@@ -1,0 +1,24 @@
+<header class="border-b-2 border-accent px-4 py-3 sm:px-10">
+    <div class="flex items-center justify-start gap-4">
+        <a href="/">
+            <img src="logo/logo-transparent.png" title="LOVI" alt="LOVI logo" class="max-h-[45px]"/>
+        </a>
+
+        <div class="flex-1"></div>
+
+        <button id="menu-toggle" class="sm:hidden">
+            <fa-icon [icon]="faBars" />
+        </button>
+        <button type="button" class="button">Sign In</button>
+    </div>
+    
+    <div id="menu" class="flex items-center justify-between whitespace-nowrap gap-8">
+        <a class="text-sm leading-normal" href="audiobooks.html">Audiobooks</a>
+        <a class="text-sm leading-normal" href="podcasts.html">Podcasts</a>
+        <a class="text-sm leading-normal" href="my-library.html">My Library</a>
+
+        <input type="search" id="search" class="input" placeholder="Search" required />
+
+        <div class="flex-1"></div>
+    </div>
+</header>

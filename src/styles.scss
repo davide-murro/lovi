@@ -1,0 +1,64 @@
+@use "tailwindcss";
+
+@theme {
+  --font-display: "Noto Serif", "Noto Sans", sans-serif;
+
+  --background-color: #231f20; 
+  --background-color-accent: #2e261f;
+
+  --text-color: #ffffff;
+  --text-color-accent: #bead9d;
+  --text-color-dark: #231f20;
+
+  --color-primary: #cd9b69;
+  --color-primary-dark: #ad7b49;
+  --color-primary-light: #edbb79;
+  --color-accent: #40362b;
+  --color-accent-dark: #20160b;
+  --color-accent-light: #60564b;
+  --color-disabled: #a0a0a0;
+}
+
+
+
+html,
+body {
+    font-family: var(--font-display);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+
+.border-primary {
+    border-color: var(--color-primary);
+}
+.border-accent {
+    border-color: var(--color-accent);
+}
+
+.button {
+    background-color: var(--color-accent);
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    border-radius: var(--radius-lg);
+    line-height: var(--text-sm--line-height);
+    padding-inline: calc(var(--spacing) * 5);
+    padding-block: calc(var(--spacing) * 2.5);
+}
+.button:hover {
+    cursor: pointer;
+    background-color: var(--color-accent-light);
+}
+
+.label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+.input {
+    display: block;
+    background-color: var(--color-accent);
+    border-radius: var(--radius-lg);
+    padding: calc(var(--spacing) * 2.5);
+}
