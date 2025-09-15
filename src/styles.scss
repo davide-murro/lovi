@@ -1,7 +1,7 @@
 @use "tailwindcss";
 
 @theme {
-  --font-display: "Noto Serif", "Noto Sans", sans-serif;
+  --font-display: "Noto Serif", serif;
 
   --background-color: #231f20; 
   --background-color-accent: #2e261f;
@@ -19,11 +19,17 @@
   --color-disabled: #a0a0a0;
 }
 
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
 
 
 html,
 body {
     font-family: var(--font-display);
+    font-weight: var(--font-medium);
     background-color: var(--background-color);
     color: var(--text-color);
 }
@@ -39,12 +45,25 @@ body {
 .button {
     background-color: var(--color-accent);
     color: var(--text-color);
-    font-weight: 500;
     font-size: var(--text-sm);
-    border-radius: var(--radius-lg);
     line-height: var(--text-sm--line-height);
+    border-radius: var(--radius-lg);
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
+}
+.button-lg {
+    border-radius: var(--radius-lg);
+    padding-inline: calc(var(--spacing) * 6);
+    padding-block: calc(var(--spacing) * 3);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+}
+.button-primary {
+    background-color: var(--color-primary);
+    color: var(--text-color-dark);
+}
+.button-rounded {
+    border-radius: var(--radius-3xl);
 }
 .button:hover {
     cursor: pointer;
@@ -54,11 +73,23 @@ body {
 .label {
     display: block;
     font-size: var(--text-sm);
-    font-weight: 500;
+    font-weight: var(--font-bold);
 }
+
 .input {
     display: block;
+    color: var(--text-color-accent);
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
     background-color: var(--color-accent);
     border-radius: var(--radius-lg);
-    padding: calc(var(--spacing) * 2.5);
+    padding-inline: calc(var(--spacing) * 5);
+    padding-block: calc(var(--spacing) * 2.5);
+}
+.input-lg {
+    border-radius: var(--radius-lg);
+    padding-inline: calc(var(--spacing) * 6);
+    padding-block: calc(var(--spacing) * 3);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
 }

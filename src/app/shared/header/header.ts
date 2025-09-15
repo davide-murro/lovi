@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../core/services/auth.service';
 
 
 @Component({
@@ -11,4 +12,10 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class Header {
   faBars = faBars;
+
+  private authService = inject(AuthService);
+
+  logout(): void {
+    this.authService.logout()
+  }
 }

@@ -1,0 +1,10 @@
+<form [formGroup]="form" (ngSubmit)="register()" class="layout-content-container flex flex-col flex-1 items-center">
+    <h2 class="text-3xl font-bold leading-tight py-4">Create an account</h2>
+    <div class="flex flex-col gap-4 items-center">
+        <input type="email" formControlName="email" id="mail" class="input input-lg" placeholder="Email" required />
+        <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password" required />
+        <input type="name" formControlName="name" id="name" class="input input-lg" placeholder="Name" required />
+        <button type="submit"
+            class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid">Register</button>
+    </div>
+</form>
