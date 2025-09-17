@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RegisterDto } from '../models/dtos/register-dto.model';
@@ -40,8 +40,8 @@ export class AuthService {
   // TOKENS
   refreshToken(): Observable<TokenDto> {
     const dto: TokenDto = {
-        accessToken: this.getAccessToken() ?? '',
-        refreshToken: this.getRefreshToken() ?? ''
+        accessToken: this.getAccessToken()!,
+        refreshToken: this.getRefreshToken()!
     };
     return this.http.post<TokenDto>(`${this.apiUrl}/refresh`, dto).pipe(
       tap(res => {

@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginDto } from '../../core/models/dtos/login-dto.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
@@ -20,8 +21,8 @@ export class Login {
 
   login(): void {
     let dto: LoginDto = {
-      userName: this.form.value.userName ?? '',
-      password: this.form.value.password ?? ''
+      userName: this.form.value.userName!,
+      password: this.form.value.password!
     }
 
     this.authService.login(dto).subscribe({

@@ -21,7 +21,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "localize": ["it-IT"],
+            "localize": ["en-US", "it-IT"],
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js",

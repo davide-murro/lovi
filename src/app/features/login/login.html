@@ -1,19 +1,18 @@
 <form [formGroup]="form" (ngSubmit)="login()" class="layout-content-container flex flex-col flex-1 items-center">
-    <h2 class="text-3xl font-bold leading-tight py-4">Sign in or
-        create an account</h2>
+    <h1 class="title text-center">Sign in or create an account</h1>
+
     <div class="flex flex-col gap-4 items-center">
         <input type="text" formControlName="userName" id="user-name" class="input input-lg" placeholder="User name" required />
         <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password" required />
         <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid">Continue</button>
     </div>
-    <a href="forgot-password.html" class="text-[#bead9d] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">
+
+    <a routerLink="/forgot-password" class="link text-sm mt-3">
         Forgot Password?
     </a>
-    <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">New to AudioTales?</h3>
-    <div class="flex px-4 py-3">
-        <button
-            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#40362b] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-            <span class="truncate">Create your AudioTales account</span>
-        </button>
-    </div>
+
+    <h2 class="text-lg font-bold leading-tight py-3 mt-5">New to LOVI?</h2>
+    <a routerLink="/register" class="button button-rounded">
+        Create your AudioTales account
+    </a>
 </form>

@@ -35,6 +35,16 @@ body {
 }
 
 
+.title {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    --tw-leading: var(--leading-tight);
+    line-height: var(--leading-tight);
+    padding-block: calc(var(--spacing) * 4);
+}
+
 .border-primary {
     border-color: var(--color-primary);
 }
@@ -51,6 +61,13 @@ body {
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
 }
+.button[disabled] {
+    background-color: var(--color-disabled);
+}
+.button:not([disabled]):hover {
+    cursor: pointer;
+    background-color: var(--color-accent-light);
+}
 .button-lg {
     border-radius: var(--radius-lg);
     padding-inline: calc(var(--spacing) * 6);
@@ -65,9 +82,34 @@ body {
 .button-rounded {
     border-radius: var(--radius-3xl);
 }
-.button:hover {
+
+.icon-button {
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    border-radius: 100%;
+    padding: calc(var(--spacing) * 2);
+}
+.icon-button .ng-fa-icon {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-button:hover {
     cursor: pointer;
     background-color: var(--color-accent-light);
+}
+
+.link {
+    color: var(--text-color-accent);
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+}
+.link:hover {
+    text-decoration: underline;
 }
 
 .label {

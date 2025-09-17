@@ -1,25 +1,31 @@
 <header class="border-b-2 border-accent px-4 py-3 sm:px-10">
-    <div class="flex items-center justify-start gap-4">
-        <a href="">
-            <img src="logo/logo-transparent.png" title="LOVI" alt="LOVI logo" class="max-h-[45px]"/>
+    <div class="flex items-center justify-start gap-4 whitespace-nowrap">
+        <a routerLink="/" class="shrink-0">
+            <img src="/logo/logo-transparent.png" title="LOVI" alt="LOVI logo" width="136" height="45" />
         </a>
 
         <div class="flex-1"></div>
 
-        <button type="button" class="sm:hidden" title="Toggle menu">
+        @if (authService.isLoggedIn()) {
+        <a routerLink="/profile" class="icon-button" title="User profile">
+            <fa-icon [icon]="faUser" />
+        </a>
+        } @else {
+        <a class="button" routerLink="/login">Sign In</a>
+        }
+
+        <button type="button" class="icon-button sm:hidden" title="Toggle menu"
+            (click)="menuMobileOpen = !menuMobileOpen">
             <fa-icon [icon]="faBars" />
         </button>
-        <a class="button" href="login">Sign In</a>
-        <button class="button" (click)="logout()">Log out</button>
     </div>
-    
-    <div id="menu" class="flex items-center justify-between whitespace-nowrap gap-8">
-        <a class="text-sm leading-normal" href="audiobooks">Audiobooks</a>
-        <a class="text-sm leading-normal" href="podcasts">Podcasts</a>
-        <a class="text-sm leading-normal" href="my-library">My Library</a>
+
+    <div class="flex items-center justify-start whitespace-nowrap pt-3 flex-col gap-4 sm:flex-row sm:gap-8"
+        [class.max-sm:hidden]="!menuMobileOpen">
+        <a class="text-sm leading-normal" routerLink="/audiobooks">Audiobooks</a>
+        <a class="text-sm leading-normal" routerLink="/podcasts">Podcasts</a>
+        <a class="text-sm leading-normal" routerLink="/my-library">My Library</a>
 
         <input type="search" id="search" class="input" placeholder="Search" required />
-
-        <div class="flex-1"></div>
     </div>
 </header>
