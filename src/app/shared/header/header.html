@@ -1,4 +1,4 @@
-<header class="border-b-2 border-accent px-4 py-3 sm:px-10">
+<header class="border-b-2 border-accent p-4 sm:px-8 flex flex-col gap-4">
     <div class="flex items-center justify-start gap-4 whitespace-nowrap">
         <a routerLink="/" class="shrink-0">
             <img src="logo/logo-transparent.png" title="Home" alt="LOVI logo" width="136" height="45" />
@@ -7,7 +7,7 @@
         <div class="flex-1"></div>
 
         @if (authService.isLoggedIn()) {
-        <a routerLink="/profile" class="icon-button" title="User profile">
+        <a routerLink="/user-profile" class="icon-button" title="User profile">
             <fa-icon [icon]="faUser" />
         </a>
         } @else {
@@ -20,7 +20,7 @@
         </button>
     </div>
 
-    <div class="flex items-center justify-start whitespace-nowrap pt-3 flex-col gap-4 sm:flex-row sm:gap-8"
+    <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen">
         <a class="text-sm leading-normal" routerLink="/audiobooks">Audiobooks</a>
         <a class="text-sm leading-normal" routerLink="/podcasts">Podcasts</a>

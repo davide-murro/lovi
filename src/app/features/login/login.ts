@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginDto } from '../../core/models/dtos/login-dto.model';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.scss'
 })
 export class Login {
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   form = new FormGroup({
     userName: new FormControl(''),
@@ -26,7 +27,10 @@ export class Login {
     }
 
     this.authService.login(dto).subscribe({
-      next: (token) => console.log('Login successful!', token),
+      next: (token) => {
+        console.log('Login successful!', token);
+        this.router.navigate(['/']);
+      },
       error: (err) => console.error('Login failed', err)
     })
   }

@@ -10,7 +10,7 @@ import { RegisterDto } from '../../core/models/dtos/register-dto.model';
   styleUrl: './register.scss'
 })
 export class Register {
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
 
   form = new FormGroup({
     email: new FormControl(''),

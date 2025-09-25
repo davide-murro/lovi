@@ -1,9 +1,9 @@
-<form [formGroup]="form" (ngSubmit)="register()" class="layout-content-container flex flex-col flex-1 items-center">
-    <h2 class="title text-center">Create an account</h2>
-    <div class="flex flex-col gap-4 items-center">
-        <input type="email" formControlName="email" id="email" class="input input-lg" placeholder="Email" required />
-        <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password" required />
-        <input type="text" formControlName="name" id="name" class="input input-lg" placeholder="Name" required />
-        <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid">Register</button>
-    </div>
+<form [formGroup]="form" (ngSubmit)="register()" class="section flex flex-col flex-1 items-center gap-4">
+    <h1 class="title text-center">Create an account</h1>
+    <input type="email" formControlName="email" id="email" class="input input-lg" placeholder="Email" required />
+    <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password"
+        required />
+    <input type="text" formControlName="name" id="name" class="input input-lg" placeholder="Name" required />
+    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg"
+        [disabled]="!form.valid">Register</button>
 </form>

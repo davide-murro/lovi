@@ -1,0 +1,16 @@
+<h1 class="title">User profile</h1>
+
+<form [formGroup]="informationForm" (ngSubmit)="editInformation()" class="section flex flex-col items-start gap-4">
+    <h3 class="subtitle">Information</h3>
+    <input type="email" formControlName="email" id="email" class="input input-lg" placeholder="Email" />
+    <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password" />
+    <input type="text" formControlName="name" id="name" class="input input-lg opacity-75" placeholder="Name" required />
+    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg"
+        [disabled]="!informationForm.valid">Save</button>
+</form>
+
+<div class="section flex flex-col items-start gap-4">
+    <h3 class="subtitle">Account</h3>
+    <button type="button" class="button" (click)="logout()">Log out</button>
+    <button type="button" class="button" (click)="deleteAccount()">Delete account</button>
+</div>

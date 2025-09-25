@@ -1,0 +1,32 @@
+<div class="section flex flex-wrap gap-2">
+    <a class="link font-medium leading-normal" routerLink="/podcasts">Podcasts</a>
+    <span class="text-accent font-medium leading-normal">/</span>
+    <span class="font-medium leading-normal">{{podcast()?.name}}</span>
+</div>
+
+<div class="section">
+    <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-xl min-h-[220px]"
+        [style.background-image]="'url(' + (podcast()?.coverImageUrl) + '), url(default/podcast.png)'">
+    </div>
+</div>
+
+<div class="section">
+    <h1 class="title">{{podcast()?.name}}</h1>
+
+    <p class="paragraph">
+        {{podcast()?.description}}
+    </p>
+</div>
+
+<div class="section flex flex-1 gap-4 flex-wrap justify-start">
+    <button class="button button-primary button-rounded">
+        Buy Now
+    </button>
+    <button class="button button-rounded">
+        Add to My Library
+    </button>
+</div>
+
+<div class="section">
+    <h2 class="subtitle">Episodes</h2>
+</div>

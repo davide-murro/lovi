@@ -13,6 +13,10 @@ export class AuthService {
   private apiUrl = environment.apiUrl + '/auth';
   private http = inject(HttpClient);
 
+  private accessToken = signal(localStorage.getItem('accessToken'));
+  private refreshToken = signal(localStorage.getItem('refreshToken'));
+  public isLoggedIn = computed(() => this.accessToken());
+
   // REGISTER
   register(dto: RegisterDto): Observable<string> {
     return this.http.post(`${this.apiUrl}/register`, dto, { responseType: 'text' });
@@ -27,18 +31,20 @@ export class AuthService {
       })
     );
   }
-  isLoggedIn(): boolean {
+  /*isLoggedIn(): boolean {
     return !!this.getAccessToken();
-  }
+  }*/
 
   // LOGOUT
   logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    this.accessToken.set(null);
+    this.refreshToken.set(null);
   }
 
   // TOKENS
-  refreshToken(): Observable<TokenDto> {
+  refreshTokens(): Observable<TokenDto> {
     const dto: TokenDto = {
         accessToken: this.getAccessToken()!,
         refreshToken: this.getRefreshToken()!
@@ -51,16 +57,18 @@ export class AuthService {
     );
   }
   getAccessToken(): string | null {
-    return localStorage.getItem('accessToken');
+    return this.accessToken();
   }
   setAccessToken(token: string): void {
     localStorage.setItem('accessToken', token);
+    this.accessToken.set(token);
   }
   getRefreshToken(): string | null {
-    return localStorage.getItem('refreshToken');
+    return this.refreshToken();
   }
   setRefreshToken(token: string): void {
     localStorage.setItem('refreshToken', token);
+    this.refreshToken.set(token);
   }
   
   // REVOKE

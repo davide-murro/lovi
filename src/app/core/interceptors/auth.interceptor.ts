@@ -10,9 +10,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const deviceId = authService.getOrCreateDeviceId();
 
   // Clone the request and add headers
-  let clonedReq = req;
   const authHeader = accessToken ? `Bearer ${accessToken}` : '';
-  clonedReq = req.clone({
+  const clonedReq = req.clone({
     headers: new HttpHeaders()
       .set('X-DeviceId', deviceId)
       .set('Authorization', authHeader)
@@ -24,7 +23,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       // Check for a 401 Unauthorized error
       if (error.status === 401 && accessToken) {
         // Attempt to refresh the token
-        return authService.refreshToken().pipe(
+        return authService.refreshTokens().pipe(
           switchMap((response: TokenDto) => {
             // Get the new access token and retry the original request
             const newAccessToken = response.accessToken;

@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
+import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
+import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +37,11 @@ export class PodcastsService {
   // DELETE podcast
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  // GET paged podcasts
+  getPaged(query: PagedQuery): Observable<PagedResult<PodcastDto>> {
+    const params = new HttpParams({ fromObject: { ...query } });
+    return this.http.get<PagedResult<PodcastDto>>(`${this.apiUrl}/paged`, { params });
   }
 }
