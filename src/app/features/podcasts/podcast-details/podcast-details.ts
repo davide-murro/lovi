@@ -16,7 +16,7 @@ export class PodcastDetails {
 
   podcast = toSignal(
     this.route.paramMap.pipe(
-      map(params => Number(params.get('id')) || 0),
+      map(params => Number(params.get('id'))),
       switchMap(id =>
         this.podcastService.getById(id!).pipe(
           catchError(err => {

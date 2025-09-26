@@ -6,6 +6,7 @@ import { authGuard } from './core/guards/auth-guard';
 import { UserProfile } from './features/user-profile/user-profile';
 import { Podcasts } from './features/podcasts/podcasts';
 import { PodcastDetails } from './features/podcasts/podcast-details/podcast-details';
+import { PodcastEpisode } from './features/podcasts/podcast-details/podcast-episode/podcast-episode';
 
 export const routes: Routes = [
     {
@@ -38,6 +39,11 @@ export const routes: Routes = [
         path: 'podcasts/:id',
         component: PodcastDetails,
         title: 'LOVI - Podcast details'
+    },
+    {
+        path: 'podcasts/:id/episodes/:episodeId',
+        component: PodcastEpisode,
+        title: 'LOVI - Podcast episode'
     },
     {
         path: '**',
