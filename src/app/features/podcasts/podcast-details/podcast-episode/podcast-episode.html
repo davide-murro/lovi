@@ -1,1 +1,57 @@
-<p>podcast-episode works!</p>
+<div class="flex flex-col min-h-full">
+
+    <div class="section flex flex-wrap gap-2">
+        <a class="link font-medium leading-normal" routerLink="/podcasts">Podcasts</a>
+        <span class="text-accent font-medium leading-normal">/</span>
+        <a class="link font-medium leading-normal"
+            [routerLink]="['/podcasts', episode().podcast.id]">{{episode().podcast.name}}</a>
+        <span class="text-accent font-medium leading-normal">/</span>
+        <span class="font-medium leading-normal">{{episode().name}}</span>
+    </div>
+
+    <h1 class="title">{{episode().name}}</h1>
+
+    <div class="section flex flex-col flex-grow items-start gap-4 lg:flex-row">
+        <div class="w-full flex flex-col items-center gap-4 sm:flex-row lg:basis-1/3 lg:flex-col">
+            <div class="w-full bg-center bg-no-repeat bg-cover bg-accent flex flex-col justify-center overflow-hidden rounded-xl aspect-square"
+                [style.background-image]="'url(' + (episode().coverImageUrl) + ')'">
+            </div>
+
+            <div class="flex flex-row flex-wrap items-center gap-4">
+                <button type="button" class="icon-button button-primary button-xl shrink-0" (click)="togglePlay()">
+                    @if(episode().isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
+                    @else {<fa-icon [icon]="faPlay" />}
+                </button>
+
+                <button type="button" class="button button-primary button-rounded shrink-0" (click)="addToQueue()">
+                    <fa-icon [icon]="faList" /> Add to queue
+                </button>
+            </div>
+        </div>
+
+        <div class="lg:basis-2/3">
+            <p class="section">{{episode().description}}</p>
+
+            <div class="section flex flex-row items-center gap-2 flex-wrap">
+                <button type="button" class="button button-primary button-rounded shrink-0" (click)="play()">
+                    <fa-icon [icon]="faPlay" /> Play sample
+                </button>
+
+                <button *appAuth type="button" class="button button-accent button-rounded" (click)="toggleMyLibrary()">
+                    @if(episode().isInMyLibrary) {Remove from My Library}
+                    @else {Add to My Library}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-row justify-between gap-4">
+        <button type="button" class="button button-accent shrink-0" (click)="prevEpisode()">
+            <fa-icon [icon]="faBackward" /> Previous episode
+        </button>
+        <button type="button" class="button button-accent shrink-0" (click)="nextEpisode()">
+            Next episode <fa-icon [icon]="faForward" />
+        </button>
+    </div>
+
+</div>

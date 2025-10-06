@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './podcasts.scss'
 })
 export class Podcasts {
-  private podcastService = inject(PodcastsService);
+  private podcastsService = inject(PodcastsService);
 
   podcastPagedQuery = signal({
     pageNumber: 1,
@@ -23,7 +23,7 @@ export class Podcasts {
   podcastPagedResult = toSignal(
     toObservable(this.podcastPagedQuery).pipe(
       switchMap(query =>
-        this.podcastService.getPaged(query).pipe(
+        this.podcastsService.getPaged(query).pipe(
           catchError(err => {
             console.error('Error fetching podcasts:', err);
             return of(null);

@@ -1,2 +1,18 @@
 <h1 class="title">LOVI</h1>
-<button (click)="call()" i18n>call</button>
+<button (click)="call()" i18n>call API</button>
+<br>
+<button (click)="toast()" i18n>toast</button>
+<br><br>
+
+<div *appAuth>
+  Welcome back!
+</div>
+<ng-template #loggedOut>
+  <a routerLink="/login">Login</a>
+</ng-template>
+<div *appAuth="null; else loggedOut">
+  <p>You are logged in!</p>
+</div>
+<div *appAuth="'Admin'">
+  <p>You are logged in admin!</p>
+</div>

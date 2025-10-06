@@ -1,9 +1,10 @@
 import { PodcastEpisodeDto } from "./podcast-episode-dto.model";
 
 export interface PodcastDto {
-    id: string;
+    id: number;
     name: string;
     coverImageUrl?: string;
     description?: string;
     episodes: PodcastEpisodeDto[];
+    isInMyLibrary?: boolean;
 }

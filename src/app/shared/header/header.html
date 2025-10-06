@@ -6,25 +6,24 @@
 
         <div class="flex-1"></div>
 
-        @if (authService.isLoggedIn()) {
-        <a routerLink="/user-profile" class="icon-button" title="User profile">
+        <ng-template #signIn>
+            <a class="button button-accent" routerLink="/login">Sign In</a>
+        </ng-template>
+        <a *appAuth="null; else signIn" routerLink="/user-profile" class="icon-button" title="User profile">
             <fa-icon [icon]="faUser" />
         </a>
-        } @else {
-        <a class="button" routerLink="/login">Sign In</a>
-        }
 
         <button type="button" class="icon-button sm:hidden" title="Toggle menu"
-            (click)="menuMobileOpen = !menuMobileOpen">
+            (click)="menuMobileOpen.set(!menuMobileOpen())">
             <fa-icon [icon]="faBars" />
         </button>
     </div>
 
     <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 sm:flex-row sm:gap-8"
-        [class.max-sm:hidden]="!menuMobileOpen">
+        [class.max-sm:hidden]="!menuMobileOpen()">
         <a class="text-sm leading-normal" routerLink="/audiobooks">Audiobooks</a>
         <a class="text-sm leading-normal" routerLink="/podcasts">Podcasts</a>
-        <a class="text-sm leading-normal" routerLink="/my-library">My Library</a>
+        <a *appAuth class="text-sm leading-normal" routerLink="/my-library">My Library</a>
 
         <input type="search" id="search" class="input" placeholder="Search" required />
     </div>

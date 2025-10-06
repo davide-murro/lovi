@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
 import { UserDto } from '../../core/models/dtos/user-dto.model';
+import { map } from 'rxjs';
+import { ToasterService } from '../../core/services/toaster.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,9 +14,11 @@ import { UserDto } from '../../core/models/dtos/user-dto.model';
   styleUrl: './user-profile.scss'
 })
 export class UserProfile {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private toasterService = inject(ToasterService);
   private authService = inject(AuthService);
   private userService = inject(UsersService);
-  private router = inject(Router);
 
   informationForm = new FormGroup({
     id: new FormControl(''),
@@ -23,17 +27,10 @@ export class UserProfile {
     name: new FormControl(''),
   });
 
-  ngOnInit(): void {
-    this.userService.getMe().subscribe({
-      next: (user) => {
-        this.informationForm.patchValue(user);
-      },
-      error: (error) => {
-        console.error('Error fetching user profile:', error);
-      }
-    });
+  constructor() {
+    const userProfile = this.route.snapshot.data['userProfile'];
+    this.informationForm.patchValue(userProfile);
   }
-
 
   editInformation(): void {
     let dto: UserDto = {
@@ -41,12 +38,8 @@ export class UserProfile {
       name: this.informationForm.value.name!
     }
     this.userService.updateMe(dto).subscribe({
-      next: () => { 
-        console.log('Profile updated');
-      },
-      error: (error) => {
-        console.error('Error fetching user profile:', error);
-      }
+      next: () => this.toasterService.show('Profile updated'),
+      error: (error) => console.error('Error fetching user profile:', error)
     });
   }
 

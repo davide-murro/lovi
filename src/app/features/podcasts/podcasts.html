@@ -1,11 +1,11 @@
 <h1 class="title">Podcasts</h1>
     
 <div class="section">
-    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         @for (podcast of podcastPagedResult()?.items; track $index) {
         <a [routerLink]="['/podcasts', podcast.id]" class="flex flex-1 flex-col gap-2">
-            <div class="bg-cover bg-center bg-no-repeat aspect-[3/2] rounded-xl"
-                [style.background-image]="'url(' + (podcast.coverImageUrl) + '), url(default/podcast.png)'">
+            <div class="bg-cover bg-center bg-no-repeat bg-accent aspect-[3/2] rounded-xl"
+                [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
             </div>
             <div>
                 <p class="text-base font-medium leading-normal">{{podcast.name}}</p>

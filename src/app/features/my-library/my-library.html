@@ -1,0 +1,44 @@
+<h1 class="title">My Library</h1>
+
+<div class="section">
+    <h2 class="subtitle">Podcasts</h2>
+
+    @for (podcast of myLibraryPodcasts(); track $index) {
+    <div class="section">
+        <div class="w-full bg-center bg-no-repeat bg-cover bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[250px]"
+            [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
+        </div>
+
+        <h3 class="subtitle">{{podcast.name}}</h3>
+
+        <ul role="list" class="flex flex-col flex-grow gap-4">
+            @for (episode of podcast.episodes; track $index) {
+            <li class="flex items-center">
+                <a class="flex flex-grow items-center gap-4"
+                    [routerLink]="['/podcasts', podcast.id, 'episodes', episode.id]">
+                    <div class="size-24 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl"
+                        [style.background-image]="'url(' + (episode.coverImageUrl) + ')'">
+                    </div>
+                    <div>
+                        <p class="text-base font-medium leading-normal">{{episode.name}}</p>
+                        <!--<p class="text-accent text-sm font-normal leading-normal">Episode: {{episode.number}}</p>
+                        <p class="text-accent text-sm font-normal leading-normal">Time: 13m</p>-->
+                    </div>
+                </a>
+                <div class="flex gap-2">
+                <button type="button" class="icon-button" (click)="togglePlay(episode)">
+                    @if(episode.isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
+                    @else {<fa-icon [icon]="faPlay" />}
+                </button>
+                </div>
+            </li>
+            }
+        </ul>
+    </div>
+    }
+</div>
+
+<div class="section">
+    <h2 class="subtitle">AudioBooks</h2>
+
+</div>

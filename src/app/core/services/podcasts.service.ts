@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { PagedResult } from '../models/dtos/pagination/paged-result.model';
+import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,10 @@ export class PodcastsService {
   getPaged(query: PagedQuery): Observable<PagedResult<PodcastDto>> {
     const params = new HttpParams({ fromObject: { ...query } });
     return this.http.get<PagedResult<PodcastDto>>(`${this.apiUrl}/paged`, { params });
+  }
+
+  // GET podcast by id
+  getEpisodeById(id: number, episodeId: number): Observable<PodcastEpisodeDto> {
+    return this.http.get<PodcastEpisodeDto>(`${this.apiUrl}/${id}/episodes/${episodeId}`);
   }
 }

@@ -15,7 +15,9 @@ export class AuthService {
 
   private accessToken = signal(localStorage.getItem('accessToken'));
   private refreshToken = signal(localStorage.getItem('refreshToken'));
-  public isLoggedIn = computed(() => this.accessToken());
+  private userRole = signal(localStorage.getItem('userRole'));
+
+  isLoggedIn = computed(() => !!this.accessToken());
 
   // REGISTER
   register(dto: RegisterDto): Observable<string> {
@@ -28,31 +30,35 @@ export class AuthService {
       tap((tokenDto) => {
         this.setAccessToken(tokenDto.accessToken);
         this.setRefreshToken(tokenDto.refreshToken);
+        // extract from JWT (if it includes a role claim)
+        const payload = JSON.parse(atob(tokenDto.accessToken.split('.')[1]));
+        this.setRole(payload.role);
       })
     );
   }
-  /*isLoggedIn(): boolean {
-    return !!this.getAccessToken();
-  }*/
 
   // LOGOUT
   logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('userRole');
     this.accessToken.set(null);
     this.refreshToken.set(null);
+    this.userRole.set(null);
   }
 
   // TOKENS
   refreshTokens(): Observable<TokenDto> {
     const dto: TokenDto = {
-        accessToken: this.getAccessToken()!,
-        refreshToken: this.getRefreshToken()!
+      accessToken: this.getAccessToken()!,
+      refreshToken: this.getRefreshToken()!
     };
     return this.http.post<TokenDto>(`${this.apiUrl}/refresh`, dto).pipe(
       tap(res => {
         this.setAccessToken(res.accessToken);
         this.setRefreshToken(res.refreshToken);
+        const payload = JSON.parse(atob(res.accessToken.split('.')[1]));
+        this.setRole(payload.role);
       })
     );
   }
@@ -70,21 +76,41 @@ export class AuthService {
     localStorage.setItem('refreshToken', token);
     this.refreshToken.set(token);
   }
-  
+
   // REVOKE
   revoke(): Observable<any> {
     return this.http.post(this.apiUrl + '/revoke', {}).pipe(
       tap(() => this.logout())
     );
   }
-  
+
   // DEVICE ID
   getOrCreateDeviceId(): string {
     let deviceId = localStorage.getItem('deviceId');
     if (!deviceId) {
-      deviceId = crypto.randomUUID();
+
+      // if there is crypto use it, otherwise create it manually
+      if (typeof crypto !== "undefined" && crypto.randomUUID) {
+        deviceId = crypto.randomUUID();
+      } else {
+        deviceId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+          const r = (Math.random() * 16) | 0;
+          const v = c === 'x' ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        });
+      }
       localStorage.setItem('deviceId', deviceId);
     }
+
     return deviceId;
+  }
+
+  // ROLES
+  setRole(role: string): void {
+    localStorage.setItem('userRole', role);
+    this.userRole.set(role);
+  }
+  getRole(): string | null {
+    return this.userRole();
   }
 }

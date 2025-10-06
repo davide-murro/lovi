@@ -1,0 +1,16 @@
+<div class="fixed top-4 right-4 z-50 space-y-2 w-80">
+    @for (toast of toasterService.toasts(); track $index) {
+    <div class="px-4 py-2 rounded-xl flex justify-between items-center gap-2 border-2 border-accent-light"
+        [class]="{
+          'bg-green-600': toast.type === 'success',
+          'bg-red-600': toast.type === 'error',
+          'bg-accent': toast.type === 'info',
+          'bg-yellow-500': toast.type === 'warning'
+        }">
+        <span class="flex-grow">{{ toast.message }}</span>
+        <button class="icon-button" (click)="toasterService.dismiss(toast.id)">
+            <fa-icon [icon]="faClose" />
+        </button>
+    </div>
+    }
+</div>

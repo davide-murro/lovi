@@ -1,0 +1,75 @@
+@if (audioPlayerService.currentTrack()){
+<div class="flex flex-col items-center bg-accent p-4 border-t-2 border-primary max-h-screen sm:px-8"
+    [class]="queueOpen() ? 'gap-4' : ''">
+
+    @if (queueOpen()) {
+    <button class="icon-button" (click)="queueOpen.set(false)">
+        <fa-icon [icon]="faClose" />
+    </button>
+    <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4">
+        @for (track of audioPlayerService.queue(); track $index) {
+        <li class="flex items-center px-4 py-2 hover:bg-opacity"
+            [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id">
+            <div class="flex flex-grow items-center gap-2 cursor-pointer" (click)="audioPlayerService.playId(track.id)">
+                <div class="flex items-center justify-center size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent-light rounded-xl"
+                    [style.background-image]="'url(' + (track.coverImageSrc) + ')'">
+                </div>
+                <div class="flex flex-col">
+                    <span>{{ track.title }}</span>
+                    <span class="text-accent">{{ track.subtitle }}</span>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <button type="button" class="icon-button" [routerLink]="track.referenceLink">
+                    <fa-icon [icon]="faShare" />
+                </button>
+                <button type="button" class="icon-button" (click)="audioPlayerService.removeFromQueue(track.id)">
+                    <fa-icon [icon]="faTrash" />
+                </button>
+            </div>
+        </li>
+        }
+    </ul>
+    }
+
+    <input type="range" class="h-2 w-full cursor-pointer" [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1' : ''"
+        [min]="0" [max]="formatIntValue(audioPlayerService.duration())" [value]="formatIntValue(audioPlayerService.currentTime())"
+        (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
+        (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)">
+
+    <span class="flex justify-center items-center text-sm text-accent">
+        {{ formatTime(audioPlayerService.currentTime()) }} / {{ formatTime(audioPlayerService.duration()) }}
+    </span>
+
+    <div class="flex justify-center items-center w-full gap-2">
+
+        @if (!queueOpen()) {
+        <div class="flex flex-col flex-grow min-w-[100px] cursor-pointer" (click)="queueOpen.set(true)">
+            <div class="flex items-center gap-2">
+                <div class="flex items-center justify-center size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent-light rounded-xl"
+                    [style.background-image]="'url(' + (audioPlayerService.currentTrack()?.coverImageSrc) + ')'">
+                </div>
+                <div class="flex flex-col truncate">
+                    <span class="truncate">{{ audioPlayerService.currentTrack()?.title }}</span>
+                    <span class="text-accent truncate">{{ audioPlayerService.currentTrack()?.subtitle }}</span>
+                </div>
+            </div>
+        </div>
+        }
+
+        <div class="flex gap-2">
+            <button type="button" class="icon-button" (click)="audioPlayerService.previous()">
+                <fa-icon [icon]="faBackward" />
+            </button>
+            <button type="button" class="icon-button" (click)="audioPlayerService.togglePlay()">
+                @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />}
+                @else {<fa-icon [icon]="faPlay" />}
+            </button>
+            <button type="button" class="icon-button" (click)="audioPlayerService.next()">
+                <fa-icon [icon]="faForward" />
+            </button>
+        </div>
+    </div>
+</div>
+}

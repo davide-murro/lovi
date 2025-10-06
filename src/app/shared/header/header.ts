@@ -1,21 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from '../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
+import { AuthDirective } from '../../core/directives/auth.directive';
 
 
 @Component({
   selector: 'app-header',
-  imports: [FontAwesomeModule, RouterLink],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
 export class Header {
-  authService = inject(AuthService);
-
   faBars = faBars;
   faUser = faUser;
 
-  menuMobileOpen = false;
+  menuMobileOpen = signal(false);
 }
