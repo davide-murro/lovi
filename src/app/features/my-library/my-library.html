@@ -15,7 +15,7 @@
             @for (episode of podcast.episodes; track $index) {
             <li class="flex items-center">
                 <a class="flex flex-grow items-center gap-4"
-                    [routerLink]="['/podcasts', podcast.id, 'episodes', episode.id]">
+                    [routerLink]="['/podcasts', podcast.id, 'episodes', episode.id]" [title]="episode.name">
                     <div class="size-24 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl"
                         [style.background-image]="'url(' + (episode.coverImageUrl) + ')'">
                     </div>
@@ -26,7 +26,7 @@
                     </div>
                 </a>
                 <div class="flex gap-2">
-                    <button type="button" class="icon-button" (click)="togglePlay(episode)">
+                    <button type="button" class="icon-button" [title]="episode.isCurrentTrackPlaying ? 'Pause' : 'Play'" (click)="togglePlay(episode)">
                         @if(episode.isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
                         @else {<fa-icon [icon]="faPlay" />}
                     </button>

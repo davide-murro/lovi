@@ -8,7 +8,7 @@
   Welcome back!
 </div>
 <ng-template #loggedOut>
-  <a routerLink="/login">Login</a>
+  <a [title]="'Login'">Login</a>
 </ng-template>
 <div *appAuth="null; else loggedOut">
   <p>You are logged in!</p>

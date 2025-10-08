@@ -6,5 +6,7 @@ export interface PodcastDto {
     coverImageUrl?: string;
     description?: string;
     episodes: PodcastEpisodeDto[];
+    
+    // only front end
     isInMyLibrary?: boolean;
 }

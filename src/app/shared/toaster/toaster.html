@@ -8,7 +8,7 @@
           'bg-yellow-500': toast.type === 'warning'
         }">
         <span class="flex-grow">{{ toast.message }}</span>
-        <button class="icon-button" (click)="toasterService.dismiss(toast.id)">
+        <button class="icon-button" [title]="'Close popup'" (click)="toasterService.dismiss(toast.id)">
             <fa-icon [icon]="faClose" />
         </button>
     </div>

@@ -1,19 +1,19 @@
 <header class="border-b-2 border-accent p-4 sm:px-8 flex flex-col gap-4">
     <div class="flex items-center justify-start gap-4 whitespace-nowrap">
-        <a routerLink="/" class="shrink-0">
-            <img src="logo/logo-transparent.png" title="Home" alt="LOVI logo" width="136" height="45" />
+        <a [routerLink]="['/']" [title]="'Home'" class="shrink-0">
+            <img src="logo/logo-transparent.png" alt="LOVI" alt="LOVI logo" width="136" height="45" />
         </a>
 
         <div class="flex-1"></div>
 
         <ng-template #signIn>
-            <a class="button button-accent shrink-0" routerLink="/login">Sign In</a>
+            <a class="button button-accent shrink-0" [routerLink]="['/login']" [title]="'Sign in'">Sign in</a>
         </ng-template>
-        <a *appAuth="null; else signIn" routerLink="/user-profile" class="icon-button" title="User Profile">
+        <a *appAuth="null; else signIn" [routerLink]="['/user-profile']" class="icon-button" [title]="'User Profile'">
             <fa-icon [icon]="faUser" />
         </a>
 
-        <button type="button" class="icon-button sm:hidden" title="Toggle menu"
+        <button type="button" class="icon-button sm:hidden" [title]="'Toggle menu'"
             (click)="menuMobileOpen.set(!menuMobileOpen())">
             <fa-icon [icon]="faBars" />
         </button>
@@ -21,9 +21,9 @@
 
     <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen()">
-        <a class="text-sm leading-normal" routerLink="/audio-books">Audio Books</a>
-        <a class="text-sm leading-normal" routerLink="/podcasts">Podcasts</a>
-        <a *appAuth class="text-sm leading-normal" routerLink="/my-library">My Library</a>
+        <a class="text-sm leading-normal" [routerLink]="['/audio-books']" [title]="'Audio Books'">Audio Books</a>
+        <a class="text-sm leading-normal" [routerLink]="['/podcasts']" [title]="'Podcasts'">Podcasts</a>
+        <a *appAuth class="text-sm leading-normal" [routerLink]="['/my-library']" [title]="'My Library'">My Library</a>
 
         <input type="search" id="search" class="input" placeholder="Search" required />
     </div>

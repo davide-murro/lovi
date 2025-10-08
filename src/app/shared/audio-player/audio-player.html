@@ -3,7 +3,7 @@
     [class]="queueOpen() ? 'gap-4' : ''">
 
     @if (queueOpen()) {
-    <button class="icon-button" (click)="queueOpen.set(false)">
+    <button class="icon-button" [title]="'Close queue'" (click)="queueOpen.set(false)">
         <fa-icon [icon]="faClose" />
     </button>
     <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4">
@@ -21,10 +21,10 @@
             </div>
 
             <div class="flex gap-2">
-                <button type="button" class="icon-button" [routerLink]="track.referenceLink">
+                <button type="button" class="icon-button" [routerLink]="track.referenceLink" [title]="'Go to the reference page'">
                     <fa-icon [icon]="faShare" />
                 </button>
-                <button type="button" class="icon-button" (click)="audioPlayerService.removeFromQueue(track.id)">
+                <button type="button" class="icon-button" [title]="'Delete from queue'" (click)="audioPlayerService.removeFromQueue(track.id)">
                     <fa-icon [icon]="faTrash" />
                 </button>
             </div>
@@ -59,14 +59,14 @@
         }
 
         <div class="flex gap-2">
-            <button type="button" class="icon-button" (click)="audioPlayerService.previous()">
+            <button type="button" class="icon-button" [title]="'Previous audio'" (click)="audioPlayerService.previous()">
                 <fa-icon [icon]="faBackward" />
             </button>
-            <button type="button" class="icon-button" (click)="audioPlayerService.togglePlay()">
+            <button type="button" class="icon-button" [title]="audioPlayerService.isPlaying() ? 'Pause' : 'Play'" (click)="audioPlayerService.togglePlay()">
                 @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />}
                 @else {<fa-icon [icon]="faPlay" />}
             </button>
-            <button type="button" class="icon-button" (click)="audioPlayerService.next()">
+            <button type="button" class="icon-button" [title]="'Next audio'" (click)="audioPlayerService.next()">
                 <fa-icon [icon]="faForward" />
             </button>
         </div>

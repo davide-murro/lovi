@@ -1,5 +1,5 @@
 <div class="section flex flex-wrap gap-2">
-    <a class="link font-medium leading-normal" routerLink="/podcasts">Podcasts</a>
+    <a class="link font-medium leading-normal" [routerLink]="['/podcasts']" [title]="'Podcasts'">Podcasts</a>
     <span class="text-accent font-medium leading-normal">/</span>
     <span class="font-medium leading-normal">{{podcast().name}}</span>
 </div>
@@ -11,7 +11,7 @@
 <h1 class="title flex justify-between items-start gap-2">
     {{podcast().name}}
 
-    <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" (click)="toggleMyLibrary()">
+    <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" [title]="podcast().isInMyLibrary ? 'Remove from My Library' : 'Add to My Library'" (click)="toggleMyLibrary()">
         @if(podcast().isInMyLibrary) {
         <fa-icon [icon]="faBookBookmark" />
         <span class="hidden lg:inline">Remove from My Library</span>
@@ -28,7 +28,7 @@
 </p>
 
 <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
-    <button type="button" class="button button-primary button-lg button-rounded shrink-0" (click)="playAll()">
+    <button type="button" class="button button-primary button-lg button-rounded shrink-0" [title]="'Play all Episodes'" (click)="playAll()">
         <fa-icon [icon]="faPlay" /> Play all Episodes
     </button>
 </div>
@@ -38,7 +38,7 @@
 
     <div class="flex flex-col gap-4">
         @for (episode of podcast().episodes; track $index) {
-        <a [routerLink]="['/podcasts', podcast().id, 'episodes', episode.id]" class="flex items-center gap-4">
+        <a [routerLink]="['/podcasts', podcast().id, 'episodes', episode.id]" [title]="episode.name" class="flex items-center gap-4">
             <div class="size-24 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl"
                 [style.background-image]="'url(' + (episode.coverImageUrl) + ')'">
             </div>
