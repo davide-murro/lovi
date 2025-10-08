@@ -5,7 +5,7 @@ import { map } from 'rxjs';
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
 import { AudioTrack } from '../../../../core/models/audio-track.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBackward, faForward, faList, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faBookBookmark, faBookOpen, faForward, faList, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-dto.model';
 import { LibrariesService } from '../../../../core/services/libraries.service';
@@ -32,6 +32,8 @@ export class PodcastEpisode {
   faList = faList;
   faBackward = faBackward;
   faForward = faForward;
+  faBookOpen = faBookOpen;
+  faBookBookmark = faBookBookmark;
 
   // episode
   episode = computed(() => {
@@ -69,17 +71,10 @@ export class PodcastEpisode {
     this.audioPlayerService.pause();
   }
   playAll() {
-    const episodeTrack: AudioTrack = {
-      id: null!,
-      title: this._episode().name,
-      //subtitle: this.podcastEpisode().name,
-      audioSrc: this._episode().audioUrl,
-      coverImageSrc: this._episode().coverImageUrl,
-      referenceLink: `/podcasts/${this._episode().podcast.id}/episodes/${this._episode().id}`
-    }
+    let episodeTrack: AudioTrack;
     const episodeQueue = this._episode().podcast.episodes
       .map(pe => {
-        const episodeTrack: AudioTrack = {
+        const track: AudioTrack = {
           id: null!,
           title: pe.name,
           //subtitle: pe.name,
@@ -87,10 +82,11 @@ export class PodcastEpisode {
           coverImageSrc: pe.coverImageUrl,
           referenceLink: `/podcasts/${this._episode().podcast.id}/episodes/${pe.id}`
         }
-        return episodeTrack
+        if (pe.id === this._episode().id) episodeTrack = track;
+        return track
       });
 
-    this.audioPlayerService.playTrack(episodeTrack, episodeQueue);
+    this.audioPlayerService.playTrack(episodeTrack!, episodeQueue);
     this.toasterService.show("Album added to queue");
   }
   addToQueue() {
@@ -126,7 +122,7 @@ export class PodcastEpisode {
   }
   removeFromMyLibrary() {
     const id: number = this.librariesService.myLibrary()!
-      .find(pe => pe.podcast?.id == this._episode().podcast.id && pe.podcastEpisode?.id == this._episode().id)!.id;
+      .find(ml => ml.podcast?.id == this._episode().podcast.id && ml.podcastEpisode?.id == this._episode().id)!.id;
 
     this.librariesService.deleteMe(id).subscribe({
       next: () => {

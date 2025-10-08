@@ -2,7 +2,7 @@ import { Component, computed, inject, signal, Signal, WritableSignal } from '@an
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faBookBookmark, faBookOpen, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AudioTrack } from '../../../core/models/audio-track.model';
 import { ToasterService } from '../../../core/services/toaster.service';
@@ -28,6 +28,8 @@ export class PodcastDetails {
 
   faPlay = faPlay;
   faPause = faPause;
+  faBookOpen = faBookOpen;
+  faBookBookmark = faBookBookmark;
 
   // podcast
   podcast = computed(() => {

@@ -1,24 +1,24 @@
 @use "tailwindcss";
 
 @theme {
-  --font-display: "Noto Serif", serif;
+    --font-display: "Noto Serif", serif;
 
-  --bg-color: #231f20; 
-  --bg-color-accent: #2e261f;
+    --bg-color: #231f20;
+    --bg-color-accent: #2e261f;
 
-  --text-color: #ffffff;
-  --text-color-accent: #bead9d;
-  --text-color-dark: #231f20;
-  --text-color-disabled: #383838;
+    --text-color: #ffffff;
+    --text-color-accent: #bead9d;
+    --text-color-dark: #231f20;
+    --text-color-disabled: #383838;
 
-  --color-primary: #cd9b69;
-  --color-primary-dark: #ad7b49;
-  --color-primary-light: #edbb79;
-  --color-accent: #40362b;
-  --color-accent-dark: #20160b;
-  --color-accent-light: #60564b;
-  --color-disabled: #808080;
-  --color-opacity: #ffffff11;
+    --color-primary: #cd9b69;
+    --color-primary-dark: #ad7b49;
+    --color-primary-light: #edbb79;
+    --color-accent: #40362b;
+    --color-accent-dark: #20160b;
+    --color-accent-light: #60564b;
+    --color-disabled: #808080;
+    --color-opacity: #ffffff11;
 }
 
 @font-face {
@@ -26,6 +26,15 @@
     src: url('/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
+@keyframes bg-scroll-parallax {
+    from {
+        background-position: center 0;
+    }
+
+    to {
+        background-position: center 40%;
+    }
+}
 
 
 html,
@@ -43,19 +52,28 @@ body {
     font-weight: var(--font-weight-bold);
     padding-block: calc(var(--spacing) * 4);
 }
+
 .subtitle {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-l--line-height));
     font-weight: var(--font-weight-bold);
     padding-block: calc(var(--spacing) * 4);
 }
+
 .section {
     margin-bottom: calc(var(--spacing) * 4);
+}
+
+.bg-parallax {
+    background-attachment: scroll;
+    animation: bg-scroll-parallax linear both;
+    animation-timeline: scroll();
 }
 
 .border-primary {
     border-color: var(--color-primary);
 }
+
 .border-accent {
     border-color: var(--color-accent);
 }
@@ -67,14 +85,17 @@ body {
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
 }
+
 .button[disabled] {
     background-color: var(--color-disabled);
     color: var(--text-color-disabled);
 }
+
 .button:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-opacity);
 }
+
 .button.button-lg {
     border-radius: var(--radius-lg);
     padding-inline: calc(var(--spacing) * 6);
@@ -82,15 +103,18 @@ body {
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
 }
+
 .button.button-xl {
     padding-inline: calc(var(--spacing) * 9);
     padding-block: calc(var(--spacing) * 4.5);
     font-size: var(--text-lg);
     line-height: var(--text-lg--line-height);
 }
+
 .button.button-rounded {
     border-radius: var(--radius-3xl);
 }
+
 .button.button-xl.button-rounded {
     border-radius: var(--radius-4xl);
 }
@@ -101,6 +125,7 @@ body {
     border-radius: 100%;
     padding: calc(var(--spacing) * 2);
 }
+
 .icon-button .ng-fa-icon {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
@@ -108,15 +133,18 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .icon-button:hover {
     cursor: pointer;
     background-color: var(--color-opacity);
 }
+
 .icon-button.button-lg {
     padding: calc(var(--spacing) * 3);
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
 }
+
 .icon-button.button-xl {
     padding: calc(var(--spacing) * 5);
     font-size: var(--text-lg);
@@ -127,14 +155,17 @@ body {
     background-color: var(--color-primary);
     color: var(--text-color-dark);
 }
+
 .button-primary:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-primary-light);
 }
+
 .button-accent {
     background-color: var(--color-accent);
     color: var(--text-color);
 }
+
 .button-accent:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-accent-light);
@@ -145,6 +176,7 @@ body {
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
 }
+
 .link:hover {
     text-decoration: underline;
 }
@@ -165,10 +197,12 @@ body {
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
 }
+
 .input[disabled] {
     background-color: var(--color-disabled);
     color: var(--text-color-disabled);
 }
+
 .input-lg {
     border-radius: var(--radius-lg);
     padding-inline: calc(var(--spacing) * 6);

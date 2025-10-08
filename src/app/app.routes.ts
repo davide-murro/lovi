@@ -12,6 +12,9 @@ import { podcastEpisodeResolver } from './core/resolvers/podcast-episode.resolve
 import { userProfileResolver } from './core/resolvers/user-profile.resolver';
 import { MyLibrary } from './features/my-library/my-library';
 import { myLibraryResolver } from './core/resolvers/my-library.resolver';
+import { AudioBooks } from './features/audio-books/audio-books';
+import { AudioBookDetails } from './features/audio-books/audio-book-details/audio-book-details';
+import { audioBookResolver } from './core/resolvers/audio-book.resolver';
 
 export const routes: Routes = [
     {
@@ -32,11 +35,24 @@ export const routes: Routes = [
     {
         path: 'user-profile',
         component: UserProfile,
-        title: 'LOVI - User profile',
+        title: 'LOVI - User Profile',
         canActivate: [authGuard],
         //data: { roles: ['Admin'] },
         resolve: {
             userProfile: userProfileResolver
+        }
+    },
+    {
+        path: 'audio-books',
+        component: AudioBooks,
+        title: 'LOVI - Audio Books'
+    },
+    {
+        path: 'audio-books/:id',
+        component: AudioBookDetails,
+        title: 'LOVI - Audio Books Details',
+        resolve: {
+            audioBook: audioBookResolver
         }
     },
     {
@@ -47,7 +63,7 @@ export const routes: Routes = [
     {
         path: 'podcasts/:id',
         component: PodcastDetails,
-        title: 'LOVI - Podcast details',
+        title: 'LOVI - Podcast Details',
         resolve: {
             podcast: podcastResolver // Resolver runs before 'podcasts/:id' component loads
         }
@@ -55,7 +71,7 @@ export const routes: Routes = [
     {
         path: 'podcasts/:id/episodes/:episodeId',
         component: PodcastEpisode,
-        title: 'LOVI - Podcast episode',
+        title: 'LOVI - Podcast Episode',
         resolve: {
             podcastEpisode: podcastEpisodeResolver
         }

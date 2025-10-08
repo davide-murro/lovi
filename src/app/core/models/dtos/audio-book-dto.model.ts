@@ -3,7 +3,7 @@ export interface AudioBookDto {
     name: string;
     coverImageUrl?: string;
     description?: string;
-    audioUrl?: string;
+    audioUrl: string;
     
     // only front end
     isInMyLibrary?: boolean;

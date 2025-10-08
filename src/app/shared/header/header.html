@@ -7,9 +7,9 @@
         <div class="flex-1"></div>
 
         <ng-template #signIn>
-            <a class="button button-accent" routerLink="/login">Sign In</a>
+            <a class="button button-accent shrink-0" routerLink="/login">Sign In</a>
         </ng-template>
-        <a *appAuth="null; else signIn" routerLink="/user-profile" class="icon-button" title="User profile">
+        <a *appAuth="null; else signIn" routerLink="/user-profile" class="icon-button" title="User Profile">
             <fa-icon [icon]="faUser" />
         </a>
 
@@ -21,7 +21,7 @@
 
     <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen()">
-        <a class="text-sm leading-normal" routerLink="/audiobooks">Audiobooks</a>
+        <a class="text-sm leading-normal" routerLink="/audio-books">Audio Books</a>
         <a class="text-sm leading-normal" routerLink="/podcasts">Podcasts</a>
         <a *appAuth class="text-sm leading-normal" routerLink="/my-library">My Library</a>
 

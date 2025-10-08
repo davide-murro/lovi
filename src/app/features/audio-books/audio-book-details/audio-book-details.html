@@ -1,0 +1,45 @@
+<div class="section flex flex-wrap gap-2">
+    <a class="link font-medium leading-normal" routerLink="/audio-books">Audio Books</a>
+    <span class="text-accent font-medium leading-normal">/</span>
+    <span class="font-medium leading-normal">{{audioBook().name}}</span>
+</div>
+
+<div class="flex flex-col md:gap-4 md:flex-row lg:gap-8">
+    <div class="flex justify-center">
+        <div class="w-full bg-center bg-no-repeat bg-cover bg-accent flex flex-col justify-center overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] md:min-w-[250px] lg:min-w-[300px]"
+            [style.background-image]="'url(' + (audioBook().coverImageUrl) + ')'">
+        </div>
+    </div>
+
+    <div>
+        <h1 class="title flex justify-between items-start gap-2">
+            {{audioBook().name}}
+
+            <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" (click)="toggleMyLibrary()">
+                @if(audioBook().isInMyLibrary) {
+                <fa-icon [icon]="faBookBookmark" />
+                <span class="hidden lg:inline">Remove from My Library</span>
+                }
+                @else {
+                <fa-icon [icon]="faBookOpen" />
+                <span class="hidden lg:inline">Add to My Library</span>
+                }
+            </button>
+        </h1>
+
+        <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
+            <button type="button" class="icon-button button-primary button-xl" (click)="togglePlay()">
+                @if(audioBook().isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
+                @else {<fa-icon [icon]="faPlay" />}
+            </button>
+
+            <button type="button" class="button button-primary button-rounded shrink-0 flex gap-2" (click)="addToQueue()">
+                <fa-icon [icon]="faList" /> <span>Add to queue</span>
+            </button>
+        </div>
+
+        <p class="section">
+            {{audioBook().description}}
+        </p>
+    </div>
+</div>

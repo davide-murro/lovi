@@ -10,6 +10,7 @@ import { PodcastEpisodeDto } from '../../core/models/dtos/podcast-episode-dto.mo
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { AudioTrack } from '../../core/models/audio-track.model';
 import { AudioBookDto } from '../../core/models/dtos/audio-book-dto.model';
+import { ToasterService } from '../../core/services/toaster.service';
 
 @Component({
   selector: 'app-my-library',
@@ -20,6 +21,7 @@ import { AudioBookDto } from '../../core/models/dtos/audio-book-dto.model';
 export class MyLibrary {
   private route = inject(ActivatedRoute);
   private audioPlayerService = inject(AudioPlayerService);
+  private toasterService = inject(ToasterService);
 
   faPlay = faPlay;
   faPause = faPause;
@@ -50,9 +52,9 @@ export class MyLibrary {
       .filter((ml) => ml.audioBook?.id != null)
       .map(ml => {
         const audioBook: AudioBookDto = {
-          ...ml.podcastEpisode!,
-          isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(ml.podcastEpisode!.audioUrl),
-          isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(ml.podcastEpisode!.audioUrl)
+          ...ml.audioBook!,
+          isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(ml.audioBook!.audioUrl),
+          isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(ml.audioBook!.audioUrl)
         }
         return audioBook;
       });
@@ -61,42 +63,50 @@ export class MyLibrary {
 
 
   // audio player
-  togglePlay(episode: PodcastEpisodeDto) {
-    if (episode.isCurrentTrackPlaying) this.pause(episode);
-    else if (episode.isCurrentTrack) this.play(episode);
-    else this.playAll(episode);
+  togglePlay(item: PodcastEpisodeDto | AudioBookDto) {
+    if (item.isCurrentTrackPlaying) this.pause();
+    else if (item.isCurrentTrack) this.play();
+    else this.playAll(item);
   }
-  play(episode: PodcastEpisodeDto) {
+  play() {
     this.audioPlayerService.play();
   }
-  pause(episode: PodcastEpisodeDto) {
+  pause() {
     this.audioPlayerService.pause();
   }
-  playAll(episode: PodcastEpisodeDto) {
-    /*
-    const episodeTrack: AudioTrack = {
-      id: null!,
-      title: episode.name,
-      //subtitle: episode.name,
-      audioSrc: episode.audioUrl,
-      coverImageSrc: episode.coverImageUrl,
-      referenceLink: `/podcasts/${episode.podcast.id}/episodes/${episode.id}`
-    }
-    const episodeQueue = episode.podcast.episodes
-      .map(pe => {
-        const episodeTrack: AudioTrack = {
-          id: null!,
-          title: pe.name,
-          //subtitle: pe.name,
-          audioSrc: pe.audioUrl,
-          coverImageSrc: pe.coverImageUrl,
-          referenceLink: `/podcasts/${episode.podcast.id}/episodes/${pe.id}`
+  playAll(item: PodcastEpisodeDto | AudioBookDto) {
+    let itemTrack: AudioTrack;
+
+    const itemQueue = this._myLibrary()
+      .map(ml => {
+        let track: AudioTrack;
+
+        if (ml.podcast?.id != null && ml.podcastEpisode != null) {
+          track = {
+            id: null!,
+            title: ml.podcastEpisode.name,
+            //subtitle: pe.name,
+            audioSrc: ml.podcastEpisode.audioUrl,
+            coverImageSrc: ml.podcastEpisode.coverImageUrl,
+            referenceLink: `/podcasts/${ml.podcast.id}/episodes/${ml.id}`
+          }
+          if (ml.podcast.id === item.id) itemTrack = track;
+        } else if (ml.audioBook?.id != null) {
+          track = {
+            id: null!,
+            title: ml.audioBook.name,
+            //subtitle: pe.name,
+            audioSrc: ml.audioBook.audioUrl,
+            coverImageSrc: ml.audioBook.coverImageUrl,
+            referenceLink: `/audio-books/${ml.audioBook.id}`
+          }
+          if (ml.audioBook.id === item.id) itemTrack = track;
         }
-        return episodeTrack
+
+        return track!;
       });
 
-    this.audioPlayerService.playTrack(episodeTrack, episodeQueue);
-    //this.toasterService.show("Album added to queue");
-    */
+    this.audioPlayerService.playTrack(itemTrack!, itemQueue);
+    this.toasterService.show("Album added to queue");
   }
 }

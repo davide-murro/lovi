@@ -4,13 +4,24 @@
     <span class="font-medium leading-normal">{{podcast().name}}</span>
 </div>
 
-<div class="section">
-    <div class="w-full bg-center bg-no-repeat bg-cover bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[250px]"
-        [style.background-image]="'url(' + (podcast().coverImageUrl) + ')'">
-    </div>
+<div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[250px]"
+    [style.background-image]="'url(' + (podcast().coverImageUrl) + ')'">
 </div>
 
-<h1 class="title">{{podcast().name}}</h1>
+<h1 class="title flex justify-between items-start gap-2">
+    {{podcast().name}}
+
+    <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" (click)="toggleMyLibrary()">
+        @if(podcast().isInMyLibrary) {
+        <fa-icon [icon]="faBookBookmark" />
+        <span class="hidden lg:inline">Remove from My Library</span>
+        }
+        @else {
+        <fa-icon [icon]="faBookOpen" />
+        <span class="hidden lg:inline">Add to My Library</span>
+        }
+    </button>
+</h1>
 
 <p class="section">
     {{podcast().description}}
@@ -18,15 +29,7 @@
 
 <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
     <button type="button" class="button button-primary button-lg button-rounded shrink-0" (click)="playAll()">
-        <fa-icon [icon]="faPlay" /> Play all podcast
-    </button>
-    <button type="button" class="button button-primary button-rounded">
-        Buy Now
-    </button>
-
-    <button *appAuth type="button" class="button button-accent button-rounded" (click)="toggleMyLibrary()">
-        @if(podcast().isInMyLibrary) {Remove from My Library}
-        @else {Add to My Library}
+        <fa-icon [icon]="faPlay" /> Play all Episodes
     </button>
 </div>
 

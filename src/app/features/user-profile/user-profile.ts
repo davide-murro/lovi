@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
 import { UserDto } from '../../core/models/dtos/user-dto.model';
-import { map } from 'rxjs';
 import { ToasterService } from '../../core/services/toaster.service';
 
 @Component({
