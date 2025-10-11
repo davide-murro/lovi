@@ -71,29 +71,35 @@ export class PodcastEpisode {
     this.audioPlayerService.pause();
   }
   playAll() {
-    let episodeTrack: AudioTrack;
+    const episodeTrack: AudioTrack = {
+      id: null!,
+      title: this._episode().name,
+      subtitle: this._episode().voicers?.map(v => v.nickname).join(", "),
+      audioSrc: this._episode().audioUrl,
+      coverImageSrc: this._episode().coverImageUrl,
+      referenceLink: `/podcasts/${this._episode().podcast.id}/episodes/${this._episode().id}`
+    };
     const episodeQueue = this._episode().podcast.episodes
       .map(pe => {
         const track: AudioTrack = {
           id: null!,
           title: pe.name,
-          //subtitle: pe.name,
+          subtitle: pe.voicers?.map(v => v.nickname).join(", "),
           audioSrc: pe.audioUrl,
           coverImageSrc: pe.coverImageUrl,
           referenceLink: `/podcasts/${this._episode().podcast.id}/episodes/${pe.id}`
         }
-        if (pe.id === this._episode().id) episodeTrack = track;
         return track
       });
 
-    this.audioPlayerService.playTrack(episodeTrack!, episodeQueue);
-    this.toasterService.show("Album added to queue");
+    this.audioPlayerService.playTrack(episodeTrack, episodeQueue);
+    this.toasterService.show("Podcast added to queue");
   }
   addToQueue() {
     const episodeTrack: AudioTrack = {
       id: null!,
       title: this._episode().name,
-      //subtitle: this.podcastEpisode().name,
+      subtitle: this._episode().voicers?.map(v => v.nickname).join(", "),
       audioSrc: this._episode().audioUrl,
       coverImageSrc: this._episode().coverImageUrl,
       referenceLink: `/podcasts/${this._episode().podcast.id}/episodes/${this._episode().id}`

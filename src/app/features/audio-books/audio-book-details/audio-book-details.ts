@@ -60,7 +60,7 @@ export class AudioBookDetails {
     const audioBookTrack: AudioTrack = {
       id: null!,
       title: this._audioBook().name,
-      //subtitle: this._audioBook().name,
+      subtitle: this._audioBook().readers?.map(r => r.nickname).join(", "),
       audioSrc: this._audioBook().audioUrl,
       coverImageSrc: this._audioBook().coverImageUrl,
       referenceLink: `/audio-books/${this._audioBook().id}`
@@ -71,7 +71,7 @@ export class AudioBookDetails {
     const audioBookTrack: AudioTrack = {
       id: null!,
       title: this._audioBook().name,
-      //subtitle: this._audioBook().name,
+      subtitle: this._audioBook().readers?.map(r => r.nickname).join(", "),
       audioSrc: this._audioBook().audioUrl,
       coverImageSrc: this._audioBook().coverImageUrl,
       referenceLink: `/audio-books/${this._audioBook().id}`

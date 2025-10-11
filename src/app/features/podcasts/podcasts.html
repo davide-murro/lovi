@@ -1,5 +1,5 @@
 <h1 class="title">Podcasts</h1>
-    
+
 <div class="section">
     <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
         @for (podcast of podcastPagedResult()?.items; track $index) {
@@ -8,8 +8,12 @@
                 [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
             </div>
             <div>
-                <p class="text-base font-medium leading-normal">{{podcast.name}}</p>
-                <!--<p class="text-accent text-sm font-normal leading-normal">Speaker</p>-->
+                <p class="text-base font-medium leading-normal truncate">{{podcast.name}}</p>
+                <p class="text-accent text-sm truncate">
+                    @for(creator of podcast.voicers; track $index) {
+                    {{ creator.nickname }} @if (!$last) {, }
+                    }
+                </p>
             </div>
         </a>
         }

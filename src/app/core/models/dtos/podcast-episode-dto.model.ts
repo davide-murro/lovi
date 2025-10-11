@@ -1,3 +1,4 @@
+import { CreatorDto } from "./creator-dto.model";
 import { PodcastDto } from "./podcast-dto.model";
 
 export interface PodcastEpisodeDto {
@@ -8,6 +9,7 @@ export interface PodcastEpisodeDto {
     description?: string;
     audioUrl: string;
     podcast: PodcastDto;
+    voicers: CreatorDto[];
 
     // only front end
     isInMyLibrary?: boolean;

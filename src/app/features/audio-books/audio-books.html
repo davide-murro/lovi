@@ -8,8 +8,12 @@
                 [style.background-image]="'url(' + (audioBook.coverImageUrl) + ')'">
             </div>
             <div>
-                <p class="text-base font-medium leading-normal">{{audioBook.name}}</p>
-                <!--<p class="text-accent text-sm font-normal leading-normal">Speaker</p>-->
+                <p class="text-base font-medium leading-normal truncate">{{audioBook.name}}</p>
+                <p class="text-accent text-sm truncate">
+                    @for(creator of audioBook.readers; track $index) {
+                    {{ creator.nickname }} @if (!$last) {, }
+                    }
+                </p>
             </div>
         </a>
         }

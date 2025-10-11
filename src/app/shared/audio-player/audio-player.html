@@ -8,15 +8,15 @@
     </button>
     <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4">
         @for (track of audioPlayerService.queue(); track $index) {
-        <li class="flex items-center px-4 py-2 hover:bg-opacity"
+        <li class="flex items-center px-4 py-2 gap-2 hover:bg-opacity"
             [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id">
-            <div class="flex flex-grow items-center gap-2 cursor-pointer" (click)="audioPlayerService.playId(track.id)">
+            <div class="flex flex-grow items-center gap-2 cursor-pointer overflow-hidden" (click)="audioPlayerService.playId(track.id)">
                 <div class="flex items-center justify-center size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent-light rounded-xl"
                     [style.background-image]="'url(' + (track.coverImageSrc) + ')'">
                 </div>
-                <div class="flex flex-col">
-                    <span>{{ track.title }}</span>
-                    <span class="text-accent">{{ track.subtitle }}</span>
+                <div class="flex flex-col flex-grow overflow-hidden">
+                    <span class="truncate">{{ track.title }}</span>
+                    <span class="text-accent truncate">{{ track.subtitle }}</span>
                 </div>
             </div>
 

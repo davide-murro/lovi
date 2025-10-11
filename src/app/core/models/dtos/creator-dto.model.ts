@@ -1,6 +1,4 @@
-import { PodcastEpisodeDto } from "./podcast-episode-dto.model";
-
-export interface PodcastDto {
+export interface CreatorDto {
     id: number;
     nickname: string;
     name?: string;

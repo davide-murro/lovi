@@ -52,12 +52,16 @@ body {
     font-weight: var(--font-weight-bold);
     padding-block: calc(var(--spacing) * 4);
 }
-
-.subtitle {
+.title2 {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-l--line-height));
     font-weight: var(--font-weight-bold);
     padding-block: calc(var(--spacing) * 4);
+}
+
+.subtitle {
+    margin-top: calc(var(--spacing) * -4);
+    padding-bottom: calc(var(--spacing) * 4);
 }
 
 .section {

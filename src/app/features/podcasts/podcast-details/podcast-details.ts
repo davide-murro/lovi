@@ -57,7 +57,7 @@ export class PodcastDetails {
         const episodeTrack: AudioTrack = {
           id: null!,
           title: pe.name,
-          //subtitle: pe.name,
+          subtitle: pe.voicers?.map(v => v.nickname).join(", "),
           audioSrc: pe.audioUrl,
           coverImageSrc: pe.coverImageUrl,
           referenceLink: `/podcasts/${this._podcast().id}/episodes/${pe.id}`
@@ -66,7 +66,7 @@ export class PodcastDetails {
       });
 
     this.audioPlayerService.playTrack(episodeQueue[0], episodeQueue);
-    this.toasterService.show("Album added to queue");
+    this.toasterService.show("Podcast added to queue");
   }
 
   // library

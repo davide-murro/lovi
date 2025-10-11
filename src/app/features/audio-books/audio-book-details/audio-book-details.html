@@ -5,13 +5,13 @@
 </div>
 
 <div class="flex flex-col md:gap-4 md:flex-row lg:gap-8">
-    <div class="flex justify-center">
+    <div class="flex justify-center items-start">
         <div class="w-full bg-center bg-no-repeat bg-cover bg-accent flex flex-col justify-center overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] md:min-w-[250px] lg:min-w-[300px]"
             [style.background-image]="'url(' + (audioBook().coverImageUrl) + ')'">
         </div>
     </div>
 
-    <div>
+    <div class="flex-grow">
         <h1 class="title flex justify-between items-start gap-2">
             {{audioBook().name}}
 
@@ -28,6 +28,12 @@
                 }
             </button>
         </h1>
+
+        <p class="subtitle text-accent">
+            @for(creator of audioBook().readers; track $index) {
+            <a>{{ creator.nickname }}</a>@if (!$last) {, }
+            }
+        </p>
 
         <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
             <button type="button" class="icon-button button-primary button-xl"

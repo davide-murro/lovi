@@ -28,7 +28,7 @@ export class AudioPlayer {
   // Called on mousedown (desktop) or touchstart (mobile).
   onSeekingStart() {
     this.wasPlayingBeforeSeek.set(this.audioPlayerService.isPlaying());
-    this.audioPlayerService.pause(); 
+    this.audioPlayerService.pause();
   }
 
   // Called on input.
@@ -51,9 +51,17 @@ export class AudioPlayer {
   // Utility function to format seconds into MM:SS
   formatTime(seconds: number): string {
     if (!isFinite(seconds) || seconds < 0) return '00:00';
-    const minutes = Math.floor(seconds / 60);
+
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = Math.floor(seconds % 60);
-    const formattedSeconds = String(remainingSeconds).padStart(2, '00');
-    return `${minutes}:${formattedSeconds}`;
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    // If more than 1 hour, show HH:MM:SS, otherwise MM:SS
+    return hours > 0
+      ? `${hours}:${formattedMinutes}:${formattedSeconds}`
+      : `${minutes}:${formattedSeconds}`;
   }
 }
