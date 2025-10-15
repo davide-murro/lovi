@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { AudioBooksService } from '../../core/services/audio-books.service';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, finalize, of, switchMap } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -22,14 +22,28 @@ export class AudioBooks {
   } as PagedQuery);
   audioBookPagedResult = toSignal(
     toObservable(this.audioBookPagedQuery).pipe(
-      switchMap(query =>
-        this.audioBooksService.getPaged(query).pipe(
+      switchMap(query => {
+        this.audioBooksError.set(false);
+        this.audioBooksLoading.set(true);
+        return this.audioBooksService.getPaged(query).pipe(
           catchError(err => {
-            console.error('Error fetching audio books:', err);
+            this.audioBooksError.set(true);
+            console.error('audioBooksService.getPaged', query, err);
             return of(null);
+          }),
+          finalize(() => {
+            this.audioBooksLoading.set(false);
           })
         )
-      )
+      })
     )
   );
+  audioBooksLoading = signal(false);
+  audioBooksError = signal(false);
+
+  reload() {
+    this.audioBookPagedQuery.update(query => ({
+      ...query
+    }));
+  }
 }

@@ -1,0 +1,43 @@
+<h1 class="title">Edit - Only for pros</h1>
+
+<h2 class="title">Podcasts</h2>
+
+<table class="table w-full">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>cover image</th>
+            <th>description</th>
+            <th>episodes</th>
+            <th>voicers</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (podcast of podcastPagedResult()?.items; track $index) {
+        <tr>
+            <td>{{podcast.id}}</td>
+            <td><span class="line-clamp-2">{{podcast.name}}</span></td>
+            <td><img class="h-12 min-w-32 object-contain" [src]="podcast.coverImageUrl"></td>
+            <td><span class="line-clamp-2">{{podcast.description}}</span></td>
+            <td>{{podcast.episodes?.length}}</td>
+            <td>{{podcast.voicers?.length}}</td>
+
+            <td>
+                <a class="icon-button" [title]="'Update Podcast'"
+                    [routerLink]="['/edit', 'podcasts', podcast.id]"><fa-icon [icon]="faPen" /></a>
+            </td>
+            <td>
+                <button class="icon-button" [title]="'Delete Podcast'" (click)="deletePodcast(podcast.id!)"><fa-icon
+                        [icon]="faTrash" /></button>
+            </td>
+        </tr>
+        }
+        <tr>
+            <td colspan="100%">
+                <a [title]="'Create Podcast'" [routerLink]="['/edit', 'podcasts', 'create']"
+                    class="button button-accent">Create Podcast</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

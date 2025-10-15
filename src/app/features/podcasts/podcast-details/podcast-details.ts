@@ -24,20 +24,20 @@ export class PodcastDetails {
   private audioPlayerService = inject(AudioPlayerService);
   private librariesService = inject(LibrariesService);
 
-  private _podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
-
   faPlay = faPlay;
   faPause = faPause;
   faBookOpen = faBookOpen;
   faBookBookmark = faBookBookmark;
 
   // podcast
+  private _podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
+  podcastError = computed(() => this._podcast() == null);
   podcast = computed(() => {
     const p: PodcastDto =
     {
       ...this._podcast(),
       isInMyLibrary: this.librariesService.myLibrary()?.some(l => l.podcast?.id === this._podcast().id),
-      episodes: this._podcast().episodes.map(ep => {
+      episodes: this._podcast().episodes!.map(ep => {
         ep = {
           ...ep,
           isInMyLibrary: this.librariesService.myLibrary()?.find(l =>
@@ -52,13 +52,13 @@ export class PodcastDetails {
 
   // audio player
   playAll() {
-    const episodeQueue = this._podcast().episodes
+    const episodeQueue = this._podcast().episodes!
       .map(pe => {
         const episodeTrack: AudioTrack = {
           id: null!,
           title: pe.name,
-          subtitle: pe.voicers?.map(v => v.nickname).join(", "),
-          audioSrc: pe.audioUrl,
+          subtitle: 'Episode ' + pe.number,
+          audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImageUrl,
           referenceLink: `/podcasts/${this._podcast().id}/episodes/${pe.id}`
         }
@@ -75,7 +75,7 @@ export class PodcastDetails {
     else this.addToMyLibrary();
   }
   addToMyLibrary() {
-    const episodeLibraries: ManageLibraryDto[] = this._podcast().episodes
+    const episodeLibraries: ManageLibraryDto[] = this._podcast().episodes!
       .map(pe => {
         const ml: ManageLibraryDto = {
           podcastId: this._podcast().id,
@@ -86,21 +86,27 @@ export class PodcastDetails {
 
     this.librariesService.createMeList(episodeLibraries).subscribe({
       next: () => {
-        this.toasterService.show('Added to My Library');
+        this.toasterService.show('Added all to My Library');
       },
-      error: (err) => console.error('Adding to My Library failed', err)
+      error: (err) => {
+        this.toasterService.show('Adding all to My Library failed', { type: 'error' });
+        console.error('librariesService.createMeList', episodeLibraries, err);
+      }
     });
   }
   removeFromMyLibrary() {
     const ids: number[] = this.librariesService.myLibrary()!
       .filter(pe => pe.podcast?.id == this._podcast().id)
-      .map(pe => pe.id);
+      .map(pe => pe.id!);
 
     this.librariesService.deleteMeList(ids).subscribe({
       next: () => {
-        this.toasterService.show('Deleted all from My Library');
+        this.toasterService.show('Removed all from My Library');
       },
-      error: (err) => console.error('Deleting from My Library failed', err)
+      error: (err) => {
+        this.toasterService.show('Removing all from My Library failed', { type: 'error' });
+        console.error('librariesService.deleteMeList', ids, err);
+      }
     });
   }
 }

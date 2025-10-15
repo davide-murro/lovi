@@ -1,5 +1,26 @@
 <h1 class="title">Audio Books</h1>
 
+@if (audioBooksLoading()) {
+<p class="section">Loading...</p>
+}
+
+@else if (audioBooksError()) {
+<p class="section text-accent">Failed to load Audio Books. Please try reloading the page or navigating to My Library.</p>
+<p class="section flex gap-2">
+    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
+    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
+</p>
+}
+
+@else if(audioBookPagedResult()?.items == null || audioBookPagedResult()?.items?.length == 0) {
+<p class="section text-accent">There is no Audio Books here. Please try reloading the page or navigating to My Library.</p>
+<p class="section flex gap-2">
+    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
+    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
+</p>
+}
+
+@else {
 <div class="section">
     <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
         @for (audioBook of audioBookPagedResult()?.items; track $index) {
@@ -8,7 +29,7 @@
                 [style.background-image]="'url(' + (audioBook.coverImageUrl) + ')'">
             </div>
             <div>
-                <p class="text-base font-medium leading-normal truncate">{{audioBook.name}}</p>
+                <p class="text-base font-medium leading-normal line-clamp-2">{{audioBook.name}}</p>
                 <p class="text-accent text-sm truncate">
                     @for(creator of audioBook.readers; track $index) {
                     {{ creator.nickname }} @if (!$last) {, }
@@ -19,3 +40,4 @@
         }
     </div>
 </div>
+}

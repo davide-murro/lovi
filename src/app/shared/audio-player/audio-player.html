@@ -24,7 +24,7 @@
                 <button type="button" class="icon-button" [routerLink]="track.referenceLink" [title]="'Go to the reference page'">
                     <fa-icon [icon]="faShare" />
                 </button>
-                <button type="button" class="icon-button" [title]="'Delete from queue'" (click)="audioPlayerService.removeFromQueue(track.id)">
+                <button type="button" class="icon-button" [title]="'Remove from queue'" (click)="audioPlayerService.removeFromQueue(track.id)">
                     <fa-icon [icon]="faTrash" />
                 </button>
             </div>

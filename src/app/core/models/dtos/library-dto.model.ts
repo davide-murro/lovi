@@ -4,7 +4,7 @@ import { PodcastEpisodeDto } from "./podcast-episode-dto.model";
 import { UserDto } from "./user-dto.model";
 
 export interface LibraryDto {
-    id: number;
+    id?: number;
     user: UserDto;
     podcast?: PodcastDto;
     podcastEpisode?: PodcastEpisodeDto;

@@ -1,15 +1,24 @@
 <h1 class="title">User Profile</h1>
 
+@if (userError()) {
+<p class="section text-accent">Failed to load User Profile. Please try reloading the page or navigating to My Library.</p>
+<p class="section flex gap-2">
+    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
+    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
+</p>
+}
+
+@else {
 <div class="section">
     <h3 class="title2">Information</h3>
 
-    <form [formGroup]="informationForm" (ngSubmit)="editInformation()" class="flex flex-col items-start gap-4">
-        <input type="email" formControlName="email" id="email" class="input input-lg" placeholder="Email" />
-        <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password" />
-        <input type="text" formControlName="name" id="name" class="input input-lg opacity-75" placeholder="Name"
+    <form [formGroup]="form" (ngSubmit)="editInformation()" class="flex flex-col items-start gap-4">
+        <input type="email" formControlName="email" id="email" class="input" placeholder="Email" />
+        <input type="password" formControlName="password" id="password" class="input" placeholder="Password" />
+        <input type="text" formControlName="name" id="name" class="input opacity-75" placeholder="Name"
             required />
-        <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [title]="'Save'"
-            [disabled]="!informationForm.valid">Save</button>
+        <button type="submit" class="flex-none button button-primary button-rounded" [title]="'Save'"
+            [disabled]="!form.valid">Save</button>
     </form>
 </div>
 
@@ -21,3 +30,4 @@
         <button type="button" class="button button-accent" [title]="'Delete account'" (click)="deleteAccount()">Delete account</button>
     </div>
 </div>
+}

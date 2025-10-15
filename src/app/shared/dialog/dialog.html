@@ -1,0 +1,6 @@
+<div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center" [class.hidden]="!dialogService.dialog().visible" (click)="onBackdropClick($event)">
+    <div class="bg-accent border-2 border-primary rounded-xl p-4 max-w-lg w-[90%] max-h-lg max-h-[90%] overflow-auto"
+        (click)="$event.stopPropagation()">
+        <ng-container #componentContainer></ng-container>
+    </div>
+</div>

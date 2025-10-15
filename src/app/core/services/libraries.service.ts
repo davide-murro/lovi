@@ -17,7 +17,7 @@ export class LibrariesService {
   public readonly myLibrary: Signal<LibraryDto[] | null> = this._myLibrary.asReadonly();
 
   constructor() {
-    //this.refreshMyLibrary();
+    this.loadMyLibrary();
   }
 
   // Method to fetch data from the API and update the signal

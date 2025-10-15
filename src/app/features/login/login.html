@@ -1,8 +1,8 @@
 <h1 class="title text-center">Sign in or create an account</h1>
 
 <form [formGroup]="form" (ngSubmit)="login()" class="section flex flex-col flex-1 items-center gap-4">
-    <input type="email" formControlName="userName" class="input input-lg" placeholder="Email" required />
-    <input type="password" formControlName="password" class="input input-lg" placeholder="Password" required />
+    <input type="email" formControlName="userName" id="user-name" class="input input-lg" placeholder="Email" />
+    <input type="password" formControlName="password" id="password" class="input input-lg" placeholder="Password" />
     <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [title]="'Login'"
         [disabled]="!form.valid">Login</button>
     <a [routerLink]="['/forgot-password']" [title]="'Reset password'" class="link text-sm">

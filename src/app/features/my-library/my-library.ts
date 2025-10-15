@@ -26,9 +26,22 @@ export class MyLibrary {
   faPlay = faPlay;
   faPause = faPause;
 
-  private _myLibrary: Signal<LibraryDto[]> = toSignal(this.route.data.pipe(map(data => data['myLibrary'])));
-
   // library
+  private _myLibrary: Signal<LibraryDto[]> = toSignal(this.route.data.pipe(map(data => data['myLibrary'])));
+  myLibraryError = computed(() => this._myLibrary() == null);
+  myLibraryAudioBooks = computed(() => {
+    const list = this._myLibrary()
+      .filter((ml) => ml.audioBook?.id != null)
+      .map(ml => {
+        const audioBook: AudioBookDto = {
+          ...ml.audioBook!,
+          isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(ml.audioBook!.audioUrl!),
+          isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(ml.audioBook!.audioUrl!)
+        }
+        return audioBook;
+      });
+    return list;
+  });
   myLibraryPodcasts = computed(() => {
     const grouped = this._myLibrary()
       .filter((ml) => ml.podcast?.id != null)
@@ -37,28 +50,15 @@ export class MyLibrary {
         const pFound = acc.find(a => a.id === ml.podcast!.id)!;
         const peToInsert: PodcastEpisodeDto = {
           ...ml.podcastEpisode!,
-          isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(ml.podcastEpisode!.audioUrl),
-          isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(ml.podcastEpisode!.audioUrl)
+          isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(ml.podcastEpisode!.audioUrl!),
+          isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(ml.podcastEpisode!.audioUrl!)
         };
-        if (pFound) pFound.episodes.push(peToInsert);
+        if (pFound) pFound.episodes!.push(peToInsert);
         else acc.push({ ...pToFind, episodes: [peToInsert] })
         return acc;
       }, [] as PodcastDto[]);
 
     return grouped;
-  });
-  myLibraryAudioBooks = computed(() => {
-    const list = this._myLibrary()
-      .filter((ml) => ml.audioBook?.id != null)
-      .map(ml => {
-        const audioBook: AudioBookDto = {
-          ...ml.audioBook!,
-          isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(ml.audioBook!.audioUrl),
-          isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(ml.audioBook!.audioUrl)
-        }
-        return audioBook;
-      });
-    return list;
   });
 
 
@@ -68,38 +68,6 @@ export class MyLibrary {
   }
   pause() {
     this.audioPlayerService.pause();
-  }
-  podcastEpisodeTogglePlay(podcast: PodcastDto, podcastEpisode: PodcastEpisodeDto) {
-    if (podcastEpisode.isCurrentTrackPlaying) this.pause();
-    else if (podcastEpisode.isCurrentTrack) this.play();
-    else this.podcastEpisodePlayAll(podcast, podcastEpisode);
-  }
-  podcastEpisodePlayAll(podcast: PodcastDto, podcastEpisode: PodcastEpisodeDto) {
-    const itemTrack: AudioTrack = {
-      id: null!,
-      title: podcastEpisode.name,
-      subtitle: podcastEpisode.voicers?.map(v => v.nickname).join(", "),
-      audioSrc: podcastEpisode.audioUrl,
-      coverImageSrc: podcastEpisode.coverImageUrl,
-      referenceLink: `/podcasts/${podcast.id}/episodes/${podcastEpisode.id}`
-    };
-
-    const itemQueue = this.myLibraryPodcasts()
-      .find(p => p.id === podcast.id)!.episodes
-      .map(pe => {
-        const track: AudioTrack = {
-          id: null!,
-          title: pe.name,
-          subtitle: pe.voicers?.map(v => v.nickname).join(", "),
-          audioSrc: pe.audioUrl,
-          coverImageSrc: pe.coverImageUrl,
-          referenceLink: `/podcasts/${podcast.id}/episodes/${pe.id}`
-        }
-        return track!;
-      });
-
-    this.audioPlayerService.playTrack(itemTrack, itemQueue);
-    this.toasterService.show("Podcast added to queue");
   }
   audioBookTogglePlay(audioBook: AudioBookDto) {
     if (audioBook.isCurrentTrackPlaying) this.pause();
@@ -111,12 +79,43 @@ export class MyLibrary {
       id: null!,
       title: audioBook.name,
       subtitle: audioBook.readers?.map(r => r.nickname).join(", "),
-      audioSrc: audioBook.audioUrl,
+      audioSrc: audioBook.audioUrl!,
       coverImageSrc: audioBook.coverImageUrl,
       referenceLink: `/audio-books/${audioBook.id}`
     };
 
     this.audioPlayerService.playTrack(itemTrack);
-    this.toasterService.show("Audio Book added to queue");
+  }
+  podcastEpisodeTogglePlay(podcast: PodcastDto, podcastEpisode: PodcastEpisodeDto) {
+    if (podcastEpisode.isCurrentTrackPlaying) this.pause();
+    else if (podcastEpisode.isCurrentTrack) this.play();
+    else this.podcastEpisodePlayAll(podcast, podcastEpisode);
+  }
+  podcastEpisodePlayAll(podcast: PodcastDto, podcastEpisode: PodcastEpisodeDto) {
+    const itemTrack: AudioTrack = {
+      id: null!,
+      title: podcastEpisode.name,
+      subtitle: 'Episode ' + podcastEpisode.number,
+      audioSrc: podcastEpisode.audioUrl!,
+      coverImageSrc: podcastEpisode.coverImageUrl,
+      referenceLink: `/podcasts/${podcast.id}/episodes/${podcastEpisode.id}`
+    };
+
+    const itemQueue = this.myLibraryPodcasts()
+      .find(p => p.id === podcast.id)!.episodes!
+      .map(pe => {
+        const track: AudioTrack = {
+          id: null!,
+          title: pe.name,
+          subtitle: 'Episode ' + pe.number,
+          audioSrc: pe.audioUrl!,
+          coverImageSrc: pe.coverImageUrl,
+          referenceLink: `/podcasts/${podcast.id}/episodes/${pe.id}`
+        }
+        return track!;
+      });
+
+    this.audioPlayerService.playTrack(itemTrack, itemQueue);
+    this.toasterService.show("Podcast added to queue");
   }
 }

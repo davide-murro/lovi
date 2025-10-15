@@ -1,12 +1,14 @@
 import { CreatorDto } from "./creator-dto.model";
 
 export interface AudioBookDto {
-    id: number;
+    id?: number;
     name: string;
     coverImageUrl?: string;
+    coverImage?: File;
     description?: string;
-    audioUrl: string;
-    readers: CreatorDto[];
+    audioUrl?: string;
+    audio?: File;
+    readers?: CreatorDto[];
     
     // only front end
     isInMyLibrary?: boolean;

@@ -1,6 +1,7 @@
 export interface PagedQuery {
     pageNumber: number;
     pageSize: number;
-    sortBy: string,
+    sortBy: string;
     sortOrder: 'asc' | 'desc';
+    search: string;
 }

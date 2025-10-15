@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginDto } from '../../core/models/dtos/login-dto.model';
 import { Router, RouterLink } from '@angular/router';
+import { ToasterService } from '../../core/services/toaster.service';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +12,13 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.scss'
 })
 export class Login {
-  private authService = inject(AuthService);
   private router = inject(Router);
+  private toasterService = inject(ToasterService);
+  private authService = inject(AuthService);
 
   form = new FormGroup({
-    userName: new FormControl(''),
-    password: new FormControl(''),
-    name: new FormControl(''),
+    userName: new FormControl<string>('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
 
   login(): void {
@@ -28,10 +29,13 @@ export class Login {
 
     this.authService.login(dto).subscribe({
       next: (token) => {
-        console.log('Login successful!', token);
+        this.toasterService.show('Login successful!');
         this.router.navigate(['/']);
       },
-      error: (err) => console.error('Login failed', err)
+      error: (err) => {
+        this.toasterService.show('Login failed', { type: 'error' });
+        console.error('authService.login', dto, err)
+      }
     })
   }
 }

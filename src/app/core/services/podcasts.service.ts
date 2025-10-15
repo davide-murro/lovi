@@ -6,6 +6,7 @@ import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
+import { CreatorDto } from '../models/dtos/creator-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +28,23 @@ export class PodcastsService {
 
   // POST create podcast
   create(podcast: PodcastDto): Observable<PodcastDto> {
-    return this.http.post<PodcastDto>(this.apiUrl, podcast);
+    const formData = new FormData();
+    formData.append('Name', podcast.name);
+    if (podcast.description) formData.append('Description', podcast.description);
+    if (podcast.coverImageUrl) formData.append('CoverImageUrl', podcast.coverImageUrl);
+    if (podcast.coverImage) formData.append('CoverImage', podcast.coverImage);
+    return this.http.post<PodcastDto>(this.apiUrl, formData);
   }
 
   // PUT update podcast
-  update(id: number, podcast: PodcastDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, podcast);
+  update(id: number, podcast: PodcastDto): Observable<PodcastDto> {
+    const formData = new FormData();
+    formData.append('Id', podcast.id!.toString());
+    formData.append('Name', podcast.name);
+    if (podcast.description) formData.append('Description', podcast.description);
+    if (podcast.coverImageUrl) formData.append('CoverImageUrl', podcast.coverImageUrl);
+    if (podcast.coverImage) formData.append('CoverImage', podcast.coverImage);
+    return this.http.put<PodcastDto>(`${this.apiUrl}/${id}`, formData);
   }
 
   // DELETE podcast
@@ -46,8 +58,62 @@ export class PodcastsService {
     return this.http.get<PagedResult<PodcastDto>>(`${this.apiUrl}/paged`, { params });
   }
 
+  // ADD podcast voicer
+  addVoicer(id: number, voicerId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/voicer/${voicerId}`, null);
+  }
+
+  // REMOVE podcast voicer
+  removeVoicer(id: number, voicerId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/voicer/${voicerId}`);
+  }
+
   // GET podcast by id
   getEpisodeById(id: number, episodeId: number): Observable<PodcastEpisodeDto> {
     return this.http.get<PodcastEpisodeDto>(`${this.apiUrl}/${id}/episodes/${episodeId}`);
+  }
+
+  // POST create podcast episode
+  createEpisode(id: number, episode: PodcastEpisodeDto): Observable<PodcastEpisodeDto> {
+    const formData = new FormData();
+    formData.append('Number', episode.number.toString());
+    formData.append('Name', episode.name);
+    if (episode.description) formData.append('Description', episode.description);
+    if (episode.coverImageUrl) formData.append('CoverImageUrl', episode.coverImageUrl);
+    if (episode.coverImage) formData.append('CoverImage', episode.coverImage);
+    if (episode.audioUrl) formData.append('AudioUrl', episode.audioUrl);
+    if (episode.audio) formData.append('Audio', episode.audio);
+    if (episode.podcastId) formData.append('PodcastId', episode.podcastId.toString());
+    return this.http.post<PodcastEpisodeDto>(`${this.apiUrl}/${id}/episodes`, formData);
+  }
+
+  // PUT update podcast episode
+  updateEpisode(id: number, episodeId: number, episode: PodcastEpisodeDto): Observable<PodcastEpisodeDto> {
+    const formData = new FormData();
+    formData.append('Id', episode.id!.toString());
+    formData.append('Number', episode.number.toString());
+    formData.append('Name', episode.name);
+    if (episode.description) formData.append('Description', episode.description);
+    if (episode.coverImageUrl) formData.append('CoverImageUrl', episode.coverImageUrl);
+    if (episode.coverImage) formData.append('CoverImage', episode.coverImage);
+    if (episode.audioUrl) formData.append('AudioUrl', episode.audioUrl);
+    if (episode.audio) formData.append('Audio', episode.audio);
+    if (episode.podcastId) formData.append('PodcastId', episode.podcastId.toString());
+    return this.http.put<PodcastEpisodeDto>(`${this.apiUrl}/${id}/episodes/${episodeId}`, formData);
+  }
+
+  // DELETE podcast episode
+  deleteEpisode(id: number, episodeId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/episodes/${episodeId}`);
+  }
+
+  // ADD podcast episode voicer
+  addEpisodeVoicer(id: number, episodeId: number, voicerId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicer/${voicerId}`, null);
+  }
+
+  // REMOVE podcast episode voicer
+  removeEpisodeVoicer(id: number, episodeId: number, voicerId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicer/${voicerId}`);
   }
 }

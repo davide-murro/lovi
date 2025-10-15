@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { PodcastsService } from '../../core/services/podcasts.service';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, finalize, of, switchMap } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -22,16 +22,30 @@ export class Podcasts {
   } as PagedQuery);
   podcastPagedResult = toSignal(
     toObservable(this.podcastPagedQuery).pipe(
-      switchMap(query =>
-        this.podcastsService.getPaged(query).pipe(
+      switchMap(query => {
+        this.podcastsError.set(false);
+        this.podcastsLoading.set(true);
+        return this.podcastsService.getPaged(query).pipe(
           catchError(err => {
-            console.error('Error fetching podcasts:', err);
+            this.podcastsError.set(true);
+            console.error('podcastsService.getPaged', query, err);
             return of(null);
+          }),
+          finalize(() => {
+            this.podcastsLoading.set(false);
           })
         )
-      )
+      })
     )
   );
+  podcastsLoading = signal(false);
+  podcastsError = signal(false);
+
+  reload() {
+    this.podcastPagedQuery.update(query => ({
+      ...query
+    }));
+  }
 
   nextPage() {
     this.podcastPagedQuery.update(query => ({

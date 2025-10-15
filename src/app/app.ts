@@ -6,7 +6,7 @@ import { AudioPlayer } from "./shared/audio-player/audio-player";
 import { Toaster } from './shared/toaster/toaster';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Dialog } from './shared/dialog/dialog';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
     Body,
     Footer,
     AudioPlayer,
-    Toaster
+    Toaster,
+    Dialog
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

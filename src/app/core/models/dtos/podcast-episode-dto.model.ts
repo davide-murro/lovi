@@ -2,14 +2,17 @@ import { CreatorDto } from "./creator-dto.model";
 import { PodcastDto } from "./podcast-dto.model";
 
 export interface PodcastEpisodeDto {
-    id: number;
+    id?: number;
     number: number;
     name: string;
     coverImageUrl?: string;
+    coverImage?: File;
     description?: string;
-    audioUrl: string;
-    podcast: PodcastDto;
-    voicers: CreatorDto[];
+    audioUrl?: string;
+    audio?: File;
+    podcastId?: number;
+    podcast?: PodcastDto;
+    voicers?: CreatorDto[];
 
     // only front end
     isInMyLibrary?: boolean;

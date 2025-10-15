@@ -1,54 +1,13 @@
 <h1 class="title">My Library</h1>
 
-<div class="section">
-    <h2 class="title">Podcasts</h2>
+@if (myLibraryError()) {
+<p class="section text-accent">Failed to load My Library. Please try reloading the page.</p>
+<p class="section flex gap-2">
+    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
+</p>
+}
 
-    @for (podcast of myLibraryPodcasts(); track $index) {
-    <div class="section pb-4">
-        <a [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
-            <div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[150px] sm:min-h-[250px]"
-                [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
-            </div>
-        </a>
-
-        <h3 class="title2">{{podcast.name}}</h3>
-        <p class="subtitle text-accent">
-            @for(creator of podcast.voicers; track $index) {
-            <a>{{ creator.nickname }}</a>@if (!$last) {, }
-            }
-        </p>
-
-        <div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
-            @for (episode of podcast.episodes; track $index) {
-            <div class="flex items-center gap-2 sm:gap-4">
-                <a class="flex flex-grow items-center gap-2 overflow-hidden sm:gap-4"
-                    [routerLink]="['/podcasts', podcast.id, 'episodes', episode.id]" [title]="episode.name">
-                    <div class="size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl sm:size-24"
-                        [style.background-image]="'url(' + (episode.coverImageUrl) + ')'">
-                    </div>
-                    <div class="overflow-hidden">
-                        <p class="text-base font-medium leading-normal truncate">{{episode.name}}</p>
-                        <p class="text-accent text-sm truncate">
-                            @for(creator of episode.voicers; track $index) {
-                            {{ creator.nickname }}@if (!$last) {, }
-                            }
-                        </p>
-                    </div>
-                </a>
-                <div class="flex gap-2">
-                    <button type="button" class="icon-button" [title]="episode.isCurrentTrackPlaying ? 'Pause' : 'Play'"
-                        (click)="podcastEpisodeTogglePlay(podcast, episode)">
-                        @if(episode.isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
-                        @else {<fa-icon [icon]="faPlay" />}
-                    </button>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-    }
-</div>
-
+@else {
 <div class="section">
     <h2 class="title">Audio Books</h2>
 
@@ -62,7 +21,7 @@
             </a>
             <div class="flex items-center justify-between gap-2 sm:gap-4">
                 <div class="overflow-hidden">
-                    <p class="text-base font-medium leading-normal truncate">{{audioBook.name}}</p>
+                    <p class="text-base font-medium leading-normal line-clamp-2">{{audioBook.name}}</p>
                     <p class="text-accent text-sm truncate">
                         @for(creator of audioBook.readers; track $index) {
                         {{ creator.nickname }} @if (!$last) {, }
@@ -82,3 +41,58 @@
         }
     </div>
 </div>
+<div class="section">
+    <h2 class="title">Podcasts</h2>
+
+    @for (podcast of myLibraryPodcasts(); track $index) {
+    <div class="section pb-4">
+        <a [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
+            <div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[150px] sm:min-h-[250px]"
+                [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
+            </div>
+        </a>
+
+        <h3 class="title2">{{podcast.name}}</h3>
+        <p class="subtitle text-accent">
+            @for(creator of podcast.voicers; track $index) {
+            <a>{{ creator.nickname }}</a>@if (!$last) {, }
+            }
+        </p>
+        <p class="section text-accent">
+            {{podcast.episodes?.length ?? 0}} Episodes
+        </p>
+
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
+            @for (episode of podcast.episodes; track $index) {
+            <div class="flex items-center gap-2 sm:gap-4">
+                <a class="flex flex-grow items-center gap-2 overflow-hidden sm:gap-4"
+                    [routerLink]="['/podcasts', podcast.id, 'episodes', episode.id]" [title]="episode.name">
+                    <div class="size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl sm:size-24"
+                        [style.background-image]="'url(' + (episode.coverImageUrl) + ')'">
+                    </div>
+                    <div class="overflow-hidden">
+                        <p class="text-base font-medium leading-normal line-clamp-2">{{episode.name}}</p>
+                        <p class="text-accent text-sm truncate max-sm:hidden">
+                            @for(creator of episode.voicers; track $index) {
+                            {{ creator.nickname }}@if (!$last) {, }
+                            }
+                        </p>
+                        <p class="text-accent text-sm truncate">
+                            Episode {{episode.number}}
+                        </p>
+                    </div>
+                </a>
+                <div class="flex gap-2">
+                    <button type="button" class="icon-button" [title]="episode.isCurrentTrackPlaying ? 'Pause' : 'Play'"
+                        (click)="podcastEpisodeTogglePlay(podcast, episode)">
+                        @if(episode.isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
+                        @else {<fa-icon [icon]="faPlay" />}
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>
+}
