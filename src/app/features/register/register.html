@@ -1,95 +1,100 @@
-<h1 class="title text-center">Create an account</h1>
+<div class="max-w-lg m-auto">
+    <h1 class="title text-center">Create an account</h1>
 
-<form [formGroup]="form" (ngSubmit)="register()"
-    class="section flex flex-col flex-1 items-center gap-4 max-w-[300px] m-auto">
+    <p class="section text-center text-accent">
+        Start listening now! Get your free LOVI account in seconds. Get the access to unique, hard-to-find audiobooks and specialized podcasts! Build your perfect personal library today.
+    </p>
 
-    <div class="w-full">
-        <label class="label" for="email">Email</label>
-        <input type="email" formControlName="email" id="email" class="input input-lg w-full" />
-        @if(form.controls.email.hasError('required')) {
-        <p class="text-accent text-sm">
-            Email is required
-        </p>
-        } @else if(form.controls.email.hasError('email')) {
-        <p class="text-error text-sm">
-            Email not valid
-        </p>
-        } @else if(form.controls.email.valid) {
-        <p class="text-success text-sm">
-            Email OK
-        </p>
-        }
-    </div>
+    <form [formGroup]="form" (ngSubmit)="register()" class="section flex flex-col flex-1 items-center gap-4">
 
-    <div class="w-full">
-        <label class="label" for="password">Password</label>
-        <input type="password" formControlName="password" id="password" class="input input-lg w-full" />
-        @if(form.controls.password.hasError('required')) {
-        <p class="text-accent text-sm">Password is required</p>
-        } @else if(
-        form.controls.password.hasError('minLength') ||
-        form.controls.password.hasError('uppercase') ||
-        form.controls.password.hasError('lowercase') ||
-        form.controls.password.hasError('number') ||
-        form.controls.password.hasError('specialChar')
-        ) {
-        <div class="text-accent text-sm">
-            <b>Password must have:</b>
-            <ul>
-                <li>Minimum 6 characters</li>
-                <li>At least one uppercase letter</li>
-                <li>At least one lowercase letter</li>
-                <li>At least one number</li>
-                <li>At least one special character</li>
-            </ul>
+        <div class="max-w-full">
+            <label class="label" for="email">Email</label>
+            <input type="email" formControlName="email" id="email" class="input input-lg" />
+            @if(form.controls.email.hasError('required')) {
+            <p class="text-accent text-sm">
+                Email is required
+            </p>
+            } @else if(form.controls.email.hasError('email')) {
+            <p class="text-error text-sm">
+                Email not valid
+            </p>
+            } @else if(form.controls.email.valid) {
+            <p class="text-success text-sm">
+                Email OK
+            </p>
+            }
         </div>
-        } @else if(form.controls.password.hasError('valuesMismatch')){
-        <div class="text-accent text-sm">
-            Now repeat the password...
+
+        <div class="max-w-full">
+            <label class="label" for="password">Password</label>
+            <input type="password" formControlName="password" id="password" class="input input-lg" />
+            @if(form.controls.password.hasError('required')) {
+            <p class="text-accent text-sm">Password is required</p>
+            } @else if(
+            form.controls.password.hasError('minLength') ||
+            form.controls.password.hasError('uppercase') ||
+            form.controls.password.hasError('lowercase') ||
+            form.controls.password.hasError('number') ||
+            form.controls.password.hasError('specialChar')
+            ) {
+            <div class="text-accent text-sm">
+                <b>Password must have:</b>
+                <ul>
+                    <li>Minimum 6 characters</li>
+                    <li>At least one uppercase letter</li>
+                    <li>At least one lowercase letter</li>
+                    <li>At least one number</li>
+                    <li>At least one special character</li>
+                </ul>
+            </div>
+            } @else if(form.controls.password.hasError('valuesMismatch')){
+            <div class="text-accent text-sm">
+                Now repeat the password...
+            </div>
+            } @else if(form.controls.password.valid) {
+            <p class="text-success text-sm">
+                Password OK
+            </p>
+            }
         </div>
-        } @else if(form.controls.password.valid) {
-        <p class="text-success text-sm">
-            Password OK
-        </p>
-        }
-    </div>
 
-    <div class="w-full">
-        <label class="label" for="password-repeat">Repeat password</label>
-        <input type="password" formControlName="passwordRepeat" id="password-repeat" class="input input-lg w-full" />
-        @if (form.controls.password.hasError('required')) {
-        <p class="text-accent text-sm">
-            Password is required
-        </p>
-        } @else if (form.controls.passwordRepeat.hasError('required')) {
-        <p class="text-accent text-sm">
-            Repeat password is required
-        </p>
-        } @else if(form.controls.passwordRepeat.hasError('valuesMismatch')){
-        <div class="text-error text-sm">
-            Passwords do not match
+        <div class="max-w-full">
+            <label class="label" for="password-repeat">Repeat password</label>
+            <input type="password" formControlName="passwordRepeat" id="password-repeat" class="input input-lg" />
+            @if (form.controls.password.hasError('required')) {
+            <p class="text-accent text-sm">
+                Password is required
+            </p>
+            } @else if (form.controls.passwordRepeat.hasError('required')) {
+            <p class="text-accent text-sm">
+                Repeat password is required
+            </p>
+            } @else if(form.controls.passwordRepeat.hasError('valuesMismatch')){
+            <div class="text-error text-sm">
+                Passwords do not match
+            </div>
+            } @else if(form.controls.passwordRepeat.valid) {
+            <p class="text-success text-sm">
+                Password repeat OK
+            </p>
+            }
         </div>
-        } @else if(form.controls.passwordRepeat.valid) {
-        <p class="text-success text-sm">
-            Password repeat OK
-        </p>
-        }
-    </div>
 
-    <div class="w-full">
-        <label class="label" for="name">Name</label>
-        <input type="text" formControlName="name" id="name" class="input input-lg w-full" />
-        @if(form.controls.name.hasError('required')) {
-        <p class="text-accent text-sm">
-            Name is required
-        </p>
-        } @else if(form.controls.name.valid) {
-        <p class="text-success text-sm">
-            Name OK
-        </p>
-        }
-    </div>
+        <div class="max-w-full">
+            <label class="label" for="name">Name</label>
+            <input type="text" formControlName="name" id="name" class="input input-lg" />
+            @if(form.controls.name.hasError('required')) {
+            <p class="text-accent text-sm">
+                Name is required
+            </p>
+            } @else if(form.controls.name.valid) {
+            <p class="text-success text-sm">
+                Name OK
+            </p>
+            }
+        </div>
 
-    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid"
-        [title]="'Register'">Register</button>
-</form>
+        <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg"
+            [disabled]="!form.valid" [title]="'Register'">Register</button>
+    </form>
+</div>

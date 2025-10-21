@@ -1,46 +1,48 @@
-<h1 class="title text-center">Sign in or create an account</h1>
+<div class="max-w-lg m-auto">
+    <h1 class="title text-center">Sign in or create an account</h1>
 
-<form [formGroup]="form" (ngSubmit)="login()"
-    class="section flex flex-col flex-1 items-center gap-4 max-w-[300px] m-auto">
-    <div class="w-full">
-        <label for="user-name" class="label">Email</label>
-        <input type="email" formControlName="userName" id="user-name" class="input input-lg w-full" />
-        @if(form.controls.userName.dirty && form.controls.userName.touched) {
-        @if(form.controls.userName.hasError('required')) {
-        <p class="text-error text-sm">
-            Email is required
-        </p>
-        } @else if(form.controls.userName.hasError('email')) {
-        <p class="text-error text-sm">
-            Email not valid
-        </p>
-        }
-        }
+    <form [formGroup]="form" (ngSubmit)="login()"
+        class="section flex flex-col flex-1 items-center gap-4">
+        <div class="max-w-full">
+            <label for="user-name" class="label">Email</label>
+            <input type="email" formControlName="userName" id="user-name" class="input input-lg" />
+            @if(form.controls.userName.dirty && form.controls.userName.touched) {
+            @if(form.controls.userName.hasError('required')) {
+            <p class="text-error text-sm">
+                Email is required
+            </p>
+            } @else if(form.controls.userName.hasError('email')) {
+            <p class="text-error text-sm">
+                Email not valid
+            </p>
+            }
+            }
+        </div>
+        <div class="max-w-full">
+            <label for="password" class="label">Password</label>
+            <input type="password" formControlName="password" id="password" class="input input-lg" />
+            @if(form.controls.password.dirty && form.controls.password.touched) {
+            @if(form.controls.password.hasError('required')) {
+            <p class="text-error text-sm">
+                Password is required
+            </p>
+            }
+            }
+        </div>
+        <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg"
+            [disabled]="!form.valid" [title]="'Login'">Login</button>
+    </form>
+
+    <div class="section flex flex-col flex-1 items-center">
+        <a [routerLink]="['/forgot-password']" [title]="'Reset password'" class="link text-sm">
+            Forgot Password?
+        </a>
     </div>
-    <div class="w-full">
-        <label for="password" class="label">Password</label>
-        <input type="password" formControlName="password" id="password" class="input input-lg w-full" />
-        @if(form.controls.password.dirty && form.controls.password.touched) {
-        @if(form.controls.password.hasError('required')) {
-        <p class="text-error text-sm">
-            Password is required
-        </p>
-        }
-        }
+
+    <div class="section flex flex-col flex-1 items-center">
+        <h2 class="title2">New to LOVI?</h2>
+        <a [routerLink]="['/register']" [title]="'Register to LOVI'" class="button button-accent button-rounded">
+            Create your LOVI account
+        </a>
     </div>
-    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid"
-        [title]="'Login'">Login</button>
-</form>
-
-<div class="section flex flex-col flex-1 items-center">
-    <a [routerLink]="['/forgot-password']" [title]="'Reset password'" class="link text-sm">
-        Forgot Password?
-    </a>
-</div>
-
-<div class="section flex flex-col flex-1 items-center">
-    <h2 class="title2">New to LOVI?</h2>
-    <a [routerLink]="['/register']" [title]="'Register to LOVI'" class="button button-accent button-rounded">
-        Create your LOVI account
-    </a>
 </div>
