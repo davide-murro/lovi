@@ -1,26 +1,26 @@
-<h1 class="title">Podcasts</h1>
+<h1 class="title flex justify-between items-start gap-2">
+    Podcasts
+
+    <button type="button" class="button button-accent shrink-0 flex gap-2"
+        [title]="'Reload'" (click)="reload()">
+        <fa-icon [icon]="faRotate" />
+        <span class="hidden lg:inline">Reload</span>
+    </button>
+</h1>
 
 @if (podcastsLoading()) {
-<p class="section">Loading...</p>
+<p class="section text-accent">Loading...</p>
 }
 
 @else if (podcastsError()) {
-<p class="section text-accent">Failed to load Podcasts. Please try reloading the page or navigating to My Library.</p>
-<p class="section flex gap-2">
-    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
-    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
-</p>
+<p class="section text-accent">Failed to load Podcasts. Please try reloading or navigating to <a class="link" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a></p>
 }
 
 @else if(podcastPagedResult()?.items == null || podcastPagedResult()?.items?.length == 0) {
-<p class="section text-accent">There is no Podcasts here. Please try reloading the page or navigating to My Library.</p>
-<p class="section flex gap-2">
-    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
-    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
-</p>
+<p class="section text-accent">There are no Podcasts here. Please try reloading or navigating to <a class="link" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a></p>
 }
 
-@else {
+@else { 
 <div class="section">
     <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
         @for (podcast of podcastPagedResult()?.items; track $index) {

@@ -31,7 +31,6 @@ export class PodcastDetails {
 
   // podcast
   private _podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
-  podcastError = computed(() => this._podcast() == null);
   podcast = computed(() => {
     const p: PodcastDto =
     {
@@ -89,8 +88,8 @@ export class PodcastDetails {
         this.toasterService.show('Added all to My Library');
       },
       error: (err) => {
-        this.toasterService.show('Adding all to My Library failed', { type: 'error' });
         console.error('librariesService.createMeList', episodeLibraries, err);
+        this.toasterService.show('Adding all to My Library failed', { type: 'error' });
       }
     });
   }
@@ -104,8 +103,8 @@ export class PodcastDetails {
         this.toasterService.show('Removed all from My Library');
       },
       error: (err) => {
-        this.toasterService.show('Removing all from My Library failed', { type: 'error' });
         console.error('librariesService.deleteMeList', ids, err);
+        this.toasterService.show('Removing all from My Library failed', { type: 'error' });
       }
     });
   }

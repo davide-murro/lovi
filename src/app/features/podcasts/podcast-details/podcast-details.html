@@ -1,15 +1,4 @@
 
-@if (podcastError()) {
-<h1 class="title">Podcast</h1>
-<p class="section text-accent">Failed to load the Podcast. Please try reloading the page or navigating to My Library.</p>
-<p class="section flex gap-2">
-    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
-    <a class="button button-accent" [title]="'Podcasts'" [routerLink]="['/podcasts']">Podcasts</a>
-    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
-</p>
-}
-
-@else {
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" [routerLink]="['/podcasts']" [title]="'Podcasts'">Podcasts</a>
     <span class="text-accent font-medium leading-normal">/</span>
@@ -79,5 +68,4 @@
         }
     </div>
 </div>
-}
 }

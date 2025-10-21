@@ -18,6 +18,11 @@ import { audioBookResolver } from './core/resolvers/audio-book.resolver';
 import { Edit } from './features/edit/edit';
 import { EditPodcast } from './features/edit/edit-podcast/edit-podcast';
 import { EditPodcastEpisode } from './features/edit/edit-podcast/edit-podcast-episode/edit-podcast-episode';
+import { NotFound } from './shared/not-found/not-found';
+import { EditCreator } from './features/edit/edit-creator/edit-creator';
+import { creatorResolver } from './core/resolvers/creator.resolver';
+import { EditAudioBook } from './features/edit/edit-audio-book/edit-audio-book';
+import { ForgotPassword } from './features/forgot-password/forgot-password';
 
 export const routes: Routes = [
     {
@@ -34,6 +39,16 @@ export const routes: Routes = [
         path: 'register',
         component: Register,
         title: 'LOVI - Register'
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotPassword,
+        title: 'LOVI - Forgot password'
+    },
+    {
+        path: 'forgot-password:email:token',
+        component: ForgotPassword,
+        title: 'LOVI - Forgot password reset'
     },
     {
         path: 'user-profile',
@@ -96,6 +111,23 @@ export const routes: Routes = [
         data: { roles: ['Admin'] },
     },
     {
+        path: 'edit/audio-books/create',
+        component: EditAudioBook,
+        title: 'LOVI - Create Audio Book',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+    },
+    {
+        path: 'edit/audio-books/:id',
+        component: EditAudioBook,
+        title: 'LOVI - Edit Audio Book',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+        resolve: {
+            audioBook: audioBookResolver
+        }
+    },
+    {
         path: 'edit/podcasts/create',
         component: EditPodcast,
         title: 'LOVI - Create Podcast',
@@ -132,7 +164,29 @@ export const routes: Routes = [
             podcastEpisode: podcastEpisodeResolver
         }
     },
+    {
+        path: 'edit/creators/create',
+        component: EditCreator,
+        title: 'LOVI - Create Creator',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+    },
+    {
+        path: 'edit/creators/:id',
+        component: EditCreator,
+        title: 'LOVI - Edit Creator',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+        resolve: {
+            creator: creatorResolver
+        }
+    },
 
+    {
+        path: 'not-found',
+        component: NotFound,
+        title: 'LOVI - Not found',
+    },
     {
         path: '**',
         redirectTo: ''

@@ -1,18 +1,13 @@
-<h1 class="title">LOVI</h1>
-<button (click)="call()" i18n>call API</button>
-<br>
-<button (click)="toast()" i18n>toast</button>
-<br><br>
+<!--<h1 class="title">LOVI</h1>
 
-<div *appAuth>
-  Welcome back!
+<div class="section">
+  <h3 class="title2">Audio Books</h3>
 </div>
-<ng-template #loggedOut>
-  <a [title]="'Login'">Login</a>
-</ng-template>
-<div *appAuth="null; else loggedOut">
-  <p>You are logged in!</p>
-</div>
-<div *appAuth="'Admin'">
-  <p>You are logged in admin!</p>
-</div>
+
+<div class="section">
+  <h3 class="title2">Podcasts</h3>
+</div>-->
+
+<app-audio-books></app-audio-books>
+
+<app-podcasts></app-podcasts>

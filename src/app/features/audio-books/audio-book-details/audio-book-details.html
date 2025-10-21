@@ -1,15 +1,3 @@
-@if (audioBookError()) {
-<h1 class="title">Audio Book</h1>
-<p class="section text-accent">Failed to load the Audio Book. Please try reloading the page or navigating to My Library.
-</p>
-<p class="section flex gap-2">
-    <a href="javascript:window.location.href=window.location.href" class="button button-accent" [title]="'Reload'">Reload</a>
-    <a class="button button-accent" [title]="'Audio Books'" [routerLink]="['/audio-books']">Audio Books</a>
-    <a class="button button-accent" [title]="'My Library'" [routerLink]="['/my-library']">My Library</a>
-</p>
-}
-
-@else {
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" [routerLink]="['/audio-books']" [title]="'Audio Books'">Audio Books</a>
     <span class="text-accent font-medium leading-normal">/</span>
@@ -65,4 +53,3 @@
         </p>
     </div>
 </div>
-}

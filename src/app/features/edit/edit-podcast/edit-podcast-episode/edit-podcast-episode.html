@@ -35,7 +35,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [src]="coverPreview()" class="mt-2 size-32 object-cover" />
+        <img [src]="coverPreview()" class="mt-2 size-32 object-contain" />
         }
     </div>
 
@@ -44,7 +44,7 @@
         <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png"
             (change)="onAudioSelected($event)" />
         @if(audioPreview()){
-        <audio controls class="mt-2" [src]="audioPreview()"></audio>
+        <audio controls class="mt-2 max-w-full" [src]="audioPreview()"></audio>
         }
     </div>
 
@@ -63,36 +63,39 @@
 <div class="section">
     <h3 class="title2">Voicers</h3>
 
-    <table class="table w-full overflow-auto">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nickname</th>
-                <th>name</th>
-                <th>surname</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (voicer of episode()!.voicers; track $index) {
-            <tr>
-                <td>{{voicer.id}}</td>
-                <td>{{voicer.nickname}}</td>
-                <td>{{voicer.name}}</td>
-                <td>{{voicer.surname}}</td>
+    <div class="section overflow-auto">
+        <table class="table w-full overflow-auto">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nickname</th>
+                    <th>name</th>
+                    <th>surname</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (voicer of episode()!.voicers; track $index) {
+                <tr>
+                    <td>{{voicer.id}}</td>
+                    <td>{{voicer.nickname}}</td>
+                    <td>{{voicer.name}}</td>
+                    <td>{{voicer.surname}}</td>
 
-                <td>
-                    <button class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
-                            [icon]="faTrash" /></button>
-                </td>
-            </tr>
-            }
-            <tr>
-                <td colspan="100%">
-                    <button type="button" class="button button-accent" [title]="'Add Voicer'" (click)="addVoicer()">Add
-                        Voicer</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>
+                        <button class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
+                                [icon]="faTrash" /></button>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="100%">
+                        <button type="button" class="button button-accent" [title]="'Add Voicer'"
+                            (click)="addVoicer()">Add
+                            Voicer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 }

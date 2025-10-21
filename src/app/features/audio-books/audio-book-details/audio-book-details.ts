@@ -32,7 +32,6 @@ export class AudioBookDetails {
 
   // audioBook
   private _audioBook: Signal<AudioBookDto> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
-  audioBookError = computed(() => this._audioBook() == null);
   audioBook = computed(() => {
     const p: AudioBookDto =
     {
@@ -95,8 +94,8 @@ export class AudioBookDetails {
         this.toasterService.show('Added to My Library');
       },
       error: (err) => {
+        console.error('librariesService.createMe', audioBookLibrary, err);
         this.toasterService.show('Adding to My Library failed', { type: 'error' });
-        console.error('librariesService.createMe', audioBookLibrary, err)
       }
     });
   }
@@ -109,8 +108,8 @@ export class AudioBookDetails {
         this.toasterService.show('Removed from My Library');
       },
       error: (err) => {
+        console.error('librariesService.deleteMe', id, err);
         this.toasterService.show('Removing from My Library failed', { type: 'error' });
-        console.error('librariesService.deleteMe', id, err)
       }
     });
   }

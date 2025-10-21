@@ -30,13 +30,13 @@ export class EditPodcast {
   podcast = signal<PodcastDto | null>(this.route.snapshot.data['podcast']);
 
   form = new FormGroup({
-    id: new FormControl<number | null>({ value: this.podcast()?.id ?? null, disabled: true }),
-    name: new FormControl<string>(this.podcast()?.name ?? null!, { nonNullable: true, validators: [Validators.required] }),
-    coverImageUrl: new FormControl<string | null>(this.podcast()?.coverImageUrl ?? null),
+    id: new FormControl({ value: this.podcast()?.id, disabled: true }),
+    name: new FormControl(this.podcast()?.name ?? null!, { nonNullable: true, validators: [Validators.required] }),
+    coverImageUrl: new FormControl(this.podcast()?.coverImageUrl),
     coverImage: new FormControl<File | null>(null),
-    description: new FormControl<string | null>(this.podcast()?.description ?? null),
+    description: new FormControl(this.podcast()?.description),
   });
-  coverPreview = signal<string | null>(this.podcast()?.coverImageUrl ?? null);
+  coverPreview = signal(this.podcast()?.coverImageUrl ?? null);
 
 
   load() {
@@ -48,8 +48,8 @@ export class EditPodcast {
           this.podcast.set(podcast);
         },
         error: (err) => {
-          this.toasterService.show('Get Podcast failed', { type: 'error' });
           console.error('podcastsService.getById', this.podcast()!.id!, err);
+          this.toasterService.show('Get Podcast failed', { type: 'error' });
         }
       });
   }
@@ -81,13 +81,13 @@ export class EditPodcast {
     }
     if (this.podcast()?.id != null) {
       this.podcastsService.update(this.podcast()!.id!, p).subscribe({
-        next: (res) => {
+        next: () => {
           this.toasterService.show('Podcast updated');
           this.load();
         },
         error: (err) => {
-          this.toasterService.show('Podcast update failed', { type: 'error' });
           console.error('podcastsService.update', this.podcast()!.id!, p, err);
+          this.toasterService.show('Podcast update failed', { type: 'error' });
         }
       });
     } else {
@@ -97,8 +97,8 @@ export class EditPodcast {
           this.router.navigate(['/edit', 'podcasts', res.id])
         },
         error: (err) => {
-          this.toasterService.show('Podcast create failed', { type: 'error' });
           console.error('podcastsService.update', p, err);
+          this.toasterService.show('Podcast create failed', { type: 'error' });
         }
       });
 
@@ -115,8 +115,8 @@ export class EditPodcast {
               this.load();
             },
             error: (err) => {
-              this.toasterService.show('Delete Episode failed', { type: 'error' });
               console.error('podcastsService.deleteEpisode', this.podcast()!.id!, episodeId, err);
+              this.toasterService.show('Delete Episode failed', { type: 'error' });
             }
           });
         }
@@ -129,12 +129,12 @@ export class EditPodcast {
       .subscribe((creator: CreatorDto) => {
         if (creator) {
           this.podcastsService.addVoicer(this.podcast()!.id!, creator.id).subscribe({
-            next: (res) => {
+            next: () => {
               this.load();
             },
             error: (err) => {
-              this.toasterService.show('Add Voicer failed', { type: 'error' });
               console.error('podcastsService.addVoicer', this.podcast()!.id!, creator.id, err);
+              this.toasterService.show('Add Voicer failed', { type: 'error' });
             }
           });
         }
@@ -145,12 +145,12 @@ export class EditPodcast {
       .subscribe(confirmed => {
         if (confirmed) {
           this.podcastsService.removeVoicer(this.podcast()!.id!, voicerId).subscribe({
-            next: (res) => {
+            next: () => {
               this.load();
             },
             error: (err) => {
-              this.toasterService.show('Remove Voicer failed', { type: 'error' });
               console.error('podcastsService.removeVoicer', this.podcast()!.id!, voicerId, err);
+              this.toasterService.show('Remove Voicer failed', { type: 'error' });
             }
           });
         }

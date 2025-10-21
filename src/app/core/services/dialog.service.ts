@@ -3,6 +3,7 @@ import { Subject, Observable } from 'rxjs';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 import { DialogState } from '../models/dialog-state.model';
 import { DialogConfig } from '../models/dialog-config.model';
+import { LogDialog } from '../../shared/log-dialog/log-dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,15 @@ export class DialogService {
 
   // Shortcut for confirm dialogs
   confirm(title: string, message: string): Observable<boolean> {
-    return this.open(ConfirmDialog, { title, data: { message } });
+    return this.open(ConfirmDialog, { 
+      title, 
+      data: { message }, 
+      type: 'info'
+    });
+  }
+
+  // Shortcut for log dialogs
+  log(title: string, message: string, options?: Partial<DialogConfig>): Observable<boolean> {
+    return this.open(LogDialog, { ...options, title, data: { message } });
   }
 }

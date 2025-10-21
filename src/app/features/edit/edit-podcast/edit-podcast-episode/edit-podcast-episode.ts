@@ -30,18 +30,18 @@ export class EditPodcastEpisode {
   podcast = signal<PodcastDto | null>(this.route.snapshot.data['podcast']);
 
   form = new FormGroup({
-    id: new FormControl<number | null>({ value: this.episode()?.id ?? null, disabled: true }),
-    number: new FormControl<number>(this.episode()?.number ?? null!, { nonNullable: true, validators: [Validators.required] }),
-    name: new FormControl<string>(this.episode()?.name ?? null!, { nonNullable: true, validators: [Validators.required] }),
-    coverImageUrl: new FormControl<string | null>(this.episode()?.coverImageUrl ?? null),
+    id: new FormControl({ value: this.episode()?.id, disabled: true }),
+    number: new FormControl(this.episode()?.number, { nonNullable: true, validators: [Validators.required] }),
+    name: new FormControl(this.episode()?.name, { nonNullable: true, validators: [Validators.required] }),
+    coverImageUrl: new FormControl(this.episode()?.coverImageUrl),
     coverImage: new FormControl<File | null>(null),
-    description: new FormControl<string | null>(this.episode()?.description ?? null),
-    audioUrl: new FormControl<string | null>(this.episode()?.audioUrl ?? null),
+    description: new FormControl(this.episode()?.description),
+    audioUrl: new FormControl(this.episode()?.audioUrl),
     audio: new FormControl<File | null>(null),
-    podcastId: new FormControl<number | null>(this.episode() ? this.episode()!.podcast!.id! : this.podcast()!.id!)
+    podcastId: new FormControl(this.episode() ? this.episode()!.podcast!.id! : this.podcast()!.id!)
   });
-  coverPreview = signal<string | null>(this.episode()?.coverImageUrl ?? null);
-  audioPreview = signal<string | null>(this.episode()?.audioUrl ?? null!);
+  coverPreview = signal(this.episode()?.coverImageUrl ?? null);
+  audioPreview = signal(this.episode()?.audioUrl ?? null);
 
 
   load() {
@@ -53,8 +53,8 @@ export class EditPodcastEpisode {
         this.episode.set(episode);
       },
       error: (err) => {
-        this.toasterService.show('Get Podcast Episode failed', { type: 'error' });
         console.error('podcastsService.getEpisodeById', this.episode()!.podcast!.id!, this.episode()!.id!, err);
+        this.toasterService.show('Get Podcast Episode failed', { type: 'error' });
       }
     });
   }
@@ -92,8 +92,8 @@ export class EditPodcastEpisode {
     const form = this.form.getRawValue();
     const pe: PodcastEpisodeDto = {
       id: form.id!,
-      number: form.number,
-      name: form.name,
+      number: form.number!,
+      name: form.name!,
       coverImageUrl: form.coverImageUrl!,
       coverImage: form.coverImage!,
       description: form.description!,
@@ -104,13 +104,13 @@ export class EditPodcastEpisode {
 
     if (this.episode()?.id != null) {
       this.podcastsService.updateEpisode(this.episode()!.podcast!.id!, this.episode()!.id!, pe).subscribe({
-        next: (res) => {
+        next: () => {
           this.toasterService.show('Podcast Episode updated');
           this.load();
         },
         error: (err) => {
-          this.toasterService.show('Podcast Episode update failed', { type: 'error' });
           console.error('podcastsService.updateEpisode', this.episode()!.podcast!.id!, this.episode()!.id!, pe, err);
+          this.toasterService.show('Podcast Episode update failed', { type: 'error' });
         }
       });
     } else {
@@ -121,8 +121,8 @@ export class EditPodcastEpisode {
           this.router.navigate(['/edit', 'podcasts', res.podcastId, 'episodes', res.id])
         },
         error: (err) => {
-          this.toasterService.show('Podcast Episode create failed', { type: 'error' });
           console.error('podcastsService.createEpisode', pe.podcastId, pe, err);
+          this.toasterService.show('Podcast Episode create failed', { type: 'error' });
         }
       });
 
@@ -135,12 +135,12 @@ export class EditPodcastEpisode {
       .subscribe((creator: CreatorDto) => {
         if (creator) {
           this.podcastsService.addEpisodeVoicer(this.episode()!.podcast!.id!, this.episode()!.id!, creator.id).subscribe({
-            next: (res) => {
+            next: () => {
               this.load();
             },
             error: (err) => {
-              this.toasterService.show('Add Episode Voicer failed', { type: 'error' });
               console.error('podcastsService.addEpisodeVoicer', this.episode()!.podcast!.id!, this.episode()!.id!, creator.id, err);
+              this.toasterService.show('Add Episode Voicer failed', { type: 'error' });
             }
           });
         }
@@ -151,12 +151,12 @@ export class EditPodcastEpisode {
       .subscribe(confirmed => {
         if (confirmed) {
           this.podcastsService.removeEpisodeVoicer(this.episode()!.podcast!.id!, this.episode()!.id!, voicerId).subscribe({
-            next: (res) => {
+            next: () => {
               this.load();
             },
             error: (err) => {
-              this.toasterService.show('Remove Episode Voicer failed', { type: 'error' });
               console.error('podcastsService.removeEpisodeVoicer', this.episode()!.podcast!.id!, this.episode()!.id!, voicerId, err);
+              this.toasterService.show('Remove Episode Voicer failed', { type: 'error' });
             }
           });
         }

@@ -1,4 +1,6 @@
 export interface DialogConfig<TData = any> {
-    title?: string;
+    id?: number;
+    title: string;
     data?: TData;
+    type?: 'success' | 'error' | 'info' | 'warning';
 }

@@ -1,20 +1,21 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Toast } from '../models/toast.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToasterService {
-  toasts = signal<Toast[]>([]);
   idCounter = signal<number>(0);
+  toasts = signal<Toast[]>([]);
+  toastsReverse = computed<Toast[]>(() => this.toasts().slice().reverse());
 
-  show(message: string, options: Partial<Omit<Toast, 'id'>> = {}) {
+  show(message: string, options?: Partial<Toast>) {
     const idCounter = this.idCounter() + 1;
     const toast: Toast = {
       id: idCounter,
       message,
-      type: options.type ?? 'info',
-      duration: options.duration ?? 3000
+      type: options?.type ?? 'info',
+      duration: options?.duration ?? 3000
     };
 
     this.idCounter.set(idCounter);

@@ -26,12 +26,27 @@ export class AudioBooksService {
 
   // POST create audioBook
   create(audioBook: AudioBookDto): Observable<AudioBookDto> {
-    return this.http.post<AudioBookDto>(this.apiUrl, audioBook);
+    const formData = new FormData();
+    formData.append('Name', audioBook.name);
+    if (audioBook.description) formData.append('Description', audioBook.description);
+    if (audioBook.coverImageUrl) formData.append('CoverImageUrl', audioBook.coverImageUrl);
+    if (audioBook.coverImage) formData.append('CoverImage', audioBook.coverImage);
+    if (audioBook.audioUrl) formData.append('AudioUrl', audioBook.audioUrl);
+    if (audioBook.audio) formData.append('Audio', audioBook.audio);
+    return this.http.post<AudioBookDto>(this.apiUrl, formData);
   }
 
   // PUT update audioBook
   update(id: number, audioBook: AudioBookDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, audioBook);
+    const formData = new FormData();
+    formData.append('Id', audioBook.id!.toString());
+    formData.append('Name', audioBook.name);
+    if (audioBook.description) formData.append('Description', audioBook.description);
+    if (audioBook.coverImageUrl) formData.append('CoverImageUrl', audioBook.coverImageUrl);
+    if (audioBook.coverImage) formData.append('CoverImage', audioBook.coverImage);
+    if (audioBook.audioUrl) formData.append('AudioUrl', audioBook.audioUrl);
+    if (audioBook.audio) formData.append('Audio', audioBook.audio);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, formData);
   }
 
   // DELETE audioBook
@@ -43,6 +58,16 @@ export class AudioBooksService {
   getPaged(query: PagedQuery): Observable<PagedResult<AudioBookDto>> {
     const params = new HttpParams({ fromObject: { ...query } });
     return this.http.get<PagedResult<AudioBookDto>>(`${this.apiUrl}/paged`, { params });
+  }
+
+  // ADD audioBook reader
+  addReader(id: number, readerId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/readers/${readerId}`, null);
+  }
+
+  // REMOVE audioBook reader
+  removeReader(id: number, readerId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/readers/${readerId}`);
   }
 
 }

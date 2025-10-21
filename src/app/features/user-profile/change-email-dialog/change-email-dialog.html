@@ -1,0 +1,23 @@
+<h1 class="title text-center !pt-0">Change email</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col items-center gap-4">
+    <div class="w-full">
+        <label class="label" for="new-email">New email</label>
+        <input type="email" formControlName="newEmail" id="new-email" class="input input-accent w-full" />
+        @if(form.controls.newEmail.hasError('required')) {
+        <p class="text-accent text-sm">
+            New email is required
+        </p>
+        } @else if(form.controls.newEmail.hasError('email')) {
+        <p class="text-error text-sm">
+            New email not valid
+        </p>
+        } @else if(form.controls.newEmail.valid) {
+        <p class="text-success text-sm">
+            New email OK
+        </p>
+        }
+    </div>
+
+    <button type="submit" class="flex-none button button-primary button-rounded" [disabled]="!form.valid" [title]="'Save'">Save</button>
+</form>

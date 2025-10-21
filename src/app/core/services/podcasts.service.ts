@@ -37,14 +37,14 @@ export class PodcastsService {
   }
 
   // PUT update podcast
-  update(id: number, podcast: PodcastDto): Observable<PodcastDto> {
+  update(id: number, podcast: PodcastDto): Observable<void> {
     const formData = new FormData();
     formData.append('Id', podcast.id!.toString());
     formData.append('Name', podcast.name);
     if (podcast.description) formData.append('Description', podcast.description);
     if (podcast.coverImageUrl) formData.append('CoverImageUrl', podcast.coverImageUrl);
     if (podcast.coverImage) formData.append('CoverImage', podcast.coverImage);
-    return this.http.put<PodcastDto>(`${this.apiUrl}/${id}`, formData);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, formData);
   }
 
   // DELETE podcast
@@ -60,12 +60,12 @@ export class PodcastsService {
 
   // ADD podcast voicer
   addVoicer(id: number, voicerId: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/voicer/${voicerId}`, null);
+    return this.http.post<void>(`${this.apiUrl}/${id}/voicers/${voicerId}`, null);
   }
 
   // REMOVE podcast voicer
   removeVoicer(id: number, voicerId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}/voicer/${voicerId}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}/voicers/${voicerId}`);
   }
 
   // GET podcast by id
@@ -109,11 +109,11 @@ export class PodcastsService {
 
   // ADD podcast episode voicer
   addEpisodeVoicer(id: number, episodeId: number, voicerId: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicer/${voicerId}`, null);
+    return this.http.post<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicers/${voicerId}`, null);
   }
 
   // REMOVE podcast episode voicer
   removeEpisodeVoicer(id: number, episodeId: number, voicerId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicer/${voicerId}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicers/${voicerId}`);
   }
 }

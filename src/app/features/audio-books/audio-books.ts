@@ -4,15 +4,19 @@ import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model'
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faRotate } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-audio-books',
-  imports: [RouterLink],
+  imports: [FontAwesomeModule, RouterLink],
   templateUrl: './audio-books.html',
   styleUrl: './audio-books.scss'
 })
 export class AudioBooks {
   private audioBooksService = inject(AudioBooksService);
+
+  faRotate = faRotate;
 
   audioBookPagedQuery = signal({
     pageNumber: 1,

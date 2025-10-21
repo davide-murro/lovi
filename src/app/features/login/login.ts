@@ -17,11 +17,13 @@ export class Login {
   private authService = inject(AuthService);
 
   form = new FormGroup({
-    userName: new FormControl<string>('', Validators.required),
+    userName: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
 
   login(): void {
+    if (!this.form.valid) return;
+
     let dto: LoginDto = {
       userName: this.form.value.userName!,
       password: this.form.value.password!
@@ -33,8 +35,8 @@ export class Login {
         this.router.navigate(['/']);
       },
       error: (err) => {
+        console.error('authService.login', dto, err);
         this.toasterService.show('Login failed', { type: 'error' });
-        console.error('authService.login', dto, err)
       }
     })
   }

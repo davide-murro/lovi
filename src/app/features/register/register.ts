@@ -2,8 +2,10 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterDto } from '../../core/models/dtos/register-dto.model';
-import { ToasterService } from '../../core/services/toaster.service';
 import { Router } from '@angular/router';
+import { valuesMatchValidator } from '../../core/validators/values-match-validator';
+import { passwordValidator } from '../../core/validators/password-validator';
+import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
   selector: 'app-register',
@@ -13,16 +15,19 @@ import { Router } from '@angular/router';
 })
 export class Register {
   private router = inject(Router);
-  private toasterService = inject(ToasterService);
+  private dialogService = inject(DialogService);
   private authService = inject(AuthService);
 
   form = new FormGroup({
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
-    password: new FormControl<string>('', Validators.required),
-    name: new FormControl<string>('', Validators.required),
-  });
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, passwordValidator]),
+    passwordRepeat: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+  }, { validators: valuesMatchValidator(['password', 'passwordRepeat']) });
 
   register(): void {
+    if (!this.form.valid) return;
+
     let dto: RegisterDto = {
       email: this.form.value.email!,
       password: this.form.value.password!,
@@ -30,12 +35,18 @@ export class Register {
     }
     this.authService.register(dto).subscribe({
       next: () => {
-        this.toasterService.show('Registration successful! Please check your email inbox to verify your account');
-        this.router.navigate(["/login"]);
+        this.dialogService.log(
+          'Registration successful!',
+          'Please check your email inbox to verify your account, then sing in into LOVI')
+          .subscribe(() => this.router.navigate(["/login"]));
       },
       error: (err) => {
-        this.toasterService.show('Registration failed! Please try again', { type: 'error' });
         console.error('authService.register', dto, err);
+        this.dialogService.log(
+          'Registration failed', 
+          err.error?.at(-1)?.description ?? 'Registration failed', 
+          { type: 'error' }
+        );
       }
     });
   }

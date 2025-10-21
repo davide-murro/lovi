@@ -24,7 +24,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             autocomplete="false" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [src]="coverPreview()!" class="h-32 mt-2" />
+        <img [src]="coverPreview()!" class="h-32 mt-2 object-contain" />
         }
     </div>
 
@@ -43,84 +43,91 @@
 <div class="section">
     <h3 class="title2">Voicers</h3>
 
-    <table class="table w-full overflow-auto">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nickname</th>
-                <th>name</th>
-                <th>surname</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (voicer of podcast()!.voicers; track $index) {
-            <tr>
-                <td>{{voicer.id}}</td>
-                <td>{{voicer.nickname}}</td>
-                <td>{{voicer.name}}</td>
-                <td>{{voicer.surname}}</td>
+    <div class="section overflow-auto">
+        <table class="table w-full overflow-auto">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nickname</th>
+                    <th>name</th>
+                    <th>surname</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (voicer of podcast()!.voicers; track $index) {
+                <tr>
+                    <td>{{voicer.id}}</td>
+                    <td>{{voicer.nickname}}</td>
+                    <td>{{voicer.name}}</td>
+                    <td>{{voicer.surname}}</td>
 
-                <td>
-                    <button class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
-                            [icon]="faTrash" /></button>
-                </td>
-            </tr>
-            }
-            <tr>
-                <td colspan="100%">
-                    <button type="button" class="button button-accent" [title]="'Add Voicer'" (click)="addVoicer()">Add
-                        Voicer</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>
+                        <button class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
+                                [icon]="faTrash" /></button>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="100%">
+                        <button type="button" class="button button-accent" [title]="'Add Voicer'"
+                            (click)="addVoicer()">Add
+                            Voicer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
 <div class="section">
     <h3 class="title2">Episodes</h3>
 
-    <table class="table w-full overflow-auto">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>cover image</th>
-                <th>description</th>
-                <th>audio</th>
-                <th>voicers</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (episode of podcast()!.episodes; track $index) {
-            <tr>
-                <td>{{episode.id}}</td>
-                <td><span class="line-clamp-2">{{episode.name}}</span></td>
-                <td><img class="h-12 min-w-12" [src]="episode.coverImageUrl"></td>
-                <td><span class="line-clamp-2">{{episode.description}}</span></td>
-                <td><audio controls class="h-12" [src]="episode.audioUrl"></audio></td>
-                <td>{{episode.voicers?.length}}</td>
+    <div class="section overflow-auto">
+        <table class="table w-full overflow-auto">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>n.</th>
+                    <th>name</th>
+                    <th>cover image</th>
+                    <th>description</th>
+                    <th>audio</th>
+                    <th>voicers</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (episode of podcast()!.episodes; track $index) {
+                <tr>
+                    <td>{{episode.id}}</td>
+                    <td>{{episode.number}}</td>
+                    <td><span class="line-clamp-2">{{episode.name}}</span></td>
+                    <td><img class="h-12 min-w-12" [src]="episode.coverImageUrl"></td>
+                    <td><span class="line-clamp-2">{{episode.description}}</span></td>
+                    <td>@if(episode.audioUrl) {<audio controls class="h-12" [src]="episode.audioUrl"></audio>}</td>
+                    <td>{{episode.voicers?.length}}</td>
 
-                <td>
-                    <a class="icon-button" [title]="'Update Episode'"
-                        [routerLink]="['/edit', 'podcasts', podcast()!.id, 'episodes', episode.id]"><fa-icon
-                            [icon]="faPen" /></a>
-                </td>
-                <td>
-                    <button class="icon-button" [title]="'Delete Episode'" (click)="deleteEpisode(episode.id!)"><fa-icon
-                            [icon]="faTrash" /></button>
-                </td>
-            </tr>
-            }
-            <tr>
-                <td colspan="100%">
-                    <a class="button button-accent" [title]="'Create Episode'"
-                        [routerLink]="['/edit', 'podcasts', podcast()!.id, 'episodes', 'create']">
-                        Create Episode
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>
+                        <a class="icon-button" [title]="'Update Episode'"
+                            [routerLink]="['/edit', 'podcasts', podcast()!.id, 'episodes', episode.id]"><fa-icon
+                                [icon]="faPen" /></a>
+                    </td>
+                    <td>
+                        <button class="icon-button" [title]="'Delete Episode'"
+                            (click)="deleteEpisode(episode.id!)"><fa-icon [icon]="faTrash" /></button>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="100%">
+                        <a class="button button-accent" [title]="'Create Episode'"
+                            [routerLink]="['/edit', 'podcasts', podcast()!.id, 'episodes', 'create']">
+                            Create Episode
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 }

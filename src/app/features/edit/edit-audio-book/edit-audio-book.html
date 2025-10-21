@@ -1,0 +1,90 @@
+<div class="section flex flex-wrap gap-2">
+    <a class="link font-medium leading-normal" [routerLink]="['/edit']" [title]="'Edit'">Edit</a>
+    <span class="text-accent font-medium leading-normal">/</span>
+    <span>{{audioBook() ? audioBook()!.name : 'New Audio Book'}}</span>
+</div>
+
+<h2 class="title">Edit Audio Book</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="section flex flex-col gap-4">
+
+    <div>
+        <label class="label" for="id">Id</label>
+        <input type="text" formControlName="id" id="id" class="input w-full" />
+    </div>
+
+    <div>
+        <label class="label" for="name">Name</label>
+        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
+            placeholder="Our relationship with nature" />
+    </div>
+
+    <div>
+        <label class="label" for="cover-image">Cover image</label>
+        <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
+            (change)="onCoverImageSelected($event)" />
+        @if(coverPreview()) {
+        <img [src]="coverPreview()" class="mt-2 size-32 object-contain" />
+        }
+    </div>
+
+    <div>
+        <label class="label" for="audio">Audio</label>
+        <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png"
+            (change)="onAudioSelected($event)" />
+        @if(audioPreview()){
+        <audio controls class="mt-2 max-w-full" [src]="audioPreview()"></audio>
+        }
+    </div>
+
+    <div>
+        <label class="label" for="description">Description</label>
+        <textarea formControlName="description" id="description" class="input w-full" rows="8" autocomplete="false"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></textarea>
+    </div>
+
+    <div>
+        <button class="button button-primary" type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+</form>
+
+@if(audioBook()?.id) {
+<div class="section">
+    <h3 class="title2">Readers</h3>
+
+    <div class="section overflow-auto">
+        <table class="table w-full overflow-auto">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nickname</th>
+                    <th>name</th>
+                    <th>surname</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (reader of audioBook()!.readers; track $index) {
+                <tr>
+                    <td>{{reader.id}}</td>
+                    <td>{{reader.nickname}}</td>
+                    <td>{{reader.name}}</td>
+                    <td>{{reader.surname}}</td>
+
+                    <td>
+                        <button class="icon-button" [title]="'Remove Reader'" (click)="removeReader(reader.id)"><fa-icon
+                                [icon]="faTrash" /></button>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="100%">
+                        <button type="button" class="button button-accent" [title]="'Add Reader'"
+                            (click)="addReader()">Add
+                            Reader</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+}

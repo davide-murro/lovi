@@ -4,15 +4,19 @@ import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model'
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faRotate } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-podcasts',
-  imports: [RouterLink],
+  imports: [FontAwesomeModule, RouterLink],
   templateUrl: './podcasts.html',
   styleUrl: './podcasts.scss'
 })
 export class Podcasts {
   private podcastsService = inject(PodcastsService);
+
+  faRotate = faRotate;
 
   podcastPagedQuery = signal({
     pageNumber: 1,

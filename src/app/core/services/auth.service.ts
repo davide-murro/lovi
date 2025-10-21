@@ -5,6 +5,10 @@ import { RegisterDto } from '../models/dtos/register-dto.model';
 import { Observable, tap } from 'rxjs';
 import { LoginDto } from '../models/dtos/login-dto.model';
 import { TokenDto } from '../models/dtos/token-dto.model';
+import { ChangePasswordDto } from '../models/dtos/change-password-dto.model';
+import { ChangeEmailDto } from '../models/dtos/change-email-dto.model';
+import { ForgotPasswordDto } from '../models/dtos/forgot-password-dto.model';
+import { ResetPasswordDto } from '../models/dtos/reset-password-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +25,7 @@ export class AuthService {
 
   // REGISTER
   register(dto: RegisterDto): Observable<string> {
-    return this.http.post(`${this.apiUrl}/register`, dto, { responseType: 'text' });
+    return this.http.post<string>(`${this.apiUrl}/register`, dto);
   }
 
   // LOGIN
@@ -45,6 +49,20 @@ export class AuthService {
     this.accessToken.set(null);
     this.refreshToken.set(null);
     this.userRole.set(null);
+  }
+  
+  // REVOKE
+  revoke(): Observable<any> {
+    return this.http.post(this.apiUrl + '/revoke', {}).pipe(
+      tap(() => this.logout())
+    );
+  }
+
+  // DELETE ACCOUNT
+  deleteAccount(): Observable<any> {
+    return this.http.delete(this.apiUrl + '/delete-account').pipe(
+      tap(() => this.logout())
+    );
   }
 
   // TOKENS
@@ -77,11 +95,22 @@ export class AuthService {
     this.refreshToken.set(token);
   }
 
-  // REVOKE
-  revoke(): Observable<any> {
-    return this.http.post(this.apiUrl + '/revoke', {}).pipe(
-      tap(() => this.logout())
-    );
+  // PUT update current user email
+  changeEmail(changeEmail: ChangeEmailDto): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/change-email`, changeEmail);
+  }
+  // PUT update current user password
+  changePassword(changePassword: ChangePasswordDto): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/change-password`, changePassword);
+  }
+
+  // forgot password
+  forgotPassword(forgotPassword: ForgotPasswordDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/forgot-password`, forgotPassword);
+  }
+  // reset password
+  resetPassword(resetPassword: ResetPasswordDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/reset-password`, resetPassword);
   }
 
   // DEVICE ID

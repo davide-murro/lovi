@@ -1,11 +1,16 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
+import { DialogService } from './dialog.service';
+import { ToasterService } from './toaster.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioPlayerService {
+  private toasterService = inject(ToasterService);
+  private dialogService = inject(DialogService);
   private audio = new Audio();
+  private audioError = signal<boolean>(false);
 
   // Signals for state
   queue = signal<AudioTrack[]>([]);
@@ -32,6 +37,18 @@ export class AudioPlayerService {
     });
     this.audio.addEventListener('loadedmetadata', () => {
       this.duration.set(this.audio.duration);
+    });
+
+    // listen to errors
+    this.audio.addEventListener('error', (event) => {
+      this.audioError.set(true);
+      this.toasterService.show("Audio error", { type: 'error' });
+      console.error('Audio error', this.audio, this.audio.error);
+    });
+
+    // set error false when it loads
+    this.audio.addEventListener('canplay', () => {
+      this.audioError.set(false);
     });
   }
 

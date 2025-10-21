@@ -28,7 +28,6 @@ export class MyLibrary {
 
   // library
   private _myLibrary: Signal<LibraryDto[]> = toSignal(this.route.data.pipe(map(data => data['myLibrary'])));
-  myLibraryError = computed(() => this._myLibrary() == null);
   myLibraryAudioBooks = computed(() => {
     const list = this._myLibrary()
       .filter((ml) => ml.audioBook?.id != null)

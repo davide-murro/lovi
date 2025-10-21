@@ -1,5 +1,5 @@
-<div class="fixed top-0 right-0 z-60 space-y-2 p-4 w-[100%] max-h-[100%] overflow-auto sm:w-80">
-    @for (toast of toasterService.toasts(); track $index) {
+<div class="fixed top-0 right-0 z-60 space-y-2 p-4 w-[100%] max-h-[100%] overflow-auto sm:w-120">
+    @for (toast of toasterService.toastsReverse(); track $index) {
     <div class="px-4 py-2 rounded-xl flex justify-between items-center gap-2 border-2 border-accent-light"
         [class]="{
           'bg-accent': toast.type === 'info',
@@ -8,7 +8,7 @@
           'bg-yellow-500': toast.type === 'warning'
         }">
         <span class="flex-grow">{{ toast.message }}</span>
-        <button class="icon-button" [title]="'Close popup'" (click)="toasterService.dismiss(toast.id)">
+        <button class="icon-button" [title]="'Close popup'" (click)="toasterService.dismiss(toast.id!)">
             <fa-icon [icon]="faClose" />
         </button>
     </div>

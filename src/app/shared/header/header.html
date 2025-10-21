@@ -7,24 +7,28 @@
         <div class="flex-1"></div>
 
         <ng-template #signIn>
-            <a class="button button-accent shrink-0" [routerLink]="['/login']" [title]="'Sign in'">Sign in</a>
+            <a class="button button-accent shrink-0" [routerLink]="['/login']" [routerLinkActive]="'button-primary'" [title]="'Sign in'">Sign in</a>
         </ng-template>
-        <a *appAuth="null; else signIn" [routerLink]="['/user-profile']" class="icon-button" [title]="'User Profile'">
+        <a *appAuth="null; else signIn" class="icon-button" [routerLink]="['/user-profile']" [routerLinkActive]="'text-primary'" [title]="'User Profile'">
             <fa-icon [icon]="faUser" />
         </a>
 
         <button type="button" class="icon-button sm:hidden" [title]="'Toggle menu'"
             (click)="menuMobileOpen.set(!menuMobileOpen())">
+            @if (menuMobileOpen()) {
+            <fa-icon [icon]="faClose" />
+            } @else {
             <fa-icon [icon]="faBars" />
+            }
         </button>
     </div>
 
     <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen()">
-        <a class="text-sm leading-normal" [routerLink]="['/audio-books']" [title]="'Audio Books'">Audio Books</a>
-        <a class="text-sm leading-normal" [routerLink]="['/podcasts']" [title]="'Podcasts'">Podcasts</a>
-        <a *appAuth class="text-sm leading-normal" [routerLink]="['/my-library']" [title]="'My Library'">My Library</a>
-        <a *appAuth="'Admin'" class="text-sm leading-normal" [routerLink]="['/edit']" [title]="'Edit'">Edit</a>
+        <a class="text-sm leading-normal" [routerLink]="['/audio-books']" [routerLinkActive]="'text-primary'" [title]="'Audio Books'">Audio Books</a>
+        <a class="text-sm leading-normal" [routerLink]="['/podcasts']" [routerLinkActive]="'text-primary'" [title]="'Podcasts'">Podcasts</a>
+        <a *appAuth class="text-sm leading-normal" [routerLink]="['/my-library']" [routerLinkActive]="'text-primary'" [title]="'My Library'">My Library</a>
+        <a *appAuth="'Admin'" class="text-sm leading-normal" [routerLink]="['/edit']" [routerLinkActive]="'text-primary'" [title]="'Edit'">Edit</a>
 
         <input type="search" id="search" class="input" placeholder="Search" required />
     </div>
