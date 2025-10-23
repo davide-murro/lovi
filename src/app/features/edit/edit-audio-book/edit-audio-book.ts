@@ -7,8 +7,8 @@ import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { AudioBooksService } from '../../../core/services/audio-books.service';
-import { SelectCreatorDialog } from '../select-creator-dialog/select-creator-dialog';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
+import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
 
 @Component({
   selector: 'app-edit-audio-book',
@@ -123,7 +123,7 @@ export class EditAudioBook {
   
     // Readers
     addReader() {
-      this.dialogService.open(SelectCreatorDialog)
+      this.dialogService.open(CreatorSelectorDialog)
         .subscribe((creator: CreatorDto) => {
           if (creator) {
             this.audioBooksService.addReader(this.audioBook()!.id!, creator.id).subscribe({

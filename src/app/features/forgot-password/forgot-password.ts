@@ -18,11 +18,11 @@ import { ResetPasswordDto } from '../../core/models/dtos/reset-password-dto.mode
   styleUrl: './forgot-password.scss'
 })
 export class ForgotPassword {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
 
   email = toSignal(this.route.queryParams.pipe(map(data => data['email'])));
   token = toSignal(this.route.queryParams.pipe(map(data => data['token'])));

@@ -1,0 +1,49 @@
+<div class="flex items-center justify-center gap-2 sm:gap-4">
+
+    <!-- First / Prev -->
+    @if (pageNumber() > 1) {
+    <button type="button" class="icon-button" [title]="'First page'" (click)="first()">
+        <fa-icon [icon]="faAnglesLeft" />
+    </button>
+    }
+
+    @if (pageNumber() > 1) {
+    <button type="button" class="icon-button" [title]="'Previous page'" (click)="prev()">
+        <fa-icon [icon]="faAngleLeft" />
+    </button>
+    }
+
+
+    <!-- Leading Ellipsis -->
+    @if (visiblePages()[0] > 1) {
+    <span>...</span>
+    }
+
+    <!-- Page buttons -->
+    @for (p of visiblePages(); track $index) {
+    <button type="button" class="icon-button font-bold" [title]="'Page' + p"
+        [class.button-primary]="p === pageNumber()" (click)="goTo(p)">
+        {{ p }}
+    </button>
+    }
+
+    <!-- Trailing Ellipsis -->
+    @if (visiblePages().length && visiblePages()[visiblePages().length - 1] < totalPages()) { 
+    <span>...</span>
+    }
+
+
+    <!-- Next / Last -->
+    @if (pageNumber() < totalPages()){
+    <button type="button" class="icon-button" [title]="'Next page'" (click)="next()">
+        <fa-icon [icon]="faAngleRight" />
+    </button>
+    }
+
+    @if (pageNumber() < totalPages()){
+    <button type="button" class="icon-button" [title]="'Last page'" (click)="last()">
+        <fa-icon [icon]="faAnglesRight" />
+    </button>
+    }
+
+</div>

@@ -35,6 +35,7 @@ export class PodcastEpisode {
 
   // episode
   private _episode: Signal<PodcastEpisodeDto> = toSignal(this.route.data.pipe(map(data => data['podcastEpisode'])));
+  
   episode = computed(() => {
     const ep: PodcastEpisodeDto =
     {

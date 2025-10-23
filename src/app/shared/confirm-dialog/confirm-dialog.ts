@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input, Input } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 
 @Component({

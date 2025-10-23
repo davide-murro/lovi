@@ -1,0 +1,46 @@
+<div class="flex flex-col min-h-full w-full">
+    <h1 class="title">Podcasts</h1>
+
+    @if (podcastsLoading()) {
+    <p class="section text-accent">Loading...</p>
+    }
+
+    @else if (podcastsError()) {
+    <p class="section text-accent">Failed to load Podcasts. Please try reloading or navigating to <a class="link"
+            [title]="'My Library'" [routerLink]="['/my-library']">My Library</a></p>
+    }
+
+    @else if(podcastPagedResult()?.items == null || podcastPagedResult()?.items?.length == 0) {
+    <p class="section text-accent">There are no Podcasts here. Please try reloading or navigating to <a class="link"
+            [title]="'My Library'" [routerLink]="['/my-library']">My Library</a></p>
+    }
+
+    @else {
+    <div class="section flex-grow">
+        <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
+            @for (podcast of podcastPagedResult()?.items; track $index) {
+            <a [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name" class="flex flex-1 flex-col gap-2">
+                <div class="bg-cover bg-center bg-no-repeat bg-accent aspect-[3/2] rounded-xl"
+                    [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
+                </div>
+                <div>
+                    <p class="text-base font-medium leading-normal truncate">{{podcast.name}}</p>
+                    <p class="text-accent text-sm truncate">
+                        @for(creator of podcast.voicers; track $index) {
+                        {{ creator.nickname }}@if (!$last) {, }
+                        }
+                    </p>
+                </div>
+            </a>
+            }
+        </div>
+    </div>
+    }
+
+    @if (podcastPagedResult() && podcastPagedResult()!.totalCount > podcastPagedResult()!.pagedQuery.pageSize) {
+    <app-pagination [pageNumber]="podcastPagedQuery().pageNumber" [pageSize]="podcastPagedQuery().pageSize"
+        [totalCount]="podcastPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
+    </app-pagination>
+    }
+
+</div>

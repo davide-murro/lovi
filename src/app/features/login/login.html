@@ -1,19 +1,14 @@
 <div class="max-w-lg m-auto">
     <h1 class="title text-center">Sign in or create an account</h1>
 
-    <form [formGroup]="form" (ngSubmit)="login()"
-        class="section flex flex-col flex-1 items-center gap-4">
+    <form [formGroup]="form" (ngSubmit)="login()" class="section flex flex-col flex-1 items-center gap-4">
         <div class="max-w-full">
             <label for="user-name" class="label">Email</label>
             <input type="email" formControlName="userName" id="user-name" class="input input-lg" />
-            @if(form.controls.userName.dirty && form.controls.userName.touched) {
+            @if(form.controls.userName.dirty) {
             @if(form.controls.userName.hasError('required')) {
             <p class="text-error text-sm">
                 Email is required
-            </p>
-            } @else if(form.controls.userName.hasError('email')) {
-            <p class="text-error text-sm">
-                Email not valid
             </p>
             }
             }
@@ -21,7 +16,7 @@
         <div class="max-w-full">
             <label for="password" class="label">Password</label>
             <input type="password" formControlName="password" id="password" class="input input-lg" />
-            @if(form.controls.password.dirty && form.controls.password.touched) {
+            @if(form.controls.password.dirty) {
             @if(form.controls.password.hasError('required')) {
             <p class="text-error text-sm">
                 Password is required
@@ -34,7 +29,8 @@
     </form>
 
     <div class="section flex flex-col flex-1 items-center">
-        <a [routerLink]="['/forgot-password']" [title]="'Reset password'" class="link text-sm">
+        <a [routerLink]="['/forgot-password']" [queryParams]="{ email: form.value.userName || null }" [title]="'Reset password'"
+            class="link text-sm">
             Forgot Password?
         </a>
     </div>

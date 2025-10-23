@@ -17,7 +17,7 @@ export class Login {
   private authService = inject(AuthService);
 
   form = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.email]),
+    userName: new FormControl('', [Validators.required]),
     password: new FormControl('', Validators.required),
   });
 

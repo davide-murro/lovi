@@ -2,9 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { audioBookResolver } from './audio-book.resolver';
+import { AudioBookDto } from '../models/dtos/audio-book-dto.model';
 
 describe('audioBookResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
+  const executeResolver: ResolveFn<AudioBookDto | null> = (...resolverParameters) => 
       TestBed.runInInjectionContext(() => audioBookResolver(...resolverParameters));
 
   beforeEach(() => {

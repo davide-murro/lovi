@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectCreatorDialog } from './select-creator-dialog';
+import { AudioBooksPaged } from './audio-books-paged';
 
-describe('SelectCreatorDialog', () => {
-  let component: SelectCreatorDialog;
-  let fixture: ComponentFixture<SelectCreatorDialog>;
+describe('AudioBooksPaged', () => {
+  let component: AudioBooksPaged;
+  let fixture: ComponentFixture<AudioBooksPaged>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectCreatorDialog]
+      imports: [AudioBooksPaged]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectCreatorDialog);
+    fixture = TestBed.createComponent(AudioBooksPaged);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,10 +8,10 @@ import { ToasterService } from '../../core/services/toaster.service';
 import { map, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DialogService } from '../../core/services/dialog.service';
-import { ChangePasswordDialog } from './change-password-dialog/change-password-dialog';
-import { ChangeEmailDialog } from './change-email-dialog/change-email-dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { ChangeEmailDialog } from '../../shared/change-email-dialog/change-email-dialog';
+import { ChangePasswordDialog } from '../../shared/change-password-dialog/change-password-dialog';
 
 @Component({
   selector: 'app-user-profile',

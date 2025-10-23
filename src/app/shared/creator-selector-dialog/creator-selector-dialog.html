@@ -17,3 +17,9 @@
         }
     </ul>
 </div>
+
+@if (creatorPagedResult() && creatorPagedResult()!.totalCount > creatorPagedResult()!.pagedQuery.pageSize) {
+<app-pagination [pageNumber]="creatorPagedQuery().pageNumber" [pageSize]="creatorPagedQuery().pageSize"
+    [totalCount]="creatorPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
+</app-pagination>
+}

@@ -6,10 +6,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PodcastsService } from '../../../../core/services/podcasts.service';
 import { DialogService } from '../../../../core/services/dialog.service';
-import { SelectCreatorDialog } from '../../select-creator-dialog/select-creator-dialog';
 import { CreatorDto } from '../../../../core/models/dtos/creator-dto.model';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import { PodcastDto } from '../../../../core/models/dtos/podcast-dto.model';
+import { CreatorSelectorDialog } from '../../../../shared/creator-selector-dialog/creator-selector-dialog';
 
 @Component({
   selector: 'app-edit-podcast-episode',
@@ -131,7 +131,7 @@ export class EditPodcastEpisode {
 
   // Voicers
   addVoicer() {
-    this.dialogService.open(SelectCreatorDialog)
+    this.dialogService.open(CreatorSelectorDialog)
       .subscribe((creator: CreatorDto) => {
         if (creator) {
           this.podcastsService.addEpisodeVoicer(this.episode()!.podcast!.id!, this.episode()!.id!, creator.id).subscribe({

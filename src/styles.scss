@@ -144,6 +144,10 @@ body {
     line-height: var(--text-base--line-height);
     border-radius: 100%;
     padding: calc(var(--spacing) * 2);
+    flex-shrink: 0;
+
+    width: calc(var(--spacing) * 10);
+    height: calc(var(--spacing) * 10);
 }
 
 .icon-button .ng-fa-icon {
@@ -163,12 +167,18 @@ body {
     padding: calc(var(--spacing) * 3);
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
+
+    width: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 12);
 }
 
 .icon-button.button-xl {
     padding: calc(var(--spacing) * 5);
     font-size: var(--text-lg);
     line-height: var(--text-lg--line-height);
+
+    width: calc(var(--spacing) * 18);
+    height: calc(var(--spacing) * 18);
 }
 
 .button-accent {

@@ -20,7 +20,7 @@
                     <p class="text-base font-medium leading-normal line-clamp-2">{{audioBook.name}}</p>
                     <p class="text-accent text-sm truncate">
                         @for(creator of audioBook.readers; track $index) {
-                        {{ creator.nickname }} @if (!$last) {, }
+                        {{ creator.nickname }}@if (!$last) {, }
                         }
                     </p>
                 </div>

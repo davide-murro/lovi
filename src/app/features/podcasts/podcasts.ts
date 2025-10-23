@@ -1,80 +1,22 @@
-import { Component, inject, signal } from '@angular/core';
-import { PodcastsService } from '../../core/services/podcasts.service';
-import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, finalize, of, switchMap } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faRotate } from '@fortawesome/free-solid-svg-icons';
+import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
 
 @Component({
   selector: 'app-podcasts',
-  imports: [FontAwesomeModule, RouterLink],
+  imports: [FontAwesomeModule, PodcastsPaged],
   templateUrl: './podcasts.html',
   styleUrl: './podcasts.scss'
 })
 export class Podcasts {
-  private podcastsService = inject(PodcastsService);
+  private route = inject(ActivatedRoute);
 
-  faRotate = faRotate;
-
-  podcastPagedQuery = signal({
-    pageNumber: 1,
-    pageSize: 10,
-    sortBy: 'id',
-    sortOrder: 'asc'
-  } as PagedQuery);
-  podcastPagedResult = toSignal(
-    toObservable(this.podcastPagedQuery).pipe(
-      switchMap(query => {
-        this.podcastsError.set(false);
-        this.podcastsLoading.set(true);
-        return this.podcastsService.getPaged(query).pipe(
-          catchError(err => {
-            this.podcastsError.set(true);
-            console.error('podcastsService.getPaged', query, err);
-            return of(null);
-          }),
-          finalize(() => {
-            this.podcastsLoading.set(false);
-          })
-        )
-      })
-    )
-  );
-  podcastsLoading = signal(false);
-  podcastsError = signal(false);
-
-  reload() {
-    this.podcastPagedQuery.update(query => ({
-      ...query
-    }));
-  }
-
-  nextPage() {
-    this.podcastPagedQuery.update(query => ({
-      ...query,
-      pageNumber: query.pageNumber + 1
-    }));
-  }
-  prevPage() {
-    this.podcastPagedQuery.update(query => ({
-      ...query,
-      pageNumber: query.pageNumber - 1
-    }));
-  }
-  setPage(pageNumber: number) {
-    this.podcastPagedQuery.update(query => ({
-      ...query,
-      pageNumber: pageNumber
-    }));
-  }
-
-  setSort(sortBy: string, sortOrder: 'asc' | 'desc') {
-    this.podcastPagedQuery.update(query => ({
-      ...query,
-      sortBy: sortBy,
-      sortOrder: sortOrder
-    }));
-  }
+  pageNumber = toSignal(this.route.queryParams.pipe(map(data => data['pageNumber'] ?? 1)));
+  pageSize = toSignal(this.route.queryParams.pipe(map(data => data['pageSize'] ?? 10)));
+  sortBy = toSignal(this.route.queryParams.pipe(map(data => data['sortBy'] ?? 'id')));
+  sortOrder = toSignal(this.route.queryParams.pipe(map(data => data['sortOrder'] ?? 'asc')));
+  search = toSignal(this.route.queryParams.pipe(map(data => data['search'] ?? '')));
 }

@@ -23,6 +23,7 @@ import { EditCreator } from './features/edit/edit-creator/edit-creator';
 import { creatorResolver } from './core/resolvers/creator.resolver';
 import { EditAudioBook } from './features/edit/edit-audio-book/edit-audio-book';
 import { ForgotPassword } from './features/forgot-password/forgot-password';
+import { Search } from './features/search/search';
 
 export const routes: Routes = [
     {
@@ -46,7 +47,7 @@ export const routes: Routes = [
         title: 'LOVI - Forgot password'
     },
     {
-        path: 'forgot-password:email:token',
+        path: 'forgot-password',
         component: ForgotPassword,
         title: 'LOVI - Forgot password reset'
     },
@@ -101,6 +102,11 @@ export const routes: Routes = [
         resolve: {
             myLibrary: myLibraryResolver
         },
+    },
+    {
+        path: 'search',
+        component: Search,
+        title: 'LOVI - Search',
     },
 
     {

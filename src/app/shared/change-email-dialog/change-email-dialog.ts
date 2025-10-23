@@ -1,11 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DialogService } from '../../../core/services/dialog.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { UsersService } from '../../../core/services/users.service';
-import { passwordValidator } from '../../../core/validators/password-validator';
-import { AuthService } from '../../../core/services/auth.service';
-import { ChangeEmailDto } from '../../../core/models/dtos/change-email-dto.model';
+import { ChangeEmailDto } from '../../core/models/dtos/change-email-dto.model';
+import { AuthService } from '../../core/services/auth.service';
+import { DialogService } from '../../core/services/dialog.service';
+import { ToasterService } from '../../core/services/toaster.service';
 
 @Component({
   selector: 'app-change-email-dialog',

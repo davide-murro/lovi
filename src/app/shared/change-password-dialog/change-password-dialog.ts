@@ -1,16 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
-import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { switchMap, catchError, of } from 'rxjs';
-import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
-import { PagedQuery } from '../../../core/models/dtos/pagination/paged-query.model';
-import { DialogService } from '../../../core/services/dialog.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { passwordValidator } from '../../../core/validators/password-validator';
-import { UsersService } from '../../../core/services/users.service';
-import { AuthService } from '../../../core/services/auth.service';
-import { ChangePasswordDto } from '../../../core/models/dtos/change-password-dto.model';
-import { valuesMatchValidator } from '../../../core/validators/values-match-validator';
+import { ChangePasswordDto } from '../../core/models/dtos/change-password-dto.model';
+import { AuthService } from '../../core/services/auth.service';
+import { DialogService } from '../../core/services/dialog.service';
+import { ToasterService } from '../../core/services/toaster.service';
+import { passwordValidator } from '../../core/validators/password-validator';
+import { valuesMatchValidator } from '../../core/validators/values-match-validator';
 
 @Component({
   selector: 'app-change-password-dialog',

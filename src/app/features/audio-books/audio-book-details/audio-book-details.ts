@@ -32,6 +32,7 @@ export class AudioBookDetails {
 
   // audioBook
   private _audioBook: Signal<AudioBookDto> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
+  
   audioBook = computed(() => {
     const p: AudioBookDto =
     {
