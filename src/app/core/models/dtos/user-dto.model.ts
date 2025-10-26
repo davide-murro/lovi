@@ -1,5 +1,7 @@
 export interface UserDto {
     id: string;
-    email?: string;
+    newPassword?: string;
+    email: string;
+    emailConfirmed?: boolean;
     name: string;
 }

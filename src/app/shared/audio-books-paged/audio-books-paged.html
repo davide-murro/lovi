@@ -39,7 +39,7 @@
     }
 
     @if (audioBookPagedResult() && audioBookPagedResult()!.totalCount > audioBookPagedResult()!.pagedQuery.pageSize) {
-    <app-pagination [pageNumber]="audioBookPagedQuery().pageNumber" [pageSize]="audioBookPagedQuery().pageSize"
+    <app-pagination class="section" [pageNumber]="audioBookPagedQuery().pageNumber" [pageSize]="audioBookPagedQuery().pageSize"
         [totalCount]="audioBookPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
     </app-pagination>
     }

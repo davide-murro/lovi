@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, Signal, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,6 +9,8 @@ import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { AudioBooksService } from '../../../core/services/audio-books.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-edit-audio-book',
@@ -25,19 +27,38 @@ export class EditAudioBook {
 
   faTrash = faTrash;
 
-  audioBook = signal<AudioBookDto | null>(this.route.snapshot.data['audioBook']);
+  private _audioBook: Signal<AudioBookDto | null> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
+
+  audioBook = signal<AudioBookDto | null>(this._audioBook());
 
   form = new FormGroup({
-    id: new FormControl({ value: this.audioBook()?.id, disabled: true }),
-    name: new FormControl(this.audioBook()?.name ?? null!, { nonNullable: true, validators: [Validators.required] }),
-    coverImageUrl: new FormControl(this.audioBook()?.coverImageUrl),
+    id: new FormControl<number>({ value: null!, disabled: true }),
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    coverImageUrl: new FormControl(''),
     coverImage: new FormControl<File | null>(null),
-    description: new FormControl(this.audioBook()?.description),
-    audioUrl: new FormControl(this.audioBook()?.audioUrl),
+    description: new FormControl(''),
+    audioUrl: new FormControl(''),
     audio: new FormControl<File | null>(null),
   });
-  coverPreview = signal(this.audioBook()?.coverImageUrl ?? null);
-  audioPreview = signal(this.audioBook()?.audioUrl ?? null);
+  coverPreview = signal<string | null>(null);
+  audioPreview = signal<string | null>(null);
+
+  constructor() {
+    effect(() => {
+      this.form.patchValue({
+        id: this._audioBook()?.id,
+        name: this._audioBook()?.name,
+        coverImageUrl: this._audioBook()?.coverImageUrl,
+        coverImage: null,
+        description: this._audioBook()?.description,
+        audioUrl: this._audioBook()?.audioUrl,
+        audio: null
+      });
+      this.coverPreview.set(this._audioBook()?.coverImageUrl ?? null);
+      this.audioPreview.set(this._audioBook()?.audioUrl ?? null);
+      this.audioBook.set(this._audioBook());
+    });
+  }
   
   load() {
     this.audioBooksService.getById(
@@ -120,6 +141,25 @@ export class EditAudioBook {
   
       }
     }
+  
+  delete() {
+    this.dialogService.confirm('Delete Audio Book', 'Are you sure vecm?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          const id = this.audioBook()!.id!;
+          this.audioBooksService.delete(id).subscribe({
+            next: () => {
+              this.toasterService.show('Audio Book deleted');
+              this.router.navigate(['/edit']);
+            },
+            error: (err) => {
+              console.error('audioBooksService.delete', id, err);
+              this.toasterService.show('Audio Book delete failed', { type: 'error' });
+            }
+          });
+        }
+      });
+  }
   
     // Readers
     addReader() {

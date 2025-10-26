@@ -2,7 +2,7 @@
     <h1 class="title text-center">Create an account</h1>
 
     <p class="section text-center text-accent">
-        Start listening now! Get your free LOVI account in seconds. Get the access to unique, hard-to-find audiobooks and specialized podcasts! Build your perfect personal library today.
+        Start listening now! Get your LOVI account in seconds. Get the access to unique, hard-to-find audiobooks and specialized podcasts! Build your perfect personal library today.
     </p>
 
     <form [formGroup]="form" (ngSubmit)="register()" class="section flex flex-col flex-1 items-center gap-4">
@@ -82,7 +82,7 @@
 
         <div class="max-w-full">
             <label class="label" for="name">Name</label>
-            <input type="text" formControlName="name" id="name" class="input input-lg" />
+            <input type="text" formControlName="name" id="name" class="input input-lg"/>
             @if(form.controls.name.hasError('required')) {
             <p class="text-accent text-sm">
                 Name is required
@@ -95,6 +95,6 @@
         </div>
 
         <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg"
-            [disabled]="!form.valid" [title]="'Register'">Register</button>
+            [disabled]="!form.valid || isLoading()" [title]="'Register'">Register</button>
     </form>
 </div>

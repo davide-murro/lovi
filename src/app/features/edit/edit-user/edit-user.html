@@ -1,0 +1,59 @@
+<div class="section flex flex-wrap gap-2">
+    <a class="link font-medium leading-normal" [routerLink]="['/edit']" [title]="'Edit'">Edit</a>
+    <span class="text-accent font-medium leading-normal">/</span>
+    <span>{{user() ? user()!.name : 'New User'}}</span>
+</div>
+
+<h2 class="title flex justify-between items-start gap-2">
+    Edit User
+
+    <div class="flex gap-2">
+        @if(user() != null) {
+        <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Forgot password'"
+            (click)="forgotPassword()">
+            <fa-icon [icon]="faQuestion" />
+            <span class="hidden lg:inline">Forgot password</span>
+        </button>
+        <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Delete'" (click)="delete()">
+            <fa-icon [icon]="faTrash" />
+            <span class="hidden lg:inline">Delete</span>
+        </button>
+        }
+    </div>
+</h2>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="section flex flex-col gap-4">
+
+    <div>
+        <label class="label" for="id">Id</label>
+        <input type="text" formControlName="id" id="id" class="input w-full" />
+    </div>
+
+    <div>
+        <label class="label" for="new-password">New password</label>
+        <input type="password" formControlName="newPassword" id="new-password" class="input w-full" autocomplete="false"
+            placeholder="Password123$" />
+    </div>
+
+    <div>
+        <label class="label" for="email">Email</label>
+        <input type="email" formControlName="email" id="email" class="input w-full" autocomplete="false"
+            placeholder="Mario@mail.com" />
+    </div>
+
+    <div>
+        <label class="label" for="email-confirmed">Email confirmed</label>
+        <input type="checkbox" formControlName="emailConfirmed" id="email-confirmed" class="input-checkbox" />
+    </div>
+
+    <div>
+        <label class="label" for="name">Name</label>
+        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
+            placeholder="Mario" />
+    </div>
+
+    <div>
+        <button class="button button-primary" type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+</form>

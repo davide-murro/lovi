@@ -19,5 +19,5 @@
         }
     </div>
 
-    <button type="submit" class="flex-none button button-primary button-rounded" [disabled]="!form.valid" [title]="'Save'">Save</button>
+    <button type="submit" class="flex-none button button-primary button-rounded" [disabled]="!form.valid || isLoading()" [title]="'Save'">Save</button>
 </form>

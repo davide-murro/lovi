@@ -38,7 +38,7 @@
     }
 
     @if (podcastPagedResult() && podcastPagedResult()!.totalCount > podcastPagedResult()!.pagedQuery.pageSize) {
-    <app-pagination [pageNumber]="podcastPagedQuery().pageNumber" [pageSize]="podcastPagedQuery().pageSize"
+    <app-pagination class="section" [pageNumber]="podcastPagedQuery().pageNumber" [pageSize]="podcastPagedQuery().pageSize"
         [totalCount]="podcastPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
     </app-pagination>
     }

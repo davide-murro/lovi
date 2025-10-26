@@ -52,11 +52,32 @@ export class AudioPlayerService {
     });
   }
 
+  private loadAudio(track: AudioTrack) {
+    this.audio.src = track?.audioSrc;
+    this.loadAudioMetadata(track);
+  }
+  private loadAudioMetadata(track: AudioTrack) {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: track?.title,
+        artist: track?.subtitle,
+        artwork: [
+          { src: track?.coverImageSrc!, sizes: '512x512', type: 'image/png' },
+        ]
+      });
+
+      navigator.mediaSession.setActionHandler('play', () => this.play());
+      navigator.mediaSession.setActionHandler('pause', () => this.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', () => this.previous());
+      navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+    }
+  }
+
   loadId(id: number) {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
-      this.audio.src = track.audioSrc;
+      this.loadAudio(track);
       this.audio.pause();
       this.isPlaying.set(false);
     }
@@ -74,7 +95,7 @@ export class AudioPlayerService {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
-      this.audio.src = track.audioSrc;
+      this.loadAudio(track);
       this.audio.play();
       this.isPlaying.set(true);
     }
@@ -110,7 +131,7 @@ export class AudioPlayerService {
 
   stop() {
     this.audio.pause();
-    this.audio.src = '';
+    this.loadAudio(null!);
     this.currentId.set(null!);
     this.isPlaying.set(false);
   }

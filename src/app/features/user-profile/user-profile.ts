@@ -1,9 +1,8 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, inject, signal, Signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
-import { UserDto } from '../../core/models/dtos/user-dto.model';
 import { ToasterService } from '../../core/services/toaster.service';
 import { map, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -12,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEmailDialog } from '../../shared/change-email-dialog/change-email-dialog';
 import { ChangePasswordDialog } from '../../shared/change-password-dialog/change-password-dialog';
+import { UserProfileDto } from '../../core/models/dtos/user-profile-dto.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,9 +29,9 @@ export class UserProfile {
 
   faPen = faPen;
 
-  private _userProfile: Signal<UserDto> = toSignal(this.route.data.pipe(map(data => data['userProfile'])));
+  private _userProfile: Signal<UserProfileDto> = toSignal(this.route.data.pipe(map(data => data['userProfile'])));
 
-  form = new FormGroup({
+  informationForm = new FormGroup({
     id: new FormControl(this._userProfile().id),
     email: new FormControl({ value: this._userProfile().email!, disabled: true }),
     password: new FormControl({ value: 'xxxxxxxx', disabled: true }),
@@ -42,7 +42,7 @@ export class UserProfile {
     this.dialogService.open(ChangeEmailDialog)
       .subscribe((newEmail: string) => {
         if (newEmail) {
-          this.form.patchValue({ email: newEmail });
+          this.informationForm.patchValue({ email: newEmail });
           this.dialogService.log('Email changed!', 'Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again').subscribe();
         }
       })
@@ -55,21 +55,26 @@ export class UserProfile {
         }
       })
   }
-  onSubmitInformation(): void {
-    if (!this.form.valid) return;
 
-    let dto: UserDto = {
-      id: this.form.value.id!,
-      name: this.form.value.name!
+  onInformationLoading = signal(false);
+  onSubmitInformation(): void {
+    if (!this.informationForm.valid) return;
+
+    let dto: UserProfileDto = {
+      id: this.informationForm.value.id!,
+      name: this.informationForm.value.name!
     }
+    this.onInformationLoading.set(true);
     this.userService.updateMe(dto).subscribe({
       next: () => {
         this.toasterService.show('Profile updated');
-        this.form.reset(this.form.getRawValue());
+        this.informationForm.reset(this.informationForm.getRawValue());
+        this.onInformationLoading.set(false);
       },
       error: (error) => {
         console.error('userService.updateMe', dto, error);
         this.toasterService.show('Profile update error', { type: "error" });
+        this.onInformationLoading.set(false);
       }
     });
   }

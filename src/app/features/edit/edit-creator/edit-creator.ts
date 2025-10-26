@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, Signal, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,8 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { CreatorsService } from '../../../core/services/creators.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-edit-creator',
@@ -15,7 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './edit-creator.scss'
 })
 export class EditCreator {
-private route = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
@@ -25,7 +27,9 @@ private route = inject(ActivatedRoute);
   faPen = faPen;
   faTrash = faTrash;
 
-  creator = signal<CreatorDto | null>(this.route.snapshot.data['creator']);
+  private _creator: Signal<CreatorDto | null> = toSignal(this.route.data.pipe(map(data => data['creator'])));
+
+  creator = signal<CreatorDto | null>(this._creator());
 
   form = new FormGroup({
     id: new FormControl({ value: this.creator()?.id, disabled: true }),
@@ -36,6 +40,21 @@ private route = inject(ActivatedRoute);
     //coverImage: new FormControl<File | null>(null)
   });
   //coverPreview = signal(this.creator()?.coverImageUrl ?? null);
+
+  constructor() {
+    effect(() => {
+      this.form.patchValue({
+        id: this._creator()?.id,
+        nickname: this._creator()?.nickname,
+        name: this._creator()?.name,
+        surname: this._creator()?.surname,
+        //coverImageUrl: this._creator()?.coverImageUrl,
+        //coverImage: null
+      });
+      //this.coverPreview.set(this._creator()?.coverImageUrl ?? null);
+      this.creator.set(this._creator());
+    });
+  }
 
 
   load() {
@@ -103,5 +122,24 @@ private route = inject(ActivatedRoute);
       });
 
     }
+  }
+
+  delete() {
+    this.dialogService.confirm('Delete Creator', 'Are you sure vecm?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          const id = this.creator()!.id!;
+          this.creatorsService.delete(id).subscribe({
+            next: () => {
+              this.toasterService.show('Creator deleted');
+              this.router.navigate(['/edit']);
+            },
+            error: (err) => {
+              console.error('creatorsService.delete', id, err);
+              this.toasterService.show('Creator delete failed', { type: 'error' });
+            }
+          });
+        }
+      });
   }
 }

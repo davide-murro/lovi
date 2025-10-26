@@ -16,7 +16,7 @@
             <fa-icon [icon]="faUser" />
         </a>
 
-        <button type="button" class="icon-button sm:hidden" [title]="'Toggle menu'"
+        <button type="button" class="icon-button sm:!hidden" [title]="'Toggle menu'"
             (click)="menuMobileOpen.set(!menuMobileOpen())">
             @if (menuMobileOpen()) {
             <fa-icon [icon]="faClose" />

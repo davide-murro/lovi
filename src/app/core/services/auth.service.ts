@@ -24,8 +24,8 @@ export class AuthService {
   isLoggedIn = computed(() => !!this.accessToken());
 
   // REGISTER
-  register(dto: RegisterDto): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/register`, dto);
+  register(dto: RegisterDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/register`, dto);
   }
 
   // LOGIN

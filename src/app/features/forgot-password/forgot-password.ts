@@ -37,18 +37,21 @@ export class ForgotPassword {
     newPasswordRepeat: new FormControl(null, Validators.required),
   }, { validators: valuesMatchValidator(['newPassword', 'newPasswordRepeat']) });
 
+  isForgotLoading = signal(false);
   onForgotSubmit(): void {
     if (!this.forgotForm.valid) return;
 
     let dto: ForgotPasswordDto = {
       email: this.forgotForm.value.email!
     }
+    this.isForgotLoading.set(true);
     this.authService.forgotPassword(dto).subscribe({
       next: () => {
         this.dialogService.log(
           'Password Reset Link Sent',
           `If an account exists for ${dto.email}, a password reset link has been sent to your inbox. In case, check your spam folder.`,
         ).subscribe(() => this.router.navigate(['/login']));
+        this.isForgotLoading.set(false);
       },
       error: (error) => {
         console.error('authService.forgotPassword', dto, error);
@@ -57,10 +60,12 @@ export class ForgotPassword {
           'Unable to reset password. The email could not be processed',
           { type: 'error' }
         ).subscribe();
+        this.isForgotLoading.set(false);
       }
     });
   }
 
+  isResetLoading = signal(false);
   onResetSubmit(): void {
     if (!this.resetForm.valid) return;
 
@@ -69,12 +74,14 @@ export class ForgotPassword {
       token: this.token(),
       newPassword: this.resetForm.value.newPassword!
     }
+    this.isResetLoading.set(true);
     this.authService.resetPassword(dto).subscribe({
       next: () => {
         this.dialogService.log(
           'Password Reset Success!',
           'Your password has been successfully reset. You can now log in with your new password.'
         ).subscribe(() => this.router.navigate(['/login']));
+        this.isResetLoading.set(false);
       },
       error: (error) => {
         console.error('authService.forgotPassword', dto, error);
@@ -83,6 +90,7 @@ export class ForgotPassword {
           'Unable to reset password. The link may have expired or the token is invalid.',
           { type: 'error' }
         ).subscribe();
+        this.isResetLoading.set(false);
       }
     });
   }

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, Signal, signal } from '@angular/core';
 import { PodcastDto } from '../../../core/models/dtos/podcast-dto.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,6 +9,8 @@ import { DialogService } from '../../../core/services/dialog.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-edit-podcast',
@@ -27,16 +29,32 @@ export class EditPodcast {
   faPen = faPen;
   faTrash = faTrash;
 
-  podcast = signal<PodcastDto | null>(this.route.snapshot.data['podcast']);
+  private _podcast: Signal<PodcastDto | null> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
+
+  podcast = signal<PodcastDto | null>(this._podcast());
 
   form = new FormGroup({
-    id: new FormControl({ value: this.podcast()?.id, disabled: true }),
-    name: new FormControl(this.podcast()?.name ?? null!, { nonNullable: true, validators: [Validators.required] }),
-    coverImageUrl: new FormControl(this.podcast()?.coverImageUrl),
+    id: new FormControl<number>({ value: null!, disabled: true }),
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    coverImageUrl: new FormControl(''),
     coverImage: new FormControl<File | null>(null),
-    description: new FormControl(this.podcast()?.description),
+    description: new FormControl(''),
   });
   coverPreview = signal(this.podcast()?.coverImageUrl ?? null);
+
+  constructor() {
+    effect(() => {
+      this.form.patchValue({
+        id: this._podcast()?.id,
+        name: this._podcast()?.name ?? null!,
+        coverImageUrl: this._podcast()?.coverImageUrl,
+        coverImage: null,
+        description: this._podcast()?.description,
+      });
+      this.coverPreview.set(this._podcast()?.coverImageUrl ?? null);
+      this.podcast.set(this._podcast());
+    });
+  }
 
 
   load() {
@@ -103,6 +121,25 @@ export class EditPodcast {
       });
 
     }
+  }
+
+  delete() {
+    this.dialogService.confirm('Delete Podcast', 'Are you sure vecm?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          const id = this.podcast()!.id!;
+          this.podcastsService.delete(id).subscribe({
+            next: () => {
+              this.toasterService.show('Podcast deleted');
+              this.router.navigate(['/edit']);
+            },
+            error: (err) => {
+              console.error('podcastsService.delete', id, err);
+              this.toasterService.show('Podcast delete failed', { type: 'error' });
+            }
+          });
+        }
+      });
   }
 
   // Episodes

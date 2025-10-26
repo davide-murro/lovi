@@ -4,7 +4,18 @@
     <span>{{podcast() ? podcast()!.name : 'New Podcast'}}</span>
 </div>
 
-<h2 class="title">Edit Podcast</h2>
+<h2 class="title flex justify-between items-start gap-2">
+    Edit Podcast
+
+    <div class="flex gap-2">
+        @if(podcast() != null) {
+        <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Delete'" (click)="delete()">
+            <fa-icon [icon]="faTrash" />
+            <span class="hidden lg:inline">Delete</span>
+        </button>
+        }
+    </div>
+</h2>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="section flex flex-col gap-4">
 
@@ -44,7 +55,7 @@
     <h3 class="title2">Voicers</h3>
 
     <div class="section overflow-auto">
-        <table class="table w-full overflow-auto">
+        <table class="table w-full overflow-auto break-normal">
             <thead>
                 <tr>
                     <th>id</th>
@@ -70,8 +81,7 @@
                 <tr>
                     <td colspan="100%">
                         <button type="button" class="button button-accent" [title]="'Add Voicer'"
-                            (click)="addVoicer()">Add
-                            Voicer</button>
+                            (click)="addVoicer()">Add Voicer</button>
                     </td>
                 </tr>
             </tbody>
@@ -84,11 +94,11 @@
     <h3 class="title2">Episodes</h3>
 
     <div class="section overflow-auto">
-        <table class="table w-full overflow-auto">
+        <table class="table w-full overflow-auto break-normal">
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>n.</th>
+                    <th>number</th>
                     <th>name</th>
                     <th>cover image</th>
                     <th>description</th>

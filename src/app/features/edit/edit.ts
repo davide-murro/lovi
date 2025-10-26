@@ -5,11 +5,14 @@ import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model'
 import { PodcastsService } from '../../core/services/podcasts.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
-import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faPen, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '../../core/services/dialog.service';
 import { ToasterService } from '../../core/services/toaster.service';
 import { CreatorsService } from '../../core/services/creators.service';
 import { AudioBooksService } from '../../core/services/audio-books.service';
+import { UsersService } from '../../core/services/users.service';
+import { AuthService } from '../../core/services/auth.service';
+import { ForgotPasswordDto } from '../../core/models/dtos/forgot-password-dto.model';
 
 @Component({
   selector: 'app-edit',
@@ -23,16 +26,19 @@ export class Edit {
   private audioBooksService = inject(AudioBooksService);
   private podcastsService = inject(PodcastsService);
   private creatorsService = inject(CreatorsService);
+  private usersService = inject(UsersService);
+  private authService = inject(AuthService);
 
   faAdd = faAdd;
   faPen = faPen;
   faTrash = faTrash;
+  faQuestion = faQuestion;
 
   audioBookPagedQuery = signal({
     pageNumber: 1,
     pageSize: 10,
     sortBy: 'id',
-    sortOrder: 'asc',
+    sortOrder: 'desc',
     search: ''
   } as PagedQuery);
   audioBookPagedResult = toSignal(
@@ -53,7 +59,7 @@ export class Edit {
     pageNumber: 1,
     pageSize: 10,
     sortBy: 'id',
-    sortOrder: 'asc',
+    sortOrder: 'desc',
     search: ''
   } as PagedQuery);
   podcastPagedResult = toSignal(
@@ -74,7 +80,7 @@ export class Edit {
     pageNumber: 1,
     pageSize: 10,
     sortBy: 'id',
-    sortOrder: 'asc',
+    sortOrder: 'desc',
     search: ''
   } as PagedQuery);
   creatorPagedResult = toSignal(
@@ -82,8 +88,29 @@ export class Edit {
       switchMap(query => {
         return this.creatorsService.getPaged(query).pipe(
           catchError(err => {
-            this.toasterService.show('Get Creatos failed', { type: 'error' });
+            this.toasterService.show('Get Creators failed', { type: 'error' });
             console.error('creatorsService.getPaged', query, err);
+            return of(null);
+          }),
+        )
+      })
+    )
+  );
+
+  userPagedQuery = signal({
+    pageNumber: 1,
+    pageSize: 10,
+    sortBy: 'registeredAt',
+    sortOrder: 'desc',
+    search: ''
+  } as PagedQuery);
+  userPagedResult = toSignal(
+    toObservable(this.userPagedQuery).pipe(
+      switchMap(query => {
+        return this.usersService.getPaged(query).pipe(
+          catchError(err => {
+            this.toasterService.show('Get Users failed', { type: 'error' });
+            console.error('usersService.getPaged', query, err);
             return of(null);
           }),
         )
@@ -145,6 +172,45 @@ export class Edit {
             error: (err) => {
               console.error('creatorsService.delete', id, err);
               this.toasterService.show('Creator delete failed', { type: 'error' });
+            }
+          });
+        }
+      });
+  }
+
+  deleteUser(id: string) {
+    this.dialogService.confirm('Delete User', 'Are you sure vecm?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          this.usersService.delete(id).subscribe({
+            next: () => {
+              this.toasterService.show('User deleted');
+              this.userPagedQuery.update((u) => ({
+                ...u
+              }));
+            },
+            error: (err) => {
+              console.error('usersService.delete', id, err);
+              this.toasterService.show('User delete failed', { type: 'error' });
+            }
+          });
+        }
+      });
+  }
+  forgotPasswordUser(email: string) {
+    this.dialogService.confirm('Forgot password', 'Start forgot password process?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          const forgotPassword: ForgotPasswordDto = {
+            email: email
+          }
+          this.authService.forgotPassword(forgotPassword).subscribe({
+            next: () => {
+              this.toasterService.show('User forgot password started');
+            },
+            error: (err) => {
+              console.error('authService.forgotPassword', forgotPassword, err);
+              this.toasterService.show('User forgot password failed', { type: 'error' });
             }
           });
         }

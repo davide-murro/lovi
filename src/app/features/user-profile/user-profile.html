@@ -4,7 +4,7 @@
     <div class="section">
         <h3 class="title2 text-center">Information</h3>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmitInformation()"
+        <form [formGroup]="informationForm" (ngSubmit)="onSubmitInformation()"
             class="flex flex-col items-center gap-4">
             <div class="max-w-full">
                 <label for="email" class="label">Email</label>
@@ -33,12 +33,12 @@
             <div class="max-w-full">
                 <label for="name" class="label">Name</label>
                 <input type="text" formControlName="name" id="name" class="input" />
-                @if(form.controls.name.dirty) {
-                @if(form.controls.name.hasError('required')) {
+                @if(informationForm.controls.name.dirty) {
+                @if(informationForm.controls.name.hasError('required')) {
                 <p class="text-accent text-sm">
                     Name is required
                 </p>
-                } @else if(form.controls.name.valid) {
+                } @else if(informationForm.controls.name.valid) {
                 <p class="text-success text-sm">
                     Name OK
                 </p>
@@ -48,7 +48,7 @@
             </div>
 
             <button type="submit" class="flex-none button button-primary button-rounded"
-                [disabled]="!form.valid || !form.dirty" [title]="'Save'">Save</button>
+                [disabled]="!informationForm.valid || !informationForm.dirty || onInformationLoading()" [title]="'Save'">Save</button>
         </form>
     </div>
 

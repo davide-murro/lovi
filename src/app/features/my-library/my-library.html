@@ -7,7 +7,7 @@
     <p class="section text-accent">There are no Audio Books here</p>
     }
     @else {
-    <div class="section pb-4 grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
+    <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
         @for (audioBook of myLibraryAudioBooks(); track $index) {
         <div class="flex flex-1 flex-col gap-2">
             <a [routerLink]="['/audio-books', audioBook.id]" [title]="audioBook.name">
@@ -46,7 +46,7 @@
     }
     @else {
     @for (podcast of myLibraryPodcasts(); track $index) {
-    <div class="section pb-4">
+    <div class="section">
         <a [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
             <div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[150px] sm:min-h-[250px]"
                 [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">

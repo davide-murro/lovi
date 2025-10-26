@@ -1,10 +1,10 @@
 import { ResolveFn, Router } from '@angular/router';
-import { UserDto } from '../models/dtos/user-dto.model';
+import { UserProfileDto } from '../models/dtos/user-profile-dto.model';
 import { UsersService } from '../services/users.service';
 import { inject } from '@angular/core';
 import { catchError, of } from 'rxjs';
 
-export const userProfileResolver: ResolveFn<UserDto | null> = (route, state) => {
+export const userProfileResolver: ResolveFn<UserProfileDto | null> = (route, state) => {
   const router = inject(Router);
   const usersService = inject(UsersService);
 

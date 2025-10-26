@@ -3,7 +3,7 @@
 <h2 class="title">Audio Books</h2>
 
 <div class="section overflow-auto">
-    <table class="table w-full">
+    <table class="table w-full break-normal">
         <thead>
             <tr>
                 <th>id</th>
@@ -47,7 +47,7 @@
 <h2 class="title">Podcasts</h2>
 
 <div class="section overflow-auto">
-    <table class="table w-full">
+    <table class="table w-full break-normal">
         <thead>
             <tr>
                 <th>id</th>
@@ -91,7 +91,7 @@
 <h2 class="title">Creators</h2>
 
 <div class="section overflow-auto">
-    <table class="table w-full">
+    <table class="table w-full break-normal">
         <thead>
             <tr>
                 <th>id</th>
@@ -124,6 +124,49 @@
                 <td colspan="100%">
                     <a [title]="'Create Creator'" [routerLink]="['/edit', 'creators', 'create']"
                         class="button button-accent">Create Creator</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2 class="title">Users</h2>
+
+<div class="section overflow-auto">
+    <table class="table w-full break-normal">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>email</th>
+                <th>email confirmed</th>
+                <th>name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of userPagedResult()?.items; track $index) {
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.emailConfirmed}}</td>
+                <td>{{user.name}}</td>
+
+                <td>
+                    <button class="icon-button" [title]="'Forgot password'" (click)="forgotPasswordUser(user.email!)"><fa-icon [icon]="faQuestion" /></button>
+                </td>
+                <td>
+                    <a class="icon-button" [title]="'Update User'"
+                        [routerLink]="['/edit', 'users', user.id]"><fa-icon [icon]="faPen" /></a>
+                </td>
+                <td>
+                    <button class="icon-button" [title]="'Delete User'" (click)="deleteUser(user.id!)"><fa-icon
+                            [icon]="faTrash" /></button>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="100%">
+                    <a [title]="'Create User'" [routerLink]="['/edit', 'users', 'create']"
+                        class="button button-accent">Create User</a>
                 </td>
             </tr>
         </tbody>

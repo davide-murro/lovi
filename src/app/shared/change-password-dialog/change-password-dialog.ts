@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangePasswordDto } from '../../core/models/dtos/change-password-dto.model';
 import { AuthService } from '../../core/services/auth.service';
@@ -24,6 +24,7 @@ export class ChangePasswordDialog {
     newPasswordRepeat: new FormControl('', Validators.required),
   }, { validators: valuesMatchValidator(['newPassword', 'newPasswordRepeat']) });
 
+  isLoading = signal(false);
   submit() {
     if (!this.form.valid) return;
 
@@ -32,16 +33,19 @@ export class ChangePasswordDialog {
       newPassword: this.form.value.newPassword!
     }
 
+    this.isLoading.set(true);
     this.authService.changePassword(changePassword).subscribe({
       next: () => {
         this.dialogService.close(true);
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.changePassword', changePassword, err);
         this.toasterService.show(
-          err.error[0]?.description ?? 'Changing email failed', 
+          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Changing password failed',
           { type: 'error' }
         );
+        this.isLoading.set(false);
       }
     });
   }

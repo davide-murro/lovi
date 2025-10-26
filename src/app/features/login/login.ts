@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginDto } from '../../core/models/dtos/login-dto.model';
@@ -21,6 +21,7 @@ export class Login {
     password: new FormControl('', Validators.required),
   });
 
+  isLoading = signal(false);
   login(): void {
     if (!this.form.valid) return;
 
@@ -29,14 +30,17 @@ export class Login {
       password: this.form.value.password!
     }
 
+    this.isLoading.set(true);
     this.authService.login(dto).subscribe({
       next: (token) => {
         this.toasterService.show('Login successful!');
         this.router.navigate(['/']);
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.login', dto, err);
         this.toasterService.show('Login failed', { type: 'error' });
+        this.isLoading.set(false);
       }
     })
   }

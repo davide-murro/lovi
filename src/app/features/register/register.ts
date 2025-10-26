@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, Signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterDto } from '../../core/models/dtos/register-dto.model';
@@ -25,6 +25,7 @@ export class Register {
     name: new FormControl('', Validators.required),
   }, { validators: valuesMatchValidator(['password', 'passwordRepeat']) });
 
+  isLoading = signal(false);;
   register(): void {
     if (!this.form.valid) return;
 
@@ -33,20 +34,23 @@ export class Register {
       password: this.form.value.password!,
       name: this.form.value.name!
     }
+    this.isLoading.set(true);
     this.authService.register(dto).subscribe({
       next: () => {
         this.dialogService.log(
           'Registration successful!',
           'Please check your email inbox to verify your account, then sing in into LOVI')
           .subscribe(() => this.router.navigate(["/login"]));
+          this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.register', dto, err);
         this.dialogService.log(
           'Registration failed', 
-          err.error?.at(-1)?.description ?? 'Registration failed', 
+          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Registration failed, unexpected error',
           { type: 'error' }
         );
+        this.isLoading.set(false);
       }
     });
   }

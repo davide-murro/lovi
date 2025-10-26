@@ -24,6 +24,8 @@ import { creatorResolver } from './core/resolvers/creator.resolver';
 import { EditAudioBook } from './features/edit/edit-audio-book/edit-audio-book';
 import { ForgotPassword } from './features/forgot-password/forgot-password';
 import { Search } from './features/search/search';
+import { EditUser } from './features/edit/edit-user/edit-user';
+import { userResolver } from './core/resolvers/user.resolver';
 
 export const routes: Routes = [
     {
@@ -185,6 +187,23 @@ export const routes: Routes = [
         data: { roles: ['Admin'] },
         resolve: {
             creator: creatorResolver
+        }
+    },
+    {
+        path: 'edit/users/create',
+        component: EditUser,
+        title: 'LOVI - Create User',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+    },
+    {
+        path: 'edit/users/:id',
+        component: EditUser,
+        title: 'LOVI - Edit User',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+        resolve: {
+            user: userResolver
         }
     },
 
