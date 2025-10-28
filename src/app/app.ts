@@ -1,7 +1,6 @@
-import { Component, effect, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { Header } from './shared/header/header';
 import { Body } from "./shared/body/body";
-import { Footer } from "./shared/footer/footer";
 import { AudioPlayer } from "./shared/audio-player/audio-player";
 import { Toaster } from './shared/toaster/toaster';
 import { NavigationEnd, Router } from '@angular/router';
@@ -13,7 +12,6 @@ import { Dialog } from './shared/dialog/dialog';
   imports: [
     Header,
     Body,
-    Footer,
     AudioPlayer,
     Toaster,
     Dialog

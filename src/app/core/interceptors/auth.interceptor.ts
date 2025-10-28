@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpHeaders, HttpInterceptorFn } from '@angular/comm
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { catchError, switchMap, throwError } from 'rxjs';
-import { TokenDto } from '../models/dtos/token-dto.model';
+import { TokenDto } from '../models/dtos/auth/token-dto.model';
 import { Router } from '@angular/router';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -25,7 +25,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       // check if the refresh call fails
       if (error.url?.includes('/auth/refresh')) {
         authService.logout();
-        router.navigate(['/login']);
+        router.navigate(['/auth', 'login']);
         return throwError(() => new Error('Session expired. Please log in again.'));
       }
 

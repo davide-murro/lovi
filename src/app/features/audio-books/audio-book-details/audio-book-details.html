@@ -16,9 +16,9 @@
             {{audioBook().name}}
 
             <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-                [title]="audioBook().isInMyLibrary ? 'Remove from My Library' : 'Add to My Library'"
+                [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'"
                 (click)="toggleMyLibrary()">
-                @if(audioBook().isInMyLibrary) {
+                @if(isInMyLibrary()) {
                 <fa-icon [icon]="faBookBookmark" />
                 <span class="hidden lg:inline">Remove from My Library</span>
                 }
@@ -37,8 +37,8 @@
 
         <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
             <button type="button" class="icon-button button-primary button-xl"
-                [title]="audioBook().isCurrentTrackPlaying ? 'Pause' : 'Play'" (click)="togglePlay()">
-                @if(audioBook().isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
+                [title]="isCurrentTrackPlaying() ? 'Pause' : 'Play'" (click)="togglePlay()">
+                @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />}
                 @else {<fa-icon [icon]="faPlay" />}
             </button>
 

@@ -11,10 +11,11 @@ import { PodcastDto } from '../../../core/models/dtos/podcast-dto.model';
 import { LibrariesService } from '../../../core/services/libraries.service';
 import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.model';
 import { AuthDirective } from '../../../core/directives/auth.directive';
+import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
 
 @Component({
   selector: 'app-podcast-detail',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem],
   templateUrl: './podcast-details.html',
   styleUrl: './podcast-details.scss'
 })
@@ -30,29 +31,13 @@ export class PodcastDetails {
   faBookBookmark = faBookBookmark;
 
   // podcast
-  private _podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
+  podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
   
-  podcast = computed(() => {
-    const p: PodcastDto =
-    {
-      ...this._podcast(),
-      isInMyLibrary: this.librariesService.myLibrary()?.some(l => l.podcast?.id === this._podcast().id),
-      episodes: this._podcast().episodes!.map(ep => {
-        ep = {
-          ...ep,
-          isInMyLibrary: this.librariesService.myLibrary()?.find(l =>
-            l.podcast?.id === this._podcast().id && l.podcastEpisode?.id === ep.id
-          ) != null
-        }
-        return ep;
-      })
-    }
-    return p;
-  });
+  isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
 
   // audio player
   playAll() {
-    const episodeQueue = this._podcast().episodes!
+    const episodeQueue = this.podcast().episodes!
       .map(pe => {
         const episodeTrack: AudioTrack = {
           id: null!,
@@ -60,7 +45,7 @@ export class PodcastDetails {
           subtitle: 'Episode ' + pe.number,
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImageUrl,
-          referenceLink: `/podcasts/${this._podcast().id}/episodes/${pe.id}`
+          referenceLink: `/podcasts/${this.podcast().id}/episodes/${pe.id}`
         }
         return episodeTrack
       });
@@ -71,14 +56,14 @@ export class PodcastDetails {
 
   // library
   toggleMyLibrary() {
-    if (this.podcast().isInMyLibrary) this.removeFromMyLibrary();
+    if (this.isInMyLibrary()) this.removeFromMyLibrary();
     else this.addToMyLibrary();
   }
   addToMyLibrary() {
-    const episodeLibraries: ManageLibraryDto[] = this._podcast().episodes!
+    const episodeLibraries: ManageLibraryDto[] = this.podcast().episodes!
       .map(pe => {
         const ml: ManageLibraryDto = {
-          podcastId: this._podcast().id,
+          podcastId: this.podcast().id,
           podcastEpisodeId: pe.id
         }
         return ml;
@@ -96,7 +81,7 @@ export class PodcastDetails {
   }
   removeFromMyLibrary() {
     const ids: number[] = this.librariesService.myLibrary()!
-      .filter(pe => pe.podcast?.id == this._podcast().id)
+      .filter(pe => pe.podcast?.id == this.podcast().id)
       .map(pe => pe.id!);
 
     this.librariesService.deleteMeList(ids).subscribe({

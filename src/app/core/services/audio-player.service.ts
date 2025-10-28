@@ -50,11 +50,24 @@ export class AudioPlayerService {
     this.audio.addEventListener('canplay', () => {
       this.audioError.set(false);
     });
+
+    // set media session for smartphones
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => this.play());
+      navigator.mediaSession.setActionHandler('pause', () => this.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', () => this.previous());
+      navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+    }
   }
 
   private loadAudio(track: AudioTrack) {
     this.audio.src = track?.audioSrc;
     this.loadAudioMetadata(track);
+  }
+  private clearAudio() {
+    this.audio.removeAttribute('src'); // remove src attribute entirely
+    this.audio.load(); // reset the element
+    this.clearMediaSession();
   }
   private loadAudioMetadata(track: AudioTrack) {
     if ('mediaSession' in navigator) {
@@ -65,11 +78,12 @@ export class AudioPlayerService {
           { src: track?.coverImageSrc!, sizes: '512x512', type: 'image/png' },
         ]
       });
-
-      navigator.mediaSession.setActionHandler('play', () => this.play());
-      navigator.mediaSession.setActionHandler('pause', () => this.pause());
-      navigator.mediaSession.setActionHandler('previoustrack', () => this.previous());
-      navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+    }
+  }
+  private clearMediaSession() {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.playbackState = 'none';
     }
   }
 
@@ -115,7 +129,7 @@ export class AudioPlayerService {
     });
 
     // If queue doesn't already contain this track, prepend it
-    const playTrack = newQueue.find(t => t.audioSrc === track.audioSrc)!;
+    const playTrack = newQueue.find(t => t.audioSrc === track?.audioSrc)!;
 
     // set signals
     this.idCounter.set(idCounter);
@@ -131,7 +145,7 @@ export class AudioPlayerService {
 
   stop() {
     this.audio.pause();
-    this.loadAudio(null!);
+    this.clearAudio();
     this.currentId.set(null!);
     this.isPlaying.set(false);
   }
@@ -179,6 +193,11 @@ export class AudioPlayerService {
     }
   }
 
+  removeAllQueue() {
+    this.queue.set([]);
+    this.stop();
+  }
+
   seek(time: number) {
     // Only seek if the audio is loaded
     if (this.audio.readyState > 0) {
@@ -186,6 +205,9 @@ export class AudioPlayerService {
     }
   }
 
+  isInQueueAudioSrc(audioSrc: string): boolean {
+    return this.queue().some(q => q.audioSrc === audioSrc);
+  }
   isCurrentAudioSrc(audioSrc: string): boolean {
     return this.currentTrack()?.audioSrc === audioSrc;
   }

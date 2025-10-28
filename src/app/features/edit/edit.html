@@ -29,7 +29,7 @@
                         [routerLink]="['/edit', 'audio-books', audioBook.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button class="icon-button" [title]="'Delete Audio Book'"
+                    <button type="button" class="icon-button" [title]="'Delete Audio Book'"
                         (click)="deleteAudioBook(audioBook.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>
@@ -73,7 +73,7 @@
                         [routerLink]="['/edit', 'podcasts', podcast.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button class="icon-button" [title]="'Delete Podcast'" (click)="deletePodcast(podcast.id!)"><fa-icon
+                    <button type="button" class="icon-button" [title]="'Delete Podcast'" (click)="deletePodcast(podcast.id!)"><fa-icon
                             [icon]="faTrash" /></button>
                 </td>
             </tr>
@@ -115,7 +115,7 @@
                         [routerLink]="['/edit', 'creators', creator.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button class="icon-button" [title]="'Delete Creator'" (click)="deleteCreator(creator.id!)"><fa-icon
+                    <button type="button" class="icon-button" [title]="'Delete Creator'" (click)="deleteCreator(creator.id!)"><fa-icon
                             [icon]="faTrash" /></button>
                 </td>
             </tr>
@@ -151,14 +151,14 @@
                 <td>{{user.name}}</td>
 
                 <td>
-                    <button class="icon-button" [title]="'Forgot password'" (click)="forgotPasswordUser(user.email!)"><fa-icon [icon]="faQuestion" /></button>
+                    <button type="button" class="icon-button" [title]="'Forgot password'" (click)="forgotPasswordUser(user.email!)"><fa-icon [icon]="faQuestion" /></button>
                 </td>
                 <td>
                     <a class="icon-button" [title]="'Update User'"
                         [routerLink]="['/edit', 'users', user.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button class="icon-button" [title]="'Delete User'" (click)="deleteUser(user.id!)"><fa-icon
+                    <button type="button" class="icon-button" [title]="'Delete User'" (click)="deleteUser(user.id!)"><fa-icon
                             [icon]="faTrash" /></button>
                 </td>
             </tr>

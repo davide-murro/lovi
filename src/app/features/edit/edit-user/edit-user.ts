@@ -3,12 +3,12 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToasterService } from '../../../core/services/toaster.service';
-import { UserDto } from '../../../core/models/dtos/user-dto.model';
+import { UserDto } from '../../../core/models/dtos/auth/user-dto.model';
 import { UsersService } from '../../../core/services/users.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { passwordValidator } from '../../../core/validators/password-validator';
 import { DialogService } from '../../../core/services/dialog.service';
-import { ForgotPasswordDto } from '../../../core/models/dtos/forgot-password-dto.model';
+import { ForgotPasswordDto } from '../../../core/models/dtos/auth/forgot-password-dto.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';

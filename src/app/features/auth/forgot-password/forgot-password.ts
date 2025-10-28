@@ -1,15 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
-import { DialogService } from '../../core/services/dialog.service';
-import { ForgotPasswordDto } from '../../core/models/dtos/forgot-password-dto.model';
-import { ToasterService } from '../../core/services/toaster.service';
-import { valuesMatchValidator } from '../../core/validators/values-match-validator';
+import { AuthService } from '../../../core/services/auth.service';
+import { DialogService } from '../../../core/services/dialog.service';
+import { ForgotPasswordDto } from '../../../core/models/dtos/auth/forgot-password-dto.model';
+import { ToasterService } from '../../../core/services/toaster.service';
+import { valuesMatchValidator } from '../../../core/validators/values-match-validator';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { passwordValidator } from '../../core/validators/password-validator';
-import { ResetPasswordDto } from '../../core/models/dtos/reset-password-dto.model';
+import { passwordValidator } from '../../../core/validators/password-validator';
+import { ResetPasswordDto } from '../../../core/models/dtos/auth/reset-password-dto.model';
 
 @Component({
   selector: 'app-forgot-password',
@@ -50,7 +50,7 @@ export class ForgotPassword {
         this.dialogService.log(
           'Password Reset Link Sent',
           `If an account exists for ${dto.email}, a password reset link has been sent to your inbox. In case, check your spam folder.`,
-        ).subscribe(() => this.router.navigate(['/login']));
+        ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isForgotLoading.set(false);
       },
       error: (error) => {
@@ -80,7 +80,7 @@ export class ForgotPassword {
         this.dialogService.log(
           'Password Reset Success!',
           'Your password has been successfully reset. You can now log in with your new password.'
-        ).subscribe(() => this.router.navigate(['/login']));
+        ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isResetLoading.set(false);
       },
       error: (error) => {

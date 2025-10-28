@@ -9,10 +9,4 @@ export interface AudioBookDto {
     audioUrl?: string;
     audio?: File;
     readers?: CreatorDto[];
-    
-    // only front end
-    isInMyLibrary?: boolean;
-
-    isCurrentTrack?: boolean;
-    isCurrentTrackPlaying?: boolean;
 }

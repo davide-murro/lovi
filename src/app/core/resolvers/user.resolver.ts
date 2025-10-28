@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { ResolveFn, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { UsersService } from '../services/users.service';
-import { UserDto } from '../models/dtos/user-dto.model';
+import { UserDto } from '../models/dtos/auth/user-dto.model';
 
 export const userResolver: ResolveFn<UserDto | null> = (route, state) => {
   const id = route.paramMap.get('id')!;

@@ -12,21 +12,4 @@ import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
   styleUrl: './home.scss'
 })
 export class Home {
-  private toasterService = inject(ToasterService);
-  private dialogService = inject(DialogService);
-  private podcastsService = inject(PodcastsService);
-
-  call(): void {
-    this.podcastsService.getAll().subscribe({
-      next: (p) => console.log('Get podcasts successful!', p),
-      error: (err) => console.error('Get podcasts failed', err)
-    });
-  }
-  toast() {
-    this.toasterService.show('try toast!', { type: 'success' });
-    this.toasterService.show('try toast molto lungo per vedere fino a dove arriva e se va a capo !');
-  }
-  dialog() {
-    this.dialogService.log('Test', 'try toast molto lungo per vedere fino a dove arriva e se va a capo !');
-  }
 }

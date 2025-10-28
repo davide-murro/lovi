@@ -226,6 +226,14 @@ body {
     text-decoration: underline;
 }
 
+.link-item {
+    text-decoration-color: var(--text-color-accent);
+}
+
+.link-item:hover {
+    text-decoration-line: underline;
+}
+
 .label {
     display: block;
     font-size: var(--text-sm);
@@ -243,16 +251,21 @@ body {
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
 }
+
 .input::placeholder {
-  color: var(--text-color-accent);
-  opacity: 1; /* Firefox */
+    color: var(--text-color-accent);
+    opacity: 1;
+    /* Firefox */
 }
-.input::-ms-input-placeholder { /* Edge 12 -18 */
-  color: var(--text-color-accent);
+
+.input::-ms-input-placeholder {
+    /* Edge 12 -18 */
+    color: var(--text-color-accent);
 }
+
 .input-checkbox {
-    width: calc(var(--spacing) * 10);
-    height: calc(var(--spacing) * 10);
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
 }
 
 .input-accent {

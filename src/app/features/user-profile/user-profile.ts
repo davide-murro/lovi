@@ -4,14 +4,15 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
 import { ToasterService } from '../../core/services/toaster.service';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DialogService } from '../../core/services/dialog.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { ChangeEmailDialog } from '../../shared/change-email-dialog/change-email-dialog';
-import { ChangePasswordDialog } from '../../shared/change-password-dialog/change-password-dialog';
+import { ChangeEmailDialog } from '../../shared/auth/change-email-dialog/change-email-dialog';
+import { ChangePasswordDialog } from '../../shared/auth/change-password-dialog/change-password-dialog';
 import { UserProfileDto } from '../../core/models/dtos/user-profile-dto.model';
+import { DeleteAccountDialog } from '../../shared/auth/delete-account-dialog/delete-account-dialog';
 
 @Component({
   selector: 'app-user-profile',
@@ -40,12 +41,11 @@ export class UserProfile {
 
   changeEmail() {
     this.dialogService.open(ChangeEmailDialog)
-      .subscribe((newEmail: string) => {
-        if (newEmail) {
-          this.informationForm.patchValue({ email: newEmail });
-          this.dialogService.log('Email changed!', 'Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again').subscribe();
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.dialogService.log('Email changing confirmation sent!', 'Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again').subscribe();
         }
-      })
+      });
   }
   changePassword() {
     this.dialogService.open(ChangePasswordDialog)
@@ -53,7 +53,7 @@ export class UserProfile {
         if (result) {
           this.dialogService.log('Password changed!', 'Confirmation notices have been sent to your email addresses.').subscribe();
         }
-      })
+      });
   }
 
   onInformationLoading = signal(false);
@@ -67,7 +67,7 @@ export class UserProfile {
     this.onInformationLoading.set(true);
     this.userService.updateMe(dto).subscribe({
       next: () => {
-        this.toasterService.show('Profile updated');
+        this.toasterService.show('Profile updated', { type: 'success' });
         this.informationForm.reset(this.informationForm.getRawValue());
         this.onInformationLoading.set(false);
       },
@@ -108,23 +108,14 @@ export class UserProfile {
         }
       });
   }
+
   deleteAccount(): void {
-    this.dialogService.confirm(
-      'Delete account?',
-      'Are you sure you want to permanently delete your account? All your data and information will be lost forever and cannot be recovered.')
-      .subscribe((res) => {
-        if (res) {
-          this.authService.deleteAccount().subscribe({
-            next: () => {
-              this.toasterService.show('Account deleted');
-              this.router.navigate(['/']);
-            },
-            error: (error) => {
-              console.error('authService.deleteAccount', error);
-              this.toasterService.show('Delete account error', { type: "error" });
-            }
-          });
+    this.dialogService.open(DeleteAccountDialog)
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.dialogService.log('Account deleted!', 'You will be redirected to the home page.').subscribe();
+          this.router.navigate(['/']);
         }
-      });
+      })
   }
 }

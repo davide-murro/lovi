@@ -19,8 +19,8 @@
 
             <div class="flex flex-row flex-wrap justify-center items-center gap-4">
                 <button type="button" class="icon-button button-primary button-xl"
-                    [title]="episode().isCurrentTrackPlaying ? 'Pause' : 'Play'" (click)="togglePlay()">
-                    @if(episode().isCurrentTrackPlaying) {<fa-icon [icon]="faPause" />}
+                    [title]="isCurrentTrackPlaying() ? 'Pause' : 'Play'" (click)="togglePlay()">
+                    @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />}
                     @else {<fa-icon [icon]="faPlay" />}
                 </button>
 
@@ -36,9 +36,9 @@
                 {{episode().name}}
 
                 <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-                    [title]="episode().isInMyLibrary ? 'Remove from My Library' : 'Add to My Library'"
+                    [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'"
                     (click)="toggleMyLibrary()">
-                    @if(episode().isInMyLibrary) {
+                    @if(isInMyLibrary()) {
                     <fa-icon [icon]="faBookBookmark" />
                     <span class="hidden lg:inline">Remove from My Library</span>
                     }

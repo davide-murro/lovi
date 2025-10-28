@@ -12,7 +12,7 @@ import { PodcastDto } from '../../../../core/models/dtos/podcast-dto.model';
 import { CreatorSelectorDialog } from '../../../../shared/creator-selector-dialog/creator-selector-dialog';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { UserDto } from '../../../../core/models/dtos/user-dto.model';
+import { UserDto } from '../../../../core/models/dtos/auth/user-dto.model';
 import { passwordValidator } from '../../../../core/validators/password-validator';
 
 @Component({

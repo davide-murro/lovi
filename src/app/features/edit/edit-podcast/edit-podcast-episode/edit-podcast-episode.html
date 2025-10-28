@@ -80,7 +80,7 @@
     </div>
 
     <div>
-        <button class="button button-primary" type="submit" [disabled]="!form.valid">Save</button>
+        <button type="submit" class="button button-primary" [disabled]="!form.valid" [title]="'Save'">Save</button>
     </div>
 </form>
 
@@ -107,7 +107,7 @@
                     <td>{{voicer.surname}}</td>
 
                     <td>
-                        <button class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
+                        <button type="button" class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
                                 [icon]="faTrash" /></button>
                     </td>
                 </tr>

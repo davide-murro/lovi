@@ -12,7 +12,7 @@ import { CreatorsService } from '../../core/services/creators.service';
 import { AudioBooksService } from '../../core/services/audio-books.service';
 import { UsersService } from '../../core/services/users.service';
 import { AuthService } from '../../core/services/auth.service';
-import { ForgotPasswordDto } from '../../core/models/dtos/forgot-password-dto.model';
+import { ForgotPasswordDto } from '../../core/models/dtos/auth/forgot-password-dto.model';
 
 @Component({
   selector: 'app-edit',

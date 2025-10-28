@@ -1,0 +1,13 @@
+<a [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name" class="link-item flex flex-1 flex-col gap-2">
+    <div class="bg-cover bg-center bg-no-repeat bg-accent aspect-[3/2] rounded-xl"
+        [style.background-image]="'url(' + (podcast().coverImageUrl) + ')'">
+    </div>
+    <div>
+        <p class="text-base font-medium leading-normal truncate">{{podcast().name}}</p>
+        <p class="text-accent text-sm truncate">
+            @for(creator of podcast().voicers; track $index) {
+            {{ creator.nickname }}@if (!$last) {, }
+            }
+        </p>
+    </div>
+</a>

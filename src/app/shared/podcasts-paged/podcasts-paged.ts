@@ -5,10 +5,11 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Pagination } from "../pagination/pagination";
+import { PodcastItem } from "../podcast-item/podcast-item";
 
 @Component({
   selector: 'app-podcasts-paged',
-  imports: [RouterLink, Pagination],
+  imports: [RouterLink, Pagination, PodcastItem],
   templateUrl: './podcasts-paged.html',
   styleUrl: './podcasts-paged.scss'
 })

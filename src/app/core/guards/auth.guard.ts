@@ -15,14 +15,14 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // If not logged in -> redirect to login
   if (!isLoggedIn) {
-    return router.parseUrl('/login');
+    return router.navigate(['/auth', 'login']);
   }
 
   // If route requires a specific role
   if (requiredRoles && requiredRoles.length > 0) {
     if (!userRole || !requiredRoles.includes(userRole)) {
       // Optionally redirect to "forbidden" page
-      return router.parseUrl('/forbidden');
+      return router.navigate(['/forbidden']);
     }
   }
 

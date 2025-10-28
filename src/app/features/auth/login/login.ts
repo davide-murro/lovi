@@ -1,9 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginDto } from '../../core/models/dtos/login-dto.model';
+import { LoginDto } from '../../../core/models/dtos/auth/login-dto.model';
 import { Router, RouterLink } from '@angular/router';
-import { ToasterService } from '../../core/services/toaster.service';
+import { ToasterService } from '../../../core/services/toaster.service';
+import { DialogService } from '../../../core/services/dialog.service';
+import { ResendConfirmEmailDto } from '../../../core/models/dtos/auth/resend-confirm-email-dto.model';
+import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +17,7 @@ import { ToasterService } from '../../core/services/toaster.service';
 export class Login {
   private router = inject(Router);
   private toasterService = inject(ToasterService);
+  private dialogService = inject(DialogService);
   private authService = inject(AuthService);
 
   form = new FormGroup({
@@ -39,8 +43,18 @@ export class Login {
       },
       error: (err) => {
         console.error('authService.login', dto, err);
-        this.toasterService.show('Login failed', { type: 'error' });
         this.isLoading.set(false);
+
+        if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'EmailNotConfirmed'))) {
+          let resendDto: ResendConfirmEmailDto = {
+            email: dto.userName,
+          };
+          this.dialogService.open(ResendChangeEmailDialog, {
+            data: resendDto,
+          });
+        } else {
+          this.toasterService.show('Login failed', { type: 'error' });
+        }
       }
     })
   }

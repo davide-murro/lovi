@@ -34,34 +34,27 @@ export class PodcastEpisode {
   faBookBookmark = faBookBookmark;
 
   // episode
-  private _episode: Signal<PodcastEpisodeDto> = toSignal(this.route.data.pipe(map(data => data['podcastEpisode'])));
-  
-  episode = computed(() => {
-    const ep: PodcastEpisodeDto =
-    {
-      ...this._episode(),
-      isInMyLibrary: this.librariesService.myLibrary()?.some(l => l.podcast?.id === this._episode().podcast!.id && l.podcastEpisode?.id === this._episode().id),
-      isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(this._episode().audioUrl!),
-      isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(this._episode().audioUrl!)
-    }
-    return ep;
-  });
+  episode: Signal<PodcastEpisodeDto> = toSignal(this.route.data.pipe(map(data => data['podcastEpisode'])));
 
-  episodePrev = computed(() => this._episode().podcast!.episodes!.find(pe => pe.number == this._episode().number - 1));
-  episodeNext = computed(() => this._episode().podcast!.episodes!.find(pe => pe.number == this._episode().number + 1));
+  episodePrev = computed(() => this.episode().podcast!.episodes!.find(pe => pe.number == this.episode().number - 1));
+  episodeNext = computed(() => this.episode().podcast!.episodes!.find(pe => pe.number == this.episode().number + 1));
+
+  isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.podcast?.id === this.episode().podcast!.id && l.podcastEpisode?.id === this.episode().id));
+  isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.episode().audioUrl!));
+  isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.episode().audioUrl!));
 
   // episode
   prevEpisode() {
-    this.router.navigate(['/podcasts', this._episode().podcast!.id, 'episodes', this.episodePrev()!.id]);
+    this.router.navigate(['/podcasts', this.episode().podcast!.id, 'episodes', this.episodePrev()!.id]);
   }
   nextEpisode() {
-    this.router.navigate(['/podcasts', this._episode().podcast!.id, 'episodes', this.episodeNext()!.id]);
+    this.router.navigate(['/podcasts', this.episode().podcast!.id, 'episodes', this.episodeNext()!.id]);
   }
 
   // audio player
   togglePlay() {
-    if (this.episode().isCurrentTrackPlaying) this.pause();
-    else if (this.episode().isCurrentTrack) this.play();
+    if (this.isCurrentTrackPlaying()) this.pause();
+    else if (this.isCurrentTrack()) this.play();
     else this.playAll();
   }
   play() {
@@ -73,13 +66,13 @@ export class PodcastEpisode {
   playAll() {
     const episodeTrack: AudioTrack = {
       id: null!,
-      title: this._episode().name,
-      subtitle: 'Episode ' + this._episode().number,
-      audioSrc: this._episode().audioUrl!,
-      coverImageSrc: this._episode().coverImageUrl,
-      referenceLink: `/podcasts/${this._episode().podcast!.id}/episodes/${this._episode().id}`
+      title: this.episode().name,
+      subtitle: 'Episode ' + this.episode().number,
+      audioSrc: this.episode().audioUrl!,
+      coverImageSrc: this.episode().coverImageUrl,
+      referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${this.episode().id}`
     };
-    const episodeQueue = this._episode().podcast!.episodes!
+    const episodeQueue = this.episode().podcast!.episodes!
       .map(pe => {
         const track: AudioTrack = {
           id: null!,
@@ -87,7 +80,7 @@ export class PodcastEpisode {
           subtitle: 'Episode ' + pe.number,
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImageUrl,
-          referenceLink: `/podcasts/${this._episode().podcast!.id}/episodes/${pe.id}`
+          referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${pe.id}`
         }
         return track
       });
@@ -98,11 +91,11 @@ export class PodcastEpisode {
   addToQueue() {
     const episodeTrack: AudioTrack = {
       id: null!,
-      title: this._episode().name,
-      subtitle: 'Episode ' + this._episode().number,
-      audioSrc: this._episode().audioUrl!,
-      coverImageSrc: this._episode().coverImageUrl,
-      referenceLink: `/podcasts/${this._episode().podcast!.id}/episodes/${this._episode().id}`
+      title: this.episode().name,
+      subtitle: 'Episode ' + this.episode().number,
+      audioSrc: this.episode().audioUrl!,
+      coverImageSrc: this.episode().coverImageUrl,
+      referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${this.episode().id}`
     }
     this.audioPlayerService.addToQueue(episodeTrack);
     this.toasterService.show("Episode added to queue");
@@ -110,13 +103,13 @@ export class PodcastEpisode {
 
   // libraries
   toggleMyLibrary() {
-    if (this.episode().isInMyLibrary) this.removeFromMyLibrary();
+    if (this.isInMyLibrary()) this.removeFromMyLibrary();
     else this.addToMyLibrary();
   }
   addToMyLibrary() {
     const episodeLibrary: ManageLibraryDto = {
-      podcastId: this._episode().podcast!.id,
-      podcastEpisodeId: this._episode().id
+      podcastId: this.episode().podcast!.id,
+      podcastEpisodeId: this.episode().id
     };
 
     this.librariesService.createMe(episodeLibrary).subscribe({
@@ -131,7 +124,7 @@ export class PodcastEpisode {
   }
   removeFromMyLibrary() {
     const id: number = this.librariesService.myLibrary()!
-      .find(ml => ml.podcast?.id == this._episode().podcast!.id && ml.podcastEpisode?.id == this._episode().id)!.id!;
+      .find(ml => ml.podcast?.id == this.episode().podcast!.id && ml.podcastEpisode?.id == this.episode().id)!.id!;
 
     this.librariesService.deleteMe(id).subscribe({
       next: () => {

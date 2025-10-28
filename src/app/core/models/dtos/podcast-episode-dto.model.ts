@@ -13,10 +13,4 @@ export interface PodcastEpisodeDto {
     podcastId?: number;
     podcast?: PodcastDto;
     voicers?: CreatorDto[];
-
-    // only front end
-    isInMyLibrary?: boolean;
-
-    isCurrentTrack?: boolean;
-    isCurrentTrackPlaying?: boolean;
 }

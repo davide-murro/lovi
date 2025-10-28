@@ -1,11 +1,11 @@
 import { Component, inject, signal, Signal } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RegisterDto } from '../../core/models/dtos/register-dto.model';
+import { RegisterDto } from '../../../core/models/dtos/auth/register-dto.model';
 import { Router } from '@angular/router';
-import { valuesMatchValidator } from '../../core/validators/values-match-validator';
-import { passwordValidator } from '../../core/validators/password-validator';
-import { DialogService } from '../../core/services/dialog.service';
+import { valuesMatchValidator } from '../../../core/validators/values-match-validator';
+import { passwordValidator } from '../../../core/validators/password-validator';
+import { DialogService } from '../../../core/services/dialog.service';
 
 @Component({
   selector: 'app-register',
@@ -40,13 +40,13 @@ export class Register {
         this.dialogService.log(
           'Registration successful!',
           'Please check your email inbox to verify your account, then sing in into LOVI')
-          .subscribe(() => this.router.navigate(["/login"]));
-          this.isLoading.set(false);
+          .subscribe(() => this.router.navigate(['/auth', 'login']));
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.register', dto, err);
         this.dialogService.log(
-          'Registration failed', 
+          'Registration failed',
           (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Registration failed, unexpected error',
           { type: 'error' }
         );

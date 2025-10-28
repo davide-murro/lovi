@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ChangeEmailDto } from '../../core/models/dtos/change-email-dto.model';
-import { AuthService } from '../../core/services/auth.service';
-import { DialogService } from '../../core/services/dialog.service';
-import { ToasterService } from '../../core/services/toaster.service';
+import { ChangeEmailDto } from '../../../core/models/dtos/auth/change-email-dto.model';
+import { AuthService } from '../../../core/services/auth.service';
+import { DialogService } from '../../../core/services/dialog.service';
+import { ToasterService } from '../../../core/services/toaster.service';
 
 @Component({
   selector: 'app-change-email-dialog',
@@ -17,6 +17,7 @@ export class ChangeEmailDialog {
   private authService = inject(AuthService);
 
   form = new FormGroup({
+    password: new FormControl('', [Validators.required]),
     newEmail: new FormControl('', [Validators.required, Validators.email])
   });
 
@@ -25,13 +26,14 @@ export class ChangeEmailDialog {
     if (!this.form.valid) return;
 
     const changeEmail: ChangeEmailDto = {
+      password: this.form.value.password!,
       newEmail: this.form.value.newEmail!
     }
 
     this.isLoading.set(true);
     this.authService.changeEmail(changeEmail).subscribe({
       next: () => {
-        this.dialogService.close(changeEmail.newEmail);
+        this.dialogService.close(true);
         this.isLoading.set(false);
       },
       error: (err) => {

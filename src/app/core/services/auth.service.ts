@@ -1,14 +1,18 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RegisterDto } from '../models/dtos/register-dto.model';
+import { RegisterDto } from '../models/dtos/auth/register-dto.model';
 import { Observable, tap } from 'rxjs';
-import { LoginDto } from '../models/dtos/login-dto.model';
-import { TokenDto } from '../models/dtos/token-dto.model';
-import { ChangePasswordDto } from '../models/dtos/change-password-dto.model';
-import { ChangeEmailDto } from '../models/dtos/change-email-dto.model';
-import { ForgotPasswordDto } from '../models/dtos/forgot-password-dto.model';
-import { ResetPasswordDto } from '../models/dtos/reset-password-dto.model';
+import { LoginDto } from '../models/dtos/auth/login-dto.model';
+import { TokenDto } from '../models/dtos/auth/token-dto.model';
+import { ChangePasswordDto } from '../models/dtos/auth/change-password-dto.model';
+import { ChangeEmailDto } from '../models/dtos/auth/change-email-dto.model';
+import { ForgotPasswordDto } from '../models/dtos/auth/forgot-password-dto.model';
+import { ResetPasswordDto } from '../models/dtos/auth/reset-password-dto.model';
+import { ConfirmEmailDto } from '../models/dtos/auth/confirm-email-dto.model';
+import { ConfirmChangeEmailDto } from '../models/dtos/auth/confirm-change-email-dto.model';
+import { DeleteAccountDto } from '../models/dtos/auth/delete-account-dto.model';
+import { ResendConfirmEmailDto } from '../models/dtos/auth/resend-confirm-email-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +30,12 @@ export class AuthService {
   // REGISTER
   register(dto: RegisterDto): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/register`, dto);
+  }
+  confirmEmail(dto: ConfirmEmailDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/confirm-email`, dto);
+  }
+  resendConfirmEmail(dto: ResendConfirmEmailDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/resend-confirm-email`, dto);
   }
 
   // LOGIN
@@ -53,14 +63,14 @@ export class AuthService {
   
   // REVOKE
   revoke(): Observable<any> {
-    return this.http.post(this.apiUrl + '/revoke', {}).pipe(
+    return this.http.post(`${this.apiUrl}/revoke`, {}).pipe(
       tap(() => this.logout())
     );
   }
 
   // DELETE ACCOUNT
-  deleteAccount(): Observable<any> {
-    return this.http.delete(this.apiUrl + '/delete-account').pipe(
+  deleteAccount(dto: DeleteAccountDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/delete-account`, dto).pipe(
       tap(() => this.logout())
     );
   }
@@ -95,20 +105,21 @@ export class AuthService {
     this.refreshToken.set(token);
   }
 
-  // PUT update current user email
+  // EMAIL
   changeEmail(changeEmail: ChangeEmailDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/change-email`, changeEmail);
+    return this.http.post<void>(`${this.apiUrl}/change-email`, changeEmail);
   }
-  // PUT update current user password
-  changePassword(changePassword: ChangePasswordDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/change-password`, changePassword);
+  confirmChangeEmail(confirmChangeEmail: ConfirmChangeEmailDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/confirm-change-email`, confirmChangeEmail);
   }
 
-  // forgot password
+  // PASSWORD
+  changePassword(changePassword: ChangePasswordDto): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/change-password`, changePassword);
+  }
   forgotPassword(forgotPassword: ForgotPasswordDto): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/forgot-password`, forgotPassword);
   }
-  // reset password
   resetPassword(resetPassword: ResetPasswordDto): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/reset-password`, resetPassword);
   }

@@ -9,7 +9,4 @@ export interface PodcastDto {
     description?: string;
     episodes?: PodcastEpisodeDto[];
     voicers?: CreatorDto[];
-
-    // only front end
-    isInMyLibrary?: boolean;
 }

@@ -19,20 +19,7 @@
     <div class="section flex-grow">
         <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
             @for (audioBook of audioBookPagedResult()?.items; track $index) {
-            <a [routerLink]="['/audio-books', audioBook.id]" [title]="audioBook.name"
-                class="flex flex-1 flex-col gap-2">
-                <div class="bg-cover bg-center bg-no-repeat bg-accent aspect-[3/4] rounded-xl"
-                    [style.background-image]="'url(' + (audioBook.coverImageUrl) + ')'">
-                </div>
-                <div>
-                    <p class="text-base font-medium leading-normal line-clamp-2">{{audioBook.name}}</p>
-                    <p class="text-accent text-sm truncate">
-                        @for(creator of audioBook.readers; track $index) {
-                        {{ creator.nickname }}@if (!$last) {, }
-                        }
-                    </p>
-                </div>
-            </a>
+            <app-audio-book-item [audioBook]="audioBook"></app-audio-book-item>
             }
         </div>
     </div>

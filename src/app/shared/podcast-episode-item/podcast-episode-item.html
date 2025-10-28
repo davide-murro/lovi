@@ -1,0 +1,17 @@
+<a [routerLink]="['/podcasts', podcast().id, 'episodes', episode().id]" [title]="episode().name"
+    class="link-item flex items-center gap-2 sm:gap-4">
+    <div class="size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl sm:size-24"
+        [style.background-image]="'url(' + (episode().coverImageUrl) + ')'">
+    </div>
+    <div class="overflow-hidden">
+        <p class="text-base font-medium leading-normal line-clamp-2">{{episode().name}}</p>
+        <p class="text-accent text-sm truncate max-sm:hidden">
+            @for(creator of episode().voicers; track $index) {
+            {{ creator.nickname }}@if (!$last) {, }
+            }
+        </p>
+        <p class="text-accent text-sm truncate">
+            Episode {{episode().number}}
+        </p>
+    </div>
+</a>

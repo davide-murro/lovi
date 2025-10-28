@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ChangePasswordDto } from '../../core/models/dtos/change-password-dto.model';
-import { AuthService } from '../../core/services/auth.service';
-import { DialogService } from '../../core/services/dialog.service';
-import { ToasterService } from '../../core/services/toaster.service';
-import { passwordValidator } from '../../core/validators/password-validator';
-import { valuesMatchValidator } from '../../core/validators/values-match-validator';
+import { ChangePasswordDto } from '../../../core/models/dtos/auth/change-password-dto.model';
+import { AuthService } from '../../../core/services/auth.service';
+import { DialogService } from '../../../core/services/dialog.service';
+import { ToasterService } from '../../../core/services/toaster.service';
+import { passwordValidator } from '../../../core/validators/password-validator';
+import { valuesMatchValidator } from '../../../core/validators/values-match-validator';
 
 @Component({
   selector: 'app-change-password-dialog',

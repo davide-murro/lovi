@@ -5,10 +5,11 @@ import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model'
 import { AudioBooksService } from '../../core/services/audio-books.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Pagination } from '../pagination/pagination';
+import { AudioBookItem } from "../audio-book-item/audio-book-item";
 
 @Component({
   selector: 'app-audio-books-paged',
-  imports: [RouterLink, Pagination],
+  imports: [RouterLink, Pagination, AudioBookItem],
   templateUrl: './audio-books-paged.html',
   styleUrl: './audio-books-paged.scss'
 })

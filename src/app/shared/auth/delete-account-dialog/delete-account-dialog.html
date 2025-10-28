@@ -1,0 +1,23 @@
+<h1 class="title text-center !pt-0">Delete account?</h1>
+<p class="section">
+    Are you sure you want to permanently delete your account? All your data and information will be lost forever and cannot be recovered.
+</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()"
+    class="flex flex-col items-center gap-4">
+
+    <div class="w-full">
+        <label class="label" for="password">Password</label>
+        <input type="password" formControlName="password" id="password" class="input input-accent w-full" />
+        @if(form.controls.password.hasError('required')) {
+        <p class="text-accent text-sm">Password is required</p>
+        } @else if(form.controls.password.valid) {
+        <p class="text-success text-sm">
+            Password ready
+        </p>
+        }
+    </div>
+
+    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid || isLoading()"
+        [title]="'Confirm'">Confirm</button>
+</form>

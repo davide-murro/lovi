@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home } from './features/home/home';
-import { Login } from './features/login/login';
-import { Register } from './features/register/register';
+import { Login } from './features/auth/login/login';
+import { Register } from './features/auth/register/register';
 import { authGuard } from './core/guards/auth.guard';
 import { UserProfile } from './features/user-profile/user-profile';
 import { Podcasts } from './features/podcasts/podcasts';
@@ -22,10 +22,12 @@ import { NotFound } from './shared/not-found/not-found';
 import { EditCreator } from './features/edit/edit-creator/edit-creator';
 import { creatorResolver } from './core/resolvers/creator.resolver';
 import { EditAudioBook } from './features/edit/edit-audio-book/edit-audio-book';
-import { ForgotPassword } from './features/forgot-password/forgot-password';
+import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { Search } from './features/search/search';
 import { EditUser } from './features/edit/edit-user/edit-user';
 import { userResolver } from './core/resolvers/user.resolver';
+import { ConfirmEmail } from './features/auth/confirm-email/confirm-email';
+import { ConfirmChangeEmail } from './features/auth/confirm-change-email/confirm-change-email';
 
 export const routes: Routes = [
     {
@@ -34,24 +36,29 @@ export const routes: Routes = [
         title: 'LOVI - Home page'
     },
     {
-        path: 'login',
+        path: 'auth/login',
         component: Login,
         title: 'LOVI - Log in'
     },
     {
-        path: 'register',
+        path: 'auth/register',
         component: Register,
         title: 'LOVI - Register'
     },
     {
-        path: 'forgot-password',
+        path: 'auth/confirm-email',
+        component: ConfirmEmail,
+        title: 'LOVI - Confirm email'
+    },
+    {
+        path: 'auth/forgot-password',
         component: ForgotPassword,
         title: 'LOVI - Forgot password'
     },
     {
-        path: 'forgot-password',
-        component: ForgotPassword,
-        title: 'LOVI - Forgot password reset'
+        path: 'auth/confirm-change-email',
+        component: ConfirmChangeEmail,
+        title: 'LOVI - Confirm change email'
     },
     {
         path: 'user-profile',

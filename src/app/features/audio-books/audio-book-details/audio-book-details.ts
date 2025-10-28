@@ -31,23 +31,16 @@ export class AudioBookDetails {
   faBookBookmark = faBookBookmark;
 
   // audioBook
-  private _audioBook: Signal<AudioBookDto> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
-  
-  audioBook = computed(() => {
-    const p: AudioBookDto =
-    {
-      ...this._audioBook(),
-      isInMyLibrary: this.librariesService.myLibrary()?.some(l => l.audioBook?.id === this._audioBook().id),
-      isCurrentTrack: this.audioPlayerService.isCurrentAudioSrc(this._audioBook().audioUrl!),
-      isCurrentTrackPlaying: this.audioPlayerService.isCurrentPlayingAudioSrc(this._audioBook().audioUrl!)
-    }
-    return p;
-  });
+  audioBook: Signal<AudioBookDto> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
+
+  isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.audioBook?.id === this.audioBook().id));
+  isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.audioBook().audioUrl!));
+  isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.audioBook().audioUrl!));
 
   // audio player
   togglePlay() {
-    if (this.audioBook().isCurrentTrackPlaying) this.pause();
-    else if (this.audioBook().isCurrentTrack) this.play();
+    if (this.isCurrentTrackPlaying()) this.pause();
+    else if (this.isCurrentTrack()) this.play();
     else this.playAll();
   }
   play() {
@@ -59,22 +52,22 @@ export class AudioBookDetails {
   playAll() {
     const audioBookTrack: AudioTrack = {
       id: null!,
-      title: this._audioBook().name,
-      subtitle: this._audioBook().readers?.map(r => r.nickname).join(", "),
-      audioSrc: this._audioBook().audioUrl!,
-      coverImageSrc: this._audioBook().coverImageUrl,
-      referenceLink: `/audio-books/${this._audioBook().id}`
+      title: this.audioBook().name,
+      subtitle: this.audioBook().readers?.map(r => r.nickname).join(", "),
+      audioSrc: this.audioBook().audioUrl!,
+      coverImageSrc: this.audioBook().coverImageUrl,
+      referenceLink: `/audio-books/${this.audioBook().id}`
     };
     this.audioPlayerService.playTrack(audioBookTrack);
   }
   addToQueue() {
     const audioBookTrack: AudioTrack = {
       id: null!,
-      title: this._audioBook().name,
-      subtitle: this._audioBook().readers?.map(r => r.nickname).join(", "),
-      audioSrc: this._audioBook().audioUrl!,
-      coverImageSrc: this._audioBook().coverImageUrl,
-      referenceLink: `/audio-books/${this._audioBook().id}`
+      title: this.audioBook().name,
+      subtitle: this.audioBook().readers?.map(r => r.nickname).join(", "),
+      audioSrc: this.audioBook().audioUrl!,
+      coverImageSrc: this.audioBook().coverImageUrl,
+      referenceLink: `/audio-books/${this.audioBook().id}`
     };
     this.audioPlayerService.addToQueue(audioBookTrack);
     this.toasterService.show("Audio Book added to queue");
@@ -82,12 +75,12 @@ export class AudioBookDetails {
 
   // libraries
   toggleMyLibrary() {
-    if (this.audioBook().isInMyLibrary) this.removeFromMyLibrary();
+    if (this.isInMyLibrary()) this.removeFromMyLibrary();
     else this.addToMyLibrary();
   }
   addToMyLibrary() {
     const audioBookLibrary: ManageLibraryDto = {
-      audioBookId: this._audioBook().id
+      audioBookId: this.audioBook().id
     };
 
     this.librariesService.createMe(audioBookLibrary).subscribe({
@@ -102,7 +95,7 @@ export class AudioBookDetails {
   }
   removeFromMyLibrary() {
     const id: number = this.librariesService.myLibrary()!
-      .find(ml => ml.audioBook?.id == this._audioBook().id)!.id!;
+      .find(ml => ml.audioBook?.id == this.audioBook().id)!.id!;
 
     this.librariesService.deleteMe(id).subscribe({
       next: () => {
