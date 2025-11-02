@@ -44,7 +44,7 @@ export class PodcastDetails {
           title: pe.name,
           subtitle: 'Episode ' + pe.number,
           audioSrc: pe.audioUrl!,
-          coverImageSrc: pe.coverImageUrl,
+          coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${this.podcast().id}/episodes/${pe.id}`
         }
         return episodeTrack

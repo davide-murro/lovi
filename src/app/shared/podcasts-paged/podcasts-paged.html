@@ -1,18 +1,18 @@
 <div class="flex flex-col min-h-full w-full">
-    <h1 class="title">Podcasts</h1>
+    <h1 i18n class="title">Podcasts</h1>
 
     @if (podcastsLoading()) {
-    <p class="section text-accent">Loading...</p>
+    <p i18n class="section text-accent">Loading...</p>
     }
 
     @else if (podcastsError()) {
-    <p class="section text-accent">Failed to load Podcasts. Please try reloading or navigating to <a class="link"
-            [title]="'My Library'" [routerLink]="['/my-library']">My Library</a></p>
+    <p i18n class="section text-accent">Failed to load Podcasts. Please try reloading or navigating to <a i18n-title
+            class="link" title="My Library" [routerLink]="['/my-library']">My Library</a></p>
     }
 
     @else if(podcastPagedResult()?.items == null || podcastPagedResult()?.items?.length == 0) {
-    <p class="section text-accent">There are no Podcasts here. Please try reloading or navigating to <a class="link"
-            [title]="'My Library'" [routerLink]="['/my-library']">My Library</a></p>
+    <p i18n class="section text-accent">There are no Podcasts here. Please try reloading or navigating to <a i18n-title
+            class="link" title="My Library" [routerLink]="['/my-library']">My Library</a></p>
     }
 
     @else {

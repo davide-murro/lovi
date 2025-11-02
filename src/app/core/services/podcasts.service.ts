@@ -33,6 +33,8 @@ export class PodcastsService {
     if (podcast.description) formData.append('Description', podcast.description);
     if (podcast.coverImageUrl) formData.append('CoverImageUrl', podcast.coverImageUrl);
     if (podcast.coverImage) formData.append('CoverImage', podcast.coverImage);
+    if (podcast.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', podcast.coverImagePreviewUrl);
+    if (podcast.coverImagePreview) formData.append('CoverImagePreview', podcast.coverImagePreview);
     return this.http.post<PodcastDto>(this.apiUrl, formData);
   }
 
@@ -44,6 +46,8 @@ export class PodcastsService {
     if (podcast.description) formData.append('Description', podcast.description);
     if (podcast.coverImageUrl) formData.append('CoverImageUrl', podcast.coverImageUrl);
     if (podcast.coverImage) formData.append('CoverImage', podcast.coverImage);
+    if (podcast.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', podcast.coverImagePreviewUrl);
+    if (podcast.coverImagePreview) formData.append('CoverImagePreview', podcast.coverImagePreview);
     return this.http.put<void>(`${this.apiUrl}/${id}`, formData);
   }
 
@@ -81,6 +85,8 @@ export class PodcastsService {
     if (episode.description) formData.append('Description', episode.description);
     if (episode.coverImageUrl) formData.append('CoverImageUrl', episode.coverImageUrl);
     if (episode.coverImage) formData.append('CoverImage', episode.coverImage);
+    if (episode.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', episode.coverImagePreviewUrl);
+    if (episode.coverImagePreview) formData.append('CoverImagePreview', episode.coverImagePreview);
     if (episode.audioUrl) formData.append('AudioUrl', episode.audioUrl);
     if (episode.audio) formData.append('Audio', episode.audio);
     if (episode.podcastId) formData.append('PodcastId', episode.podcastId.toString());
@@ -96,6 +102,8 @@ export class PodcastsService {
     if (episode.description) formData.append('Description', episode.description);
     if (episode.coverImageUrl) formData.append('CoverImageUrl', episode.coverImageUrl);
     if (episode.coverImage) formData.append('CoverImage', episode.coverImage);
+    if (episode.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', episode.coverImagePreviewUrl);
+    if (episode.coverImagePreview) formData.append('CoverImagePreview', episode.coverImagePreview);
     if (episode.audioUrl) formData.append('AudioUrl', episode.audioUrl);
     if (episode.audio) formData.append('Audio', episode.audio);
     if (episode.podcastId) formData.append('PodcastId', episode.podcastId.toString());

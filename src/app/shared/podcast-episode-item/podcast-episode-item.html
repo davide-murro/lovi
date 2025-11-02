@@ -1,7 +1,7 @@
-<a [routerLink]="['/podcasts', podcast().id, 'episodes', episode().id]" [title]="episode().name"
-    class="link-item flex items-center gap-2 sm:gap-4">
+<a class="link-item flex items-center gap-2 sm:gap-4"
+    [routerLink]="['/podcasts', podcast().id, 'episodes', episode().id]" [title]="episode().name">
     <div class="size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent rounded-xl sm:size-24"
-        [style.background-image]="'url(' + (episode().coverImageUrl) + ')'">
+        [style.background-image]="'url(' + (episode().coverImagePreviewUrl) + ')'">
     </div>
     <div class="overflow-hidden">
         <p class="text-base font-medium leading-normal line-clamp-2">{{episode().name}}</p>

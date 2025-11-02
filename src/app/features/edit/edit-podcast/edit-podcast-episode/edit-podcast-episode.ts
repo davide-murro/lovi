@@ -41,18 +41,25 @@ export class EditPodcastEpisode {
   episodePrev = computed(() => this.episode()?.podcast!.episodes!.find(pe => pe.number == this.episode()!.number - 1));
   episodeNext = computed(() => this.episode()?.podcast!.episodes!.find(pe => pe.number == this.episode()!.number + 1));
 
+  isLoading = signal(false);
   form = new FormGroup({
     id: new FormControl<number>({ value: null!, disabled: true }),
     number: new FormControl<number>(null!, { nonNullable: true, validators: [Validators.required] }),
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     coverImageUrl: new FormControl(''),
+    coverImageValue: new FormControl<string | null>(null),
     coverImage: new FormControl<File | null>(null),
+    coverImagePreviewUrl: new FormControl(''),
+    coverImagePreviewValue: new FormControl<string | null>(null),
+    coverImagePreview: new FormControl<File | null>(null),
     description: new FormControl(''),
     audioUrl: new FormControl(''),
+    audioValue: new FormControl<string | null>(null),
     audio: new FormControl<File | null>(null),
     podcastId: new FormControl<number>(null!)
   });
   coverPreview = signal<string | null>(null);
+  coverPreviewPreview = signal<string | null>(null);
   audioPreview = signal<string | null>(null);
 
   constructor() {
@@ -62,13 +69,19 @@ export class EditPodcastEpisode {
         number: this._episode()?.number,
         name: this._episode()?.name,
         coverImageUrl: this._episode()?.coverImageUrl,
+        coverImageValue: null,
         coverImage: null,
+        coverImagePreviewUrl: this._episode()?.coverImagePreviewUrl,
+        coverImagePreviewValue: null,
+        coverImagePreview: null,
         description: this._episode()?.description,
         audioUrl: this._episode()?.audioUrl,
+        audioValue: null,
         audio: null,
         podcastId: this._episode() ? this._episode()!.podcast!.id! : this._podcast()!.id!
       });
       this.coverPreview.set(this._episode()?.coverImageUrl ?? null);
+      this.coverPreviewPreview.set(this._episode()?.coverImagePreviewUrl ?? null);
       this.audioPreview.set(this._episode()?.audioUrl ?? null);
       this.episode.set(this._episode());
     });
@@ -112,6 +125,19 @@ export class EditPodcastEpisode {
       this.coverPreview.set(null);
     }
   }
+  onCoverImagePreviewSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0] ?? null;
+    this.form.controls.coverImagePreview.setValue(file);
+    this.form.controls.coverImagePreviewUrl.setValue(null);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => this.coverPreviewPreview.set(reader.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      this.coverPreviewPreview.set(null);
+    }
+  }
   onAudioSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0] ?? null;
     this.form.controls.audio.setValue(file);
@@ -135,20 +161,25 @@ export class EditPodcastEpisode {
       name: form.name!,
       coverImageUrl: form.coverImageUrl!,
       coverImage: form.coverImage!,
+      coverImagePreviewUrl: form.coverImagePreviewUrl!,
+      coverImagePreview: form.coverImagePreview!,
       description: form.description!,
       audioUrl: form.audioUrl!,
       audio: form.audio!,
       podcastId: form.podcastId!
     };
 
+    this.isLoading.set(true);
     if (this.episode()?.id != null) {
       this.podcastsService.updateEpisode(this.episode()!.podcast!.id!, this.episode()!.id!, pe).subscribe({
         next: () => {
+          this.isLoading.set(false);
           this.toasterService.show('Podcast Episode updated');
           this.load();
         },
         error: (err) => {
           console.error('podcastsService.updateEpisode', this.episode()!.podcast!.id!, this.episode()!.id!, pe, err);
+          this.isLoading.set(false);
           this.toasterService.show('Podcast Episode update failed', { type: 'error' });
         }
       });
@@ -156,18 +187,20 @@ export class EditPodcastEpisode {
       pe.podcastId = this.podcast()!.id!;
       this.podcastsService.createEpisode(pe.podcastId, pe).subscribe({
         next: (res) => {
+          this.isLoading.set(false);
           this.toasterService.show('Podcast Episode created');
           this.router.navigate(['/edit', 'podcasts', res.podcastId, 'episodes', res.id])
         },
         error: (err) => {
           console.error('podcastsService.createEpisode', pe.podcastId, pe, err);
+          this.isLoading.set(false);
           this.toasterService.show('Podcast Episode create failed', { type: 'error' });
         }
       });
 
     }
   }
-  
+
   delete() {
     this.dialogService.confirm('Delete Podcast Episode', 'Are you sure vecm?')
       .subscribe(confirmed => {

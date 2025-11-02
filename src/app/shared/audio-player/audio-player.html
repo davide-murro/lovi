@@ -3,7 +3,7 @@
     [class]="queueOpen() ? 'gap-4 border-t-2 border-primary' : ''">
 
     @if (queueOpen()) {
-    <button class="icon-button" [title]="'Close queue'" (click)="queueOpen.set(false)">
+    <button class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
         <fa-icon [icon]="faClose" />
     </button>
     }
@@ -12,7 +12,7 @@
         @for (track of audioPlayerService.queue(); track $index) {
         <li class="flex items-center px-4 py-2 gap-2 hover:bg-opacity"
             [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id">
-            <div class="flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
+            <button class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
                 (click)="audioPlayerService.playId(track.id)">
                 <div class="flex items-center justify-center size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent-light rounded-xl"
                     [style.background-image]="'url(' + (track.coverImageSrc) + ')'">
@@ -21,14 +21,14 @@
                     <span class="truncate">{{ track.title }}</span>
                     <span class="text-accent truncate">{{ track.subtitle }}</span>
                 </div>
-            </div>
+            </button>
 
             <div class="flex gap-2">
                 <button type="button" class="icon-button" [routerLink]="track.referenceLink"
-                    [title]="'Go to the reference page'">
+                    title="Go to the reference page">
                     <fa-icon [icon]="faShare" />
                 </button>
-                <button type="button" class="icon-button" [title]="'Remove from queue'"
+                <button type="button" class="icon-button" title="Remove from queue"
                     (click)="audioPlayerService.removeFromQueue(track.id)">
                     <fa-icon [icon]="faTrash" />
                 </button>
@@ -54,7 +54,7 @@
     <div class="flex justify-between items-center w-full gap-2">
 
         @if (!queueOpen()) {
-        <div class="flex flex-col flex-grow min-w-[100px] cursor-pointer" (click)="queueOpen.set(true)">
+        <button class="text-left flex flex-col flex-grow min-w-[100px] cursor-pointer" (click)="queueOpen.set(true)">
             <div class="flex items-center gap-2">
                 <div class="flex items-center justify-center size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent-light rounded-xl"
                     [style.background-image]="'url(' + (audioPlayerService.currentTrack()?.coverImageSrc) + ')'">
@@ -64,7 +64,7 @@
                     <span class="text-accent truncate">{{ audioPlayerService.currentTrack()?.subtitle }}</span>
                 </div>
             </div>
-        </div>
+        </button>
         }
 
         <!-- needs to make prev / play / pause buttons centered -->
@@ -73,22 +73,22 @@
         }
 
         <div class="flex justify-center gap-2">
-            <button type="button" class="icon-button" [title]="'Previous audio'"
+            <button type="button" class="icon-button" title="Previous audio"
                 (click)="audioPlayerService.previous()">
                 <fa-icon [icon]="faBackward" />
             </button>
-            <button type="button" class="icon-button" [title]="audioPlayerService.isPlaying() ? 'Pause' : 'Play'"
+            <button type="button" class="icon-button" title="Play / Pause"
                 (click)="audioPlayerService.togglePlay()">
                 @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />}
                 @else {<fa-icon [icon]="faPlay" />}
             </button>
-            <button type="button" class="icon-button" [title]="'Next audio'" (click)="audioPlayerService.next()">
+            <button type="button" class="icon-button" title="Next audio" (click)="audioPlayerService.next()">
                 <fa-icon [icon]="faForward" />
             </button>
         </div>
 
         @if(queueOpen()) {
-        <button type="button" class="icon-button" [title]="'Remove all queue'"
+        <button type="button" class="icon-button" title="Remove all queue"
             (click)="audioPlayerService.removeAllQueue()">
             <fa-icon [icon]="faTrash" />
         </button>

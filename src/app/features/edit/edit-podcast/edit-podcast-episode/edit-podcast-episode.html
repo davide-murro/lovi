@@ -1,9 +1,9 @@
 <div class="section flex flex-wrap gap-2">
-    <a class="link font-medium leading-normal" [routerLink]="['/edit']" [title]="'Edit'">Edit</a>
+    <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <a class="link font-medium leading-normal"
-        [routerLink]="['/edit', 'podcasts', episode() ? episode()!.podcast!.id : podcast()!.id]"
-        [title]="episode() ? episode()!.podcast!.name : podcast()!.name">{{episode() ? episode()!.podcast!.name :
+    <a class="link font-medium leading-normal" [title]="episode() ? episode()!.podcast!.name : podcast()!.name"
+        [routerLink]="['/edit', 'podcasts', episode() ? episode()!.podcast!.id : podcast()!.id]">{{episode() ?
+        episode()!.podcast!.name :
         podcast()!.name}}</a>
     <span class="text-accent font-medium leading-normal">/</span>
     <span>{{episode() ? episode()!.name : 'New Episode'}}</span>
@@ -14,21 +14,21 @@
 
     <div class="flex gap-2">
         @if (episodePrev() != null) {
-        <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Previous Episode'"
+        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Previous Episode"
             (click)="prevEpisode()">
             <fa-icon [icon]="faBackward" />
             <span class="hidden lg:inline">Previous Episode</span>
         </button>
         }
         @if(episodeNext() != null) {
-        <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Next Episode'"
+        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Next Episode"
             (click)="nextEpisode()">
             <fa-icon [icon]="faForward" />
             <span class="hidden lg:inline">Next Episode</span>
         </button>
         }
         @if(episode() != null) {
-        <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Delete'" (click)="delete()">
+        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete" (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
         </button>
@@ -58,16 +58,26 @@
     <div>
         <label class="label" for="cover-image">Cover image</label>
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
-            (change)="onCoverImageSelected($event)" />
+            formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
         <img [src]="coverPreview()" class="mt-2 size-32 object-contain" />
         }
     </div>
 
     <div>
+        <label class="label" for="cover-image-preview">Cover image preview</label>
+        <input type="file" accept="image/*" id="cover-image-preview" class="input w-full"
+            placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
+            (change)="onCoverImagePreviewSelected($event)" />
+        @if(coverPreviewPreview()) {
+        <img [src]="coverPreviewPreview()" class="mt-2 size-32 object-contain" />
+        }
+    </div>
+
+    <div>
         <label class="label" for="audio">Audio</label>
         <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png"
-            (change)="onAudioSelected($event)" />
+            formControlName="audioValue" (change)="onAudioSelected($event)" />
         @if(audioPreview()){
         <audio controls class="mt-2 max-w-full" [src]="audioPreview()"></audio>
         }
@@ -80,7 +90,7 @@
     </div>
 
     <div>
-        <button type="submit" class="button button-primary" [disabled]="!form.valid" [title]="'Save'">Save</button>
+        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>
 
@@ -107,14 +117,14 @@
                     <td>{{voicer.surname}}</td>
 
                     <td>
-                        <button type="button" class="icon-button" [title]="'Remove Voicer'" (click)="removeVoicer(voicer.id)"><fa-icon
-                                [icon]="faTrash" /></button>
+                        <button type="button" class="icon-button" title="Remove Voicer"
+                            (click)="removeVoicer(voicer.id)"><fa-icon [icon]="faTrash" /></button>
                     </td>
                 </tr>
                 }
                 <tr>
                     <td colspan="100%">
-                        <button type="button" class="button button-accent" [title]="'Add Voicer'"
+                        <button type="button" class="button button-accent" title="Add Voicer"
                             (click)="addVoicer()">Add
                             Voicer</button>
                     </td>

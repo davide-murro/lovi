@@ -9,6 +9,7 @@
                 <th>id</th>
                 <th>name</th>
                 <th>cover image</th>
+                <th>cover image preview</th>
                 <th>description</th>
                 <th>audio</th>
                 <th>readers</th>
@@ -19,25 +20,26 @@
             <tr>
                 <td>{{audioBook.id}}</td>
                 <td><span class="line-clamp-2">{{audioBook.name}}</span></td>
-                <td><img class="h-12 min-w-32 object-contain" [src]="audioBook.coverImageUrl"></td>
+                <td>{{!!audioBook.coverImageUrl}}</td>
+                <td>{{!!audioBook.coverImagePreviewUrl}}</td>
                 <td><span class="line-clamp-2">{{audioBook.description}}</span></td>
-                <td>@if(audioBook.audioUrl) {<audio controls class="h-12" [src]="audioBook.audioUrl"></audio>}</td>
+                <td>{{!!audioBook.audioUrl}}</td>
                 <td>{{audioBook.readers?.length}}</td>
 
                 <td>
-                    <a class="icon-button" [title]="'Update Audio Book'"
+                    <a class="icon-button" title="Update Audio Book"
                         [routerLink]="['/edit', 'audio-books', audioBook.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" [title]="'Delete Audio Book'"
+                    <button type="button" class="icon-button" title="Delete Audio Book"
                         (click)="deleteAudioBook(audioBook.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>
             }
             <tr>
                 <td colspan="100%">
-                    <a [title]="'Create Audio Book'" [routerLink]="['/edit', 'audio-books', 'create']"
-                        class="button button-accent">Create Audio Book</a>
+                    <a title="Create Audio Book" class="button button-accent"
+                        [routerLink]="['/edit', 'audio-books', 'create']">Create Audio Book</a>
                 </td>
             </tr>
         </tbody>
@@ -53,6 +55,7 @@
                 <th>id</th>
                 <th>name</th>
                 <th>cover image</th>
+                <th>cover image preview</th>
                 <th>description</th>
                 <th>episodes</th>
                 <th>voicers</th>
@@ -63,25 +66,26 @@
             <tr>
                 <td>{{podcast.id}}</td>
                 <td><span class="line-clamp-2">{{podcast.name}}</span></td>
-                <td><img class="h-12 min-w-32 object-contain" [src]="podcast.coverImageUrl"></td>
+                <td>{{!!podcast.coverImageUrl}}</td>
+                <td>{{!!podcast.coverImagePreviewUrl}}</td>
                 <td><span class="line-clamp-2">{{podcast.description}}</span></td>
                 <td>{{podcast.episodes?.length}}</td>
                 <td>{{podcast.voicers?.length}}</td>
 
                 <td>
-                    <a class="icon-button" [title]="'Update Podcast'"
+                    <a class="icon-button" title="Update Podcast"
                         [routerLink]="['/edit', 'podcasts', podcast.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" [title]="'Delete Podcast'" (click)="deletePodcast(podcast.id!)"><fa-icon
-                            [icon]="faTrash" /></button>
+                    <button type="button" class="icon-button" title="Delete Podcast"
+                        (click)="deletePodcast(podcast.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>
             }
             <tr>
                 <td colspan="100%">
-                    <a [title]="'Create Podcast'" [routerLink]="['/edit', 'podcasts', 'create']"
-                        class="button button-accent">Create Podcast</a>
+                    <a title="Create Podcast" class="button button-accent"
+                        [routerLink]="['/edit', 'podcasts', 'create']">Create Podcast</a>
                 </td>
             </tr>
         </tbody>
@@ -108,67 +112,26 @@
                 <td><span>{{creator.nickname}}</span></td>
                 <td><span>{{creator.name}}</span></td>
                 <td><span>{{creator.surname}}</span></td>
-                <!--<td><img class="h-12 min-w-32 object-contain" [src]="creator.coverImageUrl"></td>-->
+                <!--<td><img class="h-12 min-w-32 object-contain" [src]="creator.coverImagePreviewUrl"></td>-->
 
                 <td>
-                    <a class="icon-button" [title]="'Update Creator'"
+                    <a class="icon-button" title="Update Creator"
                         [routerLink]="['/edit', 'creators', creator.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" [title]="'Delete Creator'" (click)="deleteCreator(creator.id!)"><fa-icon
-                            [icon]="faTrash" /></button>
+                    <button type="button" class="icon-button" title="Delete Creator"
+                        (click)="deleteCreator(creator.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>
             }
             <tr>
                 <td colspan="100%">
-                    <a [title]="'Create Creator'" [routerLink]="['/edit', 'creators', 'create']"
-                        class="button button-accent">Create Creator</a>
+                    <a title="Create Creator" class="button button-accent"
+                        [routerLink]="['/edit', 'creators', 'create']">Create Creator</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<h2 class="title">Users</h2>
-
-<div class="section overflow-auto">
-    <table class="table w-full break-normal">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>email</th>
-                <th>email confirmed</th>
-                <th>name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (user of userPagedResult()?.items; track $index) {
-            <tr>
-                <td>{{user.id}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.emailConfirmed}}</td>
-                <td>{{user.name}}</td>
-
-                <td>
-                    <button type="button" class="icon-button" [title]="'Forgot password'" (click)="forgotPasswordUser(user.email!)"><fa-icon [icon]="faQuestion" /></button>
-                </td>
-                <td>
-                    <a class="icon-button" [title]="'Update User'"
-                        [routerLink]="['/edit', 'users', user.id]"><fa-icon [icon]="faPen" /></a>
-                </td>
-                <td>
-                    <button type="button" class="icon-button" [title]="'Delete User'" (click)="deleteUser(user.id!)"><fa-icon
-                            [icon]="faTrash" /></button>
-                </td>
-            </tr>
-            }
-            <tr>
-                <td colspan="100%">
-                    <a [title]="'Create User'" [routerLink]="['/edit', 'users', 'create']"
-                        class="button button-accent">Create User</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<app-users-table-paged *appAuth="'Admin'"></app-users-table-paged>

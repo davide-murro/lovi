@@ -1,6 +1,6 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { switchMap, catchError, of, finalize } from 'rxjs';
+import { switchMap, catchError, of, finalize, filter } from 'rxjs';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { AudioBooksService } from '../../core/services/audio-books.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -20,7 +20,7 @@ export class AudioBooksPaged {
 
   pageNumber = input<number>(1);
   pageSize = input<number>(10);
-  sortBy = input(<string>'id');
+  sortBy = input<string>('id');
   sortOrder = input<'asc' | 'desc'>('asc');
   search = input<string>('');
 
@@ -29,6 +29,7 @@ export class AudioBooksPaged {
   audioBookPagedQuery = signal<PagedQuery>(null!);
   audioBookPagedResult = toSignal(
     toObservable(this.audioBookPagedQuery).pipe(
+      filter(query => !!query),
       switchMap(query => {
         this.audioBooksError.set(false);
         this.audioBooksLoading.set(true);

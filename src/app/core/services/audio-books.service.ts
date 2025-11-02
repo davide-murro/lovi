@@ -31,6 +31,8 @@ export class AudioBooksService {
     if (audioBook.description) formData.append('Description', audioBook.description);
     if (audioBook.coverImageUrl) formData.append('CoverImageUrl', audioBook.coverImageUrl);
     if (audioBook.coverImage) formData.append('CoverImage', audioBook.coverImage);
+    if (audioBook.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', audioBook.coverImagePreviewUrl);
+    if (audioBook.coverImagePreview) formData.append('CoverImagePreview', audioBook.coverImagePreview);
     if (audioBook.audioUrl) formData.append('AudioUrl', audioBook.audioUrl);
     if (audioBook.audio) formData.append('Audio', audioBook.audio);
     return this.http.post<AudioBookDto>(this.apiUrl, formData);
@@ -44,6 +46,8 @@ export class AudioBooksService {
     if (audioBook.description) formData.append('Description', audioBook.description);
     if (audioBook.coverImageUrl) formData.append('CoverImageUrl', audioBook.coverImageUrl);
     if (audioBook.coverImage) formData.append('CoverImage', audioBook.coverImage);
+    if (audioBook.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', audioBook.coverImagePreviewUrl);
+    if (audioBook.coverImagePreview) formData.append('CoverImagePreview', audioBook.coverImagePreview);
     if (audioBook.audioUrl) formData.append('AudioUrl', audioBook.audioUrl);
     if (audioBook.audio) formData.append('Audio', audioBook.audio);
     return this.http.put<void>(`${this.apiUrl}/${id}`, formData);

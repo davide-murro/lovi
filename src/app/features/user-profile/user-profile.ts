@@ -32,6 +32,7 @@ export class UserProfile {
 
   private _userProfile: Signal<UserProfileDto> = toSignal(this.route.data.pipe(map(data => data['userProfile'])));
 
+  onInformationLoading = signal(false);
   informationForm = new FormGroup({
     id: new FormControl(this._userProfile().id),
     email: new FormControl({ value: this._userProfile().email!, disabled: true }),
@@ -56,7 +57,6 @@ export class UserProfile {
       });
   }
 
-  onInformationLoading = signal(false);
   onSubmitInformation(): void {
     if (!this.informationForm.valid) return;
 

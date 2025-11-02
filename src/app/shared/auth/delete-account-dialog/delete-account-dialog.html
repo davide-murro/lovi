@@ -1,10 +1,10 @@
 <h1 class="title text-center !pt-0">Delete account?</h1>
 <p class="section">
-    Are you sure you want to permanently delete your account? All your data and information will be lost forever and cannot be recovered.
+    Are you sure you want to permanently delete your account? All your data and information will be lost forever and
+    cannot be recovered.
 </p>
 
-<form [formGroup]="form" (ngSubmit)="submit()"
-    class="flex flex-col items-center gap-4">
+<form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col items-center gap-4">
 
     <div class="w-full">
         <label class="label" for="password">Password</label>
@@ -18,6 +18,6 @@
         }
     </div>
 
-    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" [disabled]="!form.valid || isLoading()"
-        [title]="'Confirm'">Confirm</button>
+    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" title="Confirm"
+        [disabled]="!form.valid || isLoading()">Confirm</button>
 </form>

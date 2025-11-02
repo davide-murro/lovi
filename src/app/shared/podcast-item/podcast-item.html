@@ -1,6 +1,6 @@
-<a [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name" class="link-item flex flex-1 flex-col gap-2">
+<a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name">
     <div class="bg-cover bg-center bg-no-repeat bg-accent aspect-[3/2] rounded-xl"
-        [style.background-image]="'url(' + (podcast().coverImageUrl) + ')'">
+        [style.background-image]="'url(' + (podcast().coverImagePreviewUrl) + ')'">
     </div>
     <div>
         <p class="text-base font-medium leading-normal truncate">{{podcast().name}}</p>

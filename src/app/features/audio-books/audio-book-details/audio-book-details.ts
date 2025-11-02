@@ -55,7 +55,7 @@ export class AudioBookDetails {
       title: this.audioBook().name,
       subtitle: this.audioBook().readers?.map(r => r.nickname).join(", "),
       audioSrc: this.audioBook().audioUrl!,
-      coverImageSrc: this.audioBook().coverImageUrl,
+      coverImageSrc: this.audioBook().coverImagePreviewUrl,
       referenceLink: `/audio-books/${this.audioBook().id}`
     };
     this.audioPlayerService.playTrack(audioBookTrack);
@@ -66,7 +66,7 @@ export class AudioBookDetails {
       title: this.audioBook().name,
       subtitle: this.audioBook().readers?.map(r => r.nickname).join(", "),
       audioSrc: this.audioBook().audioUrl!,
-      coverImageSrc: this.audioBook().coverImageUrl,
+      coverImageSrc: this.audioBook().coverImagePreviewUrl,
       referenceLink: `/audio-books/${this.audioBook().id}`
     };
     this.audioPlayerService.addToQueue(audioBookTrack);

@@ -36,23 +36,29 @@ input[type='range'] {
       background-color: var(--color-primary);
    }
 
-   /*
+
    // Firefox
    &::-moz-range-progress {
-      background-color: var(--fill-color);
-      height: 4px;
+      background: transparent;
    }
 
    &::-moz-range-track {
-      background-color: var(--track-color);
-      height: 4px;
+      background: transparent;
    }
 
    &::-moz-range-thumb {
-      background-color: var(--color-primary);
       border: none;
       height: 14px;
       width: 14px;
       border-radius: 50%;
-   }*/
+   }
+
+   &.thump-hidden::-moz-range-thumb {
+      background-color: transparent;
+   }
+
+   &:focus::-moz-range-thumb,
+   &:not(.thump-hidden)::-moz-range-thumb {
+      background-color: var(--color-primary);
+   }
 }

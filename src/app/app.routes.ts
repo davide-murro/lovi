@@ -123,21 +123,21 @@ export const routes: Routes = [
         component: Edit,
         title: 'LOVI - Edit',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/audio-books/create',
         component: EditAudioBook,
         title: 'LOVI - Create Audio Book',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/audio-books/:id',
         component: EditAudioBook,
         title: 'LOVI - Edit Audio Book',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
         resolve: {
             audioBook: audioBookResolver
         }
@@ -147,14 +147,14 @@ export const routes: Routes = [
         component: EditPodcast,
         title: 'LOVI - Create Podcast',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/podcasts/:id',
         component: EditPodcast,
         title: 'LOVI - Edit Podcast',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
         resolve: {
             podcast: podcastResolver
         }
@@ -164,7 +164,7 @@ export const routes: Routes = [
         component: EditPodcastEpisode,
         title: 'LOVI - Create Podcast Episode',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
         resolve: {
             podcast: podcastResolver
         }
@@ -174,7 +174,7 @@ export const routes: Routes = [
         component: EditPodcastEpisode,
         title: 'LOVI - Edit Podcast Episode',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
         resolve: {
             podcastEpisode: podcastEpisodeResolver
         }
@@ -184,14 +184,14 @@ export const routes: Routes = [
         component: EditCreator,
         title: 'LOVI - Create Creator',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/creators/:id',
         component: EditCreator,
         title: 'LOVI - Edit Creator',
         canActivate: [authGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Admin', 'Editor'] },
         resolve: {
             creator: creatorResolver
         }

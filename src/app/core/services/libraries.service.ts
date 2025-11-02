@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from 'rxjs';
 import { LibraryDto } from '../models/dtos/library-dto.model';
 import { ManageLibraryDto } from '../models/dtos/manage-library-dto.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,16 @@ import { ManageLibraryDto } from '../models/dtos/manage-library-dto.model';
 export class LibrariesService {
   private apiUrl = environment.apiUrl + '/libraries';
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   // myLibrary
   private _myLibrary: WritableSignal<LibraryDto[] | null> = signal(null);
   public readonly myLibrary: Signal<LibraryDto[] | null> = this._myLibrary.asReadonly();
 
   constructor() {
-    this.loadMyLibrary();
+    if (this.authService.isLoggedIn()) {
+      this.loadMyLibrary();
+    }
   }
 
   // Method to fetch data from the API and update the signal
@@ -62,10 +66,10 @@ export class LibrariesService {
 
   // DELETE library list
   deleteMeList(ids: number[]): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/me/list`, 
-      {body: ids})
-    .pipe(
-      tap(() => this.loadMyLibrary())
-    );
+    return this.http.delete<void>(`${this.apiUrl}/me/list`,
+      { body: ids })
+      .pipe(
+        tap(() => this.loadMyLibrary())
+      );
   }
 }

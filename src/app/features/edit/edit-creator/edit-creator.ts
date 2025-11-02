@@ -31,6 +31,7 @@ export class EditCreator {
 
   creator = signal<CreatorDto | null>(this._creator());
 
+  isLoading = signal(false);
   form = new FormGroup({
     id: new FormControl({ value: this.creator()?.id, disabled: true }),
     nickname: new FormControl(this.creator()?.nickname ?? null!, { nonNullable: true, validators: [Validators.required] }),
@@ -98,25 +99,30 @@ export class EditCreator {
       //coverImageUrl: form.coverImageUrl!,
       //coverImage: form.coverImage!,
     }
+    this.isLoading.set(true);
     if (this.creator()?.id != null) {
       this.creatorsService.update(this.creator()!.id!, p).subscribe({
         next: () => {
+          this.isLoading.set(false);
           this.toasterService.show('Creator updated');
           this.load();
         },
         error: (err) => {
           console.error('creatorsService.update', this.creator()!.id!, p, err);
+          this.isLoading.set(false);
           this.toasterService.show('Creator update failed', { type: 'error' });
         }
       });
     } else {
       this.creatorsService.create(p).subscribe({
         next: (res) => {
+          this.isLoading.set(false);
           this.toasterService.show('Creator created');
           this.router.navigate(['/edit', 'creators', res.id])
         },
         error: (err) => {
           console.error('creatorsService.update', p, err);
+          this.isLoading.set(false);
           this.toasterService.show('Creator create failed', { type: 'error' });
         }
       });

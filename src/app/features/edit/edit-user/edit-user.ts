@@ -35,7 +35,8 @@ export class EditUser {
   private _user: Signal<UserDto | null> = toSignal(this.route.data.pipe(map(data => data['user'])));
 
   user = signal<UserDto | null>(this._user());
-  
+
+  isLoading = signal(false);
   form = new FormGroup({
     id: new FormControl({ value: '', disabled: true }),
     newPassword: new FormControl('', [passwordValidator]),
@@ -84,25 +85,30 @@ export class EditUser {
       emailConfirmed: form.emailConfirmed!,
       name: form.name!
     }
+    this.isLoading.set(true);
     if (this.user()?.id != null) {
       this.usersService.update(this.user()!.id!, u).subscribe({
         next: () => {
+          this.isLoading.set(false);
           this.toasterService.show('User updated');
           this.load();
         },
         error: (err) => {
           console.error('usersService.update', this.user()!.id!, u, err);
+          this.isLoading.set(false);
           this.toasterService.show('User update failed', { type: 'error' });
         }
       });
     } else {
       this.usersService.create(u).subscribe({
         next: (res) => {
+          this.isLoading.set(false);
           this.toasterService.show('User created');
           this.router.navigate(['/edit', 'users', res.id])
         },
         error: (err) => {
           console.error('usersService.update', u, err);
+          this.isLoading.set(false);
           this.toasterService.show('User create failed', { type: 'error' });
         }
       });

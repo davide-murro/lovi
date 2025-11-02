@@ -1,5 +1,5 @@
 <div class="section flex flex-wrap gap-2">
-    <a class="link font-medium leading-normal" [routerLink]="['/audio-books']" [title]="'Audio Books'">Audio Books</a>
+    <a class="link font-medium leading-normal" [routerLink]="['/audio-books']" title="Audio Books">Audio Books</a>
     <span class="text-accent font-medium leading-normal">/</span>
     <span class="font-medium leading-normal">{{audioBook().name}}</span>
 </div>
@@ -15,8 +15,7 @@
         <h1 class="title flex justify-between items-start gap-2">
             {{audioBook().name}}
 
-            <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-                [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'"
+            <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" title="Add to / remove from My Library"
                 (click)="toggleMyLibrary()">
                 @if(isInMyLibrary()) {
                 <fa-icon [icon]="faBookBookmark" />
@@ -36,14 +35,14 @@
         </p>
 
         <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
-            <button type="button" class="icon-button button-primary button-xl"
-                [title]="isCurrentTrackPlaying() ? 'Pause' : 'Play'" (click)="togglePlay()">
+            <button type="button" class="icon-button button-primary button-xl" title="Play / Pause"
+                (click)="togglePlay()">
                 @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />}
                 @else {<fa-icon [icon]="faPlay" />}
             </button>
 
-            <button type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
-                [title]="'Add to queue'" (click)="addToQueue()">
+            <button type="button" class="button button-primary button-rounded shrink-0 flex gap-2" title="Add to queue"
+                (click)="addToQueue()">
                 <fa-icon [icon]="faList" /> <span>Add to queue</span>
             </button>
         </div>

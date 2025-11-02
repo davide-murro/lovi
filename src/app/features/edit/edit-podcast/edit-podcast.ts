@@ -33,14 +33,20 @@ export class EditPodcast {
 
   podcast = signal<PodcastDto | null>(this._podcast());
 
+  isLoading = signal(false);
   form = new FormGroup({
     id: new FormControl<number>({ value: null!, disabled: true }),
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     coverImageUrl: new FormControl(''),
+    coverImageValue: new FormControl<string | null>(null),
     coverImage: new FormControl<File | null>(null),
+    coverImagePreviewUrl: new FormControl(''),
+    coverImagePreviewValue: new FormControl<string | null>(null),
+    coverImagePreview: new FormControl<File | null>(null),
     description: new FormControl(''),
   });
-  coverPreview = signal(this.podcast()?.coverImageUrl ?? null);
+  coverPreview = signal<string | null>(null);
+  coverPreviewPreview = signal<string | null>(null);
 
   constructor() {
     effect(() => {
@@ -48,10 +54,15 @@ export class EditPodcast {
         id: this._podcast()?.id,
         name: this._podcast()?.name ?? null!,
         coverImageUrl: this._podcast()?.coverImageUrl,
+        coverImageValue: null,
         coverImage: null,
+        coverImagePreviewUrl: this._podcast()?.coverImagePreviewUrl,
+        coverImagePreviewValue: null,
+        coverImagePreview: null,
         description: this._podcast()?.description,
       });
       this.coverPreview.set(this._podcast()?.coverImageUrl ?? null);
+      this.coverPreviewPreview.set(this._podcast()?.coverImagePreviewUrl ?? null);
       this.podcast.set(this._podcast());
     });
   }
@@ -86,6 +97,19 @@ export class EditPodcast {
       this.coverPreview.set(null);
     }
   }
+  onCoverImagePreviewSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0] ?? null;
+    this.form.controls.coverImagePreview.setValue(file);
+    this.form.controls.coverImagePreviewUrl.setValue(null);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => this.coverPreviewPreview.set(reader.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      this.coverPreviewPreview.set(null);
+    }
+  }
   onSubmit() {
     if (this.form.invalid) return;
 
@@ -95,27 +119,34 @@ export class EditPodcast {
       name: form.name,
       coverImageUrl: form.coverImageUrl!,
       coverImage: form.coverImage!,
+      coverImagePreviewUrl: form.coverImagePreviewUrl!,
+      coverImagePreview: form.coverImagePreview!,
       description: form.description!
     }
+    this.isLoading.set(true);
     if (this.podcast()?.id != null) {
       this.podcastsService.update(this.podcast()!.id!, p).subscribe({
         next: () => {
+          this.isLoading.set(false);
           this.toasterService.show('Podcast updated');
           this.load();
         },
         error: (err) => {
           console.error('podcastsService.update', this.podcast()!.id!, p, err);
+          this.isLoading.set(false);
           this.toasterService.show('Podcast update failed', { type: 'error' });
         }
       });
     } else {
       this.podcastsService.create(p).subscribe({
         next: (res) => {
+          this.isLoading.set(false);
           this.toasterService.show('Podcast created');
           this.router.navigate(['/edit', 'podcasts', res.id])
         },
         error: (err) => {
           console.error('podcastsService.update', p, err);
+          this.isLoading.set(false);
           this.toasterService.show('Podcast create failed', { type: 'error' });
         }
       });

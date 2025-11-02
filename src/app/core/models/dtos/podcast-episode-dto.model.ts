@@ -7,6 +7,8 @@ export interface PodcastEpisodeDto {
     name: string;
     coverImageUrl?: string;
     coverImage?: File;
+    coverImagePreviewUrl?: string;
+    coverImagePreview?: File;
     description?: string;
     audioUrl?: string;
     audio?: File;

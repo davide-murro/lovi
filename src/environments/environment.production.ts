@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://79.16.234.244:5000/api'
+  //apiUrl: 'http://loviaudiobooks-001-site1.mtempurl.com/api'
+  apiUrl: 'https://www.lovi.media/api'
 };

@@ -10,7 +10,7 @@
                 <label for="email" class="label">Email</label>
                 <div class="flex gap-2">
                     <input type="email" formControlName="email" id="email" class="input w-full" />
-                    <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Change email'"
+                    <button type="button" class="button button-accent shrink-0 flex gap-2" title="Change email"
                         (click)="changeEmail()">
                         <fa-icon [icon]="faPen" />
                         <span class="hidden lg:inline">Edit</span>
@@ -22,7 +22,7 @@
                 <label for="password" class="label">Password</label>
                 <div class="flex gap-2">
                     <input type="password" formControlName="password" id="password" class="input w-full" />
-                    <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Change password'"
+                    <button type="button" class="button button-accent shrink-0 flex gap-2" title="Change password"
                         (click)="changePassword()">
                         <fa-icon [icon]="faPen" />
                         <span class="hidden lg:inline">Edit</span>
@@ -47,8 +47,8 @@
 
             </div>
 
-            <button type="submit" class="flex-none button button-primary button-rounded"
-                [disabled]="!informationForm.valid || !informationForm.dirty || onInformationLoading()" [title]="'Save'">Save</button>
+            <button type="submit" class="flex-none button button-primary button-rounded" title="Save"
+                [disabled]="!informationForm.valid || !informationForm.dirty || onInformationLoading()">Save</button>
         </form>
     </div>
 
@@ -60,10 +60,10 @@
         <h3 class="title2 text-center">Account</h3>
 
         <div class="flex flex-col items-center gap-4">
-            <button type="button" class="button button-accent" [title]="'Log out'" (click)="logout()">Log out</button>
-            <button type="button" class="button button-accent" [title]="'Log out from all devices'"
+            <button type="button" class="button button-accent" title="Log out" (click)="logout()">Log out</button>
+            <button type="button" class="button button-accent" title="Log out from all devices"
                 (click)="logoutAll()">Log out from all devices</button>
-            <button type="button" class="button button-error" [title]="'Delete account'"
+            <button type="button" class="button button-error" title="Delete account"
                 (click)="deleteAccount()">Delete
                 account</button>
         </div>

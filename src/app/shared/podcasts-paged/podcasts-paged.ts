@@ -1,8 +1,8 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, Signal, signal } from '@angular/core';
 import { PodcastsService } from '../../core/services/podcasts.service';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, finalize, of, switchMap } from 'rxjs';
+import { catchError, filter, finalize, of, switchMap } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Pagination } from "../pagination/pagination";
 import { PodcastItem } from "../podcast-item/podcast-item";
@@ -20,7 +20,7 @@ export class PodcastsPaged {
 
   pageNumber = input<number>(1);
   pageSize = input<number>(10);
-  sortBy = input(<string>'id');
+  sortBy = input<string>('id');
   sortOrder = input<'asc' | 'desc'>('asc');
   search = input<string>('');
 
@@ -29,6 +29,7 @@ export class PodcastsPaged {
   podcastPagedQuery = signal<PagedQuery>(null!);
   podcastPagedResult = toSignal(
     toObservable(this.podcastPagedQuery).pipe(
+      filter(query => !!query),
       switchMap(query => {
         this.podcastsError.set(false);
         this.podcastsLoading.set(true);

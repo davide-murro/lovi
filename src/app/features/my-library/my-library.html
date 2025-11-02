@@ -17,7 +17,7 @@
 <div class="section">
     <h2 class="title">Podcasts</h2>
 
-    @if (myLibraryAudioBooks() == null || myLibraryAudioBooks().length == 0) {
+    @if (myLibraryPodcasts() == null || myLibraryPodcasts().length == 0) {
     <p class="section text-accent">There are no Podcasts here</p>
     }
     @else {
@@ -25,7 +25,7 @@
     <div class="section">
         <a class="link-item" [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
             <div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[150px] sm:min-h-[250px]"
-                [style.background-image]="'url(' + (podcast.coverImageUrl) + ')'">
+                [style.background-image]="'url(' + (podcast.coverImagePreviewUrl) + ')'">
             </div>
 
             <h3 class="title2">{{podcast.name}}</h3>
@@ -39,7 +39,7 @@
         <h5 class="section text-accent flex justify-between items-center gap-2">
             {{podcast.episodes?.length ?? 0}} Episodes
 
-            <button type="button" class="button button-primary button-rounded shrink-0" [title]="'Play all Episodes'"
+            <button type="button" class="button button-primary button-rounded shrink-0" title="Play all Episodes"
                 (click)="podcastPlayAll(podcast)">
                 <fa-icon [icon]="faPlay" /> Play all
             </button>

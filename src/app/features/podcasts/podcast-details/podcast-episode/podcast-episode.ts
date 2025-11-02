@@ -69,7 +69,7 @@ export class PodcastEpisode {
       title: this.episode().name,
       subtitle: 'Episode ' + this.episode().number,
       audioSrc: this.episode().audioUrl!,
-      coverImageSrc: this.episode().coverImageUrl,
+      coverImageSrc: this.episode().coverImagePreviewUrl,
       referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${this.episode().id}`
     };
     const episodeQueue = this.episode().podcast!.episodes!
@@ -79,7 +79,7 @@ export class PodcastEpisode {
           title: pe.name,
           subtitle: 'Episode ' + pe.number,
           audioSrc: pe.audioUrl!,
-          coverImageSrc: pe.coverImageUrl,
+          coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${pe.id}`
         }
         return track
@@ -94,7 +94,7 @@ export class PodcastEpisode {
       title: this.episode().name,
       subtitle: 'Episode ' + this.episode().number,
       audioSrc: this.episode().audioUrl!,
-      coverImageSrc: this.episode().coverImageUrl,
+      coverImageSrc: this.episode().coverImagePreviewUrl,
       referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${this.episode().id}`
     }
     this.audioPlayerService.addToQueue(episodeTrack);

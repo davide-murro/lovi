@@ -24,20 +24,20 @@
             }
             }
         </div>
-        <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg"
-            [disabled]="!form.valid || isLoading()" [title]="'Login'">Login</button>
+        <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" title="Login"
+            [disabled]="!form.valid || isLoading()">Login</button>
     </form>
 
     <div class="section flex flex-col flex-1 items-center">
-        <a [routerLink]="['/auth', 'forgot-password']" [queryParams]="{ email: form.value.userName || null }" [title]="'Reset password'"
-            class="link text-sm">
+        <a title="Reset password" class="link text-sm" [routerLink]="['/auth', 'forgot-password']"
+            [queryParams]="{ email: form.value.userName || null }">
             Forgot Password?
         </a>
     </div>
 
     <div class="section flex flex-col flex-1 items-center">
         <h2 class="title2">New to LOVI?</h2>
-        <a [routerLink]="['/auth', 'register']" [title]="'Register to LOVI'" class="button button-accent button-rounded">
+        <a title="Register to LOVI" class="button button-accent button-rounded" [routerLink]="['/auth', 'register']">
             Create your LOVI account
         </a>
     </div>

@@ -4,9 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "lovi": {
-      "i18n":{
+      "i18n": {
         "sourceLocale": "en-US",
-        "locales": {"it-IT": "src/locale/messages.it.xlf"}
+        "locales": {
+          "it-IT": "src/locale/messages.it.xlf",
+          "fi-FI": "src/locale/messages.fi.xlf"
+        }
       },
       "projectType": "application",
       "schematics": {
@@ -21,7 +24,11 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "localize": ["en-US", "it-IT"],
+            "localize": [
+              "en-US",
+              "it-IT",
+              "fi-FI"
+            ],
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js",
@@ -36,7 +43,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "public/fonts/fonts.css"
             ]
           },
           "configurations": {

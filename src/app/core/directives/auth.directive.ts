@@ -10,7 +10,7 @@ export class AuthDirective {
   private viewContainer = inject(ViewContainerRef);
 
   // Role to check (optional)
-  appAuth = input<string | null>(null);
+  appAuth = input<string[] | string | null>(null);
 
   // Optional else block
   appAuthElse = input<TemplateRef<any> | null>(null);
@@ -19,13 +19,19 @@ export class AuthDirective {
     // Reactively watch for changes
     effect(() => {
       const isLoggedIn = this.authService.isLoggedIn();
-      const requiredRole = this.appAuth();
+      const requiredRoles = this.appAuth();
       const userRole = this.authService.getRole();
       const elseTemplate = this.appAuthElse();
 
       this.viewContainer.clear();
 
-      const isAuthorized = isLoggedIn && (!requiredRole || (userRole && userRole === requiredRole));
+      let isAuthorized = isLoggedIn;
+      if (Array.isArray(requiredRoles)) {
+        isAuthorized = (userRole != null && requiredRoles.includes(userRole));
+      } else if (typeof requiredRoles === 'string' && requiredRoles.length > 0) {
+        isAuthorized = (userRole != null && requiredRoles === userRole);
+      }
+
       if (isAuthorized) {
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else if (elseTemplate) {

@@ -1,5 +1,5 @@
 <div class="section flex flex-wrap gap-2">
-    <a class="link font-medium leading-normal" [routerLink]="['/podcasts']" [title]="'Podcasts'">Podcasts</a>
+    <a class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']">Podcasts</a>
     <span class="text-accent font-medium leading-normal">/</span>
     <span class="font-medium leading-normal">{{podcast().name}}</span>
 </div>
@@ -11,8 +11,8 @@
 <h1 class="title flex justify-between items-start gap-2">
     {{podcast().name}}
 
-    <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-        [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'" (click)="toggleMyLibrary()">
+    <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" title="Add to / remove from My Library"
+        (click)="toggleMyLibrary()">
         @if(isInMyLibrary()) {
         <fa-icon [icon]="faBookBookmark" />
         <span class="hidden lg:inline">Remove from My Library</span>
@@ -39,7 +39,7 @@
     <h2 class="title2 flex justify-between items-center ">
         {{ podcast().episodes!.length }} Episodes
 
-        <button type="button" class="button button-primary button-rounded shrink-0" [title]="'Play all Episodes'"
+        <button type="button" class="button button-primary button-rounded shrink-0" title="Play all Episodes"
             (click)="playAll()">
             <fa-icon [icon]="faPlay" /> Play all
         </button>

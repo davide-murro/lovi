@@ -57,7 +57,7 @@ export class MyLibrary {
           title: pe.name,
           subtitle: 'Episode ' + pe.number,
           audioSrc: pe.audioUrl!,
-          coverImageSrc: pe.coverImageUrl,
+          coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${podcast.id}/episodes/${pe.id}`
         }
         return track!;

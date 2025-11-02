@@ -2,13 +2,13 @@
 
     <!-- First / Prev -->
     @if (pageNumber() > 1) {
-    <button type="button" class="icon-button" [title]="'First page'" (click)="first()">
+    <button i18n-title type="button" class="icon-button" title="First page" (click)="first()">
         <fa-icon [icon]="faAnglesLeft" />
     </button>
     }
 
     @if (pageNumber() > 1) {
-    <button type="button" class="icon-button" [title]="'Previous page'" (click)="prev()">
+    <button i18n-title type="button" class="icon-button" title="Previous page" (click)="prev()">
         <fa-icon [icon]="faAngleLeft" />
     </button>
     }
@@ -21,7 +21,7 @@
 
     <!-- Page buttons -->
     @for (p of visiblePages(); track $index) {
-    <button type="button" class="icon-button font-bold" [title]="'Page' + p"
+    <button i18n-title type="button" class="icon-button font-bold" title="Change page"
         [class.button-primary]="p === pageNumber()" (click)="goTo(p)">
         {{ p }}
     </button>
@@ -35,13 +35,13 @@
 
     <!-- Next / Last -->
     @if (pageNumber() < totalPages()){
-    <button type="button" class="icon-button" [title]="'Next page'" (click)="next()">
+    <button i18n-title type="button" class="icon-button" title="Next page" (click)="next()">
         <fa-icon [icon]="faAngleRight" />
     </button>
     }
 
     @if (pageNumber() < totalPages()){
-    <button type="button" class="icon-button" [title]="'Last page'" (click)="last()">
+    <button i18n-title type="button" class="icon-button" title="Last page" (click)="last()">
         <fa-icon [icon]="faAnglesRight" />
     </button>
     }

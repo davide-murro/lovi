@@ -1,10 +1,10 @@
 <div class="flex flex-col min-h-full">
 
     <div class="section flex flex-wrap gap-2">
-        <a class="link font-medium leading-normal" [routerLink]="['/podcasts']" [title]="'Podcasts'">Podcasts</a>
+        <a class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']">Podcasts</a>
         <span class="text-accent font-medium leading-normal">/</span>
-        <a class="link font-medium leading-normal" [routerLink]="['/podcasts', episode().podcast!.id]"
-            [title]="episode().podcast!.name">{{episode().podcast!.name}}</a>
+        <a class="link font-medium leading-normal" [title]="episode().podcast!.name"
+            [routerLink]="['/podcasts', episode().podcast!.id]">{{episode().podcast!.name}}</a>
         <span class="text-accent font-medium leading-normal">/</span>
         <span class="font-medium leading-normal">{{episode().name}}</span>
     </div>
@@ -18,14 +18,14 @@
             </div>
 
             <div class="flex flex-row flex-wrap justify-center items-center gap-4">
-                <button type="button" class="icon-button button-primary button-xl"
-                    [title]="isCurrentTrackPlaying() ? 'Pause' : 'Play'" (click)="togglePlay()">
+                <button type="button" class="icon-button button-primary button-xl" title="Play / Pause"
+                    (click)="togglePlay()">
                     @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />}
                     @else {<fa-icon [icon]="faPlay" />}
                 </button>
 
                 <button type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
-                    [title]="'Add to queue'" (click)="addToQueue()">
+                    title="Add to queue" (click)="addToQueue()">
                     <fa-icon [icon]="faList" /> <span>Add to queue</span>
                 </button>
             </div>
@@ -35,8 +35,7 @@
             <h1 class="title flex justify-between items-start gap-2">
                 {{episode().name}}
 
-                <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-                    [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'"
+                <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" title="Add to / remove from My Library"
                     (click)="toggleMyLibrary()">
                     @if(isInMyLibrary()) {
                     <fa-icon [icon]="faBookBookmark" />
@@ -66,7 +65,7 @@
     <div class="flex flex-row justify-between gap-4">
         <div>
             @if (episodePrev() != null) {
-            <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Previous Episode'"
+            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Previous Episode"
                 (click)="prevEpisode()">
                 <fa-icon [icon]="faBackward" />
                 <span class="hidden lg:inline">Previous Episode</span>
@@ -75,7 +74,7 @@
         </div>
         <div>
             @if(episodeNext() != null) {
-            <button type="button" class="button button-accent shrink-0 flex gap-2" [title]="'Next Episode'"
+            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Next Episode"
                 (click)="nextEpisode()">
                 <span class="hidden lg:inline">Next Episode</span>
                 <fa-icon [icon]="faForward" />

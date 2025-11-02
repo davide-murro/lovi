@@ -24,11 +24,7 @@
     --color-disabled: #808080;
     --color-opacity: #ffffff31;
 }
-
-@font-face {
-    font-family: 'Noto Serif';
-    src: url('/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
-}
+    
 
 @keyframes bg-scroll-parallax {
     from {
@@ -36,7 +32,7 @@
     }
 
     to {
-        background-position: center 40%;
+        background-position: center 100%;
     }
 }
 
@@ -85,7 +81,7 @@ body {
 .bg-parallax {
     background-attachment: scroll;
     animation: bg-scroll-parallax linear both;
-    animation-timeline: scroll();
+    animation-timeline: scroll(root);
 }
 
 .border-accent {
