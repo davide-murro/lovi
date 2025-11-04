@@ -131,7 +131,7 @@ export class EditCreator {
   }
 
   delete() {
-    this.dialogService.confirm('Delete Creator', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Creator', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           const id = this.creator()!.id!;

@@ -57,3 +57,70 @@
         <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>
+
+
+@if (user()?.id) {
+<div class="section">
+    <h3 class="title2">Roles</h3>
+
+    <div class="section overflow-auto">
+        <table class="table w-full overflow-auto break-normal">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (role of user()!.roles; track $index) {
+                <tr>
+                    <td>{{role.id}}</td>
+                    <td>{{role.name}}</td>
+
+                    <td>
+                        <button type="button" class="icon-button" title="Remove Role"
+                            (click)="removeRole(role.id)"><fa-icon [icon]="faTrash" /></button>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="100%">
+                        <button type="button" class="button button-accent" title="Add Role"
+                            (click)="addRole()">Add Role</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="section">
+    <h3 class="title2">Token Infos</h3>
+
+    <div class="section overflow-auto">
+        <table class="table w-full overflow-auto break-normal">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>user name</th>
+                    <th>refresh token</th>
+                    <th>expired at</th>
+                    <th>refreshed at</th>
+                    <th>device id</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (tokenInfo of user()!.tokenInfos; track $index) {
+                <tr>
+                    <td>{{tokenInfo.id}}</td>
+                    <td>{{tokenInfo.userName}}</td>
+                    <td>{{tokenInfo.refreshToken}}</td>
+                    <td>{{tokenInfo.expiredAt | date:'long'}}</td>
+                    <td>{{tokenInfo.refreshedAt | date:'long'}}</td>
+                    <td>{{tokenInfo.deviceId}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+}

@@ -1,5 +1,5 @@
-<h1 class="title text-center !pt-0">Delete account?</h1>
-<p class="section">
+<h1 i18n class="title text-center !pt-0">Delete account?</h1>
+<p i18n class="section">
     Are you sure you want to permanently delete your account? All your data and information will be lost forever and
     cannot be recovered.
 </p>
@@ -7,17 +7,17 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col items-center gap-4">
 
     <div class="w-full">
-        <label class="label" for="password">Password</label>
+        <label i18n class="label" for="password">Password</label>
         <input type="password" formControlName="password" id="password" class="input input-accent w-full" />
         @if(form.controls.password.hasError('required')) {
-        <p class="text-accent text-sm">Password is required</p>
+        <p i18n class="text-accent text-sm">Password is required</p>
         } @else if(form.controls.password.valid) {
-        <p class="text-success text-sm">
+        <p i18n class="text-success text-sm">
             Password ready
         </p>
         }
     </div>
 
-    <button type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" title="Confirm"
+    <button i18n i18n-title type="submit" class="flex-none button button-lg button-primary button-rounded button-lg" title="Confirm"
         [disabled]="!form.valid || isLoading()">Confirm</button>
 </form>

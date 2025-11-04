@@ -45,6 +45,16 @@ export class UsersService {
     const params = new HttpParams({ fromObject: { ...query } });
     return this.http.get<PagedResult<UserDto>>(`${this.apiUrl}/paged`, { params });
   }
+
+  // ADD user role
+  addRole(id: string, roleId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/roles/${roleId}`, null);
+  }
+
+  // REMOVE user role
+  removeRole(id: string, roleId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/roles/${roleId}`);
+  }
   
   // GET current user
   getMe(): Observable<UserProfileDto> {

@@ -1,16 +1,16 @@
 <div class="max-w-lg m-auto">
-    <h1 class="title text-center">Confirm email</h1>
+    <h1 i18n class="title text-center">Confirm email</h1>
 
     @if (userId() != null && token() != null){
-    <p class="section text-center text-accent">
+    <p i18n class="section text-center text-accent">
         Please confirm your email address by clicking the button
     </p>
     <p class="section text-center">
-        <button type="button" class="button button-rounded button-primary" title="Confirm email"
+        <button i18n i18n-title type="button" class="button button-rounded button-primary" title="Confirm email"
             [disabled]="isLoading()" (click)="onSubmit()">Confirm</button>
     </p>
     } @else {
-    <p class="section text-center text-accent">
+    <p i18n class="section text-center text-accent">
         Parameters not valid
     </p>
     }

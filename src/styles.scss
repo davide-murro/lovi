@@ -159,7 +159,11 @@ body {
     justify-content: center;
 }
 
-.icon-button:hover {
+.icon-button[disabled] {
+    color: var(--color-disabled);
+}
+
+.icon-button:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-opacity);
 }

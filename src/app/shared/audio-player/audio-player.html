@@ -3,7 +3,7 @@
     [class]="queueOpen() ? 'gap-4 border-t-2 border-primary' : ''">
 
     @if (queueOpen()) {
-    <button class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
+    <button i18n-title class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
         <fa-icon [icon]="faClose" />
     </button>
     }
@@ -24,11 +24,11 @@
             </button>
 
             <div class="flex gap-2">
-                <button type="button" class="icon-button" [routerLink]="track.referenceLink"
+                <button i18n-title type="button" class="icon-button" [routerLink]="track.referenceLink"
                     title="Go to the reference page">
                     <fa-icon [icon]="faShare" />
                 </button>
-                <button type="button" class="icon-button" title="Remove from queue"
+                <button i18n-title type="button" class="icon-button" title="Remove from queue"
                     (click)="audioPlayerService.removeFromQueue(track.id)">
                     <fa-icon [icon]="faTrash" />
                 </button>
@@ -40,10 +40,9 @@
     <input type="range" class="h-2 w-full cursor-pointer"
         [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1 thump-hidden' : 'my-2'" [min]="0"
         [max]="formatIntValue(audioPlayerService.duration())" [value]="formatIntValue(audioPlayerService.currentTime())"
-        (mousedown)="onSeekingStart()"
         [style.--value]="formatIntValue(audioPlayerService.currentTime()) / formatIntValue(audioPlayerService.duration())"
-        (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()" (touchend)="onSeekingEnd()"
-        (input)="onSeeking($event.target.valueAsNumber)">
+        (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
+        (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)">
 
     @if (queueOpen()) {
     <span class="flex justify-center items-center text-sm text-accent">
@@ -69,26 +68,27 @@
 
         <!-- needs to make prev / play / pause buttons centered -->
         @if (queueOpen()) {
-            <span class="size-10"></span>
+        <span class="size-10"></span>
         }
 
         <div class="flex justify-center gap-2">
-            <button type="button" class="icon-button" title="Previous audio"
+            <button i18n-title type="button" class="icon-button" title="Back"
                 (click)="audioPlayerService.previous()">
-                <fa-icon [icon]="faBackward" />
+                @if (audioPlayerService.currentIndex() > 0){ <fa-icon [icon]="faBackward" />}
+                @else if (audioPlayerService.currentIndex() === 0){ <fa-icon [icon]="faBackwardStep" />}
             </button>
-            <button type="button" class="icon-button" title="Play / Pause"
+            <button i18n-title type="button" class="icon-button" title="Play / Pause"
                 (click)="audioPlayerService.togglePlay()">
                 @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />}
                 @else {<fa-icon [icon]="faPlay" />}
             </button>
-            <button type="button" class="icon-button" title="Next audio" (click)="audioPlayerService.next()">
+            <button i18n-title type="button" class="icon-button" title="Forward" [disabled]="audioPlayerService.nextTrack() == null" (click)="audioPlayerService.next()">
                 <fa-icon [icon]="faForward" />
             </button>
         </div>
 
         @if(queueOpen()) {
-        <button type="button" class="icon-button" title="Remove all queue"
+        <button i18n-title type="button" class="icon-button" title="Remove all queue"
             (click)="audioPlayerService.removeAllQueue()">
             <fa-icon [icon]="faTrash" />
         </button>

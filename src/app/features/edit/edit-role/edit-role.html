@@ -1,0 +1,36 @@
+<div class="section flex flex-wrap gap-2">
+    <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
+    <span class="text-accent font-medium leading-normal">/</span>
+    <span>{{role() ? role()!.name : 'New Role'}}</span>
+</div>
+
+<h2 class="title flex justify-between items-start gap-2">
+    Edit Role
+
+    <div class="flex gap-2">
+        @if(role() != null) {
+        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete" (click)="delete()">
+            <fa-icon [icon]="faTrash" />
+            <span class="hidden lg:inline">Delete</span>
+        </button>
+        }
+    </div>
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="section flex flex-col gap-4">
+
+    <div>
+        <label class="label" for="id">Id</label>
+        <input type="text" formControlName="id" id="id" class="input w-full" />
+    </div>
+
+    <div>
+        <label class="label" for="name">Name</label>
+        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
+            placeholder="Mario" />
+    </div>
+
+    <div>
+        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
+    </div>
+</form>

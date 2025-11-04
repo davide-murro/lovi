@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBackward, faClose, faForward, faPause, faPlay, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faBackwardStep, faClose, faForward, faPause, faPlay, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -16,6 +16,7 @@ export class AudioPlayer {
   faPlay = faPlay;
   faPause = faPause;
   faBackward = faBackward;
+  faBackwardStep = faBackwardStep;
   faForward = faForward;
   faTrash = faTrash;
   faShare = faShare;

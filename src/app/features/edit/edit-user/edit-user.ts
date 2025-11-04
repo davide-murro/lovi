@@ -12,10 +12,13 @@ import { ForgotPasswordDto } from '../../../core/models/dtos/auth/forgot-passwor
 import { AuthService } from '../../../core/services/auth.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { RoleDto } from '../../../core/models/dtos/auth/role-dto.model';
+import { RoleSelectorDialog } from '../../../shared/auth/role-selector-dialog/role-selector-dialog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-user',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, DatePipe],
   templateUrl: './edit-user.html',
   styleUrl: './edit-user.scss'
 })
@@ -117,7 +120,7 @@ export class EditUser {
   }
 
   delete() {
-    this.dialogService.confirm('Delete User', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete User', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           const id = this.user()!.id;
@@ -148,6 +151,39 @@ export class EditUser {
             error: (err) => {
               console.error('authService.forgotPassword', forgotPassword, err);
               this.toasterService.show('User forgot password failed', { type: 'error' });
+            }
+          });
+        }
+      });
+  }
+
+  addRole() {
+      this.dialogService.open(RoleSelectorDialog)
+        .subscribe((role: RoleDto) => {
+          if (role) {
+            this.usersService.addRole(this.user()!.id!, role.id).subscribe({
+              next: () => {
+                this.load();
+              },
+              error: (err) => {
+                console.error('usersService.addRole', this.user()!.id!, role.id, err);
+                this.toasterService.show('Add Role failed', { type: 'error' });
+              }
+            });
+          }
+        });
+  }
+  removeRole(roleId: string) {
+    this.dialogService.confirm('Remove User Role', 'Are you sure?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          this.usersService.removeRole(this.user()!.id!, roleId).subscribe({
+            next: () => {
+              this.load();
+            },
+            error: (err) => {
+              console.error('usersService.removeRole', this.user()!.id!, roleId, err);
+              this.toasterService.show('Remove Role failed', { type: 'error' });
             }
           });
         }

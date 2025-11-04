@@ -1,36 +1,36 @@
-<h1 class="title text-center !pt-0">Change email</h1>
+<h1 i18n class="title text-center !pt-0">Change email</h1>
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col items-center gap-4">
 
     <div class="w-full">
-        <label class="label" for="password">Password</label>
+        <label i18n class="label" for="password">Password</label>
         <input type="password" formControlName="password" id="password" class="input input-accent w-full" />
         @if(form.controls.password.hasError('required')) {
-        <p class="text-accent text-sm">Password is required</p>
+        <p i18n class="text-accent text-sm">Password is required</p>
         } @else if(form.controls.password.valid) {
-        <p class="text-success text-sm">
+        <p i18n class="text-success text-sm">
             Password ready
         </p>
         }
     </div>
 
     <div class="w-full">
-        <label class="label" for="new-email">New email</label>
+        <label i18n class="label" for="new-email">New email</label>
         <input type="email" formControlName="newEmail" id="new-email" class="input input-accent w-full" />
         @if(form.controls.newEmail.hasError('required')) {
-        <p class="text-accent text-sm">
+        <p i18n class="text-accent text-sm">
             New email is required
         </p>
         } @else if(form.controls.newEmail.hasError('email')) {
-        <p class="text-error text-sm">
+        <p i18n class="text-error text-sm">
             New email not valid
         </p>
         } @else if(form.controls.newEmail.valid) {
-        <p class="text-success text-sm">
+        <p i18n class="text-success text-sm">
             New email OK
         </p>
         }
     </div>
 
-    <button type="submit" class="flex-none button button-primary button-rounded" title="Confirm" [disabled]="!form.valid || isLoading()">Confirm</button>
+    <button i18n i18n-title type="submit" class="flex-none button button-primary button-rounded" title="Confirm" [disabled]="!form.valid || isLoading()">Confirm</button>
 </form>

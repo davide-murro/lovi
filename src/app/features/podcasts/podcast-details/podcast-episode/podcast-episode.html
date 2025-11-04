@@ -1,7 +1,7 @@
 <div class="flex flex-col min-h-full">
 
     <div class="section flex flex-wrap gap-2">
-        <a class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']">Podcasts</a>
+        <a i18n class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']">Podcasts</a>
         <span class="text-accent font-medium leading-normal">/</span>
         <a class="link font-medium leading-normal" [title]="episode().podcast!.name"
             [routerLink]="['/podcasts', episode().podcast!.id]">{{episode().podcast!.name}}</a>
@@ -18,15 +18,16 @@
             </div>
 
             <div class="flex flex-row flex-wrap justify-center items-center gap-4">
-                <button type="button" class="icon-button button-primary button-xl" title="Play / Pause"
+                <button i18n-title type="button" class="icon-button button-primary button-xl" title="Play / Pause"
                     (click)="togglePlay()">
                     @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />}
                     @else {<fa-icon [icon]="faPlay" />}
                 </button>
 
-                <button type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
+                <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
                     title="Add to queue" (click)="addToQueue()">
-                    <fa-icon [icon]="faList" /> <span>Add to queue</span>
+                    <fa-icon [icon]="faList" /> 
+                    <span i18n>Add to queue</span>
                 </button>
             </div>
         </div>
@@ -35,15 +36,15 @@
             <h1 class="title flex justify-between items-start gap-2">
                 {{episode().name}}
 
-                <button *appAuth type="button" class="button button-accent shrink-0 flex gap-2" title="Add to / remove from My Library"
+                <button i18n-title *appAuth type="button" class="button button-accent shrink-0 flex gap-2" title="Add to / remove from My Library"
                     (click)="toggleMyLibrary()">
                     @if(isInMyLibrary()) {
                     <fa-icon [icon]="faBookBookmark" />
-                    <span class="hidden lg:inline">Remove from My Library</span>
+                    <span i18n class="hidden lg:inline">Remove from My Library</span>
                     }
                     @else {
                     <fa-icon [icon]="faBookOpen" />
-                    <span class="hidden lg:inline">Add to My Library</span>
+                    <span i18n class="hidden lg:inline">Add to My Library</span>
                     }
                 </button>
             </h1>
@@ -54,7 +55,7 @@
                 }
             </p>
 
-            <p class="section text-accent">
+            <p i18n class="section text-accent">
                 Episode {{ episode().number }}
             </p>
 
@@ -65,18 +66,18 @@
     <div class="flex flex-row justify-between gap-4">
         <div>
             @if (episodePrev() != null) {
-            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Previous Episode"
+            <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Previous Episode"
                 (click)="prevEpisode()">
                 <fa-icon [icon]="faBackward" />
-                <span class="hidden lg:inline">Previous Episode</span>
+                <span i18n class="hidden lg:inline">Previous Episode</span>
             </button>
             }
         </div>
         <div>
             @if(episodeNext() != null) {
-            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Next Episode"
+            <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Next Episode"
                 (click)="nextEpisode()">
-                <span class="hidden lg:inline">Next Episode</span>
+                <span i18n class="hidden lg:inline">Next Episode</span>
                 <fa-icon [icon]="faForward" />
             </button>
             }

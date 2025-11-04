@@ -176,7 +176,7 @@ export class EditAudioBook {
   }
 
   delete() {
-    this.dialogService.confirm('Delete Audio Book', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Audio Book', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           const id = this.audioBook()!.id!;
@@ -212,7 +212,7 @@ export class EditAudioBook {
       });
   }
   removeReader(readerId: number) {
-    this.dialogService.confirm('Remove Audio Book Reader', 'Are you sure vecm?')
+    this.dialogService.confirm('Remove Audio Book Reader', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.audioBooksService.removeReader(this.audioBook()!.id!, readerId).subscribe({

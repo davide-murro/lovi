@@ -28,6 +28,8 @@ import { EditUser } from './features/edit/edit-user/edit-user';
 import { userResolver } from './core/resolvers/user.resolver';
 import { ConfirmEmail } from './features/auth/confirm-email/confirm-email';
 import { ConfirmChangeEmail } from './features/auth/confirm-change-email/confirm-change-email';
+import { roleResolver } from './core/resolvers/role.resolver';
+import { EditRole } from './features/edit/edit-role/edit-role';
 
 export const routes: Routes = [
     {
@@ -211,6 +213,23 @@ export const routes: Routes = [
         data: { roles: ['Admin'] },
         resolve: {
             user: userResolver
+        }
+    },
+    {
+        path: 'edit/roles/create',
+        component: EditRole,
+        title: 'LOVI - Create Role',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+    },
+    {
+        path: 'edit/roles/:id',
+        component: EditRole,
+        title: 'LOVI - Edit Role',
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] },
+        resolve: {
+            role: roleResolver
         }
     },
 

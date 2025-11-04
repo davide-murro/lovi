@@ -1,17 +1,17 @@
 <div class="flex flex-col min-h-full w-full">
-    <h1 class="title">Audio Books</h1>
+    <h1 i18n class="title">Audio Books</h1>
 
     @if (audioBooksLoading()) {
-    <p class="section text-accent">Loading...</p>
+    <p i18n class="section text-accent">Loading...</p>
     }
 
     @else if (audioBooksError()) {
-    <p class="section text-accent">Failed to load Audio Books. Please try reloading or navigating to <a class="link"
+    <p i18n class="section text-accent">Failed to load Audio Books. Please try reloading or navigating to <a class="link"
             title="My Library" [routerLink]="['/my-library']">My Library</a></p>
     }
 
     @else if(audioBookPagedResult()?.items == null || audioBookPagedResult()?.items?.length == 0) {
-    <p class="section text-accent">There are no Audio Books here. Please try reloading or navigating to <a class="link"
+    <p i18n class="section text-accent">There are no Audio Books here. Please try reloading or navigating to <a class="link"
             title="My Library" [routerLink]="['/my-library']">My Library</a></p>
     }
 
@@ -26,8 +26,9 @@
     }
 
     @if (audioBookPagedResult() && audioBookPagedResult()!.totalCount > audioBookPagedResult()!.pagedQuery.pageSize) {
-    <app-pagination class="section" [pageNumber]="audioBookPagedQuery().pageNumber" [pageSize]="audioBookPagedQuery().pageSize"
-        [totalCount]="audioBookPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
+    <app-pagination class="section" [pageNumber]="audioBookPagedQuery().pageNumber"
+        [pageSize]="audioBookPagedQuery().pageSize" [totalCount]="audioBookPagedResult()?.totalCount || 0"
+        (pageChange)="setPage($event)">
     </app-pagination>
     }
 

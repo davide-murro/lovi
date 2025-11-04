@@ -8,7 +8,6 @@ import { ToasterService } from './toaster.service';
 })
 export class AudioPlayerService {
   private toasterService = inject(ToasterService);
-  private dialogService = inject(DialogService);
   private audio = new Audio();
   private audioError = signal<boolean>(false);
 
@@ -23,8 +22,23 @@ export class AudioPlayerService {
   duration = signal(0);
 
   // Computed signal: current track
+  currentIndex = computed(() => {
+    return this.queue().findIndex(t => t.id === this.currentId()) ?? null;
+  });
   currentTrack = computed(() => {
     return this.queue().find(t => t.id === this.currentId()) ?? null;
+  });
+  previousTrack = computed(() => {
+    if (this.currentIndex() > 0) {
+      return this.queue()[this.currentIndex() - 1] ?? null;
+    }
+    return null
+  });
+  nextTrack = computed(() => {
+    if (this.currentIndex() >= 0 && this.currentIndex() + 1 < this.queue()?.length) {
+      return this.queue()[this.currentIndex() + 1] ?? null;
+    }
+    return null
   });
 
   constructor() {
@@ -41,9 +55,9 @@ export class AudioPlayerService {
 
     // listen to errors
     this.audio.addEventListener('error', (event) => {
+      console.error('Audio error', this.audio, this.audio.error);
       this.audioError.set(true);
       this.toasterService.show("Audio error", { type: 'error' });
-      console.error('Audio error', this.audio, this.audio.error);
     });
 
     // set error false when it loads
@@ -151,18 +165,18 @@ export class AudioPlayerService {
   }
 
   next() {
-    const q = this.queue();
-    const currentIndex = q.findIndex(t => t.id === this.currentId());
-    if (currentIndex >= 0 && currentIndex + 1 < q.length) {
-      this.playId(q[currentIndex + 1].id);
+    if (this.nextTrack() != null) {
+      this.playId(this.nextTrack()!.id);
     }
   }
 
   previous() {
-    const q = this.queue();
-    const currentIndex = q.findIndex(t => t.id === this.currentId());
-    if (currentIndex > 0) {
-      this.playId(q[currentIndex - 1].id);
+    if (this.audio.currentTime > 5) {
+      this.seek(0);
+    } else if (this.previousTrack() != null) {
+      this.playId(this.previousTrack()!.id);
+    } else {
+      this.seek(0);
     }
   }
 

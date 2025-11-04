@@ -1,18 +1,15 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, of, finalize, filter } from 'rxjs';
-import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
-import { AudioBooksService } from '../../core/services/audio-books.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Pagination } from '../pagination/pagination';
-import { AudioBookItem } from "../audio-book-item/audio-book-item";
-import { UsersService } from '../../core/services/users.service';
-import { ForgotPasswordDto } from '../../core/models/dtos/auth/forgot-password-dto.model';
-import { DialogService } from '../../core/services/dialog.service';
-import { ToasterService } from '../../core/services/toaster.service';
-import { AuthService } from '../../core/services/auth.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { ForgotPasswordDto } from '../../../core/models/dtos/auth/forgot-password-dto.model';
+import { PagedQuery } from '../../../core/models/dtos/pagination/paged-query.model';
+import { AuthService } from '../../../core/services/auth.service';
+import { DialogService } from '../../../core/services/dialog.service';
+import { ToasterService } from '../../../core/services/toaster.service';
+import { UsersService } from '../../../core/services/users.service';
 
 @Component({
   selector: 'app-users-table-paged',
@@ -169,7 +166,7 @@ export class UsersTablePaged {
 
 
   deleteUser(id: string) {
-    this.dialogService.confirm('Delete User', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete User', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.usersService.delete(id).subscribe({

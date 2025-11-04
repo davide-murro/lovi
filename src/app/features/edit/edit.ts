@@ -10,14 +10,13 @@ import { DialogService } from '../../core/services/dialog.service';
 import { ToasterService } from '../../core/services/toaster.service';
 import { CreatorsService } from '../../core/services/creators.service';
 import { AudioBooksService } from '../../core/services/audio-books.service';
-import { UsersService } from '../../core/services/users.service';
-import { AuthService } from '../../core/services/auth.service';
 import { AuthDirective } from "../../core/directives/auth.directive";
-import { UsersTablePaged } from "../../shared/users-table-paged/users-table-paged";
+import { RolesTablePaged } from '../../shared/auth/roles-table-paged/roles-table-paged';
+import { UsersTablePaged } from '../../shared/auth/users-table-paged/users-table-paged';
 
 @Component({
   selector: 'app-edit',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, UsersTablePaged],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, UsersTablePaged, RolesTablePaged],
   templateUrl: './edit.html',
   styleUrl: './edit.scss'
 })
@@ -97,7 +96,7 @@ export class Edit {
   );
 
   deleteAudioBook(id: number) {
-    this.dialogService.confirm('Delete Audio Book', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Audio Book', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.audioBooksService.delete(id).subscribe({
@@ -117,7 +116,7 @@ export class Edit {
   }
 
   deletePodcast(id: number) {
-    this.dialogService.confirm('Delete Podcast', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Podcast', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.podcastsService.delete(id).subscribe({
@@ -137,7 +136,7 @@ export class Edit {
   }
 
   deleteCreator(id: number) {
-    this.dialogService.confirm('Delete Creator', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Creator', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.creatorsService.delete(id).subscribe({

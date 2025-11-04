@@ -1,69 +1,68 @@
 <div class="max-w-lg m-auto">
-    <h1 class="title text-center">User Profile</h1>
+    <h1 i18n class="title text-center">User Profile</h1>
 
     <div class="section">
-        <h3 class="title2 text-center">Information</h3>
+        <h3 i18n class="title2 text-center">Information</h3>
 
         <form [formGroup]="informationForm" (ngSubmit)="onSubmitInformation()"
             class="flex flex-col items-center gap-4">
             <div class="max-w-full">
-                <label for="email" class="label">Email</label>
+                <label i18n for="email" class="label">Email</label>
                 <div class="flex gap-2">
                     <input type="email" formControlName="email" id="email" class="input w-full" />
-                    <button type="button" class="button button-accent shrink-0 flex gap-2" title="Change email"
+                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Change email"
                         (click)="changeEmail()">
                         <fa-icon [icon]="faPen" />
-                        <span class="hidden lg:inline">Edit</span>
+                        <span i18n class="hidden lg:inline">Edit</span>
                     </button>
                 </div>
             </div>
 
             <div class="max-w-full">
-                <label for="password" class="label">Password</label>
+                <label i18n for="password" class="label">Password</label>
                 <div class="flex gap-2">
                     <input type="password" formControlName="password" id="password" class="input w-full" />
-                    <button type="button" class="button button-accent shrink-0 flex gap-2" title="Change password"
+                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Change password"
                         (click)="changePassword()">
                         <fa-icon [icon]="faPen" />
-                        <span class="hidden lg:inline">Edit</span>
+                        <span i18n class="hidden lg:inline">Edit</span>
                     </button>
                 </div>
             </div>
 
             <div class="max-w-full">
-                <label for="name" class="label">Name</label>
+                <label i18n for="name" class="label">Name</label>
                 <input type="text" formControlName="name" id="name" class="input" />
                 @if(informationForm.controls.name.dirty) {
                 @if(informationForm.controls.name.hasError('required')) {
-                <p class="text-accent text-sm">
+                <p i18n class="text-accent text-sm">
                     Name is required
                 </p>
                 } @else if(informationForm.controls.name.valid) {
-                <p class="text-success text-sm">
+                <p i18n class="text-success text-sm">
                     Name OK
                 </p>
                 }
                 }
-
             </div>
 
-            <button type="submit" class="flex-none button button-primary button-rounded" title="Save"
+            <button i18n i18n-title type="submit" class="flex-none button button-primary button-rounded" title="Save"
                 [disabled]="!informationForm.valid || !informationForm.dirty || onInformationLoading()">Save</button>
         </form>
     </div>
 
     <div class="section">
-        <h3 class="title2 text-center">Subscription</h3>
+        <h3 i18n class="title2 text-center">Subscription</h3>
     </div>
 
     <div class="section">
-        <h3 class="title2 text-center">Account</h3>
+        <h3 i18n class="title2 text-center">Account</h3>
 
         <div class="flex flex-col items-center gap-4">
-            <button type="button" class="button button-accent" title="Log out" (click)="logout()">Log out</button>
-            <button type="button" class="button button-accent" title="Log out from all devices"
+            <button i18n i18n-title type="button" class="button button-accent" title="Log out" (click)="logout()">Log out</button>
+            <button i18n i18n-title type="button" class="button button-accent" title="Log out from all devices"
                 (click)="logoutAll()">Log out from all devices</button>
-            <button type="button" class="button button-error" title="Delete account"
+            <button i18n i18n-title type="button" class="button button-error" title="Delete account"
                 (click)="deleteAccount()">Delete
                 account</button>
         </div>

@@ -155,7 +155,7 @@ export class EditPodcast {
   }
 
   delete() {
-    this.dialogService.confirm('Delete Podcast', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Podcast', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           const id = this.podcast()!.id!;
@@ -175,7 +175,7 @@ export class EditPodcast {
 
   // Episodes
   deleteEpisode(episodeId: number) {
-    this.dialogService.confirm('Delete Podcast Episode', 'Are you sure vecm?')
+    this.dialogService.confirm('Delete Podcast Episode', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.podcastsService.deleteEpisode(this.podcast()!.id!, episodeId).subscribe({
@@ -209,7 +209,7 @@ export class EditPodcast {
       });
   }
   removeVoicer(voicerId: number) {
-    this.dialogService.confirm('Remove Podcast Voicer', 'Are you sure vecm?')
+    this.dialogService.confirm('Remove Podcast Voicer', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
           this.podcastsService.removeVoicer(this.podcast()!.id!, voicerId).subscribe({

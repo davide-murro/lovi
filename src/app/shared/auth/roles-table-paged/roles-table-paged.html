@@ -1,0 +1,35 @@
+<h2 i18n class="title">Roles</h2>
+
+<div class="section overflow-auto">
+    <table class="table w-full break-normal">
+        <thead>
+            <tr>
+                <th i18n>id</th>
+                <th i18n>name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (role of rolePagedResult()?.items; track $index) {
+            <tr>
+                <td>{{role.id}}</td>
+                <td>{{role.name}}</td>
+
+                <td>
+                    <a i18n-title class="icon-button" title="Update Role"
+                        [routerLink]="['/edit', 'roles', role.id]"><fa-icon [icon]="faPen" /></a>
+                </td>
+                <td>
+                    <button i18n-title type="button" class="icon-button" title="Delete Role"
+                        (click)="deleteRole(role.id!)"><fa-icon [icon]="faTrash" /></button>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="100%">
+                    <a i18n i18n-title title="Create Role" class="button button-accent"
+                        [routerLink]="['/edit', 'roles', 'create']">Create Role</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

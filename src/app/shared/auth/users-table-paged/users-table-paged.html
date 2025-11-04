@@ -1,13 +1,13 @@
-<h2 class="title">Users</h2>
+<h2 i18n class="title">Users</h2>
 
 <div class="section overflow-auto">
     <table class="table w-full break-normal">
         <thead>
             <tr>
-                <th>id</th>
-                <th>email</th>
-                <th>email confirmed</th>
-                <th>name</th>
+                <th i18n>id</th>
+                <th i18n>email</th>
+                <th i18n>email confirmed</th>
+                <th i18n>name</th>
             </tr>
         </thead>
         <tbody>
@@ -19,22 +19,22 @@
                 <td>{{user.name}}</td>
 
                 <td>
-                    <button type="button" class="icon-button" title="Forgot password"
+                    <button i18n-title type="button" class="icon-button" title="Forgot password"
                         (click)="forgotPasswordUser(user.email!)"><fa-icon [icon]="faQuestion" /></button>
                 </td>
                 <td>
-                    <a class="icon-button" title="Update User" [routerLink]="['/edit', 'users', user.id]"><fa-icon
+                    <a i18n-title class="icon-button" title="Update User" [routerLink]="['/edit', 'users', user.id]"><fa-icon
                             [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" title="Delete User"
+                    <button i18n-title type="button" class="icon-button" title="Delete User"
                         (click)="deleteUser(user.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>
             }
             <tr>
                 <td colspan="100%">
-                    <a title="Create User" class="button button-accent"
+                    <a i18n i18n-title title="Create User" class="button button-accent"
                         [routerLink]="['/edit', 'users', 'create']">Create User</a>
                 </td>
             </tr>
