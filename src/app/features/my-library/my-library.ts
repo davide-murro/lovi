@@ -52,10 +52,11 @@ export class MyLibrary {
     const itemQueue = this.myLibraryPodcasts()
       .find(p => p.id === podcast.id)!.episodes!
       .map(pe => {
+        const number = pe.number;
         const track: AudioTrack = {
           id: null!,
           title: pe.name,
-          subtitle: 'Episode ' + pe.number,
+          subtitle: $localize`Episode ${number}`,
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${podcast.id}/episodes/${pe.id}`
@@ -64,6 +65,6 @@ export class MyLibrary {
       });
 
     this.audioPlayerService.playTrack(itemQueue[0], itemQueue);
-    this.toasterService.show("Podcast added to queue");
+    this.toasterService.show($localize`Podcast added to queue`);
   }
 }

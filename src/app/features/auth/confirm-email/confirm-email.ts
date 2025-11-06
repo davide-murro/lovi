@@ -33,16 +33,16 @@ export class ConfirmEmail {
     this.authService.confirmEmail(dto).subscribe({
       next: () => {
         this.dialogService.log(
-          'Email confirmed',
-          `You can now login into LOVI with the email and the password you chose during the registration.`,
+          $localize`Email confirmed`,
+          $localize`You can now login into LOVI with the email and the password you chose during the registration.`,
         ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isLoading.set(false);
       },
       error: (error) => {
         console.error('authService.confirmEmail', dto, error);
         this.dialogService.log(
-          'Email confirmation failed',
-          'Email confirmation failed, unexpected error',
+          $localize`Email confirmation failed`,
+          $localize`Email confirmation failed, unexpected error.`,
           { type: 'error' }
         );
         this.isLoading.set(false);

@@ -70,7 +70,7 @@ export class AudioBookDetails {
       referenceLink: `/audio-books/${this.audioBook().id}`
     };
     this.audioPlayerService.addToQueue(audioBookTrack);
-    this.toasterService.show("Audio Book added to queue");
+    this.toasterService.show($localize`Audio Book added to queue`);
   }
 
   // libraries
@@ -85,11 +85,11 @@ export class AudioBookDetails {
 
     this.librariesService.createMe(audioBookLibrary).subscribe({
       next: () => {
-        this.toasterService.show('Added to My Library');
+        this.toasterService.show($localize`Added to My Library`);
       },
       error: (err) => {
         console.error('librariesService.createMe', audioBookLibrary, err);
-        this.toasterService.show('Adding to My Library failed', { type: 'error' });
+        this.toasterService.show($localize`Adding to My Library failed`, { type: 'error' });
       }
     });
   }
@@ -99,11 +99,11 @@ export class AudioBookDetails {
 
     this.librariesService.deleteMe(id).subscribe({
       next: () => {
-        this.toasterService.show('Removed from My Library');
+        this.toasterService.show($localize`Removed from My Library`);
       },
       error: (err) => {
         console.error('librariesService.deleteMe', id, err);
-        this.toasterService.show('Removing from My Library failed', { type: 'error' });
+        this.toasterService.show($localize`Removing from My Library failed`, { type: 'error' });
       }
     });
   }

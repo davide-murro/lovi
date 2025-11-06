@@ -166,26 +166,32 @@ export class UsersTablePaged {
 
 
   deleteUser(id: string) {
-    this.dialogService.confirm('Delete User', 'Are you sure?')
+    this.dialogService.confirm(
+      $localize`Delete User`,
+      $localize`Are you sure?`
+    )
       .subscribe(confirmed => {
         if (confirmed) {
           this.usersService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('User deleted');
+              this.toasterService.show($localize`User deleted`);
               this.userPagedQuery.update((u) => ({
                 ...u
               }));
             },
             error: (err) => {
               console.error('usersService.delete', id, err);
-              this.toasterService.show('User delete failed', { type: 'error' });
+              this.toasterService.show($localize`User delete failed`, { type: 'error' });
             }
           });
         }
       });
   }
   forgotPasswordUser(email: string) {
-    this.dialogService.confirm('Forgot password', 'Start forgot password process?')
+    this.dialogService.confirm(
+      $localize`Forgot password`,
+      $localize`Start forgot password process?`
+    )
       .subscribe(confirmed => {
         if (confirmed) {
           const forgotPassword: ForgotPasswordDto = {
@@ -193,11 +199,11 @@ export class UsersTablePaged {
           }
           this.authService.forgotPassword(forgotPassword).subscribe({
             next: () => {
-              this.toasterService.show('User forgot password started');
+              this.toasterService.show($localize`User forgot password started`);
             },
             error: (err) => {
               console.error('authService.forgotPassword', forgotPassword, err);
-              this.toasterService.show('User forgot password failed', { type: 'error' });
+              this.toasterService.show($localize`User forgot password failed`, { type: 'error' });
             }
           });
         }

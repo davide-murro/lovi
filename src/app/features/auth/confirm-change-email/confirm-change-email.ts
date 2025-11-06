@@ -34,16 +34,16 @@ export class ConfirmChangeEmail {
     this.authService.confirmChangeEmail(dto).subscribe({
       next: () => {
         this.dialogService.log(
-          'Changing email confirmed',
-          `You can now login into LOVI with the new mail you chose and the old password.`,
+          $localize`Changing email confirmed`,
+          $localize`You can now login into LOVI with the new mail you chose and the old password.`,
         ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isLoading.set(false);
       },
       error: (error) => {
         console.error('authService.confirmChangeEmail', dto, error);
         this.dialogService.log(
-          'Changing email confirmation failed',
-          'Changing email confirmation failed, unexpected error',
+          $localize`Changing email confirmation failed`,
+          $localize`Changing email confirmation failed, unexpected error.`,
           { type: 'error' }
         );
         this.isLoading.set(false);

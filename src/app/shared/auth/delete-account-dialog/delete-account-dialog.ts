@@ -37,7 +37,7 @@ export class DeleteAccountDialog {
       error: (err) => {
         console.error('authService.deleteAccount', deleteAccount, err);
         this.toasterService.show(
-          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Deleting account failed',
+          $localize`Deleting account failed`,
           { type: 'error' }
         );
         this.isLoading.set(false);

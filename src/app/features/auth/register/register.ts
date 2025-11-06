@@ -38,18 +38,26 @@ export class Register {
     this.authService.register(dto).subscribe({
       next: () => {
         this.dialogService.log(
-          'Registration successful!',
-          'Please check your email inbox to verify your account, then sing in into LOVI')
+          $localize`Registration successful`,
+          $localize`Please check your email inbox to verify your account, then sing in into LOVI`)
           .subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.register', dto, err);
-        this.dialogService.log(
-          'Registration failed',
-          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Registration failed, unexpected error',
-          { type: 'error' }
-        );
+        if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'DuplicateEmail'))) {
+          this.dialogService.log(
+            $localize`Registration failed`,
+            $localize`Email is already taken.`,
+            { type: 'error' }
+          );
+        } else {
+          this.dialogService.log(
+            $localize`Registration failed`,
+            $localize`Registration failed, unexpected error.`,
+            { type: 'error' }
+          );
+        }
         this.isLoading.set(false);
       }
     });

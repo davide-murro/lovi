@@ -42,7 +42,7 @@ export class ChangePasswordDialog {
       error: (err) => {
         console.error('authService.changePassword', changePassword, err);
         this.toasterService.show(
-          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Changing password failed',
+          $localize`Changing password failed`,
           { type: 'error' }
         );
         this.isLoading.set(false);

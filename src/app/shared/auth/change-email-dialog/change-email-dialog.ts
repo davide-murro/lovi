@@ -38,10 +38,22 @@ export class ChangeEmailDialog {
       },
       error: (err) => {
         console.error('authService.changeEmail', changeEmail, err);
-        this.toasterService.show(
-          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Changing email failed',
-          { type: 'error' }
-        );
+        if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'ChangeSameMail'))) {
+          this.toasterService.show(
+            $localize`The new email is the same as the current one.`,
+            { type: 'error' }
+          );
+        } else if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'DuplicateEmail'))) {
+          this.toasterService.show(
+            $localize`Email is already taken.`,
+            { type: 'error' }
+          );
+        } else {
+          this.toasterService.show(
+            $localize`Changing email failed`,
+            { type: 'error' }
+          );
+        }
         this.isLoading.set(false);
       }
     });

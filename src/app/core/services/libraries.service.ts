@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { effect, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from 'rxjs';
@@ -19,14 +19,19 @@ export class LibrariesService {
   public readonly myLibrary: Signal<LibraryDto[] | null> = this._myLibrary.asReadonly();
 
   constructor() {
-    if (this.authService.isLoggedIn()) {
-      this.loadMyLibrary();
-    }
+    effect(() => {
+      if (this.authService.isLoggedIn()) this.loadMyLibrary();
+      else this.removeMyLibrary();
+    });
   }
 
   // Method to fetch data from the API and update the signal
   private loadMyLibrary() {
     this.getMe().subscribe();
+  }
+  // Method to remove my library when logout
+  private removeMyLibrary() {
+    this._myLibrary.set(null);
   }
 
   // GET my library

@@ -25,13 +25,13 @@ export class ResendChangeEmailDialog {
     this.authService.resendConfirmEmail(resendDto).subscribe({
       next: () => {
         this.dialogService.close(true);
-        this.toasterService.show('Confirmation email resent!', { type: 'success' });
+        this.toasterService.show($localize`Confirmation email resent!`, { type: 'success' });
         this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.resendConfirmEmail', resendDto, err);
         this.toasterService.show(
-          (Array.isArray(err.error) ? (err.error.at(-1))?.description : null) ?? 'Confirmation email resending failed',
+          $localize`Confirmation email resending failed`,
           { type: 'error' }
         );
         this.isLoading.set(false);

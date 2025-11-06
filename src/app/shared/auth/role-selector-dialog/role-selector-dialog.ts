@@ -32,7 +32,7 @@ export class RoleSelectorDialog {
       switchMap(query =>
         this.rolesService.getPaged(query).pipe(
           catchError(err => {
-            this.toasterService.show('Get Roles failed', { type: 'error' });
+            this.toasterService.show($localize`Get Roles failed`, { type: 'error' });
             console.error('rolesService.getPaged', query, err);
             return of(null);
           })

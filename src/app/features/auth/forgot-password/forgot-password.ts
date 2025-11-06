@@ -48,16 +48,16 @@ export class ForgotPassword {
     this.authService.forgotPassword(dto).subscribe({
       next: () => {
         this.dialogService.log(
-          'Password Reset Link Sent',
-          `If an account exists for ${dto.email}, a password reset link has been sent to your inbox. In case, check your spam folder.`,
+          $localize`Password Reset Link Sent`,
+          $localize`If an account exists for this email, a password reset link has been sent to your inbox. In case, check your spam folder.`,
         ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isForgotLoading.set(false);
       },
       error: (error) => {
         console.error('authService.forgotPassword', dto, error);
         this.dialogService.log(
-          'Forgot password process error',
-          'Unable to reset password. The email could not be processed',
+          $localize`Forgot password process error`,
+          $localize`Unable to reset password. The email could not be processed.`,
           { type: 'error' }
         ).subscribe();
         this.isForgotLoading.set(false);
@@ -78,16 +78,16 @@ export class ForgotPassword {
     this.authService.resetPassword(dto).subscribe({
       next: () => {
         this.dialogService.log(
-          'Password Reset Success!',
-          'Your password has been successfully reset. You can now log in with your new password.'
+          $localize`Password Reset Success`,
+          $localize`Your password has been successfully reset. You can now log in with your new password.`
         ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isResetLoading.set(false);
       },
       error: (error) => {
         console.error('authService.forgotPassword', dto, error);
         this.dialogService.log(
-          'Password Reset error',
-          'Unable to reset password. The link may have expired or the token is invalid.',
+          $localize`Password Reset error`,
+          $localize`Unable to reset password. The link may have expired or the token is invalid.`,
           { type: 'error' }
         ).subscribe();
         this.isResetLoading.set(false);

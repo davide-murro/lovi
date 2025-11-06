@@ -37,7 +37,7 @@ export class Login {
     this.isLoading.set(true);
     this.authService.login(dto).subscribe({
       next: (token) => {
-        this.toasterService.show('Login successful!');
+        this.toasterService.show($localize`Login successful`);
         this.router.navigate(['/']);
         this.isLoading.set(false);
       },
@@ -53,7 +53,7 @@ export class Login {
             data: resendDto,
           });
         } else {
-          this.toasterService.show('Login failed', { type: 'error' });
+          this.toasterService.show($localize`Login failed`, { type: 'error' });
         }
       }
     })

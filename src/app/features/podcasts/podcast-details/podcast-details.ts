@@ -39,10 +39,11 @@ export class PodcastDetails {
   playAll() {
     const episodeQueue = this.podcast().episodes!
       .map(pe => {
+        const number = pe.number;
         const episodeTrack: AudioTrack = {
           id: null!,
           title: pe.name,
-          subtitle: 'Episode ' + pe.number,
+          subtitle: $localize`Episode ${number}`,
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${this.podcast().id}/episodes/${pe.id}`
@@ -51,7 +52,7 @@ export class PodcastDetails {
       });
 
     this.audioPlayerService.playTrack(episodeQueue[0], episodeQueue);
-    this.toasterService.show("Podcast added to queue");
+    this.toasterService.show($localize`Podcast added to queue`);
   }
 
   // library
@@ -71,11 +72,11 @@ export class PodcastDetails {
 
     this.librariesService.createMeList(episodeLibraries).subscribe({
       next: () => {
-        this.toasterService.show('Added all to My Library');
+        this.toasterService.show($localize`Added all to My Library`);
       },
       error: (err) => {
         console.error('librariesService.createMeList', episodeLibraries, err);
-        this.toasterService.show('Adding all to My Library failed', { type: 'error' });
+        this.toasterService.show($localize`Adding all to My Library failed`, { type: 'error' });
       }
     });
   }
@@ -86,11 +87,11 @@ export class PodcastDetails {
 
     this.librariesService.deleteMeList(ids).subscribe({
       next: () => {
-        this.toasterService.show('Removed all from My Library');
+        this.toasterService.show($localize`Removed all from My Library`);
       },
       error: (err) => {
         console.error('librariesService.deleteMeList', ids, err);
-        this.toasterService.show('Removing all from My Library failed', { type: 'error' });
+        this.toasterService.show($localize`Removing all from My Library failed`, { type: 'error' });
       }
     });
   }

@@ -168,14 +168,14 @@ export class RolesTablePaged {
         if (confirmed) {
           this.rolesService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('Role deleted');
+              this.toasterService.show($localize`Role deleted`);
               this.rolePagedQuery.update((u) => ({
                 ...u
               }));
             },
             error: (err) => {
               console.error('rolesService.delete', id, err);
-              this.toasterService.show('Role delete failed', { type: 'error' });
+              this.toasterService.show($localize`Role delete failed`, { type: 'error' });
             }
           });
         }

@@ -44,7 +44,10 @@ export class UserProfile {
     this.dialogService.open(ChangeEmailDialog)
       .subscribe((result: boolean) => {
         if (result) {
-          this.dialogService.log('Email changing confirmation sent!', 'Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again').subscribe();
+          this.dialogService.log(
+            $localize`Email changing confirmation sent`, 
+            $localize`Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again.`
+          ).subscribe();
         }
       });
   }
@@ -52,7 +55,10 @@ export class UserProfile {
     this.dialogService.open(ChangePasswordDialog)
       .subscribe((result: boolean) => {
         if (result) {
-          this.dialogService.log('Password changed!', 'Confirmation notices have been sent to your email addresses.').subscribe();
+          this.dialogService.log(
+            $localize`Password changed`, 
+            $localize`Confirmation notices have been sent to your email addresses.`
+          ).subscribe();
         }
       });
   }
@@ -67,13 +73,13 @@ export class UserProfile {
     this.onInformationLoading.set(true);
     this.userService.updateMe(dto).subscribe({
       next: () => {
-        this.toasterService.show('Profile updated', { type: 'success' });
+        this.toasterService.show($localize`Profile updated`, { type: 'success' });
         this.informationForm.reset(this.informationForm.getRawValue());
         this.onInformationLoading.set(false);
       },
       error: (error) => {
         console.error('userService.updateMe', dto, error);
-        this.toasterService.show('Profile update error', { type: "error" });
+        this.toasterService.show($localize`Profile update error`, { type: "error" });
         this.onInformationLoading.set(false);
       }
     });
@@ -81,8 +87,8 @@ export class UserProfile {
 
   logout(): void {
     this.dialogService.confirm(
-      'Log out?',
-      'You will be logged out of this browser session only. All other active sessions will remain logged in.')
+      $localize`Log out`,
+      $localize`You will be logged out of this browser session only. All other active sessions will remain logged in.`)
       .subscribe((res) => {
         if (res) {
           this.authService.logout();
@@ -92,8 +98,8 @@ export class UserProfile {
   }
   logoutAll(): void {
     this.dialogService.confirm(
-      'Log out all devices?',
-      'You will be logged out of all browser sessions you have opened. Are you sure?')
+      $localize`Log out all devices`,
+      $localize`You will be logged out of all browser sessions you have opened. Are you sure?`)
       .subscribe((res) => {
         if (res) {
           this.authService.revoke().subscribe({
@@ -102,7 +108,7 @@ export class UserProfile {
             },
             error: (error) => {
               console.error('authService.revoke', error);
-              this.toasterService.show('Log out from all devices error', { type: "error" });
+              this.toasterService.show($localize`Log out from all devices error`, { type: "error" });
             }
           });
         }
@@ -113,7 +119,10 @@ export class UserProfile {
     this.dialogService.open(DeleteAccountDialog)
       .subscribe((result: boolean) => {
         if (result) {
-          this.dialogService.log('Account deleted!', 'You will be redirected to the home page.').subscribe();
+          this.dialogService.log(
+            $localize`Account deleted`, 
+            $localize`You will be redirected to the home page.`
+          ).subscribe();
           this.router.navigate(['/']);
         }
       })
