@@ -11,7 +11,6 @@ import { podcastResolver } from './core/resolvers/podcast.resolver';
 import { podcastEpisodeResolver } from './core/resolvers/podcast-episode.resolver';
 import { userProfileResolver } from './core/resolvers/user-profile.resolver';
 import { MyLibrary } from './features/my-library/my-library';
-import { myLibraryResolver } from './core/resolvers/my-library.resolver';
 import { AudioBooks } from './features/audio-books/audio-books';
 import { AudioBookDetails } from './features/audio-books/audio-book-details/audio-book-details';
 import { audioBookResolver } from './core/resolvers/audio-book.resolver';
@@ -110,9 +109,6 @@ export const routes: Routes = [
         component: MyLibrary,
         title: 'LOVI - My Library',
         canActivate: [authGuard],
-        resolve: {
-            myLibrary: myLibraryResolver
-        },
     },
     {
         path: 'search',

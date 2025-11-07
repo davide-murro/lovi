@@ -29,6 +29,10 @@ export class LibrariesService {
   private loadMyLibrary() {
     this.getMe().subscribe();
   }
+  // Method to set my library
+  private setMyLibrary(data: LibraryDto[]) {
+    this._myLibrary.set(data);
+  }
   // Method to remove my library when logout
   private removeMyLibrary() {
     this._myLibrary.set(null);
@@ -37,7 +41,7 @@ export class LibrariesService {
   // GET my library
   getMe(): Observable<LibraryDto[]> {
     return this.http.get<LibraryDto[]>(`${this.apiUrl}/me`).pipe(
-      tap(data => this._myLibrary.set(data))
+      tap(data => this.setMyLibrary(data))
     );
   }
 

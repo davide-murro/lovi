@@ -1,8 +1,4 @@
 import { Component, computed, inject, Signal } from '@angular/core';
-import { LibraryDto } from '../../core/models/dtos/library-dto.model';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { map } from 'rxjs';
 import { PodcastDto } from '../../core/models/dtos/podcast-dto.model';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,6 +7,8 @@ import { AudioTrack } from '../../core/models/audio-track.model';
 import { ToasterService } from '../../core/services/toaster.service';
 import { AudioBookItem } from "../../shared/audio-book-item/audio-book-item";
 import { PodcastEpisodeItem } from "../../shared/podcast-episode-item/podcast-episode-item";
+import { LibrariesService } from '../../core/services/libraries.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-my-library',
@@ -19,24 +17,22 @@ import { PodcastEpisodeItem } from "../../shared/podcast-episode-item/podcast-ep
   styleUrl: './my-library.scss'
 })
 export class MyLibrary {
-  private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
+  private librariesService = inject(LibrariesService);
 
   faPlay = faPlay;
   
-  // library
-  private _myLibrary: Signal<LibraryDto[]> = toSignal(this.route.data.pipe(map(data => data['myLibrary'])));
-  
+  // library  
   myLibraryAudioBooks = computed(() => {
-    const list = this._myLibrary()
-      .filter((ml) => ml.audioBook?.id != null)
+    const list = this.librariesService.myLibrary()
+      ?.filter((ml) => ml.audioBook?.id != null)
       .map(ml => ml.audioBook!);
     return list;
   });
   myLibraryPodcasts = computed(() => {
-    const grouped = this._myLibrary()
-      .filter((ml) => ml.podcast?.id != null)
+    const grouped = this.librariesService.myLibrary()
+      ?.filter((ml) => ml.podcast?.id != null)
       .reduce((acc, ml) => {
         const pToFind = ml.podcast!;
         const pFound = acc.find(a => a.id === ml.podcast!.id)!;
@@ -49,7 +45,7 @@ export class MyLibrary {
   });
   
   podcastPlayAll(podcast: PodcastDto) {
-    const itemQueue = this.myLibraryPodcasts()
+    const itemQueue = this.myLibraryPodcasts()!
       .find(p => p.id === podcast.id)!.episodes!
       .map(pe => {
         const number = pe.number;

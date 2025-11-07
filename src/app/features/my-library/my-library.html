@@ -3,7 +3,7 @@
 <div class="section">
     <h2 i18n class="title">Audio Books</h2>
 
-    @if (myLibraryAudioBooks() == null || myLibraryAudioBooks().length == 0) {
+    @if (myLibraryAudioBooks() == null || myLibraryAudioBooks()!.length == 0) {
     <p i18n class="section text-accent">There are no Audio Books here</p>
     }
     @else {
@@ -17,7 +17,7 @@
 <div class="section">
     <h2 i18n class="title">Podcasts</h2>
 
-    @if (myLibraryPodcasts() == null || myLibraryPodcasts().length == 0) {
+    @if (myLibraryPodcasts() == null || myLibraryPodcasts()!.length == 0) {
     <p i18n class="section text-accent">There are no Podcasts here</p>
     }
     @else {
