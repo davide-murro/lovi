@@ -6,6 +6,7 @@ import { Toaster } from './shared/toaster/toaster';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { Dialog } from './shared/dialog/dialog';
+import { DialogService } from './core/services/dialog.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ import { Dialog } from './shared/dialog/dialog';
 })
 export class App {
   private router = inject(Router);
+  private dialogService = inject(DialogService);
 
   @ViewChild(Header) header!: Header;
   @ViewChild(AudioPlayer) audioPlayer!: AudioPlayer;
@@ -31,6 +33,7 @@ export class App {
       .subscribe(() => {
         this.header.menuMobileOpen.set(false);
         this.audioPlayer.queueOpen.set(false);
+        this.dialogService.close(null);
       });
   }
 

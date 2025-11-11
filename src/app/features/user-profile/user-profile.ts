@@ -122,8 +122,7 @@ export class UserProfile {
           this.dialogService.log(
             $localize`Account deleted`, 
             $localize`You will be redirected to the home page.`
-          ).subscribe();
-          this.router.navigate(['/']);
+          ).subscribe(() => this.router.navigate(['/']));
         }
       })
   }
