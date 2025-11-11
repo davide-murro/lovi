@@ -65,7 +65,7 @@ export class EditRole {
 
   // Form
   onSubmit() {
-    if (this.form.invalid) return;
+    if (!this.form.valid) return;
 
     const form = this.form.getRawValue();
     const p: RoleDto = {

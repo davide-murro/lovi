@@ -152,7 +152,7 @@ export class EditPodcastEpisode {
     }
   }
   onSubmit() {
-    if (this.form.invalid) return;
+    if (!this.form.valid) return;
 
     const form = this.form.getRawValue();
     const pe: PodcastEpisodeDto = {

@@ -78,7 +78,7 @@ export class EditUser {
 
   // Form
   onSubmit() {
-    if (this.form.invalid) return;
+    if (!this.form.valid) return;
 
     const form = this.form.getRawValue();
     const u: UserDto = {
