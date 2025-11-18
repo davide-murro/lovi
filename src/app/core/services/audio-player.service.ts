@@ -45,12 +45,24 @@ export class AudioPlayerService {
     // Go to next when audio ends
     this.audio.addEventListener('ended', () => this.next());
 
+    this.audio.addEventListener('play', () => {
+      this.isPlaying.set(true);
+      this.updatePlaybackState();
+    });
+    this.audio.addEventListener('pause', () => {
+      this.isPlaying.set(false);
+      this.updatePlaybackState();
+    });
+
     // Listen for time updates and duration
     this.audio.addEventListener('timeupdate', () => {
       this.currentTime.set(this.audio.currentTime);
+      this.updatePositionState();
     });
     this.audio.addEventListener('loadedmetadata', () => {
       this.duration.set(this.audio.duration);
+      this.updatePositionState();
+      this.updatePlaybackState();
     });
 
     // listen to errors
@@ -94,6 +106,24 @@ export class AudioPlayerService {
       });
     }
   }
+  private updatePositionState() {
+    if (
+      'mediaSession' in navigator &&
+      'setPositionState' in navigator.mediaSession &&
+      this.audio.readyState >= 2 // HAVE_CURRENT_DATA or higher
+    ) {
+      navigator.mediaSession.setPositionState({
+        duration: this.duration(),
+        playbackRate: this.audio.playbackRate,
+        position: this.currentTime()
+      });
+    }
+  }
+  private updatePlaybackState() {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = this.isPlaying() ? 'playing' : 'paused';
+    }
+  }
   private clearMediaSession() {
     if ('mediaSession' in navigator) {
       navigator.mediaSession.metadata = null;
@@ -106,8 +136,7 @@ export class AudioPlayerService {
     const track = this.currentTrack();
     if (track) {
       this.loadAudio(track);
-      this.audio.pause();
-      this.isPlaying.set(false);
+      this.pause();
     }
   }
 
@@ -117,15 +146,13 @@ export class AudioPlayerService {
   }
   play() {
     this.audio.play();
-    this.isPlaying.set(true);
   }
   playId(id: number) {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
       this.loadAudio(track);
-      this.audio.play();
-      this.isPlaying.set(true);
+      this.play();
     }
   }
   playTrack(track: AudioTrack, newQueue: AudioTrack[] = []) {
@@ -154,14 +181,12 @@ export class AudioPlayerService {
 
   pause() {
     this.audio.pause();
-    this.isPlaying.set(false);
   }
 
   stop() {
-    this.audio.pause();
+    this.pause();
     this.clearAudio();
     this.currentId.set(null!);
-    this.isPlaying.set(false);
   }
 
   next() {

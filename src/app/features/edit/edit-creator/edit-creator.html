@@ -26,27 +26,24 @@
 
     <div>
         <label class="label" for="nickname">Nickname</label>
-        <input type="text" formControlName="nickname" id="nickname" class="input w-full" autocomplete="false"
-            placeholder="CappelloRosso" />
+        <input type="text" formControlName="nickname" id="nickname" class="input w-full" placeholder="CappelloRosso" />
     </div>
 
     <div>
         <label class="label" for="name">Name</label>
-        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
-            placeholder="Mario" />
+        <input type="text" formControlName="name" id="name" class="input w-full" placeholder="Mario" />
     </div>
 
     <div>
         <label class="label" for="surname">Surname</label>
-        <input type="text" formControlName="surname" id="surname" class="input w-full" autocomplete="false"
-            placeholder="Rossi" />
+        <input type="text" formControlName="surname" id="surname" class="input w-full" placeholder="Rossi" />
     </div>
 
     <!--
     <div>
         <label class="label" for="cover-image">Cover image</label>
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
-            autocomplete="false" (change)="onCoverImageSelected($event)" />
+            (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
         <img [src]="coverPreview()!" class="size-32 mt-2 object-contain" />
         }
@@ -54,11 +51,12 @@
 
     <div>
         <label class="label" for="info">Info</label>
-        <textarea formControlName="info" id="info" class="input w-full" rows="8" autocomplete="false"
+        <textarea formControlName="info" id="info" class="input w-full" rows="8"
             placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></textarea>
     </div>-->
 
     <div>
-        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
+        <button type="submit" class="button button-primary" title="Save"
+            [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>

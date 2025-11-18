@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.csr.html",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-data-calls",
+      "urls": [
+        "https://www.lovi.media/api/audio-books/paged",
+        "https://www.lovi.media/api/audio-books/*",
+        
+        "https://www.lovi.media/api/podcasts/paged",
+        "https://www.lovi.media/api/podcasts/*",
+
+        "https://www.lovi.media/api/podcasts/*/episodes/*",
+
+        "https://www.lovi.media/api/creators/paged",
+        "https://www.lovi.media/api/creators/*",
+
+        "https://www.lovi.media/api/libraries/me",
+        
+        "https://www.lovi.media/api/users/profiles/me"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "1d",
+        "timeout": "5s"
+      }
+    },
+    {
+      "name": "api-media-calls",
+      "urls": [
+        "https://www.lovi.media/api/audio-books/*/cover",
+        "https://www.lovi.media/api/podcasts/*/cover",
+        "https://www.lovi.media/api/podcasts/*/episodes/*/cover",
+        "https://www.lovi.media/api/creators/*/cover"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "1d",
+        "timeout": "5s"
+      }
+    }
+  ]
+}

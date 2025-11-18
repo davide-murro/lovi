@@ -45,13 +45,12 @@
 
     <div>
         <label class="label" for="number">Number</label>
-        <input type="number" formControlName="number" id="number" class="input w-full" autocomplete="false"
-            placeholder="2" />
+        <input type="number" formControlName="number" id="number" class="input w-full" placeholder="2" />
     </div>
 
     <div>
         <label class="label" for="name">Name</label>
-        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
+        <input type="text" formControlName="name" id="name" class="input w-full"
             placeholder="Our relationship with nature" />
     </div>
 
@@ -85,12 +84,13 @@
 
     <div>
         <label class="label" for="description">Description</label>
-        <textarea formControlName="description" id="description" class="input w-full" rows="8" autocomplete="false"
+        <textarea formControlName="description" id="description" class="input w-full" rows="8"
             placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></textarea>
     </div>
 
     <div>
-        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
+        <button type="submit" class="button button-primary" title="Save"
+            [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>
 
@@ -124,8 +124,7 @@
                 }
                 <tr>
                     <td colspan="100%">
-                        <button type="button" class="button button-accent" title="Add Voicer"
-                            (click)="addVoicer()">Add
+                        <button type="button" class="button button-accent" title="Add Voicer" (click)="addVoicer()">Add
                             Voicer</button>
                     </td>
                 </tr>

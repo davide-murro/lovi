@@ -32,14 +32,13 @@
 
     <div>
         <label class="label" for="new-password">New password</label>
-        <input type="password" formControlName="newPassword" id="new-password" class="input w-full" autocomplete="false"
+        <input type="password" formControlName="newPassword" id="new-password" class="input w-full"
             placeholder="Password123$" />
     </div>
 
     <div>
         <label class="label" for="email">Email</label>
-        <input type="email" formControlName="email" id="email" class="input w-full" autocomplete="false"
-            placeholder="Mario@mail.com" />
+        <input type="email" formControlName="email" id="email" class="input w-full" placeholder="Mario@mail.com" />
     </div>
 
     <div>
@@ -49,12 +48,12 @@
 
     <div>
         <label class="label" for="name">Name</label>
-        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
-            placeholder="Mario" />
+        <input type="text" formControlName="name" id="name" class="input w-full" placeholder="Mario" />
     </div>
 
     <div>
-        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
+        <button type="submit" class="button button-primary" title="Save"
+            [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>
 
@@ -85,8 +84,8 @@
                 }
                 <tr>
                     <td colspan="100%">
-                        <button type="button" class="button button-accent" title="Add Role"
-                            (click)="addRole()">Add Role</button>
+                        <button type="button" class="button button-accent" title="Add Role" (click)="addRole()">Add
+                            Role</button>
                     </td>
                 </tr>
             </tbody>

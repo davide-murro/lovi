@@ -24,7 +24,7 @@
     --color-disabled: #808080;
     --color-opacity: #ffffff31;
 }
-    
+
 
 @keyframes bg-scroll-parallax {
     from {
@@ -103,7 +103,6 @@ body {
 }
 
 .button[disabled] {
-    background-color: var(--color-disabled);
     color: var(--text-color-disabled);
 }
 
@@ -186,9 +185,34 @@ body {
     height: calc(var(--spacing) * 16);
 }
 
+.input-button {
+    appearance: button;
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+    border-radius: var(--radius-lg);
+    padding-inline: calc(var(--spacing) * 5);
+    padding-block: calc(var(--spacing) * 2.5);
+    text-align: center;
+    background-color: var(--color-accent);
+}
+
+.input-button[disabled] {
+    color: var(--text-color-accent);
+}
+
+.input-button:not([disabled]):hover {
+    cursor: pointer;
+    background-color: var(--color-accent-light);
+}
+
 .button-accent {
     background-color: var(--color-accent);
     color: var(--text-color);
+}
+
+.button-accent[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
 }
 
 .button-error {
@@ -209,6 +233,11 @@ body {
 .button-primary {
     background-color: var(--color-primary);
     color: var(--text-color-dark);
+}
+
+.button-primary[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
 }
 
 .button-primary:not([disabled]):hover {

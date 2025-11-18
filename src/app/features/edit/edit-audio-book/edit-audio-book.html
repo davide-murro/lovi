@@ -26,14 +26,14 @@
 
     <div>
         <label class="label" for="name">Name</label>
-        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
+        <input type="text" formControlName="name" id="name" class="input w-full"
             placeholder="Our relationship with nature" />
     </div>
 
     <div>
         <label class="label" for="cover-image">Cover image</label>
-        <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png" formControlName="coverImageValue"
-            (change)="onCoverImageSelected($event)" />
+        <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
+            formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
         <img [src]="coverPreview()" class="w-40 mt-2 object-contain" />
         }
@@ -41,7 +41,8 @@
 
     <div>
         <label class="label" for="cover-image-preview">Cover image preview</label>
-        <input type="file" accept="image/*" id="cover-image-preview" class="input w-full" placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
+        <input type="file" accept="image/*" id="cover-image-preview" class="input w-full"
+            placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />
         @if(coverPreviewPreview()) {
         <img [src]="coverPreviewPreview()" class="w-40 mt-2 object-contain" />
@@ -50,8 +51,8 @@
 
     <div>
         <label class="label" for="audio">Audio</label>
-        <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png" formControlName="audioValue"
-            (change)="onAudioSelected($event)" />
+        <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png"
+            formControlName="audioValue" (change)="onAudioSelected($event)" />
         @if(audioPreview()){
         <audio controls class="mt-2 max-w-full" [src]="audioPreview()"></audio>
         }
@@ -59,12 +60,13 @@
 
     <div>
         <label class="label" for="description">Description</label>
-        <textarea formControlName="description" id="description" class="input w-full" rows="8" autocomplete="false"
+        <textarea formControlName="description" id="description" class="input w-full" rows="8"
             placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></textarea>
     </div>
 
     <div>
-        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
+        <button type="submit" class="button button-primary" title="Save"
+            [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>
 
@@ -91,15 +93,14 @@
                     <td>{{reader.surname}}</td>
 
                     <td>
-                        <button type="button" class="icon-button" title="Remove Reader" (click)="removeReader(reader.id)"><fa-icon
-                                [icon]="faTrash" /></button>
+                        <button type="button" class="icon-button" title="Remove Reader"
+                            (click)="removeReader(reader.id)"><fa-icon [icon]="faTrash" /></button>
                     </td>
                 </tr>
                 }
                 <tr>
                     <td colspan="100%">
-                        <button type="button" class="button button-accent" title="Add Reader"
-                            (click)="addReader()">Add
+                        <button type="button" class="button button-accent" title="Add Reader" (click)="addReader()">Add
                             Reader</button>
                     </td>
                 </tr>

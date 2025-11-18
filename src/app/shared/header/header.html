@@ -34,10 +34,17 @@
             [routerLinkActive]="'text-primary'">Podcasts</a>
         <a i18n i18n-title *appAuth class="text-sm leading-normal" title="My Library" [routerLink]="['/my-library']"
             [routerLinkActive]="'text-primary'">My Library</a>
-        <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="text-sm leading-normal" title="Edit" [routerLink]="['/edit']"
-            [routerLinkActive]="'text-primary'">Edit</a>
+        <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="text-sm leading-normal" title="Edit"
+            [routerLink]="['/edit']" [routerLinkActive]="'text-primary'">Edit</a>
 
-        <input i18n-placeholder type="search" id="search" class="input" placeholder="Search" required
-            [value]="search() ?? ''" (keyup.enter)="goToSearch($event.target.value)" />
+        <span class="flex-grow"></span>
+
+        <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="flex gap-2 relative">
+            <input i18n-placeholder type="search" formControlName="search" id="search" class="input !pr-14"
+                placeholder="Search" autocomplete="on" />
+            <button i18n-title type="submit" title="Search" class="input-button absolute right-0" [disabled]="!searchForm.valid">
+                <fa-icon [icon]="faMagnifyingGlass" />
+            </button>
+        </form>
     </div>
 </header>

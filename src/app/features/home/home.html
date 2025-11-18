@@ -1,4 +1,12 @@
 <h1 i18n class="title">Home</h1>
 
+<app-image-slider
+  class="block section"
+  [items]="imageSliderItems()"
+  [showArrows]="true"
+  [autoplay]="true"
+>
+</app-image-slider>
+
 <app-audio-books-paged class="flex" [controlRoute]="false"></app-audio-books-paged>
 <app-podcasts-paged class="flex" [controlRoute]="false"></app-podcasts-paged>

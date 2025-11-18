@@ -1,0 +1,52 @@
+<div
+  class="relative w-full mx-auto overflow-hidden rounded-2xl"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()"
+>
+  <!-- Viewport -->
+  <div class="relative w-full h-[500px]">
+    <div
+      class="absolute inset-0 flex transition-transform duration-500"
+      [style.transform]="'translateX(' + -current() * 100 + '%)'"
+    >
+      @for (item of items(); track $index) {
+      <div class="relative w-full h-full shrink-0">
+        <figure class="w-full h-full flex items-center justify-center shrink-0">
+          <img
+            [src]="item.image"
+            [attr.alt]="'Slide ' + ($index + 1)"
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        </figure>
+
+        @if (item.title || item.subtitle) {
+        <div class="absolute bottom-14 px-4">
+          <h3 class="title">
+            {{ item.title }}
+          </h3>
+          <h6>
+            {{ item.subtitle }}
+          </h6>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+
+  <!-- Arrows -->
+  @if (showArrows()) {
+  <div class="absolute bottom-2 right-2 flex gap-2">
+    <button type="button" class="button button-accent" aria-label="Previous slide" (click)="prev()">
+      <fa-icon [icon]="faAngleLeft" />
+    </button>
+    <button type="button" class="button button-accent" aria-label="Next slide" (click)="next()">
+      <fa-icon [icon]="faAngleRight" />
+    </button>
+  </div>
+  }
+</div>

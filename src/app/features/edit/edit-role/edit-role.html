@@ -26,11 +26,11 @@
 
     <div>
         <label class="label" for="name">Name</label>
-        <input type="text" formControlName="name" id="name" class="input w-full" autocomplete="false"
-            placeholder="Mario" />
+        <input type="text" formControlName="name" id="name" class="input w-full" placeholder="Mario" />
     </div>
 
     <div>
-        <button type="submit" class="button button-primary" title="Save" [disabled]="!form.valid || isLoading()">Save</button>
+        <button type="submit" class="button button-primary" title="Save"
+            [disabled]="!form.valid || isLoading()">Save</button>
     </div>
 </form>
