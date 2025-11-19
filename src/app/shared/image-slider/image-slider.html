@@ -17,7 +17,7 @@
         <figure class="w-full h-full flex items-center justify-center shrink-0">
           <img
             [src]="item.image"
-            [attr.alt]="'Slide ' + ($index + 1)"
+            [attr.alt]="item.title"
             loading="lazy"
             class="w-full h-full object-cover"
           />
@@ -41,10 +41,22 @@
   <!-- Arrows -->
   @if (showArrows()) {
   <div class="absolute bottom-2 right-2 flex gap-2">
-    <button type="button" class="button button-accent" aria-label="Previous slide" (click)="prev()">
+    <button
+      i18n-title
+      type="button"
+      class="button button-accent"
+      title="Previous slide"
+      (click)="prev()"
+    >
       <fa-icon [icon]="faAngleLeft" />
     </button>
-    <button type="button" class="button button-accent" aria-label="Next slide" (click)="next()">
+    <button
+      i18n-title
+      type="button"
+      class="button button-accent"
+      title="Next slide"
+      (click)="next()"
+    >
       <fa-icon [icon]="faAngleRight" />
     </button>
   </div>
