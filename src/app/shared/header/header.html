@@ -26,7 +26,7 @@
         </button>
     </div>
 
-    <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 sm:flex-row sm:gap-8"
+    <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 overflow-auto -my-4 -mx-8 py-4 px-8 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen()">
         <a i18n i18n-title class="text-sm leading-normal" title="Audio Books" [routerLink]="['/audio-books']"
             [routerLinkActive]="'text-primary'">Audio Books</a>
@@ -37,7 +37,7 @@
         <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="text-sm leading-normal" title="Edit"
             [routerLink]="['/edit']" [routerLinkActive]="'text-primary'">Edit</a>
 
-        <span class="flex-grow"></span>
+        <span class="flex-grow hidden sm:flex"></span>
 
         <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="flex gap-2 relative">
             <input i18n-placeholder type="search" formControlName="search" id="search" class="input !pr-14"
