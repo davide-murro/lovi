@@ -99,7 +99,11 @@ export class ImageSlider implements OnDestroy {
     this.endX = e.touches[0].clientX;
   }
   onTouchEnd() {
-    const diff = this.endX - this.startX;
-    if (Math.abs(diff) > 40) diff > 0 ? this.prev() : this.next();
+    if (this.startX && this.endX) {
+      const diff = this.endX - this.startX;
+      if (Math.abs(diff) > 40) diff > 0 ? this.prev() : this.next();
+    }
+    this.startX = 0;
+    this.endX = 0;
   }
 }
