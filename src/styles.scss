@@ -26,13 +26,15 @@
 }
 
 
-@keyframes bg-scroll-parallax {
+@keyframes object-scroll-parallax {
     from {
-        background-position: center 0;
+        --tw-translate-y: -50px;
+        translate: 0 -50px;
     }
 
     to {
-        background-position: center 100%;
+        --tw-translate-y: 0;
+        translate: 0 0;
     }
 }
 
@@ -78,9 +80,17 @@ body {
     color: var(--text-color-error);
 }
 
-.bg-parallax {
-    background-attachment: scroll;
-    animation: bg-scroll-parallax linear both;
+.object-parallax {
+    position: relative; 
+    overflow: hidden;
+}
+.object-parallax .img-parallax {
+    object-fit: cover;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+    height: calc(100% + 50px);
+    animation: object-scroll-parallax linear both;
     animation-timeline: scroll(root);
 }
 

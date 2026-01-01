@@ -4,11 +4,6 @@
     <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4 sm:mx-0">
         @for (creator of creatorPagedResult()?.items; track $index) {
         <li class="flex items-center px-4 py-2 gap-2 hover:bg-opacity cursor-pointer" (click)="selectCreator(creator)">
-            <!--
-            <div class="flex items-center justify-center size-12 bg-center bg-no-repeat aspect-square bg-cover bg-accent-light rounded-xl"
-                [style.background-image]="'url(' + (creator.coverImageSrc) + ')'">
-            </div>
-            -->
             <div class="flex flex-col flex-grow overflow-hidden">
                 <span class="truncate">{{ creator.nickname }}</span>
                 <span class="text-accent truncate">{{ creator.name }} {{ creator.surname }}</span>

@@ -1,57 +1,64 @@
 <h1 i18n class="title">My Library</h1>
 
 <div class="section">
-    <h2 i18n class="title">Audio Books</h2>
+  <h2 i18n class="title">Audio Books</h2>
 
-    @if (myLibraryAudioBooks() == null || myLibraryAudioBooks()!.length == 0) {
-    <p i18n class="section text-accent">There are no Audio Books here</p>
+  @if (myLibraryAudioBooks() == null || myLibraryAudioBooks()!.length == 0) {
+  <p i18n class="section text-accent">There are no Audio Books here</p>
+  } @else {
+  <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
+    @for (audioBook of myLibraryAudioBooks(); track $index) {
+    <app-audio-book-item [audioBook]="audioBook"></app-audio-book-item>
     }
-    @else {
-    <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
-        @for (audioBook of myLibraryAudioBooks(); track $index) {
-        <app-audio-book-item [audioBook]="audioBook"></app-audio-book-item>
-        }
-    </div>
-    }
+  </div>
+  }
 </div>
 <div class="section">
-    <h2 i18n class="title">Podcasts</h2>
+  <h2 i18n class="title">Podcasts</h2>
 
-    @if (myLibraryPodcasts() == null || myLibraryPodcasts()!.length == 0) {
-    <p i18n class="section text-accent">There are no Podcasts here</p>
-    }
-    @else {
-    @for (podcast of myLibraryPodcasts(); track $index) {
-    <div class="section">
-        <a class="link-item" [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
-            <div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[150px] sm:min-h-[250px]"
-                [style.background-image]="'url(' + (podcast.coverImagePreviewUrl) + ')'">
-            </div>
+  @if (myLibraryPodcasts() == null || myLibraryPodcasts()!.length == 0) {
+  <p i18n class="section text-accent">There are no Podcasts here</p>
+  } @else { @for (podcast of myLibraryPodcasts(); track $index) {
+  <div class="section">
+    <a class="link-item" [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
+      <div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
+        <img
+          loading="lazy"
+          decoding="async"
+          class="img-parallax"
+          [src]="podcast.coverImageUrl"
+          [alt]="podcast.name"
+        />
+      </div>
 
-            <h3 class="title2">{{podcast.name}}</h3>
-            <p class="subtitle text-accent">
-                @for(creator of podcast.voicers; track $index) {
-                <a>{{ creator.nickname }}</a>@if (!$last) {, }
-                }
-            </p>
-        </a>
+      <h3 class="title2">{{ podcast.name }}</h3>
+      <p class="subtitle text-accent">
+        @for(creator of podcast.voicers; track $index) {
+        <a>{{ creator.nickname }}</a
+        >@if (!$last) {, } }
+      </p>
+    </a>
 
-        <h5 class="section text-accent flex justify-between items-center gap-2">
-            <span i18n>{{podcast.episodes?.length ?? 0}} Episodes</span>
+    <h5 class="section text-accent flex justify-between items-center gap-2">
+      <span i18n>{{ podcast.episodes?.length ?? 0 }} Episodes</span>
 
-            <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2" title="Play all Episodes"
-                (click)="podcastPlayAll(podcast)">
-                <fa-icon [icon]="faPlay" /> 
-                <span i18n>Play all</span>
-            </button>
-        </h5>
+      <button
+        i18n-title
+        type="button"
+        class="button button-primary button-rounded shrink-0 flex gap-2"
+        title="Play all Episodes"
+        (click)="podcastPlayAll(podcast)"
+      >
+        <fa-icon [icon]="faPlay" />
+        <span i18n>Play all</span>
+      </button>
+    </h5>
 
-        <div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
-            @for (episode of podcast.episodes; track $index) {
-            <app-podcast-episode-item [podcast]="podcast" [episode]="episode"></app-podcast-episode-item>
-            }
-        </div>
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
+      @for (episode of podcast.episodes; track $index) {
+      <app-podcast-episode-item [podcast]="podcast" [episode]="episode"></app-podcast-episode-item>
+      }
     </div>
-    }
-    }
+  </div>
+  } }
 </div>

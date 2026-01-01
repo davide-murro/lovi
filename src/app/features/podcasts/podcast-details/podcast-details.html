@@ -1,55 +1,71 @@
 <div class="section flex flex-wrap gap-2">
-    <a i18n class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']">Podcasts</a>
-    <span class="text-accent font-medium leading-normal">/</span>
-    <span class="font-medium leading-normal">{{podcast().name}}</span>
+  <a i18n class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']"
+    >Podcasts</a
+  >
+  <span class="text-accent font-medium leading-normal">/</span>
+  <span class="font-medium leading-normal">{{ podcast().name }}</span>
 </div>
 
-<div class="w-full bg-center bg-no-repeat bg-cover bg-parallax bg-accent flex flex-col justify-center overflow-hidden rounded-xl min-h-[150px] sm:min-h-[250px]"
-    [style.background-image]="'url(' + (podcast().coverImageUrl) + ')'">
+<div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
+  <img
+    class="img-parallax"
+    [src]="podcast().coverImageUrl"
+    [alt]="podcast().name"
+  />
 </div>
 
 <h1 class="title flex justify-between items-start gap-2">
-    {{podcast().name}}
+  {{ podcast().name }}
 
-    <button i18n-title *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-        title="Add to / remove from My Library" (click)="toggleMyLibrary()">
-        @if(isInMyLibrary()) {
-        <fa-icon [icon]="faBookBookmark" />
-        <span i18n class="hidden lg:inline">Remove from My Library</span>
-        }
-        @else {
-        <fa-icon [icon]="faBookOpen" />
-        <span i18n class="hidden lg:inline">Add to My Library</span>
-        }
-    </button>
+  <button
+    i18n-title
+    *appAuth
+    type="button"
+    class="button button-accent shrink-0 flex gap-2"
+    title="Add to / remove from My Library"
+    (click)="toggleMyLibrary()"
+  >
+    @if(isInMyLibrary()) {
+    <fa-icon [icon]="faBookBookmark" />
+    <span i18n class="hidden lg:inline">Remove from My Library</span>
+    } @else {
+    <fa-icon [icon]="faBookOpen" />
+    <span i18n class="hidden lg:inline">Add to My Library</span>
+    }
+  </button>
 </h1>
 
 <p class="subtitle text-accent">
-    @for(creator of podcast().voicers; track $index) {
-    <a>{{ creator.nickname }}</a>@if (!$last) {, }
-    }
+  @for(creator of podcast().voicers; track $index) {
+  <a>{{ creator.nickname }}</a
+  >@if (!$last) {, } }
 </p>
 
 <p class="section whitespace-pre-line">
-    {{podcast().description}}
+  {{ podcast().description }}
 </p>
 
 @if(podcast().episodes!.length > 0) {
 <div class="section">
-    <h2 class="title2 flex justify-between items-center ">
-        <span i18n>{{ podcast().episodes!.length }} Episodes</span>
+  <h2 class="title2 flex justify-between items-center">
+    <span i18n>{{ podcast().episodes!.length }} Episodes</span>
 
-        <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2" title="Play all Episodes"
-            (click)="playAll()">
-            <fa-icon [icon]="faPlay" />
-            <span i18n>Play all</span>
-        </button>
-    </h2>
+    <button
+      i18n-title
+      type="button"
+      class="button button-primary button-rounded shrink-0 flex gap-2"
+      title="Play all Episodes"
+      (click)="playAll()"
+    >
+      <fa-icon [icon]="faPlay" />
+      <span i18n>Play all</span>
+    </button>
+  </h2>
 
-    <div class="gap-4 grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
-        @for (episode of podcast().episodes; track $index) {
-        <app-podcast-episode-item [podcast]="podcast()" [episode]="episode"></app-podcast-episode-item>
-        }
-    </div>
+  <div class="gap-4 grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
+    @for (episode of podcast().episodes; track $index) {
+    <app-podcast-episode-item [podcast]="podcast()" [episode]="episode"></app-podcast-episode-item>
+    }
+  </div>
 </div>
 }

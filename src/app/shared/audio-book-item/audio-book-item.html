@@ -1,13 +1,20 @@
-<a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/audio-books', audioBook().id]" [title]="audioBook().name">
-    <div class="bg-cover bg-center bg-no-repeat bg-accent aspect-[3/4] rounded-xl"
-        [style.background-image]="'url(' + (audioBook().coverImagePreviewUrl) + ')'">
-    </div>
-    <div>
-        <p class="text-base font-medium leading-normal line-clamp-2">{{audioBook().name}}</p>
-        <p class="text-accent text-sm truncate">
-            @for(creator of audioBook().readers; track $index) {
-            {{ creator.nickname }}@if (!$last) {, }
-            }
-        </p>
-    </div>
+<a
+  class="link-item flex flex-1 flex-col gap-2"
+  [routerLink]="['/audio-books', audioBook().id]"
+  [title]="audioBook().name"
+>
+  <img
+    class="aspect-[3/4] object-cover bg-accent rounded-xl"
+    loading="lazy"
+    decoding="async"
+    [src]="audioBook().coverImagePreviewUrl"
+    [alt]="audioBook().name"
+  />
+  <div>
+    <p class="text-base font-medium leading-normal line-clamp-2">{{ audioBook().name }}</p>
+    <p class="text-accent text-sm truncate">
+      @for(creator of audioBook().readers; track $index) {
+      {{ creator.nickname }}@if (!$last) {, } }
+    </p>
+  </div>
 </a>

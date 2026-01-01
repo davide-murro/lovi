@@ -1,87 +1,117 @@
 <div class="flex flex-col min-h-full">
+  <div class="section flex flex-wrap gap-2">
+    <a i18n class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']"
+      >Podcasts</a
+    >
+    <span class="text-accent font-medium leading-normal">/</span>
+    <a
+      class="link font-medium leading-normal"
+      [title]="episode().podcast!.name"
+      [routerLink]="['/podcasts', episode().podcast!.id]"
+      >{{ episode().podcast!.name }}</a
+    >
+    <span class="text-accent font-medium leading-normal">/</span>
+    <span class="font-medium leading-normal">{{ episode().name }}</span>
+  </div>
 
-    <div class="section flex flex-wrap gap-2">
-        <a i18n class="link font-medium leading-normal" title="Podcasts" [routerLink]="['/podcasts']">Podcasts</a>
-        <span class="text-accent font-medium leading-normal">/</span>
-        <a class="link font-medium leading-normal" [title]="episode().podcast!.name"
-            [routerLink]="['/podcasts', episode().podcast!.id]">{{episode().podcast!.name}}</a>
-        <span class="text-accent font-medium leading-normal">/</span>
-        <span class="font-medium leading-normal">{{episode().name}}</span>
+  <div class="section flex flex-col flex-grow gap-4 lg:flex-row lg:gap-8">
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-center items-start">
+        <img
+          class="w-full flex flex-col justify-center aspect-square object-cover bg-accent overflow-hidden rounded-xl max-w-[350px] lg:min-w-[250px] lg:min-w-[350px]"
+          [src]="episode().coverImageUrl"
+          [alt]="episode().name"
+        />
+      </div>
+
+      <div class="flex flex-row flex-wrap justify-center items-center gap-4">
+        <button
+          i18n-title
+          type="button"
+          class="icon-button button-primary button-xl"
+          title="Play / Pause"
+          (click)="togglePlay()"
+        >
+          @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon
+            [icon]="faPlay"
+          />}
+        </button>
+
+        <button
+          i18n-title
+          type="button"
+          class="button button-primary button-rounded shrink-0 flex gap-2"
+          title="Add to queue"
+          (click)="addToQueue()"
+        >
+          <fa-icon [icon]="faList" />
+          <span i18n>Add to queue</span>
+        </button>
+      </div>
     </div>
 
-    <div class="section flex flex-col flex-grow gap-4 lg:flex-row lg:gap-8">
-        <div class="flex flex-col gap-4">
-            <div class="flex justify-center items-start">
-                <div class="w-full bg-center bg-no-repeat bg-cover bg-accent flex flex-col justify-center overflow-hidden rounded-xl aspect-square max-w-[350px] lg:min-w-[250px] lg:min-w-[350px]"
-                    [style.background-image]="'url(' + (episode().coverImageUrl) + ')'">
-                </div>
-            </div>
+    <div class="flex-grow">
+      <h1 class="title flex justify-between items-start gap-2">
+        {{ episode().name }}
 
-            <div class="flex flex-row flex-wrap justify-center items-center gap-4">
-                <button i18n-title type="button" class="icon-button button-primary button-xl" title="Play / Pause"
-                    (click)="togglePlay()">
-                    @if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />}
-                    @else {<fa-icon [icon]="faPlay" />}
-                </button>
+        <button
+          i18n-title
+          *appAuth
+          type="button"
+          class="button button-accent shrink-0 flex gap-2"
+          title="Add to / remove from My Library"
+          (click)="toggleMyLibrary()"
+        >
+          @if(isInMyLibrary()) {
+          <fa-icon [icon]="faBookBookmark" />
+          <span i18n class="hidden lg:inline">Remove from My Library</span>
+          } @else {
+          <fa-icon [icon]="faBookOpen" />
+          <span i18n class="hidden lg:inline">Add to My Library</span>
+          }
+        </button>
+      </h1>
 
-                <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
-                    title="Add to queue" (click)="addToQueue()">
-                    <fa-icon [icon]="faList" /> 
-                    <span i18n>Add to queue</span>
-                </button>
-            </div>
-        </div>
+      <p class="subtitle text-accent">
+        @for(creator of episode().voicers; track $index) {
+        <a>{{ creator.nickname }}</a
+        >@if (!$last) {, } }
+      </p>
 
-        <div class="flex-grow">
-            <h1 class="title flex justify-between items-start gap-2">
-                {{episode().name}}
+      <p i18n class="section text-accent">Episode {{ episode().number }}</p>
 
-                <button i18n-title *appAuth type="button" class="button button-accent shrink-0 flex gap-2" title="Add to / remove from My Library"
-                    (click)="toggleMyLibrary()">
-                    @if(isInMyLibrary()) {
-                    <fa-icon [icon]="faBookBookmark" />
-                    <span i18n class="hidden lg:inline">Remove from My Library</span>
-                    }
-                    @else {
-                    <fa-icon [icon]="faBookOpen" />
-                    <span i18n class="hidden lg:inline">Add to My Library</span>
-                    }
-                </button>
-            </h1>
-
-            <p class="subtitle text-accent">
-                @for(creator of episode().voicers; track $index) {
-                <a>{{ creator.nickname }}</a>@if (!$last) {, }
-                }
-            </p>
-
-            <p i18n class="section text-accent">
-                Episode {{ episode().number }}
-            </p>
-
-            <p class="section whitespace-pre-line">{{episode().description}}</p>
-        </div>
+      <p class="section whitespace-pre-line">{{ episode().description }}</p>
     </div>
+  </div>
 
-    <div class="flex flex-row justify-between gap-4">
-        <div>
-            @if (episodePrev() != null) {
-            <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Previous Episode"
-                (click)="prevEpisode()">
-                <fa-icon [icon]="faBackward" />
-                <span i18n class="hidden lg:inline">Previous Episode</span>
-            </button>
-            }
-        </div>
-        <div>
-            @if(episodeNext() != null) {
-            <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Next Episode"
-                (click)="nextEpisode()">
-                <span i18n class="hidden lg:inline">Next Episode</span>
-                <fa-icon [icon]="faForward" />
-            </button>
-            }
-        </div>
+  <div class="flex flex-row justify-between gap-4">
+    <div>
+      @if (episodePrev() != null) {
+      <button
+        i18n-title
+        type="button"
+        class="button button-accent shrink-0 flex gap-2"
+        title="Previous Episode"
+        (click)="prevEpisode()"
+      >
+        <fa-icon [icon]="faBackward" />
+        <span i18n class="hidden lg:inline">Previous Episode</span>
+      </button>
+      }
     </div>
-
+    <div>
+      @if(episodeNext() != null) {
+      <button
+        i18n-title
+        type="button"
+        class="button button-accent shrink-0 flex gap-2"
+        title="Next Episode"
+        (click)="nextEpisode()"
+      >
+        <span i18n class="hidden lg:inline">Next Episode</span>
+        <fa-icon [icon]="faForward" />
+      </button>
+      }
+    </div>
+  </div>
 </div>
