@@ -12,8 +12,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes,
       withInMemoryScrolling({
-        scrollPositionRestoration: 'top', // Scroll to top if is not navigation back
-        anchorScrolling: 'enabled',           // Enable anchor scrolling
+        // disable to do it in app.ts.. becauase of back navigation scroll issue
+        scrollPositionRestoration: 'disabled', 
+        anchorScrolling: 'disabled',           
       }),
     ),
     provideHttpClient(withInterceptors([authInterceptor])), provideServiceWorker('ngsw-worker.js', {

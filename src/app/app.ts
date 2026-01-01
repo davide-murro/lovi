@@ -1,40 +1,47 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, NgZone, ViewChild } from '@angular/core';
 import { Header } from './shared/header/header';
-import { Body } from "./shared/body/body";
-import { AudioPlayer } from "./shared/audio-player/audio-player";
+import { Body } from './shared/body/body';
+import { AudioPlayer } from './shared/audio-player/audio-player';
 import { Toaster } from './shared/toaster/toaster';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router, Scroll } from '@angular/router';
+import { filter, take } from 'rxjs';
 import { Dialog } from './shared/dialog/dialog';
 import { DialogService } from './core/services/dialog.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    Header,
-    Body,
-    AudioPlayer,
-    Toaster,
-    Dialog
-  ],
+  imports: [Header, Body, AudioPlayer, Toaster, Dialog],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   private router = inject(Router);
   private dialogService = inject(DialogService);
+  private viewportScroller = inject(ViewportScroller);
+  private zone = inject(NgZone);
 
   @ViewChild(Header) header!: Header;
   @ViewChild(AudioPlayer) audioPlayer!: AudioPlayer;
 
   constructor() {
-    this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe(() => {
-        this.header.menuMobileOpen.set(false);
-        this.audioPlayer.queueOpen.set(false);
-        this.dialogService.close(null);
-      });
-  }
+    // close all opened ui
+    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
+      this.header.menuMobileOpen.set(false);
+      this.audioPlayer.queueOpen.set(false);
+      this.dialogService.close(null);
+    });
 
+    this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e: any) => {
+      this.zone.onStable.pipe(take(1)).subscribe(() => {
+        if (e.position) {
+          this.viewportScroller.scrollToPosition(e.position);
+        } else if (e.anchor) {
+          this.viewportScroller.scrollToAnchor(e.anchor);
+        } else {
+          this.viewportScroller.scrollToPosition([0, 0]);
+        }
+      });
+    });
+  }
 }
