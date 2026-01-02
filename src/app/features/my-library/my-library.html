@@ -23,9 +23,9 @@
     <a class="link-item" [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
       <div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
         <img
+          class="img-parallax bg-accent"
           loading="lazy"
           decoding="async"
-          class="img-parallax"
           [src]="podcast.coverImageUrl"
           [alt]="podcast.name"
         />
