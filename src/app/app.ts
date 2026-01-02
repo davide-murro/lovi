@@ -1,4 +1,4 @@
-import { Component, inject, NgZone, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, inject, NgZone, ViewChild } from '@angular/core';
 import { Header } from './shared/header/header';
 import { Body } from './shared/body/body';
 import { AudioPlayer } from './shared/audio-player/audio-player';
@@ -19,7 +19,7 @@ export class App {
   private router = inject(Router);
   private dialogService = inject(DialogService);
   private viewportScroller = inject(ViewportScroller);
-  private zone = inject(NgZone);
+  private applicationRef = inject(ApplicationRef);
 
   @ViewChild(Header) header!: Header;
   @ViewChild(AudioPlayer) audioPlayer!: AudioPlayer;
@@ -31,17 +31,23 @@ export class App {
       this.audioPlayer.queueOpen.set(false);
       this.dialogService.close(null);
     });
-
-    this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e: any) => {
-      this.zone.onStable.pipe(take(1)).subscribe(() => {
-        if (e.position) {
-          this.viewportScroller.scrollToPosition(e.position);
-        } else if (e.anchor) {
-          this.viewportScroller.scrollToAnchor(e.anchor);
-        } else {
-          this.viewportScroller.scrollToPosition([0, 0]);
-        }
-      });
+    
+    // handle navigation scroll
+    this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e) => {
+      this.applicationRef.isStable
+        .pipe(
+          filter((stable) => stable),
+          take(1)
+        )
+        .subscribe(() => {
+          if (e.position) {
+            this.viewportScroller.scrollToPosition(e.position);
+          } else if (e.anchor) {
+            this.viewportScroller.scrollToAnchor(e.anchor);
+          } else {
+            this.viewportScroller.scrollToPosition([0, 0]);
+          }
+        });
     });
   }
 }

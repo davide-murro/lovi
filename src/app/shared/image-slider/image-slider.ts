@@ -1,4 +1,14 @@
-import { Component, effect, HostListener, input, OnDestroy, signal } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  effect,
+  HostListener,
+  inject,
+  Injector,
+  input,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { Subscription, interval } from 'rxjs';
@@ -17,6 +27,8 @@ export interface ImageSliderItem {
   styleUrl: './image-slider.scss',
 })
 export class ImageSlider implements OnDestroy {
+  private readonly injector = inject(Injector);
+
   // Reactive inputs using Angular's `input()` API
   items = input<ImageSliderItem[]>([]);
   autoplay = input<boolean>(false);
@@ -41,7 +53,11 @@ export class ImageSlider implements OnDestroy {
     effect(() => {
       this.clearAutoplay();
       if (this.autoplay() && this.items().length > 1) {
-        this.startAutoplay();
+        // start autoplay when everything is loaded
+        afterNextRender(
+          () => this.startAutoplay(),
+          { injector: this.injector }
+        );
       }
     });
   }

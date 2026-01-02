@@ -14,12 +14,13 @@ export class Home {
     {
       image: 'home-image-slider/slider1.png',
       title: 'Listen to your next great story',
-      subtitle: 'Stream or download from our library of audiobooks, including new releases and best sellers.'
+      subtitle:
+        'Stream or download from our library of audiobooks, including new releases and best sellers.',
     },
     {
       image: 'home-image-slider/slider2.jpg',
       title: 'Discover a new world of sound',
-      subtitle: 'Explore hand-picked audio stories crafted for every mood and moment.'
+      subtitle: 'Explore hand-picked audio stories crafted for every mood and moment.',
     },
   ]);
 }
