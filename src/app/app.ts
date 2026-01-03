@@ -16,10 +16,10 @@ import { ViewportScroller } from '@angular/common';
   styleUrl: './app.scss',
 })
 export class App {
+  private applicationRef = inject(ApplicationRef);
   private router = inject(Router);
   private dialogService = inject(DialogService);
   private viewportScroller = inject(ViewportScroller);
-  private applicationRef = inject(ApplicationRef);
 
   @ViewChild(Header) header!: Header;
   @ViewChild(AudioPlayer) audioPlayer!: AudioPlayer;
@@ -31,7 +31,7 @@ export class App {
       this.audioPlayer.queueOpen.set(false);
       this.dialogService.close(null);
     });
-    
+
     // handle navigation scroll
     this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e) => {
       this.applicationRef.isStable

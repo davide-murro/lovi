@@ -2,7 +2,6 @@ import {
   afterNextRender,
   Component,
   effect,
-  HostListener,
   inject,
   Injector,
   input,
@@ -27,9 +26,9 @@ export interface ImageSliderItem {
   styleUrl: './image-slider.scss',
 })
 export class ImageSlider implements OnDestroy {
-  private readonly injector = inject(Injector);
+  private injector = inject(Injector);
 
-  // Reactive inputs using Angular's `input()` API
+  // Reactive inputs
   items = input<ImageSliderItem[]>([]);
   autoplay = input<boolean>(false);
   intervalMs = input<number>(5000);
@@ -54,10 +53,7 @@ export class ImageSlider implements OnDestroy {
       this.clearAutoplay();
       if (this.autoplay() && this.items().length > 1) {
         // start autoplay when everything is loaded
-        afterNextRender(
-          () => this.startAutoplay(),
-          { injector: this.injector }
-        );
+        afterNextRender(() => this.startAutoplay(), { injector: this.injector });
       }
     });
   }
