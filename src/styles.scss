@@ -259,6 +259,7 @@ body {
     color: var(--text-color-accent);
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
+    text-underline-offset: calc(var(--spacing) * 0.5);
 }
 
 .link:hover {
@@ -267,6 +268,7 @@ body {
 
 .link-item {
     text-decoration-color: var(--text-color-accent);
+    text-underline-offset: calc(var(--spacing) * 0.5);
 }
 
 .link-item:hover {
