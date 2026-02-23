@@ -7,10 +7,14 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ResendConfirmEmailDto } from '../../../core/models/dtos/auth/resend-confirm-email-dto.model';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFacebook, faGoogle, faInstagram, faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { ExternalLoginDto } from '../../../core/models/dtos/auth/external-login-dto.model';
+import { SocialAuthService } from '../../../core/services/social-auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, FontAwesomeModule],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
@@ -19,6 +23,17 @@ export class Login {
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
   private authService = inject(AuthService);
+  private socialAuthService = inject(SocialAuthService);
+
+  faGoogle = faGoogle;
+  faFacebook = faFacebook;
+  faInstagram = faInstagram;
+  faSpotify = faSpotify;
+
+  constructor() {
+    //this.checkSpotifyCallback();
+    //this.checkInstagramCallback();
+  }
 
   form = new FormGroup({
     userName: new FormControl('', [Validators.required]),
@@ -26,6 +41,7 @@ export class Login {
   });
 
   isLoading = signal(false);
+
   login(): void {
     if (!this.form.valid) return;
 
@@ -57,5 +73,64 @@ export class Login {
         }
       }
     })
+  }
+
+  loginWithGoogle(): void {
+    this.socialAuthService.loginWithGoogle().then(token => {
+      this.externalLogin('Google', token);
+    }).catch(err => {
+      this.toasterService.show($localize`Google login failed`, { type: 'error' });
+    });
+  }
+
+  loginWithFacebook(): void {
+    this.socialAuthService.loginWithFacebook().then(token => {
+      this.externalLogin('Facebook', token);
+    }).catch(err => {
+      this.toasterService.show($localize`Facebook login failed`, { type: 'error' });
+    });
+  }
+
+  loginWithInstagram(): void {
+    this.socialAuthService.loginWithInstagram();
+  }
+
+  loginWithSpotify(): void {
+    this.socialAuthService.loginWithSpotify();
+  }
+
+  private checkSpotifyCallback(): void {
+    const token = this.socialAuthService.getSpotifyTokenFromHash();
+    if (token) {
+      this.externalLogin('Spotify', token);
+    }
+  }
+
+  private checkInstagramCallback(): void {
+    const code = this.socialAuthService.getInstagramCodeFromQuery();
+    if (code) {
+      this.externalLogin('Instagram', code);
+    }
+  }
+
+  private externalLogin(provider: string, token: string): void {
+    const dto: ExternalLoginDto = {
+      provider: provider,
+      accessToken: token
+    };
+
+    this.isLoading.set(true);
+    this.authService.externalLogin(dto).subscribe({
+      next: () => {
+        this.toasterService.show($localize`Login successful with ${provider}`);
+        this.router.navigate(['/']);
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('authService.externalLogin', dto, err);
+        this.isLoading.set(false);
+        this.toasterService.show($localize`Login failed with ${provider}`, { type: 'error' });
+      }
+    });
   }
 }

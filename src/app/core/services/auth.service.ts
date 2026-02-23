@@ -13,6 +13,7 @@ import { ConfirmEmailDto } from '../models/dtos/auth/confirm-email-dto.model';
 import { ConfirmChangeEmailDto } from '../models/dtos/auth/confirm-change-email-dto.model';
 import { DeleteAccountDto } from '../models/dtos/auth/delete-account-dto.model';
 import { ResendConfirmEmailDto } from '../models/dtos/auth/resend-confirm-email-dto.model';
+import { ExternalLoginDto } from '../models/dtos/auth/external-login-dto.model';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -48,12 +49,23 @@ export class AuthService {
     ).pipe(
       tap((tokenDto) => {
         this.setAccessToken(tokenDto.accessToken);
-        try {
-          const payload: any = jwtDecode(tokenDto.accessToken);
-          this.setRole(payload.role);
-        } catch (error) {
-          console.error('Error decoding JWT payload', error);
-        }
+        const payload: any = jwtDecode(tokenDto.accessToken);
+        this.setRole(payload.role);
+      })
+    );
+  }
+
+  // EXTERNAL LOGIN
+  externalLogin(dto: ExternalLoginDto): Observable<TokenDto> {
+    return this.http.post<TokenDto>(
+      `${`${this.apiUrl}/external-login`}`,
+      dto,
+      { withCredentials: true }
+    ).pipe(
+      tap((tokenDto) => {
+        this.setAccessToken(tokenDto.accessToken);
+        const payload: any = jwtDecode(tokenDto.accessToken);
+        this.setRole(payload.role);
       })
     );
   }
@@ -103,12 +115,8 @@ export class AuthService {
     ).pipe(
       tap(res => {
         this.setAccessToken(res.accessToken);
-        try {
-          const payload: any = jwtDecode(res.accessToken);
-          this.setRole(payload.role);
-        } catch (error) {
-          console.error('Error decoding JWT payload', error);
-        }
+        const payload: any = jwtDecode(res.accessToken);
+        this.setRole(payload.role);
       })
     );
   }

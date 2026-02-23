@@ -39,11 +39,34 @@
             title="Login" [disabled]="!form.valid || isLoading()">Login</button>
     </form>
 
-    <div class="section flex flex-col flex-1 items-center">
-        <h2 i18n class="title2">New to LOVI?</h2>
-        <a i18n i18n-title title="Register to LOVI" class="button button-accent button-rounded"
-            [routerLink]="['/auth', 'register']">
-            Create your LOVI account
-        </a>
+    <div class="section flex flex-col items-center">
+        <h2 i18n class="title2">or continue with</h2>
+
+        <div class="flex flex-col items-center gap-4">
+            <button i18n-title (click)="loginWithGoogle()" class="button button-rounded flex gap-2 bg-[#DB4437]"
+                title="Login with Google">
+                <fa-icon [icon]="faGoogle"></fa-icon>
+                <span i18n>Login with Google</span>
+            </button>
+            <!--
+            <button i18n-title (click)="loginWithFacebook()" class="button button-rounded flex gap-2 bg-[#4267B2]" title="Login with Facebook">
+                <fa-icon [icon]="faFacebook"></fa-icon>
+                <span i18n>Login with Facebook</span>
+            </button>
+            <button i18n-title (click)="loginWithInstagram()" class="button button-rounded flex gap-2 bg-[#C13584]"
+                title="Login with Instagram">
+                <fa-icon [icon]="faInstagram"></fa-icon>
+                <span i18n>Login with Instagram</span>
+            </button>
+            <button i18n-title (click)="loginWithSpotify()" class="button button-rounded flex gap-2 bg-[#1DB954]" title="Login with Spotify">
+                <fa-icon [icon]="faSpotify"></fa-icon>
+                <span i18n>Login with Spotify</span>
+            </button>
+            -->
+            <a i18n i18n-title title="Register to LOVI" class="button button-accent button-rounded"
+                [routerLink]="['/auth', 'register']">
+                Create your LOVI account
+            </a>
+        </div>
     </div>
 </div>
