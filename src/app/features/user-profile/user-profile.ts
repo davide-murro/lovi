@@ -91,8 +91,16 @@ export class UserProfile {
       $localize`You will be logged out of this browser session only. All other active sessions will remain logged in.`)
       .subscribe((res) => {
         if (res) {
-          this.authService.logout();
-          this.router.navigate(['/']);
+          this.authService.revoke().subscribe({
+            next: () => {
+              this.router.navigate(['/']);
+            },
+            error: (error) => {
+              console.error('authService.revoke', error);
+              //this.toasterService.show($localize`Log out error`, { type: "error" });
+              this.authService.logout(); // Force logout even if revoke fails (e.g. due to network error), to prevent user from being stuck in a broken state
+            }
+          });
         }
       });
   }
@@ -102,12 +110,12 @@ export class UserProfile {
       $localize`You will be logged out of all browser sessions you have opened. Are you sure?`)
       .subscribe((res) => {
         if (res) {
-          this.authService.revoke().subscribe({
+          this.authService.revokeAll().subscribe({
             next: () => {
               this.router.navigate(['/']);
             },
             error: (error) => {
-              console.error('authService.revoke', error);
+              console.error('authService.revokeAll', error);
               this.toasterService.show($localize`Log out from all devices error`, { type: "error" });
             }
           });

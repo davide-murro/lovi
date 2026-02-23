@@ -1,6 +1,6 @@
-import { computed, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { RegisterDto } from '../models/dtos/auth/register-dto.model';
 import { Observable, tap } from 'rxjs';
 import { LoginDto } from '../models/dtos/auth/login-dto.model';
@@ -13,6 +13,7 @@ import { ConfirmEmailDto } from '../models/dtos/auth/confirm-email-dto.model';
 import { ConfirmChangeEmailDto } from '../models/dtos/auth/confirm-change-email-dto.model';
 import { DeleteAccountDto } from '../models/dtos/auth/delete-account-dto.model';
 import { ResendConfirmEmailDto } from '../models/dtos/auth/resend-confirm-email-dto.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,11 @@ export class AuthService {
   private apiUrl = environment.apiUrl + '/auth';
   private http = inject(HttpClient);
 
-  private accessToken = signal(localStorage.getItem('accessToken'));
-  private refreshToken = signal(localStorage.getItem('refreshToken'));
-  private userRole = signal(localStorage.getItem('userRole'));
+  private accessToken = signal<string | null>(null);
+  private userRole = signal<string | null>(null);
+  private hasSession = signal(localStorage.getItem('hasSession') === 'true');
 
-  isLoggedIn = computed(() => !!this.accessToken());
+  isLoggedIn = computed(() => !!this.hasSession());
 
   // REGISTER
   register(dto: RegisterDto): Observable<void> {
@@ -40,30 +41,48 @@ export class AuthService {
 
   // LOGIN
   login(dto: LoginDto): Observable<TokenDto> {
-    return this.http.post<TokenDto>(`${this.apiUrl}/login`, dto).pipe(
+    return this.http.post<TokenDto>(
+      `${this.apiUrl}/login`,
+      dto,
+      { withCredentials: true }
+    ).pipe(
       tap((tokenDto) => {
         this.setAccessToken(tokenDto.accessToken);
-        this.setRefreshToken(tokenDto.refreshToken);
-        // extract from JWT (if it includes a role claim)
-        const payload = JSON.parse(atob(tokenDto.accessToken.split('.')[1]));
-        this.setRole(payload.role);
+        try {
+          const payload: any = jwtDecode(tokenDto.accessToken);
+          this.setRole(payload.role);
+        } catch (error) {
+          console.error('Error decoding JWT payload', error);
+        }
       })
     );
   }
 
   // LOGOUT
   logout(): void {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('userRole');
+    localStorage.removeItem('hasSession');
+    this.hasSession.set(false);
     this.accessToken.set(null);
-    this.refreshToken.set(null);
     this.userRole.set(null);
   }
-  
+
   // REVOKE
   revoke(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/revoke`, {}).pipe(
+    return this.http.post(
+      `${this.apiUrl}/revoke`,
+      {},
+      { withCredentials: true }
+    ).pipe(
+      tap(() => this.logout())
+    );
+  }
+  // REVOKE ALL DEVICES
+  revokeAll(): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/revoke-all`,
+      {},
+      { withCredentials: true }
+    ).pipe(
       tap(() => this.logout())
     );
   }
@@ -77,16 +96,19 @@ export class AuthService {
 
   // TOKENS
   refreshTokens(): Observable<TokenDto> {
-    const dto: TokenDto = {
-      accessToken: this.getAccessToken()!,
-      refreshToken: this.getRefreshToken()!
-    };
-    return this.http.post<TokenDto>(`${this.apiUrl}/refresh`, dto).pipe(
+    return this.http.post<TokenDto>(
+      `${this.apiUrl}/refresh`,
+      {},
+      { withCredentials: true }
+    ).pipe(
       tap(res => {
         this.setAccessToken(res.accessToken);
-        this.setRefreshToken(res.refreshToken);
-        const payload = JSON.parse(atob(res.accessToken.split('.')[1]));
-        this.setRole(payload.role);
+        try {
+          const payload: any = jwtDecode(res.accessToken);
+          this.setRole(payload.role);
+        } catch (error) {
+          console.error('Error decoding JWT payload', error);
+        }
       })
     );
   }
@@ -94,15 +116,9 @@ export class AuthService {
     return this.accessToken();
   }
   setAccessToken(token: string): void {
-    localStorage.setItem('accessToken', token);
     this.accessToken.set(token);
-  }
-  getRefreshToken(): string | null {
-    return this.refreshToken();
-  }
-  setRefreshToken(token: string): void {
-    localStorage.setItem('refreshToken', token);
-    this.refreshToken.set(token);
+    this.hasSession.set(true);
+    localStorage.setItem('hasSession', 'true');
   }
 
   // EMAIL
@@ -147,7 +163,6 @@ export class AuthService {
 
   // ROLES
   setRole(role: string): void {
-    localStorage.setItem('userRole', role);
     this.userRole.set(role);
   }
   getRole(): string | null {
