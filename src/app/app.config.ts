@@ -15,7 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const authService = inject(AuthService);
       // Try to restore session on page load if we have a session hint
-      console.log(authService.isLoggedIn())
       if (authService.isLoggedIn()) {
         return authService.refreshTokens().pipe(
           catchError((err) => {

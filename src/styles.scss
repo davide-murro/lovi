@@ -81,9 +81,10 @@ body {
 }
 
 .object-parallax {
-    position: relative; 
+    position: relative;
     overflow: hidden;
 }
+
 .object-parallax .img-parallax {
     object-fit: cover;
     inset: 0;
