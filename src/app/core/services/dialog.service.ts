@@ -27,16 +27,20 @@ export class DialogService {
   }
 
   close<TResult = any>(result?: TResult) {
+    const subject = this._result$;
     this._dialog.set({ ...this._dialog(), visible: false });
-    this._result$?.next(result);
-    this._result$?.complete();
+    subject?.next(result);
+    subject?.complete();
+    if (this._result$ === subject) {
+      this._result$ = undefined;
+    }
   }
 
   // Shortcut for confirm dialogs
   confirm(title: string, message: string): Observable<boolean> {
-    return this.open(ConfirmDialog, { 
-      title, 
-      data: { message }, 
+    return this.open(ConfirmDialog, {
+      title,
+      data: { message },
       type: 'info'
     });
   }

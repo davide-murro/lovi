@@ -4,14 +4,13 @@
     <div class="section">
         <h3 i18n class="title2 text-center">Information</h3>
 
-        <form [formGroup]="informationForm" (ngSubmit)="onSubmitInformation()"
-            class="flex flex-col items-center gap-4">
+        <form [formGroup]="informationForm" (ngSubmit)="onSubmitInformation()" class="flex flex-col items-center gap-4">
             <div class="max-w-full">
                 <label i18n for="email" class="label">Email</label>
                 <div class="flex gap-2">
                     <input type="email" formControlName="email" id="email" class="input w-full" />
-                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Change email"
-                        (click)="changeEmail()">
+                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2"
+                        title="Change email" (click)="changeEmail()">
                         <fa-icon [icon]="faPen" />
                         <span i18n class="hidden lg:inline">Edit</span>
                     </button>
@@ -22,8 +21,8 @@
                 <label i18n for="password" class="label">Password</label>
                 <div class="flex gap-2">
                     <input type="password" formControlName="password" id="password" class="input w-full" />
-                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2" title="Change password"
-                        (click)="changePassword()">
+                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2"
+                        title="Change password" (click)="changePassword()">
                         <fa-icon [icon]="faPen" />
                         <span i18n class="hidden lg:inline">Edit</span>
                     </button>
@@ -47,7 +46,7 @@
             </div>
 
             <button i18n i18n-title type="submit" class="flex-none button button-primary button-rounded" title="Save"
-                [disabled]="!informationForm.valid || !informationForm.dirty || onInformationLoading()">Save</button>
+                [disabled]="!informationForm.valid || !informationForm.dirty || informationLoading()">Save</button>
         </form>
     </div>
 
@@ -59,9 +58,11 @@
         <h3 i18n class="title2 text-center">Account</h3>
 
         <div class="flex flex-col items-center gap-4">
-            <button i18n i18n-title type="button" class="button button-accent" title="Log out" (click)="logout()">Log out</button>
+            <button i18n i18n-title type="button" class="button button-accent" title="Log out" (click)="logout()"
+                [disabled]="logoutLoading()">Log
+                out</button>
             <button i18n i18n-title type="button" class="button button-accent" title="Log out from all devices"
-                (click)="logoutAll()">Log out from all devices</button>
+                (click)="logoutAll()" [disabled]="logoutLoading()">Log out from all devices</button>
             <button i18n i18n-title type="button" class="button button-error" title="Delete account"
                 (click)="deleteAccount()">Delete
                 account</button>

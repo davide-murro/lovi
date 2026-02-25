@@ -32,7 +32,7 @@ export class UserProfile {
 
   private _userProfile: Signal<UserProfileDto> = toSignal(this.route.data.pipe(map(data => data['userProfile'])));
 
-  onInformationLoading = signal(false);
+  informationLoading = signal(false);
   informationForm = new FormGroup({
     id: new FormControl(this._userProfile().id),
     email: new FormControl({ value: this._userProfile().email!, disabled: true }),
@@ -40,12 +40,14 @@ export class UserProfile {
     name: new FormControl(this._userProfile().name, Validators.required),
   });
 
+  logoutLoading = signal(false);
+
   changeEmail() {
     this.dialogService.open(ChangeEmailDialog)
       .subscribe((result: boolean) => {
         if (result) {
           this.dialogService.log(
-            $localize`Email changing confirmation sent`, 
+            $localize`Email changing confirmation sent`,
             $localize`Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again.`
           ).subscribe();
         }
@@ -56,7 +58,7 @@ export class UserProfile {
       .subscribe((result: boolean) => {
         if (result) {
           this.dialogService.log(
-            $localize`Password changed`, 
+            $localize`Password changed`,
             $localize`Confirmation notices have been sent to your email addresses.`
           ).subscribe();
         }
@@ -70,17 +72,17 @@ export class UserProfile {
       id: this.informationForm.value.id!,
       name: this.informationForm.value.name!
     }
-    this.onInformationLoading.set(true);
+    this.informationLoading.set(true);
     this.userService.updateMe(dto).subscribe({
       next: () => {
         this.toasterService.show($localize`Profile updated`, { type: 'success' });
         this.informationForm.reset(this.informationForm.getRawValue());
-        this.onInformationLoading.set(false);
+        this.informationLoading.set(false);
       },
       error: (error) => {
         console.error('userService.updateMe', dto, error);
         this.toasterService.show($localize`Profile update error`, { type: "error" });
-        this.onInformationLoading.set(false);
+        this.informationLoading.set(false);
       }
     });
   }
@@ -91,14 +93,18 @@ export class UserProfile {
       $localize`You will be logged out of this browser session only. All other active sessions will remain logged in.`)
       .subscribe((res) => {
         if (res) {
+          this.logoutLoading.set(true);
           this.authService.revoke().subscribe({
             next: () => {
               this.router.navigate(['/']);
+              this.logoutLoading.set(false);
             },
             error: (error) => {
               console.error('authService.revoke', error);
-              //this.toasterService.show($localize`Log out error`, { type: "error" });
-              this.authService.logout(); // Force logout even if revoke fails (e.g. due to network error), to prevent user from being stuck in a broken state
+              // Force logout even if revoke fails (e.g. due to network error), to prevent user from being stuck in a broken state
+              this.authService.logout();
+              this.router.navigate(['/']);
+              this.logoutLoading.set(false);
             }
           });
         }
@@ -110,13 +116,16 @@ export class UserProfile {
       $localize`You will be logged out of all browser sessions you have opened. Are you sure?`)
       .subscribe((res) => {
         if (res) {
+          this.logoutLoading.set(true);
           this.authService.revokeAll().subscribe({
             next: () => {
               this.router.navigate(['/']);
+              this.logoutLoading.set(false);
             },
             error: (error) => {
               console.error('authService.revokeAll', error);
               this.toasterService.show($localize`Log out from all devices error`, { type: "error" });
+              this.logoutLoading.set(false);
             }
           });
         }
@@ -128,7 +137,7 @@ export class UserProfile {
       .subscribe((result: boolean) => {
         if (result) {
           this.dialogService.log(
-            $localize`Account deleted`, 
+            $localize`Account deleted`,
             $localize`You will be redirected to the home page.`
           ).subscribe(() => this.router.navigate(['/']));
         }

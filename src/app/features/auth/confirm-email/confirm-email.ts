@@ -3,7 +3,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
-import { ToasterService } from '../../../core/services/toaster.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ConfirmEmailDto } from '../../../core/models/dtos/auth/confirm-email-dto.model';
@@ -40,11 +39,18 @@ export class ConfirmEmail {
       },
       error: (error) => {
         console.error('authService.confirmEmail', dto, error);
-        this.dialogService.log(
-          $localize`Email confirmation failed`,
-          $localize`Email confirmation failed, unexpected error.`,
-          { type: 'error' }
-        );
+        if ((Array.isArray(error.error) && error.error.some((e: any) => e.code === 'EmailAlreadyConfirmed'))) {
+          this.dialogService.log(
+            $localize`Email already confirmed`,
+            $localize`You can login into LOVI with the email and the password you chose during the registration.`
+          ).subscribe(() => this.router.navigate(['/auth', 'login']));
+        } else {
+          this.dialogService.log(
+            $localize`Email confirmation failed`,
+            $localize`Email confirmation failed, unexpected error.`,
+            { type: 'error' }
+          );
+        }
         this.isLoading.set(false);
       }
     });

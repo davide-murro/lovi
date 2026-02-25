@@ -226,16 +226,6 @@ body {
     color: var(--text-color-disabled);
 }
 
-.button-error {
-    background-color: var(--bg-color-error);
-    color: var(--text-color-error);
-}
-
-.button-success {
-    background-color: var(--bg-color-success);
-    color: var(--text-color-success);
-}
-
 .button-accent:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-accent-light);
@@ -254,6 +244,16 @@ body {
 .button-primary:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-primary-light);
+}
+
+.button-error {
+    background-color: var(--bg-color-error);
+    color: var(--text-color-error);
+}
+
+.button-success {
+    background-color: var(--bg-color-success);
+    color: var(--text-color-success);
 }
 
 .link {

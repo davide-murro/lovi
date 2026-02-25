@@ -1,0 +1,57 @@
+.button-google {
+    background-color: #DB4437;
+    color: var(--text-color-light);
+}
+
+.button-google[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
+}
+
+.button-google:not([disabled]):hover {
+    background-color: #c93a2d;
+}
+
+/*
+.button-facebook {
+    background-color: #4267B2;
+    color: var(--text-color-light);
+}
+
+.button-facebook[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
+}
+
+.button-facebook:not([disabled]):hover {
+    background-color: #3b5b98;
+}
+
+.button-instagram {
+    background-color: #C13584;
+    color: var(--text-color-light);
+}
+
+.button-instagram[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
+}
+
+.button-instagram:not([disabled]):hover {
+    background-color: #a82e72;
+}
+
+.button-spotify {
+    background-color: #1DB954;
+    color: var(--text-color-light);
+}
+
+.button-spotify[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
+}
+
+.button-spotify:not([disabled]):hover {
+    background-color: #1a8c44;
+}
+*/
