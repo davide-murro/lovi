@@ -41,5 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Production settings
+# environment settings
 /src/environments/environment.*.ts
