@@ -10,6 +10,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { passwordValidator } from '../../../core/validators/password-validator';
 import { ResetPasswordDto } from '../../../core/models/dtos/auth/reset-password-dto.model';
+import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
 
 @Component({
   selector: 'app-forgot-password',
@@ -53,13 +54,18 @@ export class ForgotPassword {
         ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isForgotLoading.set(false);
       },
-      error: (error) => {
-        console.error('authService.forgotPassword', dto, error);
-        this.dialogService.log(
-          $localize`Forgot password process error`,
-          $localize`Unable to reset password. The email could not be processed.`,
-          { type: 'error' }
-        ).subscribe();
+      error: (err) => {
+        console.error('authService.forgotPassword', dto, err);
+        if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'EmailNotConfirmed'))) {
+          this.dialogService.open(ResendChangeEmailDialog, { data: { email: dto.email } })
+            .subscribe((res) => { if (res) this.router.navigate(['/auth', 'login']) });
+        } else {
+          this.dialogService.log(
+            $localize`Forgot password process error`,
+            $localize`Unable to reset password. The email could not be processed.`,
+            { type: 'error' }
+          ).subscribe();
+        }
         this.isForgotLoading.set(false);
       }
     });

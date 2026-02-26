@@ -5,7 +5,6 @@ import { LoginDto } from '../../../core/models/dtos/auth/login-dto.model';
 import { Router, RouterLink } from '@angular/router';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { DialogService } from '../../../core/services/dialog.service';
-import { ResendConfirmEmailDto } from '../../../core/models/dtos/auth/resend-confirm-email-dto.model';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle, faInstagram, faSpotify } from '@fortawesome/free-brands-svg-icons';
@@ -62,12 +61,7 @@ export class Login {
         this.isLoading.set(false);
 
         if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'EmailNotConfirmed'))) {
-          let resendDto: ResendConfirmEmailDto = {
-            email: dto.userName,
-          };
-          this.dialogService.open(ResendChangeEmailDialog, {
-            data: resendDto,
-          });
+          this.dialogService.open(ResendChangeEmailDialog, { data: { email: dto.userName } });
         } else {
           this.toasterService.show($localize`Login failed`, { type: 'error' });
         }

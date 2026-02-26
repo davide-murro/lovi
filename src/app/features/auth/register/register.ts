@@ -7,6 +7,7 @@ import { valuesMatchValidator } from '../../../core/validators/values-match-vali
 import { passwordValidator } from '../../../core/validators/password-validator';
 import { DialogService } from '../../../core/services/dialog.service';
 import { EmailAlreadyTakenDialog } from '../../../shared/auth/email-already-taken-dialog/email-already-taken-dialog';
+import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
 
 @Component({
   selector: 'app-register',
@@ -46,7 +47,10 @@ export class Register {
       },
       error: (err) => {
         console.error('authService.register', dto, err);
-        if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'DuplicateEmail'))) {
+        if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'EmailNotConfirmed'))) {
+          this.dialogService.open(ResendChangeEmailDialog, { data: { email: dto.email } })
+            .subscribe((res) => { if (res) this.router.navigate(['/auth', 'login']) });
+        } else if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'DuplicateEmail'))) {
           this.dialogService.open(EmailAlreadyTakenDialog, { data: { email: dto.email } });
         } else {
           this.dialogService.log(

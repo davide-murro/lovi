@@ -3,7 +3,6 @@ import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { ResendConfirmEmailDto } from '../../../core/models/dtos/auth/resend-confirm-email-dto.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resend-change-email-dialog',
@@ -12,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrl: './resend-change-email-dialog.scss'
 })
 export class ResendChangeEmailDialog {
-  private router = inject(Router);
   private dialogService = inject(DialogService);
   private toasterService = inject(ToasterService);
   private authService = inject(AuthService);
@@ -37,7 +35,7 @@ export class ResendChangeEmailDialog {
           this.dialogService.log(
             $localize`Email already confirmed`,
             $localize`You can login into LOVI with the email and the password you chose during the registration.`
-          ).subscribe(() => this.router.navigate(['/auth', 'login']));
+          ).subscribe(() => this.dialogService.close(true));
         } else {
           this.toasterService.show(
             $localize`Confirmation email resending failed`,
