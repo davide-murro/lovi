@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, LOCALE_ID } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { catchError, switchMap, throwError, filter, take, Observable, shareReplay, finalize, map } from 'rxjs';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ let refreshToken$: Observable<string> | null = null;
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const authService = inject(AuthService);
+  const locale = inject(LOCALE_ID);
   const accessToken = authService.getAccessToken();
   const deviceId = authService.getOrCreateDeviceId();
 
@@ -17,9 +18,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authHeader = accessToken
     ? new HttpHeaders()
       .set('X-DeviceId', deviceId)
+      .set('X-Locale', locale)
       .set('Authorization', `Bearer ${accessToken}`)
     : new HttpHeaders()
-      .set('X-DeviceId', deviceId);
+      .set('X-DeviceId', deviceId)
+      .set('X-Locale', locale);
   const clonedReq = req.clone({
     headers: authHeader
   });
@@ -54,6 +57,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
               headers: new HttpHeaders()
                 .set('Authorization', `Bearer ${newAccessToken}`)
                 .set('X-DeviceId', deviceId)
+                .set('X-Locale', locale)
             });
             return next(newReq);
           })

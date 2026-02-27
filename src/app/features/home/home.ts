@@ -22,5 +22,10 @@ export class Home {
       title: 'Discover a new world of sound',
       subtitle: 'Explore hand-picked audio stories crafted for every mood and moment.',
     },
+    {
+      image: 'home-image-slider/slider3.jpg',
+      title: 'Test title',
+      subtitle: 'Test subtitle',
+    },
   ]);
 }

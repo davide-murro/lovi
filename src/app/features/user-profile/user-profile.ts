@@ -48,7 +48,7 @@ export class UserProfile {
         if (result) {
           this.dialogService.log(
             $localize`Email changing confirmation sent`,
-            $localize`Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in again.`
+            $localize`Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in.`
           ).subscribe();
         }
       });
