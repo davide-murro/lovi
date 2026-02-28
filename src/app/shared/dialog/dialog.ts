@@ -13,6 +13,8 @@ export class Dialog {
   @ViewChild('componentContainer', { read: ViewContainerRef, static: true })
   componentContainer!: ViewContainerRef;
 
+  private isMouseDownOnBackdrop = false;
+
   constructor() {
     // React to signal changes
     effect(() => {
@@ -29,8 +31,16 @@ export class Dialog {
     });
   }
 
-  onBackdropClick(event: MouseEvent) {
-    // close when clicking outside
-    this.dialogService.close(null);
+  onMouseDown(event: MouseEvent) {
+    // Check if the click started on the backdrop
+    this.isMouseDownOnBackdrop = event.target === event.currentTarget;
+  }
+
+  onMouseUp(event: MouseEvent) {
+    // Only close if it started and ended on the backdrop
+    if (this.isMouseDownOnBackdrop && event.target === event.currentTarget) {
+      this.dialogService.close(null);
+    }
+    this.isMouseDownOnBackdrop = false;
   }
 }
