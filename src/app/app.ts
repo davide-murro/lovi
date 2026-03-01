@@ -40,12 +40,10 @@ export class App {
           take(1)
         )
         .subscribe(() => {
-          if (e.position) {
+          if (e.position && (e.position[0] > 0 || e.position[1] > 0)) {
             this.viewportScroller.scrollToPosition(e.position);
           } else if (e.anchor) {
             this.viewportScroller.scrollToAnchor(e.anchor);
-          } else {
-            this.viewportScroller.scrollToPosition([0, 0]);
           }
         });
     });
