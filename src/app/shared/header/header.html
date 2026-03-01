@@ -39,10 +39,11 @@
 
         <span class="flex-grow hidden sm:flex"></span>
 
-        <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="flex gap-2 relative max-w-full">
-            <input i18n-placeholder type="search" formControlName="search" id="search" class="input !pr-14"
+        <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="flex items-center relative max-w-full">
+            <input i18n-placeholder type="search" formControlName="search" id="search" class="input !pr-15"
                 placeholder="Search" autocomplete="on" />
-            <button i18n-title type="submit" title="Search" class="input-button absolute right-0" [disabled]="!searchForm.valid">
+            <button i18n-title type="submit" title="Search" class="input-button absolute right-0"
+                [disabled]="!searchForm.valid">
                 <fa-icon [icon]="faMagnifyingGlass" />
             </button>
         </form>

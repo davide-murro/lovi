@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle, faInstagram, faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { ExternalLoginDto } from '../../../core/models/dtos/auth/external-login-dto.model';
 import { SocialAuthService } from '../../../core/services/social-auth.service';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,9 @@ export class Login {
   faFacebook = faFacebook;
   faInstagram = faInstagram;
   faSpotify = faSpotify;
+  faEye = faEye;
+
+  showPassword = signal(false);
 
   constructor() {
     //this.checkSpotifyCallback();
@@ -40,6 +44,10 @@ export class Login {
   });
 
   isLoading = signal(false);
+
+  togglePasswordVisibility(): void {
+    this.showPassword.set(!this.showPassword());
+  }
 
   login(): void {
     if (!this.form.valid) return;

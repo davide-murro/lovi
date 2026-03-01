@@ -1,10 +1,11 @@
 <div class="max-w-lg m-auto">
     <h1 i18n class="title text-center">Sign in or create an account</h1>
 
-    <form [formGroup]="form" (ngSubmit)="login()" class="section flex flex-col flex-1 items-center gap-4">
-        <div class="max-w-full">
+    <form [formGroup]="form" (ngSubmit)="login()"
+        class="section flex flex-col flex-1 items-center justify-center gap-4 m-auto max-w-full w-[300px]">
+        <div class="w-full">
             <label i18n for="user-name" class="label">Email</label>
-            <input type="email" formControlName="userName" id="user-name" class="input input-lg" />
+            <input type="email" formControlName="userName" id="user-name" class="input input-lg w-full" />
             @if(form.controls.userName.dirty) {
             @if(form.controls.userName.hasError('required')) {
             <p i18n class="text-error text-sm">
@@ -13,9 +14,17 @@
             }
             }
         </div>
-        <div class="max-w-full">
+        <div class="w-full">
             <label i18n for="password" class="label">Password</label>
-            <input type="password" formControlName="password" id="password" class="input input-lg" />
+            <div class="relative w-full">
+                <input [type]="showPassword() ? 'text' : 'password'" formControlName="password" id="password"
+                    class="input input-lg w-full !pr-18" />
+                <button i18n-title type="button" title="Show / Hide password"
+                    class="input-button input-button-lg absolute right-0 top-0" [class.text-primary]="showPassword()"
+                    (click)="togglePasswordVisibility()">
+                    <fa-icon [icon]="faEye" />
+                </button>
+            </div>
             @if(form.controls.password.dirty) {
             @if(form.controls.password.hasError('required')) {
             <p i18n class="text-error text-sm">
@@ -40,7 +49,7 @@
     </form>
 
     <div class="section flex flex-col items-center">
-        <h2 i18n class="title2">or continue with</h2>
+        <h2 i18n class="title2">Sign in another way</h2>
 
         <div class="flex flex-col items-center gap-4">
             <button i18n-title (click)="loginWithGoogle()" class="button button-rounded button-google flex gap-2"
