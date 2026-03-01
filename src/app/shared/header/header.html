@@ -1,6 +1,6 @@
 <header class="border-b-2 border-accent p-4 sm:px-8 flex flex-col gap-4">
     <div class="flex items-center justify-start gap-2 whitespace-nowrap sm:gap-4">
-        <a i18n-title title="Home" class="shrink-0" [routerLink]="['/']">
+        <a i18n-title title="Home" class="shrink-0 logo-link" [routerLink]="['/']">
             <img src="logo/logo-transparent.png" title="LOVI" alt="LOVI" width="136" height="45"
                 class="w-auto h-[40px] sm:h-[45px]" />
         </a>
@@ -28,14 +28,14 @@
 
     <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 overflow-initial sm:overflow-auto sm:-my-4 sm:-mx-8 sm:py-4 sm:px-8 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen()">
-        <a i18n i18n-title class="text-sm leading-normal" title="Audio Books" [routerLink]="['/audio-books']"
-            [routerLinkActive]="'text-primary'">Audio Books</a>
-        <a i18n i18n-title class="text-sm leading-normal" title="Podcasts" [routerLink]="['/podcasts']"
-            [routerLinkActive]="'text-primary'">Podcasts</a>
-        <a i18n i18n-title *appAuth class="text-sm leading-normal" title="My Library" [routerLink]="['/my-library']"
-            [routerLinkActive]="'text-primary'">My Library</a>
-        <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="text-sm leading-normal" title="Edit"
-            [routerLink]="['/edit']" [routerLinkActive]="'text-primary'">Edit</a>
+        <a i18n i18n-title class="menu-link" title="Audio Books" [routerLink]="['/audio-books']"
+            [routerLinkActive]="'active'">Audio Books</a>
+        <a i18n i18n-title class="menu-link" title="Podcasts" [routerLink]="['/podcasts']"
+            [routerLinkActive]="'active'">Podcasts</a>
+        <a i18n i18n-title *appAuth class="menu-link" title="My Library" [routerLink]="['/my-library']"
+            [routerLinkActive]="'active'">My Library</a>
+        <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="menu-link" title="Edit" [routerLink]="['/edit']"
+            [routerLinkActive]="'active'">Edit</a>
 
         <span class="flex-grow hidden sm:flex"></span>
 

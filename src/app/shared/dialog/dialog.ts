@@ -1,4 +1,4 @@
-import { Component, effect, inject, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, effect, ElementRef, inject, ViewChild, ViewContainerRef } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { DialogService } from '../../core/services/dialog.service';
 })
 export class Dialog {
   dialogService = inject(DialogService);
+  private elementRef = inject(ElementRef);
 
   @ViewChild('componentContainer', { read: ViewContainerRef, static: true })
   componentContainer!: ViewContainerRef;
@@ -27,6 +28,11 @@ export class Dialog {
         if (config?.title && 'title' in ref.instance) {
           (ref.instance as any).title = config.title;
         }
+
+        setTimeout(() => {
+          const autofocusElement = this.elementRef.nativeElement.querySelector('[autofocus]');
+          autofocusElement?.focus();
+        }, 0);
       }
     });
   }

@@ -21,6 +21,7 @@ export class DialogService {
     component: Type<any>,
     config?: DialogConfig<TData>
   ): Observable<TResult> {
+    (document.activeElement as HTMLElement)?.blur();
     this._result$ = new Subject<TResult>();
     this._dialog.set({ component, config, visible: true });
     return this._result$.asObservable();

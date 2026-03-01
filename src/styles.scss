@@ -118,7 +118,8 @@ body {
     color: var(--text-color-disabled);
 }
 
-.button:not([disabled]):hover {
+.button:not([disabled]):hover,
+.button:not([disabled]):focus {
     cursor: pointer;
     background-color: var(--color-opacity);
 }
@@ -174,7 +175,8 @@ body {
     color: var(--color-disabled);
 }
 
-.icon-button:not([disabled]):hover {
+.icon-button:not([disabled]):hover,
+.icon-button:not([disabled]):focus {
     cursor: pointer;
     background-color: var(--color-opacity);
 }
@@ -220,7 +222,8 @@ body {
     color: var(--text-color-accent);
 }
 
-.input-button:not([disabled]):hover {
+.input-button:not([disabled]):hover,
+.input-button:not([disabled]):focus {
     cursor: pointer;
     background-color: var(--color-accent-light);
 }
@@ -235,8 +238,8 @@ body {
     color: var(--text-color-disabled);
 }
 
-.button-accent:not([disabled]):hover {
-    cursor: pointer;
+.button-accent:not([disabled]):hover,
+.button-accent:not([disabled]):focus {
     background-color: var(--color-accent-light);
 }
 
@@ -250,8 +253,8 @@ body {
     color: var(--text-color-disabled);
 }
 
-.button-primary:not([disabled]):hover {
-    cursor: pointer;
+.button-primary:not([disabled]):hover,
+.button-primary:not([disabled]):focus {
     background-color: var(--color-primary-light);
 }
 
@@ -272,7 +275,8 @@ body {
     text-underline-offset: calc(var(--spacing) * 0.5);
 }
 
-.link:hover {
+.link:hover,
+.link:focus {
     text-decoration: underline;
 }
 
@@ -281,7 +285,8 @@ body {
     text-underline-offset: calc(var(--spacing) * 0.5);
 }
 
-.link-item:hover {
+.link-item:hover,
+.link-item:focus {
     text-decoration-line: underline;
 }
 
