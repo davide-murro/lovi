@@ -10,6 +10,7 @@
 
     --text-color: #ffffff;
     --text-color-accent: #bead9d;
+    --text-color-link: #cccccc;
     --text-color-dark: #231f20;
     --text-color-disabled: #383838;
     --text-color-error: #ff686a;
@@ -265,7 +266,7 @@ body {
 }
 
 .link {
-    color: var(--text-color-accent);
+    color: var(--text-color-link);
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
     text-underline-offset: calc(var(--spacing) * 0.5);
@@ -276,7 +277,7 @@ body {
 }
 
 .link-item {
-    text-decoration-color: var(--text-color-accent);
+    text-decoration-color: var(--text-color-link);
     text-underline-offset: calc(var(--spacing) * 0.5);
 }
 
