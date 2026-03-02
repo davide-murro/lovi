@@ -32,7 +32,7 @@ export class PodcastDetails {
 
   // podcast
   podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
-  
+
   isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
 
   // audio player
@@ -44,6 +44,7 @@ export class PodcastDetails {
           id: null!,
           title: pe.name,
           subtitle: $localize`Episode ${number}`,
+          artists: pe.voicers?.map(v => v.nickname),
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${this.podcast().id}/episodes/${pe.id}`

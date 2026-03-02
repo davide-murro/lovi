@@ -69,6 +69,7 @@ export class PodcastEpisode {
       id: null!,
       title: this.episode().name,
       subtitle: $localize`Episode ${number}`,
+      artists: this.episode().voicers?.map(v => v.nickname),
       audioSrc: this.episode().audioUrl!,
       coverImageSrc: this.episode().coverImagePreviewUrl,
       referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${this.episode().id}`
@@ -80,6 +81,7 @@ export class PodcastEpisode {
           id: null!,
           title: pe.name,
           subtitle: $localize`Episode ${number}`,
+          artists: pe.voicers?.map(v => v.nickname),
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${pe.id}`
@@ -95,6 +97,7 @@ export class PodcastEpisode {
       id: null!,
       title: this.episode().name,
       subtitle: $localize`Episode ${this.episode().number}`,
+      artists: this.episode().voicers?.map(v => v.nickname),
       audioSrc: this.episode().audioUrl!,
       coverImageSrc: this.episode().coverImagePreviewUrl,
       referenceLink: `/podcasts/${this.episode().podcast!.id}/episodes/${this.episode().id}`

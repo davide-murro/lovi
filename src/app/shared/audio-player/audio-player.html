@@ -1,58 +1,33 @@
 @if (audioPlayerService.currentTrack()){
-<div
-  class="flex flex-col items-center bg-accent p-4 max-h-[80vh] sm:px-8"
-  [class]="queueOpen() ? 'gap-4 border-t-2 border-primary' : ''"
->
+<div class="flex flex-col items-center bg-accent p-4 max-h-[80vh] sm:px-8"
+  [class]="queueOpen() ? 'gap-4 border-t-2 border-primary' : ''">
   @if (queueOpen()) {
   <button i18n-title class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
     <fa-icon [icon]="faClose" />
   </button>
   }
 
-  <ul
-    role="list"
-    class="flex flex-col flex-grow w-full overflow-auto -mx-4"
-    [class]="!queueOpen() ? 'hidden' : ''"
-  >
+  <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4" [class]="!queueOpen() ? 'hidden' : ''">
     @for (track of audioPlayerService.queue(); track $index) {
-    <li
-      class="flex items-center px-4 py-2 gap-2 hover:bg-opacity"
-      [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id"
-    >
-      <button
-        class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
-        (click)="audioPlayerService.playId(track.id)"
-      >
-        <img
-          class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-          loading="lazy"
-          decoding="async"
-          [src]="track.coverImageSrc"
-          [alt]="track.title"
-        />
+    <li class="flex items-center px-4 py-2 gap-2 hover:bg-opacity"
+      [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id">
+      <button class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
+        (click)="audioPlayerService.playId(track.id)">
+        <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
+          loading="lazy" decoding="async" [src]="track.coverImageSrc" [alt]="track.title" />
         <div class="flex flex-col flex-grow overflow-hidden">
-          <span class="truncate">{{ track.title }}</span>
-          <span class="text-accent truncate">{{ track.subtitle }}</span>
+          <span class="truncate">{{ track.title }} @if(track.subtitle) { - {{ track.subtitle }} }</span>
+          <span class="text-accent truncate">{{ track.artists?.join(", ") }}</span>
         </div>
       </button>
 
       <div class="flex gap-2">
-        <button
-          i18n-title
-          type="button"
-          class="icon-button"
-          [routerLink]="track.referenceLink"
-          title="Go to the reference page"
-        >
+        <button i18n-title type="button" class="icon-button" [routerLink]="track.referenceLink"
+          title="Go to the reference page">
           <fa-icon [icon]="faShare" />
         </button>
-        <button
-          i18n-title
-          type="button"
-          class="icon-button"
-          title="Remove from queue"
-          (click)="audioPlayerService.removeFromQueue(track.id)"
-        >
+        <button i18n-title type="button" class="icon-button" title="Remove from queue"
+          (click)="audioPlayerService.removeFromQueue(track.id)">
           <fa-icon [icon]="faTrash" />
         </button>
       </div>
@@ -60,23 +35,14 @@
     }
   </ul>
 
-  <input
-    type="range"
-    class="h-2 w-full cursor-pointer"
-    [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1 thump-hidden' : 'my-2'"
-    [min]="0"
-    [max]="formatIntValue(audioPlayerService.duration())"
-    [value]="formatIntValue(audioPlayerService.currentTime())"
+  <input type="range" class="h-2 w-full cursor-pointer"
+    [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1 thump-hidden' : 'my-2'" [min]="0"
+    [max]="formatIntValue(audioPlayerService.duration())" [value]="formatIntValue(audioPlayerService.currentTime())"
     [style.--value]="
       formatIntValue(audioPlayerService.currentTime()) /
       formatIntValue(audioPlayerService.duration())
-    "
-    (mousedown)="onSeekingStart()"
-    (touchstart)="onSeekingStart()"
-    (mouseup)="onSeekingEnd()"
-    (touchend)="onSeekingEnd()"
-    (input)="onSeeking($event.target.valueAsNumber)"
-  />
+    " (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
+    (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)" />
 
   @if (queueOpen()) {
   <span class="flex justify-center items-center text-sm text-accent">
@@ -87,23 +53,18 @@
 
   <div class="flex justify-between items-center w-full gap-2">
     @if (!queueOpen()) {
-    <button
-      class="text-left flex flex-col flex-grow min-w-[100px] cursor-pointer"
-      (click)="queueOpen.set(true)"
-    >
+    <button class="text-left flex flex-col flex-grow min-w-[100px] cursor-pointer" (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">
-        <img
-          class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-          loading="lazy"
-          decoding="async"
-          [src]="audioPlayerService.currentTrack()?.coverImageSrc"
-          [alt]="audioPlayerService.currentTrack()?.title"
-        />
+        <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
+          loading="lazy" decoding="async" [src]="audioPlayerService.currentTrack()?.coverImageSrc"
+          [alt]="audioPlayerService.currentTrack()?.title" />
         <div class="flex flex-col truncate">
-          <span class="truncate">{{ audioPlayerService.currentTrack()?.title }}</span>
+          <span class="truncate">{{ audioPlayerService.currentTrack()?.title }}
+            @if(audioPlayerService.currentTrack()?.subtitle) { - {{ audioPlayerService.currentTrack()?.subtitle }}
+            }</span>
           <span class="text-accent truncate">{{
-            audioPlayerService.currentTrack()?.subtitle
-          }}</span>
+            audioPlayerService.currentTrack()?.artists?.join(", ")
+            }}</span>
         </div>
       </div>
     </button>
@@ -115,47 +76,23 @@
     }
 
     <div class="flex justify-center gap-2">
-      <button
-        i18n-title
-        type="button"
-        class="icon-button"
-        title="Back"
-        (click)="audioPlayerService.previous()"
-      >
+      <button i18n-title type="button" class="icon-button" title="Back" (click)="audioPlayerService.previous()">
         @if (audioPlayerService.currentIndex() > 0){ <fa-icon [icon]="faBackward" />} @else if
         (audioPlayerService.currentIndex() === 0){ <fa-icon [icon]="faBackwardStep" />}
       </button>
-      <button
-        i18n-title
-        type="button"
-        class="icon-button"
-        title="Play / Pause"
-        (click)="audioPlayerService.togglePlay()"
-      >
-        @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon
-          [icon]="faPlay"
-        />}
+      <button i18n-title type="button" class="icon-button" title="Play / Pause"
+        (click)="audioPlayerService.togglePlay()">
+        @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon [icon]="faPlay" />}
       </button>
-      <button
-        i18n-title
-        type="button"
-        class="icon-button"
-        title="Forward"
-        [disabled]="audioPlayerService.nextTrack() == null"
-        (click)="audioPlayerService.next()"
-      >
+      <button i18n-title type="button" class="icon-button" title="Forward"
+        [disabled]="audioPlayerService.nextTrack() == null" (click)="audioPlayerService.next()">
         <fa-icon [icon]="faForward" />
       </button>
     </div>
 
     @if(queueOpen()) {
-    <button
-      i18n-title
-      type="button"
-      class="icon-button"
-      title="Remove all queue"
-      (click)="audioPlayerService.removeAllQueue()"
-    >
+    <button i18n-title type="button" class="icon-button" title="Remove all queue"
+      (click)="audioPlayerService.removeAllQueue()">
       <fa-icon [icon]="faTrash" />
     </button>
     }

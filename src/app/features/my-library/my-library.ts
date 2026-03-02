@@ -22,7 +22,7 @@ export class MyLibrary {
   private librariesService = inject(LibrariesService);
 
   faPlay = faPlay;
-  
+
   // library  
   myLibraryAudioBooks = computed(() => {
     const list = this.librariesService.myLibrary()
@@ -43,7 +43,7 @@ export class MyLibrary {
 
     return grouped;
   });
-  
+
   podcastPlayAll(podcast: PodcastDto) {
     const itemQueue = this.myLibraryPodcasts()!
       .find(p => p.id === podcast.id)!.episodes!
@@ -53,6 +53,7 @@ export class MyLibrary {
           id: null!,
           title: pe.name,
           subtitle: $localize`Episode ${number}`,
+          artists: pe.voicers?.map(v => v.nickname),
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,
           referenceLink: `/podcasts/${podcast.id}/episodes/${pe.id}`
