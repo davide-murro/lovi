@@ -4,8 +4,8 @@
     <span>{{audioBook() ? audioBook()!.name : 'New Audio Book'}}</span>
 </div>
 
-<h2 class="title flex justify-between items-start gap-2">
-    Edit Audio Book
+<div class="title flex justify-between items-start gap-2">
+    <h2 class="flex-1">Edit Audio Book</h2>
 
     <div class="flex gap-2">
         @if(audioBook() != null) {
@@ -15,7 +15,7 @@
         </button>
         }
     </div>
-</h2>
+</div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="section flex flex-col gap-4">
 

@@ -4,8 +4,8 @@
     <span>{{creator() ? creator()!.nickname : 'New Creator'}}</span>
 </div>
 
-<h2 class="title flex justify-between items-start gap-2">
-    Edit Creator
+<div class="title flex justify-between items-start gap-2">
+    <h2 class="flex-1">Edit Creator</h2>
 
     <div class="flex gap-2">
         @if(creator() != null) {
@@ -15,7 +15,7 @@
         </button>
         }
     </div>
-</h2>
+</div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="section flex flex-col gap-4">
 
