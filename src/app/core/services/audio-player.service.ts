@@ -1,6 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
-import { DialogService } from './dialog.service';
 import { ToasterService } from './toaster.service';
 
 @Injectable({
@@ -51,19 +50,32 @@ export class AudioPlayerService {
     });
     this.audio.addEventListener('pause', () => {
       this.isPlaying.set(false);
+      this.currentTime.set(this.audio.currentTime); // Sync time on pause to ensure the UI is 100% accurate
       this.updatePlaybackState();
     });
 
     // Listen for time updates and duration
-    this.audio.addEventListener('timeupdate', () => {
-      this.currentTime.set(this.audio.currentTime);
-      this.updatePositionState();
-    });
-    this.audio.addEventListener('loadedmetadata', () => {
-      this.duration.set(this.audio.duration);
-      this.updatePositionState();
-      this.updatePlaybackState();
-    });
+    const syncTime = () => {
+      if (isFinite(this.audio.currentTime)) {
+        this.currentTime.set(this.audio.currentTime);
+        this.updatePositionState();
+      }
+    };
+
+    const syncDuration = () => {
+      if (isFinite(this.audio.duration)) {
+        this.duration.set(this.audio.duration);
+        this.updatePositionState();
+        this.updatePlaybackState();
+      }
+    };
+
+    this.audio.addEventListener('timeupdate', syncTime);
+    this.audio.addEventListener('seeking', syncTime);
+    this.audio.addEventListener('seeked', syncTime);
+
+    this.audio.addEventListener('loadedmetadata', syncDuration);
+    this.audio.addEventListener('durationchange', syncDuration);
 
     // listen to errors
     this.audio.addEventListener('error', (event) => {
@@ -83,6 +95,17 @@ export class AudioPlayerService {
       navigator.mediaSession.setActionHandler('pause', () => this.pause());
       navigator.mediaSession.setActionHandler('previoustrack', () => this.previous());
       navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+      navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.seekTime !== undefined) this.seek(details.seekTime);
+      });
+      navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+        const skipTime = details.seekOffset || 10;
+        this.seek(this.audio.currentTime - skipTime);
+      });
+      navigator.mediaSession.setActionHandler('seekforward', (details) => {
+        const skipTime = details.seekOffset || 10;
+        this.seek(this.audio.currentTime + skipTime);
+      });
     }
   }
 
@@ -178,6 +201,14 @@ export class AudioPlayerService {
     this.playId(playTrack.id);
   }
 
+  restartQueue() {
+    const q = this.queue();
+    if (q.length > 0) {
+      this.playId(q[0].id);
+      this.seek(0);
+    }
+  }
+
 
   pause() {
     this.audio.pause();
@@ -192,6 +223,9 @@ export class AudioPlayerService {
   next() {
     if (this.nextTrack() != null) {
       this.playId(this.nextTrack()!.id);
+    } else {
+      this.seek(this.audio.duration);
+      this.pause();
     }
   }
 
@@ -241,6 +275,7 @@ export class AudioPlayerService {
     // Only seek if the audio is loaded
     if (this.audio.readyState > 0) {
       this.audio.currentTime = time;
+      this.currentTime.set(time); // Sync immediately to prevent UI glitch on release
     }
   }
 

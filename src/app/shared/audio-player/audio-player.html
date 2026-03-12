@@ -37,17 +37,16 @@
 
   <input type="range" class="h-2 w-full cursor-pointer"
     [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1 thump-hidden' : 'my-2'" [min]="0"
-    [max]="formatIntValue(audioPlayerService.duration())" [value]="formatIntValue(audioPlayerService.currentTime())"
-    [style.--value]="
-      formatIntValue(audioPlayerService.currentTime()) /
-      formatIntValue(audioPlayerService.duration())
+    [max]="formatIntValue(displayDuration())" [value]="formatIntValue(displayTime())" [style.--value]="
+      formatIntValue(displayTime()) /
+      formatIntValue(displayDuration())
     " (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
     (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)" />
 
   @if (queueOpen()) {
   <span class="flex justify-center items-center text-sm text-accent">
-    {{ formatTime(audioPlayerService.currentTime()) }} /
-    {{ formatTime(audioPlayerService.duration()) }}
+    {{ formatTime(displayTime()) }} /
+    {{ formatTime(displayDuration()) }}
   </span>
   }
 

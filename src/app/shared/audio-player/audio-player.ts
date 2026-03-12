@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBackward, faBackwardStep, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +26,12 @@ export class AudioPlayer {
   playerVisible = signal(false);
   queueOpen = signal(false);
 
+  displayTime = computed(() => this.isSeeking() ? this.seekingTime() : this.audioPlayerService.currentTime());
+  displayDuration = computed(() => this.audioPlayerService.duration());
+
   private wasPlayingBeforeSeek = signal(false);
+  private isSeeking = signal(false);
+  private seekingTime = signal(0);
 
   constructor() {
     effect(() => {
@@ -42,16 +47,21 @@ export class AudioPlayer {
   // Called on mousedown (desktop) or touchstart (mobile).
   onSeekingStart() {
     this.wasPlayingBeforeSeek.set(this.audioPlayerService.isPlaying());
+    this.isSeeking.set(true);
+    this.seekingTime.set(this.audioPlayerService.currentTime());
     this.audioPlayerService.pause();
   }
 
   // Called on input.
   onSeeking(value: number) {
-    this.audioPlayerService.seek(value);
+    this.seekingTime.set(value);
   }
 
   // Called on mouseup (desktop) or touchend (mobile).
   onSeekingEnd() {
+    this.audioPlayerService.seek(this.seekingTime());
+    this.isSeeking.set(false);
+
     if (this.wasPlayingBeforeSeek()) {
       this.audioPlayerService.play();
     }
