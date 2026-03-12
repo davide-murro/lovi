@@ -84,10 +84,17 @@
         (click)="audioPlayerService.togglePlay()">
         @if(audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon [icon]="faPlay" />}
       </button>
-      <button i18n-title type="button" class="icon-button" title="Forward"
+      @if (audioPlayerService.nextTrack() != null || audioPlayerService.currentTime() < audioPlayerService.duration() -
+        5) { <button i18n-title type="button" class="icon-button" title="Forward"
         [disabled]="audioPlayerService.nextTrack() == null" (click)="audioPlayerService.next()">
         <fa-icon [icon]="faForward" />
-      </button>
+        </button>
+        } @else {
+        <button i18n-title type="button" class="icon-button" title="Restart queue"
+          (click)="audioPlayerService.restartQueue()">
+          <fa-icon [icon]="faRotateLeft" />
+        </button>
+        }
     </div>
 
     @if(queueOpen()) {
