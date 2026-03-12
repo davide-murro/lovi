@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { CreatorDto } from '../models/dtos/creator-dto.model';
-import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
+import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +43,11 @@ export class CreatorsService {
   getPaged(query: PagedQuery): Observable<PagedResult<CreatorDto>> {
     const params = new HttpParams({ fromObject: { ...query } });
     return this.http.get<PagedResult<CreatorDto>>(`${this.apiUrl}/paged`, { params });
+  }
+
+  // GET creator cover
+  getCover(id: number, isPreview: boolean = false): Observable<Blob> {
+    let params = isPreview ? new HttpParams().set('isPreview', 'True') : new HttpParams();
+    return this.http.get(`${this.apiUrl}/${id}/cover`, { params, responseType: 'blob' });
   }
 }

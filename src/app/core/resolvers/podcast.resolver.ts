@@ -6,10 +6,11 @@ import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { catchError, of } from 'rxjs';
 
 export const podcastResolver: ResolveFn<PodcastDto | null> = (route, state) => {
-  const id = Number(route.paramMap.get('id'));
   const router = inject(Router);
   const location = inject(Location);
   const podcastsService = inject(PodcastsService);
+
+  const id = Number(route.paramMap.get('id'));
 
   return podcastsService.getById(id).pipe(
     catchError(() => {

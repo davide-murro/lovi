@@ -3,4 +3,9 @@ export interface CreatorDto {
     nickname: string;
     name?: string;
     surname?: string;
+    dataUrl?: string;
+    coverImageUrl?: string;
+    coverImage?: File;
+    coverImagePreviewUrl?: string;
+    coverImagePreview?: File;
 }

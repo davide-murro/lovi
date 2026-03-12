@@ -6,10 +6,11 @@ import { CreatorsService } from '../services/creators.service';
 import { CreatorDto } from '../models/dtos/creator-dto.model';
 
 export const creatorResolver: ResolveFn<CreatorDto | null> = (route, state) => {
-  const id = Number(route.paramMap.get('id'));
   const router = inject(Router);
   const location = inject(Location);
   const creatorsService = inject(CreatorsService);
+
+  const id = Number(route.paramMap.get('id'));
 
   return creatorsService.getById(id).pipe(
     catchError(() => {

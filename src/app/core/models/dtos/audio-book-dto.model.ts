@@ -3,6 +3,7 @@ import { CreatorDto } from "./creator-dto.model";
 export interface AudioBookDto {
     id?: number;
     name: string;
+    dataUrl?: string;
     coverImageUrl?: string;
     coverImage?: File;
     coverImagePreviewUrl?: string;

@@ -74,4 +74,14 @@ export class AudioBooksService {
     return this.http.delete<void>(`${this.apiUrl}/${id}/readers/${readerId}`);
   }
 
+  // GET audioBook cover
+  getCover(id: number, isPreview: boolean = false): Observable<Blob> {
+    let params = isPreview ? new HttpParams().set('isPreview', 'True') : new HttpParams();
+    return this.http.get(`${this.apiUrl}/${id}/cover`, { params, responseType: 'blob' });
+  }
+
+  // GET audioBook audio
+  getAudio(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${id}/audio`, { responseType: 'blob' });
+  }
 }

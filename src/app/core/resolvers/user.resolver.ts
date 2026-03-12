@@ -6,10 +6,11 @@ import { UsersService } from '../services/users.service';
 import { UserDto } from '../models/dtos/auth/user-dto.model';
 
 export const userResolver: ResolveFn<UserDto | null> = (route, state) => {
-  const id = route.paramMap.get('id')!;
   const router = inject(Router);
   const location = inject(Location);
   const usersService = inject(UsersService);
+
+  const id = route.paramMap.get('id')!;
 
   return usersService.getById(id).pipe(
     catchError(() => {

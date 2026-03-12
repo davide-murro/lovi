@@ -6,15 +6,16 @@ import { catchError, of } from 'rxjs';
 import { AudioBookDto } from '../models/dtos/audio-book-dto.model';
 
 export const audioBookResolver: ResolveFn<AudioBookDto | null> = (route, state) => {
-  const id = Number(route.paramMap.get('id'));
   const router = inject(Router);
   const location = inject(Location);
   const audioBooksService = inject(AudioBooksService);
 
+  const id = Number(route.paramMap.get('id'));
+
   return audioBooksService.getById(id).pipe(
     catchError(() => {
       if (location.path() !== state.url) location.go(state.url);
-      router.navigate(['/not-found'], { skipLocationChange: true }); 
+      router.navigate(['/not-found'], { skipLocationChange: true });
       return of(null);
     })
   )

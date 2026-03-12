@@ -6,7 +6,6 @@ import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
-import { CreatorDto } from '../models/dtos/creator-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +71,13 @@ export class PodcastsService {
     return this.http.delete<void>(`${this.apiUrl}/${id}/voicers/${voicerId}`);
   }
 
-  // GET podcast by id
+  // GET podcast cover
+  getCover(id: number, isPreview: boolean = false): Observable<Blob> {
+    let params = isPreview ? new HttpParams().set('isPreview', 'True') : new HttpParams();
+    return this.http.get(`${this.apiUrl}/${id}/cover`, { params, responseType: 'blob' });
+  }
+
+  // GET podcast episode by id
   getEpisodeById(id: number, episodeId: number): Observable<PodcastEpisodeDto> {
     return this.http.get<PodcastEpisodeDto>(`${this.apiUrl}/${id}/episodes/${episodeId}`);
   }
@@ -123,5 +128,16 @@ export class PodcastsService {
   // REMOVE podcast episode voicer
   removeEpisodeVoicer(id: number, episodeId: number, voicerId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}/episodes/${episodeId}/voicers/${voicerId}`);
+  }
+
+  // GET podcast episode cover
+  getEpisodeCover(id: number, episodeId: number, isPreview: boolean = false): Observable<Blob> {
+    let params = isPreview ? new HttpParams().set('isPreview', 'True') : new HttpParams();
+    return this.http.get(`${this.apiUrl}/${id}/episodes/${episodeId}/cover`, { params, responseType: 'blob' });
+  }
+
+  // GET podcast episode audio
+  getEpisodeAudio(id: number, episodeId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${id}/episodes/${episodeId}/audio`, { responseType: 'blob' });
   }
 }

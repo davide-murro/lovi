@@ -6,10 +6,11 @@ import { RolesService } from '../services/roles.service';
 import { RoleDto } from '../models/dtos/auth/role-dto.model';
 
 export const roleResolver: ResolveFn<RoleDto | null> = (route, state) => {
-  const id = route.paramMap.get('id')!;
   const router = inject(Router);
   const location = inject(Location);
   const rolesService = inject(RolesService);
+
+  const id = route.paramMap.get('id')!;
 
   return rolesService.getById(id).pipe(
     catchError(() => {

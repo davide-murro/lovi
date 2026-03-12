@@ -4,6 +4,7 @@ import { PodcastEpisodeDto } from "./podcast-episode-dto.model";
 export interface PodcastDto {
     id?: number;
     name: string;
+    dataUrl?: string;
     coverImageUrl?: string;
     coverImage?: File;
     coverImagePreviewUrl?: string;
