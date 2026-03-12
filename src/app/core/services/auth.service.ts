@@ -23,21 +23,22 @@ export class AuthService {
   private apiUrl = environment.apiUrl + '/auth';
   private http = inject(HttpClient);
 
+  private hasSession = signal(localStorage.getItem('hasSession') === 'true');
   private accessToken = signal<string | null>(null);
   private userRole = signal<string | null>(null);
-  private hasSession = signal(localStorage.getItem('hasSession') === 'true');
 
   isLoggedIn = computed(() => !!this.hasSession());
+  isConnected = computed(() => !!this.hasSession() && !!this.accessToken());
 
   // REGISTER
   register(dto: RegisterDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/register`, dto);
+    return this.http.post<void>(`${this.apiUrl}/register`, dto, { headers: { 'ngsw-bypass': '' } });
   }
   confirmEmail(dto: ConfirmEmailDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/confirm-email`, dto);
+    return this.http.post<void>(`${this.apiUrl}/confirm-email`, dto, { headers: { 'ngsw-bypass': '' } });
   }
   resendConfirmEmail(dto: ResendConfirmEmailDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/resend-confirm-email`, dto);
+    return this.http.post<void>(`${this.apiUrl}/resend-confirm-email`, dto, { headers: { 'ngsw-bypass': '' } });
   }
 
   // LOGIN
@@ -45,7 +46,10 @@ export class AuthService {
     return this.http.post<TokenDto>(
       `${this.apiUrl}/login`,
       dto,
-      { withCredentials: true }
+      {
+        withCredentials: true,
+        headers: { 'ngsw-bypass': '' }
+      }
     ).pipe(
       tap((tokenDto) => {
         this.setAccessToken(tokenDto.accessToken);
@@ -60,7 +64,10 @@ export class AuthService {
     return this.http.post<TokenDto>(
       `${`${this.apiUrl}/external-login`}`,
       dto,
-      { withCredentials: true }
+      {
+        withCredentials: true,
+        headers: { 'ngsw-bypass': '' }
+      }
     ).pipe(
       tap((tokenDto) => {
         this.setAccessToken(tokenDto.accessToken);
@@ -83,7 +90,10 @@ export class AuthService {
     return this.http.post(
       `${this.apiUrl}/revoke`,
       {},
-      { withCredentials: true }
+      {
+        withCredentials: true,
+        headers: { 'ngsw-bypass': '' }
+      }
     ).pipe(
       tap(() => this.logout())
     );
@@ -93,7 +103,10 @@ export class AuthService {
     return this.http.post(
       `${this.apiUrl}/revoke-all`,
       {},
-      { withCredentials: true }
+      {
+        withCredentials: true,
+        headers: { 'ngsw-bypass': '' }
+      }
     ).pipe(
       tap(() => this.logout())
     );
@@ -101,17 +114,25 @@ export class AuthService {
 
   // DELETE ACCOUNT
   deleteAccount(dto: DeleteAccountDto): Observable<any> {
-    return this.http.post(`${this.apiUrl}/delete-account`, dto).pipe(
+    return this.http.post(`${this.apiUrl}/delete-account`,
+      dto,
+      {
+        withCredentials: true,
+        headers: { 'ngsw-bypass': '' }
+      }
+    ).pipe(
       tap(() => this.logout())
     );
   }
 
-  // TOKENS
   refreshTokens(): Observable<TokenDto> {
     return this.http.post<TokenDto>(
       `${this.apiUrl}/refresh`,
       {},
-      { withCredentials: true }
+      {
+        withCredentials: true,
+        headers: { 'ngsw-bypass': '' }
+      }
     ).pipe(
       tap(res => {
         this.setAccessToken(res.accessToken);
@@ -131,21 +152,21 @@ export class AuthService {
 
   // EMAIL
   changeEmail(changeEmail: ChangeEmailDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/change-email`, changeEmail);
+    return this.http.post<void>(`${this.apiUrl}/change-email`, changeEmail, { headers: { 'ngsw-bypass': '' } });
   }
   confirmChangeEmail(confirmChangeEmail: ConfirmChangeEmailDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/confirm-change-email`, confirmChangeEmail);
+    return this.http.post<void>(`${this.apiUrl}/confirm-change-email`, confirmChangeEmail, { headers: { 'ngsw-bypass': '' } });
   }
 
   // PASSWORD
   changePassword(changePassword: ChangePasswordDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/change-password`, changePassword);
+    return this.http.post<void>(`${this.apiUrl}/change-password`, changePassword, { headers: { 'ngsw-bypass': '' } });
   }
   forgotPassword(forgotPassword: ForgotPasswordDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/forgot-password`, forgotPassword);
+    return this.http.post<void>(`${this.apiUrl}/forgot-password`, forgotPassword, { headers: { 'ngsw-bypass': '' } });
   }
   resetPassword(resetPassword: ResetPasswordDto): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/reset-password`, resetPassword);
+    return this.http.post<void>(`${this.apiUrl}/reset-password`, resetPassword, { headers: { 'ngsw-bypass': '' } });
   }
 
   // DEVICE ID

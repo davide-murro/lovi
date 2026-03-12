@@ -1,7 +1,7 @@
-import { HttpErrorResponse, HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject, LOCALE_ID } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { catchError, switchMap, throwError, filter, take, Observable, shareReplay, finalize, map } from 'rxjs';
+import { catchError, switchMap, throwError, take, Observable, shareReplay, finalize, map } from 'rxjs';
 import { Router } from '@angular/router';
 
 // Shared refresh observable for all requests
@@ -11,20 +11,21 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const authService = inject(AuthService);
   const locale = inject(LOCALE_ID);
+  const isLoggedIn = authService.isLoggedIn();
   const accessToken = authService.getAccessToken();
   const deviceId = authService.getOrCreateDeviceId();
 
   // Clone the request and add headers
-  const authHeader = accessToken
-    ? new HttpHeaders()
-      .set('X-DeviceId', deviceId)
-      .set('X-Locale', locale)
-      .set('Authorization', `Bearer ${accessToken}`)
-    : new HttpHeaders()
-      .set('X-DeviceId', deviceId)
-      .set('X-Locale', locale);
+  const setHeaders: any = {
+    'X-DeviceId': deviceId,
+    'X-Locale': locale
+  };
+  if (accessToken) {
+    setHeaders['Authorization'] = `Bearer ${accessToken}`;
+  }
+
   const clonedReq = req.clone({
-    headers: authHeader
+    setHeaders
   });
 
   // Handle the response
@@ -33,13 +34,20 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       // check if the refresh call fails
       if (error.url?.includes('/auth/refresh')) {
         refreshToken$ = null;
+
+        // If it's a network error (0) or a server error (5xx), dont logout.
+        // We want to stay "logged in" offline.
+        if (error.status === 0 || error.status >= 500) {
+          return throwError(() => new Error('Server unreachable. Application is not connected.'));
+        }
+
         authService.logout();
         router.navigate(['/auth', 'login']);
         return throwError(() => new Error('Session expired. Please log in again.'));
       }
 
       // Check for a 401 Unauthorized error
-      if (error.status === 401 && accessToken) {
+      if (error.status === 401 && isLoggedIn) {
         if (!refreshToken$) {
           refreshToken$ = authService.refreshTokens().pipe(
             map(response => response.accessToken),
@@ -54,10 +62,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           take(1),
           switchMap(newAccessToken => {
             const newReq = req.clone({
-              headers: new HttpHeaders()
-                .set('Authorization', `Bearer ${newAccessToken}`)
-                .set('X-DeviceId', deviceId)
-                .set('X-Locale', locale)
+              setHeaders: {
+                'Authorization': `Bearer ${newAccessToken}`,
+                'X-DeviceId': deviceId,
+                'X-Locale': locale
+              }
             });
             return next(newReq);
           })
