@@ -1,7 +1,7 @@
 import { effect, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { finalize, Observable, shareReplay, tap } from 'rxjs';
 import { LibraryDto } from '../models/dtos/library-dto.model';
 import { ManageLibraryDto } from '../models/dtos/manage-library-dto.model';
 import { AuthService } from './auth.service';
@@ -20,7 +20,7 @@ export class LibrariesService {
 
   constructor() {
     effect(() => {
-      if (this.authService.isLoggedIn()) this.loadMyLibrary();
+      if (this.authService.isLoggedIn() || this.authService.isConnected()) this.loadMyLibrary();
       else this.removeMyLibrary();
     });
   }
@@ -39,10 +39,17 @@ export class LibrariesService {
   }
 
   // GET my library
+  private getMe$?: Observable<LibraryDto[]>;
   getMe(): Observable<LibraryDto[]> {
-    return this.http.get<LibraryDto[]>(`${this.apiUrl}/me`).pipe(
-      tap(data => this.setMyLibrary(data))
+    if (this.getMe$) return this.getMe$;
+
+    this.getMe$ = this.http.get<LibraryDto[]>(`${this.apiUrl}/me`).pipe(
+      tap(data => this.setMyLibrary(data)),
+      shareReplay(1),
+      finalize(() => this.getMe$ = undefined)
     );
+
+    return this.getMe$;
   }
 
   // POST create library

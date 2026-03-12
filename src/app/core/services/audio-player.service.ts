@@ -1,12 +1,15 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
 import { ToasterService } from './toaster.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioPlayerService {
+  private authService = inject(AuthService);
   private toasterService = inject(ToasterService);
+
   private audio = new Audio();
   private audioError = signal<boolean>(false);
 
@@ -41,6 +44,10 @@ export class AudioPlayerService {
   });
 
   constructor() {
+    effect(() => {
+      if (!this.authService.isLoggedIn()) this.removeAllQueue();
+    });
+
     // Go to next when audio ends
     this.audio.addEventListener('ended', () => this.next());
 
