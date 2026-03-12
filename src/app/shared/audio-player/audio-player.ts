@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBackward, faBackwardStep, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -23,9 +23,21 @@ export class AudioPlayer {
   faClose = faClose;
   faRotateLeft = faRotateLeft;
 
+  playerVisible = signal(false);
   queueOpen = signal(false);
 
   private wasPlayingBeforeSeek = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (this.audioPlayerService.currentTrack() != null) {
+        this.playerVisible.set(true);
+      } else {
+        this.playerVisible.set(false);
+        this.queueOpen.set(false);
+      }
+    })
+  }
 
   // Called on mousedown (desktop) or touchstart (mobile).
   onSeekingStart() {
