@@ -11,6 +11,7 @@ import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-
 import { LibrariesService } from '../../../../core/services/libraries.service';
 import { ManageLibraryDto } from '../../../../core/models/dtos/manage-library-dto.model';
 import { AuthDirective } from '../../../../core/directives/auth.directive';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-podcast-episode',
@@ -23,7 +24,8 @@ export class PodcastEpisode {
   private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private librariesService = inject(LibrariesService);
+  private authService = inject(AuthService);
+  private librariesService?: LibrariesService;
 
   faPlay = faPlay;
   faPause = faPause;
@@ -39,9 +41,15 @@ export class PodcastEpisode {
   episodePrev = computed(() => this.episode().podcast!.episodes!.find(pe => pe.number == this.episode().number - 1));
   episodeNext = computed(() => this.episode().podcast!.episodes!.find(pe => pe.number == this.episode().number + 1));
 
-  isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.podcast?.id === this.episode().podcast!.id && l.podcastEpisode?.id === this.episode().id));
+  isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.podcast?.id === this.episode().podcast!.id && l.podcastEpisode?.id === this.episode().id));
   isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.episode().audioUrl!));
   isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.episode().audioUrl!));
+
+  constructor() {
+    if (this.authService.isLoggedIn()) {
+      this.librariesService = inject(LibrariesService);
+    }
+  }
 
   // episode
   prevEpisode() {
@@ -117,7 +125,7 @@ export class PodcastEpisode {
       podcastEpisodeId: this.episode().id
     };
 
-    this.librariesService.createMe(episodeLibrary).subscribe({
+    this.librariesService!.createMe(episodeLibrary).subscribe({
       next: () => {
         this.toasterService.show($localize`Added to My Library`);
       },
@@ -128,10 +136,10 @@ export class PodcastEpisode {
     });
   }
   removeFromMyLibrary() {
-    const id: number = this.librariesService.myLibrary()!
+    const id: number = this.librariesService!.myLibrary()!
       .find(ml => ml.podcast?.id == this.episode().podcast!.id && ml.podcastEpisode?.id == this.episode().id)!.id!;
 
-    this.librariesService.deleteMe(id).subscribe({
+    this.librariesService!.deleteMe(id).subscribe({
       next: () => {
         this.toasterService.show($localize`Removed from My Library`);
       },

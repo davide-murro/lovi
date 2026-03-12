@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
@@ -12,6 +12,7 @@ import { LibrariesService } from '../../../core/services/libraries.service';
 import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.model';
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-podcast-detail',
@@ -23,7 +24,8 @@ export class PodcastDetails {
   private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private librariesService = inject(LibrariesService);
+  private authService = inject(AuthService);
+  private librariesService?: LibrariesService;
 
   faPlay = faPlay;
   faPause = faPause;
@@ -33,7 +35,13 @@ export class PodcastDetails {
   // podcast
   podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
 
-  isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
+  isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
+
+  constructor() {
+    if (this.authService.isLoggedIn()) {
+      this.librariesService = inject(LibrariesService);
+    }
+  }
 
   // audio player
   playAll() {
@@ -71,7 +79,7 @@ export class PodcastDetails {
         return ml;
       });
 
-    this.librariesService.createMeList(episodeLibraries).subscribe({
+    this.librariesService!.createMeList(episodeLibraries).subscribe({
       next: () => {
         this.toasterService.show($localize`Added all to My Library`);
       },
@@ -82,11 +90,11 @@ export class PodcastDetails {
     });
   }
   removeFromMyLibrary() {
-    const ids: number[] = this.librariesService.myLibrary()!
+    const ids: number[] = this.librariesService!.myLibrary()!
       .filter(pe => pe.podcast?.id == this.podcast().id)
       .map(pe => pe.id!);
 
-    this.librariesService.deleteMeList(ids).subscribe({
+    this.librariesService!.deleteMeList(ids).subscribe({
       next: () => {
         this.toasterService.show($localize`Removed all from My Library`);
       },

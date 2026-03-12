@@ -5,12 +5,13 @@ import { AudioPlayerService } from '../../../core/services/audio-player.service'
 import { LibrariesService } from '../../../core/services/libraries.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { faPlay, faPause, faList, faBookOpen, faBookBookmark } from '@fortawesome/free-solid-svg-icons';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 import { AudioTrack } from '../../../core/models/audio-track.model';
 import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.model';
 import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthDirective } from '../../../core/directives/auth.directive';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-audio-book-details',
@@ -22,7 +23,8 @@ export class AudioBookDetails {
   private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private librariesService = inject(LibrariesService);
+  private authService = inject(AuthService);
+  private librariesService?: LibrariesService;
 
   faPlay = faPlay;
   faPause = faPause;
@@ -33,9 +35,15 @@ export class AudioBookDetails {
   // audioBook
   audioBook: Signal<AudioBookDto> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
 
-  isInMyLibrary = computed(() => this.librariesService.myLibrary()?.some(l => l.audioBook?.id === this.audioBook().id));
+  isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.audioBook?.id === this.audioBook().id));
   isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.audioBook().audioUrl!));
   isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.audioBook().audioUrl!));
+
+  constructor() {
+    if (this.authService.isLoggedIn()) {
+      this.librariesService = inject(LibrariesService);
+    }
+  }
 
   // audio player
   togglePlay() {
@@ -83,7 +91,7 @@ export class AudioBookDetails {
       audioBookId: this.audioBook().id
     };
 
-    this.librariesService.createMe(audioBookLibrary).subscribe({
+    this.librariesService!.createMe(audioBookLibrary).subscribe({
       next: () => {
         this.toasterService.show($localize`Added to My Library`);
       },
@@ -94,10 +102,10 @@ export class AudioBookDetails {
     });
   }
   removeFromMyLibrary() {
-    const id: number = this.librariesService.myLibrary()!
+    const id: number = this.librariesService!.myLibrary()!
       .find(ml => ml.audioBook?.id == this.audioBook().id)!.id!;
 
-    this.librariesService.deleteMe(id).subscribe({
+    this.librariesService!.deleteMe(id).subscribe({
       next: () => {
         this.toasterService.show($localize`Removed from My Library`);
       },
