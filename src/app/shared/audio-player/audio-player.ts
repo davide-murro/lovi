@@ -3,10 +3,11 @@ import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBackward, faBackwardStep, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
+import { HttpSrcDirective } from '../../core/directives/http-src.directive';
 
 @Component({
   selector: 'app-audio-player',
-  imports: [FontAwesomeModule, RouterLink],
+  imports: [FontAwesomeModule, RouterLink, HttpSrcDirective],
   templateUrl: './audio-player.html',
   styleUrl: './audio-player.scss'
 })

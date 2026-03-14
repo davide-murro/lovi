@@ -1,15 +1,6 @@
-<a
-  class="link-item flex flex-1 flex-col gap-2"
-  [routerLink]="['/podcasts', podcast().id]"
-  [title]="podcast().name"
->
-  <img
-    class="aspect-[3/2] object-cover bg-accent rounded-xl"
-    loading="lazy"
-    decoding="async"
-    [src]="podcast().coverImagePreviewUrl"
-    [alt]="podcast().name"
-  />
+<a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name">
+  <img class="aspect-[3/2] object-cover bg-accent rounded-xl" loading="lazy" decoding="async"
+    [httpSrc]="podcast().coverImagePreviewUrl" [alt]="podcast().name" />
   <div>
     <p class="text-base font-medium leading-normal truncate">{{ podcast().name }}</p>
     <p class="text-accent text-sm truncate">

@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { faBookBookmark, faBookOpen, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AudioTrack } from '../../../core/models/audio-track.model';
 import { ToasterService } from '../../../core/services/toaster.service';
@@ -16,7 +17,7 @@ import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-podcast-detail',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem, HttpSrcDirective],
   templateUrl: './podcast-details.html',
   styleUrl: './podcast-details.scss'
 })
@@ -38,6 +39,7 @@ export class PodcastDetails {
   isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
 
   constructor() {
+    // TODO: creare un componente a parte così non devo fare il check??
     if (this.authService.isLoggedIn()) {
       this.librariesService = inject(LibrariesService);
     }

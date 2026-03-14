@@ -12,12 +12,11 @@ import { PodcastDto } from '../../../../core/models/dtos/podcast-dto.model';
 import { CreatorSelectorDialog } from '../../../../shared/creator-selector-dialog/creator-selector-dialog';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { UserDto } from '../../../../core/models/dtos/auth/user-dto.model';
-import { passwordValidator } from '../../../../core/validators/password-validator';
+import { HttpSrcDirective } from '../../../../core/directives/http-src.directive';
 
 @Component({
   selector: 'app-edit-podcast-episode',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, HttpSrcDirective],
   templateUrl: './edit-podcast-episode.html',
   styleUrl: './edit-podcast-episode.scss'
 })

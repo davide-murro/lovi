@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
+import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { AudioBooksService } from '../../../core/services/audio-books.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
@@ -14,7 +15,7 @@ import { map } from 'rxjs';
 
 @Component({
   selector: 'app-edit-audio-book',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, HttpSrcDirective],
   templateUrl: './edit-audio-book.html',
   styleUrl: './edit-audio-book.scss'
 })

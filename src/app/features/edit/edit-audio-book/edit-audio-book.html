@@ -35,7 +35,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [src]="coverPreview()" class="w-40 mt-2 object-contain" />
+        <img [httpSrc]="coverPreview()" class="w-40 mt-2 object-contain" />
         }
     </div>
 
@@ -45,7 +45,7 @@
             placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />
         @if(coverPreviewPreview()) {
-        <img [src]="coverPreviewPreview()" class="w-40 mt-2 object-contain" />
+        <img [httpSrc]="coverPreviewPreview()" class="w-40 mt-2 object-contain" />
         }
     </div>
 
@@ -53,8 +53,8 @@
         <label class="label" for="audio">Audio</label>
         <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png"
             formControlName="audioValue" (change)="onAudioSelected($event)" />
-        @if(audioPreview()){
-        <audio controls class="mt-2 max-w-full" [src]="audioPreview()"></audio>
+        @if(audioPreview()) {
+        <audio controls class="mt-2 max-w-full" [httpSrc]="audioPreview()"></audio>
         }
     </div>
 

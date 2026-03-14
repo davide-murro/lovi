@@ -11,10 +11,11 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 
 @Component({
   selector: 'app-edit-podcast',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, HttpSrcDirective],
   templateUrl: './edit-podcast.html',
   styleUrl: './edit-podcast.scss'
 })
