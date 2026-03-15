@@ -1,25 +1,14 @@
-<div
-  class="relative w-full mx-auto overflow-hidden rounded-2xl"
-  (mouseenter)="onMouseEnter()"
-  (mouseleave)="onMouseLeave()"
-  (touchstart)="onTouchStart($event)"
-  (touchmove)="onTouchMove($event)"
-  (touchend)="onTouchEnd()"
->
+<div class="relative w-full mx-auto overflow-hidden rounded-2xl" (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()">
   <!-- Viewport -->
   <div class="relative w-full h-[500px]">
-    <div
-      class="absolute inset-0 flex transition-transform duration-400"
-      [style.transform]="'translateX(' + -current() * 100 + '%)'"
-    >
+    <div class="absolute inset-0 flex transition-transform duration-400"
+      [style.transform]="'translateX(' + -current() * 100 + '%)'">
       @for (item of items(); track $index) {
       <div class="relative w-full h-full shrink-0">
         <figure class="w-full h-full flex items-center justify-center shrink-0">
-          <img
-            class="w-full h-full object-cover"
-            [src]="item.image"
-            [alt]="item.title"
-          />
+          <img class="w-full h-full object-cover bg-accent" [src]="item.image" [alt]="item.title" />
         </figure>
 
         @if (item.title || item.subtitle) {
@@ -40,22 +29,10 @@
   <!-- Arrows -->
   @if (showArrows()) {
   <div class="absolute bottom-2 right-2 flex gap-2">
-    <button
-      i18n-title
-      type="button"
-      class="button button-accent"
-      title="Previous slide"
-      (click)="prev()"
-    >
+    <button i18n-title type="button" class="button button-accent" title="Previous slide" (click)="prev()">
       <fa-icon [icon]="faAngleLeft" />
     </button>
-    <button
-      i18n-title
-      type="button"
-      class="button button-accent"
-      title="Next slide"
-      (click)="next()"
-    >
+    <button i18n-title type="button" class="button button-accent" title="Next slide" (click)="next()">
       <fa-icon [icon]="faAngleRight" />
     </button>
   </div>
