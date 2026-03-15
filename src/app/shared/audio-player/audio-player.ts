@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBackward, faBackwardStep, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faBackwardStep, faCircleNotch, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
 import { HttpSrcDirective } from '../../core/directives/http-src.directive';
 
@@ -23,6 +23,7 @@ export class AudioPlayer {
   faShare = faShare;
   faClose = faClose;
   faRotateLeft = faRotateLeft;
+  faCircleNotch = faCircleNotch;
 
   playerVisible = signal(false);
   queueOpen = signal(false);
@@ -56,6 +57,9 @@ export class AudioPlayer {
   // Called on input.
   onSeeking(value: number) {
     this.seekingTime.set(value);
+    if (!this.isSeeking()) {
+      this.audioPlayerService.seek(value);
+    }
   }
 
   // Called on mouseup (desktop) or touchend (mobile).

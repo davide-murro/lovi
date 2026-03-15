@@ -1,6 +1,5 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
-import { ToasterService } from './toaster.service';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -8,16 +7,18 @@ import { AuthService } from './auth.service';
 })
 export class AudioPlayerService {
   private authService = inject(AuthService);
-  private toasterService = inject(ToasterService);
 
   private audio = new Audio();
-  private audioError = signal<boolean>(false);
 
   // Signals for state
   queue = signal<AudioTrack[]>([]);
   currentId = signal<number>(null!);
   idCounter = signal<number>(0);
-  isPlaying = signal(false);
+
+  isPlaying = signal<boolean>(false);
+  isLoading = signal<boolean>(false);
+  isError = signal<boolean>(false);
+  errorEvent = signal<any>(null);
 
   // Signals for Time/Seek
   currentTime = signal(0);
@@ -84,16 +85,29 @@ export class AudioPlayerService {
     this.audio.addEventListener('loadedmetadata', syncDuration);
     this.audio.addEventListener('durationchange', syncDuration);
 
-    // listen to errors
-    this.audio.addEventListener('error', (event) => {
-      console.error('Audio error', this.audio, this.audio.error);
-      this.audioError.set(true);
-      this.toasterService.show("Audio error", { type: 'error' });
+    // start loading
+    this.audio.addEventListener('loadstart', () => {
+      this.isLoading.set(true);
     });
 
-    // set error false when it loads
+    // buffering
+    this.audio.addEventListener('waiting', () => {
+      this.isLoading.set(true);
+    });
+
+    // playable again
     this.audio.addEventListener('canplay', () => {
-      this.audioError.set(false);
+      this.isLoading.set(false);
+      this.isError.set(false);
+      this.errorEvent.set(null);
+    });
+
+    // error
+    this.audio.addEventListener('error', (event) => {
+      this.isLoading.set(false);
+      this.isError.set(true);
+      this.errorEvent.set(event);
+      this.isPlaying.set(false);
     });
 
     // set media session for smartphones
@@ -117,13 +131,19 @@ export class AudioPlayerService {
   }
 
   private loadAudio(track: AudioTrack) {
+    this.audio.pause();
     this.audio.src = track?.audioSrc;
     this.loadAudioMetadata(track);
+    this.currentTime.set(0);
+    this.duration.set(0);
   }
   private clearAudio() {
+    this.audio.pause();
     this.audio.removeAttribute('src'); // remove src attribute entirely
     this.audio.load(); // reset the element
     this.clearMediaSession();
+    this.currentTime.set(0);
+    this.duration.set(0);
   }
   private loadAudioMetadata(track: AudioTrack) {
     if ('mediaSession' in navigator) {
@@ -175,6 +195,10 @@ export class AudioPlayerService {
     else this.play();
   }
   play() {
+    if (this.isError()) {
+      this.audio.load();
+      this.audio.currentTime = this.currentTime();
+    }
     this.audio.play();
   }
   playId(id: number) {
@@ -279,11 +303,11 @@ export class AudioPlayerService {
   }
 
   seek(time: number) {
-    // Only seek if the audio is loaded
-    if (this.audio.readyState > 0) {
-      this.audio.currentTime = time;
-      this.currentTime.set(time); // Sync immediately to prevent UI glitch on release
+    if (this.isError()) {
+      this.audio.load();
     }
+    this.audio.currentTime = time;
+    this.currentTime.set(time); // Sync immediately to prevent UI glitch on release
   }
 
   isInQueueAudioSrc(audioSrc: string): boolean {
@@ -294,5 +318,8 @@ export class AudioPlayerService {
   }
   isCurrentPlayingAudioSrc(audioSrc: string): boolean {
     return this.isCurrentAudioSrc(audioSrc) && this.isPlaying();
+  }
+  isCurrentLoadingAudioSrc(audioSrc: string): boolean {
+    return this.isCurrentAudioSrc(audioSrc) && this.isLoading();
   }
 }
