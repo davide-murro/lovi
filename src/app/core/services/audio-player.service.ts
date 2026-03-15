@@ -18,7 +18,6 @@ export class AudioPlayerService {
   isPlaying = signal<boolean>(false);
   isLoading = signal<boolean>(false);
   isError = signal<boolean>(false);
-  errorEvent = signal<any>(null);
 
   // Signals for Time/Seek
   currentTime = signal(0);
@@ -99,14 +98,12 @@ export class AudioPlayerService {
     this.audio.addEventListener('canplay', () => {
       this.isLoading.set(false);
       this.isError.set(false);
-      this.errorEvent.set(null);
     });
 
     // error
     this.audio.addEventListener('error', (event) => {
       this.isLoading.set(false);
       this.isError.set(true);
-      this.errorEvent.set(event);
       this.isPlaying.set(false);
     });
 
