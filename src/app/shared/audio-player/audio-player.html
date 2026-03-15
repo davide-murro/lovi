@@ -75,7 +75,8 @@
         (audioPlayerService.currentIndex() === 0){ <fa-icon [icon]="faBackwardStep" />}
       </button>
       <button i18n-title type="button" class="icon-button" title="Play / Pause"
-        [disabled]="audioPlayerService.isLoading()" (click)="audioPlayerService.togglePlay()">
+        [class.text-error]="audioPlayerService.isError()" [disabled]="audioPlayerService.isLoading()"
+        (click)="audioPlayerService.togglePlay()">
         @if(audioPlayerService.isLoading()) {<fa-icon [icon]="faCircleNotch" animation="spin" />} @else if
         (audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon [icon]="faPlay" />}
       </button>
