@@ -2,6 +2,8 @@ import { Directive, ElementRef, inject, Input, OnDestroy, Renderer2 } from '@ang
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
+const EMPTY = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='; // Empty image (1×1 transparent GIF)
+
 @Directive({
   selector: 'img[httpSrc], audio[httpSrc], video[httpSrc], source[httpSrc]'
 })
@@ -18,11 +20,9 @@ export class HttpSrcDirective implements OnDestroy {
 
   private updateSrc(url: string | null | undefined) {
     this.cleanup();
+    this.removeAttribute();
 
-    if (!url) {
-      this.renderer.removeAttribute(this.el.nativeElement, 'src');
-      return;
-    }
+    if (!url) return;
 
     this.subscription = this.http.get(url, { responseType: 'blob' }).subscribe({
       next: (blob) => {
@@ -30,10 +30,17 @@ export class HttpSrcDirective implements OnDestroy {
         this.renderer.setAttribute(this.el.nativeElement, 'src', this.objectUrl);
       },
       error: (err) => {
-        console.error(url, err);
-        this.renderer.removeAttribute(this.el.nativeElement, 'src');
+        this.removeAttribute();
       }
     });
+  }
+
+  private removeAttribute() {
+    if (this.el.nativeElement.tagName === 'IMG') {
+      this.renderer.setAttribute(this.el.nativeElement, 'src', EMPTY);
+    } else {
+      this.renderer.removeAttribute(this.el.nativeElement, 'src');
+    }
   }
 
   private cleanup() {
