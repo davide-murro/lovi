@@ -1,6 +1,7 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
 import { AuthService } from './auth.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class AudioPlayerService {
   isPlaying = signal<boolean>(false);
   isLoading = signal<boolean>(false);
   isError = signal<boolean>(false);
+
+  private _errorEvent$ = new Subject<Event>();
+  public readonly errorEvent$ = this._errorEvent$.asObservable();
 
   // Signals for Time/Seek
   currentTime = signal(0);
@@ -105,6 +109,8 @@ export class AudioPlayerService {
       this.isLoading.set(false);
       this.isError.set(true);
       this.isPlaying.set(false);
+
+      this._errorEvent$.next(event);
     });
 
     // set media session for smartphones

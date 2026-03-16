@@ -1,7 +1,7 @@
 import { effect, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { finalize, Observable, shareReplay, tap } from 'rxjs';
+import { finalize, map, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { LibraryDto } from '../models/dtos/library-dto.model';
 import { ManageLibraryDto } from '../models/dtos/manage-library-dto.model';
 import { AuthService } from './auth.service';
@@ -14,9 +14,14 @@ export class LibrariesService {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
 
+  private getMe$?: Observable<LibraryDto[]>;
+
   // myLibrary
   private _myLibrary: WritableSignal<LibraryDto[] | null> = signal(null);
   public readonly myLibrary: Signal<LibraryDto[] | null> = this._myLibrary.asReadonly();
+
+  private _isLoading: WritableSignal<boolean> = signal(false);
+  public readonly isLoading: Signal<boolean> = this._isLoading.asReadonly();
 
   constructor() {
     effect(() => {
@@ -39,14 +44,17 @@ export class LibrariesService {
   }
 
   // GET my library
-  private getMe$?: Observable<LibraryDto[]>;
   getMe(): Observable<LibraryDto[]> {
     if (this.getMe$) return this.getMe$;
 
+    this._isLoading.set(true);
     this.getMe$ = this.http.get<LibraryDto[]>(`${this.apiUrl}/me`).pipe(
       tap(data => this.setMyLibrary(data)),
       shareReplay(1),
-      finalize(() => this.getMe$ = undefined)
+      finalize(() => {
+        this._isLoading.set(false);
+        this.getMe$ = undefined;
+      })
     );
 
     return this.getMe$;
@@ -54,38 +62,47 @@ export class LibrariesService {
 
   // POST create library
   createMe(dto: ManageLibraryDto): Observable<LibraryDto> {
+    this._isLoading.set(true);
     return this.http.post<LibraryDto>(`${this.apiUrl}/me`, dto).pipe(
-      tap(() => this.loadMyLibrary())
+      switchMap((result) => this.getMe().pipe(map(() => result))),
+      finalize(() => this._isLoading.set(false))
     );
   }
 
   // POST create library list
   createMeList(dtos: ManageLibraryDto[]): Observable<LibraryDto[]> {
+    this._isLoading.set(true);
     return this.http.post<LibraryDto[]>(`${this.apiUrl}/me/list`, dtos).pipe(
-      tap(() => this.loadMyLibrary())
+      switchMap((result) => this.getMe().pipe(map(() => result))),
+      finalize(() => this._isLoading.set(false))
     );
   }
 
   // DELETE library
   deleteMe(id: number): Observable<void> {
+    this._isLoading.set(true);
     return this.http.delete<void>(`${this.apiUrl}/me/${id}`).pipe(
-      tap(() => this.loadMyLibrary())
+      switchMap((result) => this.getMe().pipe(map(() => result))),
+      finalize(() => this._isLoading.set(false))
     );
   }
 
   // DELETE all library
   deleteMeAll(): Observable<void> {
+    this._isLoading.set(true);
     return this.http.delete<void>(`${this.apiUrl}/me`).pipe(
-      tap(() => this.loadMyLibrary())
+      switchMap((result) => this.getMe().pipe(map(() => result))),
+      finalize(() => this._isLoading.set(false))
     );
   }
 
   // DELETE library list
   deleteMeList(ids: number[]): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/me/list`,
-      { body: ids })
+    this._isLoading.set(true);
+    return this.http.delete<void>(`${this.apiUrl}/me/list`, { body: ids })
       .pipe(
-        tap(() => this.loadMyLibrary())
+        switchMap((result) => this.getMe().pipe(map(() => result))),
+        finalize(() => this._isLoading.set(false))
       );
   }
 }

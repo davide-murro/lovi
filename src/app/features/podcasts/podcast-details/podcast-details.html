@@ -12,8 +12,11 @@
   <h1 class="flex-1">{{ podcast().name }}</h1>
 
   <button i18n-title *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
-    title="Add to / remove from My Library" (click)="toggleMyLibrary()">
-    @if(isInMyLibrary()) {
+    title="Add to / remove from My Library" [disabled]="isMyLibraryLoading()" (click)="toggleMyLibrary()">
+    @if(isMyLibraryLoading()) {
+    <fa-icon [icon]="faCircleNotch" class="animate-spin" />
+    <span i18n class="hidden lg:inline">Loading...</span>
+    } @else if(isInMyLibrary()) {
     <fa-icon [icon]="faBookBookmark" />
     <span i18n class="hidden lg:inline">Remove from My Library</span>
     } @else {

@@ -4,6 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBackward, faBackwardStep, faCircleNotch, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
 import { HttpSrcDirective } from '../../core/directives/http-src.directive';
+import { ToasterService } from '../../core/services/toaster.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-audio-player',
@@ -13,6 +15,7 @@ import { HttpSrcDirective } from '../../core/directives/http-src.directive';
 })
 export class AudioPlayer {
   audioPlayerService = inject(AudioPlayerService);
+  toasterService = inject(ToasterService);
 
   faPlay = faPlay;
   faPause = faPause;
@@ -35,6 +38,8 @@ export class AudioPlayer {
   private isSeeking = signal(false);
   private seekingTime = signal(0);
 
+  private audioPlayerErrorSubscription?: Subscription;
+
   constructor() {
     effect(() => {
       if (this.audioPlayerService.currentTrack() != null) {
@@ -44,6 +49,17 @@ export class AudioPlayer {
         this.queueOpen.set(false);
       }
     })
+
+    // error handling
+    this.audioPlayerErrorSubscription = this.audioPlayerService.errorEvent$.subscribe((event) => {
+      console.error('audioPlayerService.errorEvent', event);
+      this.toasterService.show('Error playing audio', { type: 'error', duration: 5000 });
+    })
+  }
+
+  ngOnDestroy() {
+    this.audioPlayerErrorSubscription?.unsubscribe();
+    this.audioPlayerErrorSubscription = undefined;
   }
 
   // Called on mousedown (desktop) or touchstart (mobile).

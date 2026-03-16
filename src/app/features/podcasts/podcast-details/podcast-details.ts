@@ -2,7 +2,7 @@ import { Component, computed, inject, Signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { faBookBookmark, faBookOpen, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faBookBookmark, faBookOpen, faCircleNotch, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AudioTrack } from '../../../core/models/audio-track.model';
@@ -32,11 +32,13 @@ export class PodcastDetails {
   faPause = faPause;
   faBookOpen = faBookOpen;
   faBookBookmark = faBookBookmark;
+  faCircleNotch = faCircleNotch;
 
   // podcast
   podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
 
   isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
+  isMyLibraryLoading = computed(() => this.librariesService?.isLoading());
 
   constructor() {
     // TODO: creare un componente a parte così non devo fare il check??
