@@ -60,7 +60,7 @@ export class Login {
     this.isLoading.set(true);
     this.authService.login(dto).subscribe({
       next: (token) => {
-        this.toasterService.show($localize`Login successful`);
+        this.toasterService.show($localize`Login successful`, { type: 'success' });
         this.router.navigate(['/']);
         this.isLoading.set(false);
       },
@@ -124,14 +124,14 @@ export class Login {
     this.isLoading.set(true);
     this.authService.externalLogin(dto).subscribe({
       next: () => {
-        this.toasterService.show($localize`Login successful with ${provider}`);
+        this.toasterService.show($localize`${provider} login successful`, { type: 'success' });
         this.router.navigate(['/']);
         this.isLoading.set(false);
       },
       error: (err) => {
         console.error('authService.externalLogin', dto, err);
         this.isLoading.set(false);
-        this.toasterService.show($localize`Login failed with ${provider}`, { type: 'error' });
+        this.toasterService.show($localize`${provider} login failed`, { type: 'error' });
       }
     });
   }

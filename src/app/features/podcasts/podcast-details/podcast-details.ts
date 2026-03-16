@@ -65,7 +65,7 @@ export class PodcastDetails {
       });
 
     this.audioPlayerService.playTrack(episodeQueue[0], episodeQueue);
-    this.toasterService.show($localize`Podcast added to queue`);
+    this.toasterService.show($localize`"${this.podcast().name}" episodes added to queue`);
   }
 
   // library
@@ -85,11 +85,11 @@ export class PodcastDetails {
 
     this.librariesService!.createMeList(episodeLibraries).subscribe({
       next: () => {
-        this.toasterService.show($localize`Added all to My Library`);
+        this.toasterService.show($localize`"${this.podcast().name}" added to My Library`);
       },
       error: (err) => {
         console.error('librariesService.createMeList', episodeLibraries, err);
-        this.toasterService.show($localize`Adding all to My Library failed`, { type: 'error' });
+        this.toasterService.show($localize`"${this.podcast().name}" adding to My Library failed`, { type: 'error' });
       }
     });
   }
@@ -100,11 +100,11 @@ export class PodcastDetails {
 
     this.librariesService!.deleteMeList(ids).subscribe({
       next: () => {
-        this.toasterService.show($localize`Removed all from My Library`);
+        this.toasterService.show($localize`"${this.podcast().name}" removed from My Library`);
       },
       error: (err) => {
         console.error('librariesService.deleteMeList', ids, err);
-        this.toasterService.show($localize`Removing all from My Library failed`, { type: 'error' });
+        this.toasterService.show($localize`"${this.podcast().name}" removing from My Library failed`, { type: 'error' });
       }
     });
   }

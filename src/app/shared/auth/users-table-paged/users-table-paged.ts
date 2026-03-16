@@ -181,7 +181,7 @@ export class UsersTablePaged {
             },
             error: (err) => {
               console.error('usersService.delete', id, err);
-              this.toasterService.show($localize`User delete failed`, { type: 'error' });
+              this.toasterService.show($localize`User deleting failed`, { type: 'error' });
             }
           });
         }

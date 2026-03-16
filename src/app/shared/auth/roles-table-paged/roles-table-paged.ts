@@ -175,7 +175,7 @@ export class RolesTablePaged {
             },
             error: (err) => {
               console.error('rolesService.delete', id, err);
-              this.toasterService.show($localize`Role delete failed`, { type: 'error' });
+              this.toasterService.show($localize`Role deleting failed`, { type: 'error' });
             }
           });
         }
