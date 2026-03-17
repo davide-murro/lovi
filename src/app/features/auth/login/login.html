@@ -8,7 +8,7 @@
             <input type="email" formControlName="userName" id="user-name" class="input input-lg w-full" />
             @if(form.controls.userName.dirty) {
             @if(form.controls.userName.hasError('required')) {
-            <p i18n class="text-error text-sm">
+            <p i18n class="hint text-error">
                 Email is required
             </p>
             }
@@ -27,7 +27,7 @@
             </div>
             @if(form.controls.password.dirty) {
             @if(form.controls.password.hasError('required')) {
-            <p i18n class="text-error text-sm">
+            <p i18n class="hint text-error">
                 Password is required.
                 <a title="Reset password" class="link" [routerLink]="['/auth', 'forgot-password']"
                     [queryParams]="{ email: form.value.userName || null }">Forgot Password?</a>
@@ -35,7 +35,7 @@
             }
             }
             @if(!form.controls.password.dirty || !form.controls.password.hasError('required')) {
-            <p class="text-right text-sm">
+            <p class="hint text-right">
                 <a i18n i18n-title title="Reset password" class="link" [routerLink]="['/auth', 'forgot-password']"
                     [queryParams]="{ email: form.value.userName || null }">
                     Forgot Password?

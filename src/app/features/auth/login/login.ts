@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginDto } from '../../../core/models/dtos/auth/login-dto.model';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
@@ -11,6 +11,8 @@ import { faFacebook, faGoogle, faInstagram, faSpotify } from '@fortawesome/free-
 import { ExternalLoginDto } from '../../../core/models/dtos/auth/external-login-dto.model';
 import { SocialAuthService } from '../../../core/services/social-auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 })
 export class Login {
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
   private authService = inject(AuthService);
@@ -30,6 +33,8 @@ export class Login {
   faInstagram = faInstagram;
   faSpotify = faSpotify;
   faEye = faEye;
+
+  redirect = toSignal(this.route.queryParams.pipe(map(data => data['redirect'] ?? '/')));
 
   showPassword = signal(false);
 
@@ -61,7 +66,7 @@ export class Login {
     this.authService.login(dto).subscribe({
       next: (token) => {
         this.toasterService.show($localize`Login successful`, { type: 'success' });
-        this.router.navigate(['/']);
+        this.router.navigate([this.redirect()]);
         this.isLoading.set(false);
       },
       error: (err) => {

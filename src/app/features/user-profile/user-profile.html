@@ -34,11 +34,11 @@
                 <input type="text" formControlName="name" id="name" class="input" />
                 @if(informationForm.controls.name.dirty) {
                 @if(informationForm.controls.name.hasError('required')) {
-                <p i18n class="text-accent text-sm">
+                <p i18n class="hint text-accent">
                     Name is required
                 </p>
                 } @else if(informationForm.controls.name.valid) {
-                <p i18n class="text-success text-sm">
+                <p i18n class="hint text-success">
                     Name OK
                 </p>
                 }
