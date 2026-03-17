@@ -1,6 +1,5 @@
 <a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/audio-books', audioBook().id]"
   [title]="audioBook().name">
-  <!-- TODO: try src with a call http... -->
   <img class="aspect-[3/4] object-cover bg-accent rounded-xl" loading="lazy" decoding="async"
     [httpSrc]="audioBook().coverImagePreviewUrl" [alt]="audioBook().name" />
   <div>

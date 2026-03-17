@@ -41,7 +41,6 @@ export class PodcastDetails {
   isMyLibraryLoading = computed(() => this.librariesService?.isLoading());
 
   constructor() {
-    // TODO: creare un componente a parte così non devo fare il check??
     if (this.authService.isLoggedIn()) {
       this.librariesService = inject(LibrariesService);
     }
