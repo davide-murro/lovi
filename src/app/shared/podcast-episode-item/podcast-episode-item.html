@@ -1,13 +1,13 @@
 <a class="link-item flex items-center gap-2 sm:gap-4"
-  [routerLink]="['/podcasts', podcast().id, 'episodes', episode().id]" [title]="episode().name">
+  [routerLink]="['/podcasts', podcast().id, 'episodes', podcastEpisode().id]" [title]="podcastEpisode().name">
   <img class="size-12 aspect-square object-cover bg-accent rounded-xl sm:size-24" loading="lazy" decoding="async"
-    [httpSrc]="episode().coverImagePreviewUrl" [alt]="episode().name" />
+    [httpSrc]="podcastEpisode().coverImagePreviewUrl" [alt]="podcastEpisode().name" />
   <div class="overflow-hidden">
-    <p class="text-base font-medium leading-normal line-clamp-2">{{ episode().name }}</p>
+    <p class="text-base font-medium leading-normal line-clamp-2">{{ podcastEpisode().name }}</p>
     <p class="text-accent text-sm truncate max-sm:hidden">
-      @for(creator of episode().voicers; track $index) {
+      @for(creator of podcastEpisode().voicers; track $index) {
       {{ creator.nickname }}@if (!$last) {, } }
     </p>
-    <p i18n class="text-accent text-sm truncate">Episode {{ episode().number }}</p>
+    <p i18n class="text-accent text-sm truncate">Episode {{ podcastEpisode().number }}</p>
   </div>
 </a>

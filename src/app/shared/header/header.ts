@@ -1,10 +1,8 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faClose, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthDirective } from '../../core/directives/auth.directive';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +10,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-header',

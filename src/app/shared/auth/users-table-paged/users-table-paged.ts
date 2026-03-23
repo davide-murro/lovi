@@ -65,8 +65,8 @@ export class UsersTablePaged {
     // This allows the parent to override the current state at any time.
     effect(() => {
       const query = {
-        pageNumber: Number(this.pageNumber()),
-        pageSize: Number(this.pageSize()),
+        pageNumber: this.pageNumber(),
+        pageSize: this.pageSize(),
         sortBy: this.sortBy(),
         sortOrder: this.sortOrder(),
         search: this.search()

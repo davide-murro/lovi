@@ -48,14 +48,14 @@ export class AudioBooksPaged {
   );
   audioBooksLoading = signal(false);
   audioBooksError = signal(false);
-  
+
   constructor() {
     // Effect: Synchronizes the internal signal when any external input changes.
     // This allows the parent to override the current state at any time.
     effect(() => {
       const query = {
-        pageNumber: Number(this.pageNumber()),
-        pageSize: Number(this.pageSize()),
+        pageNumber: this.pageNumber(),
+        pageSize: this.pageSize(),
         sortBy: this.sortBy(),
         sortOrder: this.sortOrder(),
         search: this.search()
@@ -70,7 +70,7 @@ export class AudioBooksPaged {
     // This forces the signal to update and thus re-run the switchMap
     this.audioBookPagedQuery.update(query => ({ ...query }));
   }
-  
+
   nextPage() {
     const query = {
       ...this.audioBookPagedQuery(),

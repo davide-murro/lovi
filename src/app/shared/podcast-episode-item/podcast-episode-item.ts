@@ -11,6 +11,6 @@ import { HttpSrcDirective } from '../../core/directives/http-src.directive';
   styleUrl: './podcast-episode-item.scss'
 })
 export class PodcastEpisodeItem {
-  podcast = input<PodcastDto>(null!);
-  episode = input<PodcastEpisodeDto>(null!);
+  podcast = input.required<PodcastDto>();
+  podcastEpisode = input.required<PodcastEpisodeDto>();
 }

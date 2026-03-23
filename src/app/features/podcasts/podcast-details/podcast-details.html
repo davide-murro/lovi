@@ -37,19 +37,19 @@
 
 @if(podcast().episodes!.length > 0) {
 <div class="section">
-  <h2 class="title2 flex justify-between items-center">
-    <span i18n>{{ podcast().episodes!.length }} Episodes</span>
+  <div class="title2 flex justify-between items-center">
+    <h2 i18n class="flex-1">{{ podcast().episodes!.length }} Episodes</h2>
 
     <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
       title="Play all Episodes" (click)="playAll()">
       <fa-icon [icon]="faPlay" />
       <span i18n>Play all</span>
     </button>
-  </h2>
+  </div>
 
   <div class="gap-4 grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
     @for (episode of podcast().episodes; track $index) {
-    <app-podcast-episode-item [podcast]="podcast()" [episode]="episode"></app-podcast-episode-item>
+    <app-podcast-episode-item [podcast]="podcast()" [podcastEpisode]="episode"></app-podcast-episode-item>
     }
   </div>
 </div>

@@ -10,5 +10,5 @@ import { HttpSrcDirective } from '../../core/directives/http-src.directive';
   styleUrl: './audio-book-item.scss'
 })
 export class AudioBookItem {
-  audioBook = input<AudioBookDto>(null!);
+  audioBook = input.required<AudioBookDto>();
 }

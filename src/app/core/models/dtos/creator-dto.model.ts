@@ -1,5 +1,5 @@
 export interface CreatorDto {
-    id: number;
+    id?: number;
     nickname: string;
     name?: string;
     surname?: string;
