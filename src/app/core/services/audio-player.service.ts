@@ -2,52 +2,71 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
 import { AuthService } from './auth.service';
 import { Subject } from 'rxjs';
+import { FetchClient } from '../interceptors/fetch-client/fetch-client.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioPlayerService {
+  private fetchClient = inject(FetchClient);
   private authService = inject(AuthService);
 
   private audio = new Audio();
 
+  // Stream state
+  // Each load gets a unique "session" id. The streaming loop checks it and
+  // self-terminates if a newer session has started, eliminating all races.
+  private _sessionId = 0;
+  private _activeAbortController?: AbortController;
+
+  // flag to indicate if play/pause was requested and will start after loading
+  private _timeRequested = signal(0);
+  private _playRequested = signal(false);
+  private _pauseRequested = signal(false);
+  private _isRequesting = computed(() => this._timeRequested() > 0 || this._playRequested() || this._pauseRequested());
+
   // Signals for state
   queue = signal<AudioTrack[]>([]);
-  currentId = signal<number>(null!);
+  currentId = signal<number | null>(null);
   idCounter = signal<number>(0);
-
-  isPlaying = signal<boolean>(false);
-  isLoading = signal<boolean>(false);
-  isError = signal<boolean>(false);
-
-  private _errorEvent$ = new Subject<Event>();
-  public readonly errorEvent$ = this._errorEvent$.asObservable();
 
   // Signals for Time/Seek
   currentTime = signal(0);
   duration = signal(0);
+  fileSize = signal(0);
+
+  isElaborating = signal<boolean>(false);
+  isPlaying = signal<boolean>(false);
+  isError = signal<boolean>(false);
+
+  isLoading = computed(() => this.isElaborating() || this._isRequesting());
+
+  private _errorEvent$ = new Subject<any>();
+  public readonly errorEvent$ = this._errorEvent$.asObservable();
 
   // Computed signal: current track
   currentIndex = computed(() => {
-    return this.queue().findIndex(t => t.id === this.currentId()) ?? null;
+    const index = this.queue().findIndex(t => t.id === this.currentId());
+    return index >= 0 ? index : null;
   });
   currentTrack = computed(() => {
     return this.queue().find(t => t.id === this.currentId()) ?? null;
   });
   previousTrack = computed(() => {
-    if (this.currentIndex() > 0) {
-      return this.queue()[this.currentIndex() - 1] ?? null;
+    if (this.currentIndex() != null && this.currentIndex()! > 0) {
+      return this.queue()[this.currentIndex()! - 1] ?? null;
     }
     return null
   });
   nextTrack = computed(() => {
-    if (this.currentIndex() >= 0 && this.currentIndex() + 1 < this.queue()?.length) {
-      return this.queue()[this.currentIndex() + 1] ?? null;
+    if (this.currentIndex() != null && this.currentIndex()! + 1 < this.queue()?.length) {
+      return this.queue()[this.currentIndex()! + 1] ?? null;
     }
     return null
   });
 
   constructor() {
+    // TODO: when islogged load queue from saved data in DB
     effect(() => {
       if (!this.authService.isLoggedIn()) this.removeAllQueue();
     });
@@ -57,27 +76,30 @@ export class AudioPlayerService {
 
     this.audio.addEventListener('play', () => {
       this.isPlaying.set(true);
-      this.updatePlaybackState();
+      this.updatePlaybackMetadata();
+      this._playRequested.set(false);
     });
     this.audio.addEventListener('pause', () => {
       this.isPlaying.set(false);
-      this.currentTime.set(this.audio.currentTime); // Sync time on pause to ensure the UI is 100% accurate
-      this.updatePlaybackState();
+      //this.currentTime.set(this.audio.currentTime); // Sync time on pause to ensure the UI is 100% accurate
+      this.updatePlaybackMetadata();
+      this._pauseRequested.set(false);
     });
 
     // Listen for time updates and duration
     const syncTime = () => {
-      if (isFinite(this.audio.currentTime)) {
-        this.currentTime.set(this.audio.currentTime);
-        this.updatePositionState();
+      const currentTime = this._timeRequested() > 0 ? this._timeRequested() : this.audio.currentTime;
+      if (isFinite(currentTime)) {
+        this.currentTime.set(currentTime);
+        this.updatePositionMetadata();
       }
     };
 
     const syncDuration = () => {
       if (isFinite(this.audio.duration)) {
         this.duration.set(this.audio.duration);
-        this.updatePositionState();
-        this.updatePlaybackState();
+        this.updatePositionMetadata();
+        this.updatePlaybackMetadata();
       }
     };
 
@@ -90,27 +112,38 @@ export class AudioPlayerService {
 
     // start loading
     this.audio.addEventListener('loadstart', () => {
-      this.isLoading.set(true);
+      this.isElaborating.set(true);
     });
 
     // buffering
     this.audio.addEventListener('waiting', () => {
-      this.isLoading.set(true);
+      this.isElaborating.set(true);
     });
 
     // playable again
     this.audio.addEventListener('canplay', () => {
-      this.isLoading.set(false);
+      this.isElaborating.set(false);
       this.isError.set(false);
+
+      if (this._playRequested()) {
+        this.audio.play();
+      }
+      if (this._pauseRequested()) {
+        this.audio.pause();
+      }
     });
 
     // error
     this.audio.addEventListener('error', (event) => {
-      this.isLoading.set(false);
+      this.isElaborating.set(false);
       this.isError.set(true);
       this.isPlaying.set(false);
 
       this._errorEvent$.next(event);
+
+      this._playRequested.set(false);
+      this._pauseRequested.set(false);
+      this._timeRequested.set(0);
     });
 
     // set media session for smartphones
@@ -133,22 +166,253 @@ export class AudioPlayerService {
     }
   }
 
-  private loadAudio(track: AudioTrack) {
+  private async loadAudio(track: AudioTrack, startTime: number = 0, playAfterLoad: boolean = false) {
     this.audio.pause();
-    this.audio.src = track?.audioSrc;
-    this.loadAudioMetadata(track);
-    this.currentTime.set(0);
-    this.duration.set(0);
+    this._pauseRequested.set(false);
+    this._playRequested.set(playAfterLoad)
+    this._timeRequested.set(startTime);
+
+    // Cancel any in-flight stream immediately
+    this._activeAbortController?.abort();
+    const abort = new AbortController();
+    this._activeAbortController = abort;
+
+    // Stamp this session — the pump loop will exit if the id changes
+    const sessionId = ++this._sessionId;
+    const isAlive = () => !abort.signal.aborted && this._sessionId === sessionId;
+
+    try {
+      const url = track?.audioSrc;
+      if (!url) return;
+
+      // Calculate byte offset with the previous duration and file size
+      let byteOffset: number = 0;
+      if (startTime > 0) {
+        const ratio = startTime / this.duration();
+        byteOffset = Math.floor(ratio * this.fileSize());
+      }
+      const response = await this.fetchClient.request(url, {
+        signal: abort.signal,
+        headers: {
+          Range: `bytes=${byteOffset}-`
+        }
+      });
+
+      if (!isAlive()) return;
+
+      // check ok
+      if (!response.ok || !response.body) {
+        throw new Error('Error loading audio');
+      }
+
+      // get headers 
+      const contentTypeHeader = response.headers.get('Content-Type') || 'audio/mpeg';
+      const lengthHeader = response.headers.get('Content-Length');
+      const durationHeader = response.headers.get('X-Duration');
+      const mimeType = MediaSource.isTypeSupported(contentTypeHeader)
+        ? contentTypeHeader
+        : 'audio/mpeg';
+
+      const fileSize = lengthHeader ? parseInt(lengthHeader, 10) : 0;
+      if (startTime === 0) this.fileSize.set(fileSize);
+
+      const duration = durationHeader ? parseFloat(durationHeader) : 0;
+      if (duration > 0) this.duration.set(duration);
+
+      // create media source
+      const mediaSource = new MediaSource();
+
+      const objectUrl = URL.createObjectURL(mediaSource);
+      this.audio.src = objectUrl;
+      this.loadMetadata(track);
+
+      // Clean up the blob URL once the source is opened (or aborted)
+      abort.signal.addEventListener('abort', () => URL.revokeObjectURL(objectUrl), { once: true });
+
+      await new Promise<void>((resolve, reject) => {
+        mediaSource.addEventListener('sourceopen', async () => {
+          try {
+            if (!isAlive()) { resolve(); return; }
+
+            if (duration > 0) {
+              mediaSource.duration = duration;
+            }
+
+            let sourceBuffer: SourceBuffer;
+            try {
+              sourceBuffer = mediaSource.addSourceBuffer(mimeType);
+            } catch (e) {
+              reject(e); return;
+            }
+
+            // Offset timestamps so chunks align with real playback time when seeking
+            if (startTime > 0) {
+              sourceBuffer.timestampOffset = startTime;
+              // Set playhead AFTER src is assigned so it sticks
+              this.audio.currentTime = startTime;
+              this._timeRequested.set(0);
+            }
+
+            const reader = response.body!.getReader();
+
+            // Cancel reader when this session is aborted
+            abort.signal.addEventListener('abort', () => reader.cancel(), { once: true });
+
+            const waitForUpdateEnd = () =>
+              new Promise<void>((resolve) => {
+                if (!sourceBuffer.updating) return resolve();
+                sourceBuffer.addEventListener('updateend', () => resolve(), { once: true });
+              });
+
+            const sleep = (ms: number) =>
+              new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+            while (isAlive()) {
+              if (mediaSource.readyState !== 'open') break;
+
+              // Throttle: max 60s ahead
+              if (sourceBuffer.buffered.length > 0) {
+                const bufferedEnd = sourceBuffer.buffered.end(sourceBuffer.buffered.length - 1);
+                const currentTime = this.audio.currentTime;
+
+                if (bufferedEnd - currentTime > 60) {
+                  await sleep(500);
+                  continue;
+                }
+              }
+
+              // Read chunk
+              let result: ReadableStreamReadResult<Uint8Array>;
+              try {
+                result = await reader.read();
+              } catch {
+                break; // reader cancelled or network error
+              }
+
+              if (!isAlive()) break;
+
+              if (result.done) {
+                await waitForUpdateEnd();
+                if (mediaSource.readyState === 'open') {
+                  try { mediaSource.endOfStream(); } catch { }
+                }
+                break;
+              }
+
+              // Append safely
+              try {
+                const chunk = new Uint8Array(result.value);
+                sourceBuffer.appendBuffer(chunk.buffer);
+              } catch (e: any) {
+                if (e.name === 'QuotaExceededError') {
+                  // simple backoff
+                  await sleep(500);
+                  continue;
+                }
+                break;
+              }
+
+              try {
+                await waitForUpdateEnd();
+              } catch {
+                break; // Aborted mid-append
+              }
+
+              // Garbage collection (light, safe)
+              if (sourceBuffer.buffered.length > 0) {
+                const start = sourceBuffer.buffered.start(0);
+                const currentTime = this.audio.currentTime;
+
+                if (currentTime - start > 300) {
+                  try {
+                    sourceBuffer.remove(start, currentTime - 120);
+                    await waitForUpdateEnd();
+                  } catch { }
+                }
+              }
+            }
+            resolve();
+          } catch (err) {
+            reject(err);
+          }
+        }, { once: true });
+        mediaSource.addEventListener('sourceended', () => resolve(), { once: true });
+        mediaSource.addEventListener('sourceerror', () => reject(new Error('MediaSource error')), { once: true });
+      });
+
+    } catch (err: any) {
+      if (abort.signal.aborted) return; // expected — not an error
+
+      this.audio.currentTime = startTime;
+      this.audio.pause();
+
+      this.isElaborating.set(false);
+      this.isError.set(true);
+      this.isPlaying.set(false);
+
+      this._errorEvent$.next(err);
+
+      this._playRequested.set(false);
+      this._pauseRequested.set(false);
+      this._timeRequested.set(0);
+    }
+  }
+
+  private async seekAudio(time: number, playAfterSeek: boolean) {
+    if (this.isTimeBuffered(time)) {
+      // Already in buffer — just move playhead, pump continues naturally
+      this.audio.currentTime = time;
+      if (playAfterSeek) this.audio.play();
+      return;
+    }
+
+    // loadAudio handles aborting the previous session internally
+    await this.loadAudio(this.currentTrack()!, time, playAfterSeek);
+  }
+  private async pauseAudio() {
+    if (this.audio.readyState >= 2) {
+      if (!this.audio.paused) {
+        this._pauseRequested.set(true);
+        this._playRequested.set(false);
+      }
+      this.audio.pause();
+    }
+  }
+  private async playAudio() {
+    if (this.audio.readyState >= 2) {
+      if (this.audio.paused) {
+        this._playRequested.set(true);
+        this._pauseRequested.set(false);
+      }
+      this.audio.play();
+    } else {
+      await this.loadAudio(this.currentTrack()!, this.audio.currentTime, true);
+    }
   }
   private clearAudio() {
+    // Abort the stream first, then clear the element
+    this._activeAbortController?.abort();
     this.audio.pause();
     this.audio.removeAttribute('src'); // remove src attribute entirely
     this.audio.load(); // reset the element
-    this.clearMediaSession();
-    this.currentTime.set(0);
-    this.duration.set(0);
+
+    this._playRequested.set(false);
+    this._pauseRequested.set(false);
+    this._timeRequested.set(0);
+
+    this.clearMetadata();
   }
-  private loadAudioMetadata(track: AudioTrack) {
+
+  private isTimeBuffered(time: number): boolean {
+    for (let i = 0; i < this.audio.buffered.length; i++) {
+      if (time >= this.audio.buffered.start(i) && time <= this.audio.buffered.end(i)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private loadMetadata(track: AudioTrack) {
     if ('mediaSession' in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: track?.subtitle ? `${track?.title} - ${track?.subtitle}` : track?.title,
@@ -159,25 +423,25 @@ export class AudioPlayerService {
       });
     }
   }
-  private updatePositionState() {
+  private updatePositionMetadata() {
     if (
       'mediaSession' in navigator &&
       'setPositionState' in navigator.mediaSession &&
       this.audio.readyState >= 2 // HAVE_CURRENT_DATA or higher
     ) {
       navigator.mediaSession.setPositionState({
-        duration: this.duration(),
+        duration: this.audio.duration,
         playbackRate: this.audio.playbackRate,
-        position: this.currentTime()
+        position: this.audio.currentTime
       });
     }
   }
-  private updatePlaybackState() {
+  private updatePlaybackMetadata() {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.playbackState = this.isPlaying() ? 'playing' : 'paused';
+      navigator.mediaSession.playbackState = this.audio.paused ? 'paused' : 'playing';
     }
   }
-  private clearMediaSession() {
+  private clearMetadata() {
     if ('mediaSession' in navigator) {
       navigator.mediaSession.metadata = null;
       navigator.mediaSession.playbackState = 'none';
@@ -188,9 +452,17 @@ export class AudioPlayerService {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
+      this.clear();
       this.loadAudio(track);
       this.pause();
     }
+  }
+
+  clear() {
+    this.clearAudio();
+    this.currentTime.set(0);
+    this.duration.set(0);
+    this.fileSize.set(0);
   }
 
   togglePlay() {
@@ -198,16 +470,13 @@ export class AudioPlayerService {
     else this.play();
   }
   play() {
-    if (this.isError()) {
-      this.audio.load();
-      this.audio.currentTime = this.currentTime();
-    }
-    this.audio.play();
+    this.playAudio();
   }
   playId(id: number) {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
+      this.clear();
       this.loadAudio(track);
       this.play();
     }
@@ -232,42 +501,42 @@ export class AudioPlayerService {
     // set signals
     this.idCounter.set(idCounter);
     this.queue.set(newQueue);
-    this.playId(playTrack.id);
+    this.playId(playTrack.id!);
   }
 
   restartQueue() {
     const q = this.queue();
     if (q.length > 0) {
-      this.playId(q[0].id);
+      this.playId(q[0].id!);
       this.seek(0);
     }
   }
 
 
   pause() {
-    this.audio.pause();
+    this.pauseAudio();
+    this.isPlaying.set(false); // sync immediately to prevent UI problems
   }
 
   stop() {
     this.pause();
-    this.clearAudio();
-    this.currentId.set(null!);
+    this.clear();
+    this.currentId.set(null);
   }
 
   next() {
     if (this.nextTrack() != null) {
-      this.playId(this.nextTrack()!.id);
+      this.playId(this.nextTrack()!.id!);
     } else {
-      this.seek(this.audio.duration);
-      this.pause();
+      this.seek(this.duration(), false);
     }
   }
 
   previous() {
-    if (this.audio.currentTime > 5) {
+    if (this.currentTime() > 5) {
       this.seek(0);
     } else if (this.previousTrack() != null) {
-      this.playId(this.previousTrack()!.id);
+      this.playId(this.previousTrack()!.id!);
     } else {
       this.seek(0);
     }
@@ -275,14 +544,14 @@ export class AudioPlayerService {
 
   addToQueue(track: AudioTrack) {
     const id = this.idCounter() + 1;
-    track = structuredClone({ ...track, id: id });
+    const newTrack: AudioTrack = structuredClone({ ...track, id: id });
 
     this.idCounter.set(id);
-    this.queue.update(q => [...q, track]);
+    this.queue.update(q => [...q, newTrack]);
 
     // set current if doesn t exists
     if (this.currentId() == null) {
-      this.loadId(track.id);
+      this.loadId(newTrack.id!);
     }
   }
 
@@ -293,7 +562,7 @@ export class AudioPlayerService {
       // auto-play next if available, otherwise stop
       const q = this.queue();
       if (q.length > 0) {
-        this.loadId(q[0].id);
+        this.loadId(q[0].id!);
       } else {
         this.stop();
       }
@@ -305,11 +574,8 @@ export class AudioPlayerService {
     this.stop();
   }
 
-  seek(time: number) {
-    if (this.isError()) {
-      this.audio.load();
-    }
-    this.audio.currentTime = time;
+  seek(time: number, playAfterSeek: boolean = this.isPlaying()) {
+    this.seekAudio(time, playAfterSeek);
     this.currentTime.set(time); // Sync immediately to prevent UI glitch on release
   }
 

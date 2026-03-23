@@ -74,18 +74,14 @@ export class AudioPlayer {
   onSeeking(value: number) {
     this.seekingTime.set(value);
     if (!this.isSeeking()) {
-      this.audioPlayerService.seek(value);
+      this.audioPlayerService.seek(value, this.audioPlayerService.isPlaying());
     }
   }
 
   // Called on mouseup (desktop) or touchend (mobile).
   onSeekingEnd() {
-    this.audioPlayerService.seek(this.seekingTime());
+    this.audioPlayerService.seek(this.seekingTime(), this.wasPlayingBeforeSeek());
     this.isSeeking.set(false);
-
-    if (this.wasPlayingBeforeSeek()) {
-      this.audioPlayerService.play();
-    }
     this.wasPlayingBeforeSeek.set(false);
   }
 

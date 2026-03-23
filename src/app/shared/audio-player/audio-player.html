@@ -10,9 +10,10 @@
   <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4" [class]="!queueOpen() ? '!hidden' : ''">
     @for (track of audioPlayerService.queue(); track $index) {
     <li class="flex items-center px-4 py-2 gap-2 hover:bg-opacity"
-      [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id">
+      [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id"
+      [class.text-error]="audioPlayerService.currentTrack()!.id == track.id && audioPlayerService.isError()">
       <button class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
-        (click)="audioPlayerService.playId(track.id)">
+        (click)="audioPlayerService.playId(track.id!)">
         <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
           loading="lazy" decoding="async" [httpSrc]="track.coverImageSrc" [alt]="track.title" />
         <div class="flex flex-col flex-grow overflow-hidden">
@@ -27,7 +28,7 @@
           <fa-icon [icon]="faShare" />
         </button>
         <button i18n-title type="button" class="icon-button" title="Remove from queue"
-          (click)="audioPlayerService.removeFromQueue(track.id)">
+          (click)="audioPlayerService.removeFromQueue(track.id!)">
           <fa-icon [icon]="faTrash" />
         </button>
       </div>
@@ -50,7 +51,8 @@
 
   <div class="flex justify-between items-center w-full gap-2">
     <button class="text-left flex flex-col flex-grow min-w-[100px] cursor-pointer"
-      [class]="queueOpen() ? '!hidden' : ''" (click)="queueOpen.set(true)">
+      [class]="queueOpen() ? '!hidden' : ''" [class.text-error]="audioPlayerService.isError()"
+      (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">
         <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
           loading="lazy" decoding="async" [httpSrc]="audioPlayerService.currentTrack()?.coverImageSrc"
@@ -69,14 +71,13 @@
     <!-- needs to make prev / play / pause buttons centered -->
     <span class="size-10" [class]="!queueOpen() ? '!hidden' : ''"></span>
 
-    <div class="flex justify-center gap-2">
+    <div class="flex justify-center gap-2" [class.text-error]="audioPlayerService.isError()">
       <button i18n-title type="button" class="icon-button" title="Back" (click)="audioPlayerService.previous()">
         @if (audioPlayerService.currentIndex() > 0){ <fa-icon [icon]="faBackward" />} @else if
         (audioPlayerService.currentIndex() === 0){ <fa-icon [icon]="faBackwardStep" />}
       </button>
       <button i18n-title type="button" class="icon-button" title="Play / Pause"
-        [class.text-error]="audioPlayerService.isError()" [disabled]="audioPlayerService.isLoading()"
-        (click)="audioPlayerService.togglePlay()">
+        [disabled]="audioPlayerService.isLoading()" (click)="audioPlayerService.togglePlay()">
         @if(audioPlayerService.isLoading()) {<fa-icon [icon]="faCircleNotch" animation="spin" />} @else if
         (audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon [icon]="faPlay" />}
       </button>
