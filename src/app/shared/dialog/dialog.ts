@@ -24,9 +24,23 @@ export class Dialog {
 
       if (visible && component) {
         const ref = this.componentContainer.createComponent(component);
-        if (config?.data) Object.assign(ref.instance, config.data);
-        if (config?.title && 'title' in ref.instance) {
-          (ref.instance as any).title = config.title;
+        if (config?.data) {
+          for (const key of Object.keys(config.data)) {
+            try {
+              ref.setInput(key, config.data[key]);
+            } catch {
+              (ref.instance as any)[key] = config.data[key];
+            }
+          }
+        }
+        if (config?.title) {
+          try {
+            ref.setInput('title', config.title);
+          } catch {
+            if ('title' in ref.instance) {
+              (ref.instance as any).title = config.title;
+            }
+          }
         }
 
         setTimeout(() => {

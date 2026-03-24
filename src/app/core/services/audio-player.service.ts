@@ -36,10 +36,11 @@ export class AudioPlayerService {
   fileSize = signal(0);
 
   isElaborating = signal<boolean>(false);
-  isPlaying = signal<boolean>(false);
-  isError = signal<boolean>(false);
+  isRealPlaying = signal<boolean>(false);
 
   isLoading = computed(() => this.isElaborating() || this._isRequesting());
+  isPlaying = computed(() => this.isRealPlaying() || this._playRequested());
+  isError = signal<boolean>(false);
 
   private _errorEvent$ = new Subject<any>();
   public readonly errorEvent$ = this._errorEvent$.asObservable();
@@ -75,12 +76,12 @@ export class AudioPlayerService {
     this.audio.addEventListener('ended', () => this.next());
 
     this.audio.addEventListener('play', () => {
-      this.isPlaying.set(true);
+      this.isRealPlaying.set(true);
       this.updatePlaybackMetadata();
       this._playRequested.set(false);
     });
     this.audio.addEventListener('pause', () => {
-      this.isPlaying.set(false);
+      this.isRealPlaying.set(false);
       //this.currentTime.set(this.audio.currentTime); // Sync time on pause to ensure the UI is 100% accurate
       this.updatePlaybackMetadata();
       this._pauseRequested.set(false);
@@ -137,7 +138,7 @@ export class AudioPlayerService {
     this.audio.addEventListener('error', (event) => {
       this.isElaborating.set(false);
       this.isError.set(true);
-      this.isPlaying.set(false);
+      this.isRealPlaying.set(false);
 
       this._errorEvent$.next(event);
 
@@ -348,7 +349,7 @@ export class AudioPlayerService {
 
       this.isElaborating.set(false);
       this.isError.set(true);
-      this.isPlaying.set(false);
+      this.isRealPlaying.set(false);
 
       this._errorEvent$.next(err);
 
@@ -515,7 +516,7 @@ export class AudioPlayerService {
 
   pause() {
     this.pauseAudio();
-    this.isPlaying.set(false); // sync immediately to prevent UI problems
+    this.isRealPlaying.set(false); // sync immediately to prevent UI problems
   }
 
   stop() {
