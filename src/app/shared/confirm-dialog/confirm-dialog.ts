@@ -1,4 +1,4 @@
-import { Component, inject, input, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { DialogService } from '../../core/services/dialog.service';
 export class ConfirmDialog {
   dialogService = inject(DialogService);
 
-  @Input() title = '';
-  @Input() message = '';
+  readonly title = input.required<string>();
+  readonly message = input.required<string>();
 
   confirm(result: boolean) {
     this.dialogService.close(result);

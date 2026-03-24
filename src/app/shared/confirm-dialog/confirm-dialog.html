@@ -1,5 +1,5 @@
-<h2 class="title2 !pt-0">{{ title }}</h2>
-<p class="section">{{ message }}</p>
+<h2 class="title2 !pt-0">{{ title() }}</h2>
+<p class="section">{{ message() }}</p>
 <div class="flex justify-center gap-4">
     <button i18n i18n-title autofocus type="button" class="button button-primary" title="Confirm"
         (click)="confirm(true)">Confirm</button>

@@ -3,7 +3,7 @@
     account, please use the forgot password functionality.</p>
 <div class="flex justify-center gap-4">
     <a i18n i18n-title type="button" class="button button-accent" title="Forgot password"
-        [routerLink]="['/auth', 'forgot-password']" [queryParams]="{ email: email || null }">Forgot password
+        [routerLink]="['/auth', 'forgot-password']" [queryParams]="{ email: email() || null }">Forgot password
     </a>
     <button i18n i18n-title autofocus type="button" class="button button-accent" title="Cancel"
         (click)="cancel()">Cancel</button>

@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, inject, signal, input } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
@@ -15,12 +15,12 @@ export class ResendChangeEmailDialog {
   private toasterService = inject(ToasterService);
   private authService = inject(AuthService);
 
-  @Input() email = null!;
+  readonly email = input.required<string>();
 
   isLoading = signal(false);
   submit() {
     let resendDto: ResendConfirmEmailDto = {
-      email: this.email,
+      email: this.email(),
     };
     this.isLoading.set(true);
     this.authService.resendConfirmEmail(resendDto).subscribe({

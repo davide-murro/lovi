@@ -73,8 +73,8 @@
 
     <div class="flex justify-center gap-2" [class.text-error]="audioPlayerService.isError()">
       <button i18n-title type="button" class="icon-button" title="Back" (click)="audioPlayerService.previous()">
-        @if (audioPlayerService.currentIndex() > 0){ <fa-icon [icon]="faBackward" />} @else if
-        (audioPlayerService.currentIndex() === 0){ <fa-icon [icon]="faBackwardStep" />}
+        @if (audioPlayerService.currentIndex()! === 0){ <fa-icon [icon]="faBackwardStep" />}
+        @else if (audioPlayerService.currentIndex()! > 0){ <fa-icon [icon]="faBackward" />}
       </button>
       <button i18n-title type="button" class="icon-button" title="Play / Pause"
         [disabled]="audioPlayerService.isLoading()" (click)="audioPlayerService.togglePlay()">

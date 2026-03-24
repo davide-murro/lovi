@@ -1,8 +1,5 @@
-import { Component, inject, Input, signal } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
+import { Component, inject, input } from '@angular/core';
 import { DialogService } from '../../../core/services/dialog.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { ResendConfirmEmailDto } from '../../../core/models/dtos/auth/resend-confirm-email-dto.model';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -14,7 +11,7 @@ import { RouterLink } from '@angular/router';
 export class EmailAlreadyTakenDialog {
   private dialogService = inject(DialogService);
 
-  @Input() email = null!;
+  readonly email = input.required<string>();
 
   cancel() {
     this.dialogService.close();

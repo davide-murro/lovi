@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
@@ -14,8 +14,12 @@ export class HttpSrcDirective implements OnDestroy {
   private subscription?: Subscription;
   private objectUrl?: string;
 
-  @Input() set httpSrc(url: string | null | undefined) {
-    this.updateSrc(url);
+  httpSrc = input<string | null | undefined>();
+
+  constructor() {
+    effect(() => {
+      this.updateSrc(this.httpSrc());
+    });
   }
 
   private updateSrc(url: string | null | undefined) {
