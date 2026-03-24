@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -34,10 +34,15 @@ export class RolesTablePaged {
 
   controlRoute = input<boolean>(true);
 
-  rolePagedQuery = signal<PagedQuery>(null!);
+  rolePagedQuery = linkedSignal<PagedQuery>(() => ({
+    pageNumber: this.pageNumber(),
+    pageSize: this.pageSize(),
+    sortBy: this.sortBy(),
+    sortOrder: this.sortOrder(),
+    search: this.search()
+  }));
   rolePagedResult = toSignal(
     toObservable(this.rolePagedQuery).pipe(
-      filter(query => !!query),
       switchMap(query => {
         this.rolesError.set(false);
         this.rolesLoading.set(true);
@@ -56,23 +61,6 @@ export class RolesTablePaged {
   );
   rolesLoading = signal(false);
   rolesError = signal(false);
-
-  constructor() {
-    // Effect: Synchronizes the internal signal when any external input changes.
-    // This allows the parent to override the current state at any time.
-    effect(() => {
-      const query = {
-        pageNumber: this.pageNumber(),
-        pageSize: this.pageSize(),
-        sortBy: this.sortBy(),
-        sortOrder: this.sortOrder(),
-        search: this.search()
-      };
-
-      // Update the internal signal with the new input values.
-      this.rolePagedQuery.set(query);
-    });
-  }
 
   reload() {
     // This forces the signal to update and thus re-run the switchMap

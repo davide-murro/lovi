@@ -1,8 +1,8 @@
-import { Component, effect, inject, input, Signal, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { PodcastsService } from '../../core/services/podcasts.service';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, filter, finalize, of, switchMap } from 'rxjs';
+import { catchError, finalize, of, switchMap } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Pagination } from "../pagination/pagination";
 import { PodcastItem } from "../podcast-item/podcast-item";
@@ -26,10 +26,15 @@ export class PodcastsPaged {
 
   controlRoute = input<boolean>(true);
 
-  podcastPagedQuery = signal<PagedQuery>(null!);
+  podcastPagedQuery = linkedSignal<PagedQuery>(() => ({
+    pageNumber: this.pageNumber(),
+    pageSize: this.pageSize(),
+    sortBy: this.sortBy(),
+    sortOrder: this.sortOrder(),
+    search: this.search()
+  }));
   podcastPagedResult = toSignal(
     toObservable(this.podcastPagedQuery).pipe(
-      filter(query => !!query),
       switchMap(query => {
         this.podcastsError.set(false);
         this.podcastsLoading.set(true);
@@ -48,23 +53,6 @@ export class PodcastsPaged {
   );
   podcastsLoading = signal(false);
   podcastsError = signal(false);
-
-  constructor() {
-    // Effect: Synchronizes the internal signal when any external input changes.
-    // This allows the parent to override the current state at any time.
-    effect(() => {
-      const query = {
-        pageNumber: this.pageNumber(),
-        pageSize: this.pageSize(),
-        sortBy: this.sortBy(),
-        sortOrder: this.sortOrder(),
-        search: this.search()
-      };
-
-      // Update the internal signal with the new input values.
-      this.podcastPagedQuery.set(query);
-    });
-  }
 
   reload() {
     // This forces the signal to update and thus re-run the switchMap

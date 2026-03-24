@@ -1,6 +1,6 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { switchMap, catchError, of, finalize, filter } from 'rxjs';
+import { switchMap, catchError, of, finalize } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
@@ -37,10 +37,15 @@ export class UsersTablePaged {
 
   controlRoute = input<boolean>(true);
 
-  userPagedQuery = signal<PagedQuery>(null!);
+  userPagedQuery = linkedSignal<PagedQuery>(() => ({
+    pageNumber: this.pageNumber(),
+    pageSize: this.pageSize(),
+    sortBy: this.sortBy(),
+    sortOrder: this.sortOrder(),
+    search: this.search()
+  }));
   userPagedResult = toSignal(
     toObservable(this.userPagedQuery).pipe(
-      filter(query => !!query),
       switchMap(query => {
         this.usersError.set(false);
         this.usersLoading.set(true);
@@ -59,23 +64,6 @@ export class UsersTablePaged {
   );
   usersLoading = signal(false);
   usersError = signal(false);
-
-  constructor() {
-    // Effect: Synchronizes the internal signal when any external input changes.
-    // This allows the parent to override the current state at any time.
-    effect(() => {
-      const query = {
-        pageNumber: this.pageNumber(),
-        pageSize: this.pageSize(),
-        sortBy: this.sortBy(),
-        sortOrder: this.sortOrder(),
-        search: this.search()
-      };
-
-      // Update the internal signal with the new input values.
-      this.userPagedQuery.set(query);
-    });
-  }
 
   reload() {
     // This forces the signal to update and thus re-run the switchMap

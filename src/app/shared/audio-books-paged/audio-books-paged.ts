@@ -1,6 +1,6 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { switchMap, catchError, of, finalize, filter } from 'rxjs';
+import { switchMap, catchError, of, finalize } from 'rxjs';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { AudioBooksService } from '../../core/services/audio-books.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -26,10 +26,15 @@ export class AudioBooksPaged {
 
   controlRoute = input<boolean>(true);
 
-  audioBookPagedQuery = signal<PagedQuery>(null!);
+  audioBookPagedQuery = linkedSignal<PagedQuery>(() => ({
+    pageNumber: this.pageNumber(),
+    pageSize: this.pageSize(),
+    sortBy: this.sortBy(),
+    sortOrder: this.sortOrder(),
+    search: this.search()
+  }));
   audioBookPagedResult = toSignal(
     toObservable(this.audioBookPagedQuery).pipe(
-      filter(query => !!query),
       switchMap(query => {
         this.audioBooksError.set(false);
         this.audioBooksLoading.set(true);
@@ -48,23 +53,6 @@ export class AudioBooksPaged {
   );
   audioBooksLoading = signal(false);
   audioBooksError = signal(false);
-
-  constructor() {
-    // Effect: Synchronizes the internal signal when any external input changes.
-    // This allows the parent to override the current state at any time.
-    effect(() => {
-      const query = {
-        pageNumber: this.pageNumber(),
-        pageSize: this.pageSize(),
-        sortBy: this.sortBy(),
-        sortOrder: this.sortOrder(),
-        search: this.search()
-      };
-
-      // Update the internal signal with the new input values.
-      this.audioBookPagedQuery.set(query);
-    });
-  }
 
   reload() {
     // This forces the signal to update and thus re-run the switchMap
