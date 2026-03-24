@@ -454,8 +454,7 @@ export class AudioPlayerService {
     const track = this.currentTrack();
     if (track) {
       this.clear();
-      this.loadAudio(track);
-      this.pause();
+      this.loadAudio(track, 0, false);
     }
   }
 
@@ -478,8 +477,7 @@ export class AudioPlayerService {
     const track = this.currentTrack();
     if (track) {
       this.clear();
-      this.loadAudio(track);
-      this.play();
+      this.loadAudio(track, 0, true);
     }
   }
   playTrack(track: AudioTrack, newQueue: AudioTrack[] = []) {
