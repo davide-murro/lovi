@@ -1,7 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { Component, effect, input } from '@angular/core';
 import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
 import { AudioBooksPaged } from "../../shared/audio-books-paged/audio-books-paged";
 
@@ -12,7 +9,5 @@ import { AudioBooksPaged } from "../../shared/audio-books-paged/audio-books-page
   styleUrl: './search.scss'
 })
 export class Search {
-  private route = inject(ActivatedRoute);
-
-  search = toSignal(this.route.queryParams.pipe(map(data => data['search'] ?? '')));
+  search = input('', { transform: (v: string | undefined) => v ?? '' });
 }

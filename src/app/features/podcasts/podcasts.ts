@@ -1,7 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Component, input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
 
@@ -12,11 +9,9 @@ import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
   styleUrl: './podcasts.scss'
 })
 export class Podcasts {
-  private route = inject(ActivatedRoute);
-
-  pageNumber = toSignal(this.route.queryParams.pipe(map(data => data['pageNumber'] ?? 1)));
-  pageSize = toSignal(this.route.queryParams.pipe(map(data => data['pageSize'] ?? 10)));
-  sortBy = toSignal(this.route.queryParams.pipe(map(data => data['sortBy'] ?? 'id')));
-  sortOrder = toSignal(this.route.queryParams.pipe(map(data => data['sortOrder'] ?? 'asc')));
-  search = toSignal(this.route.queryParams.pipe(map(data => data['search'] ?? '')));
+  pageNumber = input(1, { transform: (v: number | undefined) => Number(v ?? 1) });
+  pageSize = input(10, { transform: (v: number | undefined) => Number(v ?? 10) });
+  sortBy = input('id', { transform: (v: string | undefined) => v ?? 'id' });
+  sortOrder = input('asc', { transform: (v: 'asc' | 'desc' | undefined) => v ?? 'asc' });
+  search = input('', { transform: (v: string | undefined) => v ?? '' });
 }

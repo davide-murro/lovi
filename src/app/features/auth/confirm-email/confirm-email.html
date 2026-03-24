@@ -1,7 +1,7 @@
 <div class="max-w-lg m-auto">
     <h1 i18n class="title text-center">Confirm email</h1>
 
-    @if (userId() != null && token() != null){
+    @if (userId() && token()){
     <p i18n class="section text-center text-accent">
         Please confirm your email address by clicking the button
     </p>

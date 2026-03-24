@@ -1,7 +1,5 @@
-import { Component, computed, inject, Signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { faBookBookmark, faBookOpen, faCircleNotch, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -22,7 +20,6 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './podcast-details.scss'
 })
 export class PodcastDetails {
-  private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
   private authService = inject(AuthService);
@@ -35,7 +32,7 @@ export class PodcastDetails {
   faCircleNotch = faCircleNotch;
 
   // podcast
-  podcast: Signal<PodcastDto> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
+  readonly podcast = input.required<PodcastDto>();
 
   isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
   isMyLibraryLoading = computed(() => this.librariesService?.isLoading());
@@ -52,7 +49,6 @@ export class PodcastDetails {
       .map(pe => {
         const number = pe.number;
         const episodeTrack: AudioTrack = {
-          id: null!,
           title: pe.name,
           subtitle: $localize`Episode ${number}`,
           artists: pe.voicers?.map(v => v.nickname),

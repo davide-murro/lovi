@@ -1,11 +1,9 @@
-import { Component, inject, signal, Signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
 import { ToasterService } from '../../core/services/toaster.service';
-import { map } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { DialogService } from '../../core/services/dialog.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +19,6 @@ import { DeleteAccountDialog } from '../../shared/auth/delete-account-dialog/del
   styleUrl: './user-profile.scss'
 })
 export class UserProfile {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialogService = inject(DialogService);
   private toasterService = inject(ToasterService);
@@ -30,17 +27,27 @@ export class UserProfile {
 
   faPen = faPen;
 
-  private _userProfile: Signal<UserProfileDto> = toSignal(this.route.data.pipe(map(data => data['userProfile'])));
-
-  informationLoading = signal(false);
-  informationForm = new FormGroup({
-    id: new FormControl(this._userProfile().id),
-    email: new FormControl({ value: this._userProfile().email!, disabled: true }),
-    password: new FormControl({ value: 'xxxxxxxx', disabled: true }),
-    name: new FormControl(this._userProfile().name, Validators.required),
-  });
+  userProfile = input.required<UserProfileDto>();
 
   logoutLoading = signal(false);
+  informationLoading = signal(false);
+  informationForm = new FormGroup({
+    id: new FormControl<string>(''),
+    email: new FormControl<string>({ value: '', disabled: true }),
+    password: new FormControl<string>({ value: 'xxxxxxxx', disabled: true }),
+    name: new FormControl<string>('', Validators.required),
+  });
+
+  constructor() {
+    effect(() => {
+      this.informationForm.patchValue({
+        id: this.userProfile().id,
+        email: this.userProfile().email!,
+        name: this.userProfile().name
+      });
+    });
+  }
+
 
   changeEmail() {
     this.dialogService.open(ChangeEmailDialog)

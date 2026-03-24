@@ -1,10 +1,7 @@
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AudioBooksPaged } from "../../shared/audio-books-paged/audio-books-paged";
-import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-audio-books',
@@ -13,11 +10,9 @@ import { map } from 'rxjs';
   styleUrl: './audio-books.scss'
 })
 export class AudioBooks {
-  private route = inject(ActivatedRoute);
-
-  pageNumber = toSignal(this.route.queryParams.pipe(map(data => data['pageNumber'] ?? 1)));
-  pageSize = toSignal(this.route.queryParams.pipe(map(data => data['pageSize'] ?? 10)));
-  sortBy = toSignal(this.route.queryParams.pipe(map(data => data['sortBy'] ?? 'id')));
-  sortOrder = toSignal(this.route.queryParams.pipe(map(data => data['sortOrder'] ?? 'asc')));
-  search = toSignal(this.route.queryParams.pipe(map(data => data['search'] ?? '')));
+  pageNumber = input(1, { transform: (v: number | undefined) => Number(v ?? 1) });
+  pageSize = input(10, { transform: (v: number | undefined) => Number(v ?? 10) });
+  sortBy = input('id', { transform: (v: string | undefined) => v ?? 'id' });
+  sortOrder = input('asc', { transform: (v: 'asc' | 'desc' | undefined) => v ?? 'asc' });
+  search = input('', { transform: (v: string | undefined) => v ?? '' });
 }

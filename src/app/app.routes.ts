@@ -10,7 +10,7 @@ import { PodcastEpisode } from './features/podcasts/podcast-details/podcast-epis
 import { podcastResolver } from './core/resolvers/podcast.resolver';
 import { podcastEpisodeResolver } from './core/resolvers/podcast-episode.resolver';
 import { userProfileResolver } from './core/resolvers/user-profile.resolver';
-import { MyLibrary } from './features/my-library/my-library';
+import { MyLibrary } from './features/my-library-container/my-library/my-library';
 import { AudioBooks } from './features/audio-books/audio-books';
 import { AudioBookDetails } from './features/audio-books/audio-book-details/audio-book-details';
 import { audioBookResolver } from './core/resolvers/audio-book.resolver';
@@ -29,6 +29,8 @@ import { ConfirmEmail } from './features/auth/confirm-email/confirm-email';
 import { ConfirmChangeEmail } from './features/auth/confirm-change-email/confirm-change-email';
 import { roleResolver } from './core/resolvers/role.resolver';
 import { EditRole } from './features/edit/edit-role/edit-role';
+import { MyLibraryContainer } from './features/my-library-container/my-library-container';
+import { MyOffline } from './features/my-library-container/my-offline/my-offline';
 
 export const routes: Routes = [
     {
@@ -106,9 +108,30 @@ export const routes: Routes = [
     },
     {
         path: 'my-library',
-        component: MyLibrary,
-        title: 'LOVI - My Library',
+        component: MyLibraryContainer,
         canActivate: [authGuard],
+        children: [
+            {
+                path: '',
+                redirectTo: 'library',
+                pathMatch: 'full'
+            },
+            {
+                path: 'library',
+                component: MyLibrary,
+                title: 'LOVI - My Library'
+            },
+            {
+                path: 'offline',
+                component: MyOffline,
+                title: 'LOVI - My Offline'
+            }/*,
+            {
+                path: 'local',
+                component: MyFiles,
+                title: 'LOVI - My files'
+            }*/
+        ]
     },
     {
         path: 'search',

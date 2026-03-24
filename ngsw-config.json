@@ -30,42 +30,45 @@
   ],
   "dataGroups": [
     {
-      "name": "api-data-calls",
+      "name": "api-offline-audio-calls",
       "urls": [
-        "https://www.lovi.media/api/audio-books/paged",
-        "https://www.lovi.media/api/audio-books/*",
-        
-        "https://www.lovi.media/api/podcasts/paged",
-        "https://www.lovi.media/api/podcasts/*",
-
-        "https://www.lovi.media/api/podcasts/*/episodes/*",
-
-        "https://www.lovi.media/api/creators/paged",
-        "https://www.lovi.media/api/creators/*",
-
-        "https://www.lovi.media/api/libraries/me",
-        
-        "https://www.lovi.media/api/users/profiles/me"
-      ],
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 100,
-        "maxAge": "1d",
-        "timeout": "5s"
-      }
-    },
-    {
-      "name": "api-media-calls",
-      "urls": [
-        "https://www.lovi.media/api/audio-books/*/cover",
-        "https://www.lovi.media/api/podcasts/*/cover",
-        "https://www.lovi.media/api/podcasts/*/episodes/*/cover",
-        "https://www.lovi.media/api/creators/*/cover"
+        "https://localhost:7203/api/audio-books/*/audio*isOffline=True*",
+        "https://localhost:7203/api/podcasts/*/episodes/*/audio*isOffline=True*"
       ],
       "cacheConfig": {
         "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "30d",
+        "maxSize": 1000,
+        "maxAge": "365d",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "api-offline-media-calls",
+      "urls": [
+        "https://localhost:7203/api/audio-books/*/cover*isOffline=True*",
+        "https://localhost:7203/api/podcasts/*/cover*isOffline=True*",
+        "https://localhost:7203/api/podcasts/*/episodes/*/cover*isOffline=True*",
+        "https://localhost:7203/api/creators/*/cover*isOffline=True*"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 1000,
+        "maxAge": "365d",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "api-offline-data-calls",
+      "urls": [
+        "https://localhost:7203/api/audio-books/*isOffline=True*",
+        "https://localhost:7203/api/podcasts/*isOffline=True*",
+        "https://localhost:7203/api/podcasts/*/episodes/*isOffline=True*",
+        "https://localhost:7203/api/creators/*isOffline=True*"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 1000,
+        "maxAge": "365d",
         "timeout": "5s"
       }
     }

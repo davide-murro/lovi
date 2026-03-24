@@ -1,10 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { ConfirmEmailDto } from '../../../core/models/dtos/auth/confirm-email-dto.model';
 
 @Component({
@@ -15,18 +13,17 @@ import { ConfirmEmailDto } from '../../../core/models/dtos/auth/confirm-email-dt
 })
 export class ConfirmEmail {
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private dialogService = inject(DialogService);
 
-  userId = toSignal<string>(this.route.queryParams.pipe(map(data => data['userId'])));
-  token = toSignal<string>(this.route.queryParams.pipe(map(data => data['token'])));
+  userId = input.required<string>();
+  token = input.required<string>();
 
   isLoading = signal(false);
   onSubmit(): void {
     let dto: ConfirmEmailDto = {
-      userId: this.userId()!,
-      token: this.token()!
+      userId: this.userId(),
+      token: this.token()
     }
     this.isLoading.set(true);
     this.authService.confirmEmail(dto).subscribe({

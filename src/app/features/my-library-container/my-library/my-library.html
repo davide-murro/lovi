@@ -1,4 +1,8 @@
-<h1 i18n class="title">My Library</h1>
+@if (myLibraryLoading()) {
+<p i18n class="section text-accent">Loading...</p>
+} @else if (myLibraryError()) {
+<p i18n class="section text-accent">Failed to load My Library. Please try reloading.</p>
+} @else {
 
 <div class="section">
   <h2 i18n class="title">Audio Books</h2>
@@ -7,58 +11,50 @@
   <p i18n class="section text-accent">There are no Audio Books here</p>
   } @else {
   <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
-    @for (audioBook of myLibraryAudioBooks(); track $index) {
+    @for (audioBook of myLibraryAudioBooks(); track audioBook.id) {
     <app-audio-book-item [audioBook]="audioBook"></app-audio-book-item>
     }
   </div>
   }
 </div>
+
 <div class="section">
   <h2 i18n class="title">Podcasts</h2>
 
   @if (myLibraryPodcasts() == null || myLibraryPodcasts()!.length == 0) {
   <p i18n class="section text-accent">There are no Podcasts here</p>
-  } @else { @for (podcast of myLibraryPodcasts(); track $index) {
+  } @else {
+  @for (podcast of myLibraryPodcasts(); track podcast.id) {
   <div class="section">
     <a class="link-item" [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
       <div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
-        <img
-          class="img-parallax bg-accent"
-          loading="lazy"
-          decoding="async"
-          [src]="podcast.coverImageUrl"
-          [alt]="podcast.name"
-        />
+        <img class="img-parallax bg-accent" loading="lazy" decoding="async" [httpSrc]="podcast.coverImagePreviewUrl"
+          [alt]="podcast.name" />
       </div>
-
       <h3 class="title2">{{ podcast.name }}</h3>
       <p class="subtitle text-accent">
-        @for(creator of podcast.voicers; track $index) {
-        <a>{{ creator.nickname }}</a
-        >@if (!$last) {, } }
+        @for(creator of podcast.voicers; track creator.id) {
+        <a>{{ creator.nickname }}</a>@if (!$last) {, }
+        }
       </p>
     </a>
 
-    <h5 class="section text-accent flex justify-between items-center gap-2">
-      <span i18n>{{ podcast.episodes?.length ?? 0 }} Episodes</span>
-
-      <button
-        i18n-title
-        type="button"
-        class="button button-primary button-rounded shrink-0 flex gap-2"
-        title="Play all Episodes"
-        (click)="podcastPlayAll(podcast)"
-      >
+    <div class="section text-accent flex justify-between items-center gap-2">
+      <h5 i18n class="flex-1">{{ podcast.episodes?.length ?? 0 }} Episodes</h5>
+      <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
+        title="Play all Episodes" (click)="podcastPlayAll(podcast)">
         <fa-icon [icon]="faPlay" />
         <span i18n>Play all</span>
       </button>
-    </h5>
+    </div>
 
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
-      @for (episode of podcast.episodes; track $index) {
-      <app-podcast-episode-item [podcast]="podcast" [episode]="episode"></app-podcast-episode-item>
+      @for (episode of podcast.episodes; track episode.id) {
+      <app-podcast-episode-item [podcast]="podcast" [podcastEpisode]="episode"></app-podcast-episode-item>
       }
     </div>
   </div>
-  } }
+  }
+  }
 </div>
+}

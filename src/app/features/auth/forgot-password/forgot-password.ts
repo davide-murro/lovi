@@ -1,13 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ForgotPasswordDto } from '../../../core/models/dtos/auth/forgot-password-dto.model';
-import { ToasterService } from '../../../core/services/toaster.service';
 import { valuesMatchValidator } from '../../../core/validators/values-match-validator';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { passwordValidator } from '../../../core/validators/password-validator';
 import { ResetPasswordDto } from '../../../core/models/dtos/auth/reset-password-dto.model';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
@@ -20,23 +17,31 @@ import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-emai
 })
 export class ForgotPassword {
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
-  private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
 
-  email = toSignal(this.route.queryParams.pipe(map(data => data['email'])));
-  token = toSignal(this.route.queryParams.pipe(map(data => data['token'])));
+  email = input<string>();
+  token = input<string>();
 
   forgotForm = new FormGroup({
-    email: new FormControl(this.email(), [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   resetForm = new FormGroup({
-    email: new FormControl({ value: this.email(), disabled: true }),
+    email: new FormControl({ value: '', disabled: true }),
     newPassword: new FormControl(null, [Validators.required, passwordValidator]),
     newPasswordRepeat: new FormControl(null, Validators.required),
   }, { validators: valuesMatchValidator(['newPassword', 'newPasswordRepeat']) });
+
+  constructor() {
+    effect(() => {
+      if (!this.token()) {
+        this.forgotForm.get('email')?.setValue(this.email() ?? '');
+      } else {
+        this.resetForm.get('email')?.setValue(this.email()!);
+      }
+    })
+  }
 
   isForgotLoading = signal(false);
   onForgotSubmit(): void {
@@ -76,8 +81,8 @@ export class ForgotPassword {
     if (!this.resetForm.valid) return;
 
     let dto: ResetPasswordDto = {
-      email: this.email(),
-      token: this.token(),
+      email: this.email()!,
+      token: this.token()!,
       newPassword: this.resetForm.value.newPassword!
     }
     this.isResetLoading.set(true);
