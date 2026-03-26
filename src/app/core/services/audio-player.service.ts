@@ -170,6 +170,7 @@ export class AudioPlayerService {
     }
 
     // Check if token is valid
+    this.audio.pause();
     await this.checkToken();
     url = this.authUrlPipe.transform(url) ?? url;
 
@@ -195,12 +196,20 @@ export class AudioPlayerService {
     }
 
     // Check if offline
-    if (this.offlineUrlPipe.transform(this.currentTrack()?.audioSrc) !== this.currentTrack()?.audioSrc) {
+    let url = this.currentTrack()?.audioSrc!;
+    if (!url) return;
+    const offlineUrl = this.offlineUrlPipe.transform(url)!;
+    if (offlineUrl !== url) {
+      if (this.audio.src !== offlineUrl) {
+        this.audio.src = offlineUrl;
+        this.audio.load();
+      }
       this.audio.currentTime = time;
       return;
     }
 
     // Ensure token before browser sends a Range request.
+    this.audio.pause();
     const oldToken = this.authService.getAccessToken();
     await this.checkToken();
     const newToken = this.authService.getAccessToken();

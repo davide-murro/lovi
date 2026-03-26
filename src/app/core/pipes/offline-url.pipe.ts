@@ -18,7 +18,7 @@ export class OfflineUrlPipe implements PipeTransform {
     }
 
     const offlineService = this.injector.get(OfflineService);
-    if (offlineService.isUrlDownloaded(url)) {
+    if (!url.includes('&isOffline=') && !url.includes('?isOffline=') && offlineService.isUrlDownloaded(url)) {
       return url.includes('?') ? `${url}&isOffline=True` : `${url}?isOffline=True`;
     }
     return url;

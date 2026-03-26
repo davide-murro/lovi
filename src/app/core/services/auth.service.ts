@@ -145,7 +145,7 @@ export class AuthService {
       }),
       shareReplay(1),
       finalize(() => {
-        this.refreshToken$ = null;
+        this.refreshToken$ = undefined;
       })
     );
     return this.refreshToken$;
@@ -154,9 +154,9 @@ export class AuthService {
     const token = this.accessToken();
     if (!token) return of(undefined);
 
-    // If token is not expired (in less than 60 seconds), return
+    // If token is not expired (in less than 30 seconds), return
     const payload: any = jwtDecode(token);
-    if (Date.now() < payload.exp * 1000 - 60000) {
+    if (Date.now() < payload.exp * 1000 - 30000) {
       return of(undefined);
     }
 

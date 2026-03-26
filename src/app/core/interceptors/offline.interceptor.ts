@@ -15,7 +15,7 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
 
     // add isOffline=True to the request if offline
     let modifiedReq = req;
-    if (offlineService.isUrlDownloaded(url) && !req.params.has('isOffline')) {
+    if (!req.params.has('isOffline') && (offlineService.isUrlDownloaded(url)) || offlineService.isUrlDownloading(url)) {
         modifiedReq = req.clone({
             setParams: { isOffline: 'True' }
         });

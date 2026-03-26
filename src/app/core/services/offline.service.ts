@@ -82,30 +82,74 @@ export class OfflineService {
     isUrlDownloaded(url: string): boolean {
         if (!url) return false;
 
-        // Strip any query strings from the input url for matching
-        const cleanUrl = url.split('?')[0];
+        let isOffline = false;
 
-        for (const a of this.audioBooks()) {
-            if (a.dataUrl?.split('?')[0] === cleanUrl || a.audioUrl?.split('?')[0] === cleanUrl || a.coverImageUrl?.split('?')[0] === cleanUrl || a.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
-            if (a.readers) {
-                for (const r of a.readers) {
-                    if (r.dataUrl?.split('?')[0] === cleanUrl || r.coverImageUrl?.split('?')[0] === cleanUrl || r.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
-                }
+        // Audiobooks
+        const audioBookMatch = url.match(/\/api\/audio-books\/(\d+)/);
+        if (audioBookMatch) {
+            const id = parseInt(audioBookMatch[1]);
+            isOffline = this.isAudioBookDownloaded(id);
+        }
+
+        // Podcasts & Episodes
+        const podcastMatch = url.match(/\/api\/podcasts\/(\d+)/);
+        if (podcastMatch) {
+            const podcastId = parseInt(podcastMatch[1]);
+            const episodeMatch = url.match(/\/episodes\/(\d+)/);
+
+            if (episodeMatch) {
+                const episodeId = parseInt(episodeMatch[1]);
+                isOffline = this.isPodcastEpisodeDownloaded(episodeId);
+            } else {
+                isOffline = this.isPodcastDownloaded(podcastId);
             }
         }
 
-        for (const e of this.episodes()) {
-            if (e.dataUrl?.split('?')[0] === cleanUrl || e.audioUrl?.split('?')[0] === cleanUrl || e.coverImageUrl?.split('?')[0] === cleanUrl || e.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
-            if (e.podcast) {
-                if (e.podcast.dataUrl?.split('?')[0] === cleanUrl || e.podcast.coverImageUrl?.split('?')[0] === cleanUrl || e.podcast.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
-            }
-            if (e.voicers) {
-                for (const v of e.voicers) {
-                    if (v.dataUrl?.split('?')[0] === cleanUrl || v.coverImageUrl?.split('?')[0] === cleanUrl || v.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
-                }
+        // Creators
+        const creatorMatch = url.match(/\/api\/creators\/(\d+)/);
+        if (creatorMatch) {
+            const id = parseInt(creatorMatch[1]);
+            isOffline = this.isCreatorDownloaded(id);
+        }
+
+        return isOffline;
+    }
+
+    isUrlDownloading(url: string): boolean {
+        if (!url) return false;
+
+        let isDownloading = false;
+
+        // Audiobooks
+        const audioBookMatch = url.match(/\/api\/audio-books\/(\d+)/);
+        if (audioBookMatch) {
+            const id = parseInt(audioBookMatch[1]);
+            isDownloading = this.isAudioBookDownloading(id);
+        }
+
+        // Podcasts & Episodes
+        const podcastMatch = url.match(/\/api\/podcasts\/(\d+)/);
+        if (podcastMatch) {
+            const podcastId = parseInt(podcastMatch[1]);
+            const episodeMatch = url.match(/\/episodes\/(\d+)/);
+
+            if (episodeMatch) {
+                console.log("fdsfdsfsd")
+                const episodeId = parseInt(episodeMatch[1]);
+                isDownloading = this.isPodcastEpisodeDownloading(episodeId);
+            } else {
+                isDownloading = this.isPodcastDownloading(podcastId);
             }
         }
-        return false;
+
+        // Creators
+        const creatorMatch = url.match(/\/api\/creators\/(\d+)/);
+        if (creatorMatch) {
+            const id = parseInt(creatorMatch[1]);
+            isDownloading = this.isCreatorDownloading(id);
+        }
+
+        return isDownloading;
     }
 
     isAudioBookDownloaded(id: number): boolean {
