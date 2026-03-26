@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { RegisterDto } from '../models/dtos/auth/register-dto.model';
-import { Observable, tap } from 'rxjs';
+import { finalize, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { LoginDto } from '../models/dtos/auth/login-dto.model';
 import { TokenDto } from '../models/dtos/auth/token-dto.model';
 import { ChangePasswordDto } from '../models/dtos/auth/change-password-dto.model';
@@ -26,6 +26,8 @@ export class AuthService {
   private hasSession = signal(localStorage.getItem('authHasSession') === 'true');
   private accessToken = signal<string | null>(null);
   private userRole = signal<string | null>(null);
+
+  private refreshToken$?: Observable<TokenDto> | null;
 
   isLoggedIn = computed(() => !!this.hasSession());
   isConnected = computed(() => !!this.hasSession() && !!this.accessToken());
@@ -126,7 +128,9 @@ export class AuthService {
   }
 
   refreshTokens(): Observable<TokenDto> {
-    return this.http.post<TokenDto>(
+    if (this.refreshToken$) return this.refreshToken$;
+
+    this.refreshToken$ = this.http.post<TokenDto>(
       `${this.apiUrl}/refresh`,
       {},
       {
@@ -138,8 +142,26 @@ export class AuthService {
         this.setAccessToken(res.accessToken);
         const payload: any = jwtDecode(res.accessToken);
         this.setRole(payload.role);
+      }),
+      shareReplay(1),
+      finalize(() => {
+        this.refreshToken$ = null;
       })
     );
+    return this.refreshToken$;
+  }
+  ensureTokens(): Observable<void> {
+    const token = this.accessToken();
+    if (!token) return of(undefined);
+
+    // If token is not expired (in less than 60 seconds), return
+    const payload: any = jwtDecode(token);
+    if (Date.now() < payload.exp * 1000 - 60000) {
+      return of(undefined);
+    }
+
+    // Refresh token if it expires
+    return this.refreshTokens().pipe(map(() => { }));
   }
   getAccessToken(): string | null {
     return this.accessToken();

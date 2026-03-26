@@ -1,11 +1,9 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject, LOCALE_ID } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { catchError, switchMap, throwError, take, Observable, shareReplay, finalize, map } from 'rxjs';
+import { catchError, switchMap, throwError, take, map } from 'rxjs';
 import { Router } from '@angular/router';
 
-// Shared refresh observable for all requests
-let refreshToken$: Observable<string> | null = null;
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
@@ -33,8 +31,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       // check if the refresh call fails
       if (error.url?.includes('/auth/refresh')) {
-        refreshToken$ = null;
-
         // If it's a network error (0) or a server error (5xx), dont logout.
         // We want to stay "logged in" offline.
         if (error.status === 0 || error.status >= 500) {
@@ -48,17 +44,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
       // Check for a 401 Unauthorized error
       if (error.status === 401 && isLoggedIn) {
-        if (!refreshToken$) {
-          refreshToken$ = authService.refreshTokens().pipe(
-            map(response => response.accessToken),
-            shareReplay(1),
-            finalize(() => {
-              refreshToken$ = null;
-            })
-          );
-        }
-
-        return refreshToken$.pipe(
+        return authService.refreshTokens().pipe(
+          map(response => response.accessToken),
           take(1),
           switchMap(newAccessToken => {
             const newReq = req.clone({

@@ -24,6 +24,7 @@ export class LibrariesService {
   public readonly isLoading: Signal<boolean> = this._isLoading.asReadonly();
 
   constructor() {
+    console.log("LibrariesService constructor")
     effect(() => {
       if (this.authService.isLoggedIn() || this.authService.isConnected()) this.loadMyLibrary();
       else this.removeMyLibrary();

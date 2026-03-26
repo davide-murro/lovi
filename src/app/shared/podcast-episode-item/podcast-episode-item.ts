@@ -2,11 +2,11 @@ import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PodcastEpisodeDto } from '../../core/models/dtos/podcast-episode-dto.model';
 import { PodcastDto } from '../../core/models/dtos/podcast-dto.model';
-import { HttpSrcDirective } from '../../core/directives/http-src.directive';
+import { OfflineUrlPipe } from '../../core/pipes/offline-url.pipe';
 
 @Component({
   selector: 'app-podcast-episode-item',
-  imports: [RouterLink, HttpSrcDirective],
+  imports: [RouterLink, OfflineUrlPipe],
   templateUrl: './podcast-episode-item.html',
   styleUrl: './podcast-episode-item.scss'
 })

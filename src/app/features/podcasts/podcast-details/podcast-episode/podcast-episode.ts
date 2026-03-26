@@ -1,6 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { from } from 'rxjs';
-import { HttpSrcDirective } from '../../../../core/directives/http-src.directive';
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
 import { AudioTrack } from '../../../../core/models/audio-track.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -13,10 +12,11 @@ import { ManageLibraryDto } from '../../../../core/models/dtos/manage-library-dt
 import { AuthDirective } from '../../../../core/directives/auth.directive';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { OfflineUrlPipe } from '../../../../core/pipes/offline-url.pipe';
 
 @Component({
   selector: 'app-podcast-episode',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, HttpSrcDirective],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, OfflineUrlPipe],
   templateUrl: './podcast-episode.html',
   styleUrl: './podcast-episode.scss'
 })

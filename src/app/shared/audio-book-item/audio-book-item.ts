@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AudioBookDto } from '../../core/models/dtos/audio-book-dto.model';
-import { HttpSrcDirective } from '../../core/directives/http-src.directive';
+import { OfflineUrlPipe } from '../../core/pipes/offline-url.pipe';
 
 @Component({
   selector: 'app-audio-book-item',
-  imports: [RouterLink, HttpSrcDirective],
+  imports: [RouterLink, OfflineUrlPipe],
   templateUrl: './audio-book-item.html',
   styleUrl: './audio-book-item.scss'
 })

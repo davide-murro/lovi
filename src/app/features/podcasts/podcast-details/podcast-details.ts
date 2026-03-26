@@ -1,7 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { faBookBookmark, faBookOpen, faCircleNotch, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AudioTrack } from '../../../core/models/audio-track.model';
 import { ToasterService } from '../../../core/services/toaster.service';
@@ -12,10 +11,11 @@ import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.m
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
 import { AuthService } from '../../../core/services/auth.service';
+import { OfflineUrlPipe } from '../../../core/pipes/offline-url.pipe';
 
 @Component({
   selector: 'app-podcast-detail',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem, HttpSrcDirective],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem, OfflineUrlPipe],
   templateUrl: './podcast-details.html',
   styleUrl: './podcast-details.scss'
 })

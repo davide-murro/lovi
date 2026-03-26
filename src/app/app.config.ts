@@ -7,9 +7,6 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { offlineInterceptor } from './core/interceptors/offline.interceptor';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AuthService } from './core/services/auth.service';
-import { authFetchInterceptor } from './core/interceptors/auth.fetch-interceptor';
-import { provideFetchClient } from './core/interceptors/fetch-client/provide-fetch-client';
-import { offlineFetchInterceptor } from './core/interceptors/offline.fetch-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,7 +34,6 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideHttpClient(withInterceptors([authInterceptor, offlineInterceptor])),
-    provideFetchClient(authFetchInterceptor, offlineFetchInterceptor),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'

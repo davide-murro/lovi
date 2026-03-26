@@ -13,7 +13,7 @@
       <div class="flex justify-center items-start">
         <img
           class="w-full flex flex-col justify-center aspect-square object-cover bg-accent overflow-hidden rounded-xl max-w-[350px] lg:min-w-[250px] lg:min-w-[350px]"
-          [httpSrc]="podcastEpisode().coverImageUrl" [alt]="podcastEpisode().name" />
+          [src]="podcastEpisode().coverImageUrl | offlineUrl" [alt]="podcastEpisode().name" />
       </div>
 
       <div class="flex flex-row flex-wrap justify-center items-center gap-4">

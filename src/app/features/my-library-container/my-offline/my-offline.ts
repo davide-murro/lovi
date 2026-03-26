@@ -2,7 +2,6 @@ import { Component, inject, computed } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { HttpSrcDirective } from "../../../core/directives/http-src.directive";
 import { AudioTrack } from "../../../core/models/audio-track.model";
 import { PodcastDto } from "../../../core/models/dtos/podcast-dto.model";
 import { AudioPlayerService } from "../../../core/services/audio-player.service";
@@ -10,10 +9,11 @@ import { OfflineService } from "../../../core/services/offline.service";
 import { ToasterService } from "../../../core/services/toaster.service";
 import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
+import { OfflineUrlPipe } from "../../../core/pipes/offline-url.pipe";
 
 @Component({
   selector: 'app-my-offline',
-  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, HttpSrcDirective],
+  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, OfflineUrlPipe],
   templateUrl: './my-offline.html',
   styleUrl: './my-offline.scss'
 })

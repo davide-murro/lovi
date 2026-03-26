@@ -32,6 +32,7 @@ export class OfflineService {
     episodes = computed(() => [...this.downloadingEpisodes(), ...this.offlineEpisodes()]);
 
     constructor() {
+        console.log("OfflineService constructor")
         // TODO: check when is called.. and if it necessary also for playing audio in smartphone, and also request per leggere audio locali
         this.requestPersistentStorage();
 
@@ -70,6 +71,41 @@ export class OfflineService {
 
     private saveToStorage(key: string, data: any[]) {
         localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    private addOfflineToUrl(url: string) {
+        if (!url) return url;
+        if (url.includes('isOffline=')) return url;
+        return url.includes('?') ? `${url}&isOffline=True` : `${url}?isOffline=True`;
+    }
+
+    isUrlDownloaded(url: string): boolean {
+        if (!url) return false;
+
+        // Strip any query strings from the input url for matching
+        const cleanUrl = url.split('?')[0];
+
+        for (const a of this.audioBooks()) {
+            if (a.dataUrl?.split('?')[0] === cleanUrl || a.audioUrl?.split('?')[0] === cleanUrl || a.coverImageUrl?.split('?')[0] === cleanUrl || a.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+            if (a.readers) {
+                for (const r of a.readers) {
+                    if (r.dataUrl?.split('?')[0] === cleanUrl || r.coverImageUrl?.split('?')[0] === cleanUrl || r.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                }
+            }
+        }
+
+        for (const e of this.episodes()) {
+            if (e.dataUrl?.split('?')[0] === cleanUrl || e.audioUrl?.split('?')[0] === cleanUrl || e.coverImageUrl?.split('?')[0] === cleanUrl || e.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+            if (e.podcast) {
+                if (e.podcast.dataUrl?.split('?')[0] === cleanUrl || e.podcast.coverImageUrl?.split('?')[0] === cleanUrl || e.podcast.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+            }
+            if (e.voicers) {
+                for (const v of e.voicers) {
+                    if (v.dataUrl?.split('?')[0] === cleanUrl || v.coverImageUrl?.split('?')[0] === cleanUrl || v.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                }
+            }
+        }
+        return false;
     }
 
     isAudioBookDownloaded(id: number): boolean {
@@ -204,6 +240,7 @@ export class OfflineService {
             this.downloadingEpisodes.update(set => [...set, episode]);
 
             // 2. Fetch resources via services (priming the NGSW cache)
+            // TODO: download with fetch urls instead
             const offlineEpisode = await firstValueFrom(this.podcastsService.getEpisodeById(episode.podcast!.id!, episode.id!));
             if (episode.audioUrl) await firstValueFrom(this.podcastsService.getEpisodeAudio(episode.podcast!.id!, episode.id!));
             if (episode.coverImageUrl) await firstValueFrom(this.podcastsService.getEpisodeCover(episode.podcast!.id!, episode.id!, false));
@@ -281,7 +318,8 @@ export class OfflineService {
                 if (name.includes('api-offline-')) {
                     const cache = await caches.open(name);
                     for (const url of urlsToRemove) {
-                        await cache.delete(url);
+                        const urlWithOfflineTo = this.addOfflineToUrl(url);
+                        await cache.delete(urlWithOfflineTo);
                     }
                 }
             }
@@ -319,7 +357,8 @@ export class OfflineService {
             this.deletingEpisodes.update(set => [...set, storedItem]);
 
             // 3. Determine URLs to remove from cache using the storedItem (which has isOffline=True)
-            const urlsToRemove = [];
+            const urlsToRemove: string[] = [];
+
             if (storedItem.dataUrl) urlsToRemove.push(storedItem.dataUrl);
             if (storedItem.audioUrl) urlsToRemove.push(storedItem.audioUrl);
             if (storedItem.coverImageUrl) urlsToRemove.push(storedItem.coverImageUrl);
@@ -327,9 +366,9 @@ export class OfflineService {
 
             // Check if podcast cover is still needed
             if (storedItem.podcast?.id && !this.isPodcastDownloaded(storedItem.podcast.id!)) {
-                if (storedItem.podcast.dataUrl) urlsToRemove.push(storedItem.podcast.dataUrl);
-                if (storedItem.podcast.coverImageUrl) urlsToRemove.push(storedItem.podcast.coverImageUrl);
-                if (storedItem.podcast.coverImagePreviewUrl) urlsToRemove.push(storedItem.podcast.coverImagePreviewUrl);
+                if (storedItem.podcast.dataUrl) urlsToRemove.push(storedItem.podcast?.dataUrl);
+                if (storedItem.podcast.coverImageUrl) urlsToRemove.push(storedItem.podcast?.coverImageUrl);
+                if (storedItem.podcast.coverImagePreviewUrl) urlsToRemove.push(storedItem.podcast?.coverImagePreviewUrl);
             }
 
             // Check if voicers' covers are still needed
@@ -349,7 +388,8 @@ export class OfflineService {
                 if (name.includes('api-offline-')) {
                     const cache = await caches.open(name);
                     for (const url of urlsToRemove) {
-                        await cache.delete(url);
+                        const urlWithOfflineTo = this.addOfflineToUrl(url);
+                        await cache.delete(urlWithOfflineTo);
                     }
                 }
             }

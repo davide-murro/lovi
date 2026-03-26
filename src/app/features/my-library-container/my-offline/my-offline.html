@@ -22,8 +22,8 @@
   <div class="section">
     <a class="link-item" [routerLink]="['/podcasts', podcast.id]" [title]="podcast.name">
       <div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
-        <img class="img-parallax bg-accent" loading="lazy" decoding="async" [httpSrc]="podcast.coverImagePreviewUrl"
-          [alt]="podcast.name" />
+        <img class="img-parallax bg-accent" loading="lazy" decoding="async"
+          [src]="podcast.coverImagePreviewUrl | offlineUrl" [alt]="podcast.name" />
       </div>
       <h3 class="title2">{{ podcast.name }}</h3>
       <p class="subtitle text-accent">

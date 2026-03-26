@@ -15,7 +15,7 @@
       <button class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
         (click)="audioPlayerService.playId(track.id!)">
         <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-          loading="lazy" decoding="async" [httpSrc]="track.coverImageSrc" [alt]="track.title" />
+          loading="lazy" decoding="async" [src]="track.coverImageSrc | offlineUrl" [alt]="track.title" />
         <div class="flex flex-col flex-grow overflow-hidden">
           <span class="truncate">{{ track.title }} @if(track.subtitle) { - {{ track.subtitle }} }</span>
           <span class="text-accent truncate">{{ track.artists?.join(", ") }}</span>
@@ -55,7 +55,7 @@
       (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">
         <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-          loading="lazy" decoding="async" [httpSrc]="audioPlayerService.currentTrack()?.coverImageSrc"
+          loading="lazy" decoding="async" [src]="audioPlayerService.currentTrack()?.coverImageSrc | offlineUrl"
           [alt]="audioPlayerService.currentTrack()?.title" />
         <div class="flex flex-col truncate">
           <span class="truncate">{{ audioPlayerService.currentTrack()?.title }}
