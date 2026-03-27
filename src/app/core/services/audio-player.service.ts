@@ -154,16 +154,17 @@ export class AudioPlayerService {
   }
 
   // AUDIO
-  private async loadAudio(track: AudioTrack, time: number = 0) {
+  private async loadAudio(track: AudioTrack, time: number = 0, play: boolean = false) {
     let url = track?.audioSrc;
     if (!url) return;
 
     // Check if offline
-    url = this.offlineUrlPipe.transform(url) ?? url;
-    if (url !== track?.audioSrc) {
-      this.audio.src = url;
+    const offlineUrl = this.offlineUrlPipe.transform(url)!;
+    if (offlineUrl !== url) {
+      this.audio.src = offlineUrl;
       this.audio.load();
       this.audio.currentTime = time;
+      if (play) this.audio.play();
       this.loadMetadata(track);
       return;
     }
@@ -171,15 +172,18 @@ export class AudioPlayerService {
     // Check if token is valid
     this.audio.pause();
     await this.checkToken();
-    url = this.authUrlPipe.transform(url) ?? url;
-
-    this.audio.src = url;
+    const authUrl = this.authUrlPipe.transform(url)!;
+    this.audio.src = authUrl;
     this.audio.load();
     this.audio.currentTime = time;
+    if (play) this.audio.play();
     this.loadMetadata(track);
   }
 
-  private async seekAudio(time: number) {
+  private async seekAudio(time: number, play: boolean = false) {
+    let url = this.currentTrack()?.audioSrc!;
+    if (!url) return;
+
     // Check if the time is already buffered in memory to skip network checks
     let isBuffered = false;
     for (let i = 0; i < this.audio.buffered.length; i++) {
@@ -192,12 +196,11 @@ export class AudioPlayerService {
     if (isBuffered) {
       // We are offline, or the range is fully buffered. Direct seek.
       this.audio.currentTime = time;
+      if (play) this.audio.play();
       return;
     }
 
     // Check if offline
-    let url = this.currentTrack()?.audioSrc!;
-    if (!url) return;
     const offlineUrl = this.offlineUrlPipe.transform(url)!;
     if (offlineUrl !== url) {
       if (this.audio.src !== offlineUrl) {
@@ -205,6 +208,7 @@ export class AudioPlayerService {
         this.audio.load();
       }
       this.audio.currentTime = time;
+      if (play) this.audio.play();
       return;
     }
 
@@ -214,23 +218,54 @@ export class AudioPlayerService {
     await this.checkToken();
     const newToken = this.authService.getAccessToken();
     if (oldToken !== newToken) {
-      let url = this.currentTrack()?.audioSrc;
-      if (url) {
-        url = this.authUrlPipe.transform(url) ?? url;
-        this.audio.src = url;
-        this.audio.load();
-      }
+      const authUrl = this.authUrlPipe.transform(url)!;
+      this.audio.src = authUrl;
+      this.audio.load();
+      this.audio.currentTime = time;
+      if (play) this.audio.play();
+      return;
     }
 
     this.audio.currentTime = time;
+    if (play) this.audio.play();
+  }
+
+  private async playAudio(time: number = 0) {
+    let url = this.currentTrack()?.audioSrc!;
+    if (!url) return;
+
+    // Check if offline
+    const offlineUrl = this.offlineUrlPipe.transform(url)!;
+    if (offlineUrl !== url) {
+      if (this.audio.src !== offlineUrl) {
+        this.audio.src = offlineUrl;
+        this.audio.load();
+      }
+      this.audio.currentTime = time;
+      this.audio.play();
+      return;
+    }
+
+    // Ensure token before browser sends a Range request.
+    this.audio.pause();
+    const oldToken = this.authService.getAccessToken();
+    await this.checkToken();
+    const newToken = this.authService.getAccessToken();
+    if (oldToken !== newToken) {
+      const authUrl = this.authUrlPipe.transform(url)!;
+      this.audio.src = authUrl;
+      this.audio.load();
+      this.audio.currentTime = time;
+      this.audio.play();
+      return;
+    }
+
+    this.audio.currentTime = time;
+    this.audio.play();
   }
 
   private pauseAudio() {
     this.audio.pause();
-  }
-
-  private playAudio() {
-    this.audio.play();
   }
 
   private clearAudio() {
@@ -301,16 +336,15 @@ export class AudioPlayerService {
     else this.play();
   }
   async play() {
-    if (this.isError()) await this.loadAudio(this.currentTrack()!, this.currentTime());
-    this.playAudio();
+    if (this.isError()) await this.loadAudio(this.currentTrack()!, this.currentTime(), true);
+    else await this.playAudio(this.currentTime());
   }
   async playId(id: number) {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
       this.clear();
-      await this.loadAudio(track);
-      this.playAudio();
+      await this.loadAudio(track, 0, true);
     }
   }
   async playTrack(track: AudioTrack, newQueue: AudioTrack[] = []) {
@@ -338,9 +372,8 @@ export class AudioPlayerService {
 
   async seek(time: number) {
     this.currentTime.set(time); // Sync to avoid UI glitch
-    if (this.isError()) await this.loadAudio(this.currentTrack()!, time);
-    else await this.seekAudio(time);
-    this.playAudio();
+    if (this.isError()) await this.loadAudio(this.currentTrack()!, time, true);
+    else await this.seekAudio(time, true);
   }
 
   pause() {
