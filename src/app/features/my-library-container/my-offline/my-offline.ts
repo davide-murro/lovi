@@ -29,14 +29,7 @@ export class MyOffline {
     return this.offlineService.audioBooks();
   });
   myOfflinePodcasts = computed(() => {
-    const grouped = this.offlineService.episodes().reduce((acc, ep) => {
-      const pToFind = ep.podcast!;
-      const pFound = acc.find(a => a.id === pToFind.id);
-      if (pFound) pFound.episodes!.push(ep);
-      else acc.push({ ...pToFind, episodes: [ep] });
-      return acc;
-    }, [] as PodcastDto[]);
-
+    const grouped = this.offlineService.podcasts();
     grouped.forEach(p => p.episodes?.sort((a, b) => (a.number ?? 0) - (b.number ?? 0)));
 
     return grouped;

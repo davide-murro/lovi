@@ -1,11 +1,13 @@
 import { effect, inject, Injectable, signal, computed } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { AudioBookDto } from '../models/dtos/audio-book-dto.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
 import { AudioBooksService } from './audio-books.service';
 import { PodcastsService } from './podcasts.service';
 import { AuthService } from './auth.service';
 import { CreatorsService } from './creators.service';
+import { PodcastDto } from '../models/dtos/podcast-dto.model';
+import { CreatorDto } from '../models/dtos/creator-dto.model';
 
 @Injectable({
     providedIn: 'root'
@@ -28,8 +30,32 @@ export class OfflineService {
     private deletingAudioBooks = signal<AudioBookDto[]>([]);
     private deletingEpisodes = signal<PodcastEpisodeDto[]>([]);
 
+    // Subject to cancel ongoing downloads when user logs out
+    private cancelDownloads$ = new Subject<void>();
+
     audioBooks = computed(() => [...this.downloadingAudioBooks(), ...this.offlineAudioBooks()]);
     episodes = computed(() => [...this.downloadingEpisodes(), ...this.offlineEpisodes()]);
+    podcasts = computed(() => {
+        const grouped = this.episodes().reduce((acc, ep) => {
+            const pToFind = ep.podcast!;
+            const pFound = acc.find(a => a.id === pToFind.id);
+            if (pFound) pFound.episodes!.push(ep);
+            else acc.push({ ...pToFind, episodes: [ep] });
+            return acc;
+        }, [] as PodcastDto[]);
+        return grouped;
+    });
+    creators = computed(() => {
+        const creators = Array.from(
+            new Map(
+                [
+                    ...this.audioBooks().flatMap(ab => ab.readers ?? []),
+                    ...this.episodes().flatMap(ep => ep.voicers ?? [])
+                ].map(c => [c.id, c])
+            ).values()
+        );
+        return creators;
+    });
 
     constructor() {
         console.log("OfflineService constructor")
@@ -52,13 +78,23 @@ export class OfflineService {
     }
 
     private initializeOfflineData() {
+        this.cancelDownloads$.next();
         this.offlineAudioBooks.set(this.loadFromStorage('offlineAudioBooks'));
         this.offlineEpisodes.set(this.loadFromStorage('offlinePodcastEpisodes'));
+        this.downloadingAudioBooks.set([]);
+        this.downloadingEpisodes.set([]);
+        this.deletingAudioBooks.set([]);
+        this.deletingEpisodes.set([]);
     }
 
     private clearOfflineData() {
+        this.cancelDownloads$.next();
         this.offlineAudioBooks.set([]);
         this.offlineEpisodes.set([]);
+        this.downloadingAudioBooks.set([]);
+        this.downloadingEpisodes.set([]);
+        this.deletingAudioBooks.set([]);
+        this.deletingEpisodes.set([]);
     }
 
     private loadFromStorage(key: string): any[] {
@@ -82,74 +118,30 @@ export class OfflineService {
     isUrlDownloaded(url: string): boolean {
         if (!url) return false;
 
-        let isOffline = false;
+        const cleanUrl = url.split('?')[0];
 
-        // Audiobooks
-        const audioBookMatch = url.match(/\/api\/audio-books\/(\d+)/);
-        if (audioBookMatch) {
-            const id = parseInt(audioBookMatch[1]);
-            isOffline = this.isAudioBookDownloaded(id);
-        }
-
-        // Podcasts & Episodes
-        const podcastMatch = url.match(/\/api\/podcasts\/(\d+)/);
-        if (podcastMatch) {
-            const podcastId = parseInt(podcastMatch[1]);
-            const episodeMatch = url.match(/\/episodes\/(\d+)/);
-
-            if (episodeMatch) {
-                const episodeId = parseInt(episodeMatch[1]);
-                isOffline = this.isPodcastEpisodeDownloaded(episodeId);
-            } else {
-                isOffline = this.isPodcastDownloaded(podcastId);
+        for (const a of this.offlineAudioBooks()) {
+            if (a.dataUrl?.split('?')[0] === cleanUrl || a.audioUrl?.split('?')[0] === cleanUrl || a.coverImageUrl?.split('?')[0] === cleanUrl || a.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+            if (a.readers) {
+                for (const r of a.readers) {
+                    if (r.dataUrl?.split('?')[0] === cleanUrl || r.coverImageUrl?.split('?')[0] === cleanUrl || r.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                }
             }
         }
 
-        // Creators
-        const creatorMatch = url.match(/\/api\/creators\/(\d+)/);
-        if (creatorMatch) {
-            const id = parseInt(creatorMatch[1]);
-            isOffline = this.isCreatorDownloaded(id);
-        }
-
-        return isOffline;
-    }
-
-    isUrlDownloading(url: string): boolean {
-        if (!url) return false;
-
-        let isDownloading = false;
-
-        // Audiobooks
-        const audioBookMatch = url.match(/\/api\/audio-books\/(\d+)/);
-        if (audioBookMatch) {
-            const id = parseInt(audioBookMatch[1]);
-            isDownloading = this.isAudioBookDownloading(id);
-        }
-
-        // Podcasts & Episodes
-        const podcastMatch = url.match(/\/api\/podcasts\/(\d+)/);
-        if (podcastMatch) {
-            const podcastId = parseInt(podcastMatch[1]);
-            const episodeMatch = url.match(/\/episodes\/(\d+)/);
-
-            if (episodeMatch) {
-                console.log("fdsfdsfsd")
-                const episodeId = parseInt(episodeMatch[1]);
-                isDownloading = this.isPodcastEpisodeDownloading(episodeId);
-            } else {
-                isDownloading = this.isPodcastDownloading(podcastId);
+        for (const e of this.offlineEpisodes()) {
+            if (e.dataUrl?.split('?')[0] === cleanUrl || e.audioUrl?.split('?')[0] === cleanUrl || e.coverImageUrl?.split('?')[0] === cleanUrl || e.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+            if (e.podcast) {
+                if (e.podcast.dataUrl?.split('?')[0] === cleanUrl || e.podcast.coverImageUrl?.split('?')[0] === cleanUrl || e.podcast.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+            }
+            if (e.voicers) {
+                for (const v of e.voicers) {
+                    if (v.dataUrl?.split('?')[0] === cleanUrl || v.coverImageUrl?.split('?')[0] === cleanUrl || v.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                }
             }
         }
 
-        // Creators
-        const creatorMatch = url.match(/\/api\/creators\/(\d+)/);
-        if (creatorMatch) {
-            const id = parseInt(creatorMatch[1]);
-            isDownloading = this.isCreatorDownloading(id);
-        }
-
-        return isDownloading;
+        return false;
     }
 
     isAudioBookDownloaded(id: number): boolean {
@@ -240,10 +232,10 @@ export class OfflineService {
             this.downloadingAudioBooks.update(set => [...set, audioBook]);
 
             // 2. Fetch resources via services (priming the NGSW cache)
-            const offlineAudioBook = await firstValueFrom(this.audioBooksService.getById(audioBook.id!));
-            if (audioBook.audioUrl) await firstValueFrom(this.audioBooksService.getAudio(audioBook.id!));
-            if (audioBook.coverImageUrl) await firstValueFrom(this.audioBooksService.getCover(audioBook.id!, false));
-            if (audioBook.coverImagePreviewUrl) await firstValueFrom(this.audioBooksService.getCover(audioBook.id!, true));
+            const offlineAudioBook = await firstValueFrom(this.audioBooksService.getById(audioBook.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (audioBook.audioUrl) await firstValueFrom(this.audioBooksService.getAudio(audioBook.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (audioBook.coverImageUrl) await firstValueFrom(this.audioBooksService.getCover(audioBook.id!, false).pipe(takeUntil(this.cancelDownloads$)));
+            if (audioBook.coverImagePreviewUrl) await firstValueFrom(this.audioBooksService.getCover(audioBook.id!, true).pipe(takeUntil(this.cancelDownloads$)));
 
             // 3. Download readers
             /*if (readersToDownload?.length > 0) {
@@ -285,16 +277,16 @@ export class OfflineService {
 
             // 2. Fetch resources via services (priming the NGSW cache)
             // TODO: download with fetch urls instead
-            const offlineEpisode = await firstValueFrom(this.podcastsService.getEpisodeById(episode.podcast!.id!, episode.id!));
-            if (episode.audioUrl) await firstValueFrom(this.podcastsService.getEpisodeAudio(episode.podcast!.id!, episode.id!));
-            if (episode.coverImageUrl) await firstValueFrom(this.podcastsService.getEpisodeCover(episode.podcast!.id!, episode.id!, false));
-            if (episode.coverImagePreviewUrl) await firstValueFrom(this.podcastsService.getEpisodeCover(episode.podcast!.id!, episode.id!, true));
+            const offlineEpisode = await firstValueFrom(this.podcastsService.getEpisodeById(episode.podcast!.id!, episode.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (episode.audioUrl) await firstValueFrom(this.podcastsService.getEpisodeAudio(episode.podcast!.id!, episode.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (episode.coverImageUrl) await firstValueFrom(this.podcastsService.getEpisodeCover(episode.podcast!.id!, episode.id!, false).pipe(takeUntil(this.cancelDownloads$)));
+            if (episode.coverImagePreviewUrl) await firstValueFrom(this.podcastsService.getEpisodeCover(episode.podcast!.id!, episode.id!, true).pipe(takeUntil(this.cancelDownloads$)));
 
             // 3. Download podcast
             if (podcastToDownload) {
-                await firstValueFrom(this.podcastsService.getById(podcastToDownload!.id!));
-                if (podcastToDownload.coverImageUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, true));
-                if (podcastToDownload.coverImagePreviewUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, false));
+                await firstValueFrom(this.podcastsService.getById(podcastToDownload!.id!).pipe(takeUntil(this.cancelDownloads$)));
+                if (podcastToDownload.coverImageUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, true).pipe(takeUntil(this.cancelDownloads$)));
+                if (podcastToDownload.coverImagePreviewUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, false).pipe(takeUntil(this.cancelDownloads$)));
             }
 
             // 4. Download voicers

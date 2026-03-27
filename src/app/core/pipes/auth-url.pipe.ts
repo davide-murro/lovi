@@ -12,7 +12,7 @@ export class AuthUrlPipe implements PipeTransform {
     if (!url) return url;
 
     const token = this.authService.getAccessToken();
-    if (token) {
+    if (!url.includes('&access_token=') && !url.includes('?access_token=') && token) {
       return url.includes('?') ? `${url}&access_token=${token}` : `${url}?access_token=${token}`;
     }
     return url;

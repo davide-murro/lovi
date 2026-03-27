@@ -150,8 +150,6 @@ export class AudioPlayerService {
       this.isChecking.set(false);
     } catch (error) {
       this.isChecking.set(false);
-      this.isError.set(true);
-      this._errorEvent$.next(error);
     }
   }
 
