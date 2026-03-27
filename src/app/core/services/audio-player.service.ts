@@ -154,7 +154,7 @@ export class AudioPlayerService {
   }
 
   // AUDIO
-  private async loadAudio(track: AudioTrack) {
+  private async loadAudio(track: AudioTrack, time: number = 0) {
     let url = track?.audioSrc;
     if (!url) return;
 
@@ -163,6 +163,7 @@ export class AudioPlayerService {
     if (url !== track?.audioSrc) {
       this.audio.src = url;
       this.audio.load();
+      this.audio.currentTime = time;
       this.loadMetadata(track);
       return;
     }
@@ -174,6 +175,7 @@ export class AudioPlayerService {
 
     this.audio.src = url;
     this.audio.load();
+    this.audio.currentTime = time;
     this.loadMetadata(track);
   }
 
@@ -299,7 +301,7 @@ export class AudioPlayerService {
     else this.play();
   }
   async play() {
-    if (this.isError()) await this.seek(this.currentTime());
+    if (this.isError()) await this.loadAudio(this.currentTrack()!, this.currentTime());
     this.playAudio();
   }
   async playId(id: number) {
@@ -336,9 +338,8 @@ export class AudioPlayerService {
 
   async seek(time: number) {
     this.currentTime.set(time); // Sync to avoid UI glitch
-    if (this.isError()) await this.loadAudio(this.currentTrack()!);
-
-    await this.seekAudio(time);
+    if (this.isError()) await this.loadAudio(this.currentTrack()!, time);
+    else await this.seekAudio(time);
     this.playAudio();
   }
 
