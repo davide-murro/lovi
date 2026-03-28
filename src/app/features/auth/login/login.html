@@ -57,6 +57,11 @@
                 <fa-icon [icon]="faGoogle"></fa-icon>
                 <span i18n>Login with Google</span>
             </button>
+            <button i18n-title (click)="loginWithSpotify()" class="button button-rounded button-spotify flex gap-2"
+                title="Login with Spotify" [disabled]="isLoading()">
+                <fa-icon [icon]="faSpotify"></fa-icon>
+                <span i18n>Login with Spotify</span>
+            </button>
             <!--
             <button i18n-title (click)="loginWithFacebook()" class="button button-rounded button-facebook flex gap-2" title="Login with Facebook" [disabled]="isLoading()">
                 <fa-icon [icon]="faFacebook"></fa-icon>
@@ -66,10 +71,6 @@
                 title="Login with Instagram">
                 <fa-icon [icon]="faInstagram"></fa-icon>
                 <span i18n>Login with Instagram</span>
-            </button>
-            <button i18n-title (click)="loginWithSpotify()" class="button button-rounded button-spotify flex gap-2" title="Login with Spotify" [disabled]="isLoading()">
-                <fa-icon [icon]="faSpotify"></fa-icon>
-                <span i18n>Login with Spotify</span>
             </button>
             -->
             <a i18n i18n-title title="Register to LOVI" class="button button-accent button-rounded"

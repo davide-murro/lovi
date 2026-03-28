@@ -26,9 +26,9 @@ export class Login {
   private socialAuthService = inject(SocialAuthService);
 
   faGoogle = faGoogle;
-  faFacebook = faFacebook;
-  faInstagram = faInstagram;
   faSpotify = faSpotify;
+  //faFacebook = faFacebook;
+  //faInstagram = faInstagram;
   faEye = faEye;
 
   redirect = input('/', { transform: (v: string | undefined) => v ?? '/' });
@@ -36,7 +36,7 @@ export class Login {
   showPassword = signal(false);
 
   constructor() {
-    //this.checkSpotifyCallback();
+    this.checkSpotifyCallback();
     //this.checkInstagramCallback();
   }
 
@@ -87,6 +87,18 @@ export class Login {
     });
   }
 
+  loginWithSpotify(): void {
+    this.socialAuthService.loginWithSpotify();
+  }
+  private checkSpotifyCallback(): void {
+    this.socialAuthService.getSpotifyTokenFromCode().then(token => {
+      if (token) this.externalLogin('Spotify', token);
+    }).catch(() => {
+      this.toasterService.show($localize`Spotify login failed`, { type: 'error' });
+    });
+  }
+
+  /*
   loginWithFacebook(): void {
     this.socialAuthService.loginWithFacebook().then(token => {
       this.externalLogin('Facebook', token);
@@ -98,24 +110,13 @@ export class Login {
   loginWithInstagram(): void {
     this.socialAuthService.loginWithInstagram();
   }
-
-  loginWithSpotify(): void {
-    this.socialAuthService.loginWithSpotify();
-  }
-
-  private checkSpotifyCallback(): void {
-    const token = this.socialAuthService.getSpotifyTokenFromHash();
-    if (token) {
-      this.externalLogin('Spotify', token);
-    }
-  }
-
   private checkInstagramCallback(): void {
     const code = this.socialAuthService.getInstagramCodeFromQuery();
     if (code) {
       this.externalLogin('Instagram', code);
     }
   }
+  */
 
   private externalLogin(provider: string, token: string): void {
     const dto: ExternalLoginDto = {

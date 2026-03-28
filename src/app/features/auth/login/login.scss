@@ -12,6 +12,21 @@
     background-color: #c93a2d;
 }
 
+
+.button-spotify {
+    background-color: #1DB954;
+    color: var(--text-color-dark);
+}
+
+.button-spotify[disabled] {
+    background-color: var(--color-disabled);
+    color: var(--text-color-disabled);
+}
+
+.button-spotify:not([disabled]):hover {
+    background-color: #1a8c44;
+}
+
 /*
 .button-facebook {
     background-color: #4267B2;
@@ -41,17 +56,4 @@
     background-color: #a82e72;
 }
 
-.button-spotify {
-    background-color: #1DB954;
-    color: var(--text-color-light);
-}
-
-.button-spotify[disabled] {
-    background-color: var(--color-disabled);
-    color: var(--text-color-disabled);
-}
-
-.button-spotify:not([disabled]):hover {
-    background-color: #1a8c44;
-}
 */

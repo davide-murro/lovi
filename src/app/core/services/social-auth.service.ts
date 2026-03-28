@@ -10,12 +10,12 @@ declare const FB: any;
 export class SocialAuthService {
     // IDs are managed in src/environments/environment.ts
     private readonly GOOGLE_CLIENT_ID = environment.googleClientId;
-    private readonly FACEBOOK_APP_ID = environment.facebookAppId;
     private readonly SPOTIFY_CLIENT_ID = environment.spotifyClientId;
-    private readonly INSTAGRAM_CLIENT_ID = environment.instagramClientId;
+    //private readonly FACEBOOK_APP_ID = environment.facebookAppId;
+    //private readonly INSTAGRAM_CLIENT_ID = environment.instagramClientId;
 
     private isGoogleLoaded = signal(false);
-    private isFacebookLoaded = signal(false);
+    //private isFacebookLoaded = signal(false);
 
     constructor() {
         this.loadGoogleLibrary();
@@ -64,6 +64,70 @@ export class SocialAuthService {
         });
     }
 
+    // SPOTIFY (Authorization Code + PKCE)
+    async loginWithSpotify(): Promise<void> {
+        const codeVerifier = this.generateCodeVerifier();
+        const codeChallenge = await this.generateCodeChallenge(codeVerifier);
+
+        // Store verifier to use during callback
+        sessionStorage.setItem('authSpotifyCodeVerifier', codeVerifier);
+
+        const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
+        const scope = encodeURIComponent('user-read-private user-read-email');
+        const url = `https://accounts.spotify.com/authorize?client_id=${this.SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
+        window.location.href = url;
+    }
+
+    async getSpotifyTokenFromCode(): Promise<string | null> {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        if (!code) return null;
+
+        // Remove code from URL to avoid re-processing
+        const url = new URL(window.location.href);
+        url.searchParams.delete('code');
+        window.history.replaceState({}, document.title, url.toString());
+
+        const codeVerifier = sessionStorage.getItem('authSpotifyCodeVerifier');
+        if (!codeVerifier) return null;
+        sessionStorage.removeItem('authSpotifyCodeVerifier');
+
+        const redirectUri = window.location.origin + window.location.pathname;
+        const body = new URLSearchParams({
+            grant_type: 'authorization_code',
+            code,
+            redirect_uri: redirectUri,
+            client_id: this.SPOTIFY_CLIENT_ID,
+            code_verifier: codeVerifier
+        });
+
+        const response = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body.toString()
+        });
+
+        if (!response.ok) return null;
+        const data = await response.json();
+        return data.access_token ?? null;
+    }
+
+    private generateCodeVerifier(): string {
+        const array = new Uint8Array(64);
+        crypto.getRandomValues(array);
+        return btoa(String.fromCharCode(...array))
+            .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    }
+
+    private async generateCodeChallenge(verifier: string): Promise<string> {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(verifier);
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        return btoa(String.fromCharCode(...new Uint8Array(digest)))
+            .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    }
+
+    /*
     // FACEBOOK
     private loadFacebookLibrary() {
         if (document.getElementById('facebook-jssdk')) return;
@@ -101,26 +165,6 @@ export class SocialAuthService {
         });
     }
 
-    // SPOTIFY
-    loginWithSpotify(): void {
-        const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
-        const scope = encodeURIComponent('user-read-private user-read-email');
-        const url = `https://accounts.spotify.com/authorize?client_id=${this.SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}`;
-        window.location.href = url;
-    }
-
-    getSpotifyTokenFromHash(): string | null {
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
-        const token = params.get('access_token');
-        if (token) {
-            // Clear hash to avoid re-processing
-            window.location.hash = '';
-            return token;
-        }
-        return null;
-    }
-
     // INSTAGRAM
     loginWithInstagram(): void {
         const redirectUri = encodeURIComponent(window.location.origin + '/auth/login');
@@ -141,4 +185,5 @@ export class SocialAuthService {
         }
         return null;
     }
+    */
 }
