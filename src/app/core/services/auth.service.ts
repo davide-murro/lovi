@@ -150,19 +150,6 @@ export class AuthService {
     );
     return this.refreshToken$;
   }
-  ensureTokens(): Observable<void> {
-    const token = this.accessToken();
-    if (!token) return of(undefined);
-
-    // If token is not expired (in less than 30 seconds), return
-    const payload: any = jwtDecode(token);
-    if (Date.now() < payload.exp * 1000 - 30000) {
-      return of(undefined);
-    }
-
-    // Refresh token if it expires
-    return this.refreshTokens().pipe(map(() => { }));
-  }
   getAccessToken(): string | null {
     return this.accessToken();
   }

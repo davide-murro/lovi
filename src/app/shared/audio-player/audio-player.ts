@@ -34,6 +34,16 @@ export class AudioPlayer {
   displayTime = computed(() => this.isSeeking() ? this.seekingTime() : this.audioPlayerService.currentTime());
   displayDuration = computed(() => this.audioPlayerService.duration());
 
+  bufferedSegments = computed(() => {
+    const duration = this.audioPlayerService.duration();
+    if (duration <= 0) return [];
+
+    return this.audioPlayerService.buffered().map(range => ({
+      left: (range.start / duration) * 100,
+      width: ((range.end - range.start) / duration) * 100
+    }));
+  });
+
   private isSeeking = signal(false);
   private seekingTime = signal(0);
 

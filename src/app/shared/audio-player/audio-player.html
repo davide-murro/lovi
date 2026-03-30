@@ -36,13 +36,19 @@
     }
   </ul>
 
-  <input type="range" class="h-2 w-full cursor-pointer"
-    [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1 thump-hidden' : 'my-2'" [min]="0"
-    [max]="formatIntValue(displayDuration())" [value]="formatIntValue(displayTime())" [style.--value]="
-      formatIntValue(displayTime()) /
-      formatIntValue(displayDuration())
-    " (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
-    (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)" />
+  <div class="slider-container" [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1' : 'relative my-2'">
+    <div class="buffer-bar-container">
+      @for (segment of bufferedSegments(); track $index) {
+      <div class="buffer-bar" [style.left.%]="segment.left" [style.width.%]="segment.width"></div>
+      }
+    </div>
+    <input type="range" class="slider-input" [class.thump-hidden]="!queueOpen()" [min]="0"
+      [max]="formatIntValue(displayDuration())" [value]="formatIntValue(displayTime())" [style.--value]="
+        formatIntValue(displayTime()) /
+        formatIntValue(displayDuration())
+      " (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
+      (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)" />
+  </div>
 
   <span class="flex justify-center items-center text-sm text-accent" [class]="!queueOpen() ? '!hidden' : ''">
     {{ formatTime(displayTime()) }} /
@@ -94,8 +100,8 @@
         }
     </div>
 
-    <button i18n-title type="button" class="icon-button" title="Remove all queue"
-      [class]="!queueOpen() ? '!hidden' : ''" (click)="audioPlayerService.removeAllQueue()">
+    <button i18n-title type="button" class="icon-button" title="Clear queue" [class]="!queueOpen() ? '!hidden' : ''"
+      (click)="audioPlayerService.clearQueue()">
       <fa-icon [icon]="faTrash" />
     </button>
   </div>

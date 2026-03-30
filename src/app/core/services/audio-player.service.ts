@@ -15,26 +15,23 @@ export class AudioPlayerService {
 
   private audio = new Audio();
 
-  private isChecking = signal(false);
-
-  // Signals for state
+  // Signals for Queue
   queue = signal<AudioTrack[]>([]);
   currentId = signal<number | null>(null);
   idCounter = signal<number>(0);
 
-  // Signals for Time/Seek
+  // Signals for Audio
   currentTime = signal(0);
   duration = signal(0);
-  fileSize = signal(0);
+  buffered = signal<{ start: number, end: number }[]>([]);
 
-  private isElaborating = signal<boolean>(false);
+  isLoading = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
   isError = signal<boolean>(false);
 
+  private hasRetriedAfterError = signal(false);
   private _errorEvent$ = new Subject<any>();
   public readonly errorEvent$ = this._errorEvent$.asObservable();
-
-  isLoading = computed(() => this.isChecking() || this.isElaborating());
 
   // Computed signal: current track
   currentIndex = computed(() => {
@@ -59,74 +56,103 @@ export class AudioPlayerService {
 
   constructor() {
     effect(() => {
-      if (!this.authService.isLoggedIn()) this.removeAllQueue();
+      if (!this.authService.isLoggedIn()) this.clearQueue();
     });
+
+    // Listen for play, pause, time updates and duration
+    const syncPlayPause = () => {
+      const isPlaying = !this.audio.paused;
+      this.isPlaying.set(isPlaying);
+      this.updatePlaybackMetadata(isPlaying);
+    };
+    const syncTime = () => {
+      const duration = this.audio.duration;
+      const playbackRate = this.audio.playbackRate;
+      const currentTime = this.audio.currentTime;
+      if (isFinite(currentTime)) {
+        this.currentTime.set(currentTime);
+        this.updatePositionMetadata(duration, playbackRate, currentTime);
+      }
+    };
+    const syncDuration = () => {
+      const duration = this.audio.duration;
+      const playbackRate = this.audio.playbackRate;
+      const currentTime = this.audio.currentTime;
+      if (isFinite(duration)) {
+        this.duration.set(duration);
+        this.updatePositionMetadata(duration, playbackRate, currentTime);
+      }
+    };
+
+    const syncBuffered = () => {
+      const buffered = [];
+      for (let i = 0; i < this.audio.buffered.length; i++) {
+        buffered.push({
+          start: this.audio.buffered.start(i),
+          end: this.audio.buffered.end(i)
+        });
+      }
+      this.buffered.set(buffered);
+    };
+
+    this.audio.addEventListener('play', syncPlayPause);
+    this.audio.addEventListener('pause', syncPlayPause);
+
+    this.audio.addEventListener('progress', syncBuffered);
+
+    this.audio.addEventListener('timeupdate', syncTime);
+    this.audio.addEventListener('seeking', () => { syncTime(); syncBuffered(); });
+    this.audio.addEventListener('seeked', () => { syncTime(); syncBuffered(); });
+
+    this.audio.addEventListener('loadedmetadata', () => { syncDuration(); syncBuffered(); });
+    this.audio.addEventListener('durationchange', () => { syncDuration(); syncBuffered(); });
 
     // Go to next when audio ends
     this.audio.addEventListener('ended', () => this.next());
 
-    this.audio.addEventListener('play', () => {
-      this.isPlaying.set(true);
-      this.updatePlaybackMetadata();
-    });
-    this.audio.addEventListener('pause', () => {
-      this.isPlaying.set(false);
-      //this.currentTime.set(this.audio.currentTime); // Sync time on pause to ensure the UI is 100% accurate
-      this.updatePlaybackMetadata();
-    });
-
-    // Listen for time updates and duration
-    const syncTime = () => {
-      if (isFinite(this.audio.currentTime) && !this.isChecking()) {
-        this.currentTime.set(this.audio.currentTime);
-        this.updatePositionMetadata();
-      }
-    };
-
-    const syncDuration = () => {
-      if (isFinite(this.audio.duration) && !this.isChecking()) {
-        this.duration.set(this.audio.duration);
-        this.updatePositionMetadata();
-        this.updatePlaybackMetadata();
-      }
-    };
-
-    this.audio.addEventListener('timeupdate', syncTime);
-    this.audio.addEventListener('seeking', syncTime);
-    this.audio.addEventListener('seeked', syncTime);
-
-    this.audio.addEventListener('loadedmetadata', syncDuration);
-    this.audio.addEventListener('durationchange', syncDuration);
-
     // start loading
     this.audio.addEventListener('loadstart', () => {
-      this.isElaborating.set(true);
+      this.isLoading.set(true);
     });
 
     // buffering
     this.audio.addEventListener('waiting', () => {
-      this.isElaborating.set(true);
+      this.isLoading.set(true);
     });
 
     // playable again
     this.audio.addEventListener('canplay', () => {
-      this.isElaborating.set(false);
+      this.isLoading.set(false);
       this.isError.set(false);
+      this.hasRetriedAfterError.set(false);
     });
 
     // error
     this.audio.addEventListener('error', async (event) => {
-      // Wait a moment in case the error was transient or token just refreshed
-      this.isElaborating.set(false);
-      this.isPlaying.set(false);
-      this.isError.set(true);
-      this._errorEvent$.next(event);
+      // Always retry once, if logged also refresh token
+      if (this.hasRetriedAfterError() || !this.authService.isLoggedIn()) {
+        this.isLoading.set(false);
+        this.isPlaying.set(false);
+        this.isError.set(true);
+        this._errorEvent$.next(event);
+        this.hasRetriedAfterError.set(false); // reset for next time
+        return;
+      }
+
+      // First failure, try again after refreshing token
+      this.hasRetriedAfterError.set(true);
+
+      try {
+        await firstValueFrom(this.authService.refreshTokens());
+      } catch (error) { }
+      this.loadAudio(this.currentTrack()!, this.currentTime(), this.isPlaying());
     });
 
     // set media session for smartphones
     if ('mediaSession' in navigator) {
       navigator.mediaSession.setActionHandler('play', () => this.play());
       navigator.mediaSession.setActionHandler('pause', () => this.pause());
+      navigator.mediaSession.setActionHandler('stop', () => this.stop());
       navigator.mediaSession.setActionHandler('previoustrack', () => this.previous());
       navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
       navigator.mediaSession.setActionHandler('seekto', (details) => {
@@ -143,18 +169,8 @@ export class AudioPlayerService {
     }
   }
 
-  private async checkToken() {
-    try {
-      this.isChecking.set(true);
-      await firstValueFrom(this.authService.ensureTokens());
-      this.isChecking.set(false);
-    } catch (error) {
-      this.isChecking.set(false);
-    }
-  }
-
   // AUDIO
-  private async loadAudio(track: AudioTrack, time: number = 0, play: boolean = false) {
+  private loadAudio(track: AudioTrack, time: number = 0, play: boolean = false) {
     let url = track?.audioSrc;
     if (!url) return;
 
@@ -170,97 +186,29 @@ export class AudioPlayerService {
     }
 
     // Check if token is valid
-    this.audio.pause();
-    await this.checkToken();
-    const authUrl = this.authUrlPipe.transform(url)!;
-    this.audio.src = authUrl;
+    const token = this.authService.getAccessToken();
+    if (token) {
+      const authUrl = this.authUrlPipe.transform(url)!;
+      this.audio.src = authUrl;
+      this.audio.load();
+      this.audio.currentTime = time;
+      if (play) this.audio.play();
+      this.loadMetadata(track);
+      return;
+    }
+
+    this.audio.src = url;
     this.audio.load();
     this.audio.currentTime = time;
     if (play) this.audio.play();
     this.loadMetadata(track);
   }
 
-  private async seekAudio(time: number, play: boolean = false) {
-    let url = this.currentTrack()?.audioSrc!;
-    if (!url) return;
-
-    // Check if the time is already buffered in memory to skip network checks
-    let isBuffered = false;
-    for (let i = 0; i < this.audio.buffered.length; i++) {
-      // Add a small 1-second margin because the end of the buffer might trigger a load
-      if (time >= this.audio.buffered.start(i) && time <= this.audio.buffered.end(i) - 1) {
-        isBuffered = true;
-        break;
-      }
-    }
-    if (isBuffered) {
-      // We are offline, or the range is fully buffered. Direct seek.
-      this.audio.currentTime = time;
-      if (play) this.audio.play();
-      return;
-    }
-
-    // Check if offline
-    const offlineUrl = this.offlineUrlPipe.transform(url)!;
-    if (offlineUrl !== url) {
-      if (this.audio.src !== offlineUrl) {
-        this.audio.src = offlineUrl;
-        this.audio.load();
-      }
-      this.audio.currentTime = time;
-      if (play) this.audio.play();
-      return;
-    }
-
-    // Ensure token before browser sends a Range request.
-    this.audio.pause();
-    const oldToken = this.authService.getAccessToken();
-    await this.checkToken();
-    const newToken = this.authService.getAccessToken();
-    if (oldToken !== newToken) {
-      const authUrl = this.authUrlPipe.transform(url)!;
-      this.audio.src = authUrl;
-      this.audio.load();
-      this.audio.currentTime = time;
-      if (play) this.audio.play();
-      return;
-    }
-
+  private seekAudio(time: number) {
     this.audio.currentTime = time;
-    if (play) this.audio.play();
   }
 
-  private async playAudio(time: number = 0) {
-    let url = this.currentTrack()?.audioSrc!;
-    if (!url) return;
-
-    // Check if offline
-    const offlineUrl = this.offlineUrlPipe.transform(url)!;
-    if (offlineUrl !== url) {
-      if (this.audio.src !== offlineUrl) {
-        this.audio.src = offlineUrl;
-        this.audio.load();
-      }
-      this.audio.currentTime = time;
-      this.audio.play();
-      return;
-    }
-
-    // Ensure token before browser sends a Range request.
-    this.audio.pause();
-    const oldToken = this.authService.getAccessToken();
-    await this.checkToken();
-    const newToken = this.authService.getAccessToken();
-    if (oldToken !== newToken) {
-      const authUrl = this.authUrlPipe.transform(url)!;
-      this.audio.src = authUrl;
-      this.audio.load();
-      this.audio.currentTime = time;
-      this.audio.play();
-      return;
-    }
-
-    this.audio.currentTime = time;
+  private playAudio() {
     this.audio.play();
   }
 
@@ -289,22 +237,22 @@ export class AudioPlayerService {
       });
     }
   }
-  private updatePositionMetadata() {
+  private updatePositionMetadata(duration: number, playbackRate: number, currentTime: number) {
     if (
       'mediaSession' in navigator &&
       'setPositionState' in navigator.mediaSession &&
       this.audio.readyState >= 2 // HAVE_CURRENT_DATA or higher
     ) {
       navigator.mediaSession.setPositionState({
-        duration: this.audio.duration,
-        playbackRate: this.audio.playbackRate,
-        position: this.audio.currentTime
+        duration: duration,
+        playbackRate: playbackRate,
+        position: currentTime
       });
     }
   }
-  private updatePlaybackMetadata() {
+  private updatePlaybackMetadata(isPlaying: boolean) {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.playbackState = this.audio.paused ? 'paused' : 'playing';
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
     }
   }
   private clearMetadata() {
@@ -315,39 +263,44 @@ export class AudioPlayerService {
   }
 
   // PUBLIC METHODS
-  async loadId(id: number) {
-    this.currentId.set(id);
-    const track = this.currentTrack();
-    if (track) {
-      this.clear();
-      await this.loadAudio(track);
-    }
-  }
-
   clear() {
     this.clearAudio();
     this.currentTime.set(0);
     this.duration.set(0);
-    this.fileSize.set(0);
+    this.buffered.set([]);
+  }
+
+  loadId(id: number) {
+    this.clear();
+
+    this.currentId.set(id);
+    const track = this.currentTrack();
+    if (track) {
+      this.loadAudio(track);
+    }
   }
 
   togglePlay() {
     if (this.isPlaying()) this.pause();
     else this.play();
   }
-  async play() {
-    if (this.isError()) await this.loadAudio(this.currentTrack()!, this.currentTime(), true);
-    else await this.playAudio(this.currentTime());
+  play() {
+    if (this.isError()) this.loadAudio(this.currentTrack()!, this.currentTime(), true);
+    else this.playAudio();
   }
-  async playId(id: number) {
+  playId(id: number) {
+    // avoid glitch when changing track
+    this.currentTime.set(0);
+    this.duration.set(0);
+    this.buffered.set([]);
+
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
-      this.clear();
-      await this.loadAudio(track, 0, true);
+      this.loadAudio(track, 0, true);
     }
   }
-  async playTrack(track: AudioTrack, newQueue: AudioTrack[] = []) {
+  playTrack(track: AudioTrack, newQueue: AudioTrack[] = []) {
     // If queue doesn't already contain this track, prepend it
     if (!newQueue.find(t => t.audioSrc === track.audioSrc)) {
       newQueue = [track, ...newQueue];
@@ -361,23 +314,22 @@ export class AudioPlayerService {
       return t;
     });
 
-    // If queue doesn't already contain this track, prepend it
+    // track to play
     const playTrack = newQueue.find(t => t.audioSrc === track?.audioSrc)!;
 
     // set signals
     this.idCounter.set(idCounter);
     this.queue.set(newQueue);
-    await this.playId(playTrack.id!);
+    this.playId(playTrack.id!);
   }
 
-  async seek(time: number) {
-    this.currentTime.set(time); // Sync to avoid UI glitch
-    if (this.isError()) await this.loadAudio(this.currentTrack()!, time, true);
-    else await this.seekAudio(time, true);
+  seek(time: number) {
+    this.currentTime.set(time); // set time to avoid ui glitch
+    if (this.isError()) this.loadAudio(this.currentTrack()!, time, true);
+    else this.seekAudio(time);
   }
 
   pause() {
-    this.isPlaying.set(false); // sync immediately to prevent UI problems
     this.pauseAudio();
   }
 
@@ -387,32 +339,33 @@ export class AudioPlayerService {
     this.currentId.set(null);
   }
 
-  async next() {
+  next() {
     if (this.nextTrack() != null) {
-      await this.playId(this.nextTrack()!.id!);
+      this.playId(this.nextTrack()!.id!);
     } else {
-      await this.seek(this.duration());
+      this.seek(this.duration());
     }
   }
 
-  async previous() {
+  previous() {
     if (this.currentTime() > 5) {
-      await this.seek(0);
+      this.seek(0);
     } else if (this.previousTrack() != null) {
-      await this.playId(this.previousTrack()!.id!);
+      this.playId(this.previousTrack()!.id!);
     } else {
-      await this.seek(0);
+      this.seek(0);
     }
   }
 
-  async restartQueue() {
+  // QUEUE
+  restartQueue() {
     const q = this.queue();
     if (q.length > 0) {
-      await this.playId(q[0].id!);
+      this.playId(q[0].id!);
     }
   }
 
-  async addToQueue(track: AudioTrack) {
+  addToQueue(track: AudioTrack) {
     const id = this.idCounter() + 1;
     const newTrack: AudioTrack = structuredClone({ ...track, id: id });
 
@@ -421,29 +374,30 @@ export class AudioPlayerService {
 
     // set current if doesn t exists
     if (this.currentId() == null) {
-      await this.loadId(newTrack.id!);
+      this.loadId(newTrack.id!);
     }
   }
 
-  async removeFromQueue(id: number) {
+  removeFromQueue(id: number) {
     this.queue.update(q => q.filter(t => t.id !== id));
 
     if (this.currentId() === id) {
       // auto-play next if available, otherwise stop
       const q = this.queue();
       if (q.length > 0) {
-        await this.loadId(q[0].id!);
+        this.loadId(q[0].id!);
       } else {
         this.stop();
       }
     }
   }
 
-  removeAllQueue() {
+  clearQueue() {
     this.queue.set([]);
     this.stop();
   }
 
+  // flags
   isInQueueAudioSrc(audioSrc: string): boolean {
     return this.queue().some(q => q.audioSrc === audioSrc);
   }
