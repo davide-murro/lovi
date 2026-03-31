@@ -232,7 +232,7 @@ export class AudioPlayerService {
         title: track?.subtitle ? `${track?.title} - ${track?.subtitle}` : track?.title,
         artist: track?.artists?.join(", "),
         artwork: [
-          { src: track?.coverImageSrc!, sizes: '512x512', type: 'image/png' },
+          { src: this.offlineUrlPipe.transform(track?.coverImageSrc)!, sizes: '512x512', type: 'image/png' },
         ]
       });
     }
