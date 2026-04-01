@@ -1,6 +1,6 @@
-import { Component, effect, inject, Signal, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { PodcastDto } from '../../../core/models/dtos/podcast-dto.model';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -9,18 +9,14 @@ import { DialogService } from '../../../core/services/dialog.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
-import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 
 @Component({
   selector: 'app-edit-podcast',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, HttpSrcDirective],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
   templateUrl: './edit-podcast.html',
   styleUrl: './edit-podcast.scss'
 })
 export class EditPodcast {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
@@ -30,13 +26,12 @@ export class EditPodcast {
   faPen = faPen;
   faTrash = faTrash;
 
-  private _podcast: Signal<PodcastDto | null> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
-
-  podcast = signal<PodcastDto | null>(this._podcast());
+  podcast = input<PodcastDto>();
+  podcastEdit = signal<PodcastDto | undefined>(this.podcast());
 
   isLoading = signal(false);
   form = new FormGroup({
-    id: new FormControl<number>({ value: null!, disabled: true }),
+    id: new FormControl<number | null>({ value: null, disabled: true }),
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     coverImageUrl: new FormControl(''),
     coverImageValue: new FormControl<string | null>(null),
@@ -52,33 +47,33 @@ export class EditPodcast {
   constructor() {
     effect(() => {
       this.form.patchValue({
-        id: this._podcast()?.id,
-        name: this._podcast()?.name ?? null!,
-        coverImageUrl: this._podcast()?.coverImageUrl,
+        id: this.podcast()?.id,
+        name: this.podcast()?.name,
+        coverImageUrl: this.podcast()?.coverImageUrl,
         coverImageValue: null,
         coverImage: null,
-        coverImagePreviewUrl: this._podcast()?.coverImagePreviewUrl,
+        coverImagePreviewUrl: this.podcast()?.coverImagePreviewUrl,
         coverImagePreviewValue: null,
         coverImagePreview: null,
-        description: this._podcast()?.description,
+        description: this.podcast()?.description,
       });
-      this.coverPreview.set(this._podcast()?.coverImageUrl ?? null);
-      this.coverPreviewPreview.set(this._podcast()?.coverImagePreviewUrl ?? null);
-      this.podcast.set(this._podcast());
+      this.coverPreview.set(this.podcast()?.coverImageUrl ?? null);
+      this.coverPreviewPreview.set(this.podcast()?.coverImagePreviewUrl ?? null);
+      this.podcastEdit.set(this.podcast());
     });
   }
 
 
   load() {
     this.podcastsService.getById(
-      this.podcast()!.id!
+      this.podcastEdit()!.id!
     ).subscribe(
       {
         next: (podcast) => {
-          this.podcast.set(podcast);
+          this.podcastEdit.set(podcast);
         },
         error: (err) => {
-          console.error('podcastsService.getById', this.podcast()!.id!, err);
+          console.error('podcastsService.getById', this.podcastEdit()!.id!, err);
           this.toasterService.show('Get Podcast failed', { type: 'error' });
         }
       });
@@ -125,15 +120,15 @@ export class EditPodcast {
       description: form.description!
     }
     this.isLoading.set(true);
-    if (this.podcast()?.id != null) {
-      this.podcastsService.update(this.podcast()!.id!, p).subscribe({
+    if (this.podcastEdit()?.id != null) {
+      this.podcastsService.update(this.podcastEdit()!.id!, p).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.toasterService.show('Podcast updated');
           this.load();
         },
         error: (err) => {
-          console.error('podcastsService.update', this.podcast()!.id!, p, err);
+          console.error('podcastsService.update', this.podcastEdit()!.id!, p, err);
           this.isLoading.set(false);
           this.toasterService.show('Podcast update failed', { type: 'error' });
         }
@@ -159,7 +154,7 @@ export class EditPodcast {
     this.dialogService.confirm('Delete Podcast', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          const id = this.podcast()!.id!;
+          const id = this.podcastEdit()!.id!;
           this.podcastsService.delete(id).subscribe({
             next: () => {
               this.toasterService.show('Podcast deleted');
@@ -179,12 +174,12 @@ export class EditPodcast {
     this.dialogService.confirm('Delete Podcast Episode', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.podcastsService.deleteEpisode(this.podcast()!.id!, episodeId).subscribe({
+          this.podcastsService.deleteEpisode(this.podcastEdit()!.id!, episodeId).subscribe({
             next: (res) => {
               this.load();
             },
             error: (err) => {
-              console.error('podcastsService.deleteEpisode', this.podcast()!.id!, episodeId, err);
+              console.error('podcastsService.deleteEpisode', this.podcastEdit()!.id!, episodeId, err);
               this.toasterService.show('Delete Episode failed', { type: 'error' });
             }
           });
@@ -197,12 +192,12 @@ export class EditPodcast {
     this.dialogService.open(CreatorSelectorDialog)
       .subscribe((creator: CreatorDto) => {
         if (creator) {
-          this.podcastsService.addVoicer(this.podcast()!.id!, creator.id).subscribe({
+          this.podcastsService.addVoicer(this.podcastEdit()!.id!, creator.id!).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('podcastsService.addVoicer', this.podcast()!.id!, creator.id, err);
+              console.error('podcastsService.addVoicer', this.podcastEdit()!.id!, creator.id, err);
               this.toasterService.show('Add Voicer failed', { type: 'error' });
             }
           });
@@ -213,12 +208,12 @@ export class EditPodcast {
     this.dialogService.confirm('Remove Podcast Voicer', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.podcastsService.removeVoicer(this.podcast()!.id!, voicerId).subscribe({
+          this.podcastsService.removeVoicer(this.podcastEdit()!.id!, voicerId).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('podcastsService.removeVoicer', this.podcast()!.id!, voicerId, err);
+              console.error('podcastsService.removeVoicer', this.podcastEdit()!.id!, voicerId, err);
               this.toasterService.show('Remove Voicer failed', { type: 'error' });
             }
           });

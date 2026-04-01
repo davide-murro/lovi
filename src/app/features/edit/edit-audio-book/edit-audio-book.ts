@@ -1,40 +1,40 @@
-import { Component, effect, inject, Signal, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faRefresh, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
-import { HttpSrcDirective } from '../../../core/directives/http-src.directive';
 import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { AudioBooksService } from '../../../core/services/audio-books.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { AuthUrlPipe } from "../../../core/pipes/auth-url.pipe";
 
 @Component({
   selector: 'app-edit-audio-book',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, HttpSrcDirective],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, AuthUrlPipe],
   templateUrl: './edit-audio-book.html',
   styleUrl: './edit-audio-book.scss'
 })
 export class EditAudioBook {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
   private audioBooksService = inject(AudioBooksService);
+  private authService = inject(AuthService);
 
   faTrash = faTrash;
+  faRefresh = faRefresh;
 
-  private _audioBook: Signal<AudioBookDto | null> = toSignal(this.route.data.pipe(map(data => data['audioBook'])));
-
-  audioBook = signal<AudioBookDto | null>(this._audioBook());
+  audioBook = input<AudioBookDto>();
+  audioBookEdit = signal<AudioBookDto | undefined>(this.audioBook());
 
   isLoading = signal(false);
   form = new FormGroup({
-    id: new FormControl<number>({ value: null!, disabled: true }),
+    id: new FormControl<number | null>({ value: null, disabled: true }),
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     coverImageUrl: new FormControl(''),
     coverImageValue: new FormControl<string | null>(null),
@@ -50,40 +50,41 @@ export class EditAudioBook {
   coverPreview = signal<string | null>(null);
   coverPreviewPreview = signal<string | null>(null);
   audioPreview = signal<string | null>(null);
+  isAudioError = signal(false);
 
   constructor() {
     effect(() => {
       this.form.patchValue({
-        id: this._audioBook()?.id,
-        name: this._audioBook()?.name,
-        coverImageUrl: this._audioBook()?.coverImageUrl,
+        id: this.audioBook()?.id,
+        name: this.audioBook()?.name,
+        coverImageUrl: this.audioBook()?.coverImageUrl,
         coverImageValue: null,
         coverImage: null,
-        coverImagePreviewUrl: this._audioBook()?.coverImagePreviewUrl,
+        coverImagePreviewUrl: this.audioBook()?.coverImagePreviewUrl,
         coverImagePreviewValue: null,
         coverImagePreview: null,
-        description: this._audioBook()?.description,
-        audioUrl: this._audioBook()?.audioUrl,
+        description: this.audioBook()?.description,
+        audioUrl: this.audioBook()?.audioUrl,
         audioValue: null,
         audio: null
       });
-      this.coverPreview.set(this._audioBook()?.coverImageUrl ?? null);
-      this.coverPreviewPreview.set(this._audioBook()?.coverImagePreviewUrl ?? null);
-      this.audioPreview.set(this._audioBook()?.audioUrl ?? null);
-      this.audioBook.set(this._audioBook());
+      this.coverPreview.set(this.audioBook()?.coverImageUrl ?? null);
+      this.coverPreviewPreview.set(this.audioBook()?.coverImagePreviewUrl ?? null);
+      this.audioPreview.set(this.audioBook()?.audioUrl ?? null);
+      this.audioBookEdit.set(this.audioBook());
     });
   }
 
   load() {
     this.audioBooksService.getById(
-      this.audioBook()!.id!
+      this.audioBookEdit()!.id!
     ).subscribe(
       {
         next: (audioBook) => {
-          this.audioBook.set(audioBook);
+          this.audioBookEdit.set(audioBook);
         },
         error: (err) => {
-          console.error('audioBooksService.getById', this.audioBook()!.id!, err);
+          console.error('audioBooksService.getById', this.audioBookEdit()!.id!, err);
           this.toasterService.show('Get Audio Book failed', { type: 'error' });
         }
       });
@@ -129,6 +130,20 @@ export class EditAudioBook {
       this.audioPreview.set(null);
     }
   }
+  async refreshAudio() {
+    try {
+      await firstValueFrom(this.authService.refreshTokens());
+    } catch (e) { }
+    const current = this.audioPreview();
+    this.audioPreview.set(null);
+    setTimeout(() => this.audioPreview.set(current));
+  }
+  deleteAudio() {
+    this.form.controls.audio.setValue(null);
+    this.form.controls.audioUrl.setValue(null);
+    this.audioPreview.set(null);
+  }
+
   onSubmit() {
     if (!this.form.valid) return;
 
@@ -146,15 +161,15 @@ export class EditAudioBook {
     };
 
     this.isLoading.set(true);
-    if (this.audioBook()?.id != null) {
-      this.audioBooksService.update(this.audioBook()!.id!, ab).subscribe({
+    if (this.audioBookEdit()?.id != null) {
+      this.audioBooksService.update(this.audioBookEdit()!.id!, ab).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.toasterService.show('Audio Book updated');
           this.load();
         },
         error: (err) => {
-          console.error('audioBooksService.update', this.audioBook()!.id!, ab, err);
+          console.error('audioBooksService.update', this.audioBookEdit()!.id!, ab, err);
           this.isLoading.set(false);
           this.toasterService.show('Audio Book update failed', { type: 'error' });
         }
@@ -180,7 +195,7 @@ export class EditAudioBook {
     this.dialogService.confirm('Delete Audio Book', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          const id = this.audioBook()!.id!;
+          const id = this.audioBookEdit()!.id!;
           this.audioBooksService.delete(id).subscribe({
             next: () => {
               this.toasterService.show('Audio Book deleted');
@@ -200,12 +215,12 @@ export class EditAudioBook {
     this.dialogService.open(CreatorSelectorDialog)
       .subscribe((creator: CreatorDto) => {
         if (creator) {
-          this.audioBooksService.addReader(this.audioBook()!.id!, creator.id).subscribe({
+          this.audioBooksService.addReader(this.audioBookEdit()!.id!, creator.id!).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('audioBooksService.addReader', this.audioBook()!.id!, creator.id, err);
+              console.error('audioBooksService.addReader', this.audioBookEdit()!.id!, creator.id, err);
               this.toasterService.show('Add Reader failed', { type: 'error' });
             }
           });
@@ -216,12 +231,12 @@ export class EditAudioBook {
     this.dialogService.confirm('Remove Audio Book Reader', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.audioBooksService.removeReader(this.audioBook()!.id!, readerId).subscribe({
+          this.audioBooksService.removeReader(this.audioBookEdit()!.id!, readerId).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('audioBooksService.removeReader', this.audioBook()!.id!, readerId, err);
+              console.error('audioBooksService.removeReader', this.audioBookEdit()!.id!, readerId, err);
               this.toasterService.show('Remove Reader failed', { type: 'error' });
             }
           });

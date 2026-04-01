@@ -1,14 +1,12 @@
-import { Component, effect, inject, Signal, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { CreatorsService } from '../../../core/services/creators.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-edit-creator',
@@ -17,7 +15,6 @@ import { map } from 'rxjs';
   styleUrl: './edit-creator.scss'
 })
 export class EditCreator {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
@@ -27,16 +24,15 @@ export class EditCreator {
   faPen = faPen;
   faTrash = faTrash;
 
-  private _creator: Signal<CreatorDto | null> = toSignal(this.route.data.pipe(map(data => data['creator'])));
-
-  creator = signal<CreatorDto | null>(this._creator());
+  creator = input<CreatorDto>();
+  creatorEdit = signal<CreatorDto | undefined>(this.creator());
 
   isLoading = signal(false);
   form = new FormGroup({
-    id: new FormControl({ value: this.creator()?.id, disabled: true }),
-    nickname: new FormControl(this.creator()?.nickname ?? null!, { nonNullable: true, validators: [Validators.required] }),
-    name: new FormControl(this.creator()?.name),
-    surname: new FormControl(this.creator()?.surname),
+    id: new FormControl<number | null>({ value: null, disabled: true }),
+    nickname: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    name: new FormControl(''),
+    surname: new FormControl(''),
     //coverImageUrl: new FormControl(this.creator()?.coverImageUrl),
     //coverImage: new FormControl<File | null>(null)
   });
@@ -45,29 +41,29 @@ export class EditCreator {
   constructor() {
     effect(() => {
       this.form.patchValue({
-        id: this._creator()?.id,
-        nickname: this._creator()?.nickname,
-        name: this._creator()?.name,
-        surname: this._creator()?.surname,
+        id: this.creator()?.id,
+        nickname: this.creator()?.nickname,
+        name: this.creator()?.name,
+        surname: this.creator()?.surname,
         //coverImageUrl: this._creator()?.coverImageUrl,
         //coverImage: null
       });
       //this.coverPreview.set(this._creator()?.coverImageUrl ?? null);
-      this.creator.set(this._creator());
+      this.creatorEdit.set(this.creator());
     });
   }
 
 
   load() {
     this.creatorsService.getById(
-      this.creator()!.id!
+      this.creatorEdit()!.id!
     ).subscribe(
       {
         next: (creator) => {
-          this.creator.set(creator);
+          this.creatorEdit.set(creator);
         },
         error: (err) => {
-          console.error('creatorsService.getById', this.creator()!.id!, err);
+          console.error('creatorsService.getById', this.creatorEdit()!.id!, err);
           this.toasterService.show('Get Creator failed', { type: 'error' });
         }
       });
@@ -100,15 +96,15 @@ export class EditCreator {
       //coverImage: form.coverImage!,
     }
     this.isLoading.set(true);
-    if (this.creator()?.id != null) {
-      this.creatorsService.update(this.creator()!.id!, p).subscribe({
+    if (this.creatorEdit()?.id != null) {
+      this.creatorsService.update(this.creatorEdit()!.id!, p).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.toasterService.show('Creator updated');
           this.load();
         },
         error: (err) => {
-          console.error('creatorsService.update', this.creator()!.id!, p, err);
+          console.error('creatorsService.update', this.creatorEdit()!.id!, p, err);
           this.isLoading.set(false);
           this.toasterService.show('Creator update failed', { type: 'error' });
         }
@@ -134,7 +130,7 @@ export class EditCreator {
     this.dialogService.confirm('Delete Creator', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          const id = this.creator()!.id!;
+          const id = this.creatorEdit()!.id!;
           this.creatorsService.delete(id).subscribe({
             next: () => {
               this.toasterService.show('Creator deleted');

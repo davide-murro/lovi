@@ -10,6 +10,9 @@ export class AuthUrlPipe implements PipeTransform {
 
   transform(url: string | null | undefined): string | null | undefined {
     if (!url) return url;
+    if (url.startsWith('blob:') || url.startsWith('data:')) {
+      return url;
+    }
 
     const token = this.authService.getAccessToken();
     if (!url.includes('&access_token=') && !url.includes('?access_token=') && token) {

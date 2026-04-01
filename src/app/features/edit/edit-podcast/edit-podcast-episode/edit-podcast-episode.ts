@@ -1,49 +1,50 @@
-import { Component, computed, effect, inject, Signal, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-dto.model';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { faBackward, faForward, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faForward, faRefresh, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PodcastsService } from '../../../../core/services/podcasts.service';
 import { DialogService } from '../../../../core/services/dialog.service';
 import { CreatorDto } from '../../../../core/models/dtos/creator-dto.model';
 import { ToasterService } from '../../../../core/services/toaster.service';
+import { AuthService } from '../../../../core/services/auth.service';
 import { PodcastDto } from '../../../../core/models/dtos/podcast-dto.model';
 import { CreatorSelectorDialog } from '../../../../shared/creator-selector-dialog/creator-selector-dialog';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
-import { HttpSrcDirective } from '../../../../core/directives/http-src.directive';
+import { AuthUrlPipe } from "../../../../core/pipes/auth-url.pipe";
 
 @Component({
   selector: 'app-edit-podcast-episode',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, HttpSrcDirective],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, AuthUrlPipe],
   templateUrl: './edit-podcast-episode.html',
   styleUrl: './edit-podcast-episode.scss'
 })
 export class EditPodcastEpisode {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
   private podcastsService = inject(PodcastsService);
+  private authService = inject(AuthService);
 
   faTrash = faTrash;
   faBackward = faBackward;
   faForward = faForward;
+  faRefresh = faRefresh;
 
-  private _episode: Signal<PodcastEpisodeDto | null> = toSignal(this.route.data.pipe(map(data => data['podcastEpisode'])));
-  private _podcast: Signal<PodcastDto | null> = toSignal(this.route.data.pipe(map(data => data['podcast'])));
+  podcastEpisode = input<PodcastEpisodeDto>();
+  podcast = input<PodcastDto>();
+  podcastEpisodeEdit = signal<PodcastEpisodeDto | undefined>(this.podcastEpisode());
+  podcastEdit = signal<PodcastDto | undefined>(this.podcast());
 
-  episode = signal<PodcastEpisodeDto | null>(this._episode());
-  podcast = signal<PodcastDto | null>(this._podcast());
-
-  episodePrev = computed(() => this.episode()?.podcast!.episodes!.find(pe => pe.number == this.episode()!.number - 1));
-  episodeNext = computed(() => this.episode()?.podcast!.episodes!.find(pe => pe.number == this.episode()!.number + 1));
+  currentIndex = computed(() => this.podcastEpisodeEdit()?.podcast!.episodes!.findIndex(pe => pe.number == this.podcastEpisodeEdit()!.number));
+  episodePrev = computed(() => this.podcastEpisodeEdit()?.podcast!.episodes![this.currentIndex()! - 1] ?? null);
+  episodeNext = computed(() => this.podcastEpisodeEdit()?.podcast!.episodes![this.currentIndex()! + 1] ?? null);
 
   isLoading = signal(false);
   form = new FormGroup({
-    id: new FormControl<number>({ value: null!, disabled: true }),
-    number: new FormControl<number>(null!, { nonNullable: true, validators: [Validators.required] }),
+    id: new FormControl<number | null>({ value: null, disabled: true }),
+    number: new FormControl<number | null>(null, { nonNullable: true, validators: [Validators.required] }),
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     coverImageUrl: new FormControl(''),
     coverImageValue: new FormControl<string | null>(null),
@@ -55,56 +56,58 @@ export class EditPodcastEpisode {
     audioUrl: new FormControl(''),
     audioValue: new FormControl<string | null>(null),
     audio: new FormControl<File | null>(null),
-    podcastId: new FormControl<number>(null!)
+    podcastId: new FormControl<number | null>(null)
   });
   coverPreview = signal<string | null>(null);
   coverPreviewPreview = signal<string | null>(null);
   audioPreview = signal<string | null>(null);
+  isAudioError = signal(false);
 
   constructor() {
     effect(() => {
       this.form.patchValue({
-        id: this._episode()?.id,
-        number: this._episode()?.number,
-        name: this._episode()?.name,
-        coverImageUrl: this._episode()?.coverImageUrl,
+        id: this.podcastEpisode()?.id,
+        number: this.podcastEpisode()?.number,
+        name: this.podcastEpisode()?.name,
+        coverImageUrl: this.podcastEpisode()?.coverImageUrl,
         coverImageValue: null,
         coverImage: null,
-        coverImagePreviewUrl: this._episode()?.coverImagePreviewUrl,
+        coverImagePreviewUrl: this.podcastEpisode()?.coverImagePreviewUrl,
         coverImagePreviewValue: null,
         coverImagePreview: null,
-        description: this._episode()?.description,
-        audioUrl: this._episode()?.audioUrl,
+        description: this.podcastEpisode()?.description,
+        audioUrl: this.podcastEpisode()?.audioUrl,
         audioValue: null,
         audio: null,
-        podcastId: this._episode() ? this._episode()!.podcast!.id! : this._podcast()!.id!
+        podcastId: this.podcastEpisode() ? this.podcastEpisode()!.podcast!.id! : this.podcast()!.id!
       });
-      this.coverPreview.set(this._episode()?.coverImageUrl ?? null);
-      this.coverPreviewPreview.set(this._episode()?.coverImagePreviewUrl ?? null);
-      this.audioPreview.set(this._episode()?.audioUrl ?? null);
-      this.episode.set(this._episode());
+      this.coverPreview.set(this.podcastEpisode()?.coverImageUrl ?? null);
+      this.coverPreviewPreview.set(this.podcastEpisode()?.coverImagePreviewUrl ?? null);
+      this.audioPreview.set(this.podcastEpisode()?.audioUrl ?? null);
+      this.podcastEpisodeEdit.set(this.podcastEpisode());
+      this.podcastEdit.set(this.podcast());
     });
   }
 
 
   // episode
   prevEpisode() {
-    this.router.navigate(['/edit', 'podcasts', this.episode()!.podcast!.id, 'episodes', this.episodePrev()!.id]);
+    this.router.navigate(['/edit', 'podcasts', this.podcastEpisodeEdit()!.podcast!.id, 'episodes', this.episodePrev()!.id]);
   }
   nextEpisode() {
-    this.router.navigate(['/edit', 'podcasts', this.episode()!.podcast!.id, 'episodes', this.episodeNext()!.id]);
+    this.router.navigate(['/edit', 'podcasts', this.podcastEpisodeEdit()!.podcast!.id, 'episodes', this.episodeNext()!.id]);
   }
 
   load() {
     this.podcastsService.getEpisodeById(
-      this.episode()!.podcast!.id!,
-      this.episode()!.id!
+      this.podcastEpisodeEdit()!.podcast!.id!,
+      this.podcastEpisodeEdit()!.id!
     ).subscribe({
       next: (episode) => {
-        this.episode.set(episode);
+        this.podcastEpisodeEdit.set(episode);
       },
       error: (err) => {
-        console.error('podcastsService.getEpisodeById', this.episode()!.podcast!.id!, this.episode()!.id!, err);
+        console.error('podcastsService.getEpisodeById', this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, err);
         this.toasterService.show('Get Podcast Episode failed', { type: 'error' });
       }
     });
@@ -150,6 +153,20 @@ export class EditPodcastEpisode {
       this.audioPreview.set(null);
     }
   }
+  async refreshAudio() {
+    try {
+      await firstValueFrom(this.authService.refreshTokens());
+    } catch (e) { }
+    const current = this.audioPreview();
+    this.audioPreview.set(null);
+    setTimeout(() => this.audioPreview.set(current));
+  }
+  deleteAudio() {
+    this.form.controls.audio.setValue(null);
+    this.form.controls.audioUrl.setValue(null);
+    this.audioPreview.set(null);
+  }
+
   onSubmit() {
     if (!this.form.valid) return;
 
@@ -169,21 +186,21 @@ export class EditPodcastEpisode {
     };
 
     this.isLoading.set(true);
-    if (this.episode()?.id != null) {
-      this.podcastsService.updateEpisode(this.episode()!.podcast!.id!, this.episode()!.id!, pe).subscribe({
+    if (this.podcastEpisodeEdit()?.id != null) {
+      this.podcastsService.updateEpisode(this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, pe).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.toasterService.show('Podcast Episode updated');
           this.load();
         },
         error: (err) => {
-          console.error('podcastsService.updateEpisode', this.episode()!.podcast!.id!, this.episode()!.id!, pe, err);
+          console.error('podcastsService.updateEpisode', this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, pe, err);
           this.isLoading.set(false);
           this.toasterService.show('Podcast Episode update failed', { type: 'error' });
         }
       });
     } else {
-      pe.podcastId = this.podcast()!.id!;
+      pe.podcastId = this.podcastEdit()!.id!;
       this.podcastsService.createEpisode(pe.podcastId, pe).subscribe({
         next: (res) => {
           this.isLoading.set(false);
@@ -204,8 +221,8 @@ export class EditPodcastEpisode {
     this.dialogService.confirm('Delete Podcast Episode', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          const podcastId = this.episode()!.podcast!.id!;
-          const id = this.episode()!.id!;
+          const podcastId = this.podcastEpisodeEdit()!.podcast!.id!;
+          const id = this.podcastEpisodeEdit()!.id!;
           this.podcastsService.deleteEpisode(podcastId, id).subscribe({
             next: () => {
               this.toasterService.show('Podcast Episode deleted');
@@ -225,12 +242,12 @@ export class EditPodcastEpisode {
     this.dialogService.open(CreatorSelectorDialog)
       .subscribe((creator: CreatorDto) => {
         if (creator) {
-          this.podcastsService.addEpisodeVoicer(this.episode()!.podcast!.id!, this.episode()!.id!, creator.id).subscribe({
+          this.podcastsService.addEpisodeVoicer(this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, creator.id!).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('podcastsService.addEpisodeVoicer', this.episode()!.podcast!.id!, this.episode()!.id!, creator.id, err);
+              console.error('podcastsService.addEpisodeVoicer', this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, creator.id, err);
               this.toasterService.show('Add Episode Voicer failed', { type: 'error' });
             }
           });
@@ -241,12 +258,12 @@ export class EditPodcastEpisode {
     this.dialogService.confirm('Remove Podcast Episode Voicer', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.podcastsService.removeEpisodeVoicer(this.episode()!.podcast!.id!, this.episode()!.id!, voicerId).subscribe({
+          this.podcastsService.removeEpisodeVoicer(this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, voicerId).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('podcastsService.removeEpisodeVoicer', this.episode()!.podcast!.id!, this.episode()!.id!, voicerId, err);
+              console.error('podcastsService.removeEpisodeVoicer', this.podcastEpisodeEdit()!.podcast!.id!, this.podcastEpisodeEdit()!.id!, voicerId, err);
               this.toasterService.show('Remove Episode Voicer failed', { type: 'error' });
             }
           });

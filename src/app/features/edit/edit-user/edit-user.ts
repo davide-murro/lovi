@@ -1,6 +1,6 @@
-import { Component, effect, inject, Signal, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { UserDto } from '../../../core/models/dtos/auth/user-dto.model';
@@ -10,8 +10,6 @@ import { passwordValidator } from '../../../core/validators/password-validator';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ForgotPasswordDto } from '../../../core/models/dtos/auth/forgot-password-dto.model';
 import { AuthService } from '../../../core/services/auth.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { RoleDto } from '../../../core/models/dtos/auth/role-dto.model';
 import { RoleSelectorDialog } from '../../../shared/auth/role-selector-dialog/role-selector-dialog';
 import { DatePipe } from '@angular/common';
@@ -23,7 +21,6 @@ import { DatePipe } from '@angular/common';
   styleUrl: './edit-user.scss'
 })
 export class EditUser {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialogService = inject(DialogService);
   private toasterService = inject(ToasterService);
@@ -35,9 +32,8 @@ export class EditUser {
   faTrash = faTrash;
   faQuestion = faQuestion;
 
-  private _user: Signal<UserDto | null> = toSignal(this.route.data.pipe(map(data => data['user'])));
-
-  user = signal<UserDto | null>(this._user());
+  user = input<UserDto>();
+  userEdit = signal<UserDto | undefined>(this.user());
 
   isLoading = signal(false);
   form = new FormGroup({
@@ -51,26 +47,26 @@ export class EditUser {
   constructor() {
     effect(() => {
       this.form.patchValue({
-        id: this._user()?.id,
+        id: this.user()?.id,
         newPassword: '',
-        email: this._user()?.email,
-        emailConfirmed: this._user()?.emailConfirmed,
-        name: this._user()?.name,
+        email: this.user()?.email,
+        emailConfirmed: this.user()?.emailConfirmed,
+        name: this.user()?.name,
       });
-      this.user.set(this._user());
+      this.userEdit.set(this.user());
     });
   }
 
   load() {
     this.usersService.getById(
-      this.user()!.id!
+      this.userEdit()!.id!
     ).subscribe(
       {
         next: (user) => {
-          this.user.set(user);
+          this.userEdit.set(user);
         },
         error: (err) => {
-          console.error('usersService.getById', this.user()!.id!, err);
+          console.error('usersService.getById', this.userEdit()!.id!, err);
           this.toasterService.show('Get User failed', { type: 'error' });
         }
       });
@@ -89,15 +85,15 @@ export class EditUser {
       name: form.name!
     }
     this.isLoading.set(true);
-    if (this.user()?.id != null) {
-      this.usersService.update(this.user()!.id!, u).subscribe({
+    if (this.userEdit()?.id != null) {
+      this.usersService.update(this.userEdit()!.id!, u).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.toasterService.show('User updated');
           this.load();
         },
         error: (err) => {
-          console.error('usersService.update', this.user()!.id!, u, err);
+          console.error('usersService.update', this.userEdit()!.id!, u, err);
           this.isLoading.set(false);
           this.toasterService.show('User update failed', { type: 'error' });
         }
@@ -123,7 +119,7 @@ export class EditUser {
     this.dialogService.confirm('Delete User', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          const id = this.user()!.id;
+          const id = this.userEdit()!.id;
           this.usersService.delete(id).subscribe({
             next: () => {
               this.toasterService.show('User deleted');
@@ -142,7 +138,7 @@ export class EditUser {
       .subscribe(confirmed => {
         if (confirmed) {
           const forgotPassword: ForgotPasswordDto = {
-            email: this.user()!.email
+            email: this.userEdit()!.email
           }
           this.authService.forgotPassword(forgotPassword).subscribe({
             next: () => {
@@ -158,31 +154,31 @@ export class EditUser {
   }
 
   addRole() {
-      this.dialogService.open(RoleSelectorDialog)
-        .subscribe((role: RoleDto) => {
-          if (role) {
-            this.usersService.addRole(this.user()!.id!, role.id).subscribe({
-              next: () => {
-                this.load();
-              },
-              error: (err) => {
-                console.error('usersService.addRole', this.user()!.id!, role.id, err);
-                this.toasterService.show('Add Role failed', { type: 'error' });
-              }
-            });
-          }
-        });
+    this.dialogService.open(RoleSelectorDialog)
+      .subscribe((role: RoleDto) => {
+        if (role) {
+          this.usersService.addRole(this.userEdit()!.id!, role.id).subscribe({
+            next: () => {
+              this.load();
+            },
+            error: (err) => {
+              console.error('usersService.addRole', this.userEdit()!.id!, role.id, err);
+              this.toasterService.show('Add Role failed', { type: 'error' });
+            }
+          });
+        }
+      });
   }
   removeRole(roleId: string) {
     this.dialogService.confirm('Remove User Role', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.usersService.removeRole(this.user()!.id!, roleId).subscribe({
+          this.usersService.removeRole(this.userEdit()!.id!, roleId).subscribe({
             next: () => {
               this.load();
             },
             error: (err) => {
-              console.error('usersService.removeRole', this.user()!.id!, roleId, err);
+              console.error('usersService.removeRole', this.userEdit()!.id!, roleId, err);
               this.toasterService.show('Remove Role failed', { type: 'error' });
             }
           });

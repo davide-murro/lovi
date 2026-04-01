@@ -1,14 +1,14 @@
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <span>{{user() ? user()!.name : 'New User'}}</span>
+    <span>{{userEdit() ? userEdit()!.name : 'New User'}}</span>
 </div>
 
 <div class="title flex justify-between items-start gap-2">
     <h2 class="flex-1">Edit User</h2>
 
     <div class="flex gap-2">
-        @if(user() != null) {
+        @if(userEdit() != null) {
         <button type="button" class="button button-accent shrink-0 flex gap-2" title="Forgot password"
             (click)="forgotPassword()">
             <fa-icon [icon]="faQuestion" />
@@ -58,7 +58,7 @@
 </form>
 
 
-@if (user()?.id) {
+@if (userEdit()?.id) {
 <div class="section">
     <h3 class="title2">Roles</h3>
 
@@ -71,7 +71,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (role of user()!.roles; track $index) {
+                @for (role of userEdit()!.roles; track $index) {
                 <tr>
                     <td>{{role.id}}</td>
                     <td>{{role.name}}</td>
@@ -108,7 +108,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (tokenInfo of user()!.tokenInfos; track $index) {
+                @for (tokenInfo of userEdit()!.tokenInfos; track $index) {
                 <tr>
                     <td>{{tokenInfo.id}}</td>
                     <td>{{tokenInfo.userName}}</td>

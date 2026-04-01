@@ -1,14 +1,14 @@
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <span>{{creator() ? creator()!.nickname : 'New Creator'}}</span>
+    <span>{{creatorEdit() ? creatorEdit()!.nickname : 'New Creator'}}</span>
 </div>
 
 <div class="title flex justify-between items-start gap-2">
     <h2 class="flex-1">Edit Creator</h2>
 
     <div class="flex gap-2">
-        @if(creator() != null) {
+        @if(creatorEdit() != null) {
         <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete" (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
@@ -45,7 +45,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [httpSrc]="coverPreview()!" class="size-32 mt-2 object-contain" />
+        <img [src]="coverPreview()!" class="size-32 mt-2 object-contain" />
         }
     </div>
 

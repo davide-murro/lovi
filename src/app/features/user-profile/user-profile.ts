@@ -32,7 +32,7 @@ export class UserProfile {
   logoutLoading = signal(false);
   informationLoading = signal(false);
   informationForm = new FormGroup({
-    id: new FormControl<string>(''),
+    id: new FormControl<string>({ value: '', disabled: true }),
     email: new FormControl<string>({ value: '', disabled: true }),
     password: new FormControl<string>({ value: 'xxxxxxxx', disabled: true }),
     name: new FormControl<string>('', Validators.required),

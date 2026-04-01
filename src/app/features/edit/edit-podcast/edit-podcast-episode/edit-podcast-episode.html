@@ -1,12 +1,14 @@
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <a class="link font-medium leading-normal" [title]="episode() ? episode()!.podcast!.name : podcast()!.name"
-        [routerLink]="['/edit', 'podcasts', episode() ? episode()!.podcast!.id : podcast()!.id]">{{episode() ?
-        episode()!.podcast!.name :
-        podcast()!.name}}</a>
+    <a class="link font-medium leading-normal"
+        [title]="podcastEpisodeEdit() ? podcastEpisodeEdit()!.podcast!.name : podcastEdit()!.name"
+        [routerLink]="['/edit', 'podcasts', podcastEpisodeEdit() ? podcastEpisodeEdit()!.podcast!.id : podcastEdit()!.id]">{{podcastEpisodeEdit()
+        ?
+        podcastEpisodeEdit()!.podcast!.name :
+        podcastEdit()!.name}}</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <span>{{episode() ? episode()!.name : 'New Episode'}}</span>
+    <span>{{podcastEpisodeEdit() ? podcastEpisodeEdit()!.name : 'New Episode'}}</span>
 </div>
 
 <div class="title flex justify-between items-start gap-2">
@@ -27,7 +29,7 @@
             <span class="hidden lg:inline">Next Episode</span>
         </button>
         }
-        @if(episode() != null) {
+        @if(podcastEpisodeEdit() != null) {
         <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete" (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
@@ -59,7 +61,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [httpSrc]="coverPreview()" class="mt-2 size-32 object-contain" />
+        <img [src]="coverPreview()" class="mt-2 size-32 object-contain" />
         }
     </div>
 
@@ -69,7 +71,7 @@
             placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />
         @if(coverPreviewPreview()) {
-        <img [httpSrc]="coverPreviewPreview()" class="mt-2 size-32 object-contain" />
+        <img [src]="coverPreviewPreview()" class="mt-2 size-32 object-contain" />
         }
     </div>
 
@@ -78,7 +80,22 @@
         <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.png"
             formControlName="audioValue" (change)="onAudioSelected($event)" />
         @if(audioPreview()){
-        <audio controls class="mt-2 max-w-full" [httpSrc]="audioPreview()"></audio>
+        <div class="flex items-center gap-2 mt-2">
+            <audio controls class="max-w-full" [src]="audioPreview() | authUrl" (error)="isAudioError.set(true)"
+                (canplay)="isAudioError.set(false)"></audio>
+            @if(isAudioError()) {
+            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Refresh Audio"
+                (click)="refreshAudio()">
+                <fa-icon [icon]="faRefresh" />
+                <span class="hidden lg:inline">Refresh Audio</span>
+            </button>
+            }
+            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete Audio"
+                (click)="deleteAudio()">
+                <fa-icon [icon]="faTrash" />
+                <span class="hidden lg:inline">Delete Audio</span>
+            </button>
+        </div>
         }
     </div>
 
@@ -94,7 +111,7 @@
     </div>
 </form>
 
-@if(episode()?.id) {
+@if(podcastEpisodeEdit()?.id) {
 <div class="section">
     <h3 class="title2">Voicers</h3>
 
@@ -109,7 +126,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (voicer of episode()!.voicers; track $index) {
+                @for (voicer of podcastEpisodeEdit()!.voicers; track $index) {
                 <tr>
                     <td>{{voicer.id}}</td>
                     <td>{{voicer.nickname}}</td>
@@ -118,7 +135,7 @@
 
                     <td>
                         <button type="button" class="icon-button" title="Remove Voicer"
-                            (click)="removeVoicer(voicer.id)"><fa-icon [icon]="faTrash" /></button>
+                            (click)="removeVoicer(voicer.id!)"><fa-icon [icon]="faTrash" /></button>
                     </td>
                 </tr>
                 }

@@ -1,12 +1,10 @@
-import { Component, effect, inject, Signal, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { RolesService } from '../../../core/services/roles.service';
 import { RoleDto } from '../../../core/models/dtos/auth/role-dto.model';
 
@@ -17,7 +15,6 @@ import { RoleDto } from '../../../core/models/dtos/auth/role-dto.model';
   styleUrl: './edit-role.scss'
 })
 export class EditRole {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
@@ -27,37 +24,36 @@ export class EditRole {
   faPen = faPen;
   faTrash = faTrash;
 
-  private _role: Signal<RoleDto | null> = toSignal(this.route.data.pipe(map(data => data['role'])));
-
-  role = signal<RoleDto | null>(this._role());
+  role = input<RoleDto>();
+  roleEdit = signal<RoleDto | undefined>(this.role());
 
   isLoading = signal(false);
   form = new FormGroup({
-    id: new FormControl(this.role()?.id, Validators.required),
-    name: new FormControl(this.role()?.name, Validators.required),
+    id: new FormControl(this.roleEdit()?.id, Validators.required),
+    name: new FormControl(this.roleEdit()?.name, Validators.required),
   });
 
   constructor() {
     effect(() => {
       this.form.patchValue({
-        id: this._role()?.id,
-        name: this._role()?.name
+        id: this.role()?.id,
+        name: this.role()?.name
       });
-      this.role.set(this._role());
+      this.roleEdit.set(this.role());
     });
   }
 
 
   load() {
     this.rolesService.getById(
-      this.role()!.id!
+      this.roleEdit()!.id!
     ).subscribe(
       {
         next: (role) => {
-          this.role.set(role);
+          this.roleEdit.set(role);
         },
         error: (err) => {
-          console.error('rolesService.getById', this.role()!.id!, err);
+          console.error('rolesService.getById', this.roleEdit()!.id!, err);
           this.toasterService.show('Get Role failed', { type: 'error' });
         }
       });
@@ -73,15 +69,15 @@ export class EditRole {
       name: form.name!
     }
     this.isLoading.set(true);
-    if (this.role()?.id != null) {
-      this.rolesService.update(this.role()!.id!, p).subscribe({
+    if (this.roleEdit()?.id != null) {
+      this.rolesService.update(this.roleEdit()!.id!, p).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.toasterService.show('Role updated');
           this.load();
         },
         error: (err) => {
-          console.error('rolesService.update', this.role()!.id!, p, err);
+          console.error('rolesService.update', this.roleEdit()!.id!, p, err);
           this.isLoading.set(false);
           this.toasterService.show('Role update failed', { type: 'error' });
         }
@@ -107,7 +103,7 @@ export class EditRole {
     this.dialogService.confirm('Delete Role', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          const id = this.role()!.id!;
+          const id = this.roleEdit()!.id!;
           this.rolesService.delete(id).subscribe({
             next: () => {
               this.toasterService.show('Role deleted');

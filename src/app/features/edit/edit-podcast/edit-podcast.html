@@ -1,14 +1,14 @@
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <span>{{podcast() ? podcast()!.name : 'New Podcast'}}</span>
+    <span>{{podcastEdit() ? podcastEdit()!.name : 'New Podcast'}}</span>
 </div>
 
 <div class="title flex justify-between items-start gap-2">
     <h2 class="flex-1">Edit Podcast</h2>
 
     <div class="flex gap-2">
-        @if(podcast() != null) {
+        @if(podcastEdit() != null) {
         <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete" (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
@@ -34,7 +34,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [httpSrc]="coverPreview()!" class="h-32 mt-2 object-contain" />
+        <img [src]="coverPreview()!" class="h-32 mt-2 object-contain" />
         }
     </div>
 
@@ -44,7 +44,7 @@
             placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />
         @if(coverPreviewPreview()) {
-        <img [httpSrc]="coverPreviewPreview()!" class="h-32 mt-2 object-contain" />
+        <img [src]="coverPreviewPreview()!" class="h-32 mt-2 object-contain" />
         }
     </div>
 
@@ -60,7 +60,7 @@
     </div>
 </form>
 
-@if (podcast()?.id) {
+@if (podcastEdit()?.id) {
 <div class="section">
     <h3 class="title2">Voicers</h3>
 
@@ -75,7 +75,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (voicer of podcast()!.voicers; track $index) {
+                @for (voicer of podcastEdit()!.voicers; track $index) {
                 <tr>
                     <td>{{voicer.id}}</td>
                     <td>{{voicer.nickname}}</td>
@@ -84,7 +84,7 @@
 
                     <td>
                         <button type="button" class="icon-button" title="Remove Voicer"
-                            (click)="removeVoicer(voicer.id)"><fa-icon [icon]="faTrash" /></button>
+                            (click)="removeVoicer(voicer.id!)"><fa-icon [icon]="faTrash" /></button>
                     </td>
                 </tr>
                 }
@@ -118,7 +118,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (episode of podcast()!.episodes; track $index) {
+                @for (episode of podcastEdit()!.episodes; track $index) {
                 <tr>
                     <td>{{episode.id}}</td>
                     <td>{{episode.number}}</td>
@@ -131,7 +131,7 @@
 
                     <td>
                         <a class="icon-button" title="Update Episode"
-                            [routerLink]="['/edit', 'podcasts', podcast()!.id, 'episodes', episode.id]"><fa-icon
+                            [routerLink]="['/edit', 'podcasts', podcastEdit()!.id, 'episodes', episode.id]"><fa-icon
                                 [icon]="faPen" /></a>
                     </td>
                     <td>
@@ -143,7 +143,7 @@
                 <tr>
                     <td colspan="100%">
                         <a class="button button-accent" title="Create Episode"
-                            [routerLink]="['/edit', 'podcasts', podcast()!.id, 'episodes', 'create']">
+                            [routerLink]="['/edit', 'podcasts', podcastEdit()!.id, 'episodes', 'create']">
                             Create Episode
                         </a>
                     </td>
