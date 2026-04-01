@@ -31,13 +31,13 @@
 
 @keyframes object-scroll-parallax {
     from {
-        --tw-translate-y: -50px;
-        translate: 0 -50px;
+        --tw-translate-y: 0px;
+        translate: 0 0px;
     }
 
     to {
-        --tw-translate-y: 0;
-        translate: 0 0;
+        --tw-translate-y: -50px;
+        translate: 0 -50px;
     }
 }
 
@@ -124,6 +124,7 @@ body {
 
 .button {
     appearance: button;
+    display: inline-block;
     font-size: var(--text-sm);
     line-height: var(--text-sm--line-height);
     border-radius: var(--radius-lg);
