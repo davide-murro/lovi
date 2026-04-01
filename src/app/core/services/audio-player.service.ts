@@ -186,18 +186,8 @@ export class AudioPlayerService {
     }
 
     // Check if token is valid
-    const token = this.authService.getAccessToken();
-    if (token) {
-      const authUrl = this.authUrlPipe.transform(url)!;
-      this.audio.src = authUrl;
-      this.audio.load();
-      this.audio.currentTime = time;
-      if (play) this.audio.play();
-      this.loadMetadata(track);
-      return;
-    }
-
-    this.audio.src = url;
+    const authUrl = this.authUrlPipe.transform(url)!;
+    this.audio.src = authUrl;
     this.audio.load();
     this.audio.currentTime = time;
     if (play) this.audio.play();
