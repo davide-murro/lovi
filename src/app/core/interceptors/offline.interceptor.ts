@@ -1,5 +1,6 @@
 import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { OfflineService } from '../services/offline.service';
 import { AuthService } from '../services/auth.service';
 import { catchError, of } from 'rxjs';
@@ -10,28 +11,32 @@ import { CreatorDto } from '../models/dtos/creator-dto.model';
 
 export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
     const authService = inject(AuthService);
-    if (!authService.isLoggedIn()) {
+    const router = inject(Router);
+    const currentUrl = router.currentNavigation()?.extractedUrl.toString() ?? router.url;
+
+    // skip if not logged in or on edit page
+    if (!authService.isLoggedIn() || currentUrl.startsWith('/edit')) {
         return next(req);
     }
 
     // inject offlineService only if logged in
     const offlineService = inject(OfflineService);
-    const url = req.url;
+    const reqUrl = req.url;
 
     let isOffline = false;
 
     // Audiobooks
-    const audioBookMatch = url.match(/\/api\/audio-books\/(\d+)/);
+    const audioBookMatch = reqUrl.match(/\/api\/audio-books\/(\d+)/);
     if (audioBookMatch) {
         const id = parseInt(audioBookMatch[1]);
         isOffline = offlineService.isAudioBookDownloaded(id) || offlineService.isAudioBookDownloading(id);
     }
 
     // Podcasts & Episodes
-    const podcastMatch = url.match(/\/api\/podcasts\/(\d+)/);
+    const podcastMatch = reqUrl.match(/\/api\/podcasts\/(\d+)/);
     if (podcastMatch) {
         const podcastId = parseInt(podcastMatch[1]);
-        const episodeMatch = url.match(/\/episodes\/(\d+)/);
+        const episodeMatch = reqUrl.match(/\/episodes\/(\d+)/);
 
         if (episodeMatch) {
             const episodeId = parseInt(episodeMatch[1]);
@@ -42,7 +47,7 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
     }
 
     // Creators
-    const creatorMatch = url.match(/\/api\/creators\/(\d+)/);
+    const creatorMatch = reqUrl.match(/\/api\/creators\/(\d+)/);
     if (creatorMatch) {
         const id = parseInt(creatorMatch[1]);
         isOffline = offlineService.isCreatorDownloaded(id) || offlineService.isCreatorDownloading(id);
@@ -58,7 +63,7 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
 
     return next(modifiedReq).pipe(
         catchError((err) => {
-            if (!url.match(/\/paged/)) throw err;
+            if (!reqUrl.match(/\/paged/)) throw err;
             if (req.params.get('pageNumber') !== '1') throw err;
 
             const query: PagedQuery = {
@@ -71,7 +76,7 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
             let offlineItems: AudioBookDto[] | PodcastDto[] | CreatorDto[] = [];
 
             // Audiobooks
-            if (url.match(/\/api\/audio-books\/paged/)) {
+            if (reqUrl.match(/\/api\/audio-books\/paged/)) {
                 offlineItems = offlineService.audioBooks()
                     .filter(a => a.name.toLowerCase().includes(query.search.toLowerCase()) || a.description?.toLowerCase().includes(query.search.toLowerCase()))
                     .sort((a, b) => {
@@ -83,7 +88,7 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
             }
 
             // Podcasts
-            if (url.match(/\/api\/podcasts\/paged/)) {
+            if (reqUrl.match(/\/api\/podcasts\/paged/)) {
                 offlineItems = offlineService.podcasts()
                     .filter(p => p.name.toLowerCase().includes(query.search.toLowerCase()) || p.description?.toLowerCase().includes(query.search.toLowerCase()))
                     .sort((a, b) => {
@@ -95,7 +100,7 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
             }
 
             // Creators
-            if (url.match(/\/api\/creators\/paged/)) {
+            if (reqUrl.match(/\/api\/creators\/paged/)) {
                 offlineItems = offlineService.creators()
                     .filter(c => c.nickname.toLowerCase().includes(query.search.toLowerCase()) || c.name?.toLowerCase().includes(query.search.toLowerCase()) || c.surname?.toLowerCase().includes(query.search.toLowerCase()))
                     .sort((a, b) => {
