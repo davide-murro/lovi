@@ -11,11 +11,11 @@ import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.m
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
 import { AuthService } from '../../../core/services/auth.service';
-import { OfflineUrlPipe } from '../../../core/pipes/offline-url.pipe';
+import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
 
 @Component({
   selector: 'app-podcast-detail',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem, OfflineUrlPipe],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem, SecureMediaDirective],
   templateUrl: './podcast-details.html',
   styleUrl: './podcast-details.scss'
 })

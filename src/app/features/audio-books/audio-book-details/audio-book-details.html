@@ -8,7 +8,7 @@
   <div class="flex justify-center items-start">
     <img
       class="w-full flex flex-col justify-center aspect-[3/4] object-cover bg-accent overflow-hidden rounded-xl max-w-[300px] md:min-w-[250px] lg:min-w-[300px]"
-      [src]="audioBook().coverImageUrl | offlineUrl" [alt]="audioBook().name" />
+      [secureSrc]="audioBook().coverImageUrl" [secureOffline]="true" [alt]="audioBook().name" />
   </div>
 
   <div class="flex-grow">

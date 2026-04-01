@@ -1,9 +1,6 @@
 import {
-  afterNextRender,
   Component,
   effect,
-  inject,
-  Injector,
   input,
   OnDestroy,
   signal,
@@ -26,8 +23,6 @@ export interface ImageSliderItem {
   styleUrl: './image-slider.scss',
 })
 export class ImageSlider implements OnDestroy {
-  private injector = inject(Injector);
-
   // Reactive inputs
   items = input<ImageSliderItem[]>([]);
   autoplay = input<boolean>(false);
@@ -54,7 +49,7 @@ export class ImageSlider implements OnDestroy {
       if (this.autoplay() && this.items().length > 1) {
         // start autoplay when everything is loaded
         // TODO: i don t like it.. also because the problem still exists with toast
-        afterNextRender(() => this.startAutoplay(), { injector: this.injector });
+        setTimeout(() => this.startAutoplay());
       }
     });
   }

@@ -5,11 +5,11 @@ import { faBackward, faBackwardStep, faCircleNotch, faClose, faForward, faPause,
 import { RouterLink } from '@angular/router';
 import { ToasterService } from '../../core/services/toaster.service';
 import { Subscription } from 'rxjs';
-import { OfflineUrlPipe } from '../../core/pipes/offline-url.pipe';
+import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
 
 @Component({
   selector: 'app-audio-player',
-  imports: [FontAwesomeModule, RouterLink, OfflineUrlPipe],
+  imports: [FontAwesomeModule, RouterLink, SecureMediaDirective],
   templateUrl: './audio-player.html',
   styleUrl: './audio-player.scss'
 })

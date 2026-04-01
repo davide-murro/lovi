@@ -1,5 +1,4 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -8,14 +7,13 @@ import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { AudioBooksService } from '../../../core/services/audio-books.service';
-import { AuthService } from '../../../core/services/auth.service';
 import { CreatorDto } from '../../../core/models/dtos/creator-dto.model';
 import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/creator-selector-dialog';
-import { AuthUrlPipe } from "../../../core/pipes/auth-url.pipe";
+import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
 
 @Component({
   selector: 'app-edit-audio-book',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, AuthUrlPipe],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, SecureMediaDirective],
   templateUrl: './edit-audio-book.html',
   styleUrl: './edit-audio-book.scss'
 })
@@ -24,7 +22,6 @@ export class EditAudioBook {
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
   private audioBooksService = inject(AudioBooksService);
-  private authService = inject(AuthService);
 
   faTrash = faTrash;
   faRefresh = faRefresh;
@@ -50,7 +47,6 @@ export class EditAudioBook {
   coverPreview = signal<string | null>(null);
   coverPreviewPreview = signal<string | null>(null);
   audioPreview = signal<string | null>(null);
-  isAudioError = signal(false);
 
   constructor() {
     effect(() => {
@@ -129,19 +125,6 @@ export class EditAudioBook {
     } else {
       this.audioPreview.set(null);
     }
-  }
-  async refreshAudio() {
-    try {
-      await firstValueFrom(this.authService.refreshTokens());
-    } catch (e) { }
-    const current = this.audioPreview();
-    this.audioPreview.set(null);
-    setTimeout(() => this.audioPreview.set(current));
-  }
-  deleteAudio() {
-    this.form.controls.audio.setValue(null);
-    this.form.controls.audioUrl.setValue(null);
-    this.audioPreview.set(null);
   }
 
   onSubmit() {

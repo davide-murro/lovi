@@ -35,7 +35,7 @@
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
-        <img [src]="coverPreview()" class="w-40 mt-2 object-contain" />
+        <img [secureSrc]="coverPreview()" class="w-40 mt-2 object-contain" />
         }
     </div>
 
@@ -45,7 +45,7 @@
             placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />
         @if(coverPreviewPreview()) {
-        <img [src]="coverPreviewPreview()" class="w-40 mt-2 object-contain" />
+        <img [secureSrc]="coverPreviewPreview()" class="w-40 mt-2 object-contain" />
         }
     </div>
 
@@ -55,20 +55,7 @@
             formControlName="audioValue" (change)="onAudioSelected($event)" />
         @if(audioPreview()) {
         <div class="flex items-center gap-2 mt-2">
-            <audio controls class="max-w-full" [src]="audioPreview() | authUrl" (error)="isAudioError.set(true)"
-                (canplay)="isAudioError.set(false)"></audio>
-            @if(isAudioError()) {
-            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Refresh Audio"
-                (click)="refreshAudio()">
-                <fa-icon [icon]="faRefresh" />
-                <span class="hidden lg:inline">Refresh Audio</span>
-            </button>
-            }
-            <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete Audio"
-                (click)="deleteAudio()">
-                <fa-icon [icon]="faTrash" />
-                <span class="hidden lg:inline">Delete Audio</span>
-            </button>
+            <audio controls class="max-w-full" [secureSrc]="audioPreview()" [secureAuth]="true"></audio>
         </div>
         }
     </div>

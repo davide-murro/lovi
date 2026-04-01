@@ -12,11 +12,11 @@ import { ManageLibraryDto } from '../../../../core/models/dtos/manage-library-dt
 import { AuthDirective } from '../../../../core/directives/auth.directive';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { OfflineUrlPipe } from '../../../../core/pipes/offline-url.pipe';
+import { SecureMediaDirective } from '../../../../core/directives/secure-media.directive';
 
 @Component({
   selector: 'app-podcast-episode',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, OfflineUrlPipe],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, SecureMediaDirective],
   templateUrl: './podcast-episode.html',
   styleUrl: './podcast-episode.scss'
 })

@@ -9,11 +9,11 @@ import { OfflineService } from "../../../core/services/offline.service";
 import { ToasterService } from "../../../core/services/toaster.service";
 import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
-import { OfflineUrlPipe } from "../../../core/pipes/offline-url.pipe";
+import { SecureMediaDirective } from "../../../core/directives/secure-media.directive";
 
 @Component({
   selector: 'app-my-offline',
-  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, OfflineUrlPipe],
+  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, SecureMediaDirective],
   templateUrl: './my-offline.html',
   styleUrl: './my-offline.scss'
 })

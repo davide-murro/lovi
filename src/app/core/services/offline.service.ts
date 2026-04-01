@@ -118,27 +118,99 @@ export class OfflineService {
     isUrlDownloaded(url: string): boolean {
         if (!url) return false;
 
-        const cleanUrl = url.split('?')[0];
-
-        for (const a of this.offlineAudioBooks()) {
-            if (a.dataUrl?.split('?')[0] === cleanUrl || a.audioUrl?.split('?')[0] === cleanUrl || a.coverImageUrl?.split('?')[0] === cleanUrl || a.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+        if (this.offlineAudioBooks().some(a => {
+            if (this.isAudioBookDeleting(a.id!)) return false;
+            let found = a.dataUrl === url || a.audioUrl === url || a.coverImageUrl === url || a.coverImagePreviewUrl === url
             if (a.readers) {
                 for (const r of a.readers) {
-                    if (r.dataUrl?.split('?')[0] === cleanUrl || r.coverImageUrl?.split('?')[0] === cleanUrl || r.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                    found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
                 }
             }
+            return found;
+        })) {
+            return true;
         }
 
-        for (const e of this.offlineEpisodes()) {
-            if (e.dataUrl?.split('?')[0] === cleanUrl || e.audioUrl?.split('?')[0] === cleanUrl || e.coverImageUrl?.split('?')[0] === cleanUrl || e.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+        if (this.offlineEpisodes().some(e => {
+            if (this.isPodcastEpisodeDeleting(e.id!)) return false;
+            let found = e.dataUrl === url || e.audioUrl === url || e.coverImageUrl === url || e.coverImagePreviewUrl === url
             if (e.podcast) {
-                if (e.podcast.dataUrl?.split('?')[0] === cleanUrl || e.podcast.coverImageUrl?.split('?')[0] === cleanUrl || e.podcast.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                found = found || e.podcast.dataUrl === url || e.podcast.coverImageUrl === url || e.podcast.coverImagePreviewUrl === url
             }
             if (e.voicers) {
                 for (const v of e.voicers) {
-                    if (v.dataUrl?.split('?')[0] === cleanUrl || v.coverImageUrl?.split('?')[0] === cleanUrl || v.coverImagePreviewUrl?.split('?')[0] === cleanUrl) return true;
+                    found = found || v.dataUrl === url || v.coverImageUrl === url || v.coverImagePreviewUrl === url
                 }
             }
+            return found;
+        })) {
+            return true;
+        }
+
+        return false;
+    }
+
+    isUrlDownloading(url: string): boolean {
+        if (!url) return false;
+
+        if (this.downloadingAudioBooks().some(a => {
+            let found = a.dataUrl === url || a.audioUrl === url || a.coverImageUrl === url || a.coverImagePreviewUrl === url
+            if (a.readers) {
+                for (const r of a.readers) {
+                    found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        })) {
+            return true;
+        }
+
+        if (this.downloadingEpisodes().some(e => {
+            let found = e.dataUrl === url || e.audioUrl === url || e.coverImageUrl === url || e.coverImagePreviewUrl === url
+            if (e.podcast) {
+                found = found || e.podcast.dataUrl === url || e.podcast.coverImageUrl === url || e.podcast.coverImagePreviewUrl === url
+            }
+            if (e.voicers) {
+                for (const v of e.voicers) {
+                    found = found || v.dataUrl === url || v.coverImageUrl === url || v.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        })) {
+            return true;
+        }
+
+        return false;
+    }
+
+    isUrlDeleting(url: string): boolean {
+        if (!url) return false;
+
+        if (this.offlineAudioBooks().filter(a => {
+            let found = a.dataUrl === url || a.audioUrl === url || a.coverImageUrl === url || a.coverImagePreviewUrl === url
+            if (a.readers) {
+                for (const r of a.readers) {
+                    found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        }).every(a => this.isAudioBookDeleting(a.id!))) {
+            return true;
+        }
+
+        if (this.offlineEpisodes().filter(e => {
+            let found = e.dataUrl === url || e.audioUrl === url || e.coverImageUrl === url || e.coverImagePreviewUrl === url
+            if (e.podcast) {
+                found = found || e.podcast.dataUrl === url || e.podcast.coverImageUrl === url || e.podcast.coverImagePreviewUrl === url
+            }
+            if (e.voicers) {
+                for (const v of e.voicers) {
+                    found = found || v.dataUrl === url || v.coverImageUrl === url || v.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        }).every(e => this.isPodcastEpisodeDeleting(e.id!))) {
+            return true;
         }
 
         return false;
@@ -146,31 +218,25 @@ export class OfflineService {
 
     isAudioBookDownloaded(id: number): boolean {
         if (!id) return false;
-        return this.offlineAudioBooks().some(a => a.id === id) &&
-            !this.downloadingAudioBooks().some(a => a.id === id) &&
-            !this.deletingAudioBooks().some(a => a.id === id);
+        return this.offlineAudioBooks().some(a => a.id === id) && !this.isAudioBookDeleting(id);
     }
 
     isPodcastEpisodeDownloaded(id: number): boolean {
         if (!id) return false;
-        return this.offlineEpisodes().some(e => e.id === id) &&
-            !this.downloadingEpisodes().some(e => e.id === id) &&
-            !this.deletingEpisodes().some(e => e.id === id);
+        return this.offlineEpisodes().some(e => e.id === id) && !this.isPodcastEpisodeDeleting(id);
     }
 
     isPodcastDownloaded(id: number): boolean {
         if (!id) return false;
         // A podcast is "offline" if any of its episodes are offline or being downloaded
-        return this.offlineEpisodes().some(e => e.podcast?.id === id) &&
-            !this.isPodcastDownloading(id) &&
-            !this.isPodcastDeleting(id);
+        return this.offlineEpisodes().some(e => e.podcast?.id === id) && !this.isPodcastDeleting(id);
     }
 
     isCreatorDownloaded(id: number): boolean {
         if (!id) return false;
         // A creator is "offline" if they are part of any offline audiobook or episode
-        return (this.offlineAudioBooks().some(a => a.readers?.some(r => r.id === id)) || this.offlineEpisodes().some(e => e.voicers?.some(v => v.id === id))) &&
-            !this.isCreatorDownloading(id) &&
+        return (this.offlineAudioBooks().some(a => a.readers?.some(r => r.id === id)) ||
+            this.offlineEpisodes().some(e => e.voicers?.some(v => v.id === id))) &&
             !this.isCreatorDeleting(id);
     }
 
@@ -225,6 +291,9 @@ export class OfflineService {
         if (this.isAudioBookDownloading(audioBook.id!)) {
             throw new Error(`${audioBook.name} is already downloading`);
         }
+        if (this.isAudioBookDeleting(audioBook.id!)) {
+            throw new Error(`${audioBook.name} is already deleting`);
+        }
 
         try {
             // 1. start tracking download audio book
@@ -267,6 +336,9 @@ export class OfflineService {
         }
         if (this.isPodcastEpisodeDownloading(episode.id!)) {
             throw new Error(`${episode.name} is already downloading`);
+        }
+        if (this.isPodcastEpisodeDeleting(episode.id!)) {
+            throw new Error(`${episode.name} is already deleting`);
         }
 
         try {
@@ -324,6 +396,9 @@ export class OfflineService {
         }
         if (this.isAudioBookDownloading(id)) {
             throw new Error(`${storedItem.name} is downloading`);
+        }
+        if (this.isAudioBookDeleting(id)) {
+            throw new Error(`${storedItem.name} is deleting`);
         }
 
         try {
@@ -386,6 +461,9 @@ export class OfflineService {
         }
         if (this.isPodcastEpisodeDownloading(id)) {
             throw new Error(`${storedItem.name} is downloading`);
+        }
+        if (this.isPodcastEpisodeDeleting(id)) {
+            throw new Error(`${storedItem.name} is already deleting`);
         }
 
         try {

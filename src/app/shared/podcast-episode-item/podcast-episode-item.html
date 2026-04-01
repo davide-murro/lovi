@@ -1,7 +1,7 @@
 <a class="link-item flex items-center gap-2 sm:gap-4"
   [routerLink]="['/podcasts', podcast().id, 'episodes', podcastEpisode().id]" [title]="podcastEpisode().name">
   <img class="size-12 aspect-square object-cover bg-accent rounded-xl sm:size-24" loading="lazy" decoding="async"
-    [src]="podcastEpisode().coverImagePreviewUrl | offlineUrl" [alt]="podcastEpisode().name" />
+    [secureSrc]="podcastEpisode().coverImagePreviewUrl" [secureOffline]="true" [alt]="podcastEpisode().name" />
   <div class="overflow-hidden">
     <p class="text-base font-medium leading-normal line-clamp-2">{{ podcastEpisode().name }}</p>
     <p class="text-accent text-sm truncate max-sm:hidden">

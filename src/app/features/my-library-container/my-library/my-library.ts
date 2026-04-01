@@ -11,12 +11,12 @@ import { LibrariesService } from "../../../core/services/libraries.service";
 import { ToasterService } from "../../../core/services/toaster.service";
 import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
-import { OfflineUrlPipe } from "../../../core/pipes/offline-url.pipe";
+import { SecureMediaDirective } from "../../../core/directives/secure-media.directive";
 
 
 @Component({
   selector: 'app-my-library',
-  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, OfflineUrlPipe],
+  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, SecureMediaDirective],
   templateUrl: './my-library.html',
   styleUrl: './my-library.scss'
 })

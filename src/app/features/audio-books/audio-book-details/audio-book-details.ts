@@ -12,11 +12,11 @@ import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { AuthService } from '../../../core/services/auth.service';
-import { OfflineUrlPipe } from "../../../core/pipes/offline-url.pipe";
+import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
 
 @Component({
   selector: 'app-audio-book-details',
-  imports: [FontAwesomeModule, RouterLink, AuthDirective, OfflineUrlPipe],
+  imports: [FontAwesomeModule, RouterLink, AuthDirective, SecureMediaDirective],
   templateUrl: './audio-book-details.html',
   styleUrl: './audio-book-details.scss'
 })

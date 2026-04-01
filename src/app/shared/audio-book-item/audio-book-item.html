@@ -1,7 +1,7 @@
 <a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/audio-books', audioBook().id]"
   [title]="audioBook().name">
   <img class="aspect-[3/4] object-cover bg-accent rounded-xl" loading="lazy" decoding="async"
-    [src]="audioBook().coverImagePreviewUrl | offlineUrl" [alt]="audioBook().name" />
+    [secureSrc]="audioBook().coverImagePreviewUrl" [secureOffline]="true" [alt]="audioBook().name" />
   <div>
     <p class="text-base font-medium leading-normal line-clamp-2">{{ audioBook().name }}</p>
     <p class="text-accent text-sm truncate">

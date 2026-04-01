@@ -1,5 +1,4 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-dto.model';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -9,14 +8,13 @@ import { PodcastsService } from '../../../../core/services/podcasts.service';
 import { DialogService } from '../../../../core/services/dialog.service';
 import { CreatorDto } from '../../../../core/models/dtos/creator-dto.model';
 import { ToasterService } from '../../../../core/services/toaster.service';
-import { AuthService } from '../../../../core/services/auth.service';
 import { PodcastDto } from '../../../../core/models/dtos/podcast-dto.model';
 import { CreatorSelectorDialog } from '../../../../shared/creator-selector-dialog/creator-selector-dialog';
-import { AuthUrlPipe } from "../../../../core/pipes/auth-url.pipe";
+import { SecureMediaDirective } from '../../../../core/directives/secure-media.directive';
 
 @Component({
   selector: 'app-edit-podcast-episode',
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, AuthUrlPipe],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, SecureMediaDirective],
   templateUrl: './edit-podcast-episode.html',
   styleUrl: './edit-podcast-episode.scss'
 })
@@ -25,7 +23,6 @@ export class EditPodcastEpisode {
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
   private podcastsService = inject(PodcastsService);
-  private authService = inject(AuthService);
 
   faTrash = faTrash;
   faBackward = faBackward;
@@ -61,7 +58,6 @@ export class EditPodcastEpisode {
   coverPreview = signal<string | null>(null);
   coverPreviewPreview = signal<string | null>(null);
   audioPreview = signal<string | null>(null);
-  isAudioError = signal(false);
 
   constructor() {
     effect(() => {
@@ -152,19 +148,6 @@ export class EditPodcastEpisode {
     } else {
       this.audioPreview.set(null);
     }
-  }
-  async refreshAudio() {
-    try {
-      await firstValueFrom(this.authService.refreshTokens());
-    } catch (e) { }
-    const current = this.audioPreview();
-    this.audioPreview.set(null);
-    setTimeout(() => this.audioPreview.set(current));
-  }
-  deleteAudio() {
-    this.form.controls.audio.setValue(null);
-    this.form.controls.audioUrl.setValue(null);
-    this.audioPreview.set(null);
   }
 
   onSubmit() {
