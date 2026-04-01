@@ -5,6 +5,7 @@ import { inject } from '@angular/core';
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
+  const currentUrl = router.currentNavigation()?.extractedUrl.toString() ?? router.url;
 
   // Get user info
   const isLoggedIn = authService.isLoggedIn();
@@ -15,7 +16,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // If not logged in -> redirect to login
   if (!isLoggedIn) {
-    return router.navigate(['/auth', 'login']);
+    return router.navigate(['/auth', 'login'], { queryParams: { redirect: currentUrl } });
   }
 
   // If route requires a specific role

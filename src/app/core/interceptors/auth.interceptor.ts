@@ -12,6 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const isLoggedIn = authService.isLoggedIn();
   const accessToken = authService.getAccessToken();
   const deviceId = authService.getOrCreateDeviceId();
+  const currentUrl = router.currentNavigation()?.extractedUrl.toString() ?? router.url;
 
   // Clone the request and add headers
   const setHeaders: any = {
@@ -38,7 +39,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         }
 
         authService.logout();
-        router.navigate(['/auth', 'login']);
+        router.navigate(['/auth', 'login'], { queryParams: { redirect: currentUrl } });
         return throwError(() => new Error('Session expired. Please log in again.'));
       }
 
