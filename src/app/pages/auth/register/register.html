@@ -10,7 +10,7 @@
 
         <div class="max-w-full">
             <label i18n class="label" for="email">Email</label>
-            <input type="email" formControlName="email" id="email" class="input input-lg" />
+            <input type="email" autocomplete="email" formControlName="email" id="email" class="input input-lg" />
             @if(form.controls.email.hasError('required')) {
             <p i18n class="hint text-accent">
                 Email is required
@@ -28,7 +28,8 @@
 
         <div class="max-w-full">
             <label i18n class="label" for="password">Password</label>
-            <input type="password" formControlName="password" id="password" class="input input-lg" />
+            <input type="password" autocomplete="new-password" formControlName="password" id="password"
+                class="input input-lg" />
             @if(form.controls.password.hasError('required')) {
             <p i18n class="hint text-accent">Password is required</p>
             } @else if(
@@ -61,7 +62,8 @@
 
         <div class="max-w-full">
             <label i18n class="label" for="password-repeat">Repeat password</label>
-            <input type="password" formControlName="passwordRepeat" id="password-repeat" class="input input-lg" />
+            <input type="password" autocomplete="new-password" formControlName="passwordRepeat" id="password-repeat"
+                class="input input-lg" />
             @if (form.controls.password.hasError('required')) {
             <p i18n class="hint text-accent">
                 Password is required
@@ -83,7 +85,7 @@
 
         <div class="max-w-full">
             <label i18n class="label" for="name">Name</label>
-            <input type="text" formControlName="name" id="name" class="input input-lg" />
+            <input type="text" autocomplete="name" formControlName="name" id="name" class="input input-lg" />
             @if(form.controls.name.hasError('required')) {
             <p i18n class="hint text-accent">
                 Name is required

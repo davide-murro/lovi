@@ -5,7 +5,8 @@
         class="section flex flex-col flex-1 items-center justify-center gap-4 m-auto max-w-full w-[300px]">
         <div class="w-full">
             <label i18n for="user-name" class="label">Email</label>
-            <input type="email" formControlName="userName" id="user-name" class="input input-lg w-full" />
+            <input type="email" autocomplete="username" formControlName="userName" id="user-name"
+                class="input input-lg w-full" />
             @if(form.controls.userName.dirty) {
             @if(form.controls.userName.hasError('required')) {
             <p i18n class="hint text-error">
@@ -17,8 +18,8 @@
         <div class="w-full">
             <label i18n for="password" class="label">Password</label>
             <div class="relative w-full">
-                <input [type]="showPassword() ? 'text' : 'password'" formControlName="password" id="password"
-                    class="input input-lg w-full !pr-18" />
+                <input [type]="showPassword() ? 'text' : 'password'" autocomplete="current-password"
+                    formControlName="password" id="password" class="input input-lg w-full !pr-18" />
                 <button i18n-title type="button" title="Show / Hide password"
                     class="input-button input-button-lg absolute right-0 top-0" [class.text-primary]="showPassword()"
                     (click)="togglePasswordVisibility()">

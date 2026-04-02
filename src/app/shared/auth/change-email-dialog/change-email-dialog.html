@@ -4,7 +4,8 @@
 
     <div class="w-full">
         <label i18n class="label" for="password">Password</label>
-        <input autofocus type="password" formControlName="password" id="password" class="input input-accent w-full" />
+        <input autofocus type="password" autocomplete="current-password" formControlName="password" id="password"
+            class="input input-accent w-full" />
         @if(form.controls.password.hasError('required')) {
         <p i18n class="hint text-accent">Password is required</p>
         } @else if(form.controls.password.valid) {
@@ -16,7 +17,8 @@
 
     <div class="w-full">
         <label i18n class="label" for="new-email">New email</label>
-        <input type="email" formControlName="newEmail" id="new-email" class="input input-accent w-full" />
+        <input type="email" autocomplete="email" formControlName="newEmail" id="new-email"
+            class="input input-accent w-full" />
         @if(form.controls.newEmail.hasError('required')) {
         <p i18n class="hint text-accent">
             New email is required
