@@ -3,17 +3,23 @@ import { AudioTrack } from '../models/audio-track.model';
 import { AuthService } from './auth.service';
 import { firstValueFrom, Subject } from 'rxjs';
 import { OfflineUrlPipe } from '../pipes/offline-url.pipe';
-import { AuthUrlPipe } from '../pipes/auth-url.pipe';
+
+
+const REFRESH_TOKEN_EVERY = 60000;
+const COOKIE_MAX_AGE = 120000;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioPlayerService {
   private authService = inject(AuthService);
-  private authUrlPipe = inject(AuthUrlPipe);
   private offlineUrlPipe = inject(OfflineUrlPipe);
 
   private audio = new Audio();
+
+  private tokenRefreshInterval: number | null = null;
+  private isTokenRefreshed = signal(false);
+  private isTokenRefreshing = signal(false);
 
   // Signals for Queue
   queue = signal<AudioTrack[]>([]);
@@ -25,11 +31,12 @@ export class AudioPlayerService {
   duration = signal(0);
   buffered = signal<{ start: number, end: number }[]>([]);
 
-  isLoading = signal<boolean>(false);
+  isElaborating = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
   isError = signal<boolean>(false);
 
-  private hasRetriedAfterError = signal(false);
+  isLoading = computed(() => this.isElaborating() || this.isTokenRefreshing());
+
   private _errorEvent$ = new Subject<any>();
   public readonly errorEvent$ = this._errorEvent$.asObservable();
 
@@ -55,8 +62,27 @@ export class AudioPlayerService {
   });
 
   constructor() {
+    this.audio.crossOrigin = 'use-credentials';
+
     effect(() => {
       if (!this.authService.isLoggedIn()) this.clearQueue();
+    });
+
+    // Proactive token refresh mechanism
+    effect(() => {
+      if (this.currentTrack() && this.authService.isLoggedIn()) {
+        if (this.tokenRefreshInterval) return;
+        this.refreshToken();
+        this.tokenRefreshInterval = setInterval(() => {
+          if (this.tokenRefreshInterval) this.refreshToken();
+        }, REFRESH_TOKEN_EVERY);
+      } else {
+        if (this.tokenRefreshInterval) {
+          clearInterval(this.tokenRefreshInterval);
+          this.tokenRefreshInterval = null;
+        }
+        this.cleanToken();
+      }
     });
 
     // Listen for play, pause, time updates and duration
@@ -112,40 +138,26 @@ export class AudioPlayerService {
 
     // start loading
     this.audio.addEventListener('loadstart', () => {
-      this.isLoading.set(true);
+      this.isElaborating.set(true);
     });
 
     // buffering
     this.audio.addEventListener('waiting', () => {
-      this.isLoading.set(true);
+      this.isElaborating.set(true);
     });
 
     // playable again
     this.audio.addEventListener('canplay', () => {
-      this.isLoading.set(false);
+      this.isElaborating.set(false);
       this.isError.set(false);
-      this.hasRetriedAfterError.set(false);
     });
 
     // error
     this.audio.addEventListener('error', async (event) => {
-      // Always retry once, if logged also refresh token
-      if (this.hasRetriedAfterError() || !this.authService.isLoggedIn()) {
-        this.isLoading.set(false);
-        this.isPlaying.set(false);
-        this.isError.set(true);
-        this._errorEvent$.next(event);
-        this.hasRetriedAfterError.set(false); // reset for next time
-        return;
-      }
-
-      // First failure, try again after refreshing token
-      this.hasRetriedAfterError.set(true);
-
-      try {
-        await firstValueFrom(this.authService.refreshTokens());
-      } catch (error) { }
-      this.loadAudio(this.currentTrack()!, this.currentTime(), this.isPlaying());
+      this.isElaborating.set(false);
+      this.isPlaying.set(false);
+      this.isError.set(true);
+      this._errorEvent$.next(event);
     });
 
     // set media session for smartphones
@@ -169,25 +181,45 @@ export class AudioPlayerService {
     }
   }
 
+  private async refreshToken() {
+    try {
+      this.isTokenRefreshing.set(true);
+
+      await firstValueFrom(this.authService.refreshTokens());
+      const token = this.authService.getAccessToken();
+      if (token) {
+        document.cookie = `access_token=${token}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=None; Secure;`;
+      }
+
+      this.isTokenRefreshing.set(false);
+      this.isTokenRefreshed.set(true);
+    } catch (error) {
+      this.isTokenRefreshing.set(false);
+      this.isTokenRefreshed.set(false);
+    }
+  }
+  private cleanToken() {
+    this.isTokenRefreshing.set(false);
+    this.isTokenRefreshed.set(false);
+    // don t clear cookie, let it expires, to secure not goes in error inside the setInterval after clear 
+    // document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+  }
+  private async secureToken() {
+    if (!this.isTokenRefreshed()) {
+      await this.refreshToken();
+    }
+  }
+
   // AUDIO
-  private loadAudio(track: AudioTrack, time: number = 0, play: boolean = false) {
+  private async loadAudio(track: AudioTrack, time: number = 0, play: boolean = false) {
     let url = track?.audioSrc;
     if (!url) return;
 
-    // Check if offline
-    const offlineUrl = this.offlineUrlPipe.transform(url)!;
-    if (offlineUrl !== url) {
-      this.audio.src = offlineUrl;
-      this.audio.load();
-      this.audio.currentTime = time;
-      if (play) this.audio.play();
-      this.loadMetadata(track);
-      return;
-    }
+    // retry for a secure token if it isn't refreshed
+    await this.secureToken();
 
-    // Check if token is valid
-    const authUrl = this.authUrlPipe.transform(url)!;
-    this.audio.src = authUrl;
+    url = this.offlineUrlPipe.transform(url)!;
+    this.audio.src = url;
     this.audio.load();
     this.audio.currentTime = time;
     if (play) this.audio.play();
