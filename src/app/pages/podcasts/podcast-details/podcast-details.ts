@@ -10,7 +10,6 @@ import { LibrariesService } from '../../../core/services/libraries.service';
 import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.model';
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
-import { AuthService } from '../../../core/services/auth.service';
 import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
 
 @Component({
@@ -22,8 +21,7 @@ import { SecureMediaDirective } from '../../../core/directives/secure-media.dire
 export class PodcastDetails {
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private authService = inject(AuthService);
-  private librariesService?: LibrariesService;
+  private librariesService = inject(LibrariesService);
 
   faPlay = faPlay;
   faPause = faPause;
@@ -36,12 +34,6 @@ export class PodcastDetails {
 
   isInMyLibrary = computed(() => this.librariesService?.myLibrary()?.some(l => l.podcast?.id === this.podcast().id));
   isMyLibraryLoading = computed(() => this.librariesService?.isLoading());
-
-  constructor() {
-    if (this.authService.isLoggedIn()) {
-      this.librariesService = inject(LibrariesService);
-    }
-  }
 
   // audio player
   playAll() {

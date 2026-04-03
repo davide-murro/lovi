@@ -58,12 +58,12 @@ export class OfflineService {
     });
 
     constructor() {
-        console.log("OfflineService constructor")
-        // TODO: check when is called.. and if it necessary also for playing audio in smartphone, and also request per leggere audio locali
-        this.requestPersistentStorage();
-
         effect(() => {
-            if (this.authService.isLoggedIn()) this.initializeOfflineData();
+            if (this.authService.isLoggedIn()) {
+                // TODO: check when is called.. and if it necessary also for playing audio in smartphone, and also request per leggere audio locali
+                this.requestPersistentStorage();
+                this.initializeOfflineData();
+            }
             else this.clearOfflineData();
         });
     }

@@ -36,7 +36,7 @@ export class Dialog {
         setTimeout(() => {
           const autofocusElement = this.elementRef.nativeElement.querySelector('[autofocus]');
           autofocusElement?.focus();
-        }, 0);
+        });
       }
     });
   }

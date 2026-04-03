@@ -11,7 +11,6 @@ import { ManageLibraryDto } from '../../../core/models/dtos/manage-library-dto.m
 import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthDirective } from '../../../core/directives/auth.directive';
-import { AuthService } from '../../../core/services/auth.service';
 import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
 
 @Component({
@@ -23,9 +22,8 @@ import { SecureMediaDirective } from '../../../core/directives/secure-media.dire
 export class AudioBookDetails {
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private authService = inject(AuthService);
-  private librariesService?: LibrariesService;
-  private offlineService?: OfflineService;
+  private librariesService = inject(LibrariesService);
+  private offlineService = inject(OfflineService);
 
   faPlay = faPlay;
   faPause = faPause;
@@ -46,13 +44,6 @@ export class AudioBookDetails {
   isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.audioBook().audioUrl!));
   isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.audioBook().audioUrl!));
   isCurrentTrackLoading = computed(() => this.audioPlayerService.isCurrentLoadingAudioSrc(this.audioBook().audioUrl!));
-
-  constructor() {
-    if (this.authService.isLoggedIn()) {
-      this.librariesService = inject(LibrariesService);
-      this.offlineService = inject(OfflineService);
-    }
-  }
 
   // audio player
   togglePlay() {

@@ -12,6 +12,7 @@ import { CreatorDto } from '../models/dtos/creator-dto.model';
 export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
     return untracked(() => {
         const authService = inject(AuthService);
+        const offlineService = inject(OfflineService);
         const router = inject(Router);
         const currentUrl = router.currentNavigation()?.extractedUrl.toString() ?? router.url;
 
@@ -19,14 +20,16 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
         if (req.method !== 'GET') {
             return next(req);
         }
-
-        // skip if not logged in or on edit page
-        if (!authService.isLoggedIn() || currentUrl.startsWith('/edit')) {
+        // skip if on edit page
+        if (currentUrl.startsWith('/edit')) {
+            return next(req);
+        }
+        // skip if not logged in
+        if (!authService.isLoggedIn()) {
             return next(req);
         }
 
         // inject offlineService only if logged in
-        const offlineService = inject(OfflineService);
         const reqUrl = req.url;
 
         // add isOffline=True to the request if offline

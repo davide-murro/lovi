@@ -5,8 +5,8 @@ import { firstValueFrom, Subject } from 'rxjs';
 import { OfflineUrlPipe } from '../pipes/offline-url.pipe';
 
 
-const REFRESH_TOKEN_EVERY = 60000;
-const COOKIE_MAX_AGE = 120000;
+const REFRESH_TOKEN_EVERY_MILLISECONDS = 60000;  // 1 minute
+const COOKIE_MAX_AGE_SECONDS = 1800;             // 30 minutes
 
 @Injectable({
   providedIn: 'root'
@@ -62,10 +62,13 @@ export class AudioPlayerService {
   });
 
   constructor() {
-    this.audio.crossOrigin = 'use-credentials';
-
     effect(() => {
-      if (!this.authService.isLoggedIn()) this.clearQueue();
+      if (this.authService.isLoggedIn()) {
+        this.audio.crossOrigin = 'use-credentials';
+      } else {
+        this.audio.crossOrigin = 'anonymous';
+        this.clearQueue();
+      }
     });
 
     // Proactive token refresh mechanism
@@ -75,13 +78,13 @@ export class AudioPlayerService {
         this.refreshToken();
         this.tokenRefreshInterval = setInterval(() => {
           if (this.tokenRefreshInterval) this.refreshToken();
-        }, REFRESH_TOKEN_EVERY);
+        }, REFRESH_TOKEN_EVERY_MILLISECONDS);
       } else {
         if (this.tokenRefreshInterval) {
           clearInterval(this.tokenRefreshInterval);
           this.tokenRefreshInterval = null;
         }
-        this.cleanToken();
+        this.clearToken();
       }
     });
 
@@ -188,7 +191,7 @@ export class AudioPlayerService {
       await firstValueFrom(this.authService.refreshTokens());
       const token = this.authService.getAccessToken();
       if (token) {
-        document.cookie = `access_token=${token}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=None; Secure;`;
+        document.cookie = `access_token=${token}; path=/; max-age=${COOKIE_MAX_AGE_SECONDS}; SameSite=None; Secure;`;
       }
 
       this.isTokenRefreshing.set(false);
@@ -198,11 +201,10 @@ export class AudioPlayerService {
       this.isTokenRefreshed.set(false);
     }
   }
-  private cleanToken() {
+  private clearToken() {
     this.isTokenRefreshing.set(false);
     this.isTokenRefreshed.set(false);
-    // don t clear cookie, let it expires, to secure not goes in error inside the setInterval after clear 
-    // document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
   }
   private async secureToken() {
     if (!this.isTokenRefreshed()) {
@@ -216,7 +218,9 @@ export class AudioPlayerService {
     if (!url) return;
 
     // retry for a secure token if it isn't refreshed
-    await this.secureToken();
+    if (this.authService.isLoggedIn()) {
+      await this.secureToken();
+    }
 
     url = this.offlineUrlPipe.transform(url)!;
     this.audio.src = url;
@@ -290,6 +294,10 @@ export class AudioPlayerService {
     this.currentTime.set(0);
     this.duration.set(0);
     this.buffered.set([]);
+
+    this.isElaborating.set(false);
+    this.isPlaying.set(false);
+    this.isError.set(false);
   }
 
   loadId(id: number) {
@@ -401,12 +409,15 @@ export class AudioPlayerService {
   }
 
   removeFromQueue(id: number) {
+    const currentIndex = this.currentIndex()!;
     this.queue.update(q => q.filter(t => t.id !== id));
 
     if (this.currentId() === id) {
       // auto-play next if available, otherwise stop
       const q = this.queue();
-      if (q.length > 0) {
+      if (q.length > currentIndex) {
+        this.loadId(q[currentIndex].id!);
+      } else if (q.length > 0) {
         this.loadId(q[0].id!);
       } else {
         this.stop();

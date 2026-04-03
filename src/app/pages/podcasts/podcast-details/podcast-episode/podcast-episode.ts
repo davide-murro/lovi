@@ -10,7 +10,6 @@ import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-
 import { LibrariesService } from '../../../../core/services/libraries.service';
 import { ManageLibraryDto } from '../../../../core/models/dtos/manage-library-dto.model';
 import { AuthDirective } from '../../../../core/directives/auth.directive';
-import { AuthService } from '../../../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { SecureMediaDirective } from '../../../../core/directives/secure-media.directive';
 
@@ -24,9 +23,8 @@ export class PodcastEpisode {
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private authService = inject(AuthService);
-  private librariesService?: LibrariesService;
-  private offlineService?: OfflineService;
+  private librariesService = inject(LibrariesService);
+  private offlineService = inject(OfflineService);
 
   faPlay = faPlay;
   faPause = faPause;
@@ -53,13 +51,6 @@ export class PodcastEpisode {
   isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.podcastEpisode().audioUrl!));
   isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.podcastEpisode().audioUrl!));
   isCurrentTrackLoading = computed(() => this.audioPlayerService.isCurrentLoadingAudioSrc(this.podcastEpisode().audioUrl!));
-
-  constructor() {
-    if (this.authService.isLoggedIn()) {
-      this.librariesService = inject(LibrariesService);
-      this.offlineService = inject(OfflineService);
-    }
-  }
 
   // episode
   prevEpisode() {
