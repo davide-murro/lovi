@@ -14,12 +14,12 @@ import { Router, RouterLink } from '@angular/router';
 import { SecureMediaDirective } from '../../../../core/directives/secure-media.directive';
 
 @Component({
-  selector: 'app-podcast-episode',
+  selector: 'app-podcast-episode-details',
   imports: [FontAwesomeModule, RouterLink, AuthDirective, SecureMediaDirective],
-  templateUrl: './podcast-episode.html',
-  styleUrl: './podcast-episode.scss'
+  templateUrl: './podcast-episode-details.html',
+  styleUrl: './podcast-episode-details.scss'
 })
-export class PodcastEpisode {
+export class PodcastEpisodeDetails {
   private router = inject(Router);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);

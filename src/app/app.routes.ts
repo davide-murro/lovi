@@ -26,7 +26,7 @@ import { MyLibraryContainer } from "./pages/my-library-container/my-library-cont
 import { MyLibrary } from "./pages/my-library-container/my-library/my-library";
 import { MyOffline } from "./pages/my-library-container/my-offline/my-offline";
 import { PodcastDetails } from "./pages/podcasts/podcast-details/podcast-details";
-import { PodcastEpisode } from "./pages/podcasts/podcast-details/podcast-episode/podcast-episode";
+import { PodcastEpisodeDetails } from "./pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details";
 import { Podcasts } from "./pages/podcasts/podcasts";
 import { Search } from "./pages/search/search";
 import { UserProfile } from "./pages/user-profile/user-profile";
@@ -101,7 +101,7 @@ export const routes: Routes = [
     },
     {
         path: 'podcasts/:id/episodes/:episodeId',
-        component: PodcastEpisode,
+        component: PodcastEpisodeDetails,
         title: 'LOVI - Podcast Episode',
         resolve: {
             podcastEpisode: podcastEpisodeResolver
