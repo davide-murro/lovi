@@ -9,8 +9,8 @@
                 <label i18n for="email" class="label">Email</label>
                 <div class="flex gap-2">
                     <input type="email" autocomplete="email" formControlName="email" id="email" class="input w-full" />
-                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2"
-                        title="Change email" (click)="changeEmail()">
+                    <button i18n-title type="button" class="button button-accent shrink-0 gap-2" title="Change email"
+                        (click)="changeEmail()">
                         <fa-icon [icon]="faPen" />
                         <span i18n class="hidden lg:inline">Edit</span>
                     </button>
@@ -22,8 +22,8 @@
                 <div class="flex gap-2">
                     <input type="password" autocomplete="current-password" formControlName="password" id="password"
                         class="input w-full" />
-                    <button i18n-title type="button" class="button button-accent shrink-0 flex gap-2"
-                        title="Change password" (click)="changePassword()">
+                    <button i18n-title type="button" class="button button-accent shrink-0 gap-2" title="Change password"
+                        (click)="changePassword()">
                         <fa-icon [icon]="faPen" />
                         <span i18n class="hidden lg:inline">Edit</span>
                     </button>
@@ -32,7 +32,7 @@
 
             <div class="max-w-full">
                 <label i18n for="name" class="label">Name</label>
-                <input type="text" autocomplete="name" formControlName="name" id="name" class="input" />
+                <input type="text" autocomplete="given-name" formControlName="name" id="name" class="input" />
                 @if(informationForm.controls.name.dirty) {
                 @if(informationForm.controls.name.hasError('required')) {
                 <p i18n class="hint text-accent">

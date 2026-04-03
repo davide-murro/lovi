@@ -16,21 +16,20 @@
 
     <div class="flex gap-2">
         @if (episodePrev() != null) {
-        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Previous Episode"
+        <button type="button" class="button button-accent shrink-0 gap-2" title="Previous Episode"
             (click)="prevEpisode()">
             <fa-icon [icon]="faBackward" />
             <span class="hidden lg:inline">Previous Episode</span>
         </button>
         }
         @if(episodeNext() != null) {
-        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Next Episode"
-            (click)="nextEpisode()">
+        <button type="button" class="button button-accent shrink-0 gap-2" title="Next Episode" (click)="nextEpisode()">
             <fa-icon [icon]="faForward" />
             <span class="hidden lg:inline">Next Episode</span>
         </button>
         }
         @if(podcastEpisodeEdit() != null) {
-        <button type="button" class="button button-accent shrink-0 flex gap-2" title="Delete" (click)="delete()">
+        <button type="button" class="button button-accent shrink-0 gap-2" title="Delete" (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
         </button>

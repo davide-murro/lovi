@@ -15,7 +15,7 @@
     <div class="title flex justify-between items-start gap-2">
       <h1 class="flex-1">{{ audioBook().name }}</h1>
 
-      <button i18n-title *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
+      <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
         title="Add to / remove from My Library" [disabled]="isMyLibraryLoading()" (click)="toggleMyLibrary()">
         @if(isMyLibraryLoading()) {
         <fa-icon [icon]="faCircleNotch" class="animate-spin" />
@@ -29,7 +29,7 @@
         }
       </button>
 
-      <button i18n-title *appAuth type="button" class="button button-accent shrink-0 flex gap-2"
+      <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
         title="Download / remove from offline" [disabled]="isOfflineLoading()" (click)="toggleOffline()">
         @if(isOfflineLoading()) {
         <fa-icon [icon]="faCircleNotch" animation="spin" />
@@ -57,8 +57,8 @@
         } @else {<fa-icon [icon]="faPlay" />}
       </button>
 
-      <button i18n-title type="button" class="button button-primary button-rounded shrink-0 flex gap-2"
-        title="Add to queue" (click)="addToQueue()">
+      <button i18n-title type="button" class="button button-primary button-rounded shrink-0 gap-2" title="Add to queue"
+        (click)="addToQueue()">
         <fa-icon [icon]="faList" />
         <span i18n>Add to queue</span>
       </button>
