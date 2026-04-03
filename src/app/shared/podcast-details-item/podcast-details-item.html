@@ -1,0 +1,27 @@
+<a class="link-item" [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name">
+  <div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
+    <img class="img-parallax bg-accent" loading="lazy" decoding="async" [secureSrc]="podcast().coverImagePreviewUrl"
+      [secureOffline]="true" [alt]="podcast().name" />
+  </div>
+  <h3 class="title2">{{ podcast().name }}</h3>
+  <p class="subtitle text-accent">
+    @for(creator of podcast().voicers; track creator.id) {
+    <a>{{ creator.nickname }}</a>@if (!$last) {, }
+    }
+  </p>
+</a>
+
+<div class="section text-accent flex justify-between items-center gap-2">
+  <h5 i18n class="flex-1">{{ podcast().episodes?.length ?? 0 }} Episodes</h5>
+  <button i18n-title type="button" class="button button-primary button-rounded shrink-0 gap-2" title="Play all Episodes"
+    (click)="podcastPlayAll(podcast())">
+    <fa-icon [icon]="faPlay" />
+    <span i18n>Play all</span>
+  </button>
+</div>
+
+<div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
+  @for (episode of podcast().episodes; track episode.id) {
+  <app-podcast-episode-item [podcast]="podcast()" [podcastEpisode]="episode"></app-podcast-episode-item>
+  }
+</div>

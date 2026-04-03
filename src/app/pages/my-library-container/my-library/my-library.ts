@@ -1,31 +1,21 @@
 import { Component, inject, signal, computed } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { RouterLink } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { of, catchError, finalize, defer } from "rxjs";
-import { AudioTrack } from "../../../core/models/audio-track.model";
 import { PodcastDto } from "../../../core/models/dtos/podcast-dto.model";
-import { AudioPlayerService } from "../../../core/services/audio-player.service";
 import { LibrariesService } from "../../../core/services/libraries.service";
-import { ToasterService } from "../../../core/services/toaster.service";
 import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
-import { PodcastEpisodeItem } from "../../../shared/podcast-episode-item/podcast-episode-item";
-import { SecureMediaDirective } from "../../../core/directives/secure-media.directive";
+import { PodcastDetailsItem } from "../../../shared/podcast-details-item/podcast-details-item";
 
 
 @Component({
   selector: 'app-my-library',
-  imports: [FontAwesomeModule, RouterLink, AudioBookItem, PodcastEpisodeItem, SecureMediaDirective],
+  imports: [FontAwesomeModule, AudioBookItem, PodcastDetailsItem],
   templateUrl: './my-library.html',
   styleUrl: './my-library.scss'
 })
 export class MyLibrary {
-  private toasterService = inject(ToasterService);
-  private audioPlayerService = inject(AudioPlayerService);
   private librariesService = inject(LibrariesService);
-
-  faPlay = faPlay;
 
   // Online Data Signal with Loading/Error
   myLibraryLoading = signal(false);
@@ -66,23 +56,4 @@ export class MyLibrary {
 
     return grouped;
   });
-
-  podcastPlayAll(podcast: PodcastDto) {
-    const itemQueue = podcast!.episodes!
-      .map(pe => {
-        const number = pe.number;
-        const track: AudioTrack = {
-          title: pe.name,
-          subtitle: $localize`Episode ${number}`,
-          artists: pe.voicers?.map(v => v.nickname),
-          audioSrc: pe.audioUrl!,
-          coverImageSrc: pe.coverImagePreviewUrl,
-          referenceLink: `/podcasts/${podcast.id}/episodes/${pe.id}`
-        }
-        return track!;
-      });
-
-    this.audioPlayerService.playTrack(itemQueue[0], itemQueue);
-    this.toasterService.show($localize`"${podcast.name}" episodes added to queue`);
-  }
 }
