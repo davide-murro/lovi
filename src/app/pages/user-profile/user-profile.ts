@@ -75,9 +75,10 @@ export class UserProfile {
   onSubmitInformation(): void {
     if (!this.informationForm.valid) return;
 
+    const form = this.informationForm.getRawValue();
     let dto: UserProfileDto = {
-      id: this.informationForm.value.id!,
-      name: this.informationForm.value.name!
+      id: form.id!,
+      name: form.name!
     }
     this.informationLoading.set(true);
     this.userService.updateMe(dto).subscribe({

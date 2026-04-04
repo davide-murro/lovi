@@ -6,13 +6,11 @@
     }
 
     @else if (audioBooksError()) {
-    <p i18n class="section text-accent">Failed to load Audio Books. Please try reloading or navigating to <a
-            class="link" title="My Library" [routerLink]="['/my-library']">My Library</a></p>
+    <p i18n class="section text-error">Failed to load Audio Books.</p>
     }
 
     @else if(audioBookPagedResult()?.items == null || audioBookPagedResult()?.items?.length == 0) {
-    <p i18n class="section text-accent">There are no Audio Books here. Please try reloading or navigating to <a
-            class="link" title="My Library" [routerLink]="['/my-library']">My Library</a></p>
+    <p i18n class="section text-accent">There are no Audio Books here.</p>
     }
 
     @else {

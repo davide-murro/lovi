@@ -1,12 +1,8 @@
 <div class="section flex flex-wrap gap-2">
     <a class="link font-medium leading-normal" title="Edit" [routerLink]="['/edit']">Edit</a>
     <span class="text-accent font-medium leading-normal">/</span>
-    <a class="link font-medium leading-normal"
-        [title]="podcastEpisodeEdit() ? podcastEpisodeEdit()!.podcast!.name : podcastEdit()!.name"
-        [routerLink]="['/edit', 'podcasts', podcastEpisodeEdit() ? podcastEpisodeEdit()!.podcast!.id : podcastEdit()!.id]">{{podcastEpisodeEdit()
-        ?
-        podcastEpisodeEdit()!.podcast!.name :
-        podcastEdit()!.name}}</a>
+    <a class="link font-medium leading-normal" [title]="podcast()!.name"
+        [routerLink]="['/edit', 'podcasts', podcast()!.id]">{{ podcast()!.name }}</a>
     <span class="text-accent font-medium leading-normal">/</span>
     <span>{{podcastEpisodeEdit() ? podcastEpisodeEdit()!.name : 'New Episode'}}</span>
 </div>

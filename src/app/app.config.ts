@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, isDevMode, provideAppInitializer, inject } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 import { routes } from './app.routes';
@@ -7,6 +7,7 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { offlineInterceptor } from './core/interceptors/offline.interceptor';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AuthService } from './core/services/auth.service';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +28,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideRouter(routes,
       withComponentInputBinding(),
+      withRouterConfig({ paramsInheritanceStrategy: 'always' }),
       withInMemoryScrolling({
         // set enabled here but handle better the backnavigation scroll in app.ts
         scrollPositionRestoration: 'enabled',
@@ -35,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptors([authInterceptor, offlineInterceptor])),
     provideServiceWorker('ngsw-worker.js', {
-      enabled: !isDevMode(),
+      enabled: environment.enableServiceWorker,
       registrationStrategy: 'registerWhenStable:30000'
     })
   ]

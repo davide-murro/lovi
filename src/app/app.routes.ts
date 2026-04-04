@@ -93,19 +93,24 @@ export const routes: Routes = [
     },
     {
         path: 'podcasts/:id',
-        component: PodcastDetails,
         title: 'LOVI - Podcast Details',
         resolve: {
             podcast: podcastResolver // Resolver runs before 'podcasts/:id' component loads
         },
-    },
-    {
-        path: 'podcasts/:id/episodes/:episodeId',
-        component: PodcastEpisodeDetails,
-        title: 'LOVI - Podcast Episode',
-        resolve: {
-            podcastEpisode: podcastEpisodeResolver
-        },
+        children: [
+            {
+                path: '',
+                component: PodcastDetails,
+            },
+            {
+                path: 'episodes/:episodeId',
+                component: PodcastEpisodeDetails,
+                title: 'LOVI - Podcast Episode',
+                resolve: {
+                    podcastEpisode: podcastEpisodeResolver
+                },
+            }
+        ]
     },
     {
         path: 'my-library',
@@ -173,33 +178,35 @@ export const routes: Routes = [
     },
     {
         path: 'edit/podcasts/:id',
-        component: EditPodcast,
         title: 'LOVI - Edit Podcast',
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
-        resolve: {
-            podcast: podcastResolver
-        }
-    },
-    {
-        path: 'edit/podcasts/:id/episodes/create',
-        component: EditPodcastEpisode,
-        title: 'LOVI - Create Podcast Episode',
-        canActivate: [authGuard],
-        data: { roles: ['Admin', 'Editor'] },
-        resolve: {
-            podcast: podcastResolver
-        }
-    },
-    {
-        path: 'edit/podcasts/:id/episodes/:episodeId',
-        component: EditPodcastEpisode,
-        title: 'LOVI - Edit Podcast Episode',
-        canActivate: [authGuard],
-        data: { roles: ['Admin', 'Editor'] },
-        resolve: {
-            podcastEpisode: podcastEpisodeResolver
-        }
+        children: [
+            {
+                path: '',
+                component: EditPodcast,
+                resolve: {
+                    podcast: podcastResolver
+                },
+            },
+            {
+                path: 'episodes/create',
+                component: EditPodcastEpisode,
+                title: 'LOVI - Create Podcast Episode',
+                resolve: {
+                    podcast: podcastResolver
+                }
+            },
+            {
+                path: 'episodes/:episodeId',
+                component: EditPodcastEpisode,
+                title: 'LOVI - Edit Podcast Episode',
+                resolve: {
+                    podcast: podcastResolver,
+                    podcastEpisode: podcastEpisodeResolver
+                }
+            }
+        ]
     },
     {
         path: 'edit/creators/create',

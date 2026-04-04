@@ -3,13 +3,13 @@ import { PodcastsService } from '../../core/services/podcasts.service';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, finalize, of, switchMap } from 'rxjs';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Pagination } from "../pagination/pagination";
 import { PodcastItem } from "../podcast-item/podcast-item";
 
 @Component({
   selector: 'app-podcasts-paged',
-  imports: [RouterLink, Pagination, PodcastItem],
+  imports: [Pagination, PodcastItem],
   templateUrl: './podcasts-paged.html',
   styleUrl: './podcasts-paged.scss'
 })

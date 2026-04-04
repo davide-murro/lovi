@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  enableServiceWorker: false,
   apiUrl: 'https://localhost:7203/api',
   googleClientId: 'YOUR_GOOGLE_CLIENT_ID',
   spotifyClientId: 'YOUR_SPOTIFY_CLIENT_ID',
