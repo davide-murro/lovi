@@ -1,5 +1,5 @@
-<a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/audio-books', audioBook().id]"
-  [title]="audioBook().name">
+<a i18n-title class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/audio-books', audioBook().id]"
+  title="Go to Audio Book">
   <img class="aspect-[3/4] object-cover bg-accent rounded-xl" loading="lazy" decoding="async"
     [secureSrc]="audioBook().coverImagePreviewUrl" [secureOffline]="true" [alt]="audioBook().name" />
   <div>

@@ -46,7 +46,7 @@
                 }
             </div>
 
-            <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Save"
+            <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Save changes"
                 [disabled]="!informationForm.valid || !informationForm.dirty || informationLoading()">Save</button>
         </form>
     </div>
@@ -55,14 +55,12 @@
         <h3 i18n class="title2 text-center">Account</h3>
 
         <div class="flex flex-col items-center gap-4">
-            <button i18n i18n-title type="button" class="button button-accent" title="Log out" (click)="logout()"
-                [disabled]="logoutLoading()">Log
-                out</button>
+            <button i18n i18n-title type="button" class="button button-accent" title="Log out from this device"
+                (click)="logout()" [disabled]="logoutLoading()">Log out</button>
             <button i18n i18n-title type="button" class="button button-accent" title="Log out from all devices"
                 (click)="logoutAll()" [disabled]="logoutLoading()">Log out from all devices</button>
-            <button i18n i18n-title type="button" class="button button-error" title="Delete account"
-                (click)="deleteAccount()">Delete
-                account</button>
+            <button i18n i18n-title type="button" class="button button-error" title="Delete account permanently"
+                (click)="deleteAccount()">Delete account</button>
         </div>
     </div>
 </div>

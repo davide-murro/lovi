@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { AudioPlayerService } from '../../../core/services/audio-player.service';
 import { LibrariesService } from '../../../core/services/libraries.service';
-import { faPlay, faPause, faList, faBookOpen, faBookBookmark, faFileArrowDown, faFile, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause, faList, faBookOpen, faBookBookmark, faDownload, faFileArrowDown, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { OfflineService } from '../../../core/services/offline.service';
 import { from } from 'rxjs';
 import { AudioTrack } from '../../../core/models/audio-track.model';
@@ -30,8 +30,8 @@ export class AudioBookDetails {
   faList = faList;
   faBookOpen = faBookOpen;
   faBookBookmark = faBookBookmark;
+  faDownload = faDownload;
   faFileArrowDown = faFileArrowDown;
-  faFile = faFile;
   faCircleNotch = faCircleNotch;
 
   // audioBook

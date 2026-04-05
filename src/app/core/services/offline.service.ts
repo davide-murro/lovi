@@ -60,7 +60,6 @@ export class OfflineService {
     constructor() {
         effect(() => {
             if (this.authService.isLoggedIn()) {
-                // TODO: check when is called.. and if it necessary also for playing audio in smartphone, and also request per leggere audio locali
                 this.requestPersistentStorage();
                 this.initializeOfflineData();
             }
@@ -348,7 +347,6 @@ export class OfflineService {
             this.downloadingEpisodes.update(set => [...set, episode]);
 
             // 2. Fetch resources via services (priming the NGSW cache)
-            // TODO: download with fetch urls instead
             const offlineEpisode = await firstValueFrom(this.podcastsService.getEpisodeById(episode.podcast!.id!, episode.id!).pipe(takeUntil(this.cancelDownloads$)));
             if (episode.audioUrl) await firstValueFrom(this.podcastsService.getEpisodeAudio(episode.podcast!.id!, episode.id!).pipe(takeUntil(this.cancelDownloads$)));
             if (episode.coverImageUrl) await firstValueFrom(this.podcastsService.getEpisodeCover(episode.podcast!.id!, episode.id!, false).pipe(takeUntil(this.cancelDownloads$)));

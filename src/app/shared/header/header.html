@@ -11,13 +11,13 @@
             <a i18n i18n-title class="button button-accent shrink-0" title="Sign in" [routerLink]="['/auth', 'login']"
                 [routerLinkActive]="'button-primary'">Sign in</a>
         </ng-template>
-        <a i18n-title *appAuth="null; else signIn" class="icon-button" title="User Profile"
+        <a i18n-title *appAuth="null; else signIn" class="icon-button" title="Go to User Profile"
             [routerLink]="['/user-profile']" [routerLinkActive]="'text-primary'">
             <fa-icon [icon]="faUser" />
         </a>
 
-        <button i18n-title type="button" class="icon-button sm:!hidden" title="Toggle menu"
-            (click)="menuMobileOpen.set(!menuMobileOpen())">
+        <button i18n-title type="button" class="icon-button sm:!hidden"
+            [title]="menuMobileOpen() ? 'Close menu' : 'Open menu'" (click)="menuMobileOpen.set(!menuMobileOpen())">
             @if (menuMobileOpen()) {
             <fa-icon [icon]="faClose" />
             } @else {
@@ -28,13 +28,13 @@
 
     <div class="flex items-center justify-start whitespace-nowrap flex-col gap-4 overflow-initial sm:overflow-auto sm:-my-4 sm:-mx-8 sm:py-4 sm:px-8 sm:flex-row sm:gap-8"
         [class.max-sm:hidden]="!menuMobileOpen()">
-        <a i18n i18n-title class="menu-link" title="Audio Books" [routerLink]="['/audio-books']"
+        <a i18n i18n-title class="menu-link" title="Go to Audio Books" [routerLink]="['/audio-books']"
             [routerLinkActive]="'active'">Audio Books</a>
-        <a i18n i18n-title class="menu-link" title="Podcasts" [routerLink]="['/podcasts']"
+        <a i18n i18n-title class="menu-link" title="Go to Podcasts" [routerLink]="['/podcasts']"
             [routerLinkActive]="'active'">Podcasts</a>
-        <a i18n i18n-title *appAuth class="menu-link" title="My Library" [routerLink]="['/my-library']"
+        <a i18n i18n-title *appAuth class="menu-link" title="Go to My Library" [routerLink]="['/my-library']"
             [routerLinkActive]="'active'">My Library</a>
-        <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="menu-link" title="Edit" [routerLink]="['/edit']"
+        <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="menu-link" title="Go to Edit" [routerLink]="['/edit']"
             [routerLinkActive]="'active'">Edit</a>
 
         <span class="flex-grow hidden sm:flex"></span>
@@ -42,8 +42,8 @@
         <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="flex items-center relative max-w-full">
             <input i18n-placeholder type="search" formControlName="search" id="search" class="input !pr-15"
                 placeholder="Search" autocomplete="on" />
-            <button i18n-title type="submit" title="Search" class="input-button absolute right-0"
-                [disabled]="!searchForm.valid">
+            <button i18n-title type="submit" title="Search for Audio Books or Podcasts"
+                class="input-button absolute right-0" [disabled]="!searchForm.valid">
                 <fa-icon [icon]="faMagnifyingGlass" />
             </button>
         </form>

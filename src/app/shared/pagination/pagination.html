@@ -21,29 +21,28 @@
 
     <!-- Page buttons -->
     @for (p of visiblePages(); track $index) {
-    <button i18n-title type="button" class="icon-button font-bold" title="Change page"
+    <button i18n-title type="button" class="icon-button font-bold" [title]="'Page ' + p"
         [class.button-primary]="p === pageNumber()" (click)="goTo(p)">
         {{ p }}
     </button>
     }
 
     <!-- Trailing Ellipsis -->
-    @if (visiblePages().length && visiblePages()[visiblePages().length - 1] < totalPages()) { 
-    <span>...</span>
-    }
+    @if (visiblePages().length && visiblePages()[visiblePages().length - 1] < totalPages()) { <span>...</span>
+        }
 
 
-    <!-- Next / Last -->
-    @if (pageNumber() < totalPages()){
-    <button i18n-title type="button" class="icon-button" title="Next page" (click)="next()">
-        <fa-icon [icon]="faAngleRight" />
-    </button>
-    }
+        <!-- Next / Last -->
+        @if (pageNumber() < totalPages()) { <button i18n-title type="button" class="icon-button" title="Next page"
+            (click)="next()">
+            <fa-icon [icon]="faAngleRight" />
+            </button>
+            }
 
-    @if (pageNumber() < totalPages()){
-    <button i18n-title type="button" class="icon-button" title="Last page" (click)="last()">
-        <fa-icon [icon]="faAnglesRight" />
-    </button>
-    }
+            @if (pageNumber() < totalPages()){ <button i18n-title type="button" class="icon-button" title="Last page"
+                (click)="last()">
+                <fa-icon [icon]="faAnglesRight" />
+                </button>
+                }
 
 </div>

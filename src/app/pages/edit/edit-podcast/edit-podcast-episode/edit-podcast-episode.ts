@@ -85,13 +85,6 @@ export class EditPodcastEpisode {
 
 
   // episode
-  prevEpisode() {
-    this.router.navigate(['/edit', 'podcasts', this.podcast()!.id, 'episodes', this.episodePrev()!.id]);
-  }
-  nextEpisode() {
-    this.router.navigate(['/edit', 'podcasts', this.podcast()!.id, 'episodes', this.episodeNext()!.id]);
-  }
-
   load() {
     this.podcastsService.getEpisodeById(
       this.podcast()!.id!,

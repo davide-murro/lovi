@@ -1,4 +1,5 @@
-<a class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name">
+<a i18n-title class="link-item flex flex-1 flex-col gap-2" [routerLink]="['/podcasts', podcast().id]"
+  title="Go to Podcast">
   <img class="aspect-[3/2] object-cover bg-accent rounded-xl" loading="lazy" decoding="async"
     [secureSrc]="podcast().coverImagePreviewUrl" [secureOffline]="true" [alt]="podcast().name" />
   <div>

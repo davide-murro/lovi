@@ -3,7 +3,7 @@ import { from } from 'rxjs';
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
 import { AudioTrack } from '../../../../core/models/audio-track.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBackward, faBookBookmark, faBookOpen, faCircleNotch, faFileArrowDown, faForward, faList, faPause, faPlay, faFile } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faBookBookmark, faBookOpen, faCircleNotch, faFileArrowDown, faForward, faList, faPause, faPlay, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import { OfflineService } from '../../../../core/services/offline.service';
 import { PodcastDto } from '../../../../core/models/dtos/podcast-dto.model';
@@ -11,7 +11,7 @@ import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-
 import { LibrariesService } from '../../../../core/services/libraries.service';
 import { ManageLibraryDto } from '../../../../core/models/dtos/manage-library-dto.model';
 import { AuthDirective } from '../../../../core/directives/auth.directive';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { SecureMediaDirective } from '../../../../core/directives/secure-media.directive';
 
 @Component({
@@ -21,7 +21,6 @@ import { SecureMediaDirective } from '../../../../core/directives/secure-media.d
   styleUrl: './podcast-episode-details.scss'
 })
 export class PodcastEpisodeDetails {
-  private router = inject(Router);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
   private librariesService = inject(LibrariesService);
@@ -34,8 +33,8 @@ export class PodcastEpisodeDetails {
   faForward = faForward;
   faBookOpen = faBookOpen;
   faBookBookmark = faBookBookmark;
+  faDownload = faDownload;
   faFileArrowDown = faFileArrowDown;
-  faFile = faFile;
   faCircleNotch = faCircleNotch;
 
   // episode
@@ -53,14 +52,6 @@ export class PodcastEpisodeDetails {
   isCurrentTrack = computed(() => this.audioPlayerService.isCurrentAudioSrc(this.podcastEpisode().audioUrl!));
   isCurrentTrackPlaying = computed(() => this.audioPlayerService.isCurrentPlayingAudioSrc(this.podcastEpisode().audioUrl!));
   isCurrentTrackLoading = computed(() => this.audioPlayerService.isCurrentLoadingAudioSrc(this.podcastEpisode().audioUrl!));
-
-  // episode
-  prevEpisode() {
-    this.router.navigate(['/podcasts', this.podcast().id, 'episodes', this.episodePrev()!.id]);
-  }
-  nextEpisode() {
-    this.router.navigate(['/podcasts', this.podcast().id, 'episodes', this.episodeNext()!.id]);
-  }
 
   // audio player
   togglePlay() {

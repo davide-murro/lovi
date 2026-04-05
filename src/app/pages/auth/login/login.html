@@ -20,7 +20,7 @@
             <div class="relative w-full">
                 <input [type]="showPassword() ? 'text' : 'password'" autocomplete="current-password"
                     formControlName="password" id="password" class="input input-lg w-full !pr-18" />
-                <button i18n-title type="button" title="Show / Hide password"
+                <button i18n-title type="button" [title]="showPassword() ? 'Hide password' : 'Show password'"
                     class="input-button input-button-lg absolute right-0 top-0" [class.text-primary]="showPassword()"
                     (click)="togglePasswordVisibility()">
                     <fa-icon [icon]="faEye" />
@@ -29,8 +29,8 @@
             @if(form.controls.password.dirty) {
             @if(form.controls.password.hasError('required')) {
             <p i18n class="hint text-error">
-                Password is required.
-                <a title="Reset password" class="link" [routerLink]="['/auth', 'forgot-password']"
+                Password is required. <a i18n-title title="Reset password" class="link"
+                    [routerLink]="['/auth', 'forgot-password']"
                     [queryParams]="{ email: form.value.userName || null }">Forgot Password?</a>
             </p>
             }
@@ -46,7 +46,7 @@
         </div>
 
         <button i18n i18n-title type="submit" class="flex-none button button-primary button-rounded button-lg"
-            title="Login" [disabled]="!form.valid || isLoading()">Login</button>
+            title="Login to LOVI" [disabled]="!form.valid || isLoading()">Login</button>
     </form>
 
     <div class="section flex flex-col items-center">

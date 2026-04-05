@@ -1,4 +1,4 @@
-<a class="link-item" [routerLink]="['/podcasts', podcast().id]" [title]="podcast().name">
+<a i18n-title class="link-item" [routerLink]="['/podcasts', podcast().id]" title="Go to Podcast">
   <div class="object-parallax w-full rounded-xl min-h-[150px] sm:min-h-[250px]">
     <img class="img-parallax bg-accent" loading="lazy" decoding="async" [secureSrc]="podcast().coverImagePreviewUrl"
       [secureOffline]="true" [alt]="podcast().name" />
