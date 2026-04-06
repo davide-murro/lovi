@@ -47,9 +47,7 @@ export class ImageSlider implements OnDestroy {
     effect(() => {
       this.clearAutoplay();
       if (this.autoplay() && this.items().length > 1) {
-        // start autoplay when everything is loaded
-        // TODO: i don t like it.. also because the problem still exists with toast
-        setTimeout(() => this.startAutoplay());
+        this.startAutoplay();
       }
     });
   }
