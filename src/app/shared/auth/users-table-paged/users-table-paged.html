@@ -8,6 +8,10 @@
                 <th i18n>email</th>
                 <th i18n>email confirmed</th>
                 <th i18n>name</th>
+
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +27,8 @@
                         (click)="forgotPasswordUser(user.email!)"><fa-icon [icon]="faQuestion" /></button>
                 </td>
                 <td>
-                    <a i18n-title class="icon-button" title="Update User" [routerLink]="['/edit', 'users', user.id]"><fa-icon
-                            [icon]="faPen" /></a>
+                    <a i18n-title class="icon-button" title="Update User"
+                        [routerLink]="['/edit', 'users', user.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
                     <button i18n-title type="button" class="icon-button" title="Delete User"

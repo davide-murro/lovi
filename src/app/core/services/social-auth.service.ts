@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 declare const google: any;
-declare const FB: any;
+//declare const FB: any;
 
 @Injectable({
     providedIn: 'root'

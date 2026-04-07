@@ -105,7 +105,9 @@ export class OfflineService {
     }
 
     private saveToStorage(key: string, data: any[]) {
-        localStorage.setItem(key, JSON.stringify(data));
+        try {
+            localStorage.setItem(key, JSON.stringify(data));
+        } catch { }
     }
 
     private addOfflineToUrl(url: string) {

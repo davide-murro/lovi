@@ -23,7 +23,7 @@ export class AuthService {
   private apiUrl = environment.apiUrl + '/auth';
   private http = inject(HttpClient);
 
-  private hasSession = signal(localStorage.getItem('authHasSession') === 'true');
+  private hasSession = signal(this.getLocalStorage('authHasSession') === 'true');
   private accessToken = signal<string | null>(null);
   private userRole = signal<string | null>(null);
 
@@ -31,6 +31,25 @@ export class AuthService {
 
   isLoggedIn = computed(() => !!this.hasSession());
   isConnected = computed(() => !!this.hasSession() && !!this.accessToken());
+
+  // local storage
+  private getLocalStorage(key: string): string | null {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+  private setLocalStorage(key: string, value: string): void {
+    try {
+      localStorage.setItem(key, value);
+    } catch { }
+  }
+  private removeLocalStorage(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch { }
+  }
 
   // REGISTER
   register(dto: RegisterDto): Observable<void> {
@@ -81,7 +100,7 @@ export class AuthService {
 
   // LOGOUT
   logout(): void {
-    localStorage.removeItem('authHasSession');
+    this.removeLocalStorage('authHasSession');
     this.hasSession.set(false);
     this.accessToken.set(null);
     this.userRole.set(null);
@@ -156,7 +175,7 @@ export class AuthService {
   setAccessToken(token: string): void {
     this.accessToken.set(token);
     this.hasSession.set(true);
-    localStorage.setItem('authHasSession', 'true');
+    this.setLocalStorage('authHasSession', 'true');
   }
 
   // EMAIL
@@ -180,7 +199,7 @@ export class AuthService {
 
   // DEVICE ID
   getOrCreateDeviceId(): string {
-    let deviceId = localStorage.getItem('authDeviceId');
+    let deviceId = this.getLocalStorage('authDeviceId');
     if (!deviceId) {
 
       // if there is crypto use it, otherwise create it manually
@@ -193,7 +212,7 @@ export class AuthService {
           return v.toString(16);
         });
       }
-      localStorage.setItem('authDeviceId', deviceId);
+      this.setLocalStorage('authDeviceId', deviceId);
     }
 
     return deviceId;

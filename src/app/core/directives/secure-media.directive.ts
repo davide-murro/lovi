@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { OfflineUrlPipe } from '../pipes/offline-url.pipe';
 import { AuthUrlPipe } from '../pipes/auth-url.pipe';
 
-const EMPTY_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+const EMPTY_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 @Directive({
   selector: 'img[secureSrc], audio[secureSrc]'

@@ -8,6 +8,7 @@ import { filter, take } from 'rxjs';
 import { Dialog } from './shared/dialog/dialog';
 import { DialogService } from './core/services/dialog.service';
 import { ViewportScroller } from '@angular/common';
+import { ToasterService } from './core/services/toaster.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class App {
   private zone = inject(NgZone);
   private router = inject(Router);
   private dialogService = inject(DialogService);
+  private toasterService = inject(ToasterService);
   private viewportScroller = inject(ViewportScroller);
 
   @ViewChild(Header) header!: Header;
@@ -42,5 +44,29 @@ export class App {
         }
       });
     });
+
+    // check cookie enabled
+    if (!this.checkCookie()) {
+      this.toasterService.show('Please enable cookies to use all features of this application.', { type: 'warning', duration: 5000 });
+    }
+
+    // check offline
+    window.addEventListener('online', () => this.toasterService.show('You are back online.', { type: 'success', duration: 5000 }));
+    window.addEventListener('offline', () => this.toasterService.show('You are offline. You will be able to see only offline content.', { type: 'warning', duration: 5000 }));
+  }
+
+  private checkCookie() {
+    // Quick test if browser has cookieEnabled host property
+    if (!navigator.cookieEnabled) return false;
+    // Create cookie
+    try {
+      document.cookie = "cookietest=1";
+      var ret = document.cookie.indexOf("cookietest=") != -1;
+      // Delete cookie
+      document.cookie = "cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
+      return ret;
+    } catch (e) {
+      return false;
+    }
   }
 }

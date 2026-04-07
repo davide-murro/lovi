@@ -7,7 +7,7 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faFacebook, faGoogle, faInstagram, faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle, faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { ExternalLoginDto } from '../../../core/models/dtos/auth/external-login-dto.model';
 import { SocialAuthService } from '../../../core/services/social-auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
