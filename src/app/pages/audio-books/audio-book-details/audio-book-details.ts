@@ -12,6 +12,7 @@ import { AudioBookDto } from '../../../core/models/dtos/audio-book-dto.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
+import { DialogService } from '../../../core/services/dialog.service';
 
 @Component({
   selector: 'app-audio-book-details',
@@ -21,6 +22,7 @@ import { SecureMediaDirective } from '../../../core/directives/secure-media.dire
 })
 export class AudioBookDetails {
   private toasterService = inject(ToasterService);
+  private dialogService = inject(DialogService);
   private audioPlayerService = inject(AudioPlayerService);
   private librariesService = inject(LibrariesService);
   private offlineService = inject(OfflineService);
@@ -120,26 +122,40 @@ export class AudioBookDetails {
     else this.addOffline();
   }
   addOffline() {
-    this.toasterService.show($localize`"${this.audioBook().name}" downloading...`);
-    from(this.offlineService!.downloadAudioBook(this.audioBook())).subscribe({
-      next: () => {
-        this.toasterService.show($localize`"${this.audioBook().name}" added to offline`, { type: 'success' });
-      },
-      error: (err) => {
-        console.error('offlineService.downloadAudioBook', this.audioBook(), err);
-        this.toasterService.show($localize`"${this.audioBook().name}" adding to offline failed`, { type: 'error' });
-      }
-    });
+    this.dialogService.confirm(
+      $localize`Download Audio Book`,
+      $localize`Are you sure you want to download "${this.audioBook().name}"? It will take some time depending on your internet connection.`)
+      .subscribe((res) => {
+        if (res) {
+          this.toasterService.show($localize`"${this.audioBook().name}" downloading...`);
+          from(this.offlineService!.downloadAudioBook(this.audioBook())).subscribe({
+            next: () => {
+              this.toasterService.show($localize`"${this.audioBook().name}" added to offline`, { type: 'success' });
+            },
+            error: (err) => {
+              console.error('offlineService.downloadAudioBook', this.audioBook(), err);
+              this.toasterService.show($localize`"${this.audioBook().name}" adding to offline failed`, { type: 'error' });
+            }
+          });
+        }
+      });
   }
   removeOffline() {
-    from(this.offlineService!.removeAudioBook(this.audioBook().id!)).subscribe({
-      next: () => {
-        this.toasterService.show($localize`"${this.audioBook().name}" removed from offline`);
-      },
-      error: (err) => {
-        console.error('offlineService.removeAudioBook', this.audioBook().id!, err);
-        this.toasterService.show($localize`"${this.audioBook().name}" removing from offline failed`, { type: 'error' });
-      }
-    });
+    this.dialogService.confirm(
+      $localize`Remove Audio Book`,
+      $localize`Are you sure you want to remove "${this.audioBook().name}" from offline?`)
+      .subscribe((res) => {
+        if (res) {
+          from(this.offlineService!.removeAudioBook(this.audioBook().id!)).subscribe({
+            next: () => {
+              this.toasterService.show($localize`"${this.audioBook().name}" removed from offline`);
+            },
+            error: (err) => {
+              console.error('offlineService.removeAudioBook', this.audioBook().id!, err);
+              this.toasterService.show($localize`"${this.audioBook().name}" removing from offline failed`, { type: 'error' });
+            }
+          });
+        }
+      });
   }
 }

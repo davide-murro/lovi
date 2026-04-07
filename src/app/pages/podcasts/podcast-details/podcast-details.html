@@ -27,6 +27,21 @@
     <span i18n class="hidden lg:inline">Add to My Library</span>
     }
   </button>
+
+  <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
+    [title]="isOffline() ? 'Remove from offline' : 'Download offline'" [disabled]="isOfflineLoading()"
+    (click)="toggleOffline()">
+    @if(isOfflineLoading()) {
+    <fa-icon [icon]="faCircleNotch" animation="spin" />
+    <span i18n class="hidden lg:inline">Loading...</span>
+    } @else if(isOffline()) {
+    <fa-icon [icon]="faFileArrowDown" />
+    <span i18n class="hidden lg:inline">Is offline</span>
+    } @else {
+    <fa-icon [icon]="faDownload" />
+    <span i18n class="hidden lg:inline">Download offline</span>
+    }
+  </button>
 </div>
 
 <p class="subtitle text-accent">

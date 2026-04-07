@@ -13,6 +13,7 @@ import { ManageLibraryDto } from '../../../../core/models/dtos/manage-library-dt
 import { AuthDirective } from '../../../../core/directives/auth.directive';
 import { RouterLink } from '@angular/router';
 import { SecureMediaDirective } from '../../../../core/directives/secure-media.directive';
+import { DialogService } from '../../../../core/services/dialog.service';
 
 @Component({
   selector: 'app-podcast-episode-details',
@@ -22,6 +23,7 @@ import { SecureMediaDirective } from '../../../../core/directives/secure-media.d
 })
 export class PodcastEpisodeDetails {
   private toasterService = inject(ToasterService);
+  private dialogService = inject(DialogService);
   private audioPlayerService = inject(AudioPlayerService);
   private librariesService = inject(LibrariesService);
   private offlineService = inject(OfflineService);
@@ -147,26 +149,40 @@ export class PodcastEpisodeDetails {
     else this.addOffline();
   }
   addOffline() {
-    this.toasterService.show($localize`"${this.podcastEpisode().name}" downloading...`);
-    from(this.offlineService!.downloadPodcastEpisode(this.podcastEpisode())).subscribe({
-      next: () => {
-        this.toasterService.show($localize`"${this.podcastEpisode().name}" added to offline`, { type: 'success' });
-      },
-      error: (err) => {
-        console.error('offlineService.downloadPodcastEpisode', this.podcastEpisode(), err);
-        this.toasterService.show($localize`"${this.podcastEpisode().name}" adding to offline failed`, { type: 'error' });
-      }
-    });
+    this.dialogService.confirm(
+      $localize`Download Podcast Episode`,
+      $localize`Are you sure you want to download "${this.podcastEpisode().name}"? It will take some time depending on your internet connection.`)
+      .subscribe((res) => {
+        if (res) {
+          this.toasterService.show($localize`"${this.podcastEpisode().name}" downloading...`);
+          from(this.offlineService!.downloadPodcastEpisode(this.podcastEpisode())).subscribe({
+            next: () => {
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" added to offline`, { type: 'success' });
+            },
+            error: (err) => {
+              console.error('offlineService.downloadPodcastEpisode', this.podcastEpisode(), err);
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" adding to offline failed`, { type: 'error' });
+            }
+          });
+        }
+      });
   }
   removeOffline() {
-    from(this.offlineService!.removePodcastEpisode(this.podcastEpisode().id!)).subscribe({
-      next: () => {
-        this.toasterService.show($localize`"${this.podcastEpisode().name}" removed from offline`);
-      },
-      error: (err) => {
-        console.error('offlineService.removePodcastEpisode', this.podcastEpisode().id!, err);
-        this.toasterService.show($localize`"${this.podcastEpisode().name}" removing from offline failed`, { type: 'error' });
-      }
-    });
+    this.dialogService.confirm(
+      $localize`Remove Podcast Episode`,
+      $localize`Are you sure you want to remove "${this.podcastEpisode().name}" from offline?`)
+      .subscribe((res) => {
+        if (res) {
+          from(this.offlineService!.removePodcastEpisode(this.podcastEpisode().id!)).subscribe({
+            next: () => {
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" removed from offline`);
+            },
+            error: (err) => {
+              console.error('offlineService.removePodcastEpisode', this.podcastEpisode().id!, err);
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" removing from offline failed`, { type: 'error' });
+            }
+          });
+        }
+      });
   }
 }
