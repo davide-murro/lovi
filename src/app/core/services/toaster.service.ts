@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Toast } from '../models/toast.model';
 
 @Injectable({
@@ -7,7 +7,6 @@ import { Toast } from '../models/toast.model';
 export class ToasterService {
   idCounter = signal<number>(0);
   toasts = signal<Toast[]>([]);
-  toastsReverse = computed<Toast[]>(() => this.toasts().slice().reverse());
 
   show(message: string, options?: Partial<Toast>) {
     const idCounter = this.idCounter() + 1;

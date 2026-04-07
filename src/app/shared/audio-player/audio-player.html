@@ -8,7 +8,7 @@
   </button>
 
   <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4" [class]="!queueOpen() ? '!hidden' : ''">
-    @for (track of audioPlayerService.queue(); track $index) {
+    @for (track of audioPlayerService.queue(); track track.id) {
     <li class="flex items-center px-2 py-2 gap-2 hover:bg-opacity sm:px-4"
       [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id"
       [class.text-error]="audioPlayerService.currentTrack()!.id == track.id && audioPlayerService.isError()">

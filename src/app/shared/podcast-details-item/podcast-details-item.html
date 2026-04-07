@@ -5,7 +5,7 @@
   </div>
   <h3 class="title2">{{ podcast().name }}</h3>
   <p class="subtitle text-accent">
-    @for(creator of podcast().voicers; track creator.id) {
+    @for(creator of podcast().voicers; track $index) {
     <a>{{ creator.nickname }}</a>@if (!$last) {, }
     }
   </p>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="grid gap-4 grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
-  @for (episode of podcast().episodes; track episode.id) {
+  @for (episode of podcast().episodes; track $index) {
   <app-podcast-episode-item [podcast]="podcast()" [podcastEpisode]="episode"></app-podcast-episode-item>
   }
 </div>
