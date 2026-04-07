@@ -13,19 +13,19 @@ export class Home {
   imageSliderItems: Signal<ImageSliderItem[]> = signal([
     {
       image: 'home-image-slider/slider1.png',
-      title: 'Listen to your next great story',
+      title: 'Ancient Wisdom Rediscovered',
       subtitle:
-        'Stream or download from our library of audiobooks, including new releases and best sellers.',
+        'Stream esoteric audiobooks that explore lost civilizations, forgotten philosophies and hidden histories.',
     },
     {
-      image: 'home-image-slider/slider2.jpg',
-      title: 'Discover a new world of sound',
-      subtitle: 'Explore hand-picked audio stories crafted for every mood and moment.',
+      image: 'home-image-slider/slider2.png',
+      title: 'Sacred Sounds, Deepened Connection',
+      subtitle: 'Discover podcasts on meditation, chakra healing and ceremonial magic.',
     },
     {
-      image: 'home-image-slider/slider3.jpg',
-      title: 'Test title',
-      subtitle: 'Test subtitle',
+      image: 'home-image-slider/slider3.png',
+      title: 'Unveil The Mysteries',
+      subtitle: 'Delve into alchemy, tarot and astrology with curated audio narratives.',
     },
   ]);
 }
