@@ -231,14 +231,17 @@ export class AudioPlayerService {
   }
 
   private seekAudio(time: number) {
+    if (this.audio.readyState < 2) return;
     this.audio.currentTime = time;
   }
 
   private playAudio() {
+    if (this.audio.readyState < 2) return;
     this.audio.play();
   }
 
   private pauseAudio() {
+    if (this.audio.readyState < 2) return;
     this.audio.pause();
   }
 
@@ -319,10 +322,7 @@ export class AudioPlayerService {
     else this.playAudio();
   }
   playId(id: number) {
-    // avoid glitch when changing track
-    this.currentTime.set(0);
-    this.duration.set(0);
-    this.buffered.set([]);
+    this.clear();
 
     this.currentId.set(id);
     const track = this.currentTrack();
