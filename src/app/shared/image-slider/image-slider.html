@@ -3,7 +3,7 @@
   (touchend)="onTouchEnd()">
   <!-- Viewport -->
   <div class="relative w-full h-[500px]">
-    <div class="absolute inset-0 flex transition-transform duration-400"
+    <div class="absolute inset-0 flex transition-transform duration-300"
       [style.transform]="'translateX(' + -current() * 100 + '%)'">
       @for (item of items(); track $index) {
       <div class="relative w-full h-full shrink-0">
