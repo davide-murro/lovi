@@ -19,6 +19,10 @@
         }
     </div>
 
-    <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Confirm account deletion"
-        [disabled]="!form.valid || isLoading()">Confirm</button>
+    <div class="flex justify-center gap-4">
+        <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Confirm account deletion"
+            [disabled]="!form.valid || isLoading()">Confirm</button>
+        <button i18n i18n-title type="reset" class="button button-accent" title="Cancel account deletion"
+            (click)="cancel()">Cancel</button>
+    </div>
 </form>

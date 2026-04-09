@@ -58,4 +58,8 @@ export class ChangeEmailDialog {
       }
     });
   }
+
+  cancel() {
+    this.dialogService.close(false);
+  }
 }

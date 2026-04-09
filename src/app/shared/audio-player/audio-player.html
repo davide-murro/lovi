@@ -1,63 +1,72 @@
 @if (playerVisible()){
-<div class="flex flex-col items-center bg-accent p-4 w-full max-h-full text-sm sm:px-8 sm:text-base"
-  [class]="queueOpen() ? 'gap-2 border-t-2 border-primary sm:gap-4' : ''">
+<div
+  class="flex flex-col items-center bg-accent p-4 w-full max-h-full text-sm sm:px-8 sm:text-base transition-[gap] duration-300"
+  [class]="queueOpen() ? 'border-t-2 border-primary gap-2 sm:gap-4' : 'gap-0'" animate.enter="player-enter-animation"
+  animate.leave="player-leave-animation">
 
-  <button i18n-title class="icon-button" title="Close queue" [class]="!queueOpen() ? '!hidden' : ''"
-    (click)="queueOpen.set(false)">
-    <fa-icon [icon]="faClose" />
-  </button>
+  <div class="flex flex-col items-center w-full h-full overflow-hidden gap-2 sm:gap-4"
+    [class.queue-expand-enter]="queueOpen()" [class.queue-expand-leave]="!queueOpen()">
+    <button i18n-title class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
+      <fa-icon [icon]="faClose" />
+    </button>
 
-  <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4" [class]="!queueOpen() ? '!hidden' : ''">
-    @for (track of audioPlayerService.queue(); track track.id) {
-    <li class="flex items-center px-2 py-2 gap-2 hover:bg-opacity sm:px-4"
-      [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id"
-      [class.text-error]="audioPlayerService.currentTrack()!.id == track.id && audioPlayerService.isError()">
-      <button class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden"
-        (click)="audioPlayerService.playId(track.id!)">
-        <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-          loading="lazy" decoding="async" [secureSrc]="track.coverImageSrc" [secureOffline]="true"
-          [alt]="track.title" />
-        <div class="flex flex-col flex-grow overflow-hidden">
-          <span class="truncate">{{ track.title }} @if(track.subtitle) { - {{ track.subtitle }} }</span>
-          <span class="text-accent truncate">{{ track.artists?.join(", ") }}</span>
+    <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4">
+      @for (track of audioPlayerService.queue(); track track.id) {
+      <li class="flex items-center px-2 py-2 gap-2 sm:px-4 track-list-item"
+        [class.bg-opacity]="audioPlayerService.currentTrack()!.id == track.id"
+        [class.text-error]="audioPlayerService.currentTrack()!.id == track.id && audioPlayerService.isError()">
+        <button
+          class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden track-list-item-button"
+          (click)="audioPlayerService.playId(track.id!)">
+          <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
+            loading="lazy" decoding="async" [secureSrc]="track.coverImageSrc" [secureOffline]="true"
+            [alt]="track.title" />
+          <div class="flex flex-col flex-grow overflow-hidden">
+            <span class="truncate">{{ track.title }} @if(track.subtitle) { - {{ track.subtitle }} }</span>
+            <span class="text-accent truncate">{{ track.artists?.join(", ") }}</span>
+          </div>
+        </button>
+
+        <div class="flex gap-2">
+          <button i18n-title type="button" class="icon-button" [routerLink]="track.referenceLink"
+            title="Go to reference page">
+            <fa-icon [icon]="faShare" />
+          </button>
+          <button i18n-title type="button" class="icon-button" title="Remove from queue"
+            (click)="audioPlayerService.removeFromQueue(track.id!)">
+            <fa-icon [icon]="faTrash" />
+          </button>
         </div>
-      </button>
-
-      <div class="flex gap-2">
-        <button i18n-title type="button" class="icon-button" [routerLink]="track.referenceLink"
-          title="Go to reference page">
-          <fa-icon [icon]="faShare" />
-        </button>
-        <button i18n-title type="button" class="icon-button" title="Remove from queue"
-          (click)="audioPlayerService.removeFromQueue(track.id!)">
-          <fa-icon [icon]="faTrash" />
-        </button>
-      </div>
-    </li>
-    }
-  </ul>
-
-  <div class="slider-container" [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1' : 'relative my-2'">
-    <div class="buffer-bar-container">
-      @for (segment of bufferedSegments(); track $index) {
-      <div class="buffer-bar" [style.left.%]="segment.left" [style.width.%]="segment.width"></div>
+      </li>
       }
-    </div>
-    <input type="range" class="slider-input" [class.thump-hidden]="!queueOpen()" [min]="0"
-      [max]="formatIntValue(displayDuration())" [value]="formatIntValue(displayTime())" [style.--value]="
+    </ul>
+  </div>
+
+  <div class="flex flex-col items-center w-full" [class.slider-expand-enter]="queueOpen()"
+    [class.slider-expand-leave]="!queueOpen()">
+    <div class="slider-container" [class]="!queueOpen() ? 'absolute top-0 left-0 -mt-1' : 'relative my-2'">
+      <div class="buffer-bar-container">
+        @for (segment of bufferedSegments(); track $index) {
+        <div class="buffer-bar" [style.left.%]="segment.left" [style.width.%]="segment.width"></div>
+        }
+      </div>
+      <input type="range" class="slider-input" [class.thump-hidden]="!queueOpen()" [min]="0"
+        [max]="formatIntValue(displayDuration())" [value]="formatIntValue(displayTime())" [style.--value]="
         formatIntValue(displayTime()) /
         formatIntValue(displayDuration())
       " (mousedown)="onSeekingStart()" (touchstart)="onSeekingStart()" (mouseup)="onSeekingEnd()"
-      (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)" />
+        (touchend)="onSeekingEnd()" (input)="onSeeking($event.target.valueAsNumber)" />
+    </div>
   </div>
 
-  <span class="flex justify-center items-center text-sm text-accent" [class]="!queueOpen() ? '!hidden' : ''">
+  <span class="flex justify-center items-center text-sm text-accent" [class.queue-expand-enter]="queueOpen()"
+    [class.queue-expand-leave]="!queueOpen()">
     {{ formatTime(displayTime()) }} /
     {{ formatTime(displayDuration()) }}
   </span>
 
-  <div class="flex justify-between items-center w-full gap-2">
-    <button class="text-left flex flex-col flex-grow min-w-[100px] cursor-pointer"
+  <div class="flex justify-between items-center w-full gap-2 min-h-12">
+    <button class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
       [class]="queueOpen() ? '!hidden' : ''" [class.text-error]="audioPlayerService.isError()"
       (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">

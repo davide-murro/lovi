@@ -52,11 +52,11 @@
          height: 14px;
          width: 14px;
          border-radius: 50%;
+         box-shadow: none;
       }
 
       &.thump-hidden::-webkit-slider-thumb {
          background-color: transparent;
-         box-shadow: none;
       }
 
       &:focus::-webkit-slider-thumb,
@@ -68,10 +68,12 @@
       // Firefox
       &::-moz-range-progress {
          background: transparent;
+         box-shadow: none;
       }
 
       &::-moz-range-track {
          background: transparent;
+         box-shadow: none;
       }
 
       &::-moz-range-thumb {
@@ -79,6 +81,7 @@
          height: 14px;
          width: 14px;
          border-radius: 50%;
+         box-shadow: none;
       }
 
       &.thump-hidden::-moz-range-thumb {
@@ -90,4 +93,79 @@
          background-color: var(--color-primary);
       }
    }
+}
+
+
+.player-enter-animation {
+   animation: player-enter-animation 300ms;
+}
+
+@keyframes player-enter-animation {
+   from {
+      opacity: 0;
+      padding-bottom: 0;
+   }
+
+   to {
+      opacity: 1;
+      padding-bottom: calc(var(--spacing) * 4);
+   }
+}
+
+.player-leave-animation {
+   animation: player-leave-animation 300ms;
+}
+
+@keyframes player-leave-animation {
+   from {
+      opacity: 1;
+      padding-bottom: calc(var(--spacing) * 4);
+   }
+
+   to {
+      opacity: 0;
+      padding-bottom: 0;
+   }
+}
+
+
+.queue-expand-enter {
+   transition: opacity 300ms, max-height 300ms;
+   opacity: 1;
+   max-height: 500px;
+}
+
+.queue-expand-leave {
+   transition: opacity 300ms, max-height 300ms;
+   opacity: 0;
+   max-height: 0;
+}
+
+
+.slider-expand-enter {
+   transition: height 300ms;
+   height: 20px;
+}
+
+.slider-expand-leave {
+   transition: height 300ms;
+   height: 0;
+}
+
+
+.track-list-item {
+   transition: background-color 100ms;
+}
+
+.track-list-item:hover {
+   background-color: var(--color-opacity);
+}
+
+.track-list-item-button {
+   transition: transform 100ms;
+   transform: translateY(0px);
+}
+
+.track-list-item-button:active {
+   transform: translateY(2px);
 }

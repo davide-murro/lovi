@@ -133,6 +133,9 @@ body {
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
     text-align: center;
+    transition-property: transform, background-color;
+    transition-duration: 100ms;
+    transform: translateY(0px);
 }
 
 .button[disabled] {
@@ -142,6 +145,10 @@ body {
 .button:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-opacity);
+}
+
+.button:not([disabled]):active {
+    transform: translateY(2px);
 }
 
 .button.button-lg {
@@ -181,6 +188,10 @@ body {
 
     width: calc(var(--spacing) * 10);
     height: calc(var(--spacing) * 10);
+
+    transition-property: transform, background-color;
+    transition-duration: 100ms;
+    transform: translateY(0px);
 }
 
 .icon-button .ng-fa-icon {
@@ -198,6 +209,10 @@ body {
 .icon-button:not([disabled]):hover {
     cursor: pointer;
     background-color: var(--color-opacity);
+}
+
+.icon-button:not([disabled]):active {
+    transform: translateY(2px);
 }
 
 .icon-button.button-lg {
@@ -218,6 +233,21 @@ body {
     height: calc(var(--spacing) * 16);
 }
 
+
+.list-item-button {
+    transition-property: background-color, transform;
+    transition-duration: 100ms;
+}
+
+.list-item-button:hover {
+    background-color: var(--color-opacity);
+}
+
+.list-item-button:active {
+    transform: translateY(2px);
+}
+
+
 .input-button {
     appearance: button;
     font-size: var(--text-sm);
@@ -227,6 +257,10 @@ body {
     padding-block: calc(var(--spacing) * 2.5);
     text-align: center;
     /*background-color: var(--color-accent);*/
+
+    transition-property: transform, background-color;
+    transition-duration: 100ms;
+    transform: translateY(0px);
 }
 
 .input-button.input-button-lg {
@@ -243,7 +277,11 @@ body {
 
 .input-button:not([disabled]):hover {
     cursor: pointer;
-    background-color: var(--color-accent-light);
+    /*background-color: var(--color-accent-light);*/
+}
+
+.input-button:not([disabled]):active {
+    transform: translateY(2px);
 }
 
 .button-accent {
@@ -287,19 +325,35 @@ body {
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
     text-underline-offset: calc(var(--spacing) * 0.5);
+
+    transition-property: transform, text-decoration;
+    transition-duration: 100ms;
+    transform: translateY(0px);
 }
 
 .link:hover {
-    text-decoration: underline;
+    text-decoration-line: underline;
+}
+
+.link:active {
+    transform: translateY(2px);
 }
 
 .link-item {
     text-decoration-color: var(--text-color-link);
     text-underline-offset: calc(var(--spacing) * 0.5);
+
+    transition-property: transform, text-decoration;
+    transition-duration: 100ms;
+    transform: translateY(0px);
 }
 
 .link-item:hover {
     text-decoration-line: underline;
+}
+
+.link-item:active {
+    transform: translateY(2px);
 }
 
 .label {

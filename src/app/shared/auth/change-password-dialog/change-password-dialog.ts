@@ -49,4 +49,8 @@ export class ChangePasswordDialog {
       }
     });
   }
+
+  cancel() {
+    this.dialogService.close(false);
+  }
 }

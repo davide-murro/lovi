@@ -51,6 +51,10 @@ export class Header {
     });
   }
 
+  toggleMenuMobile() {
+    this.menuMobileOpen.set(!this.menuMobileOpen());
+  }
+
   onSearchSubmit() {
     if (!this.searchForm.valid) return;
 

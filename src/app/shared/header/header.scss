@@ -1,5 +1,15 @@
+.menu-link {
+    transition-property: transform, color;
+    transition-duration: 100ms;
+    transform: translateY(0px);
+}
+
 .menu-link:hover {
     color: var(--text-color-link);
+}
+
+.menu-link:active {
+    transform: translateY(2px);
 }
 
 .menu-link.active {

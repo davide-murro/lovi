@@ -44,4 +44,8 @@ export class DeleteAccountDialog {
       }
     });
   }
+
+  cancel() {
+    this.dialogService.close(false);
+  }
 }

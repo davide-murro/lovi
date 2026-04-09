@@ -3,7 +3,7 @@
 <div class="section flex">
     <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4 sm:mx-0">
         @for (role of rolePagedResult()?.items; track $index) {
-        <li class="flex items-center px-4 py-2 gap-2 hover:bg-opacity cursor-pointer" (click)="selectRole(role)">
+        <li class="list-item-button flex items-center px-4 py-2 gap-2 cursor-pointer" (click)="selectRole(role)">
             <div class="flex flex-col flex-grow overflow-hidden">
                 <span class="truncate">{{ role.name }}</span>
             </div>
