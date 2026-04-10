@@ -30,6 +30,7 @@ export class AudioPlayerService {
   currentTime = signal(0);
   duration = signal(0);
   buffered = signal<{ start: number, end: number }[]>([]);
+  playbackRate = signal<number>(1);
 
   isElaborating = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
@@ -92,7 +93,7 @@ export class AudioPlayerService {
     const syncPlayPause = () => {
       const isPlaying = !this.audio.paused;
       this.isPlaying.set(isPlaying);
-      this.updatePlaybackMetadata(isPlaying);
+      this.updatePlayStateMetadata(isPlaying);
     };
     const syncTime = () => {
       const duration = this.audio.duration;
@@ -100,6 +101,7 @@ export class AudioPlayerService {
       const currentTime = this.audio.currentTime;
       if (isFinite(currentTime)) {
         this.currentTime.set(currentTime);
+        this.playbackRate.set(playbackRate);
         this.updatePositionMetadata(duration, playbackRate, currentTime);
       }
     };
@@ -109,6 +111,7 @@ export class AudioPlayerService {
       const currentTime = this.audio.currentTime;
       if (isFinite(duration)) {
         this.duration.set(duration);
+        this.playbackRate.set(playbackRate);
         this.updatePositionMetadata(duration, playbackRate, currentTime);
       }
     };
@@ -213,7 +216,7 @@ export class AudioPlayerService {
   }
 
   // AUDIO
-  private async loadAudio(track: AudioTrack, time: number = 0, play: boolean = false) {
+  private async loadAudio(track: AudioTrack, rate: number = 1, time: number = 0, play: boolean = false) {
     let url = track?.audioSrc;
     if (!url) return;
 
@@ -225,6 +228,7 @@ export class AudioPlayerService {
     url = this.offlineUrlPipe.transform(url)!;
     this.audio.src = url;
     this.audio.load();
+    this.audio.playbackRate = rate;
     this.audio.currentTime = time;
     if (play) this.audio.play();
     this.loadMetadata(track);
@@ -243,6 +247,11 @@ export class AudioPlayerService {
   private pauseAudio() {
     if (this.audio.readyState < 2) return;
     this.audio.pause();
+  }
+
+  private setPlaybackRateAudio(rate: number) {
+    if (this.audio.readyState < 2) return;
+    this.audio.playbackRate = rate;
   }
 
   private clearAudio() {
@@ -279,7 +288,7 @@ export class AudioPlayerService {
       });
     }
   }
-  private updatePlaybackMetadata(isPlaying: boolean) {
+  private updatePlayStateMetadata(isPlaying: boolean) {
     if ('mediaSession' in navigator) {
       navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
     }
@@ -303,13 +312,18 @@ export class AudioPlayerService {
     this.isError.set(false);
   }
 
+  setPlaybackRate(rate: number) {
+    this.playbackRate.set(rate);
+    this.setPlaybackRateAudio(rate);
+  }
+
   loadId(id: number) {
     this.clear();
 
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
-      this.loadAudio(track);
+      this.loadAudio(track, this.playbackRate());
     }
   }
 
@@ -318,7 +332,7 @@ export class AudioPlayerService {
     else this.play();
   }
   play() {
-    if (this.isError()) this.loadAudio(this.currentTrack()!, this.currentTime(), true);
+    if (this.isError()) this.loadAudio(this.currentTrack()!, this.playbackRate(), this.currentTime(), true);
     else this.playAudio();
   }
   playId(id: number) {
@@ -327,7 +341,7 @@ export class AudioPlayerService {
     this.currentId.set(id);
     const track = this.currentTrack();
     if (track) {
-      this.loadAudio(track, 0, true);
+      this.loadAudio(track, this.playbackRate(), 0, true);
     }
   }
   playTrack(track: AudioTrack, newQueue: AudioTrack[] = []) {
@@ -355,7 +369,7 @@ export class AudioPlayerService {
 
   seek(time: number) {
     this.currentTime.set(time); // set time to avoid ui glitch
-    if (this.isError()) this.loadAudio(this.currentTrack()!, time, true);
+    if (this.isError()) this.loadAudio(this.currentTrack()!, this.playbackRate(), time, true);
     else this.seekAudio(time);
   }
 

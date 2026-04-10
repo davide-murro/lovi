@@ -112,4 +112,16 @@ export class AudioPlayer {
       ? `${hours}:${formattedMinutes}:${formattedSeconds}`
       : `${minutes}:${formattedSeconds}`;
   }
+
+  // Toggle playback rate between 1x, 2x, and 0.5x
+  toggleSpeed() {
+    const currentRate = this.audioPlayerService.playbackRate();
+    let nextRate = 1;
+
+    if (currentRate === 1) nextRate = 2;
+    else if (currentRate === 2) nextRate = 0.5;
+    else nextRate = 1;
+
+    this.audioPlayerService.setPlaybackRate(nextRate);
+  }
 }

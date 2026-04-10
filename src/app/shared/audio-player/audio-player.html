@@ -85,7 +85,10 @@
     </button>
 
     <!-- needs to make prev / play / pause buttons centered -->
-    <span class="size-10" [class]="!queueOpen() ? '!hidden' : ''"></span>
+    <button type="button" class="icon-button text-nowrap font-bold" [class]="!queueOpen() ? '!hidden' : ''"
+      (click)="toggleSpeed()">
+      x{{ audioPlayerService.playbackRate() }}
+    </button>
 
     <div class="flex justify-center gap-2" [class.text-error]="audioPlayerService.isError()">
       <button i18n-title type="button" class="icon-button" title="Back" (click)="audioPlayerService.previous()">
