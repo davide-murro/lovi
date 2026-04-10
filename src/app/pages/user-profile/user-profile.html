@@ -8,7 +8,7 @@
             <div class="max-w-full">
                 <label i18n for="email" class="label">Email</label>
                 <div class="flex gap-2">
-                    <input type="email" autocomplete="email" formControlName="email" id="email" class="input w-full" />
+                    <input type="email" autocomplete="off" formControlName="email" id="email" class="input w-full" />
                     <button i18n-title type="button" class="button button-accent shrink-0 gap-2" title="Change email"
                         (click)="changeEmail()">
                         <fa-icon [icon]="faPen" />
@@ -20,7 +20,7 @@
             <div class="max-w-full">
                 <label i18n for="password" class="label">Password</label>
                 <div class="flex gap-2">
-                    <input type="password" autocomplete="current-password" formControlName="password" id="password"
+                    <input type="password" autocomplete="off" formControlName="password" id="password"
                         class="input w-full" />
                     <button i18n-title type="button" class="button button-accent shrink-0 gap-2" title="Change password"
                         (click)="changePassword()">
