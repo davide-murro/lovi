@@ -84,10 +84,9 @@
       </div>
     </button>
 
-    <!-- needs to make prev / play / pause buttons centered -->
-    <button type="button" class="icon-button text-nowrap font-bold" [class]="!queueOpen() ? '!hidden' : ''"
-      (click)="toggleSpeed()">
-      x{{ audioPlayerService.playbackRate() }}
+    <button i18n-title type="button" title="Toggle speed" class="icon-button text-nowrap font-bold"
+      [class]="!queueOpen() ? '!hidden' : ''" (click)="toggleSpeed()">
+      {{ audioPlayerService.playbackRate() }}x
     </button>
 
     <div class="flex justify-center gap-2" [class.text-error]="audioPlayerService.isError()">
@@ -113,7 +112,7 @@
         }
     </div>
 
-    <button i18n-title type="button" class="icon-button" title="Clear queue" [class]="!queueOpen() ? '!hidden' : ''"
+    <button i18n-title type="button" title="Clear queue" class="icon-button" [class]="!queueOpen() ? '!hidden' : ''"
       (click)="audioPlayerService.clearQueue()">
       <fa-icon [icon]="faTrash" />
     </button>

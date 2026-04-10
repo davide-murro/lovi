@@ -25,7 +25,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">32,33</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3894950702316166331" datatype="html">
@@ -97,8 +97,8 @@
           <context context-type="linenumber">52,53</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6692640031273779523" datatype="html">
-        <source>Is offline</source>
+      <trans-unit id="5775367540823387927" datatype="html">
+        <source>Is Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.html</context>
           <context context-type="linenumber">42,43</context>
@@ -112,8 +112,8 @@
           <context context-type="linenumber">64,65</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5930659316128488004" datatype="html">
-        <source>Download offline</source>
+      <trans-unit id="6786796833042543849" datatype="html">
+        <source>Download Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.html</context>
           <context context-type="linenumber">45,46</context>
@@ -249,8 +249,8 @@
           <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8549871561841469349" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; added to offline</source>
+      <trans-unit id="748814568807539723" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; added to Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.ts</context>
           <context context-type="linenumber">133</context>
@@ -264,8 +264,8 @@
           <context context-type="linenumber">160</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7573267051527893552" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; adding to offline failed</source>
+      <trans-unit id="4120689825129770649" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; adding to Offline failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.ts</context>
           <context context-type="linenumber">137</context>
@@ -286,8 +286,8 @@
           <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1388937605107157535" datatype="html">
-        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; from offline?</source>
+      <trans-unit id="7480048592142868941" datatype="html">
+        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; from Offline?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.ts</context>
           <context context-type="linenumber">146</context>
@@ -297,8 +297,8 @@
           <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2371064457884724362" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; removed from offline</source>
+      <trans-unit id="7048451914816791904" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; removed from Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.ts</context>
           <context context-type="linenumber">151</context>
@@ -312,8 +312,8 @@
           <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="802764526520018801" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; removing from offline failed</source>
+      <trans-unit id="2500703953933430930" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="this.audioBook().name"/>&quot; removing from Offline failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/audio-books/audio-book-details/audio-book-details.ts</context>
           <context context-type="linenumber">155</context>
@@ -327,8 +327,8 @@
           <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="475492382860195966" datatype="html">
-        <source>Confirm changing email</source>
+      <trans-unit id="6568241849286471287" datatype="html">
+        <source>Confirm email change</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
           <context context-type="linenumber">2,4</context>
@@ -338,8 +338,8 @@
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3352744287381737086" datatype="html">
-        <source> Please confirm your email address changing by clicking the button </source>
+      <trans-unit id="8946275703654004327" datatype="html">
+        <source> Please confirm your email address change by clicking the button </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
           <context context-type="linenumber">6,7</context>
@@ -357,15 +357,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">38,39</context>
+          <context context-type="linenumber">39,40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">76,77</context>
+          <context context-type="linenumber">77,78</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
@@ -376,8 +376,8 @@
           <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4920501979008317258" datatype="html">
-        <source> Parameters not valid </source>
+      <trans-unit id="1751694105082470894" datatype="html">
+        <source> Invalid parameters </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
           <context context-type="linenumber">14,15</context>
@@ -391,29 +391,29 @@
           <context context-type="linenumber">110,111</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="984021952760491268" datatype="html">
-        <source>Changing email confirmed</source>
+      <trans-unit id="3845778830128417849" datatype="html">
+        <source>Email change confirmed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
           <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2057831743223561278" datatype="html">
-        <source>You can now login into LOVI with the new mail you chose and the old password.</source>
+      <trans-unit id="682106464138872093" datatype="html">
+        <source>You can now log in to LOVI with the new email you chose and the old password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
           <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="858362179921586595" datatype="html">
-        <source>Changing email confirmation failed</source>
+      <trans-unit id="6154363620559735001" datatype="html">
+        <source>Email change confirmation failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2428373717353699813" datatype="html">
-        <source>Changing email confirmation failed, unexpected error.</source>
+      <trans-unit id="2783516973855938863" datatype="html">
+        <source>Email change confirmation failed, unexpected error.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
           <context context-type="linenumber">43</context>
@@ -444,8 +444,8 @@
           <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4180935341924074352" datatype="html">
-        <source>You can now login into LOVI with the email and the password you chose during the registration.</source>
+      <trans-unit id="7058916482511104258" datatype="html">
+        <source>You can now log in to LOVI with the email and password you chose during registration.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
           <context context-type="linenumber">33</context>
@@ -462,8 +462,8 @@
           <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2243431983742433767" datatype="html">
-        <source>You can login into LOVI with the email and the password you chose during the registration.</source>
+      <trans-unit id="8383673694407020945" datatype="html">
+        <source>You can log in to LOVI with the email and password you chose during registration.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
           <context context-type="linenumber">42</context>
@@ -547,8 +547,8 @@
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7933044779446511788" datatype="html">
-        <source> Email not valid </source>
+      <trans-unit id="2677873999927804719" datatype="html">
+        <source> Invalid email </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
           <context context-type="linenumber">20</context>
@@ -879,10 +879,10 @@
           <context context-type="linenumber">10,11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8692640118677596585" datatype="html">
+      <trans-unit id="5817778849206069572" datatype="html">
         <source> Password is required. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot;
                     [routerLink]=&quot;[&apos;/auth&apos;, &apos;forgot-password&apos;]&quot;
-                    [queryParams]=&quot;{ email: form.value.userName || null }&quot;&gt;"/>Forgot Password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+                    [queryParams]=&quot;{ email: form.value.userName || null }&quot;&gt;"/>Forgot password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
           <context context-type="linenumber">32,35</context>
@@ -903,11 +903,15 @@
           <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6336655282869661216" datatype="html">
-        <source> Forgot Password? </source>
+      <trans-unit id="3035570095838445091" datatype="html">
+        <source> Forgot password? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
           <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1750137775875093438" datatype="html">
@@ -1148,8 +1152,8 @@
           <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6735027527559480468" datatype="html">
-        <source>Please check your email inbox to verify your account, then sing in into LOVI</source>
+      <trans-unit id="941700628329568981" datatype="html">
+        <source>Please check your email inbox to verify your account, then sign in to LOVI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/auth/register/register.ts</context>
           <context context-type="linenumber">44</context>
@@ -1177,7 +1181,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3072935047674817211" datatype="html">
@@ -1187,15 +1191,12 @@
           <context context-type="linenumber">2,4</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3426104253696300222" datatype="html">
-        <source>All My Library</source>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
           <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.html</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7385160636957089888" datatype="html">
@@ -1205,8 +1206,8 @@
           <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="877165221779588249" datatype="html">
-        <source>Offline Library</source>
+      <trans-unit id="5940599242581287022" datatype="html">
+        <source>My Offline Library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
           <context context-type="linenumber">9</context>
@@ -1249,7 +1250,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="linenumber">39,40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/podcasts-paged/podcasts-paged.html</context>
@@ -1278,8 +1279,8 @@
           <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7658330295171083880" datatype="html">
-        <source>No Audio Books are available offline</source>
+      <trans-unit id="3089000173584018072" datatype="html">
+        <source>No Audio Books are available Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
           <context context-type="linenumber">11,12</context>
@@ -1292,22 +1293,18 @@
           <context context-type="linenumber">22,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1893042642009019022" datatype="html">
-        <source>No Podcasts are available offline</source>
+      <trans-unit id="4442843856048503252" datatype="html">
+        <source>No Podcasts are available Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
           <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6147484957227591088" datatype="html">
-        <source>Back to Podcasts</source>
+      <trans-unit id="4940309136341647297" datatype="html">
+        <source>Back to podcasts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
           <context context-type="linenumber">2,3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9024833043122917992" datatype="html">
@@ -1402,11 +1399,18 @@
           <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6575307431559927295" datatype="html">
-        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; from offline? All the episodes will be removed.</source>
+      <trans-unit id="3938410096344984343" datatype="html">
+        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; from Offline? All the episodes will be removed.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
           <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6147484957227591088" datatype="html">
+        <source>Back to Podcasts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
+          <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="470668609529713261" datatype="html">
@@ -1520,7 +1524,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">44,45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6309828574111583895" datatype="html">
@@ -1591,8 +1595,8 @@
           <context context-type="linenumber">63,64</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8144423722590210297" datatype="html">
-        <source>Email changing confirmation sent</source>
+      <trans-unit id="459222468206981218" datatype="html">
+        <source>Email change confirmation sent</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
           <context context-type="linenumber">57</context>
@@ -1700,49 +1704,56 @@
         <source>Close queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7471106605958244406" datatype="html">
         <source>Go to reference page</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">28,29</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6820635381009519748" datatype="html">
         <source>Remove from queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">31,32</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1083264326477451541" datatype="html">
+        <source>Toggle speed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8890553633144307762" datatype="html">
         <source>Back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8604695045343743097" datatype="html">
         <source>Forward</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7877250793311378611" datatype="html">
         <source>Restart queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">97,98</context>
+          <context context-type="linenumber">108,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1994426929514890878" datatype="html">
         <source>Clear queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8395429101406970401" datatype="html">
@@ -1770,8 +1781,8 @@
           <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6654106372089346233" datatype="html">
-        <source> New email not valid </source>
+      <trans-unit id="7821811663801547376" datatype="html">
+        <source> Invalid new email </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
           <context context-type="linenumber">28</context>
@@ -1784,11 +1795,45 @@
           <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7162693180808037100" datatype="html">
-        <source>Request changing email</source>
+      <trans-unit id="5973258709136150113" datatype="html">
+        <source>Request email change</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="574622451354762468" datatype="html">
+        <source>Cancel email change</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3398522351675884140" datatype="html">
@@ -1805,8 +1850,8 @@
           <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="575737294171361342" datatype="html">
-        <source>Changing email failed</source>
+      <trans-unit id="8812975878675449820" datatype="html">
+        <source>Email change failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.ts</context>
           <context context-type="linenumber">53</context>
@@ -1837,11 +1882,18 @@
         <source>Confirm password change</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">76,77</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8716657805698556062" datatype="html">
-        <source>Changing password failed</source>
+      <trans-unit id="5594617722028616526" datatype="html">
+        <source>Cancel password change</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
+          <context context-type="linenumber">78,79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6505667961091725510" datatype="html">
+        <source>Password change failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.ts</context>
           <context context-type="linenumber">45</context>
@@ -1866,7 +1918,14 @@
         <source>Confirm account deletion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5633178688280942024" datatype="html">
+        <source>Cancel account deletion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="340721362726841609" datatype="html">
@@ -1890,33 +1949,11 @@
           <context context-type="linenumber">2,4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3035570095838445091" datatype="html">
-        <source> Forgot password? </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1112525418959962254" datatype="html">
         <source>Cancel registration</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
           <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2159130950882492111" datatype="html">
-        <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
-          <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1463716403066266718" datatype="html">
@@ -1962,7 +1999,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/toaster/toaster.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="88688153290257784" datatype="html">
@@ -1986,8 +2023,8 @@
           <context context-type="linenumber">1,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7096919182778695171" datatype="html">
-        <source>Roles getting failed</source>
+      <trans-unit id="1417773337941503568" datatype="html">
+        <source>Failed to load roles</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/role-selector-dialog/role-selector-dialog.ts</context>
           <context context-type="linenumber">36</context>
@@ -2160,8 +2197,8 @@
           <context context-type="linenumber">1,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="60565292262431611" datatype="html">
-        <source>Creators getting failed</source>
+      <trans-unit id="5584894144965270876" datatype="html">
+        <source>Failed to load creators</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/creator-selector-dialog/creator-selector-dialog.ts</context>
           <context context-type="linenumber">35</context>
@@ -2171,60 +2208,60 @@
         <source>Sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">12,13</context>
+          <context context-type="linenumber">13,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8983306299153846900" datatype="html">
         <source>Go to User Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">14,15</context>
+          <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1401329412047425143" datatype="html">
         <source>Go to Audio Books</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5928143073449378176" datatype="html">
         <source>Go to Podcasts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1134471344072681599" datatype="html">
         <source>Go to My Library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1766402655822050116" datatype="html">
         <source>Go to Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">42,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
         <source>Search</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8845008155590279280" datatype="html">
         <source>Search for Audio Books or Podcasts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">45,46</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
@@ -2259,8 +2296,8 @@
           <context context-type="linenumber">1,2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1759060520452136622" datatype="html">
-        <source>Element not found or not available offline. Please try reloading the page or go back.</source>
+      <trans-unit id="7580974179112857817" datatype="html">
+        <source>Element not found or not available Offline. Please try reloading the page or go back.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
           <context context-type="linenumber">2,4</context>
