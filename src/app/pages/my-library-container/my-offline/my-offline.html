@@ -8,7 +8,7 @@
   <h2 i18n class="title">Offline Audio Books</h2>
 
   @if (myOfflineAudioBooks() == null || myOfflineAudioBooks()!.length == 0) {
-  <p i18n class="section text-accent">No Audio Books are available offline</p>
+  <p i18n class="section text-accent">No Audio Books are available Offline</p>
   } @else {
   <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
     @for (audioBook of myOfflineAudioBooks(); track audioBook.id) {
@@ -22,7 +22,7 @@
   <h2 i18n class="title">Offline Podcasts</h2>
 
   @if (myOfflinePodcasts() == null || myOfflinePodcasts()!.length == 0) {
-  <p i18n class="section text-accent">No Podcasts are available offline</p>
+  <p i18n class="section text-accent">No Podcasts are available Offline</p>
   } @else {
   <div class="flex flex-col gap-8">
     @for (podcast of myOfflinePodcasts(); track podcast.id) {

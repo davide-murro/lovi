@@ -37,12 +37,12 @@ export const routes: Routes = [
     {
         path: '',
         component: Home,
-        title: 'LOVI - Home page'
+        title: 'LOVI - Home Page'
     },
     {
         path: 'auth/login',
         component: Login,
-        title: 'LOVI - Log in'
+        title: 'LOVI - Log In'
     },
     {
         path: 'auth/register',
@@ -52,17 +52,17 @@ export const routes: Routes = [
     {
         path: 'auth/confirm-email',
         component: ConfirmEmail,
-        title: 'LOVI - Confirm email'
+        title: 'LOVI - Confirm Email'
     },
     {
         path: 'auth/forgot-password',
         component: ForgotPassword,
-        title: 'LOVI - Forgot password'
+        title: 'LOVI - Forgot Password'
     },
     {
         path: 'auth/confirm-change-email',
         component: ConfirmChangeEmail,
-        title: 'LOVI - Confirm change email'
+        title: 'LOVI - Confirm Change Email'
     },
     {
         path: 'user-profile',
@@ -135,7 +135,7 @@ export const routes: Routes = [
             {
                 path: 'local',
                 component: MyFiles,
-                title: 'LOVI - My files'
+                title: 'LOVI - My Files'
             }*/
         ]
     },
@@ -263,7 +263,7 @@ export const routes: Routes = [
     {
         path: 'not-found',
         component: NotFound,
-        title: 'LOVI - Not found',
+        title: 'LOVI - Not Found',
     },
     {
         path: '**',

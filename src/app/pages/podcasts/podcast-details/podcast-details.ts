@@ -119,11 +119,11 @@ export class PodcastDetails {
           this.toasterService.show($localize`"${this.podcast().name}" downloading...`);
           from(this.offlineService!.downloadPodcast(this.podcast())).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.podcast().name}" added to offline`, { type: 'success' });
+              this.toasterService.show($localize`"${this.podcast().name}" added to Offline`, { type: 'success' });
             },
             error: (err) => {
               console.error('offlineService.downloadPodcast', this.podcast().id!, err);
-              this.toasterService.show($localize`"${this.podcast().name}" adding to offline failed`, { type: 'error' });
+              this.toasterService.show($localize`"${this.podcast().name}" adding to Offline failed`, { type: 'error' });
             }
           });
         }
@@ -132,16 +132,16 @@ export class PodcastDetails {
   removeOffline() {
     this.dialogService.confirm(
       $localize`Remove Podcast`,
-      $localize`Are you sure you want to remove "${this.podcast().name}" from offline? All the episodes will be removed.`)
+      $localize`Are you sure you want to remove "${this.podcast().name}" from Offline? All the episodes will be removed.`)
       .subscribe((res) => {
         if (res) {
           from(this.offlineService!.removePodcast(this.podcast().id!)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.podcast().name}" removed from offline`);
+              this.toasterService.show($localize`"${this.podcast().name}" removed from Offline`);
             },
             error: (err) => {
               console.error('offlineService.removePodcast', this.podcast().id!, err);
-              this.toasterService.show($localize`"${this.podcast().name}" removing from offline failed`, { type: 'error' });
+              this.toasterService.show($localize`"${this.podcast().name}" removing from Offline failed`, { type: 'error' });
             }
           });
         }

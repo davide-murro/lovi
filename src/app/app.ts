@@ -52,7 +52,7 @@ export class App {
 
     // check offline
     window.addEventListener('online', () => this.toasterService.show('You are back online.', { type: 'success', duration: 5000 }));
-    window.addEventListener('offline', () => this.toasterService.show('You are offline. You will be able to see only offline content.', { type: 'warning', duration: 5000 }));
+    window.addEventListener('offline', () => this.toasterService.show('You are Offline. You will be able to see only Offline content.', { type: 'warning', duration: 5000 }));
   }
 
   private checkCookie() {

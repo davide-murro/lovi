@@ -157,11 +157,11 @@ export class PodcastEpisodeDetails {
           this.toasterService.show($localize`"${this.podcastEpisode().name}" downloading...`);
           from(this.offlineService!.downloadPodcastEpisode(this.podcastEpisode())).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.podcastEpisode().name}" added to offline`, { type: 'success' });
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" added to Offline`, { type: 'success' });
             },
             error: (err) => {
               console.error('offlineService.downloadPodcastEpisode', this.podcastEpisode(), err);
-              this.toasterService.show($localize`"${this.podcastEpisode().name}" adding to offline failed`, { type: 'error' });
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" adding to Offline failed`, { type: 'error' });
             }
           });
         }
@@ -170,16 +170,16 @@ export class PodcastEpisodeDetails {
   removeOffline() {
     this.dialogService.confirm(
       $localize`Remove Podcast Episode`,
-      $localize`Are you sure you want to remove "${this.podcastEpisode().name}" from offline?`)
+      $localize`Are you sure you want to remove "${this.podcastEpisode().name}" from Offline?`)
       .subscribe((res) => {
         if (res) {
           from(this.offlineService!.removePodcastEpisode(this.podcastEpisode().id!)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.podcastEpisode().name}" removed from offline`);
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" removed from Offline`);
             },
             error: (err) => {
               console.error('offlineService.removePodcastEpisode', this.podcastEpisode().id!, err);
-              this.toasterService.show($localize`"${this.podcastEpisode().name}" removing from offline failed`, { type: 'error' });
+              this.toasterService.show($localize`"${this.podcastEpisode().name}" removing from Offline failed`, { type: 'error' });
             }
           });
         }

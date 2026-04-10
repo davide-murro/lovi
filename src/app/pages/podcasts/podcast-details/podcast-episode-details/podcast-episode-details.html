@@ -54,17 +54,17 @@
         </button>
 
         <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-          [title]="isOffline() ? 'Remove from offline' : 'Download offline'" [disabled]="isOfflineLoading()"
+          [title]="isOffline() ? 'Remove from Offline' : 'Download Offline'" [disabled]="isOfflineLoading()"
           (click)="toggleOffline()">
           @if(isOfflineLoading()) {
           <fa-icon [icon]="faCircleNotch" animation="spin" />
           <span i18n class="hidden lg:inline">Loading...</span>
           } @else if(isOffline()) {
           <fa-icon [icon]="faFileArrowDown" />
-          <span i18n class="hidden lg:inline">Is offline</span>
+          <span i18n class="hidden lg:inline">Is Offline</span>
           } @else {
           <fa-icon [icon]="faDownload" />
-          <span i18n class="hidden lg:inline">Download offline</span>
+          <span i18n class="hidden lg:inline">Download Offline</span>
           }
         </button>
       </div>

@@ -130,11 +130,11 @@ export class AudioBookDetails {
           this.toasterService.show($localize`"${this.audioBook().name}" downloading...`);
           from(this.offlineService!.downloadAudioBook(this.audioBook())).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.audioBook().name}" added to offline`, { type: 'success' });
+              this.toasterService.show($localize`"${this.audioBook().name}" added to Offline`, { type: 'success' });
             },
             error: (err) => {
               console.error('offlineService.downloadAudioBook', this.audioBook(), err);
-              this.toasterService.show($localize`"${this.audioBook().name}" adding to offline failed`, { type: 'error' });
+              this.toasterService.show($localize`"${this.audioBook().name}" adding to Offline failed`, { type: 'error' });
             }
           });
         }
@@ -143,16 +143,16 @@ export class AudioBookDetails {
   removeOffline() {
     this.dialogService.confirm(
       $localize`Remove Audio Book`,
-      $localize`Are you sure you want to remove "${this.audioBook().name}" from offline?`)
+      $localize`Are you sure you want to remove "${this.audioBook().name}" from Offline?`)
       .subscribe((res) => {
         if (res) {
           from(this.offlineService!.removeAudioBook(this.audioBook().id!)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.audioBook().name}" removed from offline`);
+              this.toasterService.show($localize`"${this.audioBook().name}" removed from Offline`);
             },
             error: (err) => {
               console.error('offlineService.removeAudioBook', this.audioBook().id!, err);
-              this.toasterService.show($localize`"${this.audioBook().name}" removing from offline failed`, { type: 'error' });
+              this.toasterService.show($localize`"${this.audioBook().name}" removing from Offline failed`, { type: 'error' });
             }
           });
         }

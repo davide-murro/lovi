@@ -292,7 +292,7 @@ export class OfflineService {
         if (!audioBook.id) return;
 
         if (this.isAudioBookDownloaded(audioBook.id!)) {
-            throw new Error(`${audioBook.name} is already offline`);
+            throw new Error(`${audioBook.name} is already Offline`);
         }
         if (this.isAudioBookDownloading(audioBook.id!)) {
             throw new Error(`${audioBook.name} is already downloading`);
@@ -338,7 +338,7 @@ export class OfflineService {
         if (!podcast.id || !podcast.episodes) return;
 
         if (this.isPodcastDownloaded(podcast.id!)) {
-            throw new Error(`${podcast.name} is already offline`);
+            throw new Error(`${podcast.name} is already Offline`);
         }
         if (this.isPodcastDownloading(podcast.id!)) {
             throw new Error(`${podcast.name} is already downloading`);
@@ -360,7 +360,7 @@ export class OfflineService {
         if (!episode.id || !episode.podcast?.id) return;
 
         if (this.isPodcastEpisodeDownloaded(episode.id!)) {
-            throw new Error(`${episode.name} is already offline`);
+            throw new Error(`${episode.name} is already Offline`);
         }
         if (this.isPodcastEpisodeDownloading(episode.id!)) {
             throw new Error(`${episode.name} is already downloading`);
@@ -416,10 +416,10 @@ export class OfflineService {
         // 1. Find the stored offline version to get the correct URLs (with isOffline=True)
         const storedItem = this.offlineAudioBooks().find(a => a.id === id);
         if (!storedItem) {
-            throw new Error(`Audiobook ${id} not found in offline storage`);
+            throw new Error(`Audiobook ${id} not found in Offline storage`);
         }
         if (!this.isAudioBookDownloaded(id)) {
-            throw new Error(`${storedItem.name} is not offline`);
+            throw new Error(`${storedItem.name} is not Offline`);
         }
         if (this.isAudioBookDownloading(id)) {
             throw new Error(`${storedItem.name} is downloading`);
@@ -492,10 +492,10 @@ export class OfflineService {
         // 1. Find the stored offline version to get the correct URLs (with isOffline=True)
         const storedItem = this.offlineEpisodes().find(e => e.id === id);
         if (!storedItem) {
-            throw new Error(`Episode ${id} not found in offline storage`);
+            throw new Error(`Episode ${id} not found in Offline storage`);
         }
         if (!this.isPodcastEpisodeDownloaded(id)) {
-            throw new Error(`${storedItem.name} is not offline`);
+            throw new Error(`${storedItem.name} is not Offline`);
         }
         if (this.isPodcastEpisodeDownloading(id)) {
             throw new Error(`${storedItem.name} is downloading`);

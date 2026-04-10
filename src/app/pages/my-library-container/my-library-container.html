@@ -1,12 +1,12 @@
 <div class="title flex justify-between items-start gap-2">
   <h1 i18n class="flex-1">My Library</h1>
 
-  <button i18n-title type="button" title="All My Library" class="button button-rounded button-accent shrink-0 gap-2"
+  <button i18n-title type="button" title="My Library" class="button button-rounded button-accent shrink-0 gap-2"
     [routerLinkActive]="'button-primary'" [routerLink]="['/my-library', 'library']">
     <fa-icon [icon]="faBookBookmark" />
     <span i18n class="hidden lg:inline">Library</span>
   </button>
-  <button i18n-title type="button" title="Offline Library" class="button button-rounded button-accent shrink-0 gap-2"
+  <button i18n-title type="button" title="My Offline Library" class="button button-rounded button-accent shrink-0 gap-2"
     [routerLinkActive]="'button-primary'" [routerLink]="['/my-library', 'offline']">
     <fa-icon [icon]="faFileArrowDown" />
     <span i18n class="hidden lg:inline">Offline</span>
