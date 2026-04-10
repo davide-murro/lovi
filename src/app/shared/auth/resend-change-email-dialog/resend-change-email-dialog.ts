@@ -34,7 +34,7 @@ export class ResendChangeEmailDialog {
         if ((Array.isArray(err.error) && err.error.some((e: any) => e.code === 'EmailAlreadyConfirmed'))) {
           this.dialogService.log(
             $localize`Email already confirmed`,
-            $localize`You can login into LOVI with the email and the password you chose during the registration.`
+            $localize`You can log in to LOVI with the email and password you chose during registration.`
           ).subscribe(() => this.dialogService.close(true));
         } else {
           this.toasterService.show(

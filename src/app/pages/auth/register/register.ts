@@ -41,7 +41,7 @@ export class Register {
       next: () => {
         this.dialogService.log(
           $localize`Registration successful`,
-          $localize`Please check your email inbox to verify your account, then sing in into LOVI`)
+          $localize`Please check your email inbox to verify your account, then sign in to LOVI`)
           .subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isLoading.set(false);
       },

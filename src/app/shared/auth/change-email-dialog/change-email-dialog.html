@@ -25,7 +25,7 @@
         </p>
         } @else if(form.controls.newEmail.hasError('email')) {
         <p i18n class="hint text-error">
-            New email not valid
+            Invalid new email
         </p>
         } @else if(form.controls.newEmail.valid) {
         <p i18n class="hint text-success">
@@ -35,9 +35,9 @@
     </div>
 
     <div class="flex justify-center gap-4">
-        <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Request changing email"
+        <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Request email change"
             [disabled]="!form.valid || isLoading()">Confirm</button>
-        <button i18n i18n-title type="reset" class="button button-accent" title="Cancel changing email"
+        <button i18n i18n-title type="reset" class="button button-accent" title="Cancel email change"
             (click)="cancel()">Cancel</button>
     </div>
 </form>

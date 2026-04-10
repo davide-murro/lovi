@@ -30,7 +30,7 @@ export class ConfirmEmail {
       next: () => {
         this.dialogService.log(
           $localize`Email confirmed`,
-          $localize`You can now login into LOVI with the email and the password you chose during the registration.`,
+          $localize`You can now log in to LOVI with the email and password you chose during registration.`,
         ).subscribe(() => this.router.navigate(['/auth', 'login']));
         this.isLoading.set(false);
       },
@@ -39,7 +39,7 @@ export class ConfirmEmail {
         if ((Array.isArray(error.error) && error.error.some((e: any) => e.code === 'EmailAlreadyConfirmed'))) {
           this.dialogService.log(
             $localize`Email already confirmed`,
-            $localize`You can login into LOVI with the email and the password you chose during the registration.`
+            $localize`You can log in to LOVI with the email and password you chose during registration.`
           ).subscribe(() => this.router.navigate(['/auth', 'login']));
         } else {
           this.dialogService.log(

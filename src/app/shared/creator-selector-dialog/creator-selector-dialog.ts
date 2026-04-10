@@ -32,7 +32,7 @@ export class CreatorSelectorDialog {
       switchMap(query =>
         this.creatorsService.getPaged(query).pipe(
           catchError(err => {
-            this.toasterService.show($localize`Creators getting failed`, { type: 'error' });
+            this.toasterService.show($localize`Failed to load creators`, { type: 'error' });
             console.error('creatorsService.getPaged', query, err);
             return of(null);
           })

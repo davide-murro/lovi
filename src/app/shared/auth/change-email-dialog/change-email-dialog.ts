@@ -50,7 +50,7 @@ export class ChangeEmailDialog {
           );
         } else {
           this.toasterService.show(
-            $localize`Changing email failed`,
+            $localize`Email change failed`,
             { type: 'error' }
           );
         }
