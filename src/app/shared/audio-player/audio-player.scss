@@ -129,32 +129,54 @@
 }
 
 
+.player-expand {
+   transition-property: gap, border-top;
+   transition-duration: 300ms;
+}
+
+.player-expand-enter {
+   border-top: 2px solid var(--color-primary);
+   gap: 2px;
+}
+
+.player-expand-leave {
+   border-top: none;
+   gap: 0;
+}
+
+
+.queue-expand {
+   transition-property: opacity, max-height;
+   transition-duration: 300ms;
+}
+
 .queue-expand-enter {
-   transition: opacity 300ms, max-height 300ms;
    opacity: 1;
    max-height: 500px;
 }
 
 .queue-expand-leave {
-   transition: opacity 300ms, max-height 300ms;
    opacity: 0;
    max-height: 0;
 }
 
+.slider-expand {
+   transition-property: height;
+   transition-duration: 300ms;
+}
 
 .slider-expand-enter {
-   transition: height 300ms;
    height: 20px;
 }
 
 .slider-expand-leave {
-   transition: height 300ms;
    height: 0;
 }
 
 
 .track-list-item {
-   transition: background-color 100ms;
+   transition-property: background-color, color;
+   transition-duration: 100ms;
 }
 
 .track-list-item:hover {

@@ -133,7 +133,7 @@ body {
     padding-inline: calc(var(--spacing) * 5);
     padding-block: calc(var(--spacing) * 2.5);
     text-align: center;
-    transition-property: transform, background-color;
+    transition-property: transform, background-color, color;
     transition-duration: 100ms;
     transform: translateY(0px);
 }
@@ -189,7 +189,7 @@ body {
     width: calc(var(--spacing) * 10);
     height: calc(var(--spacing) * 10);
 
-    transition-property: transform, background-color;
+    transition-property: transform, background-color, color;
     transition-duration: 100ms;
     transform: translateY(0px);
 }
@@ -235,7 +235,7 @@ body {
 
 
 .list-item-button {
-    transition-property: background-color, transform;
+    transition-property: transform, background-color, color;
     transition-duration: 100ms;
 }
 
@@ -258,7 +258,7 @@ body {
     text-align: center;
     /*background-color: var(--color-accent);*/
 
-    transition-property: transform, background-color;
+    transition-property: transform, background-color, color;
     transition-duration: 100ms;
     transform: translateY(0px);
 }
