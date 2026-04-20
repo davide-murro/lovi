@@ -9,6 +9,10 @@ import { userProfileResolver } from "./core/resolvers/user-profile.resolver";
 import { userResolver } from "./core/resolvers/user.resolver";
 import { AudioBookDetails } from "./pages/audio-books/audio-book-details/audio-book-details";
 import { AudioBooks } from "./pages/audio-books/audio-books";
+import { EBooks } from "./pages/e-books/e-books";
+import { EBookDetails } from "./pages/e-books/e-book-details/e-book-details";
+import { EditEBook } from "./pages/edit/edit-e-book/edit-e-book";
+import { eBookResolver } from "./core/resolvers/e-book.resolver";
 import { ConfirmChangeEmail } from "./pages/auth/confirm-change-email/confirm-change-email";
 import { ConfirmEmail } from "./pages/auth/confirm-email/confirm-email";
 import { ForgotPassword } from "./pages/auth/forgot-password/forgot-password";
@@ -84,6 +88,19 @@ export const routes: Routes = [
         title: 'LOVI - Audio Books Details',
         resolve: {
             audioBook: audioBookResolver
+        },
+    },
+    {
+        path: 'e-books',
+        component: EBooks,
+        title: 'LOVI - eBooks'
+    },
+    {
+        path: 'e-books/:id',
+        component: EBookDetails,
+        title: 'LOVI - eBooks Details',
+        resolve: {
+            eBook: eBookResolver
         },
     },
     {
@@ -167,6 +184,23 @@ export const routes: Routes = [
         data: { roles: ['Admin', 'Editor'] },
         resolve: {
             audioBook: audioBookResolver
+        }
+    },
+    {
+        path: 'edit/e-books/create',
+        component: EditEBook,
+        title: 'LOVI - Create eBook',
+        canActivate: [authGuard],
+        data: { roles: ['Admin', 'Editor'] },
+    },
+    {
+        path: 'edit/e-books/:id',
+        component: EditEBook,
+        title: 'LOVI - Edit eBook',
+        canActivate: [authGuard],
+        data: { roles: ['Admin', 'Editor'] },
+        resolve: {
+            eBook: eBookResolver
         }
     },
     {

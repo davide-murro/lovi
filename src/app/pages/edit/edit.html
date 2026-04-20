@@ -49,6 +49,55 @@
     </table>
 </div>
 
+<h2 class="title">eBooks</h2>
+
+<div class="section overflow-auto">
+    <table class="table w-full break-normal">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>cover image</th>
+                <th>cover image preview</th>
+                <th>description</th>
+                <th>file</th>
+                <th>writers</th>
+
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (eBook of eBookPagedResult()?.items; track $index) {
+            <tr>
+                <td>{{eBook.id}}</td>
+                <td><span class="line-clamp-2">{{eBook.name}}</span></td>
+                <td>{{!!eBook.coverImageUrl}}</td>
+                <td>{{!!eBook.coverImagePreviewUrl}}</td>
+                <td><span class="line-clamp-2">{{eBook.description}}</span></td>
+                <td>{{!!eBook.fileUrl}}</td>
+                <td>{{eBook.writers?.length}}</td>
+
+                <td>
+                    <a class="icon-button" title="Update eBook" [routerLink]="['/edit', 'e-books', eBook.id]"><fa-icon
+                            [icon]="faPen" /></a>
+                </td>
+                <td>
+                    <button type="button" class="icon-button" title="Delete eBook"
+                        (click)="deleteEBook(eBook.id!)"><fa-icon [icon]="faTrash" /></button>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="100%">
+                    <a title="Create eBook" class="button button-accent"
+                        [routerLink]="['/edit', 'e-books', 'create']">Create eBook</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <h2 class="title">Podcasts</h2>
 
 <div class="section overflow-auto">

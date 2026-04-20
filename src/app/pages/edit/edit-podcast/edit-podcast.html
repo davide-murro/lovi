@@ -30,7 +30,7 @@
     </div>
 
     <div>
-        <label class="label" for="cover-image">Cover image</label>
+        <label class="label" for="cover-image">Cover image (.jpg, .jpeg, .png)</label>
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
@@ -39,7 +39,7 @@
     </div>
 
     <div>
-        <label class="label" for="cover-image-preview">Cover image preview</label>
+        <label class="label" for="cover-image-preview">Cover image preview (.jpg, .jpeg, .png)</label>
         <input type="file" accept="image/*" id="cover-image-preview" class="input w-full"
             placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />

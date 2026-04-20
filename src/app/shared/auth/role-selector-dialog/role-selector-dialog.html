@@ -1,7 +1,7 @@
 <h2 i18n class="title2 !pt-0">Select Role</h2>
 
 <div class="section flex">
-    <ul role="list" class="flex flex-col flex-grow w-full overflow-auto -mx-4 sm:mx-0">
+    <ul role="list" class="flex flex-col flex-grow w-full -mx-4 sm:mx-0">
         @for (role of rolePagedResult()?.items; track $index) {
         <li class="list-item-button flex items-center px-4 py-2 gap-2 cursor-pointer" (click)="selectRole(role)">
             <div class="flex flex-col flex-grow overflow-hidden">

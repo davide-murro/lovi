@@ -1,0 +1,86 @@
+@if (readerVisible()) {
+<div class="block w-full min-h-20"></div>
+<div animate.enter="reader-enter-animation" animate.leave="reader-leave-animation"
+    class="reader-expand fixed bottom-0 flex flex-col items-center bg-accent w-full max-h-full py-4 max-sm:text-sm"
+    [class.max-sm:py-0]="isOpen()" [class.max-sm:pt-2]="isOpen()">
+
+    <div class="reader-content-expand flex flex-col items-center w-full h-full overflow-hidden gap-2 sm:gap-4 sm:px-8"
+        [class.reader-content-expand-enter]="isOpen()" [class.reader-content-expand-leave]="!isOpen()">
+        <div class="flex justify-between items-center w-full gap-4 max-sm:px-4">
+            <div class="flex flex-grow items-center gap-1">
+                <button i18n-title class="icon-button" title="Change theme" (click)="toggleThemeInput()">
+                    <fa-icon [icon]="faCircleHalfStroke" />
+                </button>
+                <div class="slider-container" [class.open]="themeInputOpen()">
+                    <input i18n-title type="range" min="0" max="100" [value]="themeValue()"
+                        (input)="onThemeChange($event)" class="theme-slider" title="Change theme">
+                </div>
+
+                <button i18n-title class="icon-button" title="Change font size" (click)="toggleFontSizeInput()">
+                    <fa-icon [icon]="faTextHeight" />
+                </button>
+                <div class="slider-container" [class.open]="fontSizeInputOpen()">
+                    <input i18n-title type="range" min="12" max="26" [value]="fontSizeValue()"
+                        (input)="onFontSizeChange($event)" class="font-size-slider" title="Change font size">
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button i18n-title class="icon-button" title="Collapse book" (click)="isOpen.set(false)">
+                    <fa-icon [icon]="faChevronDown" />
+                </button>
+                <button i18n-title class="icon-button" title="Remove book from view"
+                    (click)="fileBookReaderService.destroyReader()">
+                    <fa-icon [icon]="faTrash" />
+                </button>
+            </div>
+        </div>
+
+        <!-- Content when expanded -->
+        <app-epub-reader-command class="overflow-hidden h-full w-full"
+            [currentFileBook]="fileBookReaderService.currentFileBook()!"
+            [currentChapterContent]="fileBookReaderService.currentChapterContent()!"
+            [chapters]="fileBookReaderService.chapters()"
+            [currentChapterIndex]="fileBookReaderService.currentChapterIndex()"
+            [isLoading]="fileBookReaderService.isLoading()" [isError]="fileBookReaderService.isError()"
+            [themeStyles]="themeStyles()" (prevChapter)="fileBookReaderService.prevChapter()"
+            (nextChapter)="fileBookReaderService.nextChapter()"
+            (goToChapter)="fileBookReaderService.goToChapter($event)" />
+    </div>
+
+    <input i18n-title disabled type="range" title="Progress" class="progress-slider w-full absolute top-0 left-0 -mt-1"
+        [class.!hidden]="isOpen()" [min]="0" [max]="100" [value]="fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) / fileBookReaderService.chapters().length) * 100).toFixed(0)
+        : 0" [style.--value]="
+        fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) / fileBookReaderService.chapters().length))
+        : 0
+      " />
+
+    <div class="toolbar-expand overflow-hidden flex justify-between items-center w-full gap-2 px-4 sm:px-8"
+        [class.toolbar-expand-enter]="!isOpen()" [class.toolbar-expand-leave]="isOpen()">
+        <button class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
+            [class.text-error]="fileBookReaderService.isError()" (click)="isOpen.set(true)">
+            <div class="flex items-center gap-2">
+                <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
+                    loading="lazy" decoding="async" [secureSrc]="fileBookReaderService.currentFileBook()?.coverImageSrc"
+                    [secureOffline]="true" [alt]="fileBookReaderService.currentFileBook()?.title" />
+                <div class="flex flex-col truncate">
+                    <span class="truncate">{{ fileBookReaderService.currentFileBook()?.title }}
+                        @if(fileBookReaderService.currentFileBook()?.subtitle) { - {{
+                        fileBookReaderService.currentFileBook()?.subtitle }}
+                        }</span>
+                    <span class="text-accent truncate">{{
+                        fileBookReaderService.currentFileBook()?.authors?.join(", ")
+                        }}</span>
+                </div>
+            </div>
+        </button>
+
+        <span class="chapter-info">
+            {{ fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) /
+            fileBookReaderService.chapters().length) * 100).toFixed(0)
+            : 0
+            }} %
+        </span>
+    </div>
+
+</div>
+}

@@ -1,0 +1,33 @@
+<div class="flex flex-col min-h-full w-full">
+    <h1 i18n class="title">eBooks</h1>
+
+    @if (eBooksLoading()) {
+    <p i18n class="section text-accent">Loading...</p>
+    }
+
+    @else if (eBooksError()) {
+    <p i18n class="section text-error">Failed to load eBooks.</p>
+    }
+
+    @else if(eBookPagedResult()?.items == null || eBookPagedResult()?.items?.length == 0) {
+    <p i18n class="section text-accent">There are no eBooks here.</p>
+    }
+
+    @else {
+    <div class="section flex-grow">
+        <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
+            @for (eBook of eBookPagedResult()?.items; track $index) {
+            <app-e-book-item [eBook]="eBook"></app-e-book-item>
+            }
+        </div>
+    </div>
+    }
+
+    @if (eBookPagedResult() && eBookPagedResult()!.totalCount > eBookPagedResult()!.pagedQuery.pageSize) {
+    <app-pagination class="section" [pageNumber]="eBookPagedQuery().pageNumber"
+        [pageSize]="eBookPagedQuery().pageSize" [totalCount]="eBookPagedResult()?.totalCount || 0"
+        (pageChange)="setPage($event)">
+    </app-pagination>
+    }
+
+</div>

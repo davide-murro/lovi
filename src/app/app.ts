@@ -1,4 +1,4 @@
-import { Component, inject, NgZone, ViewChild } from '@angular/core';
+import { Component, effect, inject, NgZone, ViewChild } from '@angular/core';
 import { Header } from './shared/header/header';
 import { Body } from './shared/body/body';
 import { AudioPlayer } from './shared/audio-player/audio-player';
@@ -9,28 +9,55 @@ import { Dialog } from './shared/dialog/dialog';
 import { DialogService } from './core/services/dialog.service';
 import { ViewportScroller } from '@angular/common';
 import { ToasterService } from './core/services/toaster.service';
+import { FileBookReader } from './shared/file-book-reader/file-book-reader';
+import { AudioPlayerService } from './core/services/audio-player.service';
+import { FileBookReaderService } from './core/services/file-book-reader.service';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Body, AudioPlayer, Toaster, Dialog],
+  imports: [Header, Body, AudioPlayer, FileBookReader, Toaster, Dialog],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
   private zone = inject(NgZone);
   private router = inject(Router);
+  private viewportScroller = inject(ViewportScroller);
   private dialogService = inject(DialogService);
   private toasterService = inject(ToasterService);
-  private viewportScroller = inject(ViewportScroller);
+  private audioPlayerService = inject(AudioPlayerService);
+  private fileBookReaderService = inject(FileBookReaderService);
 
   @ViewChild(Header) header!: Header;
   @ViewChild(AudioPlayer) audioPlayer!: AudioPlayer;
+  @ViewChild(FileBookReader) fileBookReader!: FileBookReader;
 
   constructor() {
-    // close all opened ui
+    // manage audio player and file book reader visualization
+    effect(() => {
+      if (this.audioPlayerService.currentTrack()) {
+        this.fileBookReaderService.destroyReader();
+      }
+    });
+    effect(() => {
+      if (this.fileBookReaderService.currentFileBook()) {
+        this.audioPlayerService.stop();
+      }
+    });
+    // body overflow hidden when i open file reader, dialogs and selectors
+    effect(() => {
+      if (this.fileBookReader?.isOpen() || this.dialogService?.dialog().visible) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // close all opened ui on navigation
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
       this.header.menuMobileOpen.set(false);
       this.audioPlayer.queueOpen.set(false);
+      this.fileBookReader.isOpen.set(false);
       this.dialogService.close(null);
     });
 

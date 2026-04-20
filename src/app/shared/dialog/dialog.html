@@ -1,7 +1,7 @@
-<div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center transition-opacity duration-300"
+<div class="dialog-container fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300"
     [class]="dialogService.dialog().visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'"
     (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)">
-    <div class="bg-accent border-2 border-primary rounded-xl p-4 max-w-lg w-[90%] max-h-lg max-h-[90%] overflow-auto"
+    <div class="bg-accent border-2 border-primary rounded-xl p-4 max-w-lg w-[90%] max-h-lg max-h-[90%] overflow-auto overscroll-none"
         [class.hidden]="!dialogService.dialog().visible">
         <ng-container #componentContainer></ng-container>
     </div>

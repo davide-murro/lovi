@@ -10,6 +10,7 @@ import { DialogService } from '../../core/services/dialog.service';
 import { ToasterService } from '../../core/services/toaster.service';
 import { CreatorsService } from '../../core/services/creators.service';
 import { AudioBooksService } from '../../core/services/audio-books.service';
+import { EBooksService } from '../../core/services/e-books.service';
 import { AuthDirective } from "../../core/directives/auth.directive";
 import { RolesTablePaged } from '../../shared/auth/roles-table-paged/roles-table-paged';
 import { UsersTablePaged } from '../../shared/auth/users-table-paged/users-table-paged';
@@ -24,6 +25,7 @@ export class Edit {
   private dialogService = inject(DialogService);
   private toasterService = inject(ToasterService);
   private audioBooksService = inject(AudioBooksService);
+  private eBooksService = inject(EBooksService);
   private podcastsService = inject(PodcastsService);
   private creatorsService = inject(CreatorsService);
 
@@ -46,6 +48,27 @@ export class Edit {
           catchError(err => {
             this.toasterService.show('Get Audio Books failed', { type: 'error' });
             console.error('audioBooksService.getPaged', query, err);
+            return of(null);
+          }),
+        )
+      })
+    )
+  );
+
+  eBookPagedQuery = signal({
+    pageNumber: 1,
+    pageSize: 10,
+    sortBy: 'id',
+    sortOrder: 'desc',
+    search: ''
+  } as PagedQuery);
+  eBookPagedResult = toSignal(
+    toObservable(this.eBookPagedQuery).pipe(
+      switchMap(query => {
+        return this.eBooksService.getPaged(query).pipe(
+          catchError(err => {
+            this.toasterService.show('Get eBooks failed', { type: 'error' });
+            console.error('eBooksService.getPaged', query, err);
             return of(null);
           }),
         )
@@ -109,6 +132,26 @@ export class Edit {
             error: (err) => {
               console.error('audioBooksService.delete', id, err);
               this.toasterService.show('Audio Book delete failed', { type: 'error' });
+            }
+          });
+        }
+      });
+  }
+
+  deleteEBook(id: number) {
+    this.dialogService.confirm('Delete eBook', 'Are you sure?')
+      .subscribe(confirmed => {
+        if (confirmed) {
+          this.eBooksService.delete(id).subscribe({
+            next: () => {
+              this.toasterService.show('eBook deleted');
+              this.eBookPagedQuery.update((q) => ({
+                ...q
+              }));
+            },
+            error: (err) => {
+              console.error('eBooksService.delete', id, err);
+              this.toasterService.show('eBook delete failed', { type: 'error' });
             }
           });
         }

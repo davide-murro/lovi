@@ -4,4 +4,5 @@ export interface ManageLibraryDto {
     podcastId?: number;
     podcastEpisodeId?: number;
     audioBookId?: number;
+    eBookId?: number;
 }

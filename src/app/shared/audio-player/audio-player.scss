@@ -108,7 +108,6 @@
 
    to {
       opacity: 1;
-      padding-bottom: calc(var(--spacing) * 4);
    }
 }
 
@@ -119,24 +118,21 @@
 @keyframes player-leave-animation {
    from {
       opacity: 1;
-      padding-bottom: calc(var(--spacing) * 4);
    }
 
    to {
       opacity: 0;
-      padding-bottom: 0;
    }
 }
 
 
 .player-expand {
-   transition-property: gap, border-top;
+   transition-property: gap, border-top, padding;
    transition-duration: 300ms;
 }
 
 .player-expand-enter {
    border-top: 2px solid var(--color-primary);
-   gap: 2px;
 }
 
 .player-expand-leave {
@@ -146,7 +142,7 @@
 
 
 .queue-expand {
-   transition-property: opacity, max-height;
+   transition-property: opacity, max-height, gap;
    transition-duration: 300ms;
 }
 
@@ -158,6 +154,7 @@
 .queue-expand-leave {
    opacity: 0;
    max-height: 0;
+   gap: 0;
 }
 
 .slider-expand {

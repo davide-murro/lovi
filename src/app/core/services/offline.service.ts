@@ -1,6 +1,7 @@
 import { effect, inject, Injectable, signal, computed } from '@angular/core';
 import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { AudioBookDto } from '../models/dtos/audio-book-dto.model';
+import { EBookDto } from '../models/dtos/e-book-dto.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
 import { AudioBooksService } from './audio-books.service';
 import { PodcastsService } from './podcasts.service';
@@ -8,6 +9,7 @@ import { AuthService } from './auth.service';
 import { CreatorsService } from './creators.service';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { CreatorDto } from '../models/dtos/creator-dto.model';
+import { EBooksService } from './e-books.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,25 +17,30 @@ import { CreatorDto } from '../models/dtos/creator-dto.model';
 export class OfflineService {
     private authService = inject(AuthService);
     private audioBooksService = inject(AudioBooksService);
+    private eBooksService = inject(EBooksService);
     private podcastsService = inject(PodcastsService);
-    private creatorsService = inject(CreatorsService);
+    //private creatorsService = inject(CreatorsService);
 
     // Track downloaded items with metadata
     private offlineAudioBooks = signal<AudioBookDto[]>([]);
+    private offlineEBooks = signal<EBookDto[]>([]);
     private offlineEpisodes = signal<PodcastEpisodeDto[]>([]);
 
     // Track items being downloaded (priming phase) to allow services to add ?isOffline=true
     private downloadingAudioBooks = signal<AudioBookDto[]>([]);
+    private downloadingEBooks = signal<EBookDto[]>([]);
     private downloadingEpisodes = signal<PodcastEpisodeDto[]>([]);
 
     // Track items being deleted (priming phase)
     private deletingAudioBooks = signal<AudioBookDto[]>([]);
+    private deletingEBooks = signal<EBookDto[]>([]);
     private deletingEpisodes = signal<PodcastEpisodeDto[]>([]);
 
     // Subject to cancel ongoing downloads when user logs out
     private cancelDownloads$ = new Subject<void>();
 
     audioBooks = computed(() => [...this.downloadingAudioBooks(), ...this.offlineAudioBooks()]);
+    eBooks = computed(() => [...this.downloadingEBooks(), ...this.offlineEBooks()]);
     episodes = computed(() => [...this.downloadingEpisodes(), ...this.offlineEpisodes()]);
     podcasts = computed(() => {
         const grouped = this.episodes().reduce((acc, ep) => {
@@ -80,20 +87,26 @@ export class OfflineService {
         this.cancelDownloads$.next();
         this.offlineAudioBooks.set(this.loadFromStorage('offlineAudioBooks'));
         this.offlineEpisodes.set(this.loadFromStorage('offlinePodcastEpisodes'));
+        this.offlineEBooks.set(this.loadFromStorage('offlineEBooks'));
         this.downloadingAudioBooks.set([]);
         this.downloadingEpisodes.set([]);
+        this.downloadingEBooks.set([]);
         this.deletingAudioBooks.set([]);
         this.deletingEpisodes.set([]);
+        this.deletingEBooks.set([]);
     }
 
     private clearOfflineData() {
         this.cancelDownloads$.next();
         this.offlineAudioBooks.set([]);
         this.offlineEpisodes.set([]);
+        this.offlineEBooks.set([]);
         this.downloadingAudioBooks.set([]);
         this.downloadingEpisodes.set([]);
+        this.downloadingEBooks.set([]);
         this.deletingAudioBooks.set([]);
         this.deletingEpisodes.set([]);
+        this.deletingEBooks.set([]);
     }
 
     private loadFromStorage(key: string): any[] {
@@ -125,6 +138,19 @@ export class OfflineService {
             if (a.readers) {
                 for (const r of a.readers) {
                     found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        })) {
+            return true;
+        }
+
+        if (this.offlineEBooks().some(b => {
+            if (this.isEBookDeleting(b.id!)) return false;
+            let found = b.dataUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
+            if (b.writers) {
+                for (const w of b.writers) {
+                    found = found || w.dataUrl === url || w.coverImageUrl === url || w.coverImagePreviewUrl === url
                 }
             }
             return found;
@@ -166,6 +192,18 @@ export class OfflineService {
             return true;
         }
 
+        if (this.downloadingEBooks().some(b => {
+            let found = b.dataUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
+            if (b.writers) {
+                for (const w of b.writers) {
+                    found = found || w.dataUrl === url || w.coverImageUrl === url || w.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        })) {
+            return true;
+        }
+
         if (this.downloadingEpisodes().some(e => {
             let found = e.dataUrl === url || e.audioUrl === url || e.coverImageUrl === url || e.coverImagePreviewUrl === url
             if (e.podcast) {
@@ -200,6 +238,19 @@ export class OfflineService {
             return true;
         }
 
+        const offlineEBooks = this.offlineEBooks().filter(b => {
+            let found = b.dataUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
+            if (b.writers) {
+                for (const w of b.writers) {
+                    found = found || w.dataUrl === url || w.coverImageUrl === url || w.coverImagePreviewUrl === url
+                }
+            }
+            return found;
+        });
+        if (offlineEBooks.length > 0 && offlineEBooks.every(b => this.isEBookDeleting(b.id!))) {
+            return true;
+        }
+
         const offlinePodcastEpisodes = this.offlineEpisodes().filter(e => {
             let found = e.dataUrl === url || e.audioUrl === url || e.coverImageUrl === url || e.coverImagePreviewUrl === url
             if (e.podcast) {
@@ -224,6 +275,11 @@ export class OfflineService {
         return this.offlineAudioBooks().some(a => a.id === id) && !this.isAudioBookDeleting(id);
     }
 
+    isEBookDownloaded(id: number): boolean {
+        if (!id) return false;
+        return this.offlineEBooks().some(a => a.id === id) && !this.isEBookDeleting(id);
+    }
+
     isPodcastEpisodeDownloaded(id: number): boolean {
         if (!id) return false;
         return this.offlineEpisodes().some(e => e.id === id) && !this.isPodcastEpisodeDeleting(id);
@@ -239,6 +295,7 @@ export class OfflineService {
         if (!id) return false;
         // A creator is "offline" if they are part of any offline audiobook or episode
         return (this.offlineAudioBooks().some(a => a.readers?.some(r => r.id === id)) ||
+            this.offlineEBooks().some(e => e.writers?.some(w => w.id === id)) ||
             this.offlineEpisodes().some(e => e.voicers?.some(v => v.id === id))) &&
             !this.isCreatorDeleting(id);
     }
@@ -246,6 +303,11 @@ export class OfflineService {
     isAudioBookDownloading(id: number): boolean {
         if (!id) return false;
         return this.downloadingAudioBooks().some(a => a.id === id);
+    }
+
+    isEBookDownloading(id: number): boolean {
+        if (!id) return false;
+        return this.downloadingEBooks().some(a => a.id === id);
     }
 
     isPodcastEpisodeDownloading(id: number): boolean {
@@ -261,12 +323,18 @@ export class OfflineService {
     isCreatorDownloading(id: number): boolean {
         if (!id) return false;
         return this.downloadingEpisodes().some(e => e.voicers?.some(v => v.id === id)) ||
-            this.downloadingAudioBooks().some(a => a.readers?.some(r => r.id === id));
+            this.downloadingAudioBooks().some(a => a.readers?.some(r => r.id === id)) ||
+            this.downloadingEBooks().some(e => e.writers?.some(w => w.id === id));
     }
 
     isAudioBookDeleting(id: number): boolean {
         if (!id) return false;
         return this.deletingAudioBooks().some(a => a.id === id);
+    }
+
+    isEBookDeleting(id: number): boolean {
+        if (!id) return false;
+        return this.deletingEBooks().some(a => a.id === id);
     }
 
     isPodcastEpisodeDeleting(id: number): boolean {
@@ -284,8 +352,10 @@ export class OfflineService {
         if (!id) return false;
         const offlinePodcastEpisodes = this.offlineEpisodes().filter(e => e.voicers?.some(v => v.id === id));
         const offlineAudioBooks = this.offlineAudioBooks().filter(a => a.readers?.some(r => r.id === id));
+        const offlineEBooks = this.offlineEBooks().filter(e => e.writers?.some(w => w.id === id));
         return offlinePodcastEpisodes.length > 0 && offlinePodcastEpisodes.every(e => this.isPodcastEpisodeDeleting(e.id!)) ||
-            offlineAudioBooks.length > 0 && offlineAudioBooks.every(a => this.isAudioBookDeleting(a.id!));
+            offlineAudioBooks.length > 0 && offlineAudioBooks.every(a => this.isAudioBookDeleting(a.id!)) ||
+            offlineEBooks.length > 0 && offlineEBooks.every(e => this.isEBookDeleting(e.id!));
     }
 
     async downloadAudioBook(audioBook: AudioBookDto) {
@@ -330,6 +400,51 @@ export class OfflineService {
             });
         } catch (error: any) {
             this.downloadingAudioBooks.update(set => set.filter(a => a.id !== audioBook.id));
+            throw new Error(error);
+        }
+    }
+
+    async downloadEBook(eBook: EBookDto) {
+        if (!eBook.id) return;
+
+        if (this.isEBookDownloaded(eBook.id!)) {
+            throw new Error(`${eBook.name} is already Offline`);
+        }
+        if (this.isEBookDownloading(eBook.id!)) {
+            throw new Error(`${eBook.name} is already downloading`);
+        }
+        if (this.isEBookDeleting(eBook.id!)) {
+            throw new Error(`${eBook.name} is already deleting`);
+        }
+
+        try {
+            // 1. track download
+            this.downloadingEBooks.update(set => [...set, eBook]);
+
+            // 2. Priming cache
+            const offlineEBook = await firstValueFrom(this.eBooksService.getById(eBook.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (eBook.fileUrl) await firstValueFrom(this.eBooksService.getFile(eBook.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (eBook.coverImageUrl) await firstValueFrom(this.eBooksService.getCover(eBook.id!, false).pipe(takeUntil(this.cancelDownloads$)));
+            if (eBook.coverImagePreviewUrl) await firstValueFrom(this.eBooksService.getCover(eBook.id!, true).pipe(takeUntil(this.cancelDownloads$)));
+
+            // 3. Download writers
+            /*if (writersToDownload?.length > 0) {
+                for (const writer of writersToDownload) {
+                    await firstValueFrom(this.creatorsService.getById(writer.id!));
+                    if (writer.coverImageUrl) await firstValueFrom(this.creatorsService.getCover(writer.id!, true));
+                    if (writer.coverImagePreviewUrl) await firstValueFrom(this.creatorsService.getCover(writer.id!, false));
+                }
+            }*/
+
+            // 4. Update signal and storage
+            this.downloadingEBooks.update(set => set.filter(a => a.id !== eBook.id));
+            this.offlineEBooks.update(list => {
+                const newList = [...list, offlineEBook];
+                this.saveToStorage('offlineEBooks', newList);
+                return newList;
+            });
+        } catch (error: any) {
+            this.downloadingEBooks.update(set => set.filter(a => a.id !== eBook.id));
             throw new Error(error);
         }
     }
@@ -439,8 +554,8 @@ export class OfflineService {
             if (storedItem.coverImageUrl) urlsToRemove.push(storedItem.coverImageUrl);
             if (storedItem.coverImagePreviewUrl) urlsToRemove.push(storedItem.coverImagePreviewUrl);
 
-            // Check if readers' covers are still needed
-            if (storedItem.readers) {
+            // Check if readers are still needed
+            /*if (storedItem.readers) {
                 for (const reader of storedItem.readers) {
                     if (reader.id && !this.isCreatorDownloaded(reader.id!)) {
                         if (reader.dataUrl) urlsToRemove.push(reader.dataUrl);
@@ -448,7 +563,7 @@ export class OfflineService {
                         if (reader.coverImagePreviewUrl) urlsToRemove.push(reader.coverImagePreviewUrl);
                     }
                 }
-            }
+            }*/
 
             // 4. Clear from NGSW cache
             const cacheNames = await caches.keys();
@@ -471,6 +586,56 @@ export class OfflineService {
             });
         } catch (error: any) {
             this.deletingAudioBooks.update(set => set.filter(a => a.id !== storedItem.id));
+            throw new Error(error);
+        }
+    }
+
+    async removeEBook(id: number) {
+        if (!id) return;
+
+        const storedItem = this.offlineEBooks().find(a => a.id === id);
+        if (!storedItem) return;
+
+        try {
+            this.deletingEBooks.update(set => [...set, storedItem]);
+
+            const urlsToRemove = [];
+            if (storedItem.dataUrl) urlsToRemove.push(storedItem.dataUrl);
+            if (storedItem.fileUrl) urlsToRemove.push(storedItem.fileUrl);
+            if (storedItem.coverImageUrl) urlsToRemove.push(storedItem.coverImageUrl);
+            if (storedItem.coverImagePreviewUrl) urlsToRemove.push(storedItem.coverImagePreviewUrl);
+
+            // Check if writers are still needed
+            /*if (storedItem.writers) {
+                for (const writer of storedItem.writers) {
+                    if (writer.id && !this.isCreatorDownloaded(writer.id!)) {
+                        if (writer.dataUrl) urlsToRemove.push(writer.dataUrl);
+                        if (writer.coverImageUrl) urlsToRemove.push(writer.coverImageUrl);
+                        if (writer.coverImagePreviewUrl) urlsToRemove.push(writer.coverImagePreviewUrl);
+                    }
+                }
+            }*/
+
+            // Clear from NGSW cache
+            const cacheNames = await caches.keys();
+            for (const name of cacheNames) {
+                if (name.includes('api-offline-')) {
+                    const cache = await caches.open(name);
+                    for (const url of urlsToRemove) {
+                        const urlWithOfflineTo = this.addOfflineToUrl(url);
+                        await cache.delete(urlWithOfflineTo);
+                    }
+                }
+            }
+
+            this.deletingEBooks.update(set => set.filter(a => a.id !== storedItem.id));
+            this.offlineEBooks.update(list => {
+                const newList = list.filter(a => a.id !== storedItem.id);
+                this.saveToStorage('offlineEBooks', newList);
+                return newList;
+            });
+        } catch (error: any) {
+            this.deletingEBooks.update(set => set.filter(a => a.id !== storedItem.id));
             throw new Error(error);
         }
     }
@@ -516,15 +681,15 @@ export class OfflineService {
             if (storedItem.coverImageUrl) urlsToRemove.push(storedItem.coverImageUrl);
             if (storedItem.coverImagePreviewUrl) urlsToRemove.push(storedItem.coverImagePreviewUrl);
 
-            // Check if podcast cover is still needed
+            // Check if podcast is still needed
             if (storedItem.podcast?.id && !this.isPodcastDownloaded(storedItem.podcast.id!)) {
                 if (storedItem.podcast.dataUrl) urlsToRemove.push(storedItem.podcast?.dataUrl);
                 if (storedItem.podcast.coverImageUrl) urlsToRemove.push(storedItem.podcast?.coverImageUrl);
                 if (storedItem.podcast.coverImagePreviewUrl) urlsToRemove.push(storedItem.podcast?.coverImagePreviewUrl);
             }
 
-            // Check if voicers' covers are still needed
-            if (storedItem.voicers) {
+            // Check if voicers are still needed
+            /*if (storedItem.voicers) {
                 for (const voicer of storedItem.voicers) {
                     if (voicer.id && !this.isCreatorDownloaded(voicer.id!)) {
                         if (voicer.dataUrl) urlsToRemove.push(voicer.dataUrl);
@@ -532,7 +697,7 @@ export class OfflineService {
                         if (voicer.coverImagePreviewUrl) urlsToRemove.push(voicer.coverImagePreviewUrl);
                     }
                 }
-            }
+            }*/
 
             // 4. Clear from NGSW cache
             const cacheNames = await caches.keys();

@@ -17,7 +17,7 @@ export class AudioPlayerService {
 
   private audio = new Audio();
 
-  private tokenRefreshInterval: number | null = null;
+  private tokenRefreshInterval: ReturnType<typeof setInterval> | null = null;
   private isTokenRefreshed = signal(false);
   private isTokenRefreshing = signal(false);
 

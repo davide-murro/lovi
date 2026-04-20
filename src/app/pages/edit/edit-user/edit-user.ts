@@ -54,6 +54,14 @@ export class EditUser {
         name: this.user()?.name,
       });
       this.userEdit.set(this.user());
+
+      // add password required if new user
+      if (this.userEdit()?.id) {
+        this.form.get('newPassword')!.removeValidators([Validators.required]);
+      } else {
+        this.form.get('newPassword')!.addValidators([Validators.required]);
+      }
+      this.form.get('newPassword')!.updateValueAndValidity();
     });
   }
 

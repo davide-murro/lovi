@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBackward, faBackwardStep, faCircleNotch, faClose, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faBackwardStep, faChevronDown, faCircleNotch, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
 import { ToasterService } from '../../core/services/toaster.service';
 import { Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ export class AudioPlayer {
   faForward = faForward;
   faTrash = faTrash;
   faShare = faShare;
-  faClose = faClose;
+  faChevronDown = faChevronDown;
   faRotateLeft = faRotateLeft;
   faCircleNotch = faCircleNotch;
 
@@ -57,13 +57,13 @@ export class AudioPlayer {
         this.playerVisible.set(false);
         this.queueOpen.set(false);
       }
-    })
+    });
 
     // error handling
     this.audioPlayerErrorSubscription = this.audioPlayerService.errorEvent$.subscribe((event) => {
       console.error('audioPlayerService.errorEvent', event);
       this.toasterService.show('Error playing audio', { type: 'error', duration: 5000 });
-    })
+    });
   }
 
   ngOnDestroy() {

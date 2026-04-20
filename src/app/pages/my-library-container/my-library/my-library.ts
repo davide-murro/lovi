@@ -6,11 +6,12 @@ import { PodcastDto } from "../../../core/models/dtos/podcast-dto.model";
 import { LibrariesService } from "../../../core/services/libraries.service";
 import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
 import { PodcastDetailsItem } from "../../../shared/podcast-details-item/podcast-details-item";
+import { EBookItem } from "../../../shared/e-book-item/e-book-item";
 
 
 @Component({
   selector: 'app-my-library',
-  imports: [FontAwesomeModule, AudioBookItem, PodcastDetailsItem],
+  imports: [FontAwesomeModule, AudioBookItem, PodcastDetailsItem, EBookItem],
   templateUrl: './my-library.html',
   styleUrl: './my-library.scss'
 })
@@ -41,6 +42,14 @@ export class MyLibrary {
       .map(ml => ml.audioBook!);
     return list;
   });
+
+  myLibraryEBooks = computed(() => {
+    const list = this.myLibraryData()
+      ?.filter((ml) => ml.eBook?.id != null)
+      .map(ml => ml.eBook!);
+    return list;
+  });
+
   myLibraryPodcasts = computed(() => {
     const grouped = this.myLibraryData()
       ?.filter((ml) => ml.podcast?.id != null)

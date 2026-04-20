@@ -2,6 +2,7 @@ import { AudioBookDto } from "./audio-book-dto.model";
 import { PodcastDto } from "./podcast-dto.model";
 import { PodcastEpisodeDto } from "./podcast-episode-dto.model";
 import { UserProfileDto } from "./user-profile-dto.model";
+import { EBookDto } from "./e-book-dto.model";
 
 export interface LibraryDto {
     id?: number;
@@ -9,4 +10,5 @@ export interface LibraryDto {
     podcast?: PodcastDto;
     podcastEpisode?: PodcastEpisodeDto;
     audioBook?: AudioBookDto;
+    eBook?: EBookDto;
 }

@@ -35,10 +35,16 @@
             class="flex items-center justify-start whitespace-nowrap flex-col gap-4 overflow-hidden -m-4 p-4 sm:-mx-8 sm:px-8 sm:overflow-auto sm:flex-row sm:gap-8">
             <a i18n i18n-title class="menu-link" title="Go to Audio Books" [routerLink]="['/audio-books']"
                 [routerLinkActive]="'active'">Audio Books</a>
+            <a i18n i18n-title class="menu-link" title="Go to eBooks" [routerLink]="['/e-books']"
+                [routerLinkActive]="'active'">eBooks</a>
             <a i18n i18n-title class="menu-link" title="Go to Podcasts" [routerLink]="['/podcasts']"
                 [routerLinkActive]="'active'">Podcasts</a>
+            <span *appAuth class="border-accent max-sm:border-b-2 max-sm:w-8 sm:border-r-2 sm:h-8"></span>
             <a i18n i18n-title *appAuth class="menu-link" title="Go to My Library" [routerLink]="['/my-library']"
                 [routerLinkActive]="'active'">My Library</a>
+            <span *appAuth="['Admin', 'Editor']"
+                class="border-accent max-sm:border-b-2 max-sm:w-8 sm:border-r-2 sm:h-8">
+            </span>
             <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="menu-link" title="Go to Edit"
                 [routerLink]="['/edit']" [routerLinkActive]="'active'">Edit</a>
 

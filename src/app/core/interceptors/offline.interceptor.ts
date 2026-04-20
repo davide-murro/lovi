@@ -67,6 +67,18 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
                         });
                 }
 
+                // E-books
+                if (reqUrl.match(/\/api\/e-books\/paged/)) {
+                    offlineItems = offlineService.eBooks()
+                        .filter(b => b.name.toLowerCase().includes(query.search.toLowerCase()) || b.description?.toLowerCase().includes(query.search.toLowerCase()))
+                        .sort((a, b) => {
+                            if (query.sortBy === 'name') {
+                                return query.sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+                            }
+                            return 0;
+                        });
+                }
+
                 // Podcasts
                 if (reqUrl.match(/\/api\/podcasts\/paged/)) {
                     offlineItems = offlineService.podcasts()

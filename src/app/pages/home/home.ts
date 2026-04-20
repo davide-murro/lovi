@@ -2,10 +2,11 @@ import { Component, signal, Signal } from '@angular/core';
 import { AudioBooksPaged } from '../../shared/audio-books-paged/audio-books-paged';
 import { PodcastsPaged } from '../../shared/podcasts-paged/podcasts-paged';
 import { ImageSlider, ImageSliderItem } from '../../shared/image-slider/image-slider';
+import { EBooksPaged } from '../../shared/e-books-paged/e-books-paged';
 
 @Component({
   selector: 'app-home',
-  imports: [AudioBooksPaged, PodcastsPaged, ImageSlider],
+  imports: [AudioBooksPaged, EBooksPaged, PodcastsPaged, ImageSlider],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

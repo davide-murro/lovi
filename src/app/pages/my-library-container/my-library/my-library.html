@@ -19,6 +19,20 @@
 </div>
 
 <div class="section">
+  <h2 i18n class="title">eBooks</h2>
+
+  @if (myLibraryEBooks() == null || myLibraryEBooks()!.length == 0) {
+  <p i18n class="section text-accent">There are no eBooks here</p>
+  } @else {
+  <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
+    @for (eBook of myLibraryEBooks(); track eBook.id) {
+    <app-e-book-item [eBook]="eBook"></app-e-book-item>
+    }
+  </div>
+  }
+</div>
+
+<div class="section">
   <h2 i18n class="title">Podcasts</h2>
 
   @if (myLibraryPodcasts() == null || myLibraryPodcasts()!.length == 0) {
