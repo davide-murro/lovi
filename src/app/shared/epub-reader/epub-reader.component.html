@@ -1,35 +1,36 @@
 <!-- Content when expanded -->
 <div class="reader-body" [ngStyle]="themeStyles()">
+
     <!-- Content wrapper -->
     <div #readerContentWrapper class="reader-content-wrapper">
-        <app-epub-reader-content [currentChapterContent]="currentChapterContent()">
-        </app-epub-reader-content>
+        <div #readerContent class="max-w-full max-h-full">
+        </div>
     </div>
 
     <!-- Navigation bar -->
     <div class="reader-nav">
-        <div>
-            <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
-                title="Go to previous chapter" [class.!hidden]="currentChapterIndex() === 0" (click)="onPrevChapter()">
-                <fa-icon [icon]="faChevronLeft" />
-                <span i18n class="hidden lg:inline">Previous Chapter</span>
-            </button>
-        </div>
         <div class="flex items-center gap-1 whitespace-nowrap">
             <input i18n-title type="number" title="Current chapter" name="current-chapter"
-                class="input reader-input w-full !max-w-[100px] !min-w-[80px]" [value]="currentChapterIndex() + 1"
-                (change)="onChapterInput($event)" (keydown.enter)="$event.preventDefault(); onChapterInput($event)"
-                min="1" [max]="chapters().length">
+                class="input reader-input w-full !max-w-[100px] !min-w-[80px]"
+                [value]="currentChapterIndex() ? (currentChapterIndex()! + 1) : 1" (change)="onChapterInput($event)"
+                (keydown.enter)="$event.preventDefault(); onChapterInput($event)" min="1" [max]="chapters().length">
             <span>/ {{ chapters().length }}</span>
         </div>
-        <div>
-            <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
-                title="Go to next chapter"
-                [class.!hidden]="chapters().length === 0 || currentChapterIndex() === chapters().length - 1"
-                (click)="onNextChapter()">
-                <span i18n class="hidden lg:inline">Next Chapter</span>
-                <fa-icon [icon]="faChevronRight" />
-            </button>
+        <div class="flex items-center gap-2 shrink-0">
+            <div>
+                <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
+                    title="Go to previous page" [class.!hidden]="!hasPrevPage()" (click)="onPrevPage()">
+                    <fa-icon [icon]="faChevronLeft" />
+                    <span i18n class="hidden lg:inline">Previous page</span>
+                </button>
+            </div>
+            <div>
+                <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
+                    title="Go to next page" [class.!hidden]="!hasNextPage()" (click)="onNextPage()">
+                    <span i18n class="hidden lg:inline">Next page</span>
+                    <fa-icon [icon]="faChevronRight" />
+                </button>
+            </div>
         </div>
     </div>
 

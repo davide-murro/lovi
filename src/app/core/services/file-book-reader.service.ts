@@ -9,17 +9,23 @@ import { AuthService } from './auth.service';
 export class FileBookReaderService {
   private authService = inject(AuthService);
 
-  private epubReader = new EpubReader();
-
   currentFileBook = signal<FileBook | null>(null);
 
   // EpubJS Book instance
-  chapters = computed(() => this.epubReader.chapters());
-  currentChapterIndex = computed(() => this.epubReader.currentChapterIndex());
-  currentChapterContent = computed(() => this.epubReader.currentChapterContent());
+  epubReader = signal<EpubReader>(new EpubReader());
 
-  isLoading = computed(() => this.epubReader.isLoading());
-  isError = computed(() => this.epubReader.isError());
+  // EpubJS Book state
+  chapters = computed(() => this.epubReader().chapters());
+  currentChapterIndex = computed(() => this.epubReader().currentChapterIndex());
+
+  hasNextPage = computed(() => this.epubReader().hasNextPage());
+  hasPrevPage = computed(() => this.epubReader().hasPrevPage());
+
+  isReady = computed(() => this.epubReader().isReady());
+  isLoading = computed(() => this.epubReader().isLoading());
+  isError = computed(() => this.epubReader().isError());
+  errorMessage = computed(() => this.epubReader().errorMessage());
+
 
   constructor() {
     effect(() => {
@@ -30,51 +36,27 @@ export class FileBookReaderService {
   }
 
 
-  private async loadFileBook(fileBook: FileBook) {
-    if (!fileBook?.fileSrc) return;
+  loadReader(fileBook: FileBook) {
+    if (!fileBook) return;
 
-    this.epubReader.src.set(fileBook.fileSrc);
-    await this.epubReader.load();
-  }
-
-  private unloadFileBook() {
-    this.epubReader.unload();
-  }
-
-  private async loadChapter(index: number) {
-    await this.epubReader.goToChapter(index);
-  }
-
-
-
-  initReader(fileBook: FileBook) {
-    this.unloadFileBook();
     this.currentFileBook.set(fileBook);
-    if (fileBook) {
-      this.loadFileBook(fileBook);
-    }
+    this.epubReader().src.set(this.currentFileBook()!.fileSrc);
   }
 
   destroyReader() {
     this.currentFileBook.set(null);
-    this.unloadFileBook();
+    this.epubReader().src.set(null);
   }
 
-  prevChapter() {
-    if (this.currentChapterIndex() > 0) {
-      this.loadChapter(this.currentChapterIndex() - 1);
-    }
+  prevPage() {
+    this.epubReader().prevPage();
   }
 
-  nextChapter() {
-    if (this.currentChapterIndex() < this.chapters().length - 1) {
-      this.loadChapter(this.currentChapterIndex() + 1);
-    }
+  nextPage() {
+    this.epubReader().nextPage();
   }
 
   goToChapter(index: number) {
-    if (index >= 0 && index < this.chapters().length) {
-      this.loadChapter(index);
-    }
+    this.epubReader().goToChapter(index);
   }
 }

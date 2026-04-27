@@ -4,11 +4,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faCircleHalfStroke, faTextHeight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FileBookReaderService } from '../../core/services/file-book-reader.service';
 import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
-import { EpubReaderCommandComponent } from '../epub-reader/epub-reader-command.component';
+import { EpubReaderComponent } from '../epub-reader/epub-reader.component';
 
 @Component({
   selector: 'app-file-book-reader',
-  imports: [CommonModule, FontAwesomeModule, SecureMediaDirective, EpubReaderCommandComponent],
+  imports: [CommonModule, FontAwesomeModule, SecureMediaDirective, EpubReaderComponent],
   templateUrl: './file-book-reader.html',
   styleUrl: './file-book-reader.scss'
 })
@@ -44,7 +44,7 @@ export class FileBookReader {
     return {
       background: bg,
       color: color,
-      fontSize: fontSize + 'px'
+      'font-size': fontSize + 'px'
     };
   });
 

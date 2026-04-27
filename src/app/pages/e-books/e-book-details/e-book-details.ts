@@ -130,6 +130,6 @@ export class EBookDetails {
       coverImageSrc: ebook.coverImageUrl,
       referenceLink: `/e-books/${ebook.id}`
     };
-    this.fileBookReaderService.initReader(fileBook);
+    this.fileBookReaderService.loadReader(fileBook);
   }
 }

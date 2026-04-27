@@ -59,8 +59,9 @@
         <input type="file" accept=".epub" id="file" class="input w-full" formControlName="fileValue"
             (change)="onFileSelected($event)" />
         @if(filePreview()) {
-        <app-epub-reader class="block w-160 max-w-full aspect-[1/1.414] mt-2 overflow-hidden" [src]="filePreview()!"
-            [themeStyles]="{background: '#ffffff', color: '#121212', fontSize: '16px'}" />
+        <app-epub-reader
+            class="block max-w-full w-140 aspect-[1/1.414] mt-2 overflow-hidden lg:w-280 lg:aspect-[2/1.414]"
+            [src]="filePreview()!" [themeStyles]="{background: '#ffffff', color: '#121212', 'font-size': '16px'}" />
         }
     </div>
 

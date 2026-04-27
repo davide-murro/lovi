@@ -52,6 +52,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     word-break: break-word;
+    touch-action: pan-x pan-y; // disable double tap zoom for safari ios 
 }
 
 

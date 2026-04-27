@@ -73,21 +73,18 @@
     width: 100%;
     height: 20px;
     overflow: hidden;
-    transition-property: opacity, width, margin, flex-grow;
+    transition-property: opacity, width;
     transition-duration: 300ms;
 
     &.open {
         opacity: 1;
-        width: 100%;
-        margin-inline: calc(var(--spacing) * 2);
-        flex-grow: 1;
+        width: min(100%, 300px);
     }
 
     &:not(.open) {
         pointer-events: none;
         opacity: 0;
         width: 0;
-        margin-inline: 0;
     }
 }
 
@@ -98,6 +95,8 @@
     height: 10px;
     width: 100%;
     border-radius: 5px;
+    margin-inline: calc(var(--spacing) * 1);
+
     cursor: pointer;
 
     &::-webkit-slider-runnable-track {

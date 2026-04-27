@@ -1,5 +1,5 @@
 export interface EpubReaderThemeStyle {
     background: string;
     color: string;
-    fontSize: string;
+    'font-size': string;
 }
