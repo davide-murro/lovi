@@ -29,8 +29,8 @@ export class EpubReader {
   chapters = this._chapters.asReadonly();
   currentChapterIndex = this._currentChapterIndex.asReadonly();
 
-  hasNextPage = computed(() => { return true; });
-  hasPrevPage = computed(() => { return true; });
+  //pages = this._pages.asReadonly();
+  //currentPage = this._currentPage.asReadonly();
 
   async load() {
     const src = this.src();
@@ -121,6 +121,7 @@ export class EpubReader {
           this.updateStyles();
           this.updateResize();
         } catch (err) {
+          console.error(err);
           this.unload();
           this._isError.set(true);
           this._errorMessage.set(err);
@@ -130,6 +131,7 @@ export class EpubReader {
         }
       },
       error: (err) => {
+        console.error(err);
         this.unload();
         this._isReady.set(true);
         this._isLoading.set(false);
@@ -157,6 +159,7 @@ export class EpubReader {
       this._chapters.set([]);
       this._currentChapterIndex.set(0);
     } catch (err) {
+      console.error(err);
       this._isError.set(true);
       this._errorMessage.set(err);
     }
@@ -170,6 +173,7 @@ export class EpubReader {
     try {
       this._rendition()!.resize();
     } catch (err) {
+      console.error(err);
     }
   }
 
@@ -187,6 +191,7 @@ export class EpubReader {
       // update so it also update pagination if change size
       rendition.layout();
     } catch (err) {
+      console.error(err);
     }
   }
 
@@ -197,6 +202,7 @@ export class EpubReader {
     try {
       await this._rendition()?.prev();
     } catch (err) {
+      console.error(err);
       this._isError.set(true);
       this._errorMessage.set(err);
     }
@@ -209,6 +215,7 @@ export class EpubReader {
     try {
       await this._rendition()?.next();
     } catch (err) {
+      console.error(err);
       this._isError.set(true);
       this._errorMessage.set(err);
     }
@@ -224,6 +231,7 @@ export class EpubReader {
     try {
       await this._rendition()?.display(this._chapters()[index]);
     } catch (err) {
+      console.error(err);
       this._isError.set(true);
       this._errorMessage.set(err);
     } finally {

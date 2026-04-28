@@ -48,6 +48,7 @@ export class EpubReaderComponent {
   faCircleNotch = faCircleNotch;
   faExclamationTriangle = faExclamationTriangle;
 
+  // inputs - you can either provide an EpubReader object or a src string
   epubReader = input<EpubReader>();
   src = input<string>();
   themeStyles = input<EpubReaderThemeStyle>();
@@ -65,9 +66,6 @@ export class EpubReaderComponent {
 
   chapters = computed(() => this._epubReader()?.chapters());
   currentChapterIndex = computed(() => this._epubReader()?.currentChapterIndex());
-
-  hasNextPage = computed(() => this._epubReader()?.hasNextPage());
-  hasPrevPage = computed(() => this._epubReader()?.hasPrevPage());
 
   constructor() {
     effect(() => {

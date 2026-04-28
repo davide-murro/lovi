@@ -111,8 +111,6 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
                             totalCount: offlineItems.length,
                             pageNumber: 1,
                             totalPages: 1,
-                            hasNextPage: false,
-                            hasPreviousPage: false,
                             pagedQuery: query
                         }
                     }));

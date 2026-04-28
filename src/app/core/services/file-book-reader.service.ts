@@ -18,9 +18,6 @@ export class FileBookReaderService {
   chapters = computed(() => this.epubReader().chapters());
   currentChapterIndex = computed(() => this.epubReader().currentChapterIndex());
 
-  hasNextPage = computed(() => this.epubReader().hasNextPage());
-  hasPrevPage = computed(() => this.epubReader().hasPrevPage());
-
   isReady = computed(() => this.epubReader().isReady());
   isLoading = computed(() => this.epubReader().isLoading());
   isError = computed(() => this.epubReader().isError());

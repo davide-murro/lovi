@@ -19,14 +19,14 @@
         <div class="flex items-center gap-2 shrink-0">
             <div>
                 <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
-                    title="Go to previous page" [class.!hidden]="!hasPrevPage()" (click)="onPrevPage()">
+                    title="Go to previous page" (click)="onPrevPage()">
                     <fa-icon [icon]="faChevronLeft" />
                     <span i18n class="hidden lg:inline">Previous page</span>
                 </button>
             </div>
             <div>
                 <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
-                    title="Go to next page" [class.!hidden]="!hasNextPage()" (click)="onNextPage()">
+                    title="Go to next page" (click)="onNextPage()">
                     <span i18n class="hidden lg:inline">Next page</span>
                     <fa-icon [icon]="faChevronRight" />
                 </button>
