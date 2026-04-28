@@ -1,6 +1,6 @@
 <h1 class="title">Edit - Only for pros</h1>
 
-<h2 class="title">Audio Books</h2>
+<h2 class="title">Audio Books ({{ audioBookPagedResult()?.totalCount }})</h2>
 
 <div class="section overflow-auto">
     <table class="table w-full break-normal">
@@ -49,7 +49,7 @@
     </table>
 </div>
 
-<h2 class="title">eBooks</h2>
+<h2 class="title">eBooks ({{eBookPagedResult()?.totalCount}})</h2>
 
 <div class="section overflow-auto">
     <table class="table w-full break-normal">
@@ -98,7 +98,7 @@
     </table>
 </div>
 
-<h2 class="title">Podcasts</h2>
+<h2 class="title">Podcasts ({{podcastPagedResult()?.totalCount}})</h2>
 
 <div class="section overflow-auto">
     <table class="table w-full break-normal">
@@ -147,7 +147,7 @@
     </table>
 </div>
 
-<h2 class="title">Creators</h2>
+<h2 class="title">Creators ({{creatorPagedResult()?.totalCount}})</h2>
 
 <div class="section overflow-auto">
     <table class="table w-full break-normal">

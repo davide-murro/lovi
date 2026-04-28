@@ -62,7 +62,7 @@
 
 @if (podcastEdit()?.id) {
 <div class="section">
-    <h3 class="title2">Voicers</h3>
+    <h3 class="title2">Voicers ({{podcastEdit()!.voicers?.length}})</h3>
 
     <div class="section overflow-auto">
         <table class="table w-full overflow-auto break-normal">
@@ -103,7 +103,7 @@
 
 
 <div class="section">
-    <h3 class="title2">Episodes</h3>
+    <h3 class="title2">Episodes ({{podcastEdit()!.episodes?.length}})</h3>
 
     <div class="section overflow-auto">
         <table class="table w-full overflow-auto break-normal">

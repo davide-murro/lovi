@@ -96,7 +96,7 @@
 
 @if(podcastEpisodeEdit()?.id) {
 <div class="section">
-    <h3 class="title2">Voicers</h3>
+    <h3 class="title2">Voicers ({{podcastEpisodeEdit()!.voicers?.length}})</h3>
 
     <div class="section overflow-auto">
         <table class="table w-full overflow-auto break-normal">

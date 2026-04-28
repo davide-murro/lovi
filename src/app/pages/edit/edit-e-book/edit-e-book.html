@@ -73,7 +73,7 @@
 
 @if(eBookEdit()?.id) {
 <div class="section">
-    <h3 class="title2">Writers</h3>
+    <h3 class="title2">Writers ({{eBookEdit()!.writers?.length}})</h3>
 
     <div class="section overflow-auto">
         <table class="table w-full overflow-auto break-normal">

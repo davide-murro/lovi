@@ -60,7 +60,7 @@
 
 @if (userEdit()?.id) {
 <div class="section">
-    <h3 class="title2">Roles</h3>
+    <h3 class="title2">Roles ({{userEdit()!.roles?.length}})</h3>
 
     <div class="section overflow-auto">
         <table class="table w-full overflow-auto break-normal">
@@ -95,7 +95,7 @@
     </div>
 </div>
 <div class="section">
-    <h3 class="title2">Token Infos</h3>
+    <h3 class="title2">Token Infos ({{userEdit()!.tokenInfos?.length}})</h3>
 
     <div class="section overflow-auto">
         <table class="table w-full overflow-auto break-normal">
