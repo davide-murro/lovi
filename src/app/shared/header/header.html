@@ -27,16 +27,15 @@
         </button>
     </div>
 
-    <div class="max-sm:grid max-sm:transition-[grid-template-rows,opacity] max-sm:duration-300"
+    <div class="max-sm:grid max-sm:transition-[grid-template-rows,opacity,visibility] max-sm:duration-300"
         [class.max-sm:pointer-events-none]="!menuMobileOpen()" [class.max-sm:pointer-events-auto]="menuMobileOpen()"
         [class.max-sm:grid-rows-[1fr]]="menuMobileOpen()" [class.max-sm:grid-rows-[0fr]]="!menuMobileOpen()"
-        [class.max-sm:opacity-0]="!menuMobileOpen()" [class.max-sm:opacity-100]="menuMobileOpen()">
+        [class.max-sm:opacity-0]="!menuMobileOpen()" [class.max-sm:opacity-100]="menuMobileOpen()"
+        [class.max-sm:invisible]="!menuMobileOpen()" [class.max-sm:visible]="menuMobileOpen()">
         <div
             class="flex items-center justify-start whitespace-nowrap flex-col gap-4 overflow-hidden -m-4 p-4 sm:-mx-8 sm:px-8 sm:overflow-auto sm:flex-row sm:gap-8">
-            <a i18n i18n-title class="menu-link" title="Go to Audio Books" [routerLink]="['/audio-books']"
-                [routerLinkActive]="'active'">Audio Books</a>
-            <a i18n i18n-title class="menu-link" title="Go to eBooks" [routerLink]="['/e-books']"
-                [routerLinkActive]="'active'">eBooks</a>
+            <a i18n i18n-title class="menu-link" title="Go to Books" [routerLink]="['/books']"
+                [routerLinkActive]="'active'">Books</a>
             <a i18n i18n-title class="menu-link" title="Go to Podcasts" [routerLink]="['/podcasts']"
                 [routerLinkActive]="'active'">Podcasts</a>
             <span *appAuth class="border-accent max-sm:border-b-2 max-sm:w-8 sm:border-r-2 sm:h-8"></span>

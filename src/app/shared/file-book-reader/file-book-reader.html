@@ -1,11 +1,12 @@
 @if (readerVisible()) {
 <div class="block w-full min-h-20"></div>
 <div animate.enter="reader-enter-animation" animate.leave="reader-leave-animation"
-    class="reader-expand fixed bottom-0 bg-accent flex flex-col items-center w-full max-h-full py-4 max-sm:text-sm"
-    [class.max-sm:py-0]="isOpen()" [class.max-sm:pt-2]="isOpen()">
+    class="reader-expand fixed bottom-0 bg-accent flex flex-col items-center w-full max-h-full max-sm:text-sm"
+    [class.py-0]="isOpen()" [class.py-4]="!isOpen()">
 
     <div class="reader-content-expand flex flex-col items-center w-full h-full overflow-hidden gap-2 sm:gap-4 sm:px-8"
-        [class.reader-content-expand-enter]="isOpen()" [class.reader-content-expand-leave]="!isOpen()">
+        [class.reader-content-expand-enter]="isOpen()" [class.reader-content-expand-leave]="!isOpen()"
+        [class.py-0]="!isOpen()" [class.max-sm:py-2]="isOpen()" [class.sm:py-4]="isOpen()">
         <div class="flex justify-between items-center w-full gap-4 max-sm:px-4">
             <div class="flex flex-grow items-center gap-1">
                 <button i18n-title class="icon-button" title="Change theme" (click)="toggleThemeInput()">
@@ -36,8 +37,11 @@
         </div>
 
         <!-- Content when expanded -->
-        <app-epub-reader [epubReader]="fileBookReaderService.epubReader()" [themeStyles]="themeStyles()" class="overflow-hidden w-full h-full
-            w-[100svw] min-h-[calc(100svh-3.5rem)] sm:min-h-[calc(100svh-5.5rem)]"></app-epub-reader>
+        <app-epub-reader [epubReader]="fileBookReaderService.epubReader()" [styles]="readerStyles()" class="overflow-hidden w-full h-full
+            w-[100svw] 
+            min-h-[calc(100svh-3.5rem)] sm:min-h-[calc(100svh-5.5rem)] 
+            max-h-[calc(100svh-3.5rem)] sm:max-h-[calc(100svh-5.5rem)]">
+        </app-epub-reader>
 
     </div>
 
@@ -68,7 +72,7 @@
             </div>
         </button>
 
-        <span class="chapter-info">
+        <span class="chapter-info" [class.text-error]="fileBookReaderService.isError()">
             {{ fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) /
             fileBookReaderService.chapters().length) * 100).toFixed(0)
             : 0

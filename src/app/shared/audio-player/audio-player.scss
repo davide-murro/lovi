@@ -102,11 +102,13 @@
 
 @keyframes player-enter-animation {
    from {
+      visibility: hidden;
       opacity: 0;
       padding-bottom: 0;
    }
 
    to {
+      visibility: visible;
       opacity: 1;
    }
 }
@@ -117,10 +119,12 @@
 
 @keyframes player-leave-animation {
    from {
+      visibility: visible;
       opacity: 1;
    }
 
    to {
+      visibility: hidden;
       opacity: 0;
    }
 }
@@ -142,31 +146,35 @@
 
 
 .queue-expand {
-   transition-property: opacity, max-height, gap;
+   transition-property: opacity, visibility, max-height, gap;
    transition-duration: 300ms;
 }
 
 .queue-expand-enter {
+   visibility: visible;
    opacity: 1;
    max-height: 500px;
 }
 
 .queue-expand-leave {
+   visibility: hidden;
    opacity: 0;
    max-height: 0;
    gap: 0;
 }
 
 .slider-expand {
-   transition-property: height;
+   transition-property: min-height, height;
    transition-duration: 300ms;
 }
 
 .slider-expand-enter {
+   min-height: 20px;
    height: 20px;
 }
 
 .slider-expand-leave {
+   min-height: 0;
    height: 0;
 }
 

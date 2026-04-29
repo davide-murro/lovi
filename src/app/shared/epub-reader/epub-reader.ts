@@ -1,14 +1,14 @@
-import { computed, inject, signal } from '@angular/core';
+import { inject, signal } from '@angular/core';
 import ePub, { Book, Rendition } from '@likecoin/epub-ts';
 import { HttpClient } from '@angular/common/http';
-import { EpubReaderThemeStyle } from './epub-reader-theme-style.model';
+import { EpubReaderStyle } from './epub-reader-style.model';
 
 export class EpubReader {
   private http = inject(HttpClient);
 
   src = signal<string | null>(null);
   renderTo = signal<HTMLElement | null>(null);
-  styles = signal<EpubReaderThemeStyle | null>(null);
+  styles = signal<EpubReaderStyle | null>(null);
 
   private _isReady = signal<boolean>(false);
   private _isLoading = signal<boolean>(false);
@@ -91,6 +91,50 @@ export class EpubReader {
           let locationCfi: string;
           let justResized = false;
           let correcting = false;
+
+          const wheelDebounce = 400;
+          let lastWheelTime = 0;
+          let touchStartX = 0;
+          let touchStartY = 0;
+
+          const onWheelListener = (e: WheelEvent) => {
+            const now = Date.now();
+            if (now - lastWheelTime < wheelDebounce) return;
+
+            if (Math.abs(e.deltaY) > 10) {
+              lastWheelTime = now;
+              if (e.deltaY > 0) this.nextPage();
+              else if (e.deltaY < 0) this.prevPage();
+            }
+          };
+
+          const onTouchStartListener = (e: TouchEvent) => {
+            touchStartX = e.changedTouches[0].clientX;
+            touchStartY = e.changedTouches[0].clientY;
+          };
+
+          const onTouchEndListener = (e: TouchEvent) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+            const threshold = 50;
+
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+              if (diffX > 0) this.prevPage();
+              else this.nextPage();
+            }
+          };
+
+          this._rendition()!.on('rendered', (section: any, view: any) => {
+            const doc = view.iframe.contentDocument;
+            if (doc) {
+              doc.addEventListener('wheel', onWheelListener, { passive: true });
+              doc.addEventListener('touchstart', onTouchStartListener, { passive: true });
+              doc.addEventListener('touchend', onTouchEndListener, { passive: true });
+            }
+          });
+
           this._rendition()!.on('relocated', (location) => {
             // update chapter index
             const chapterIndex = this._chapters().findIndex((chapter) => chapter === location.start.href);
@@ -147,6 +191,7 @@ export class EpubReader {
 
     try {
       if (this._rendition()) {
+        this._rendition()!.off('rendered');
         this._rendition()!.off('relocated');
         this._rendition()!.off('resized');
         this._rendition()!.destroy();

@@ -32,8 +32,8 @@
     {
       "name": "api-offline-content-calls",
       "urls": [
-        "https://lovi.media/api/audio-books/*/audio*isOffline=True*",
-        "https://lovi.media/api/e-books/*/file*isOffline=True*",
+        "https://lovi.media/api/books/*/audio*isOffline=True*",
+        "https://lovi.media/api/books/*/file*isOffline=True*",
         "https://lovi.media/api/podcasts/*/episodes/*/audio*isOffline=True*"
       ],
       "cacheConfig": {
@@ -46,9 +46,7 @@
     {
       "name": "api-offline-cover-calls",
       "urls": [
-        "https://lovi.media/api/audio-books/*/cover*isOffline=True*",
-        "https://lovi.media/api/e-books/*/cover*isOffline=True*",
-        "https://lovi.media/api/e-books/*/cover/preview*isOffline=True*",
+        "https://lovi.media/api/books/*/cover*isOffline=True*",
         "https://lovi.media/api/podcasts/*/cover*isOffline=True*",
         "https://lovi.media/api/podcasts/*/episodes/*/cover*isOffline=True*",
         "https://lovi.media/api/creators/*/cover*isOffline=True*"
@@ -63,8 +61,7 @@
     {
       "name": "api-offline-data-calls",
       "urls": [
-        "https://lovi.media/api/audio-books/*isOffline=True*",
-        "https://lovi.media/api/e-books/*isOffline=True*",
+        "https://lovi.media/api/books/*isOffline=True*",
         "https://lovi.media/api/podcasts/*isOffline=True*",
         "https://lovi.media/api/podcasts/*/episodes/*isOffline=True*",
         "https://lovi.media/api/creators/*isOffline=True*"

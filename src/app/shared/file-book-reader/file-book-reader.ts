@@ -27,7 +27,7 @@ export class FileBookReader {
   fontSizeInputOpen = signal<boolean>(false);
   fontSizeValue = signal<number>(16); // Default font size in px
 
-  themeStyles = computed(() => {
+  readerStyles = computed(() => {
     const val = this.themeValue();
     const fontSize = this.fontSizeValue();
 

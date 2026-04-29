@@ -1,6 +1,6 @@
 <h1 class="title">Edit - Only for pros</h1>
 
-<h2 class="title">Audio Books ({{ audioBookPagedResult()?.totalCount }})</h2>
+<h2 class="title">Books ({{ bookPagedResult()?.totalCount }})</h2>
 
 <div class="section overflow-auto">
     <table class="table w-full break-normal">
@@ -12,55 +12,8 @@
                 <th>cover image preview</th>
                 <th>description</th>
                 <th>audio</th>
-                <th>readers</th>
-
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (audioBook of audioBookPagedResult()?.items; track $index) {
-            <tr>
-                <td>{{audioBook.id}}</td>
-                <td><span class="line-clamp-2">{{audioBook.name}}</span></td>
-                <td>{{!!audioBook.coverImageUrl}}</td>
-                <td>{{!!audioBook.coverImagePreviewUrl}}</td>
-                <td><span class="line-clamp-2">{{audioBook.description}}</span></td>
-                <td>{{!!audioBook.audioUrl}}</td>
-                <td>{{audioBook.readers?.length}}</td>
-
-                <td>
-                    <a class="icon-button" title="Update Audio Book"
-                        [routerLink]="['/edit', 'audio-books', audioBook.id]"><fa-icon [icon]="faPen" /></a>
-                </td>
-                <td>
-                    <button type="button" class="icon-button" title="Delete Audio Book"
-                        (click)="deleteAudioBook(audioBook.id!)"><fa-icon [icon]="faTrash" /></button>
-                </td>
-            </tr>
-            }
-            <tr>
-                <td colspan="100%">
-                    <a title="Create Audio Book" class="button button-accent"
-                        [routerLink]="['/edit', 'audio-books', 'create']">Create Audio Book</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<h2 class="title">eBooks ({{eBookPagedResult()?.totalCount}})</h2>
-
-<div class="section overflow-auto">
-    <table class="table w-full break-normal">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>cover image</th>
-                <th>cover image preview</th>
-                <th>description</th>
                 <th>file</th>
+                <th>readers</th>
                 <th>writers</th>
 
                 <th></th>
@@ -68,30 +21,32 @@
             </tr>
         </thead>
         <tbody>
-            @for (eBook of eBookPagedResult()?.items; track $index) {
+            @for (book of bookPagedResult()?.items; track $index) {
             <tr>
-                <td>{{eBook.id}}</td>
-                <td><span class="line-clamp-2">{{eBook.name}}</span></td>
-                <td>{{!!eBook.coverImageUrl}}</td>
-                <td>{{!!eBook.coverImagePreviewUrl}}</td>
-                <td><span class="line-clamp-2">{{eBook.description}}</span></td>
-                <td>{{!!eBook.fileUrl}}</td>
-                <td>{{eBook.writers?.length}}</td>
+                <td>{{book.id}}</td>
+                <td><span class="line-clamp-2">{{book.name}}</span></td>
+                <td>{{!!book.coverImageUrl}}</td>
+                <td>{{!!book.coverImagePreviewUrl}}</td>
+                <td><span class="line-clamp-2">{{book.description}}</span></td>
+                <td>{{!!book.audioUrl}}</td>
+                <td>{{!!book.fileUrl}}</td>
+                <td>{{book.readers?.length}}</td>
+                <td>{{book.writers?.length}}</td>
 
                 <td>
-                    <a class="icon-button" title="Update eBook" [routerLink]="['/edit', 'e-books', eBook.id]"><fa-icon
+                    <a class="icon-button" title="Update Book" [routerLink]="['/edit', 'books', book.id]"><fa-icon
                             [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" title="Delete eBook"
-                        (click)="deleteEBook(eBook.id!)"><fa-icon [icon]="faTrash" /></button>
+                    <button type="button" class="icon-button" title="Delete Book"
+                        (click)="deleteBook(book.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>
             }
             <tr>
                 <td colspan="100%">
-                    <a title="Create eBook" class="button button-accent"
-                        [routerLink]="['/edit', 'e-books', 'create']">Create eBook</a>
+                    <a title="Create Book" class="button button-accent"
+                        [routerLink]="['/edit', 'books', 'create']">Create Book</a>
                 </td>
             </tr>
         </tbody>

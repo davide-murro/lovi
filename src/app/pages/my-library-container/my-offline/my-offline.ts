@@ -1,13 +1,12 @@
 import { Component, inject, computed } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { OfflineService } from "../../../core/services/offline.service";
-import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
+import { BookItem } from "../../../shared/book-item/book-item";
 import { PodcastDetailsItem } from "../../../shared/podcast-details-item/podcast-details-item";
-import { EBookItem } from "../../../shared/e-book-item/e-book-item";
 
 @Component({
   selector: 'app-my-offline',
-  imports: [FontAwesomeModule, AudioBookItem, PodcastDetailsItem, EBookItem],
+  imports: [FontAwesomeModule, BookItem, PodcastDetailsItem],
   templateUrl: './my-offline.html',
   styleUrl: './my-offline.scss'
 })
@@ -15,11 +14,8 @@ export class MyOffline {
   private offlineService = inject(OfflineService);
 
   // offline
-  myOfflineAudioBooks = computed(() => {
-    return this.offlineService.audioBooks();
-  });
-  myOfflineEBooks = computed(() => {
-    return this.offlineService.eBooks();
+  myOfflineBooks = computed(() => {
+    return this.offlineService.books();
   });
   myOfflinePodcasts = computed(() => {
     const grouped = this.offlineService.podcasts();

@@ -1,3 +1,10 @@
 .dialog-container {
     background-color: var(--color-opacity);
+    transition: opacity 300ms, visibility 300ms;
+    z-index: 50;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

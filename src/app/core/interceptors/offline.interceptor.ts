@@ -5,7 +5,7 @@ import { OfflineService } from '../services/offline.service';
 import { AuthService } from '../services/auth.service';
 import { catchError, of } from 'rxjs';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
-import { AudioBookDto } from '../models/dtos/audio-book-dto.model';
+import { BookDto } from '../models/dtos/book-dto.model';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { CreatorDto } from '../models/dtos/creator-dto.model';
 
@@ -53,23 +53,11 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
                     sortBy: req.params.get('sortBy')!,
                     sortOrder: req.params.get('sortOrder')! as 'asc' | 'desc'
                 };
-                let offlineItems: AudioBookDto[] | PodcastDto[] | CreatorDto[] = [];
+                let offlineItems: BookDto[] | PodcastDto[] | CreatorDto[] = [];
 
-                // Audiobooks
-                if (reqUrl.match(/\/api\/audio-books\/paged/)) {
-                    offlineItems = offlineService.audioBooks()
-                        .filter(a => a.name.toLowerCase().includes(query.search.toLowerCase()) || a.description?.toLowerCase().includes(query.search.toLowerCase()))
-                        .sort((a, b) => {
-                            if (query.sortBy === 'name') {
-                                return query.sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-                            }
-                            return 0;
-                        });
-                }
-
-                // E-books
-                if (reqUrl.match(/\/api\/e-books\/paged/)) {
-                    offlineItems = offlineService.eBooks()
+                // Books
+                if (reqUrl.match(/\/api\/books\/paged/)) {
+                    offlineItems = offlineService.books()
                         .filter(b => b.name.toLowerCase().includes(query.search.toLowerCase()) || b.description?.toLowerCase().includes(query.search.toLowerCase()))
                         .sort((a, b) => {
                             if (query.sortBy === 'name') {

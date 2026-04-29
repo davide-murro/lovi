@@ -4,14 +4,13 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { of, catchError, finalize, defer } from "rxjs";
 import { PodcastDto } from "../../../core/models/dtos/podcast-dto.model";
 import { LibrariesService } from "../../../core/services/libraries.service";
-import { AudioBookItem } from "../../../shared/audio-book-item/audio-book-item";
+import { BookItem } from "../../../shared/book-item/book-item";
 import { PodcastDetailsItem } from "../../../shared/podcast-details-item/podcast-details-item";
-import { EBookItem } from "../../../shared/e-book-item/e-book-item";
 
 
 @Component({
   selector: 'app-my-library',
-  imports: [FontAwesomeModule, AudioBookItem, PodcastDetailsItem, EBookItem],
+  imports: [FontAwesomeModule, BookItem, PodcastDetailsItem],
   templateUrl: './my-library.html',
   styleUrl: './my-library.scss'
 })
@@ -36,17 +35,10 @@ export class MyLibrary {
   }));
 
   // library  
-  myLibraryAudioBooks = computed(() => {
+  myLibraryBooks = computed(() => {
     const list = this.myLibraryData()
-      ?.filter((ml) => ml.audioBook?.id != null)
-      .map(ml => ml.audioBook!);
-    return list;
-  });
-
-  myLibraryEBooks = computed(() => {
-    const list = this.myLibraryData()
-      ?.filter((ml) => ml.eBook?.id != null)
-      .map(ml => ml.eBook!);
+      ?.filter((ml) => ml.book?.id != null)
+      .map(ml => ml.book!);
     return list;
   });
 

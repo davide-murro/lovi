@@ -5,28 +5,14 @@
 </p>
 
 <div class="section">
-  <h2 i18n class="title">Offline Audio Books</h2>
+  <h2 i18n class="title">Offline Books</h2>
 
-  @if (myOfflineAudioBooks() == null || myOfflineAudioBooks()!.length == 0) {
-  <p i18n class="section text-accent">No Audio Books are available Offline</p>
+  @if (myOfflineBooks() == null || myOfflineBooks()!.length == 0) {
+  <p i18n class="section text-accent">No Books are available Offline</p>
   } @else {
   <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
-    @for (audioBook of myOfflineAudioBooks(); track audioBook.id) {
-    <app-audio-book-item [audioBook]="audioBook"></app-audio-book-item>
-    }
-  </div>
-  }
-</div>
-
-<div class="section">
-  <h2 i18n class="title">Offline E-Books</h2>
-
-  @if (myOfflineEBooks() == null || myOfflineEBooks()!.length == 0) {
-  <p i18n class="section text-accent">No E-Books are available Offline</p>
-  } @else {
-  <div class="section grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
-    @for (eBook of myOfflineEBooks(); track eBook.id) {
-    <app-e-book-item [eBook]="eBook"></app-e-book-item>
+    @for (book of myOfflineBooks(); track book.id) {
+    <app-book-item [book]="book"></app-book-item>
     }
   </div>
   }

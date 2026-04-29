@@ -1,46 +1,37 @@
 import { effect, inject, Injectable, signal, computed } from '@angular/core';
 import { firstValueFrom, Subject, takeUntil } from 'rxjs';
-import { AudioBookDto } from '../models/dtos/audio-book-dto.model';
-import { EBookDto } from '../models/dtos/e-book-dto.model';
+import { BookDto } from '../models/dtos/book-dto.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
-import { AudioBooksService } from './audio-books.service';
+import { BooksService } from './books.service';
 import { PodcastsService } from './podcasts.service';
 import { AuthService } from './auth.service';
-import { CreatorsService } from './creators.service';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
-import { CreatorDto } from '../models/dtos/creator-dto.model';
-import { EBooksService } from './e-books.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class OfflineService {
     private authService = inject(AuthService);
-    private audioBooksService = inject(AudioBooksService);
-    private eBooksService = inject(EBooksService);
+    private booksService = inject(BooksService);
     private podcastsService = inject(PodcastsService);
     //private creatorsService = inject(CreatorsService);
 
     // Track downloaded items with metadata
-    private offlineAudioBooks = signal<AudioBookDto[]>([]);
-    private offlineEBooks = signal<EBookDto[]>([]);
+    private offlineBooks = signal<BookDto[]>([]);
     private offlineEpisodes = signal<PodcastEpisodeDto[]>([]);
 
     // Track items being downloaded (priming phase) to allow services to add ?isOffline=true
-    private downloadingAudioBooks = signal<AudioBookDto[]>([]);
-    private downloadingEBooks = signal<EBookDto[]>([]);
+    private downloadingBooks = signal<BookDto[]>([]);
     private downloadingEpisodes = signal<PodcastEpisodeDto[]>([]);
 
     // Track items being deleted (priming phase)
-    private deletingAudioBooks = signal<AudioBookDto[]>([]);
-    private deletingEBooks = signal<EBookDto[]>([]);
+    private deletingBooks = signal<BookDto[]>([]);
     private deletingEpisodes = signal<PodcastEpisodeDto[]>([]);
 
     // Subject to cancel ongoing downloads when user logs out
     private cancelDownloads$ = new Subject<void>();
 
-    audioBooks = computed(() => [...this.downloadingAudioBooks(), ...this.offlineAudioBooks()]);
-    eBooks = computed(() => [...this.downloadingEBooks(), ...this.offlineEBooks()]);
+    books = computed(() => [...this.downloadingBooks(), ...this.offlineBooks()]);
     episodes = computed(() => [...this.downloadingEpisodes(), ...this.offlineEpisodes()]);
     podcasts = computed(() => {
         const grouped = this.episodes().reduce((acc, ep) => {
@@ -56,7 +47,7 @@ export class OfflineService {
         const creators = Array.from(
             new Map(
                 [
-                    ...this.audioBooks().flatMap(ab => ab.readers ?? []),
+                    ...this.books().flatMap(b => [...(b.readers ?? []), ...(b.writers ?? [])]),
                     ...this.episodes().flatMap(ep => ep.voicers ?? [])
                 ].map(c => [c.id, c])
             ).values()
@@ -85,28 +76,22 @@ export class OfflineService {
 
     private initializeOfflineData() {
         this.cancelDownloads$.next();
-        this.offlineAudioBooks.set(this.loadFromStorage('offlineAudioBooks'));
+        this.offlineBooks.set(this.loadFromStorage('offlineBooks'));
         this.offlineEpisodes.set(this.loadFromStorage('offlinePodcastEpisodes'));
-        this.offlineEBooks.set(this.loadFromStorage('offlineEBooks'));
-        this.downloadingAudioBooks.set([]);
+        this.downloadingBooks.set([]);
         this.downloadingEpisodes.set([]);
-        this.downloadingEBooks.set([]);
-        this.deletingAudioBooks.set([]);
+        this.deletingBooks.set([]);
         this.deletingEpisodes.set([]);
-        this.deletingEBooks.set([]);
     }
 
     private clearOfflineData() {
         this.cancelDownloads$.next();
-        this.offlineAudioBooks.set([]);
+        this.offlineBooks.set([]);
         this.offlineEpisodes.set([]);
-        this.offlineEBooks.set([]);
-        this.downloadingAudioBooks.set([]);
+        this.downloadingBooks.set([]);
         this.downloadingEpisodes.set([]);
-        this.downloadingEBooks.set([]);
-        this.deletingAudioBooks.set([]);
+        this.deletingBooks.set([]);
         this.deletingEpisodes.set([]);
-        this.deletingEBooks.set([]);
     }
 
     private loadFromStorage(key: string): any[] {
@@ -132,22 +117,14 @@ export class OfflineService {
     isUrlDownloaded(url: string): boolean {
         if (!url) return false;
 
-        if (this.offlineAudioBooks().some(a => {
-            if (this.isAudioBookDeleting(a.id!)) return false;
-            let found = a.dataUrl === url || a.audioUrl === url || a.coverImageUrl === url || a.coverImagePreviewUrl === url
-            if (a.readers) {
-                for (const r of a.readers) {
+        if (this.offlineBooks().some(b => {
+            if (this.isBookDeleting(b.id!)) return false;
+            let found = b.dataUrl === url || b.audioUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
+            if (b.readers) {
+                for (const r of b.readers) {
                     found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
                 }
             }
-            return found;
-        })) {
-            return true;
-        }
-
-        if (this.offlineEBooks().some(b => {
-            if (this.isEBookDeleting(b.id!)) return false;
-            let found = b.dataUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
             if (b.writers) {
                 for (const w of b.writers) {
                     found = found || w.dataUrl === url || w.coverImageUrl === url || w.coverImagePreviewUrl === url
@@ -180,20 +157,13 @@ export class OfflineService {
     isUrlDownloading(url: string): boolean {
         if (!url) return false;
 
-        if (this.downloadingAudioBooks().some(a => {
-            let found = a.dataUrl === url || a.audioUrl === url || a.coverImageUrl === url || a.coverImagePreviewUrl === url
-            if (a.readers) {
-                for (const r of a.readers) {
+        if (this.downloadingBooks().some(b => {
+            let found = b.dataUrl === url || b.audioUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
+            if (b.readers) {
+                for (const r of b.readers) {
                     found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
                 }
             }
-            return found;
-        })) {
-            return true;
-        }
-
-        if (this.downloadingEBooks().some(b => {
-            let found = b.dataUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
             if (b.writers) {
                 for (const w of b.writers) {
                     found = found || w.dataUrl === url || w.coverImageUrl === url || w.coverImagePreviewUrl === url
@@ -225,21 +195,13 @@ export class OfflineService {
     isUrlDeleting(url: string): boolean {
         if (!url) return false;
 
-        const offlineAudioBooks = this.offlineAudioBooks().filter(a => {
-            let found = a.dataUrl === url || a.audioUrl === url || a.coverImageUrl === url || a.coverImagePreviewUrl === url
-            if (a.readers) {
-                for (const r of a.readers) {
+        const offlineBooks = this.offlineBooks().filter(b => {
+            let found = b.dataUrl === url || b.audioUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
+            if (b.readers) {
+                for (const r of b.readers) {
                     found = found || r.dataUrl === url || r.coverImageUrl === url || r.coverImagePreviewUrl === url
                 }
             }
-            return found;
-        });
-        if (offlineAudioBooks.length > 0 && offlineAudioBooks.every(a => this.isAudioBookDeleting(a.id!))) {
-            return true;
-        }
-
-        const offlineEBooks = this.offlineEBooks().filter(b => {
-            let found = b.dataUrl === url || b.fileUrl === url || b.coverImageUrl === url || b.coverImagePreviewUrl === url
             if (b.writers) {
                 for (const w of b.writers) {
                     found = found || w.dataUrl === url || w.coverImageUrl === url || w.coverImagePreviewUrl === url
@@ -247,7 +209,7 @@ export class OfflineService {
             }
             return found;
         });
-        if (offlineEBooks.length > 0 && offlineEBooks.every(b => this.isEBookDeleting(b.id!))) {
+        if (offlineBooks.length > 0 && offlineBooks.every(b => this.isBookDeleting(b.id!))) {
             return true;
         }
 
@@ -270,14 +232,9 @@ export class OfflineService {
         return false;
     }
 
-    isAudioBookDownloaded(id: number): boolean {
+    isBookDownloaded(id: number): boolean {
         if (!id) return false;
-        return this.offlineAudioBooks().some(a => a.id === id) && !this.isAudioBookDeleting(id);
-    }
-
-    isEBookDownloaded(id: number): boolean {
-        if (!id) return false;
-        return this.offlineEBooks().some(a => a.id === id) && !this.isEBookDeleting(id);
+        return this.offlineBooks().some(b => b.id === id) && !this.isBookDeleting(id);
     }
 
     isPodcastEpisodeDownloaded(id: number): boolean {
@@ -293,21 +250,15 @@ export class OfflineService {
 
     isCreatorDownloaded(id: number): boolean {
         if (!id) return false;
-        // A creator is "offline" if they are part of any offline audiobook or episode
-        return (this.offlineAudioBooks().some(a => a.readers?.some(r => r.id === id)) ||
-            this.offlineEBooks().some(e => e.writers?.some(w => w.id === id)) ||
+        // A creator is "offline" if they are part of any offline book or episode
+        return (this.offlineBooks().some(b => (b.readers?.some(r => r.id === id) || b.writers?.some(w => w.id === id))) ||
             this.offlineEpisodes().some(e => e.voicers?.some(v => v.id === id))) &&
             !this.isCreatorDeleting(id);
     }
 
-    isAudioBookDownloading(id: number): boolean {
+    isBookDownloading(id: number): boolean {
         if (!id) return false;
-        return this.downloadingAudioBooks().some(a => a.id === id);
-    }
-
-    isEBookDownloading(id: number): boolean {
-        if (!id) return false;
-        return this.downloadingEBooks().some(a => a.id === id);
+        return this.downloadingBooks().some(b => b.id === id);
     }
 
     isPodcastEpisodeDownloading(id: number): boolean {
@@ -323,18 +274,12 @@ export class OfflineService {
     isCreatorDownloading(id: number): boolean {
         if (!id) return false;
         return this.downloadingEpisodes().some(e => e.voicers?.some(v => v.id === id)) ||
-            this.downloadingAudioBooks().some(a => a.readers?.some(r => r.id === id)) ||
-            this.downloadingEBooks().some(e => e.writers?.some(w => w.id === id));
+            this.downloadingBooks().some(b => (b.readers?.some(r => r.id === id) || b.writers?.some(w => w.id === id)));
     }
 
-    isAudioBookDeleting(id: number): boolean {
+    isBookDeleting(id: number): boolean {
         if (!id) return false;
-        return this.deletingAudioBooks().some(a => a.id === id);
-    }
-
-    isEBookDeleting(id: number): boolean {
-        if (!id) return false;
-        return this.deletingEBooks().some(a => a.id === id);
+        return this.deletingBooks().some(b => b.id === id);
     }
 
     isPodcastEpisodeDeleting(id: number): boolean {
@@ -351,100 +296,46 @@ export class OfflineService {
     isCreatorDeleting(id: number): boolean {
         if (!id) return false;
         const offlinePodcastEpisodes = this.offlineEpisodes().filter(e => e.voicers?.some(v => v.id === id));
-        const offlineAudioBooks = this.offlineAudioBooks().filter(a => a.readers?.some(r => r.id === id));
-        const offlineEBooks = this.offlineEBooks().filter(e => e.writers?.some(w => w.id === id));
+        const offlineBooks = this.offlineBooks().filter(b => (b.readers?.some(r => r.id === id) || b.writers?.some(w => w.id === id)));
         return offlinePodcastEpisodes.length > 0 && offlinePodcastEpisodes.every(e => this.isPodcastEpisodeDeleting(e.id!)) ||
-            offlineAudioBooks.length > 0 && offlineAudioBooks.every(a => this.isAudioBookDeleting(a.id!)) ||
-            offlineEBooks.length > 0 && offlineEBooks.every(e => this.isEBookDeleting(e.id!));
+            offlineBooks.length > 0 && offlineBooks.every(b => this.isBookDeleting(b.id!));
     }
 
-    async downloadAudioBook(audioBook: AudioBookDto) {
-        if (!audioBook.id) return;
+    async downloadBook(book: BookDto) {
+        if (!book.id) return;
 
-        if (this.isAudioBookDownloaded(audioBook.id!)) {
-            throw new Error(`${audioBook.name} is already Offline`);
+        if (this.isBookDownloaded(book.id!)) {
+            throw new Error(`${book.name} is already Offline`);
         }
-        if (this.isAudioBookDownloading(audioBook.id!)) {
-            throw new Error(`${audioBook.name} is already downloading`);
+        if (this.isBookDownloading(book.id!)) {
+            throw new Error(`${book.name} is already downloading`);
         }
-        if (this.isAudioBookDeleting(audioBook.id!)) {
-            throw new Error(`${audioBook.name} is already deleting`);
+        if (this.isBookDeleting(book.id!)) {
+            throw new Error(`${book.name} is already deleting`);
         }
 
         try {
-            // 1. start tracking download audio book
-            const readersToDownload = audioBook.readers?.filter(r => r.id && !this.isCreatorDownloading(r.id) && !this.isCreatorDownloaded(r.id)) ?? [];
-            this.downloadingAudioBooks.update(set => [...set, audioBook]);
+            // 1. start tracking download book            
+            //const readersToDownload = book.readers?.filter(r => r.id && !this.isCreatorDownloading(r.id) && !this.isCreatorDownloaded(r.id)) ?? [];
+            //const writersToDownload = book.writers?.filter(w => w.id && !this.isCreatorDownloading(w.id) && !this.isCreatorDownloaded(w.id)) ?? [];
+            this.downloadingBooks.update(set => [...set, book]);
 
             // 2. Fetch resources via services (priming the NGSW cache)
-            const offlineAudioBook = await firstValueFrom(this.audioBooksService.getById(audioBook.id!).pipe(takeUntil(this.cancelDownloads$)));
-            if (audioBook.audioUrl) await firstValueFrom(this.audioBooksService.getAudio(audioBook.id!).pipe(takeUntil(this.cancelDownloads$)));
-            if (audioBook.coverImageUrl) await firstValueFrom(this.audioBooksService.getCover(audioBook.id!, false).pipe(takeUntil(this.cancelDownloads$)));
-            if (audioBook.coverImagePreviewUrl) await firstValueFrom(this.audioBooksService.getCover(audioBook.id!, true).pipe(takeUntil(this.cancelDownloads$)));
+            const offlineBook = await firstValueFrom(this.booksService.getById(book.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (book.audioUrl) await firstValueFrom(this.booksService.getAudio(book.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (book.fileUrl) await firstValueFrom(this.booksService.getFile(book.id!).pipe(takeUntil(this.cancelDownloads$)));
+            if (book.coverImageUrl) await firstValueFrom(this.booksService.getCover(book.id!, false).pipe(takeUntil(this.cancelDownloads$)));
+            if (book.coverImagePreviewUrl) await firstValueFrom(this.booksService.getCover(book.id!, true).pipe(takeUntil(this.cancelDownloads$)));
 
-            // 3. Download readers
-            /*if (readersToDownload?.length > 0) {
-                for (const reader of readersToDownload) {
-                    await firstValueFrom(this.creatorsService.getById(reader.id!));
-                    if (reader.coverImageUrl) await firstValueFrom(this.creatorsService.getCover(reader.id!, true));
-                    if (reader.coverImagePreviewUrl) await firstValueFrom(this.creatorsService.getCover(reader.id!, false));
-                }
-            }*/
-
-            // 4. Update signal and localStorage
-            this.downloadingAudioBooks.update(set => set.filter(a => a.id !== audioBook.id));
-            this.offlineAudioBooks.update(list => {
-                const newList = [...list, offlineAudioBook];
-                this.saveToStorage('offlineAudioBooks', newList);
+            // 3. Update signal and localStorage
+            this.downloadingBooks.update(set => set.filter(b => b.id !== book.id));
+            this.offlineBooks.update(list => {
+                const newList = [...list, offlineBook];
+                this.saveToStorage('offlineBooks', newList);
                 return newList;
             });
         } catch (error: any) {
-            this.downloadingAudioBooks.update(set => set.filter(a => a.id !== audioBook.id));
-            throw new Error(error);
-        }
-    }
-
-    async downloadEBook(eBook: EBookDto) {
-        if (!eBook.id) return;
-
-        if (this.isEBookDownloaded(eBook.id!)) {
-            throw new Error(`${eBook.name} is already Offline`);
-        }
-        if (this.isEBookDownloading(eBook.id!)) {
-            throw new Error(`${eBook.name} is already downloading`);
-        }
-        if (this.isEBookDeleting(eBook.id!)) {
-            throw new Error(`${eBook.name} is already deleting`);
-        }
-
-        try {
-            // 1. track download
-            this.downloadingEBooks.update(set => [...set, eBook]);
-
-            // 2. Priming cache
-            const offlineEBook = await firstValueFrom(this.eBooksService.getById(eBook.id!).pipe(takeUntil(this.cancelDownloads$)));
-            if (eBook.fileUrl) await firstValueFrom(this.eBooksService.getFile(eBook.id!).pipe(takeUntil(this.cancelDownloads$)));
-            if (eBook.coverImageUrl) await firstValueFrom(this.eBooksService.getCover(eBook.id!, false).pipe(takeUntil(this.cancelDownloads$)));
-            if (eBook.coverImagePreviewUrl) await firstValueFrom(this.eBooksService.getCover(eBook.id!, true).pipe(takeUntil(this.cancelDownloads$)));
-
-            // 3. Download writers
-            /*if (writersToDownload?.length > 0) {
-                for (const writer of writersToDownload) {
-                    await firstValueFrom(this.creatorsService.getById(writer.id!));
-                    if (writer.coverImageUrl) await firstValueFrom(this.creatorsService.getCover(writer.id!, true));
-                    if (writer.coverImagePreviewUrl) await firstValueFrom(this.creatorsService.getCover(writer.id!, false));
-                }
-            }*/
-
-            // 4. Update signal and storage
-            this.downloadingEBooks.update(set => set.filter(a => a.id !== eBook.id));
-            this.offlineEBooks.update(list => {
-                const newList = [...list, offlineEBook];
-                this.saveToStorage('offlineEBooks', newList);
-                return newList;
-            });
-        } catch (error: any) {
-            this.downloadingEBooks.update(set => set.filter(a => a.id !== eBook.id));
+            this.downloadingBooks.update(set => set.filter(b => b.id !== book.id));
             throw new Error(error);
         }
     }
@@ -487,7 +378,7 @@ export class OfflineService {
         try {
             // 1. Start tracking download episode
             const podcastToDownload = episode.podcast?.id && !this.isPodcastDownloading(episode.podcast.id) && !this.isPodcastDownloaded(episode.podcast.id) ? episode.podcast : null;
-            const voicersToDownload = episode.voicers?.filter(v => v.id && !this.isCreatorDownloading(v.id) && !this.isCreatorDownloaded(v.id)) ?? [];
+            //const voicersToDownload = episode.voicers?.filter(v => v.id && !this.isCreatorDownloading(v.id) && !this.isCreatorDownloaded(v.id)) ?? [];
             this.downloadingEpisodes.update(set => [...set, episode]);
 
             // 2. Fetch resources via services (priming the NGSW cache)
@@ -525,32 +416,33 @@ export class OfflineService {
         }
     }
 
-    async removeAudioBook(id: number) {
+    async removeBook(id: number) {
         if (!id) return;
 
         // 1. Find the stored offline version to get the correct URLs (with isOffline=True)
-        const storedItem = this.offlineAudioBooks().find(a => a.id === id);
+        const storedItem = this.offlineBooks().find(b => b.id === id);
         if (!storedItem) {
-            throw new Error(`Audiobook ${id} not found in Offline storage`);
+            throw new Error(`Book ${id} not found in Offline storage`);
         }
-        if (!this.isAudioBookDownloaded(id)) {
+        if (!this.isBookDownloaded(id)) {
             throw new Error(`${storedItem.name} is not Offline`);
         }
-        if (this.isAudioBookDownloading(id)) {
+        if (this.isBookDownloading(id)) {
             throw new Error(`${storedItem.name} is downloading`);
         }
-        if (this.isAudioBookDeleting(id)) {
+        if (this.isBookDeleting(id)) {
             throw new Error(`${storedItem.name} is deleting`);
         }
 
         try {
             // 2. Mark as deleting (for UI feedback)
-            this.deletingAudioBooks.update(set => [...set, storedItem]);
+            this.deletingBooks.update(set => [...set, storedItem]);
 
             // 3. Determine URLs to remove from cache
             const urlsToRemove = [];
             if (storedItem.dataUrl) urlsToRemove.push(storedItem.dataUrl);
             if (storedItem.audioUrl) urlsToRemove.push(storedItem.audioUrl);
+            if (storedItem.fileUrl) urlsToRemove.push(storedItem.fileUrl);
             if (storedItem.coverImageUrl) urlsToRemove.push(storedItem.coverImageUrl);
             if (storedItem.coverImagePreviewUrl) urlsToRemove.push(storedItem.coverImagePreviewUrl);
 
@@ -578,64 +470,14 @@ export class OfflineService {
             }
 
             // 5. Update signal and localStorage (only at the end, after successful cache removal)
-            this.deletingAudioBooks.update(set => set.filter(a => a.id !== storedItem.id));
-            this.offlineAudioBooks.update(list => {
-                const newList = list.filter(a => a.id !== storedItem.id);
-                this.saveToStorage('offlineAudioBooks', newList);
+            this.deletingBooks.update(set => set.filter(b => b.id !== storedItem.id));
+            this.offlineBooks.update(list => {
+                const newList = list.filter(b => b.id !== storedItem.id);
+                this.saveToStorage('offlineBooks', newList);
                 return newList;
             });
         } catch (error: any) {
-            this.deletingAudioBooks.update(set => set.filter(a => a.id !== storedItem.id));
-            throw new Error(error);
-        }
-    }
-
-    async removeEBook(id: number) {
-        if (!id) return;
-
-        const storedItem = this.offlineEBooks().find(a => a.id === id);
-        if (!storedItem) return;
-
-        try {
-            this.deletingEBooks.update(set => [...set, storedItem]);
-
-            const urlsToRemove = [];
-            if (storedItem.dataUrl) urlsToRemove.push(storedItem.dataUrl);
-            if (storedItem.fileUrl) urlsToRemove.push(storedItem.fileUrl);
-            if (storedItem.coverImageUrl) urlsToRemove.push(storedItem.coverImageUrl);
-            if (storedItem.coverImagePreviewUrl) urlsToRemove.push(storedItem.coverImagePreviewUrl);
-
-            // Check if writers are still needed
-            /*if (storedItem.writers) {
-                for (const writer of storedItem.writers) {
-                    if (writer.id && !this.isCreatorDownloaded(writer.id!)) {
-                        if (writer.dataUrl) urlsToRemove.push(writer.dataUrl);
-                        if (writer.coverImageUrl) urlsToRemove.push(writer.coverImageUrl);
-                        if (writer.coverImagePreviewUrl) urlsToRemove.push(writer.coverImagePreviewUrl);
-                    }
-                }
-            }*/
-
-            // Clear from NGSW cache
-            const cacheNames = await caches.keys();
-            for (const name of cacheNames) {
-                if (name.includes('api-offline-')) {
-                    const cache = await caches.open(name);
-                    for (const url of urlsToRemove) {
-                        const urlWithOfflineTo = this.addOfflineToUrl(url);
-                        await cache.delete(urlWithOfflineTo);
-                    }
-                }
-            }
-
-            this.deletingEBooks.update(set => set.filter(a => a.id !== storedItem.id));
-            this.offlineEBooks.update(list => {
-                const newList = list.filter(a => a.id !== storedItem.id);
-                this.saveToStorage('offlineEBooks', newList);
-                return newList;
-            });
-        } catch (error: any) {
-            this.deletingEBooks.update(set => set.filter(a => a.id !== storedItem.id));
+            this.deletingBooks.update(set => set.filter(b => b.id !== storedItem.id));
             throw new Error(error);
         }
     }

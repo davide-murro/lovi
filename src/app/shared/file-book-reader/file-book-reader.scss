@@ -4,11 +4,13 @@
 
 @keyframes reader-enter-animation {
     from {
+        visibility: hidden;
         opacity: 0;
         padding-bottom: 0;
     }
 
     to {
+        visibility: visible;
         opacity: 1;
     }
 }
@@ -19,11 +21,14 @@
 
 @keyframes reader-leave-animation {
     from {
+        visibility: visible;
         opacity: 1;
     }
 
     to {
+        visibility: hidden;
         opacity: 0;
+        padding-bottom: 0;
     }
 }
 
@@ -35,35 +40,43 @@
 
 
 .reader-content-expand {
-    transition-property: opacity, height, gap;
+    transition-property: opacity, visibility, height, gap;
     transition-duration: 300ms;
 }
 
 .reader-content-expand-enter {
+    visibility: visible;
     opacity: 1;
     height: 100lvh;
 }
 
 .reader-content-expand-leave {
+    visibility: hidden;
     gap: 0;
     opacity: 0;
     height: 0;
+
+    app-epub-reader {
+        display: none;
+    }
 }
 
 
 .toolbar-expand {
-    transition-property: max-height, opacity;
+    transition-property: max-height, visibility, opacity;
     transition-duration: 300ms;
 }
 
 .toolbar-expand-enter {
-    max-height: calc(var(--spacing) * 20);
+    visibility: visible;
     opacity: 1;
+    max-height: calc(var(--spacing) * 20);
 }
 
 .toolbar-expand-leave {
-    max-height: 0;
+    visibility: hidden;
     opacity: 0;
+    max-height: 0;
 }
 
 
@@ -73,16 +86,18 @@
     width: 100%;
     height: 20px;
     overflow: hidden;
-    transition-property: opacity, width;
+    transition-property: opacity, visibility, width;
     transition-duration: 300ms;
 
     &.open {
+        visibility: visible;
         opacity: 1;
         width: min(100%, 300px);
     }
 
     &:not(.open) {
         pointer-events: none;
+        visibility: hidden;
         opacity: 0;
         width: 0;
     }

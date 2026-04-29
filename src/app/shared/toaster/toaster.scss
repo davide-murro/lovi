@@ -1,14 +1,28 @@
+.toaster-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 60;
+    transition: visibility 300ms;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+}
+
+
 .toast-in-animation {
     animation: toast-in-animation 300ms;
 }
 
 @keyframes toast-in-animation {
     from {
+        visibility: hidden;
         transform: translateX(calc(var(--spacing) * 2));
         opacity: 0;
     }
 
     to {
+        visibility: visible;
         transform: translateX(0px);
         opacity: 1;
     }
@@ -21,11 +35,13 @@
 
 @keyframes toast-out-animation {
     from {
+        visibility: visible;
         transform: translateX(0px);
         opacity: 1;
     }
 
     to {
+        visibility: hidden;
         transform: translateX(calc(var(--spacing) * 2));
         opacity: 0;
     }

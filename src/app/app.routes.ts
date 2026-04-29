@@ -1,25 +1,23 @@
 import { Routes } from "@angular/router";
 import { authGuard } from "./core/guards/auth.guard";
-import { audioBookResolver } from "./core/resolvers/audio-book.resolver";
+import { bookResolver } from "./core/resolvers/book.resolver";
 import { creatorResolver } from "./core/resolvers/creator.resolver";
 import { podcastEpisodeResolver } from "./core/resolvers/podcast-episode.resolver";
 import { podcastResolver } from "./core/resolvers/podcast.resolver";
 import { roleResolver } from "./core/resolvers/role.resolver";
 import { userProfileResolver } from "./core/resolvers/user-profile.resolver";
 import { userResolver } from "./core/resolvers/user.resolver";
-import { AudioBookDetails } from "./pages/audio-books/audio-book-details/audio-book-details";
-import { AudioBooks } from "./pages/audio-books/audio-books";
-import { EBooks } from "./pages/e-books/e-books";
-import { EBookDetails } from "./pages/e-books/e-book-details/e-book-details";
-import { EditEBook } from "./pages/edit/edit-e-book/edit-e-book";
-import { eBookResolver } from "./core/resolvers/e-book.resolver";
+import { BookDetails } from "./pages/books/book-details/book-details";
+import { Books } from "./pages/books/books";
+import { EditBook } from "./pages/edit/edit-book/edit-book";
+
 import { ConfirmChangeEmail } from "./pages/auth/confirm-change-email/confirm-change-email";
 import { ConfirmEmail } from "./pages/auth/confirm-email/confirm-email";
 import { ForgotPassword } from "./pages/auth/forgot-password/forgot-password";
 import { Login } from "./pages/auth/login/login";
 import { Register } from "./pages/auth/register/register";
 import { Edit } from "./pages/edit/edit";
-import { EditAudioBook } from "./pages/edit/edit-audio-book/edit-audio-book";
+
 import { EditCreator } from "./pages/edit/edit-creator/edit-creator";
 import { EditPodcast } from "./pages/edit/edit-podcast/edit-podcast";
 import { EditPodcastEpisode } from "./pages/edit/edit-podcast/edit-podcast-episode/edit-podcast-episode";
@@ -78,29 +76,16 @@ export const routes: Routes = [
         },
     },
     {
-        path: 'audio-books',
-        component: AudioBooks,
-        title: 'LOVI - Audio Books'
+        path: 'books',
+        component: Books,
+        title: 'LOVI - Books'
     },
     {
-        path: 'audio-books/:id',
-        component: AudioBookDetails,
-        title: 'LOVI - Audio Books Details',
+        path: 'books/:id',
+        component: BookDetails,
+        title: 'LOVI - Book Details',
         resolve: {
-            audioBook: audioBookResolver
-        },
-    },
-    {
-        path: 'e-books',
-        component: EBooks,
-        title: 'LOVI - eBooks'
-    },
-    {
-        path: 'e-books/:id',
-        component: EBookDetails,
-        title: 'LOVI - eBooks Details',
-        resolve: {
-            eBook: eBookResolver
+            book: bookResolver
         },
     },
     {
@@ -122,7 +107,7 @@ export const routes: Routes = [
             {
                 path: 'episodes/:episodeId',
                 component: PodcastEpisodeDetails,
-                title: 'LOVI - Podcast Episode',
+                title: 'LOVI - Podcast Episode Details',
                 resolve: {
                     podcastEpisode: podcastEpisodeResolver
                 },
@@ -170,37 +155,20 @@ export const routes: Routes = [
         data: { roles: ['Admin', 'Editor'] },
     },
     {
-        path: 'edit/audio-books/create',
-        component: EditAudioBook,
-        title: 'LOVI - Create Audio Book',
+        path: 'edit/books/create',
+        component: EditBook,
+        title: 'LOVI - Create Book',
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
-        path: 'edit/audio-books/:id',
-        component: EditAudioBook,
-        title: 'LOVI - Edit Audio Book',
+        path: 'edit/books/:id',
+        component: EditBook,
+        title: 'LOVI - Edit Book',
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
         resolve: {
-            audioBook: audioBookResolver
-        }
-    },
-    {
-        path: 'edit/e-books/create',
-        component: EditEBook,
-        title: 'LOVI - Create eBook',
-        canActivate: [authGuard],
-        data: { roles: ['Admin', 'Editor'] },
-    },
-    {
-        path: 'edit/e-books/:id',
-        component: EditEBook,
-        title: 'LOVI - Edit eBook',
-        canActivate: [authGuard],
-        data: { roles: ['Admin', 'Editor'] },
-        resolve: {
-            eBook: eBookResolver
+            book: bookResolver
         }
     },
     {

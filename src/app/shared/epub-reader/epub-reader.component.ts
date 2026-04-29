@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight, faCircleNotch, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { EpubReader } from './epub-reader';
-import { EpubReaderThemeStyle } from './epub-reader-theme-style.model';
+import { EpubReaderStyle } from './epub-reader-style.model';
 
 @Component({
   selector: 'app-epub-reader',
@@ -31,9 +31,9 @@ export class EpubReaderComponent {
 
       this.readerWidth.set(snappedWidth);
       this.readerHeight.set(snappedHeight);
+
       this.readerContent()?.style.setProperty('width', `${snappedWidth}px`);
       this.readerContent()?.style.setProperty('height', `${snappedHeight}px`);
-
       this._epubReader()?.updateResize();
     });
     this._resizeObserver.observe(el.nativeElement);
@@ -51,7 +51,7 @@ export class EpubReaderComponent {
   // inputs - you can either provide an EpubReader object or a src string
   epubReader = input<EpubReader>();
   src = input<string>();
-  themeStyles = input<EpubReaderThemeStyle>();
+  styles = input<EpubReaderStyle>();
 
   readerContent = signal<HTMLElement | null>(null);
   readerWidth = signal<number | null>(null);
@@ -77,13 +77,18 @@ export class EpubReaderComponent {
         this._epubReader()?.src.set(this.src()!);
         this._epubReader()?.renderTo.set(this.readerContent());
         this._epubReader()?.load();
-      } else {
+      } else if (!this.epubReader() && !this.src()) {
+        this._epubReader()?.src.set(null);
+        this._epubReader()?.renderTo.set(null);
         this._epubReader()?.unload();
       }
     });
     effect(() => {
-      if (this.themeStyles()) {
-        this._epubReader()?.styles.set(this.themeStyles()!);
+      if (this.styles()) {
+        this._epubReader()?.styles.set(this.styles()!);
+        this._epubReader()?.updateStyles();
+      } else {
+        this._epubReader()?.styles.set(null);
         this._epubReader()?.updateStyles();
       }
     });
