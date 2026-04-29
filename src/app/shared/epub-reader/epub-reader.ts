@@ -127,7 +127,7 @@ export class EpubReader {
           };
 
           this._rendition()!.on('rendered', (section: any, view: any) => {
-            const doc = view.iframe.contentDocument;
+            const doc = view?.iframe?.contentDocument;
             if (doc) {
               doc.addEventListener('wheel', onWheelListener, { passive: true });
               doc.addEventListener('touchstart', onTouchStartListener, { passive: true });
