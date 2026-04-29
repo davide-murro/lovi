@@ -38,8 +38,17 @@
             }
             <tr>
                 <td colspan="100%">
-                    <a i18n i18n-title title="Create User" class="button button-accent"
-                        [routerLink]="['/edit', 'users', 'create']">Create User</a>
+                    <div class="flex flex-row justify-between">
+                        <a i18n i18n-title title="Create User" class="button button-accent"
+                            [routerLink]="['/edit', 'users', 'create']">Create User</a>
+                        @if (userPagedResult() && userPagedResult()!.totalCount >
+                        userPagedResult()!.pagedQuery.pageSize) {
+                        <app-pagination [pageNumber]="userPagedQuery().pageNumber"
+                            [pageSize]="userPagedQuery().pageSize" [totalCount]="userPagedResult()?.totalCount || 0"
+                            (pageChange)="setPage($event)">
+                        </app-pagination>
+                        }
+                    </div>
                 </td>
             </tr>
         </tbody>

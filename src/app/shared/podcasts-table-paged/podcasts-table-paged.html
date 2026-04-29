@@ -1,0 +1,57 @@
+<h2 class="title">Podcasts ({{podcastPagedResult()?.totalCount}})</h2>
+
+<div class="section overflow-auto">
+    <table class="table w-full break-normal">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>cover image</th>
+                <th>cover image preview</th>
+                <th>description</th>
+                <th>episodes</th>
+                <th>voicers</th>
+
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (podcast of podcastPagedResult()?.items; track $index) {
+            <tr>
+                <td>{{podcast.id}}</td>
+                <td><span class="line-clamp-2">{{podcast.name}}</span></td>
+                <td>{{!!podcast.coverImageUrl}}</td>
+                <td>{{!!podcast.coverImagePreviewUrl}}</td>
+                <td><span class="line-clamp-2">{{podcast.description}}</span></td>
+                <td>{{podcast.episodes?.length}}</td>
+                <td>{{podcast.voicers?.length}}</td>
+
+                <td>
+                    <a class="icon-button" title="Update Podcast"
+                        [routerLink]="['/edit', 'podcasts', podcast.id]"><fa-icon [icon]="faPen" /></a>
+                </td>
+                <td>
+                    <button type="button" class="icon-button" title="Delete Podcast"
+                        (click)="deletePodcast(podcast.id!)"><fa-icon [icon]="faTrash" /></button>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="100%">
+                    <div class="flex flex-row justify-between">
+                        <a title="Create Podcast" class="button button-accent"
+                            [routerLink]="['/edit', 'podcasts', 'create']">Create Podcast</a>
+                        @if (podcastPagedResult() && podcastPagedResult()!.totalCount >
+                        podcastPagedResult()!.pagedQuery.pageSize) {
+                        <app-pagination [pageNumber]="podcastPagedQuery().pageNumber"
+                            [pageSize]="podcastPagedQuery().pageSize"
+                            [totalCount]="podcastPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
+                        </app-pagination>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

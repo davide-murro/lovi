@@ -29,8 +29,17 @@
             }
             <tr>
                 <td colspan="100%">
-                    <a i18n i18n-title title="Create Role" class="button button-accent"
-                        [routerLink]="['/edit', 'roles', 'create']">Create Role</a>
+                    <div class="flex flex-row justify-between">
+                        <a i18n i18n-title title="Create Role" class="button button-accent"
+                            [routerLink]="['/edit', 'roles', 'create']">Create Role</a>
+                        @if (rolePagedResult() && rolePagedResult()!.totalCount >
+                        rolePagedResult()!.pagedQuery.pageSize) {
+                        <app-pagination [pageNumber]="rolePagedQuery().pageNumber"
+                            [pageSize]="rolePagedQuery().pageSize" [totalCount]="rolePagedResult()?.totalCount || 0"
+                            (pageChange)="setPage($event)">
+                        </app-pagination>
+                        }
+                    </div>
                 </td>
             </tr>
         </tbody>

@@ -1,0 +1,53 @@
+<h2 class="title">Creators ({{creatorPagedResult()?.totalCount}})</h2>
+
+<div class="section overflow-auto">
+    <table class="table w-full break-normal">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nickname</th>
+                <th>name</th>
+                <th>surname</th>
+                <!--<th>cover image</th>-->
+
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (creator of creatorPagedResult()?.items; track $index) {
+            <tr>
+                <td>{{creator.id}}</td>
+                <td><span>{{creator.nickname}}</span></td>
+                <td><span>{{creator.name}}</span></td>
+                <td><span>{{creator.surname}}</span></td>
+                <!--<td><img class="h-12 min-w-32 object-contain" [src]="creator.coverImagePreviewUrl"></td>-->
+
+                <td>
+                    <a class="icon-button" title="Update Creator"
+                        [routerLink]="['/edit', 'creators', creator.id]"><fa-icon [icon]="faPen" /></a>
+                </td>
+                <td>
+                    <button type="button" class="icon-button" title="Delete Creator"
+                        (click)="deleteCreator(creator.id!)"><fa-icon [icon]="faTrash" /></button>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="100%">
+                    <div class="flex flex-row justify-between">
+                        <a title="Create Creator" class="button button-accent"
+                            [routerLink]="['/edit', 'creators', 'create']">Create Creator</a>
+                        @if (creatorPagedResult() && creatorPagedResult()!.totalCount >
+                        creatorPagedResult()!.pagedQuery.pageSize) {
+                        <app-pagination [pageNumber]="creatorPagedQuery().pageNumber"
+                            [pageSize]="creatorPagedQuery().pageSize"
+                            [totalCount]="creatorPagedResult()?.totalCount || 0" (pageChange)="setPage($event)">
+                        </app-pagination>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

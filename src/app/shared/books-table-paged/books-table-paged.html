@@ -1,0 +1,61 @@
+<h2 class="title">Books ({{ bookPagedResult()?.totalCount }})</h2>
+
+<div class="section overflow-auto">
+    <table class="table w-full break-normal">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>cover image</th>
+                <th>cover image preview</th>
+                <th>description</th>
+                <th>audio</th>
+                <th>file</th>
+                <th>readers</th>
+                <th>writers</th>
+
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (book of bookPagedResult()?.items; track $index) {
+            <tr>
+                <td>{{book.id}}</td>
+                <td><span class="line-clamp-2">{{book.name}}</span></td>
+                <td>{{!!book.coverImageUrl}}</td>
+                <td>{{!!book.coverImagePreviewUrl}}</td>
+                <td><span class="line-clamp-2">{{book.description}}</span></td>
+                <td>{{!!book.audioUrl}}</td>
+                <td>{{!!book.fileUrl}}</td>
+                <td>{{book.readers?.length}}</td>
+                <td>{{book.writers?.length}}</td>
+
+                <td>
+                    <a class="icon-button" title="Update Book" [routerLink]="['/edit', 'books', book.id]"><fa-icon
+                            [icon]="faPen" /></a>
+                </td>
+                <td>
+                    <button type="button" class="icon-button" title="Delete Book"
+                        (click)="deleteBook(book.id!)"><fa-icon [icon]="faTrash" /></button>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="100%">
+                    <div class="flex flex-row justify-between">
+                        <a title="Create Book" class="button button-accent"
+                            [routerLink]="['/edit', 'books', 'create']">Create Book</a>
+                        @if (bookPagedResult() && bookPagedResult()!.totalCount >
+                        bookPagedResult()!.pagedQuery.pageSize) {
+                        <app-pagination [pageNumber]="bookPagedQuery().pageNumber"
+                            [pageSize]="bookPagedQuery().pageSize" [totalCount]="bookPagedResult()?.totalCount || 0"
+                            (pageChange)="setPage($event)">
+                        </app-pagination>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

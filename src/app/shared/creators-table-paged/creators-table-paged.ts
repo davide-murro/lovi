@@ -1,30 +1,29 @@
-import { Component, inject, input, linkedSignal, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { switchMap, catchError, of } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash, faQuestion, faPen } from '@fortawesome/free-solid-svg-icons';
-import { switchMap, catchError, of, finalize, filter } from 'rxjs';
-import { PagedQuery } from '../../../core/models/dtos/pagination/paged-query.model';
-import { DialogService } from '../../../core/services/dialog.service';
-import { RolesService } from '../../../core/services/roles.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { Pagination } from "../../pagination/pagination";
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
+import { DialogService } from '../../core/services/dialog.service';
+import { ToasterService } from '../../core/services/toaster.service';
+import { CreatorsService } from '../../core/services/creators.service';
+import { Pagination } from "../pagination/pagination";
 
 @Component({
-  selector: 'app-roles-table-paged',
+  selector: 'app-creators-table-paged',
   imports: [RouterLink, FontAwesomeModule, Pagination],
-  templateUrl: './roles-table-paged.html',
-  styleUrl: './roles-table-paged.scss'
+  templateUrl: './creators-table-paged.html',
+  styleUrl: './creators-table-paged.scss'
 })
-export class RolesTablePaged {
+export class CreatorsTablePaged {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
-  private rolesService = inject(RolesService);
+  private creatorsService = inject(CreatorsService);
 
   faTrash = faTrash;
-  faQuestion = faQuestion;
   faPen = faPen;
 
   pageNumber = input<number>(1);
@@ -35,43 +34,39 @@ export class RolesTablePaged {
 
   controlRoute = input<boolean>(true);
 
-  rolePagedQuery = linkedSignal<PagedQuery>(() => ({
+
+  creatorPagedQuery = signal({
     pageNumber: this.pageNumber(),
     pageSize: this.pageSize(),
     sortBy: this.sortBy(),
     sortOrder: this.sortOrder(),
     search: this.search()
-  }));
-  rolePagedResult = toSignal(
-    toObservable(this.rolePagedQuery).pipe(
+  } as PagedQuery);
+  creatorPagedResult = toSignal(
+    toObservable(this.creatorPagedQuery).pipe(
       switchMap(query => {
-        this.rolesError.set(false);
-        this.rolesLoading.set(true);
-        return this.rolesService.getPaged(query).pipe(
+        return this.creatorsService.getPaged(query).pipe(
           catchError(err => {
-            this.rolesError.set(true);
-            console.error('rolesService.getPaged', query, err);
+            this.toasterService.show('Get Creators failed', { type: 'error' });
+            console.error('creatorsService.getPaged', query, err);
             return of(null);
           }),
-          finalize(() => {
-            this.rolesLoading.set(false);
-          })
         )
       })
     )
   );
-  rolesLoading = signal(false);
-  rolesError = signal(false);
+  booksLoading = signal(false);
+  booksError = signal(false);
 
   reload() {
     // This forces the signal to update and thus re-run the switchMap
-    this.rolePagedQuery.update(query => ({ ...query }));
+    this.creatorPagedQuery.update(query => ({ ...query }));
   }
 
   nextPage() {
     const query = {
-      ...this.rolePagedQuery(),
-      pageNumber: this.rolePagedQuery().pageNumber + 1
+      ...this.creatorPagedQuery(),
+      pageNumber: this.creatorPagedQuery().pageNumber + 1
     };
 
     if (this.controlRoute()) {
@@ -80,14 +75,14 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.creatorPagedQuery.set(query);
     }
   }
 
   prevPage() {
     const query = {
-      ...this.rolePagedQuery(),
-      pageNumber: Math.max(1, this.rolePagedQuery().pageNumber - 1)
+      ...this.creatorPagedQuery(),
+      pageNumber: Math.max(1, this.creatorPagedQuery().pageNumber - 1)
     };
 
     if (this.controlRoute()) {
@@ -96,13 +91,13 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.creatorPagedQuery.set(query);
     }
   }
 
   setPage(pageNumber: number) {
     const query = {
-      ...this.rolePagedQuery(),
+      ...this.creatorPagedQuery(),
       pageNumber: pageNumber
     };
 
@@ -112,13 +107,13 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.creatorPagedQuery.set(query);
     }
   }
 
   setSort(sortBy: string, sortOrder: 'asc' | 'desc') {
     const query = {
-      ...this.rolePagedQuery(),
+      ...this.creatorPagedQuery(),
       sortBy: sortBy,
       sortOrder: sortOrder
     };
@@ -129,13 +124,13 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.creatorPagedQuery.set(query);
     }
   }
 
   setSearch(search: string) {
     const query = {
-      ...this.rolePagedQuery(),
+      ...this.creatorPagedQuery(),
       pageNumber: 1,
       search: search
     };
@@ -146,25 +141,24 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.creatorPagedQuery.set(query);
     }
   }
 
-
-  deleteRole(id: string) {
-    this.dialogService.confirm('Delete Role', 'Are you sure?')
+  deleteCreator(id: number) {
+    this.dialogService.confirm('Delete Creator', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.rolesService.delete(id).subscribe({
+          this.creatorsService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show($localize`Role deleted`);
-              this.rolePagedQuery.update((u) => ({
-                ...u
+              this.toasterService.show('Creator deleted');
+              this.creatorPagedQuery.update((q) => ({
+                ...q
               }));
             },
             error: (err) => {
-              console.error('rolesService.delete', id, err);
-              this.toasterService.show($localize`Role deleting failed`, { type: 'error' });
+              console.error('creatorsService.delete', id, err);
+              this.toasterService.show('Creator delete failed', { type: 'error' });
             }
           });
         }

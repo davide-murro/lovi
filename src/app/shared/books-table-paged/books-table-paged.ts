@@ -1,30 +1,29 @@
-import { Component, inject, input, linkedSignal, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { switchMap, catchError, of } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash, faQuestion, faPen } from '@fortawesome/free-solid-svg-icons';
-import { switchMap, catchError, of, finalize, filter } from 'rxjs';
-import { PagedQuery } from '../../../core/models/dtos/pagination/paged-query.model';
-import { DialogService } from '../../../core/services/dialog.service';
-import { RolesService } from '../../../core/services/roles.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { Pagination } from "../../pagination/pagination";
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
+import { DialogService } from '../../core/services/dialog.service';
+import { ToasterService } from '../../core/services/toaster.service';
+import { BooksService } from '../../core/services/books.service';
+import { Pagination } from "../pagination/pagination";
 
 @Component({
-  selector: 'app-roles-table-paged',
+  selector: 'app-books-table-paged',
   imports: [RouterLink, FontAwesomeModule, Pagination],
-  templateUrl: './roles-table-paged.html',
-  styleUrl: './roles-table-paged.scss'
+  templateUrl: './books-table-paged.html',
+  styleUrl: './books-table-paged.scss'
 })
-export class RolesTablePaged {
+export class BooksTablePaged {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private toasterService = inject(ToasterService);
   private dialogService = inject(DialogService);
-  private rolesService = inject(RolesService);
+  private booksService = inject(BooksService);
 
   faTrash = faTrash;
-  faQuestion = faQuestion;
   faPen = faPen;
 
   pageNumber = input<number>(1);
@@ -35,43 +34,38 @@ export class RolesTablePaged {
 
   controlRoute = input<boolean>(true);
 
-  rolePagedQuery = linkedSignal<PagedQuery>(() => ({
+  bookPagedQuery = signal({
     pageNumber: this.pageNumber(),
     pageSize: this.pageSize(),
     sortBy: this.sortBy(),
     sortOrder: this.sortOrder(),
     search: this.search()
-  }));
-  rolePagedResult = toSignal(
-    toObservable(this.rolePagedQuery).pipe(
+  } as PagedQuery);
+  bookPagedResult = toSignal(
+    toObservable(this.bookPagedQuery).pipe(
       switchMap(query => {
-        this.rolesError.set(false);
-        this.rolesLoading.set(true);
-        return this.rolesService.getPaged(query).pipe(
+        return this.booksService.getPaged(query).pipe(
           catchError(err => {
-            this.rolesError.set(true);
-            console.error('rolesService.getPaged', query, err);
+            this.toasterService.show('Get Books failed', { type: 'error' });
+            console.error('booksService.getPaged', query, err);
             return of(null);
           }),
-          finalize(() => {
-            this.rolesLoading.set(false);
-          })
         )
       })
     )
   );
-  rolesLoading = signal(false);
-  rolesError = signal(false);
+  booksLoading = signal(false);
+  booksError = signal(false);
 
   reload() {
     // This forces the signal to update and thus re-run the switchMap
-    this.rolePagedQuery.update(query => ({ ...query }));
+    this.bookPagedQuery.update(query => ({ ...query }));
   }
 
   nextPage() {
     const query = {
-      ...this.rolePagedQuery(),
-      pageNumber: this.rolePagedQuery().pageNumber + 1
+      ...this.bookPagedQuery(),
+      pageNumber: this.bookPagedQuery().pageNumber + 1
     };
 
     if (this.controlRoute()) {
@@ -80,14 +74,14 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.bookPagedQuery.set(query);
     }
   }
 
   prevPage() {
     const query = {
-      ...this.rolePagedQuery(),
-      pageNumber: Math.max(1, this.rolePagedQuery().pageNumber - 1)
+      ...this.bookPagedQuery(),
+      pageNumber: Math.max(1, this.bookPagedQuery().pageNumber - 1)
     };
 
     if (this.controlRoute()) {
@@ -96,13 +90,13 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.bookPagedQuery.set(query);
     }
   }
 
   setPage(pageNumber: number) {
     const query = {
-      ...this.rolePagedQuery(),
+      ...this.bookPagedQuery(),
       pageNumber: pageNumber
     };
 
@@ -112,13 +106,13 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.bookPagedQuery.set(query);
     }
   }
 
   setSort(sortBy: string, sortOrder: 'asc' | 'desc') {
     const query = {
-      ...this.rolePagedQuery(),
+      ...this.bookPagedQuery(),
       sortBy: sortBy,
       sortOrder: sortOrder
     };
@@ -129,13 +123,13 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.bookPagedQuery.set(query);
     }
   }
 
   setSearch(search: string) {
     const query = {
-      ...this.rolePagedQuery(),
+      ...this.bookPagedQuery(),
       pageNumber: 1,
       search: search
     };
@@ -146,25 +140,24 @@ export class RolesTablePaged {
         queryParams: query,
       })
     } else {
-      this.rolePagedQuery.set(query);
+      this.bookPagedQuery.set(query);
     }
   }
 
-
-  deleteRole(id: string) {
-    this.dialogService.confirm('Delete Role', 'Are you sure?')
+  deleteBook(id: number) {
+    this.dialogService.confirm('Delete Book', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
-          this.rolesService.delete(id).subscribe({
+          this.booksService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show($localize`Role deleted`);
-              this.rolePagedQuery.update((u) => ({
-                ...u
+              this.toasterService.show('Book deleted');
+              this.bookPagedQuery.update((q) => ({
+                ...q
               }));
             },
             error: (err) => {
-              console.error('rolesService.delete', id, err);
-              this.toasterService.show($localize`Role deleting failed`, { type: 'error' });
+              console.error('booksService.delete', id, err);
+              this.toasterService.show('Book delete failed', { type: 'error' });
             }
           });
         }

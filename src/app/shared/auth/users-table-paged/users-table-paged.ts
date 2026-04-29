@@ -10,10 +10,11 @@ import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { UsersService } from '../../../core/services/users.service';
+import { Pagination } from "../../pagination/pagination";
 
 @Component({
   selector: 'app-users-table-paged',
-  imports: [RouterLink, FontAwesomeModule],
+  imports: [RouterLink, FontAwesomeModule, Pagination],
   templateUrl: './users-table-paged.html',
   styleUrl: './users-table-paged.scss'
 })
