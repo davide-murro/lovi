@@ -68,9 +68,9 @@ export class EpubReader {
           if (!this._book()) throw new Error('Book is null');
           await this._book()!.opened;
 
-          // collect chapters
+          // collect chapters from spine for more reliable navigation
           this._chapters.set(
-            this._book()!.navigation.toc.map((item) => item.href)
+            this._book()!.spine.items.map((item) => item.href)
           );
 
           // init rendition
@@ -79,11 +79,10 @@ export class EpubReader {
               width: '100%',
               height: '100%',
               flow: 'paginated',
-              direction: 'rtl',
               spread: 'auto',
               minSpreadWidth: 1024,
-              allowScriptedContent: true,
-              gap: 32,
+              allowScriptedContent: false,
+              gap: 32
             })
           );
 
@@ -136,9 +135,8 @@ export class EpubReader {
           });
 
           this._rendition()!.on('relocated', (location) => {
-            // update chapter index
-            const chapterIndex = this._chapters().findIndex((chapter) => chapter === location.start.href);
-            this._currentChapterIndex.set(chapterIndex);
+            // update chapter index using the spine index
+            this._currentChapterIndex.set(location.start.index);
 
             // if resized, correct location
             if (!justResized) {
