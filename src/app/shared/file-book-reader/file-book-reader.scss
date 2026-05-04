@@ -40,7 +40,7 @@
 
 
 .reader-content-expand {
-    transition-property: opacity, visibility, height, gap;
+    transition-property: opacity, visibility, height, padding, gap;
     transition-duration: 300ms;
 }
 
@@ -55,10 +55,6 @@
     gap: 0;
     opacity: 0;
     height: 0;
-
-    app-epub-reader {
-        display: none;
-    }
 }
 
 

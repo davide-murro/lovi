@@ -4,7 +4,7 @@
   [class.max-sm:py-2]="queueOpen()" [class.sm:py-4]="queueOpen()" [class.py-4]="!queueOpen()"
   [class.player-expand-enter]="queueOpen()" [class.player-expand-leave]="!queueOpen()">
 
-  <div class="queue-expand flex flex-col items-center w-full h-full gap-2 sm:gap-4 sm:px-8"
+  <div class="queue-expand overflow-hidden flex flex-col items-center w-full h-full gap-2 sm:gap-4 sm:px-8"
     [class.queue-expand-enter]="queueOpen()" [class.queue-expand-leave]="!queueOpen()">
     <button i18n-title class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
       <fa-icon [icon]="faChevronDown" />

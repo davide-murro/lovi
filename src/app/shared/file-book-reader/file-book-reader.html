@@ -4,9 +4,10 @@
     class="reader-expand fixed bottom-0 bg-accent flex flex-col items-center w-full max-h-full max-sm:text-sm"
     [class.py-0]="isOpen()" [class.py-4]="!isOpen()">
 
-    <div class="reader-content-expand flex flex-col items-center w-full h-full overflow-hidden gap-2 sm:gap-4 sm:px-8"
+    <div class="reader-content-expand overflow-hidden flex flex-col items-center w-full h-full overflow-hidden gap-2 sm:gap-4 sm:px-8"
         [class.reader-content-expand-enter]="isOpen()" [class.reader-content-expand-leave]="!isOpen()"
-        [class.py-0]="!isOpen()" [class.max-sm:py-2]="isOpen()" [class.sm:py-4]="isOpen()">
+        [class.py-0]="!isOpen()" [class.max-sm:pt-2]="isOpen()" [class.max-sm:pb-0]="isOpen()"
+        [class.sm:py-4]="isOpen()">
         <div class="flex justify-between items-center w-full gap-4 max-sm:px-4">
             <div class="flex flex-grow items-center gap-1">
                 <button i18n-title class="icon-button" title="Change theme" (click)="toggleThemeInput()">
@@ -31,18 +32,15 @@
                 </button>
                 <button i18n-title class="icon-button" title="Remove book from view"
                     (click)="fileBookReaderService.destroyReader()">
-                    <fa-icon [icon]="faTrash" />
+                    <fa-icon [icon]="faClose" />
                 </button>
             </div>
         </div>
 
-        <!-- Content when expanded -->
-        <app-epub-reader [epubReader]="fileBookReaderService.epubReader()" [styles]="readerStyles()" class="overflow-hidden w-full h-full
-            w-[100svw] 
-            min-h-[calc(100svh-3.5rem)] sm:min-h-[calc(100svh-5.5rem)] 
-            max-h-[calc(100svh-3.5rem)] sm:max-h-[calc(100svh-5.5rem)]">
+        <app-epub-reader class="overflow-hidden w-full h-full" [epubReader]="fileBookReaderService.epubReader()"
+            [styles]="readerStyles()" [fixedContentWidth]="fixedContentSize().width"
+            [fixedContentHeight]="fixedContentSize().height">
         </app-epub-reader>
-
     </div>
 
     <input i18n-title disabled type="range" title="Progress" class="progress-slider w-full absolute top-0 left-0 -mt-1"

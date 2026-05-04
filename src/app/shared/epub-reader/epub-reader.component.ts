@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, input, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, OnDestroy, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight, faCircleNotch, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -11,36 +11,10 @@ import { EpubReaderStyle } from './epub-reader-style.model';
   templateUrl: './epub-reader.component.html',
   styleUrl: './epub-reader.component.scss'
 })
-export class EpubReaderComponent {
-  // Set size to multiple of 10 due to ePub defect
-  @ViewChild('readerContentWrapper')
-  set wrapperRef(el: ElementRef | undefined) {
-    if (this._resizeObserver) this._resizeObserver.disconnect();
-    if (!el) return;
-
-    this._resizeObserver = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      const width = entry.contentRect.width;
-      const height = entry.contentRect.height;
-
-      // Snap to multiple of 10 (defects)
-      const snappedWidth = Math.floor(width / 10) * 10;
-      const snappedHeight = Math.floor(height / 10) * 10;
-
-      if (this.readerWidth() === snappedWidth && this.readerHeight() === snappedHeight) return;
-
-      this.readerWidth.set(snappedWidth);
-      this.readerHeight.set(snappedHeight);
-
-      this.readerContent()?.style.setProperty('width', `${snappedWidth}px`);
-      this.readerContent()?.style.setProperty('height', `${snappedHeight}px`);
-      this._epubReader()?.updateResize();
-    });
-    this._resizeObserver.observe(el.nativeElement);
-  }
+export class EpubReaderComponent implements OnDestroy {
   @ViewChild('readerContent')
   set readerContentRef(el: ElementRef | undefined) {
-    this.readerContent.set(el?.nativeElement ?? null);
+    this._readerContent.set(el?.nativeElement ?? null);
   }
 
   faChevronLeft = faChevronLeft;
@@ -52,13 +26,11 @@ export class EpubReaderComponent {
   epubReader = input<EpubReader>();
   src = input<string>();
   styles = input<EpubReaderStyle>();
-
-  readerContent = signal<HTMLElement | null>(null);
-  readerWidth = signal<number | null>(null);
-  readerHeight = signal<number | null>(null);
+  fixedContentWidth = input<number>();
+  fixedContentHeight = input<number>();
 
   private _epubReader = signal<EpubReader>(new EpubReader());
-  private _resizeObserver: ResizeObserver | null = null;
+  private _readerContent = signal<HTMLElement | null>(null);
 
   isLoading = computed(() => this._epubReader()?.isLoading());
   isError = computed(() => this._epubReader()?.isError());
@@ -69,13 +41,13 @@ export class EpubReaderComponent {
 
   constructor() {
     effect(() => {
-      if (this.epubReader() && this.readerContent()) {
+      if (this.epubReader() && this._readerContent()) {
         this._epubReader.set(this.epubReader()!);
-        this._epubReader()?.renderTo.set(this.readerContent());
+        this._epubReader()?.renderTo.set(this._readerContent());
         this._epubReader()?.load();
-      } else if (this.src() && this.readerContent()) {
+      } else if (this.src() && this._readerContent()) {
         this._epubReader()?.src.set(this.src()!);
-        this._epubReader()?.renderTo.set(this.readerContent());
+        this._epubReader()?.renderTo.set(this._readerContent());
         this._epubReader()?.load();
       } else if (!this.epubReader() && !this.src()) {
         this._epubReader()?.src.set(null);
@@ -92,10 +64,40 @@ export class EpubReaderComponent {
         this._epubReader()?.updateStyles();
       }
     });
+    effect(() => {
+      if (this._readerContent() && (this.fixedContentWidth() || this.fixedContentHeight())) {
+        if (this.fixedContentWidth()) {
+          this._readerContent()?.style.setProperty('width', `${this.fixedContentWidth()}px`);
+          this._readerContent()?.style.setProperty('min-width', `${this.fixedContentWidth()}px`);
+          this._readerContent()?.style.setProperty('max-width', `${this.fixedContentWidth()}px`);
+        } else {
+          this._readerContent()?.style.removeProperty('width');
+          this._readerContent()?.style.removeProperty('min-width');
+          this._readerContent()?.style.removeProperty('max-width');
+        }
+        if (this.fixedContentHeight()) {
+          this._readerContent()?.style.setProperty('height', `${this.fixedContentHeight()}px`);
+          this._readerContent()?.style.setProperty('min-height', `${this.fixedContentHeight()}px`);
+          this._readerContent()?.style.setProperty('max-height', `${this.fixedContentHeight()}px`);
+        } else {
+          this._readerContent()?.style.removeProperty('height');
+          this._readerContent()?.style.removeProperty('min-height');
+          this._readerContent()?.style.removeProperty('max-height');
+        }
+        this._epubReader()?.updateResize();
+      } else if (this._readerContent()) {
+        this._readerContent()?.style.removeProperty('width');
+        this._readerContent()?.style.removeProperty('height');
+        this._readerContent()?.style.removeProperty('min-width');
+        this._readerContent()?.style.removeProperty('min-height');
+        this._readerContent()?.style.removeProperty('max-width');
+        this._readerContent()?.style.removeProperty('max-height');
+        this._epubReader()?.updateResize();
+      }
+    });
   }
 
   ngOnDestroy() {
-    if (this._resizeObserver) this._resizeObserver.disconnect();
     this._epubReader()?.src.set(null);
     this._epubReader()?.renderTo.set(null);
     this._epubReader()?.styles.set(null);

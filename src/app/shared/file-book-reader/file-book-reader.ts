@@ -1,7 +1,7 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, HostListener, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChevronDown, faCircleHalfStroke, faTextHeight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faCircleHalfStroke, faClose, faTextHeight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FileBookReaderService } from '../../core/services/file-book-reader.service';
 import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
 import { EpubReaderComponent } from '../epub-reader/epub-reader.component';
@@ -16,9 +16,15 @@ export class FileBookReader {
   fileBookReaderService = inject(FileBookReaderService);
 
   faChevronDown = faChevronDown;
-  faTrash = faTrash;
+  faClose = faClose;
   faCircleHalfStroke = faCircleHalfStroke;
   faTextHeight = faTextHeight;
+
+  // Avoid triggering on mobile address bar show/hide
+  // We only update if the width changes (orientation or desktop resize)
+  fixedContentSize = signal(this.calculateContentSize());
+  @HostListener('window:resize')
+  onResize() { this.fixedContentSize.set(this.calculateContentSize()); }
 
   readerVisible = signal<boolean>(false);
   isOpen = signal<boolean>(false);
@@ -58,6 +64,44 @@ export class FileBookReader {
         this.isOpen.set(false);
       }
     });
+  }
+
+  private calculateContentSize(): { width: number, height: number } {
+    const isSm = window.innerWidth >= 640;
+    let windowWidth: number;
+    let windowHeight: number;
+
+    if (typeof document === 'undefined') {
+      windowWidth = window.innerWidth;
+      windowHeight = window.innerHeight;
+    } else {
+      // get smallest width and height can be the viewport using css (also mobile)
+      const div = document.createElement('div');
+      div.style.width = '100svw';
+      div.style.height = '100svh';
+      div.style.visibility = 'hidden';
+      div.style.position = 'fixed';
+      div.style.inset = '0';
+      document.body.appendChild(div);
+      windowWidth = div.offsetWidth;
+      windowHeight = div.offsetHeight;
+      document.body.removeChild(div);
+    }
+
+    // remove padding and header
+    const widthOffsetRem = isSm ? 4 : 0;
+    const widthOffsetPx = widthOffsetRem * 16;
+    const w = windowWidth - widthOffsetPx;
+
+    const heightOffsetRem = isSm ? 5.5 : 4.5;
+    const heightOffsetPx = heightOffsetRem * 16 * 2;
+    const h = windowHeight - heightOffsetPx;
+
+    // snap to nearest 10px (defect)
+    const snappedWidth = Math.floor(w / 10) * 10;
+    const snappedHeight = Math.floor(h / 10) * 10;
+
+    return { width: snappedWidth, height: snappedHeight };
   }
 
   private interpolateColor(color1: string, color2: string, ratio: number): string {

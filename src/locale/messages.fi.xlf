@@ -2290,43 +2290,43 @@
         <source>Change theme</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">17,18</context>
+          <context context-type="linenumber">18,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6214609638529256016" datatype="html">
         <source>Change font size</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">25,26</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4142068363096454927" datatype="html">
         <source>Collapse book</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9114998857615529624" datatype="html">
         <source>Remove book from view</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">32,33</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3419681791450150574" datatype="html">
         <source>Progress</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
