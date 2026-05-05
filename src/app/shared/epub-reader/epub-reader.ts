@@ -214,7 +214,7 @@ export class EpubReader {
     if (!isReady || !rendition) return;
 
     try {
-      this._rendition()!.resize();
+      rendition.resize();
     } catch (err) {
       console.error(err);
     }
