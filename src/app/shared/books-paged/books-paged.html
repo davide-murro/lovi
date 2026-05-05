@@ -2,7 +2,7 @@
     <h1 class="title">{{ title() }}</h1>
 
     <div class="section flex-grow">
-        @if (bookPagedResult()?.items && bookPagedResult()!.items!.length >= 0) {
+        @if (bookPagedResult()?.items && bookPagedResult()!.items!.length > 0) {
         <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))] transition-opacity duration-300"
             [class.opacity-50]="booksLoading()">
             @for (book of bookPagedResult()?.items; track $index) {
