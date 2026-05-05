@@ -29,7 +29,7 @@ export class RolesTablePaged {
 
   pageNumber = input<number>(1);
   pageSize = input<number>(10);
-  sortBy = input<string>('id');
+  sortBy = input<string>('name');
   sortOrder = input<'asc' | 'desc'>('asc');
   search = input<string>('');
 

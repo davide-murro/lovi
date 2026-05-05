@@ -24,7 +24,9 @@ export class PodcastsPaged {
   sortOrder = input<'asc' | 'desc'>('asc');
   search = input<string>('');
 
+  title = input<string>($localize`Podcasts`);
   controlRoute = input<boolean>(true);
+  hidePagination = input<boolean>(false);
 
   podcastPagedQuery = linkedSignal<PagedQuery>(() => ({
     pageNumber: this.pageNumber(),

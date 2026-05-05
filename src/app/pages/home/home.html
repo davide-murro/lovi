@@ -3,5 +3,11 @@
 <app-image-slider class="block section" [items]="imageSliderItems()" [showArrows]="true" [autoplay]="true">
 </app-image-slider>
 
-<app-books-paged class="flex" [controlRoute]="false"></app-books-paged>
-<app-podcasts-paged class="flex" [controlRoute]="false"></app-podcasts-paged>
+<app-books-paged class="flex" [controlRoute]="booksControlRoute()" [hidePagination]="booksHidePagination()"
+    [title]="booksTitle()" [pageNumber]="booksPageNumber()" [pageSize]="booksPageSize()" [sortBy]="booksSortBy()"
+    [sortOrder]="booksSortOrder()" [search]="booksSearch()">
+</app-books-paged>
+<app-podcasts-paged class="flex" [controlRoute]="podcastsControlRoute()" [hidePagination]="podcastsHidePagination()"
+    [title]="podcastsTitle()" [pageNumber]="podcastsPageNumber()" [pageSize]="podcastsPageSize()"
+    [sortBy]="podcastsSortBy()" [sortOrder]="podcastsSortOrder()" [search]="podcastsSearch()">
+</app-podcasts-paged>

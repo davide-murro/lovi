@@ -25,13 +25,32 @@ export class CreatorsService {
   }
 
   // POST create creator
-  create(podcast: CreatorDto): Observable<CreatorDto> {
-    return this.http.post<CreatorDto>(this.apiUrl, podcast);
+  create(creator: CreatorDto): Observable<CreatorDto> {
+    const formData = new FormData();
+    formData.append('Nickname', creator.nickname);
+    if (creator.name) formData.append('Name', creator.name);
+    if (creator.surname) formData.append('Surname', creator.surname);
+    //if (creator.coverImageUrl) formData.append('CoverImageUrl', creator.coverImageUrl);
+    //if (creator.coverImage) formData.append('CoverImage', creator.coverImage);
+    //if (creator.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', creator.coverImagePreviewUrl);
+    //if (creator.coverImagePreview) formData.append('CoverImagePreview', creator.coverImagePreview);
+
+    return this.http.post<CreatorDto>(this.apiUrl, formData);
   }
 
   // PUT update creator
-  update(id: number, podcast: CreatorDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, podcast);
+  update(id: number, creator: CreatorDto): Observable<void> {
+    const formData = new FormData();
+    formData.append('Id', creator.id!.toString());
+    formData.append('Nickname', creator.nickname);
+    if (creator.name) formData.append('Name', creator.name);
+    if (creator.surname) formData.append('Surname', creator.surname);
+    //if (creator.coverImageUrl) formData.append('CoverImageUrl', creator.coverImageUrl);
+    //if (creator.coverImage) formData.append('CoverImage', creator.coverImage);
+    //if (creator.coverImagePreviewUrl) formData.append('CoverImagePreviewUrl', creator.coverImagePreviewUrl);
+    //if (creator.coverImagePreview) formData.append('CoverImagePreview', creator.coverImagePreview);
+
+    return this.http.put<void>(`${this.apiUrl}/${id}`, formData);
   }
 
   // DELETE creator

@@ -32,8 +32,8 @@ export class UsersTablePaged {
 
   pageNumber = input<number>(1);
   pageSize = input<number>(10);
-  sortBy = input<string>('id');
-  sortOrder = input<'asc' | 'desc'>('asc');
+  sortBy = input<string>('registeredAt');
+  sortOrder = input<'asc' | 'desc'>('desc');
   search = input<string>('');
 
   controlRoute = input<boolean>(true);

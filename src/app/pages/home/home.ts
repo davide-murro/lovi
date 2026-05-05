@@ -28,4 +28,22 @@ export class Home {
       subtitle: 'Delve into alchemy, tarot and astrology with curated eBooks.',
     },
   ]);
+
+  podcastsControlRoute = signal(false);
+  podcastsHidePagination = signal(true);
+  podcastsTitle = signal($localize`New Podcasts`);
+  podcastsPageNumber = signal(1);
+  podcastsPageSize = signal(10);
+  podcastsSortBy = signal('createdAt');
+  podcastsSortOrder = signal<'asc' | 'desc'>('desc');
+  podcastsSearch = signal('');
+
+  booksControlRoute = signal(false);
+  booksHidePagination = signal(true);
+  booksTitle = signal($localize`New Books`);
+  booksPageNumber = signal(1);
+  booksPageSize = signal(10);
+  booksSortBy = signal('createdAt');
+  booksSortOrder = signal<'asc' | 'desc'>('desc');
+  booksSearch = signal('');
 }

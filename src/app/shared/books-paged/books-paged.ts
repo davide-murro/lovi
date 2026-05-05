@@ -24,7 +24,9 @@ export class BooksPaged {
   sortOrder = input<'asc' | 'desc'>('asc');
   search = input<string>('');
 
+  title = input<string>($localize`Books`);
   controlRoute = input<boolean>(true);
+  hidePagination = input<boolean>(false);
 
   bookPagedQuery = linkedSignal<PagedQuery>(() => ({
     pageNumber: this.pageNumber(),

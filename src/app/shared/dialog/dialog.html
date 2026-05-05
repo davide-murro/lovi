@@ -1,7 +1,7 @@
 <div class="dialog-container"
     [class]="dialogService.dialog().visible ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'"
     (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)">
-    <div class="bg-accent border-2 border-primary rounded-xl p-4 max-w-lg w-[90%] max-h-lg max-h-[90%] overflow-auto overscroll-none"
+    <div class="bg-accent border-2 border-primary rounded-xl p-4 max-w-lg w-[90%] max-h-lg max-h-[90%] overflow-auto"
         [class.hidden]="!dialogService.dialog().visible">
         <ng-container #componentContainer></ng-container>
     </div>
