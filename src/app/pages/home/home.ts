@@ -20,7 +20,7 @@ export class Home {
     {
       image: 'home-image-slider/slider2.png',
       title: 'Sacred Sounds, Deepened Connection',
-      subtitle: 'Discover podcasts on meditation, chakra healing and ceremonial magic.',
+      subtitle: 'Discover Podcasts on meditation, chakra healing and ceremonial magic.',
     },
     {
       image: 'home-image-slider/slider3.png',
