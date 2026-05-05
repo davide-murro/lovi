@@ -47,7 +47,7 @@
     </div>
 
     @if(book().audioUrl) {
-    <h2 i18n class="section">Audio Book</h2>
+    <h2 i18n class="section font-bold">Audio Book</h2>
 
     <p class="subtitle text-accent">
       @for(creator of book().readers; track $index) {
@@ -72,7 +72,7 @@
     }
 
     @if(book().fileUrl) {
-    <h2 i18n class="section">eBook</h2>
+    <h2 i18n class="section font-bold">eBook</h2>
     <p class="subtitle text-accent">
       @for(creator of book().writers; track $index) {
       <a>{{ creator.nickname }}</a>@if (!$last) {, } }
