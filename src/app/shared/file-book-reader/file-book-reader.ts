@@ -22,9 +22,9 @@ export class FileBookReader {
 
   // Avoid triggering on mobile address bar show/hide
   // We only update if the width changes (orientation or desktop resize)
-  fixedContentSize = signal(this.calculateContentSize());
+  readerFixedContentSize = signal(this.calculateContentSize());
   @HostListener('window:resize')
-  onResize() { this.fixedContentSize.set(this.calculateContentSize()); }
+  onResize() { this.readerFixedContentSize.set(this.calculateContentSize()); }
 
   readerVisible = signal<boolean>(false);
   isOpen = signal<boolean>(false);

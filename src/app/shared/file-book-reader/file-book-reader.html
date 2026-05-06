@@ -38,8 +38,8 @@
         </div>
 
         <app-epub-reader class="overflow-hidden w-full h-full" [epubReader]="fileBookReaderService.epubReader()"
-            [styles]="readerStyles()" [fixedContentWidth]="fixedContentSize().width"
-            [fixedContentHeight]="fixedContentSize().height">
+            [styles]="readerStyles()" [fixedContentWidth]="readerFixedContentSize().width"
+            [fixedContentHeight]="readerFixedContentSize().height">
         </app-epub-reader>
     </div>
 
