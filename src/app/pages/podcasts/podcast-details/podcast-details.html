@@ -65,7 +65,7 @@
     </button>
   </div>
 
-  <div class="gap-4 grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
+  <div class="gap-4 grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] sm:items-center">
     @for (episode of podcast().episodes; track $index) {
     <app-podcast-episode-item [podcast]="podcast()" [podcastEpisode]="episode"></app-podcast-episode-item>
     }

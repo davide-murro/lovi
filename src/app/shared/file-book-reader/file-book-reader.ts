@@ -1,4 +1,4 @@
-import { Component, computed, effect, HostListener, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faCircleHalfStroke, faClose, faTextHeight, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -20,39 +20,12 @@ export class FileBookReader {
   faCircleHalfStroke = faCircleHalfStroke;
   faTextHeight = faTextHeight;
 
-  // Avoid triggering on mobile address bar show/hide
-  // We only update if the width changes (orientation or desktop resize)
-  readerFixedContentSize = signal(this.calculateContentSize());
-  @HostListener('window:resize')
-  onResize() { this.readerFixedContentSize.set(this.calculateContentSize()); }
-
   readerVisible = signal<boolean>(false);
   isOpen = signal<boolean>(false);
   themeInputOpen = signal<boolean>(false);
   themeValue = signal<number>(50); // Default to sepia
   fontSizeInputOpen = signal<boolean>(false);
   fontSizeValue = signal<number>(16); // Default font size in px
-
-  readerStyles = computed(() => {
-    const val = this.themeValue();
-    const fontSize = this.fontSizeValue();
-
-    let bg;
-
-    if (val <= 50) {
-      bg = this.interpolateColor('#121212', '#f4ecd8', val / 50);
-    } else {
-      bg = this.interpolateColor('#f4ecd8', '#ffffff', (val - 50) / 50);
-    }
-
-    const color = this.getReadableTextColor(bg);
-
-    return {
-      background: bg,
-      color: color,
-      'font-size': fontSize + 'px'
-    };
-  });
 
   constructor() {
     effect(() => {
@@ -64,44 +37,27 @@ export class FileBookReader {
         this.isOpen.set(false);
       }
     });
-  }
+    // set styles in fileBookReaderService
+    effect(() => {
+      const val = this.themeValue();
+      const fontSize = this.fontSizeValue();
 
-  private calculateContentSize(): { width: number, height: number } {
-    const isSm = window.innerWidth >= 640;
-    let windowWidth: number;
-    let windowHeight: number;
+      let bg;
 
-    if (typeof document === 'undefined') {
-      windowWidth = window.innerWidth;
-      windowHeight = window.innerHeight;
-    } else {
-      // get smallest width and height can be the viewport using css (also mobile)
-      const div = document.createElement('div');
-      div.style.width = '100svw';
-      div.style.height = '100svh';
-      div.style.visibility = 'hidden';
-      div.style.position = 'fixed';
-      div.style.inset = '0';
-      document.body.appendChild(div);
-      windowWidth = div.offsetWidth;
-      windowHeight = div.offsetHeight;
-      document.body.removeChild(div);
-    }
+      if (val <= 50) {
+        bg = this.interpolateColor('#121212', '#f4ecd8', val / 50);
+      } else {
+        bg = this.interpolateColor('#f4ecd8', '#ffffff', (val - 50) / 50);
+      }
 
-    // remove padding and header
-    const widthOffsetRem = isSm ? 4 : 0;
-    const widthOffsetPx = widthOffsetRem * 16;
-    const w = windowWidth - widthOffsetPx;
+      const color = this.getReadableTextColor(bg);
 
-    const heightOffsetRem = isSm ? 5.5 : 4.5;
-    const heightOffsetPx = heightOffsetRem * 16 * 2;
-    const h = windowHeight - heightOffsetPx;
-
-    // snap to nearest 10px (defect)
-    const snappedWidth = Math.floor(w / 10) * 10;
-    const snappedHeight = Math.floor(h / 10) * 10;
-
-    return { width: snappedWidth, height: snappedHeight };
+      this.fileBookReaderService.epubStyles.set({
+        background: bg,
+        color: color,
+        'font-size': fontSize + 'px'
+      });
+    });
   }
 
   private interpolateColor(color1: string, color2: string, ratio: number): string {

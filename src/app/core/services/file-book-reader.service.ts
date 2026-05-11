@@ -2,6 +2,7 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { FileBook } from '../models/file-book.model';
 import { EpubReader } from '../../shared/epub-reader/epub-reader';
 import { AuthService } from './auth.service';
+import { EpubReaderStyle } from '../../shared/epub-reader/epub-reader-style.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,39 @@ export class FileBookReaderService {
 
   // EpubJS Book instance
   epubReader = signal<EpubReader>(new EpubReader());
+  epubStyles = signal<EpubReaderStyle | null>(null);
 
   // EpubJS Book state
   chapters = computed(() => this.epubReader().chapters());
   currentChapterIndex = computed(() => this.epubReader().currentChapterIndex());
 
+  totalPages = computed(() => this.epubReader().totalPages());
+  currentPage = computed(() => this.epubReader().currentPage());
+
   isReady = computed(() => this.epubReader().isReady());
   isLoading = computed(() => this.epubReader().isLoading());
   isError = computed(() => this.epubReader().isError());
   errorMessage = computed(() => this.epubReader().errorMessage());
+
+  completionPercentage = computed(() => {
+    const chapters = this.chapters();
+    const currentChapterIndex = this.currentChapterIndex();
+
+    if (currentChapterIndex == null || !chapters?.length) {
+      return 0;
+    }
+
+    const totalChapters = chapters.length;
+
+    const pageProgress =
+      this.totalPages() > 0
+        ? this.currentPage() / this.totalPages()
+        : 0;
+
+    return (
+      (currentChapterIndex + pageProgress) / totalChapters
+    );
+  });
 
 
   constructor() {

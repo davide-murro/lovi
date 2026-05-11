@@ -68,10 +68,9 @@ export class PodcastEpisodeDetails {
     this.audioPlayerService.pause();
   }
   playAll() {
-    const number = this.podcastEpisode().number;
     const episodeTrack: AudioTrack = {
       title: this.podcastEpisode().name,
-      subtitle: $localize`Episode ${number}`,
+      subtitle: $localize`Ep. ${this.podcastEpisode().number} - ${this.podcast().name}`,
       artists: this.podcastEpisode().voicers?.map(v => v.nickname),
       audioSrc: this.podcastEpisode().audioUrl!,
       coverImageSrc: this.podcastEpisode().coverImagePreviewUrl,
@@ -79,10 +78,9 @@ export class PodcastEpisodeDetails {
     };
     const episodeQueue = this.podcast().episodes!
       .map(pe => {
-        const number = pe.number;
         const track: AudioTrack = {
           title: pe.name,
-          subtitle: $localize`Episode ${number}`,
+          subtitle: $localize`Ep. ${pe.number} - ${this.podcast().name}`,
           artists: pe.voicers?.map(v => v.nickname),
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,
@@ -97,7 +95,7 @@ export class PodcastEpisodeDetails {
   addToQueue() {
     const episodeTrack: AudioTrack = {
       title: this.podcastEpisode().name,
-      subtitle: $localize`Episode ${this.podcastEpisode().number}`,
+      subtitle: $localize`Ep. ${this.podcastEpisode().number} - ${this.podcast().name}`,
       artists: this.podcastEpisode().voicers?.map(v => v.nickname),
       audioSrc: this.podcastEpisode().audioUrl!,
       coverImageSrc: this.podcastEpisode().coverImagePreviewUrl,

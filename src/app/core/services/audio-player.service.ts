@@ -439,6 +439,16 @@ export class AudioPlayerService {
     }
   }
 
+  reorderQueue(previousIndex: number, currentIndex: number) {
+    this.queue.update(q => {
+      const newQueue = [...q];
+      const movedItem = newQueue[previousIndex];
+      newQueue.splice(previousIndex, 1);
+      newQueue.splice(currentIndex, 0, movedItem);
+      return newQueue;
+    });
+  }
+
   clearQueue() {
     this.queue.set([]);
     this.stop();

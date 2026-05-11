@@ -1,15 +1,15 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBackward, faBackwardStep, faChevronDown, faCircleNotch, faForward, faPause, faPlay, faRotateLeft, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { RouterLink } from '@angular/router';
+import { faBackward, faBackwardStep, faChevronDown, faCircleNotch, faForward, faGripLines, faPause, faPlay, faRotateLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToasterService } from '../../core/services/toaster.service';
 import { Subscription } from 'rxjs';
 import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-audio-player',
-  imports: [FontAwesomeModule, RouterLink, SecureMediaDirective],
+  imports: [FontAwesomeModule, SecureMediaDirective, DragDropModule],
   templateUrl: './audio-player.html',
   styleUrl: './audio-player.scss'
 })
@@ -23,7 +23,7 @@ export class AudioPlayer {
   faBackwardStep = faBackwardStep;
   faForward = faForward;
   faTrash = faTrash;
-  faShare = faShare;
+  faGripLines = faGripLines;
   faChevronDown = faChevronDown;
   faRotateLeft = faRotateLeft;
   faCircleNotch = faCircleNotch;
@@ -90,6 +90,10 @@ export class AudioPlayer {
     this.audioPlayerService.seek(this.seekingTime());
     this.isSeeking.set(false);
     this.seekingTime.set(0);
+  }
+
+  onTrackDrop(event: CdkDragDrop<any[]>) {
+    this.audioPlayerService.reorderQueue(event.previousIndex, event.currentIndex);
   }
 
   // Utility function to format seconds into int value

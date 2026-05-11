@@ -3,20 +3,33 @@
 
     <!-- Content wrapper -->
     <div class="reader-content-wrapper">
-        <div #readerContent class="w-full h-full overflow-hidden overscroll-none">
+        <!-- epub content -->
+        <div #readerContent class="overflow-hidden overscroll-none w-full h-full flex justify-center items-center">
+        </div>
+
+        <!-- Loading overlay -->
+        <div class="reader-overlay" [ngStyle]="styles()" [class.!hidden]="!isLoading()">
+            <fa-icon [icon]="faCircleNotch" class="animate-spin" />
+            <span i18n>Loading...</span>
+        </div>
+
+        <!-- Error overlay -->
+        <div class="reader-overlay" [ngStyle]="styles()" [class.!hidden]="!isError()">
+            <fa-icon [icon]="faExclamationTriangle" />
+            <span i18n>Error loading file</span>
         </div>
     </div>
 
     <!-- Navigation bar -->
-    <div class="reader-nav">
+    <div class="reader-nav max-sm:text-sm">
         <div class="flex items-center gap-1 whitespace-nowrap">
             <input i18n-title type="number" title="Current chapter" name="current-chapter"
-                class="input reader-input w-full !max-w-[100px] !min-w-[80px]"
+                class="input reader-input w-full !max-w-[100px] !min-w-[70px]"
                 [value]="currentChapterIndex() ? (currentChapterIndex()! + 1) : 1" (change)="onChapterInput($event)"
                 (keydown.enter)="$event.preventDefault(); onChapterInput($event)" min="1" [max]="chapters().length">
             <span>/ {{ chapters().length }}</span>
         </div>
-        <div class="flex items-center gap-2 shrink-0">
+        <div class="flex items-center gap-1 shrink-0">
             <div>
                 <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
                     title="Go to previous page" (click)="onPrevPage()">
@@ -24,6 +37,7 @@
                     <span i18n class="hidden lg:inline">Previous page</span>
                 </button>
             </div>
+            <div class="whitespace-nowrap">{{ currentPage() }} / {{ totalPages() }}</div>
             <div>
                 <button type="button" i18n-title class="button reader-button gap-2 whitespace-nowrap"
                     title="Go to next page" (click)="onNextPage()">
@@ -32,17 +46,5 @@
                 </button>
             </div>
         </div>
-    </div>
-
-    <!-- Loading overlay -->
-    <div class="reader-overlay" [class.!hidden]="!isLoading()">
-        <fa-icon [icon]="faCircleNotch" class="animate-spin" />
-        <span i18n>Loading...</span>
-    </div>
-
-    <!-- Error overlay -->
-    <div class="reader-overlay" [class.!hidden]="!isError()">
-        <fa-icon [icon]="faExclamationTriangle" />
-        <span i18n>Error loading file</span>
     </div>
 </div>

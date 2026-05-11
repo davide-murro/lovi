@@ -48,10 +48,9 @@ export class PodcastDetails {
   playAll() {
     const episodeQueue = this.podcast().episodes!
       .map(pe => {
-        const number = pe.number;
         const episodeTrack: AudioTrack = {
           title: pe.name,
-          subtitle: $localize`Episode ${number}`,
+          subtitle: $localize`Ep. ${pe.number} - ${this.podcast().name}`,
           artists: pe.voicers?.map(v => v.nickname),
           audioSrc: pe.audioUrl!,
           coverImageSrc: pe.coverImagePreviewUrl,

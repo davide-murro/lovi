@@ -37,18 +37,21 @@
             </div>
         </div>
 
-        <app-epub-reader class="overflow-hidden w-full h-full" [epubReader]="fileBookReaderService.epubReader()"
-            [styles]="readerStyles()" [fixedContentWidth]="readerFixedContentSize().width"
-            [fixedContentHeight]="readerFixedContentSize().height">
+        <app-epub-reader [epubReader]="fileBookReaderService.epubReader()" [styles]="fileBookReaderService.epubStyles()"
+            class="overflow-hidden
+            w-[calc(100dvw)] sm:w-[calc(100dvw-4rem)] 
+            min-w-[calc(100dvw)] sm:min-w-[calc(100dvw-4rem)] 
+            max-w-[calc(100dvw)] sm:max-w-[calc(100dvw-4rem)]
+            h-[calc(100dvh-3.5rem)] sm:h-[calc(100dvh-5.5rem)] 
+            min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-5.5rem)] 
+            max-h-[calc(100dvh-3.5rem)] sm:max-h-[calc(100dvh-5.5rem)]">
         </app-epub-reader>
     </div>
 
     <input i18n-title disabled type="range" title="Progress" class="progress-slider w-full absolute top-0 left-0 -mt-1"
-        [class.!hidden]="isOpen()" [min]="0" [max]="100" [value]="fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) / fileBookReaderService.chapters().length) * 100).toFixed(0)
-        : 0" [style.--value]="
-        fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) / fileBookReaderService.chapters().length))
-        : 0
-      " />
+        [class.!hidden]="isOpen()" [min]="0" [max]="100"
+        [value]="(fileBookReaderService.completionPercentage() * 100).toFixed(0)"
+        [style.--value]="fileBookReaderService.completionPercentage()" />
 
     <div class="toolbar-expand overflow-hidden flex justify-between items-center w-full gap-2 px-4 sm:px-8"
         [class.toolbar-expand-enter]="!isOpen()" [class.toolbar-expand-leave]="isOpen()">
@@ -59,22 +62,21 @@
                     loading="lazy" decoding="async" [secureSrc]="fileBookReaderService.currentFileBook()?.coverImageSrc"
                     [secureOffline]="true" [alt]="fileBookReaderService.currentFileBook()?.title" />
                 <div class="flex flex-col truncate">
-                    <span class="truncate">{{ fileBookReaderService.currentFileBook()?.title }}
-                        @if(fileBookReaderService.currentFileBook()?.subtitle) { - {{
-                        fileBookReaderService.currentFileBook()?.subtitle }}
-                        }</span>
-                    <span class="text-accent truncate">{{
-                        fileBookReaderService.currentFileBook()?.authors?.join(", ")
-                        }}</span>
+                    <span class="truncate">{{ fileBookReaderService.currentFileBook()?.title }}</span>
+                    <span class="text-accent text-sm truncate">
+                        @if (fileBookReaderService.currentFileBook()?.subtitle) {
+                        {{ fileBookReaderService.currentFileBook()?.subtitle }}
+                        }
+                        @else {
+                        {{ fileBookReaderService.currentFileBook()?.authors?.join(", ") }}
+                        }
+                    </span>
                 </div>
             </div>
         </button>
 
         <span class="chapter-info" [class.text-error]="fileBookReaderService.isError()">
-            {{ fileBookReaderService.chapters().length > 0 ? (((fileBookReaderService.currentChapterIndex() + 1) /
-            fileBookReaderService.chapters().length) * 100).toFixed(0)
-            : 0
-            }} %
+            {{ (fileBookReaderService.completionPercentage() * 100).toFixed(0) }} %
         </span>
     </div>
 
