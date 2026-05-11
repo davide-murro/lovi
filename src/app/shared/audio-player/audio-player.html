@@ -13,8 +13,9 @@
     <ul role="list" class="flex flex-col flex-grow w-full overflow-auto overscroll-none" #cdkBoundary cdkDropList
       [cdkDropListAutoScrollStep]="3" (cdkDropListDropped)="onTrackDrop($event)">
       @for (track of audioPlayerService.queue(); track track.id) {
-      <li class="flex items-center px-4 py-2 gap-2 track-list-item" [cdkDragBoundary]="cdkBoundary" cdkDrag
-        cdkDragLockAxis="y" [class.bg-opacity]="audioPlayerService.currentTrack()?.id == track.id"
+      <li class="flex items-center px-4 py-2 gap-2 track-list-item" animate.enter="track-enter-animation"
+        animate.leave="track-leave-animation" [cdkDragBoundary]="cdkBoundary" cdkDrag cdkDragLockAxis="y"
+        [class.bg-opacity]="audioPlayerService.currentTrack()?.id == track.id"
         [class.text-error]="audioPlayerService.currentTrack()?.id == track.id && audioPlayerService.isError()">
         <div *cdkDragPlaceholder></div>
         <button

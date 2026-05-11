@@ -130,8 +130,46 @@
 }
 
 
+.track-enter-animation {
+   animation: track-enter-animation 300ms;
+}
+
+@keyframes track-enter-animation {
+   from {
+      visibility: hidden;
+      transform: translateX(calc(var(--spacing) * -2));
+      opacity: 0;
+   }
+
+   to {
+      visibility: visible;
+      transform: translateX(0px);
+      opacity: 1;
+   }
+}
+
+
+.track-leave-animation {
+   animation: track-leave-animation 300ms;
+}
+
+@keyframes track-leave-animation {
+   from {
+      visibility: visible;
+      transform: translateX(0px);
+      opacity: 1;
+   }
+
+   to {
+      visibility: hidden;
+      transform: translateX(calc(var(--spacing) * -2));
+      opacity: 0;
+   }
+}
+
+
 .player-expand {
-   transition-property: gap, border-top, padding;
+   transition-property: gap, padding;
    transition-duration: 300ms;
 }
 
