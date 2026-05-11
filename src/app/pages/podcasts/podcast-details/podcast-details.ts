@@ -69,10 +69,11 @@ export class PodcastDetails {
     else this.addToMyLibrary();
   }
   addToMyLibrary() {
-    const episodeLibraries: ManageLibraryDto[] = this.podcast().episodes!
+    const podcast = this.podcast();
+    const episodeLibraries: ManageLibraryDto[] = podcast.episodes!
       .map(pe => {
         const ml: ManageLibraryDto = {
-          podcastId: this.podcast().id,
+          podcastId: podcast.id,
           podcastEpisodeId: pe.id
         }
         return ml;
@@ -80,26 +81,27 @@ export class PodcastDetails {
 
     this.librariesService!.createMeList(episodeLibraries).subscribe({
       next: () => {
-        this.toasterService.show($localize`"${this.podcast().name}" added to My Library`);
+        this.toasterService.show($localize`"${podcast.name}" added to My Library`);
       },
       error: (err) => {
         console.error('librariesService.createMeList', episodeLibraries, err);
-        this.toasterService.show($localize`"${this.podcast().name}" adding to My Library failed`, { type: 'error' });
+        this.toasterService.show($localize`"${podcast.name}" adding to My Library failed`, { type: 'error' });
       }
     });
   }
   removeFromMyLibrary() {
+    const podcast = this.podcast();
     const ids: number[] = this.librariesService!.myLibrary()!
-      .filter(pe => pe.podcast?.id == this.podcast().id)
+      .filter(pe => pe.podcast?.id == podcast.id)
       .map(pe => pe.id!);
 
     this.librariesService!.deleteMeList(ids).subscribe({
       next: () => {
-        this.toasterService.show($localize`"${this.podcast().name}" removed from My Library`);
+        this.toasterService.show($localize`"${podcast.name}" removed from My Library`);
       },
       error: (err) => {
         console.error('librariesService.deleteMeList', ids, err);
-        this.toasterService.show($localize`"${this.podcast().name}" removing from My Library failed`, { type: 'error' });
+        this.toasterService.show($localize`"${podcast.name}" removing from My Library failed`, { type: 'error' });
       }
     });
   }
@@ -110,37 +112,41 @@ export class PodcastDetails {
     else this.addOffline();
   }
   addOffline() {
+    const podcast = this.podcast();
+
     this.dialogService.confirm(
       $localize`Download Podcast`,
-      $localize`Are you sure you want to download "${this.podcast().name}"? It will take a lot of space and time depending on your internet connection.`)
+      $localize`Are you sure you want to download "${podcast.name}"? It will take a lot of space and time depending on your internet connection.`)
       .subscribe((res) => {
         if (res) {
-          this.toasterService.show($localize`"${this.podcast().name}" downloading...`);
-          from(this.offlineService!.downloadPodcast(this.podcast())).subscribe({
+          this.toasterService.show($localize`"${podcast.name}" downloading...`);
+          from(this.offlineService!.downloadPodcast(podcast)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.podcast().name}" added to Offline`, { type: 'success' });
+              this.toasterService.show($localize`"${podcast.name}" added to Offline`, { type: 'success' });
             },
             error: (err) => {
-              console.error('offlineService.downloadPodcast', this.podcast().id!, err);
-              this.toasterService.show($localize`"${this.podcast().name}" adding to Offline failed`, { type: 'error' });
+              console.error('offlineService.downloadPodcast', podcast.id!, err);
+              this.toasterService.show($localize`"${podcast.name}" adding to Offline failed`, { type: 'error' });
             }
           });
         }
       });
   }
   removeOffline() {
+    const podcast = this.podcast();
+
     this.dialogService.confirm(
       $localize`Remove Podcast`,
-      $localize`Are you sure you want to remove "${this.podcast().name}" from Offline? All the episodes will be removed.`)
+      $localize`Are you sure you want to remove "${podcast.name}" from Offline? All the episodes will be removed.`)
       .subscribe((res) => {
         if (res) {
-          from(this.offlineService!.removePodcast(this.podcast().id!)).subscribe({
+          from(this.offlineService!.removePodcast(podcast.id!)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.podcast().name}" removed from Offline`);
+              this.toasterService.show($localize`"${podcast.name}" removed from Offline`);
             },
             error: (err) => {
-              console.error('offlineService.removePodcast', this.podcast().id!, err);
-              this.toasterService.show($localize`"${this.podcast().name}" removing from Offline failed`, { type: 'error' });
+              console.error('offlineService.removePodcast', podcast.id!, err);
+              this.toasterService.show($localize`"${podcast.name}" removing from Offline failed`, { type: 'error' });
             }
           });
         }

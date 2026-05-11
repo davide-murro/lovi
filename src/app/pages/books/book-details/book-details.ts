@@ -106,31 +106,33 @@ export class BookDetails {
     else this.addToMyLibrary();
   }
   addToMyLibrary() {
+    const book = this.book();
     const bookLibrary: ManageLibraryDto = {
-      bookId: this.book().id
+      bookId: book.id
     };
 
     this.librariesService!.createMe(bookLibrary).subscribe({
       next: () => {
-        this.toasterService.show($localize`"${this.book().name}" added to My Library`);
+        this.toasterService.show($localize`"${book.name}" added to My Library`);
       },
       error: (err) => {
         console.error('librariesService.createMe', bookLibrary, err);
-        this.toasterService.show($localize`"${this.book().name}" adding to My Library failed`, { type: 'error' });
+        this.toasterService.show($localize`"${book.name}" adding to My Library failed`, { type: 'error' });
       }
     });
   }
   removeFromMyLibrary() {
+    const book = this.book();
     const id: number = this.librariesService!.myLibrary()!
-      .find(ml => ml.book?.id == this.book().id)!.id!;
+      .find(ml => ml.book?.id == book.id)!.id!;
 
     this.librariesService!.deleteMe(id).subscribe({
       next: () => {
-        this.toasterService.show($localize`"${this.book().name}" removed from My Library`);
+        this.toasterService.show($localize`"${book.name}" removed from My Library`);
       },
       error: (err) => {
         console.error('librariesService.deleteMe', id, err);
-        this.toasterService.show($localize`"${this.book().name}" removing from My Library failed`, { type: 'error' });
+        this.toasterService.show($localize`"${book.name}" removing from My Library failed`, { type: 'error' });
       }
     });
   }
@@ -141,37 +143,41 @@ export class BookDetails {
     else this.addOffline();
   }
   addOffline() {
+    const book = this.book();
+
     this.dialogService.confirm(
       $localize`Download Book`,
-      $localize`Are you sure you want to download "${this.book().name}"? It will take some time depending on your internet connection.`)
+      $localize`Are you sure you want to download "${book.name}"? It will take some time depending on your internet connection.`)
       .subscribe((res) => {
         if (res) {
-          this.toasterService.show($localize`"${this.book().name}" downloading...`);
-          from(this.offlineService!.downloadBook(this.book())).subscribe({
+          this.toasterService.show($localize`"${book.name}" downloading...`);
+          from(this.offlineService!.downloadBook(book)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.book().name}" added to Offline`, { type: 'success' });
+              this.toasterService.show($localize`"${book.name}" added to Offline`, { type: 'success' });
             },
             error: (err) => {
-              console.error('offlineService.downloadBook', this.book(), err);
-              this.toasterService.show($localize`"${this.book().name}" adding to Offline failed`, { type: 'error' });
+              console.error('offlineService.downloadBook', book, err);
+              this.toasterService.show($localize`"${book.name}" adding to Offline failed`, { type: 'error' });
             }
           });
         }
       });
   }
   removeOffline() {
+    const book = this.book();
+
     this.dialogService.confirm(
       $localize`Remove Book`,
-      $localize`Are you sure you want to remove "${this.book().name}" from Offline?`)
+      $localize`Are you sure you want to remove "${book.name}" from Offline?`)
       .subscribe((res) => {
         if (res) {
-          from(this.offlineService!.removeBook(this.book().id!)).subscribe({
+          from(this.offlineService!.removeBook(book.id!)).subscribe({
             next: () => {
-              this.toasterService.show($localize`"${this.book().name}" removed from Offline`);
+              this.toasterService.show($localize`"${book.name}" removed from Offline`);
             },
             error: (err) => {
-              console.error('offlineService.removeBook', this.book().id!, err);
-              this.toasterService.show($localize`"${this.book().name}" removing from Offline failed`, { type: 'error' });
+              console.error('offlineService.removeBook', book.id!, err);
+              this.toasterService.show($localize`"${book.name}" removing from Offline failed`, { type: 'error' });
             }
           });
         }

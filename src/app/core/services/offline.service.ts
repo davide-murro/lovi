@@ -6,6 +6,7 @@ import { BooksService } from './books.service';
 import { PodcastsService } from './podcasts.service';
 import { AuthService } from './auth.service';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
+import { CreatorDto } from '../models/dtos/creator-dto.model';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,8 @@ export class OfflineService {
     // Track downloaded items with metadata
     private offlineBooks = signal<BookDto[]>([]);
     private offlineEpisodes = signal<PodcastEpisodeDto[]>([]);
+    private offlinePodcasts = signal<PodcastDto[]>([]);
+    private offlineCreators = signal<CreatorDto[]>([]);
 
     // Track items being downloaded (priming phase) to allow services to add ?isOffline=true
     private downloadingBooks = signal<BookDto[]>([]);
@@ -35,7 +38,7 @@ export class OfflineService {
     episodes = computed(() => [...this.downloadingEpisodes(), ...this.offlineEpisodes()]);
     podcasts = computed(() => {
         const grouped = this.episodes().reduce((acc, ep) => {
-            const pToFind = ep.podcast!;
+            const pToFind = this.offlinePodcasts().find(p => p.id === ep.podcast?.id)!;
             const pFound = acc.find(a => a.id === pToFind.id);
             if (pFound) pFound.episodes!.push(ep);
             else acc.push({ ...pToFind, episodes: [ep] });
@@ -377,7 +380,7 @@ export class OfflineService {
 
         try {
             // 1. Start tracking download episode
-            const podcastToDownload = episode.podcast?.id && !this.isPodcastDownloading(episode.podcast.id) && !this.isPodcastDownloaded(episode.podcast.id) ? episode.podcast : null;
+            let podcastToDownload = episode.podcast?.id && !this.isPodcastDownloading(episode.podcast.id) && !this.isPodcastDownloaded(episode.podcast.id) ? episode.podcast : null;
             //const voicersToDownload = episode.voicers?.filter(v => v.id && !this.isCreatorDownloading(v.id) && !this.isCreatorDownloaded(v.id)) ?? [];
             this.downloadingEpisodes.update(set => [...set, episode]);
 
@@ -389,9 +392,9 @@ export class OfflineService {
 
             // 3. Download podcast
             if (podcastToDownload) {
-                await firstValueFrom(this.podcastsService.getById(podcastToDownload!.id!).pipe(takeUntil(this.cancelDownloads$)));
-                if (podcastToDownload.coverImageUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, true).pipe(takeUntil(this.cancelDownloads$)));
-                if (podcastToDownload.coverImagePreviewUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, false).pipe(takeUntil(this.cancelDownloads$)));
+                podcastToDownload = await firstValueFrom(this.podcastsService.getById(podcastToDownload!.id!).pipe(takeUntil(this.cancelDownloads$)));
+                if (podcastToDownload?.coverImageUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, true).pipe(takeUntil(this.cancelDownloads$)));
+                if (podcastToDownload?.coverImagePreviewUrl) await firstValueFrom(this.podcastsService.getCover(podcastToDownload!.id!, false).pipe(takeUntil(this.cancelDownloads$)));
             }
 
             // 4. Download voicers
@@ -410,6 +413,13 @@ export class OfflineService {
                 this.saveToStorage('offlinePodcastEpisodes', newList);
                 return newList;
             });
+            if (podcastToDownload) {
+                this.offlinePodcasts.update(list => {
+                    const newList = [...list, podcastToDownload];
+                    this.saveToStorage('offlinePodcasts', newList);
+                    return newList;
+                });
+            }
         } catch (error: any) {
             this.downloadingEpisodes.update(set => set.filter(e => e.id !== episode.id));
             throw new Error(error);
@@ -517,6 +527,7 @@ export class OfflineService {
 
             // 3. Determine URLs to remove from cache using the storedItem (which has isOffline=True)
             const urlsToRemove: string[] = [];
+            const isPodcastToRemove = storedItem.podcast?.id && !this.isPodcastDownloaded(storedItem.podcast.id!)
 
             if (storedItem.dataUrl) urlsToRemove.push(storedItem.dataUrl);
             if (storedItem.audioUrl) urlsToRemove.push(storedItem.audioUrl);
@@ -524,10 +535,10 @@ export class OfflineService {
             if (storedItem.coverImagePreviewUrl) urlsToRemove.push(storedItem.coverImagePreviewUrl);
 
             // Check if podcast is still needed
-            if (storedItem.podcast?.id && !this.isPodcastDownloaded(storedItem.podcast.id!)) {
-                if (storedItem.podcast.dataUrl) urlsToRemove.push(storedItem.podcast?.dataUrl);
-                if (storedItem.podcast.coverImageUrl) urlsToRemove.push(storedItem.podcast?.coverImageUrl);
-                if (storedItem.podcast.coverImagePreviewUrl) urlsToRemove.push(storedItem.podcast?.coverImagePreviewUrl);
+            if (isPodcastToRemove) {
+                if (storedItem.podcast?.dataUrl) urlsToRemove.push(storedItem.podcast.dataUrl);
+                if (storedItem.podcast?.coverImageUrl) urlsToRemove.push(storedItem.podcast.coverImageUrl);
+                if (storedItem.podcast?.coverImagePreviewUrl) urlsToRemove.push(storedItem.podcast.coverImagePreviewUrl);
             }
 
             // Check if voicers are still needed
@@ -560,6 +571,13 @@ export class OfflineService {
                 this.saveToStorage('offlinePodcastEpisodes', newList);
                 return newList;
             });
+            if (isPodcastToRemove) {
+                this.offlinePodcasts.update(list => {
+                    const newList = list.filter(p => p.id !== storedItem.podcast?.id);
+                    this.saveToStorage('offlinePodcasts', newList);
+                    return newList;
+                });
+            }
         } catch (error: any) {
             this.deletingEpisodes.update(set => set.filter(e => e.id !== storedItem.id));
             throw new Error(error);
