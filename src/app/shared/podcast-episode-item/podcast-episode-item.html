@@ -1,6 +1,6 @@
 <a i18n-title class="link-item flex items-center gap-2 sm:gap-4"
   [routerLink]="['/podcasts', podcast().id, 'episodes', podcastEpisode().id]" title="Go to Podcast Episode">
-  <img class="size-16 aspect-square object-cover bg-accent rounded-xl sm:size-24" loading="lazy" decoding="async"
+  <img class="size-18 aspect-square object-cover bg-accent rounded-xl sm:size-24" loading="lazy" decoding="async"
     [secureSrc]="podcastEpisode().coverImagePreviewUrl" [secureOffline]="true" [alt]="podcastEpisode().name" />
   <div class="overflow-hidden">
     <p class="text-base font-medium leading-normal line-clamp-2 sm:line-clamp-3">{{ podcastEpisode().name }}</p>
