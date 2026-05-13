@@ -30,6 +30,7 @@ export class AudioPlayer {
 
   playerVisible = signal(false);
   queueOpen = signal(false);
+  isReordering = signal(false);
 
   displayTime = computed(() => this.isSeeking() ? this.seekingTime() : this.audioPlayerService.currentTime());
   displayDuration = computed(() => this.audioPlayerService.duration());
@@ -94,6 +95,16 @@ export class AudioPlayer {
 
   onTrackDrop(event: CdkDragDrop<any[]>) {
     this.audioPlayerService.reorderQueue(event.previousIndex, event.currentIndex);
+  }
+
+  onTrackDragStart() {
+    this.isReordering.set(true);
+  }
+
+  onTrackDragEnd() {
+    requestAnimationFrame(() => {
+      this.isReordering.set(false);
+    });
   }
 
   // Utility function to format seconds into int value

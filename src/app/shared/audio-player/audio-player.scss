@@ -191,7 +191,7 @@
 .queue-expand-enter {
    visibility: visible;
    opacity: 1;
-   max-height: 500px;
+   max-height: 600px;
 }
 
 .queue-expand-leave {
@@ -237,11 +237,15 @@
 
 // CDK Drag and Drop styles
 .cdk-drag-preview {
-   background-color: var(--color-accent-light) !important;
    padding-inline: calc(var(--spacing) * 4);
    padding-block: calc(var(--spacing) * 2);
+   background-color: var(--color-accent-light) !important;
    cursor: grabbing !important;
    pointer-events: initial !important;
+}
+
+.cdk-drag-preview.cdk-drag-animating {
+   transition: transform 300ms;
 }
 
 .cdk-drag-placeholder {
