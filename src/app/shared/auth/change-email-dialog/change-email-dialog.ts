@@ -4,10 +4,11 @@ import { ChangeEmailDto } from '../../../core/models/dtos/auth/change-email-dto.
 import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
+import { PasswordInput } from '../password-input/password-input';
 
 @Component({
   selector: 'app-change-email-dialog',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PasswordInput],
   templateUrl: './change-email-dialog.html',
   styleUrl: './change-email-dialog.scss'
 })
@@ -17,7 +18,7 @@ export class ChangeEmailDialog {
   private authService = inject(AuthService);
 
   form = new FormGroup({
-    password: new FormControl('', [Validators.required]),
+    currentPassword: new FormControl('', [Validators.required]),
     newEmail: new FormControl('', [Validators.required, Validators.email])
   });
 
@@ -26,7 +27,7 @@ export class ChangeEmailDialog {
     if (!this.form.valid) return;
 
     const changeEmail: ChangeEmailDto = {
-      password: this.form.value.password!,
+      password: this.form.value.currentPassword!,
       newEmail: this.form.value.newEmail!
     }
 

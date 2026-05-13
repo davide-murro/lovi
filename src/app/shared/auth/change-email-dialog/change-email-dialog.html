@@ -3,12 +3,12 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col items-center gap-4">
 
     <div class="w-full">
-        <label i18n class="label" for="password">Password</label>
-        <input autofocus type="password" autocomplete="current-password" formControlName="password" id="password"
-            class="input input-accent w-full" />
-        @if(form.controls.password.hasError('required')) {
+        <label i18n class="label" for="current-password">Password</label>
+        <app-password-input autofocus id="current-password" class="input-accent" autocomplete="current-password"
+            formControlName="currentPassword" />
+        @if(form.controls.currentPassword.hasError('required')) {
         <p i18n class="hint text-accent">Password is required</p>
-        } @else if(form.controls.password.valid) {
+        } @else if(form.controls.currentPassword.valid) {
         <p i18n class="hint text-success">
             Password ready
         </p>

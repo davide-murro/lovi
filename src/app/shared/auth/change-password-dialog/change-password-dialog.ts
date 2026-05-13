@@ -6,10 +6,11 @@ import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { passwordValidator } from '../../../core/validators/password-validator';
 import { valuesMatchValidator } from '../../../core/validators/values-match-validator';
+import { PasswordInput } from '../password-input/password-input';
 
 @Component({
   selector: 'app-change-password-dialog',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PasswordInput],
   templateUrl: './change-password-dialog.html',
   styleUrl: './change-password-dialog.scss'
 })

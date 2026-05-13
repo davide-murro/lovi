@@ -8,10 +8,13 @@ import { passwordValidator } from '../../../core/validators/password-validator';
 import { DialogService } from '../../../core/services/dialog.service';
 import { EmailAlreadyTakenDialog } from '../../../shared/auth/email-already-taken-dialog/email-already-taken-dialog';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
+import { PasswordInput } from '../../../shared/auth/password-input/password-input';
+
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PasswordInput],
+
   templateUrl: './register.html',
   styleUrl: './register.scss'
 })

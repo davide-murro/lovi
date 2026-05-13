@@ -10,11 +10,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGoogle, faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { ExternalLoginDto } from '../../../core/models/dtos/auth/external-login-dto.model';
 import { SocialAuthService } from '../../../core/services/social-auth.service';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { PasswordInput } from '../../../shared/auth/password-input/password-input';
+
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, FontAwesomeModule],
+  imports: [ReactiveFormsModule, RouterLink, FontAwesomeModule, PasswordInput],
+
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
@@ -29,11 +31,10 @@ export class Login {
   faSpotify = faSpotify;
   //faFacebook = faFacebook;
   //faInstagram = faInstagram;
-  faEye = faEye;
+
 
   redirect = input('/', { transform: (v: string | undefined) => v ?? '/' });
 
-  showPassword = signal(false);
 
   constructor() {
     this.checkSpotifyCallback();
@@ -46,10 +47,6 @@ export class Login {
   });
 
   isLoading = signal(false);
-
-  togglePasswordVisibility(): void {
-    this.showPassword.set(!this.showPassword());
-  }
 
   login(): void {
     if (!this.form.valid) return;

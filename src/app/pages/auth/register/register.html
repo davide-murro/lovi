@@ -28,8 +28,7 @@
 
         <div class="max-w-full">
             <label i18n class="label" for="password">Password</label>
-            <input type="password" autocomplete="new-password" formControlName="password" id="password"
-                class="input input-lg" />
+            <app-password-input id="password" class="input-lg" autocomplete="new-password" formControlName="password" />
             @if(form.controls.password.hasError('required')) {
             <p i18n class="hint text-accent">Password is required</p>
             } @else if(
@@ -62,8 +61,8 @@
 
         <div class="max-w-full">
             <label i18n class="label" for="password-repeat">Repeat password</label>
-            <input type="password" autocomplete="new-password" formControlName="passwordRepeat" id="password-repeat"
-                class="input input-lg" />
+            <app-password-input id="password-repeat" class="input-lg" autocomplete="new-password"
+                formControlName="passwordRepeat" />
             @if (form.controls.password.hasError('required')) {
             <p i18n class="hint text-accent">
                 Password is required

@@ -17,15 +17,8 @@
         </div>
         <div class="w-full">
             <label i18n for="password" class="label">Password</label>
-            <div class="relative w-full">
-                <input [type]="showPassword() ? 'text' : 'password'" autocomplete="current-password"
-                    formControlName="password" id="password" class="input input-lg w-full !pr-18" />
-                <button i18n-title type="button" [title]="showPassword() ? 'Hide password' : 'Show password'"
-                    class="input-button input-button-lg absolute right-0 top-0" [class.text-primary]="showPassword()"
-                    (click)="togglePasswordVisibility()">
-                    <fa-icon [icon]="faEye" />
-                </button>
-            </div>
+            <app-password-input id="password" class="input-lg w-full" formControlName="password"
+                autocomplete="current-password" />
             @if(form.controls.password.dirty) {
             @if(form.controls.password.hasError('required')) {
             <p i18n class="hint text-error">

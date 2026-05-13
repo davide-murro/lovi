@@ -7,12 +7,12 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col items-center gap-4">
 
     <div class="w-full">
-        <label i18n class="label" for="password">Password</label>
-        <input autofocus type="password" autocomplete="current-password" formControlName="password" id="password"
-            class="input input-accent w-full" />
-        @if(form.controls.password.hasError('required')) {
+        <label i18n class="label" for="current-password">Password</label>
+        <app-password-input id="current-password" class="input-accent" autocomplete="current-password"
+            formControlName="currentPassword" />
+        @if(form.controls.currentPassword.hasError('required')) {
         <p i18n class="hint text-accent">Password is required</p>
-        } @else if(form.controls.password.valid) {
+        } @else if(form.controls.currentPassword.valid) {
         <p i18n class="hint text-success">
             Password ready
         </p>
@@ -22,7 +22,7 @@
     <div class="flex justify-center gap-4">
         <button i18n i18n-title type="submit" class="flex-none button button-primary" title="Confirm account deletion"
             [disabled]="!form.valid || isLoading()">Confirm</button>
-        <button i18n i18n-title type="reset" class="button button-accent" title="Cancel account deletion"
+        <button i18n i18n-title autofocus type="reset" class="button button-accent" title="Cancel account deletion"
             (click)="cancel()">Cancel</button>
     </div>
 </form>

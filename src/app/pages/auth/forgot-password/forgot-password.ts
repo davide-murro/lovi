@@ -8,10 +8,12 @@ import { valuesMatchValidator } from '../../../core/validators/values-match-vali
 import { passwordValidator } from '../../../core/validators/password-validator';
 import { ResetPasswordDto } from '../../../core/models/dtos/auth/reset-password-dto.model';
 import { ResendChangeEmailDialog } from '../../../shared/auth/resend-change-email-dialog/resend-change-email-dialog';
+import { PasswordInput } from '../../../shared/auth/password-input/password-input';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PasswordInput],
+
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.scss'
 })
