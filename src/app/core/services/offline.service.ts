@@ -81,6 +81,7 @@ export class OfflineService {
         this.cancelDownloads$.next();
         this.offlineBooks.set(this.loadFromStorage('offlineBooks'));
         this.offlineEpisodes.set(this.loadFromStorage('offlinePodcastEpisodes'));
+        this.offlinePodcasts.set(this.loadFromStorage('offlinePodcasts'));
         this.downloadingBooks.set([]);
         this.downloadingEpisodes.set([]);
         this.deletingBooks.set([]);
