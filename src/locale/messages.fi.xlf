@@ -1063,8 +1063,8 @@
         <target state="translated">Hae</target>
       </trans-unit>
       <trans-unit id="8845008155590279280" datatype="html">
-        <source>Search for Audio Books or Podcasts</source>
-        <target state="translated">Hae äänikirjoja tai podcasteja</target>
+        <source>Search for Books or Podcasts</source>
+        <target state="translated">Hae kirjoja tai podcasteja</target>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
         <source>Previous slide</source>

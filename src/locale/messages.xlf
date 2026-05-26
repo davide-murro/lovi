@@ -2448,7 +2448,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8845008155590279280" datatype="html">
-        <source>Search for Audio Books or Podcasts</source>
+        <source>Search for Books or Podcasts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
           <context context-type="linenumber">55,56</context>
