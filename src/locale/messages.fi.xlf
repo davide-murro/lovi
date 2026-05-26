@@ -4,2503 +4,1127 @@
     <body>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
+        <target>Vahvista sähköpostiosoitteen muutos</target>
       </trans-unit>
       <trans-unit id="8946275703654004327" datatype="html">
         <source> Please confirm your email address change by clicking the button </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target> Ole hyvä ja vahvista sähköpostiosoitteesi muutos klikkaamalla painiketta </target>
       </trans-unit>
       <trans-unit id="9178182467454450952" datatype="html">
         <source>Confirm</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">39,40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">77,78</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
-          <context context-type="linenumber">5,6</context>
-        </context-group>
+        <target>Vahvista</target>
       </trans-unit>
       <trans-unit id="1751694105082470894" datatype="html">
         <source> Invalid parameters </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.html</context>
-          <context context-type="linenumber">14,15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.html</context>
-          <context context-type="linenumber">14,15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">110,111</context>
-        </context-group>
+        <target> Virheelliset parametrit </target>
       </trans-unit>
       <trans-unit id="3845778830128417849" datatype="html">
         <source>Email change confirmed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
+        <target>Sähköpostiosoitteen muutos vahvistettu</target>
       </trans-unit>
       <trans-unit id="682106464138872093" datatype="html">
         <source>You can now log in to LOVI with the new email you chose and the old password.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
+        <target>Voit nyt kirjautua LOVI-palveluun valitsemallasi uudella sähköpostiosoitteella ja vanhalla salasanallasi.</target>
       </trans-unit>
       <trans-unit id="6154363620559735001" datatype="html">
         <source>Email change confirmation failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
+        <target>Sähköpostiosoitteen muutoksen vahvistus epäonnistui</target>
       </trans-unit>
       <trans-unit id="2783516973855938863" datatype="html">
         <source>Email change confirmation failed, unexpected error.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-change-email/confirm-change-email.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
+        <target>Sähköpostiosoitteen muutoksen vahvistus epäonnistui, odottamaton virhe.</target>
       </trans-unit>
       <trans-unit id="2241891459305717719" datatype="html">
         <source>Confirm email</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
+        <target>Vahvista sähköposti</target>
       </trans-unit>
       <trans-unit id="3625898736742189789" datatype="html">
         <source> Please confirm your email address by clicking the button </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target> Ole hyvä ja vahvista sähköpostiosoitteesi klikkaamalla painiketta </target>
       </trans-unit>
       <trans-unit id="3955007016208635928" datatype="html">
         <source>Email confirmed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
+        <target>Sähköposti vahvistettu</target>
       </trans-unit>
       <trans-unit id="7058916482511104258" datatype="html">
         <source>You can now log in to LOVI with the email and password you chose during registration.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
+        <target>Voit nyt kirjautua LOVI-palveluun rekisteröitymisen yhteydessä valitsemallasi sähköpostiosoitteella ja salasanalla.</target>
       </trans-unit>
       <trans-unit id="6815286196151369720" datatype="html">
         <source>Email already confirmed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.ts</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
+        <target>Sähköposti on jo vahvistettu</target>
       </trans-unit>
       <trans-unit id="8383673694407020945" datatype="html">
         <source>You can log in to LOVI with the email and password you chose during registration.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.ts</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
+        <target>Voit kirjautua LOVI-palveluun rekisteröitymisen yhteydessä valitsemallasi sähköpostiosoitteella ja salasanalla.</target>
       </trans-unit>
       <trans-unit id="7332263051995103165" datatype="html">
         <source>Email confirmation failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
+        <target>Sähköpostin vahvistus epäonnistui</target>
       </trans-unit>
       <trans-unit id="2073815763572900390" datatype="html">
         <source>Email confirmation failed, unexpected error.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/confirm-email/confirm-email.ts</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
+        <target>Sähköpostin vahvistus epäonnistui, odottamaton virhe.</target>
       </trans-unit>
       <trans-unit id="8264044238565501678" datatype="html">
         <source>Forgot password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">26,27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">181</context>
-        </context-group>
+        <target>Unohtuiko salasana</target>
       </trans-unit>
       <trans-unit id="6167260134486048636" datatype="html">
         <source> Enter the email address associated with your account, and we will send you a password reset link. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target> Syötä tiliisi liitetty sähköpostiosoite, niin lähetämme sinulle salasanan palautuslinkin. </target>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
         <source>Email</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">12,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">42,43</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">12,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
+        <target>Sähköposti</target>
       </trans-unit>
       <trans-unit id="7541853859084507047" datatype="html">
         <source> Email is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
+        <target> Sähköpostiosoite vaaditaan </target>
       </trans-unit>
       <trans-unit id="2677873999927804719" datatype="html">
         <source> Invalid email </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
+        <target> Virheellinen sähköpostiosoite </target>
       </trans-unit>
       <trans-unit id="417111167607425236" datatype="html">
         <source> Email OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
+        <target> Sähköposti OK </target>
       </trans-unit>
       <trans-unit id="7472549091655371200" datatype="html">
         <source>Request password reset</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
+        <target>Pyydä salasanan vaihtoa</target>
       </trans-unit>
       <trans-unit id="6170082236603228916" datatype="html">
         <source>Request</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">30,31</context>
-        </context-group>
+        <target>Pyydä</target>
       </trans-unit>
       <trans-unit id="6470460506945687089" datatype="html">
         <source> Enter a new password and confirm. After that, you will be able to login with the new credentials </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
+        <target> Syötä uusi salasana ja vahvista se. Tämän jälkeen voit kirjautua sisään uusilla tunnuksillasi. </target>
       </trans-unit>
       <trans-unit id="3588415639242079458" datatype="html">
         <source>New password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">47,48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">19,20</context>
-        </context-group>
+        <target>Uusi salasana</target>
       </trans-unit>
       <trans-unit id="7918094510607964725" datatype="html">
         <source>New password is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">51,52</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">23,24</context>
-        </context-group>
+        <target>Uusi salasana vaaditaan</target>
       </trans-unit>
       <trans-unit id="4046834611160246107" datatype="html">
-        <source>New password must have:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">60,61</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">32,33</context>
-        </context-group>
+        <source> New password must have:</source>
+        <target state="translated"> Uuden salasanan on sisällettävä:</target>
       </trans-unit>
       <trans-unit id="6431756795596367554" datatype="html">
         <source>Minimum 6 characters</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">62,63</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">45,46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
+        <target state="translated">Vähintään 6 merkkiä</target>
       </trans-unit>
       <trans-unit id="4827360877273979412" datatype="html">
         <source>At least one uppercase letter</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">63,64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">46,47</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">35,36</context>
-        </context-group>
+        <target state="translated">Vähintään yksi iso kirjain</target>
       </trans-unit>
       <trans-unit id="6521929470217720615" datatype="html">
         <source>At least one lowercase letter</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">47,48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
+        <target state="translated">Vähintään yksi pieni kirjain</target>
       </trans-unit>
       <trans-unit id="6367235986358966953" datatype="html">
         <source>At least one number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">65,66</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">48,49</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">37,38</context>
-        </context-group>
+        <target state="translated">Vähintään yksi numero</target>
       </trans-unit>
       <trans-unit id="3199473827307746827" datatype="html">
         <source>At least one special character</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">66,67</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">49,50</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
+        <target state="translated">Vähintään yksi erikoismerkki</target>
       </trans-unit>
       <trans-unit id="6642051250090897630" datatype="html">
         <source> Now repeat the new password... </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">71</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
+        <target state="translated"> Toista nyt uusi salasana... </target>
       </trans-unit>
       <trans-unit id="8791984776889884648" datatype="html">
         <source> New password OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">75</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
+        <target state="translated"> Uusi salasana OK </target>
       </trans-unit>
       <trans-unit id="8174919026012824751" datatype="html">
         <source>Repeat new password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">81,82</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">53,54</context>
-        </context-group>
+        <target state="translated">Toista uusi salasana</target>
       </trans-unit>
       <trans-unit id="8005278991865508477" datatype="html">
         <source> New password is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
+        <target state="translated"> Uusi salasana vaaditaan </target>
       </trans-unit>
       <trans-unit id="2118833403160143050" datatype="html">
         <source> Repeat new password is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">90</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
+        <target state="translated"> Uuden salasanan toistaminen vaaditaan </target>
       </trans-unit>
       <trans-unit id="1595487958604868985" datatype="html">
         <source> New passwords do not match </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">94</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
+        <target state="translated"> Uudet salasanat eivät täsmää </target>
       </trans-unit>
       <trans-unit id="3302445754123212607" datatype="html">
         <source> New password repeat OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">98</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
+        <target state="translated"> Uuden salasanan toisto OK </target>
       </trans-unit>
       <trans-unit id="4591169383100169155" datatype="html">
         <source>Save new password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">104</context>
-        </context-group>
+        <target state="translated">Tallenna uusi salasana</target>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.html</context>
-          <context context-type="linenumber">104,105</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">50,51</context>
-        </context-group>
+        <target state="translated">Tallenna</target>
       </trans-unit>
       <trans-unit id="3795588477873226308" datatype="html">
         <source>Password Reset Link Sent</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
+        <target state="translated">Salasanan palautuslinkki lähetetty</target>
       </trans-unit>
       <trans-unit id="8768742428169238539" datatype="html">
         <source>If an account exists for this email, a password reset link has been sent to your inbox. In case, check your spam folder.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
+        <target state="translated">Jos tällä sähköpostiosoitteella löytyy tili, salasanan palautuslinkki on lähetetty sähköpostiisi. Tarkista tarvittaessa myös roskapostikansio.</target>
       </trans-unit>
       <trans-unit id="7458742036174008482" datatype="html">
         <source>Forgot password process error</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
+        <target state="translated">Virhe salasanan palautusprosessissa</target>
       </trans-unit>
       <trans-unit id="9169981640738462056" datatype="html">
         <source>Unable to reset password. The email could not be processed.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
+        <target state="translated">Salasanaa ei voitu palauttaa. Sähköpostia ei voitu käsitellä.</target>
       </trans-unit>
       <trans-unit id="2558540539387408088" datatype="html">
         <source>Password Reset Success</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">92</context>
-        </context-group>
+        <target state="translated">Salasanan palautus onnistui</target>
       </trans-unit>
       <trans-unit id="5165266329525582847" datatype="html">
         <source>Your password has been successfully reset. You can now log in with your new password.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
+        <target state="translated">Salasanasi on vaihdettu onnistuneesti. Voit nyt kirjautua sisään uudella salasanallasi.</target>
       </trans-unit>
       <trans-unit id="7741659019891448275" datatype="html">
         <source>Password Reset error</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
+        <target state="translated">Virhe salasanan vaihdossa</target>
       </trans-unit>
       <trans-unit id="810587747709078554" datatype="html">
         <source>Unable to reset password. The link may have expired or the token is invalid.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/forgot-password/forgot-password.ts</context>
-          <context context-type="linenumber">101</context>
-        </context-group>
+        <target state="translated">Salasanaa ei voitu vaihtaa. Linkki on saattanut vanhentua tai tunniste on virheellinen.</target>
       </trans-unit>
       <trans-unit id="8492560015765107335" datatype="html">
         <source>Sign in or create an account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Kirjaudu sisään tai luo tili</target>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">19,20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">30,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">21,22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
+        <target state="translated">Salasana</target>
       </trans-unit>
       <trans-unit id="5817778849206069572" datatype="html">
-        <source> Password is required. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot;
+       <source> Password is required. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot;
                     [routerLink]=&quot;[&apos;/auth&apos;, &apos;forgot-password&apos;]&quot;
                     [queryParams]=&quot;{ email: form.value.userName || null }&quot;&gt;"/>Forgot password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">32,35</context>
-        </context-group>
+        <target state="translated"> Salasana vaaditaan. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot; 
+                    [routerLink]=&quot;[&apos;/auth&apos;, &apos;forgot-password&apos;]&quot; 
+                    [queryParams]=&quot;{ email: form.value.userName || null }&quot;&gt;"/>Unohtuiko salasana?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
       <trans-unit id="1636934520301910285" datatype="html">
         <source>Reset password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">5,6</context>
-        </context-group>
+        <target state="translated">Aseta uusi salasana</target>
       </trans-unit>
       <trans-unit id="3035570095838445091" datatype="html">
         <source> Forgot password? </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
+        <target state="translated"> Unohtuiko salasana? </target>
       </trans-unit>
       <trans-unit id="1750137775875093438" datatype="html">
         <source>Login to LOVI</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
+        <target state="translated">Kirjaudu sisään LOVI-palveluun</target>
       </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
         <source>Login</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">49,50</context>
-        </context-group>
+        <target state="translated">Kirjaudu sisään</target>
       </trans-unit>
       <trans-unit id="8604326584168843059" datatype="html">
         <source>Sign in another way</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">53,55</context>
-        </context-group>
+        <target state="translated">Kirjaudu muulla tavalla</target>
       </trans-unit>
       <trans-unit id="8999284073934392732" datatype="html">
         <source>Login with Google</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">59,60</context>
-        </context-group>
+        <target state="translated">Kirjaudu Google-tunnuksilla</target>
       </trans-unit>
       <trans-unit id="5091971017771608684" datatype="html">
         <source>Login with Spotify</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
+        <target state="translated">Kirjaudu Spotify-tunnuksilla</target>
       </trans-unit>
       <trans-unit id="3165739939364195862" datatype="html">
         <source>Register to LOVI</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
+        <target state="translated">Rekisteröidy LOVI-palveluun</target>
       </trans-unit>
       <trans-unit id="2031388745284087363" datatype="html">
         <source> Create your LOVI account </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.html</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
+        <target state="translated"> Luo LOVI-tilisi </target>
       </trans-unit>
       <trans-unit id="8830532201705056775" datatype="html">
         <source>Login successful</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.ts</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
+        <target state="translated">Kirjautuminen onnistui</target>
       </trans-unit>
       <trans-unit id="8053477814844632887" datatype="html">
         <source>Login failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.ts</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
+        <target state="translated">Kirjautuminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="6900151687232699831" datatype="html">
         <source>Google login failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.ts</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
+        <target state="translated">Google-kirjautuminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="3343972888654450674" datatype="html">
         <source>Spotify login failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.ts</context>
-          <context context-type="linenumber">97</context>
-        </context-group>
+        <target state="translated">Spotify-kirjautuminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="892209634997650887" datatype="html">
         <source><x id="PH" equiv-text="provider"/> login successful</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.ts</context>
-          <context context-type="linenumber">130</context>
-        </context-group>
+        <target state="translated"><x id="PH" equiv-text="provider"/> kirjautuminen onnistui</target>
       </trans-unit>
       <trans-unit id="6226662772203076879" datatype="html">
         <source><x id="PH" equiv-text="provider"/> login failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/login/login.ts</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
+        <target state="translated"><x id="PH" equiv-text="provider"/> kirjautuminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="2308975396733519902" datatype="html">
         <source>Create an account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Luo tili</target>
       </trans-unit>
       <trans-unit id="6023281321347518314" datatype="html">
         <source> Start listening now! Get your LOVI account in seconds. Get the access to unique, hard-to-find audiobooks and specialized podcasts! Build your perfect personal library today. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">5,6</context>
-        </context-group>
+        <target state="translated"> Aloita kuuntelu nyt! Luo LOVI-tilisi sekunneissa. Saa pääsy ainutlaatuisiin, vaikeasti löydettäviin äänikirjoihin sekä erikoistuneisiin podcasteihin! Rakenna täydellinen henkilökohtainen kirjastosi jo tänään. </target>
       </trans-unit>
       <trans-unit id="205044832662301680" datatype="html">
         <source>Password is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">14,15</context>
-        </context-group>
+        <target state="translated">Salasana vaaditaan</target>
       </trans-unit>
       <trans-unit id="7610778695094770779" datatype="html">
         <source>Password must have:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">43,44</context>
-        </context-group>
+        <target state="translated">Salasanan on sisällettävä:</target>
       </trans-unit>
       <trans-unit id="33741734521740596" datatype="html">
         <source> Now repeat the password... </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
+        <target state="translated"> Toista nyt salasana... </target>
       </trans-unit>
       <trans-unit id="4658299044875469665" datatype="html">
         <source> Password OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
+        <target state="translated"> Salasana OK </target>
       </trans-unit>
       <trans-unit id="5373727393387841282" datatype="html">
         <source>Repeat password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
+        <target state="translated">Toista salasana</target>
       </trans-unit>
       <trans-unit id="9132547751630599796" datatype="html">
         <source> Password is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
+        <target state="translated"> Salasana vaaditaan </target>
       </trans-unit>
       <trans-unit id="3959229813559644868" datatype="html">
         <source> Repeat password is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">73</context>
-        </context-group>
+        <target state="translated"> Salasanan toistaminen vaaditaan </target>
       </trans-unit>
       <trans-unit id="4314910104023472121" datatype="html">
         <source> Passwords do not match </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
+        <target state="translated"> Salasanat eivät täsmää </target>
       </trans-unit>
       <trans-unit id="4403348783252756585" datatype="html">
         <source> Password repeat OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
+        <target state="translated"> Salasanan toisto OK </target>
       </trans-unit>
       <trans-unit id="8953033926734869941" datatype="html">
         <source>Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">87,88</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
+        <target state="translated">Nimi</target>
       </trans-unit>
       <trans-unit id="4042902315677630519" datatype="html">
         <source> Name is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">91</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
+        <target state="translated"> Nimi vaaditaan </target>
       </trans-unit>
       <trans-unit id="8586580949980916008" datatype="html">
         <source> Name OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">95</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
+        <target state="translated"> Nimi OK </target>
       </trans-unit>
       <trans-unit id="1639220106336890373" datatype="html">
         <source>Register a new LOVI account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">101</context>
-        </context-group>
+        <target state="translated">Rekisteröi uusi LOVI-tili</target>
       </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
         <source>Register</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.html</context>
-          <context context-type="linenumber">101,102</context>
-        </context-group>
+        <target state="translated">Rekisteröidy</target>
       </trans-unit>
       <trans-unit id="3713449669435436942" datatype="html">
         <source>Registration successful</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
+        <target state="translated">Rekisteröityminen onnistui</target>
       </trans-unit>
       <trans-unit id="941700628329568981" datatype="html">
         <source>Please check your email inbox to verify your account, then sign in to LOVI</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
+        <target state="translated">Tarkista sähköpostisi vahvistaaksesi tilisi ja kirjaudu sen jälkeen sisään LOVI-palveluun</target>
       </trans-unit>
       <trans-unit id="1190716408793054975" datatype="html">
         <source>Registration failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
+        <target state="translated">Rekisteröityminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="2055188616012606724" datatype="html">
         <source>Registration failed, unexpected error.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/auth/register/register.ts</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
+        <target state="translated">Rekisteröityminen epäonnistui, odottamaton virhe.</target>
       </trans-unit>
       <trans-unit id="3345639992642077161" datatype="html">
         <source>Back to Books</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
+        <target state="translated">Takaisin kirjoihin</target>
       </trans-unit>
       <trans-unit id="5224604665222373201" datatype="html">
         <source>Books</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library/my-library.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/books-paged/books-paged.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
+        <target state="translated">Kirjat</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ isInMyLibrary() ? &apos;Remove from My Library&apos; : &apos;Add to My Library&apos; }}"/></source>
+        <target state="translated"><x id="INTERPOLATION" equiv-text="{{ isInMyLibrary() ? &apos;Remove from My Library&apos; : &apos;Add to My Library&apos; }}"/></target>
       </trans-unit>
       <trans-unit id="3894950702316166331" datatype="html">
         <source>Loading...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">23,24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library/my-library.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">21,22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">48,49</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">63,64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/books-paged/books-paged.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">40,41</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcasts-paged/podcasts-paged.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
+        <target state="translated">Ladataan...</target>
       </trans-unit>
       <trans-unit id="5952529966790613214" datatype="html">
         <source>In My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">26,27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">51,52</context>
-        </context-group>
+        <target state="translated">Omassa kirjastossa</target>
       </trans-unit>
       <trans-unit id="1895431379485086633" datatype="html">
         <source>Add to My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">29,30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">27,28</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">54,55</context>
-        </context-group>
+        <target state="translated">Lisää omaan kirjastoon</target>
       </trans-unit>
       <trans-unit id="5775367540823387927" datatype="html">
         <source>Is Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">41,42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">39,40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">66,67</context>
-        </context-group>
+        <target state="translated">Käytettävissä offline-tilassa</target>
       </trans-unit>
       <trans-unit id="6786796833042543849" datatype="html">
         <source>Download Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">44,45</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">42,43</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">69,70</context>
-        </context-group>
+        <target state="translated">Lataa offline-tilaan</target>
       </trans-unit>
       <trans-unit id="8735002280298695855" datatype="html">
         <source>Audio Book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">50,52</context>
-        </context-group>
+        <target state="translated">Äänikirja</target>
       </trans-unit>
       <trans-unit id="7413763716892937168" datatype="html">
         <source>Add Book to queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
+        <target state="translated">Lisää kirja jonoon</target>
       </trans-unit>
       <trans-unit id="4284688382567695437" datatype="html">
         <source>Add to queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">69,70</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">33,34</context>
-        </context-group>
+        <target state="translated">Lisää jonoon</target>
       </trans-unit>
       <trans-unit id="6316232772296091948" datatype="html">
         <source>eBook</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">75,76</context>
-        </context-group>
+        <target state="translated">E-kirja</target>
       </trans-unit>
       <trans-unit id="2556230960538313378" datatype="html">
         <source>Read Book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">83</context>
-        </context-group>
+        <target state="translated">Lue kirja</target>
       </trans-unit>
       <trans-unit id="2327592562693301723" datatype="html">
         <source>Read</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">85,86</context>
-        </context-group>
+        <target state="translated">Lue</target>
       </trans-unit>
       <trans-unit id="1819234562086037358" datatype="html">
         <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; added to queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">107</context>
-        </context-group>
+        <target state="translated">&quot;<x id="PH" equiv-text="this.book().name"/>&quot; lisätty jonoon</target>
       </trans-unit>
       <trans-unit id="1231146175672033150" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; added to My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">84</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to My Library</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; lisätty omaan kirjastoon</target>
       </trans-unit>
       <trans-unit id="8899308234896079004" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; adding to My Library failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">119</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">88</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">127</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to My Library failed</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; lisääminen omaan kirjastoon epäonnistui</target>
       </trans-unit>
       <trans-unit id="685162272484789324" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; removed from My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">129</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">99</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from My Library</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; poistettu omasta kirjastosta</target>
       </trans-unit>
       <trans-unit id="5916720668975049399" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; removing from My Library failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">133</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">103</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">141</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removing from My Library failed</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; poistaminen omasta kirjastosta epäonnistui</target>
       </trans-unit>
       <trans-unit id="5899015855537302262" datatype="html">
         <source>Download Book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">145</context>
-        </context-group>
+        <target state="translated">Lataa kirja</target>
       </trans-unit>
       <trans-unit id="2306373362517662855" datatype="html">
-        <source>Are you sure you want to download &quot;<x id="PH" equiv-text="this.book().name"/>&quot;? It will take some time depending on your internet connection.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">146</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">154</context>
-        </context-group>
+        <source>Are you sure you want to download &quot;<x id="PH" equiv-text="book.name"/>&quot;? It will take some time depending on your internet connection.</source>
+        <target state="translated">Haluatko varmasti ladata kirjan &quot;<x id="PH" equiv-text="book.name"/>&quot;? Se vie jonkin aikaa internetyhteydestäsi riippuen.</target>
       </trans-unit>
       <trans-unit id="6721414725131339985" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; downloading...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">149</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">119</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">157</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; downloading...</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; ladataan...</target>
       </trans-unit>
       <trans-unit id="748814568807539723" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; added to Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">152</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">122</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to Offline</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; lisätty offline-tilaan</target>
       </trans-unit>
       <trans-unit id="4120689825129770649" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; adding to Offline failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">156</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">126</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">164</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to Offline failed</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; lisääminen offline-tilaan epäonnistui</target>
       </trans-unit>
       <trans-unit id="8963173117497328406" datatype="html">
         <source>Remove Book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">164</context>
-        </context-group>
+        <target state="translated">Poista kirja</target>
       </trans-unit>
       <trans-unit id="7480048592142868941" datatype="html">
-        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="this.book().name"/>&quot; from Offline?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">165</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">173</context>
-        </context-group>
+        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="book.name"/>&quot; from Offline?</source>
+        <target state="translated">Haluatko varmasti poistaa kirjan &quot;<x id="PH" equiv-text="book.name"/>&quot; offline-tilasta?</target>
       </trans-unit>
       <trans-unit id="7048451914816791904" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; removed from Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">170</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">140</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">178</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from Offline</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; poistettu offline-tilasta</target>
       </trans-unit>
       <trans-unit id="2500703953933430930" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; removing from Offline failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">174</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">144</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">182</context>
-        </context-group>
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removing from Offline failed</source>
+        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; poistaminen offline-tilasta epäonnistui</target>
       </trans-unit>
       <trans-unit id="2821179408673282599" datatype="html">
         <source>Home</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/home/home.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
+        <target state="translated">Koti</target>
+      </trans-unit>
+      <trans-unit id="4930940035022738997" datatype="html">
+        <source>New Podcasts</source>
+        <target state="translated">Uudet podcastit</target>
+      </trans-unit>
+      <trans-unit id="83367217345461685" datatype="html">
+        <source>New Books</source>
+        <target state="translated">Uudet kirjat</target>
       </trans-unit>
       <trans-unit id="3072935047674817211" datatype="html">
         <source>My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">43,44</context>
-        </context-group>
+        <target state="translated">Oma kirjasto</target>
       </trans-unit>
       <trans-unit id="7385160636957089888" datatype="html">
         <source>Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
+        <target state="translated">Kirjasto</target>
       </trans-unit>
       <trans-unit id="5940599242581287022" datatype="html">
         <source>My Offline Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
+        <target state="translated">Oma offline-kirjasto</target>
       </trans-unit>
       <trans-unit id="313850810538580916" datatype="html">
         <source>Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library-container.html</context>
-          <context context-type="linenumber">12,13</context>
-        </context-group>
+        <target state="translated">Offline</target>
       </trans-unit>
       <trans-unit id="5586970926335087233" datatype="html">
         <source>Failed to load My Library.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library/my-library.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
+        <target state="translated">Oman kirjaston lataaminen epäonnistui.</target>
       </trans-unit>
       <trans-unit id="4047733304822929662" datatype="html">
         <source>There are no Books here</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library/my-library.html</context>
-          <context context-type="linenumber">11,12</context>
-        </context-group>
+        <target state="translated">Täällä ei ole kirjoja</target>
       </trans-unit>
       <trans-unit id="1984987229407697795" datatype="html">
         <source>Podcasts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library/my-library.html</context>
-          <context context-type="linenumber">22,24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">3,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">40,41</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcasts-paged/podcasts-paged.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Podcastit</target>
       </trans-unit>
       <trans-unit id="8016565132227902578" datatype="html">
         <source>There are no Podcasts here</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-library/my-library.html</context>
-          <context context-type="linenumber">25,26</context>
-        </context-group>
+        <target state="translated">Täällä ei ole podcasteja</target>
       </trans-unit>
       <trans-unit id="9002747291871623570" datatype="html">
-        <source> Offline content allows the application to always display downloaded data, even with an internet connection. The content is stored in a persistent cache, but the device can automatically clear this cache if necessary.
+        <source> Offline content allows the application to always display downloaded data, even with an internet connection. The content is stored in a persistent cache, but the device can automatically clear this cache if necessary. 
 </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
-          <context context-type="linenumber">2,6</context>
-        </context-group>
+        <target state="translated"> Offline-sisältö mahdollistaa ladatun datan näyttämisen sovelluksessa aina, myös ilman internetyhteyttä. Sisältö tallennetaan pysyvään välimuistiin, mutta laite voi tarvittaessa tyhjentää tämän välimuistin automaattisesti. 
+</target>
       </trans-unit>
       <trans-unit id="7208011052874784102" datatype="html">
         <source>Offline Books</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
+        <target state="translated">Offline-kirjat</target>
       </trans-unit>
       <trans-unit id="8033259093836806265" datatype="html">
         <source>No Books are available Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
-          <context context-type="linenumber">11,12</context>
-        </context-group>
+        <target state="translated">Kirjoja ei ole saatavilla offline-tilassa</target>
       </trans-unit>
       <trans-unit id="7639941731528817906" datatype="html">
         <source>Offline Podcasts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
-          <context context-type="linenumber">22,24</context>
-        </context-group>
+        <target state="translated">Offline-podcastit</target>
       </trans-unit>
       <trans-unit id="4442843856048503252" datatype="html">
         <source>No Podcasts are available Offline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/my-library-container/my-offline/my-offline.html</context>
-          <context context-type="linenumber">25,26</context>
-        </context-group>
+        <target state="translated">Podcasteja ei ole saatavilla offline-tilassa</target>
       </trans-unit>
       <trans-unit id="4940309136341647297" datatype="html">
         <source>Back to podcasts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
+        <target state="translated">Takaisin podcasteihin</target>
       </trans-unit>
       <trans-unit id="9024833043122917992" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ podcast().episodes!.length }}"/> Episodes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">59,61</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
+        <target state="translated"><x id="INTERPOLATION" equiv-text="{{ podcast().episodes!.length }}"/> jaksoa</target>
       </trans-unit>
       <trans-unit id="2358200177925832078" datatype="html">
         <source>Play all Episodes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.html</context>
-          <context context-type="linenumber">16,17</context>
-        </context-group>
+        <target state="translated">Toista kaikki jaksot</target>
       </trans-unit>
       <trans-unit id="8426557733791187636" datatype="html">
         <source>Play all</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.html</context>
-          <context context-type="linenumber">19,20</context>
-        </context-group>
+        <target state="translated">Toista kaikki</target>
       </trans-unit>
-      <trans-unit id="6555675494233308829" datatype="html">
-        <source>Episode <x id="PH" equiv-text="number"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">74</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">85</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.ts</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
+      <trans-unit id="4599451746885063295" datatype="html">
+        <source>Ep. <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></source>
+        <target state="translated">Jakso <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></target>
       </trans-unit>
       <trans-unit id="4557571074866615408" datatype="html">
         <source>&quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; episodes added to queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">95</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
+        <target state="translated">Podcastin &quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; jaksot lisätty jonoon</target>
       </trans-unit>
       <trans-unit id="1419156377848079268" datatype="html">
         <source>Download Podcast</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
+        <target state="translated">Lataa podcast</target>
       </trans-unit>
       <trans-unit id="4376605035914527228" datatype="html">
-        <source>Are you sure you want to download &quot;<x id="PH" equiv-text="this.podcast().name"/>&quot;? It will take a lot of space and time depending on your internet connection.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">116</context>
-        </context-group>
+        <source>Are you sure you want to download &quot;<x id="PH" equiv-text="podcast.name"/>&quot;? It will take a lot of space and time depending on your internet connection.</source>
+        <target state="translated">Haluatko varmasti ladata podcastin &quot;<x id="PH" equiv-text="podcast.name"/>&quot;? Se vie paljon tilaa ja aikaa internetyhteydestäsi riippuen.</target>
       </trans-unit>
       <trans-unit id="1666916685991188522" datatype="html">
         <source>Remove Podcast</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">134</context>
-        </context-group>
+        <target state="translated">Poista podcast</target>
       </trans-unit>
       <trans-unit id="3938410096344984343" datatype="html">
-        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; from Offline? All the episodes will be removed.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
+        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="podcast.name"/>&quot; from Offline? All the episodes will be removed.</source>
+        <target state="translated">Haluatko varmasti poistaa podcastin &quot;<x id="PH" equiv-text="podcast.name"/>&quot; offline-tilasta? Kaikki jaksot poistetaan.</target>
       </trans-unit>
       <trans-unit id="6147484957227591088" datatype="html">
         <source>Back to Podcasts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">3,4</context>
-        </context-group>
+        <target state="translated">Takaisin podcasteihin</target>
       </trans-unit>
       <trans-unit id="470668609529713261" datatype="html">
         <source>Back to Podcast</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target state="translated">Takaisin podcastiin</target>
       </trans-unit>
       <trans-unit id="8185123176328552421" datatype="html">
         <source>Add Episode to queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
+        <target state="translated">Lisää jakso jonoon</target>
       </trans-unit>
       <trans-unit id="7508463586135382783" datatype="html">
         <source>Episode <x id="INTERPOLATION" equiv-text="{{ podcastEpisode().number }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">79,81</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-episode-item/podcast-episode-item.html</context>
-          <context context-type="linenumber">11,13</context>
-        </context-group>
+        <target state="translated">Jakso <x id="INTERPOLATION" equiv-text="{{ podcastEpisode().number }}"/></target>
       </trans-unit>
       <trans-unit id="4505476411298564973" datatype="html">
         <source>Go to Previous Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">88,89</context>
-        </context-group>
+        <target state="translated">Siirry edelliseen jaksoon</target>
       </trans-unit>
       <trans-unit id="1129369554676565358" datatype="html">
         <source>Previous Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">91,92</context>
-        </context-group>
+        <target state="translated">Edellinen jakso</target>
       </trans-unit>
       <trans-unit id="6952071647606127974" datatype="html">
         <source>Go to Next Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">97,98</context>
-        </context-group>
+        <target state="translated">Siirry seuraavaan jaksoon</target>
       </trans-unit>
       <trans-unit id="3413391363176583901" datatype="html">
         <source>Next Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">99,100</context>
-        </context-group>
+        <target state="translated">Seuraava jakso</target>
       </trans-unit>
       <trans-unit id="8175797525972180712" datatype="html">
         <source>Download Podcast Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">153</context>
-        </context-group>
+        <target state="translated">Lataa podcastin jakso</target>
       </trans-unit>
       <trans-unit id="4292453927845120930" datatype="html">
         <source>Remove Podcast Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">172</context>
-        </context-group>
+        <target state="translated">Poista podcastin jakso</target>
       </trans-unit>
       <trans-unit id="8433689360468945357" datatype="html">
         <source>Search &quot;<x id="INTERPOLATION" equiv-text="{{search()}}"/>&quot;</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/search/search.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
+        <target state="translated">Hae &quot;<x id="INTERPOLATION" equiv-text="{{search()}}"/>&quot;</target>
       </trans-unit>
       <trans-unit id="7744292213705278878" datatype="html">
         <source>User Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Käyttäjäprofiili</target>
       </trans-unit>
       <trans-unit id="5037437391296624618" datatype="html">
         <source>Information</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
+        <target state="translated">Tiedot</target>
       </trans-unit>
       <trans-unit id="3000005804987112527" datatype="html">
         <source>Change email</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">12,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
+        <target state="translated">Muuta sähköpostiosoite</target>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
         <source>Edit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">28,29</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">49,50</context>
-        </context-group>
+        <target state="translated">Muokkaa</target>
       </trans-unit>
       <trans-unit id="6309828574111583895" datatype="html">
         <source>Change password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">25,26</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
+        <target state="translated">Vaihda salasana</target>
       </trans-unit>
       <trans-unit id="7000649363168371045" datatype="html">
         <source>Save changes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">49,50</context>
-        </context-group>
+        <target state="translated">Tallenna muutokset</target>
       </trans-unit>
       <trans-unit id="4086606389696938932" datatype="html">
         <source>Account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">55,57</context>
-        </context-group>
+        <target state="translated">Tili</target>
       </trans-unit>
       <trans-unit id="7569261855983898211" datatype="html">
         <source>Log out from this device</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">58,59</context>
-        </context-group>
+        <target state="translated">Kirjaudu ulos tästä laitteesta</target>
       </trans-unit>
       <trans-unit id="7507948636555938109" datatype="html">
         <source>Log out</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">59,60</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
+        <target state="translated">Kirjaudu ulos</target>
       </trans-unit>
       <trans-unit id="2152112222474686263" datatype="html">
         <source>Log out from all devices</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">60,61</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">61,62</context>
-        </context-group>
+        <target state="translated">Kirjaudu ulos kaikilta laitteilta</target>
       </trans-unit>
       <trans-unit id="5166399147795117304" datatype="html">
         <source>Delete account permanently</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">62,63</context>
-        </context-group>
+        <target state="translated">Poista tili pysyvästi</target>
       </trans-unit>
       <trans-unit id="7662015208795302518" datatype="html">
         <source>Delete account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.html</context>
-          <context context-type="linenumber">63,64</context>
-        </context-group>
+        <target state="translated">Poista tili</target>
       </trans-unit>
       <trans-unit id="459222468206981218" datatype="html">
         <source>Email change confirmation sent</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
+        <target state="translated">Sähköpostin muutoksen vahvistus lähetetty</target>
       </trans-unit>
       <trans-unit id="2100550186085655617" datatype="html">
         <source>Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
+        <target state="translated">Vahvistusilmoitukset on lähetetty sekä vanhaan että uuteen sähköpostiosoitteeseesi. Vahvista uusi sähköpostiosoite voidaksesi kirjautua sisään.</target>
       </trans-unit>
       <trans-unit id="5108418000757845610" datatype="html">
         <source>Password changed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">68</context>
-        </context-group>
+        <target state="translated">Salasana vaihdettu</target>
       </trans-unit>
       <trans-unit id="5337524527180744591" datatype="html">
         <source>Confirmation notices have been sent to your email addresses.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
+        <target state="translated">Vahvistusilmoitukset on lähetetty sähköpostiosoitteisiisi.</target>
       </trans-unit>
       <trans-unit id="1829779471067775299" datatype="html">
         <source>Profile updated</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
+        <target state="translated">Profiili päivitetty</target>
       </trans-unit>
       <trans-unit id="7269968983793840379" datatype="html">
         <source>Profile update error</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">92</context>
-        </context-group>
+        <target state="translated">Virhe profiilin päivityksessä</target>
       </trans-unit>
       <trans-unit id="2349974320554762715" datatype="html">
         <source>You will be logged out of this browser session only. All other active sessions will remain logged in.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">101</context>
-        </context-group>
+        <target state="translated">Sinut kirjataan ulos vain tästä selainistunnosta. Kaikki muut aktiiviset istunnot pysyvät kirjautuneina sisään.</target>
       </trans-unit>
       <trans-unit id="107300568423181994" datatype="html">
         <source>Log out all devices</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
+        <target state="translated">Kirjaa ulos kaikki laitteet</target>
       </trans-unit>
       <trans-unit id="8045830701612161216" datatype="html">
         <source>You will be logged out of all browser sessions you have opened. Are you sure?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">124</context>
-        </context-group>
+        <target state="translated">Sinut kirjataan ulos kaikista avaamistasi selainistunnoista. Oletko varma?</target>
       </trans-unit>
       <trans-unit id="7350705061372220825" datatype="html">
         <source>Log out from all devices error</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
+        <target state="translated">Virhe kaikilta laitteilta uloskirjautumisessa</target>
       </trans-unit>
       <trans-unit id="8507166195543036644" datatype="html">
         <source>Account deleted</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">148</context>
-        </context-group>
+        <target state="translated">Tili poistettu</target>
       </trans-unit>
       <trans-unit id="3480873535425883333" datatype="html">
         <source>You will be redirected to the home page.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/user-profile/user-profile.ts</context>
-          <context context-type="linenumber">149</context>
-        </context-group>
+        <target state="translated">Sinut ohjataan takaisin etusivulle.</target>
       </trans-unit>
       <trans-unit id="5238821077162432641" datatype="html">
         <source>Close queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
+        <target state="translated">Sulje jono</target>
       </trans-unit>
-      <trans-unit id="7471106605958244406" datatype="html">
-        <source>Go to reference page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">32,33</context>
-        </context-group>
+      <trans-unit id="5920423366277975759" datatype="html">
+        <source>Move in queue</source>
+        <target state="translated">Siirrä jonossa</target>
       </trans-unit>
       <trans-unit id="6820635381009519748" datatype="html">
         <source>Remove from queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">35,36</context>
-        </context-group>
+        <target state="translated">Poista jonosta</target>
       </trans-unit>
       <trans-unit id="8497528947328199741" datatype="html">
         <source>Time</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
+        <target state="translated">Aika</target>
       </trans-unit>
       <trans-unit id="1083264326477451541" datatype="html">
         <source>Toggle speed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
+        <target state="translated">Vaihda nopeutta</target>
       </trans-unit>
       <trans-unit id="8890553633144307762" datatype="html">
         <source>Back</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
+        <target state="translated">Takaisin</target>
       </trans-unit>
       <trans-unit id="8604695045343743097" datatype="html">
         <source>Forward</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">104</context>
-        </context-group>
+        <target state="translated">Eteenpäin</target>
       </trans-unit>
       <trans-unit id="7877250793311378611" datatype="html">
         <source>Restart queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">108,109</context>
-        </context-group>
+        <target state="translated">Käynnistä jono uudelleen</target>
       </trans-unit>
       <trans-unit id="1994426929514890878" datatype="html">
         <source>Clear queue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
+        <target state="translated">Tyhjennä jono</target>
       </trans-unit>
       <trans-unit id="8395429101406970401" datatype="html">
         <source> Password ready </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
+        <target state="translated"> Salasana valmis </target>
       </trans-unit>
       <trans-unit id="264068562357780835" datatype="html">
         <source>New email</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">19,20</context>
-        </context-group>
+        <target state="translated">Uusi sähköpostiosoite</target>
       </trans-unit>
       <trans-unit id="666361990119890138" datatype="html">
         <source> New email is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
+        <target state="translated"> Uusi sähköpostiosoite vaaditaan </target>
       </trans-unit>
       <trans-unit id="7821811663801547376" datatype="html">
         <source> Invalid new email </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
+        <target state="translated"> Virheellinen uusi sähköpostiosoite </target>
       </trans-unit>
       <trans-unit id="202750919751535079" datatype="html">
         <source> New email OK </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
+        <target state="translated"> Uusi sähköpostiosoite OK </target>
       </trans-unit>
       <trans-unit id="5973258709136150113" datatype="html">
         <source>Request email change</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
+        <target state="translated">Pyydä sähköpostiosoitteen muutosta</target>
       </trans-unit>
       <trans-unit id="574622451354762468" datatype="html">
         <source>Cancel email change</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">40,41</context>
-        </context-group>
+        <target state="translated">Peruuta sähköpostiosoitteen muutos</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.html</context>
-          <context context-type="linenumber">41,42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">79,80</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">26,27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/confirm-dialog/confirm-dialog.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
+        <target state="translated">Peruuta</target>
       </trans-unit>
       <trans-unit id="3398522351675884140" datatype="html">
         <source>The new email is the same as the current one.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
+        <target state="translated">Uusi sähköpostiosoite on sama kuin nykyinen.</target>
       </trans-unit>
       <trans-unit id="1016381241990187139" datatype="html">
         <source>Email is already taken.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.ts</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
+        <target state="translated">Sähköpostiosoite on jo käytössä.</target>
       </trans-unit>
       <trans-unit id="8812975878675449820" datatype="html">
         <source>Email change failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-email-dialog/change-email-dialog.ts</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
+        <target state="translated">Sähköpostiosoitteen muutos epäonnistui</target>
       </trans-unit>
       <trans-unit id="5340498030552368470" datatype="html">
         <source>Current password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target state="translated">Nykyinen salasana</target>
       </trans-unit>
       <trans-unit id="143678524631328953" datatype="html">
         <source>Current password is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
+        <target state="translated">Nykyinen salasana vaaditaan</target>
       </trans-unit>
       <trans-unit id="4908140598909771718" datatype="html">
         <source> Current password ready </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
+        <target state="translated"> Nykyinen salasana valmis </target>
       </trans-unit>
       <trans-unit id="4696103774472791174" datatype="html">
         <source>Confirm password change</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">76,77</context>
-        </context-group>
+        <target state="translated">Vahvista salasanan vaihto</target>
       </trans-unit>
       <trans-unit id="5594617722028616526" datatype="html">
         <source>Cancel password change</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.html</context>
-          <context context-type="linenumber">78,79</context>
-        </context-group>
+        <target state="translated">Peruuta salasanan vaihto</target>
       </trans-unit>
       <trans-unit id="6505667961091725510" datatype="html">
         <source>Password change failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/change-password-dialog/change-password-dialog.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
+        <target state="translated">Salasanan vaihto epäonnistui</target>
       </trans-unit>
       <trans-unit id="345359488993880932" datatype="html">
         <source>Delete account?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
+        <target state="translated">Poistetaanko tili?</target>
       </trans-unit>
       <trans-unit id="805226041001218767" datatype="html">
         <source> Are you sure you want to permanently delete your account? All your data and information will be lost forever and cannot be recovered.
 </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">3,5</context>
-        </context-group>
+        <target state="translated"> Oletko varma, että haluat poistaa tilisi pysyvästi? Kaikki tietosi ja tietueesi menetetään lopullisesti, eikä niitä voida palauttaa.
+</target>
       </trans-unit>
       <trans-unit id="8576027502857970325" datatype="html">
         <source>Confirm account deletion</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">23,24</context>
-        </context-group>
+        <target state="translated">Vahvista tilin poistaminen</target>
       </trans-unit>
       <trans-unit id="5633178688280942024" datatype="html">
         <source>Cancel account deletion</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.html</context>
-          <context context-type="linenumber">25,26</context>
-        </context-group>
+        <target state="translated">Peruuta tilin poistaminen</target>
       </trans-unit>
       <trans-unit id="340721362726841609" datatype="html">
         <source>Deleting account failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/delete-account-dialog/delete-account-dialog.ts</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
+        <target state="translated">Tilin poistaminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="6993106617070148867" datatype="html">
         <source>Email already taken</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
+        <target state="translated">Sähköpostiosoite on jo käytössä</target>
       </trans-unit>
       <trans-unit id="6954020330003586198" datatype="html">
         <source>The email you are trying to register with is already taken. If you have lost access to your account, please use the forgot password functionality.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Sähköpostiosoite, jolla yrität rekisteröityä, on jo käytössä. Jos olet menettänyt tilisi käyttöoikeuden, käytä unohdin salasanan -toimintoa.</target>
       </trans-unit>
       <trans-unit id="1112525418959962254" datatype="html">
         <source>Cancel registration</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
+        <target state="translated">Peruuta rekisteröityminen</target>
       </trans-unit>
       <trans-unit id="1463716403066266718" datatype="html">
         <source>Email not confirmed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
+        <target state="translated">Sähköpostia ei ole vahvistettu</target>
       </trans-unit>
       <trans-unit id="3873810076897380668" datatype="html">
         <source>Please confirm your email address by clicking the link in the email we&apos;ve sent you. If you haven&apos;t received the confirmation email, check your spam folder or request a new one.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Ole hyvä ja vahvista sähköpostiosoitteesi klikkaamalla linkkiä sähköpostissa, jonka olemme lähettäneet sinulle. Jos et ole saanut vahvistussähköpostia, tarkista roskapostikansiosi tai pyydä uusi linkki.</target>
       </trans-unit>
       <trans-unit id="377175857060238077" datatype="html">
         <source>Resend confirmation link</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.html</context>
-          <context context-type="linenumber">5,6</context>
-        </context-group>
+        <target state="translated">Lähetä vahvistuslinkki uudelleen</target>
       </trans-unit>
       <trans-unit id="15358667606271745" datatype="html">
         <source>Resend link</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target state="translated">Lähetä linkki uudelleen</target>
       </trans-unit>
       <trans-unit id="4206213852795546087" datatype="html">
         <source>Close without resending</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
+        <target state="translated">Sulje lähettämättä uudelleen</target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/toaster/toaster.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
+        <target state="translated">Sulje</target>
       </trans-unit>
       <trans-unit id="88688153290257784" datatype="html">
         <source>Confirmation email resent!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.ts</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
+        <target state="translated">Vahvistussähköposti lähetetty uudelleen!</target>
       </trans-unit>
       <trans-unit id="4801097390610329915" datatype="html">
         <source>Confirmation email resending failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/resend-change-email-dialog/resend-change-email-dialog.ts</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
+        <target state="translated">Vahvistussähköpostin uudelleenlähetys epäonnistui</target>
       </trans-unit>
       <trans-unit id="5901078222799889987" datatype="html">
         <source>Select Role</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/role-selector-dialog/role-selector-dialog.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
+        <target state="translated">Valitse rooli</target>
       </trans-unit>
       <trans-unit id="1417773337941503568" datatype="html">
         <source>Failed to load roles</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/role-selector-dialog/role-selector-dialog.ts</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
+        <target state="translated">Roolien lataaminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="1013644080577479556" datatype="html">
         <source>Roles (<x id="INTERPOLATION" equiv-text="{{rolePagedResult()?.totalCount}}"/>)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
+        <target state="translated">Roolit (<x id="INTERPOLATION" equiv-text="{{rolePagedResult()?.totalCount}}"/>)</target>
       </trans-unit>
       <trans-unit id="3625859417927520024" datatype="html">
         <source>id</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
+        <target state="translated">id</target>
       </trans-unit>
       <trans-unit id="3325180562659478330" datatype="html">
         <source>name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">10,12</context>
-        </context-group>
+        <target state="translated">nimi</target>
       </trans-unit>
       <trans-unit id="4573672792356781465" datatype="html">
         <source>Update Role</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">21,22</context>
-        </context-group>
+        <target state="translated">Päivitä rooli</target>
       </trans-unit>
       <trans-unit id="2021937620675173723" datatype="html">
         <source>Delete Role</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">25,26</context>
-        </context-group>
+        <target state="translated">Poista rooli</target>
       </trans-unit>
       <trans-unit id="7931300809730964362" datatype="html">
         <source>Create Role</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
+        <target state="translated">Luo rooli</target>
       </trans-unit>
       <trans-unit id="4108203751127770450" datatype="html">
         <source>Role deleted</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.ts</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
+        <target state="translated">Rooli poistettu</target>
       </trans-unit>
       <trans-unit id="2552246191591264197" datatype="html">
         <source>Role deleting failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/roles-table-paged/roles-table-paged.ts</context>
-          <context context-type="linenumber">167</context>
-        </context-group>
+        <target state="translated">Roolin poistaminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="7315714079098881460" datatype="html">
         <source>email</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
+        <target state="translated">sähköposti</target>
       </trans-unit>
       <trans-unit id="366439089818916916" datatype="html">
         <source>email confirmed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
+        <target state="translated">sähköposti vahvistettu</target>
       </trans-unit>
       <trans-unit id="6020357970867883938" datatype="html">
         <source>Update User</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">30,31</context>
-        </context-group>
+        <target state="translated">Päivitä käyttäjä</target>
       </trans-unit>
       <trans-unit id="4839682406703705780" datatype="html">
         <source>Delete User</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">159</context>
-        </context-group>
+        <target state="translated">Poista käyttäjä</target>
       </trans-unit>
       <trans-unit id="5891941941917080206" datatype="html">
         <source>Create User</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.html</context>
-          <context context-type="linenumber">43,44</context>
-        </context-group>
+        <target state="translated">Luo käyttäjä</target>
       </trans-unit>
       <trans-unit id="7515883357904500238" datatype="html">
         <source>Are you sure?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
+        <target state="translated">Oletko varma?</target>
       </trans-unit>
       <trans-unit id="4430279976796477709" datatype="html">
         <source>User deleted</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">166</context>
-        </context-group>
+        <target state="translated">Käyttäjä poistettu</target>
       </trans-unit>
       <trans-unit id="5791808460861105079" datatype="html">
         <source>User deleting failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">173</context>
-        </context-group>
+        <target state="translated">Käyttäjän poistaminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="1775708421448026277" datatype="html">
         <source>Start forgot password process?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">182</context>
-        </context-group>
+        <target state="translated">Aloitetaanko salasanan palautusprosessi?</target>
       </trans-unit>
       <trans-unit id="5053460342620435085" datatype="html">
         <source>User forgot password started</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">191</context>
-        </context-group>
+        <target state="translated">Käyttäjän salasanan palautus aloitettu</target>
       </trans-unit>
       <trans-unit id="7711917666704434769" datatype="html">
         <source>User forgot password failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/users-table-paged/users-table-paged.ts</context>
-          <context context-type="linenumber">195</context>
-        </context-group>
+        <target state="translated">Käyttäjän salasanan palautus epäonnistui</target>
       </trans-unit>
       <trans-unit id="5515912742104872108" datatype="html">
         <source>Go to Book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/book-item/book-item.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
+        <target state="translated">Siirry kirjaan</target>
       </trans-unit>
       <trans-unit id="3052062240425252864" datatype="html">
         <source>Failed to load Books.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/books-paged/books-paged.html</context>
-          <context context-type="linenumber">9,11</context>
-        </context-group>
+        <target state="translated">Kirjojen lataaminen epäonnistui.</target>
       </trans-unit>
       <trans-unit id="143922378743673809" datatype="html">
         <source>There are no Books here.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/books-paged/books-paged.html</context>
-          <context context-type="linenumber">13,15</context>
-        </context-group>
+        <target state="translated">Täällä ei ole kirjoja.</target>
       </trans-unit>
       <trans-unit id="2056252214059701212" datatype="html">
         <source>Select Creator</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/creator-selector-dialog/creator-selector-dialog.html</context>
-          <context context-type="linenumber">1,3</context>
-        </context-group>
+        <target state="translated">Valitse tekijä</target>
       </trans-unit>
       <trans-unit id="5584894144965270876" datatype="html">
         <source>Failed to load creators</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/creator-selector-dialog/creator-selector-dialog.ts</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5141025750782803271" datatype="html">
-        <source>Current chapter</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6221215027161505376" datatype="html">
-        <source>Go to previous page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3629960544875360046" datatype="html">
-        <source>Previous page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5430045444410376992" datatype="html">
-        <source>Go to next page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3337301694210287595" datatype="html">
-        <source>Next page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">30,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
+        <target state="translated">Tekijöiden lataaminen epäonnistui</target>
       </trans-unit>
       <trans-unit id="3525650019123992199" datatype="html">
         <source>Error loading file</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/epub-reader/epub-reader.component.html</context>
-          <context context-type="linenumber">46,47</context>
-        </context-group>
+        <target state="translated">Virhe tiedoston lataamisessa</target>
+      </trans-unit>
+      <trans-unit id="5141025750782803271" datatype="html">
+        <source>Current chapter</source>
+        <target state="translated">Nykyinen luku</target>
+      </trans-unit>
+      <trans-unit id="6221215027161505376" datatype="html">
+        <source>Go to previous page</source>
+        <target state="translated">Siirry edelliselle sivulle</target>
+      </trans-unit>
+      <trans-unit id="3629960544875360046" datatype="html">
+        <source>Previous page</source>
+        <target state="translated">Edellinen sivu</target>
+      </trans-unit>
+      <trans-unit id="5430045444410376992" datatype="html">
+        <source>Go to next page</source>
+        <target state="translated">Siirry seuraavalle sivulle</target>
+      </trans-unit>
+      <trans-unit id="3337301694210287595" datatype="html">
+        <source>Next page</source>
+        <target state="translated">Seuraava sivu</target>
       </trans-unit>
       <trans-unit id="6851459189738911638" datatype="html">
         <source>Change theme</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">18,19</context>
-        </context-group>
+        <target state="translated">Vaihda teema</target>
       </trans-unit>
       <trans-unit id="6214609638529256016" datatype="html">
         <source>Change font size</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">26,27</context>
-        </context-group>
+        <target state="translated">Vaihda fonttikokoa</target>
       </trans-unit>
       <trans-unit id="4142068363096454927" datatype="html">
         <source>Collapse book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
+        <target state="translated">Pienennä kirja</target>
       </trans-unit>
       <trans-unit id="9114998857615529624" datatype="html">
         <source>Remove book from view</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">33,34</context>
-        </context-group>
+        <target state="translated">Poista kirja näkymästä</target>
       </trans-unit>
       <trans-unit id="3419681791450150574" datatype="html">
         <source>Progress</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
+        <target state="translated">Edistyminen</target>
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">13,14</context>
-        </context-group>
+        <target state="translated">Kirjaudu sisään</target>
       </trans-unit>
       <trans-unit id="8983306299153846900" datatype="html">
         <source>Go to User Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
+        <target state="translated">Siirry käyttäjäprofiiliin</target>
       </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
+        <target state="translated">Siirry kirjoihin</target>
       </trans-unit>
       <trans-unit id="5928143073449378176" datatype="html">
         <source>Go to Podcasts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
+        <target state="translated">Siirry podcasteihin</target>
       </trans-unit>
       <trans-unit id="1134471344072681599" datatype="html">
         <source>Go to My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
+        <target state="translated">Siirry omaan kirjastoon</target>
       </trans-unit>
       <trans-unit id="1766402655822050116" datatype="html">
         <source>Go to Edit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">47,48</context>
-        </context-group>
+        <target state="translated">Siirry muokkaamaan</target>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
         <source>Search</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
+        <target state="translated">Hae</target>
       </trans-unit>
       <trans-unit id="8845008155590279280" datatype="html">
         <source>Search for Audio Books or Podcasts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">55,56</context>
-        </context-group>
+        <target state="translated">Hae äänikirjoja tai podcasteja</target>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
         <source>Previous slide</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/image-slider/image-slider.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
+        <target state="translated">Edellinen dia</target>
       </trans-unit>
       <trans-unit id="6930162363603699164" datatype="html">
         <source>Next slide</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/image-slider/image-slider.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
+        <target state="translated">Seuraava dia</target>
       </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/log-dialog/log-dialog.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/log-dialog/log-dialog.html</context>
-          <context context-type="linenumber">5,6</context>
-        </context-group>
+        <target state="translated">Ok</target>
       </trans-unit>
       <trans-unit id="6595008830732269870" datatype="html">
         <source>Not found</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
+        <target state="translated">Ei löytynyt</target>
       </trans-unit>
       <trans-unit id="7580974179112857817" datatype="html">
         <source>Element not found or not available Offline. Please try reloading the page or go back.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
+        <target state="translated">Elementtiä ei löytynyt tai se ei ole käytettävissä offline-tilassa. Yritä ladata sivu uudelleen tai siirry takaisin.</target>
       </trans-unit>
       <trans-unit id="6638867697461834046" datatype="html">
         <source>Reload current page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
+        <target state="translated">Lataa nykyinen sivu uudelleen</target>
       </trans-unit>
       <trans-unit id="7967484035994732534" datatype="html">
         <source>Reload</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
-          <context context-type="linenumber">6,7</context>
-        </context-group>
+        <target state="translated">Lataa uudelleen</target>
       </trans-unit>
       <trans-unit id="5952616973440161474" datatype="html">
         <source>Go back to previous page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
+        <target state="translated">Palaa edelliselle sivulle</target>
       </trans-unit>
       <trans-unit id="734934965373819800" datatype="html">
         <source>Go back</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/not-found/not-found.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
+        <target state="translated">Palaa takaisin</target>
       </trans-unit>
       <trans-unit id="8642445555713453888" datatype="html">
         <source>First page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
+        <target state="translated">Ensimmäinen sivu</target>
       </trans-unit>
       <trans-unit id="6784758141439994527" datatype="html">
         <source>Last page</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
-          <context context-type="linenumber">42,43</context>
-        </context-group>
+        <target state="translated">Viimeinen sivu</target>
       </trans-unit>
       <trans-unit id="4648768103414783027" datatype="html">
         <source>Go to Podcast</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-item/podcast-item.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
+        <target state="translated">Siirry podcastiin</target>
       </trans-unit>
       <trans-unit id="5662402565851233667" datatype="html">
         <source>Go to Podcast Episode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcast-episode-item/podcast-episode-item.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
+        <target state="translated">Siirry podcast-jaksoon</target>
       </trans-unit>
       <trans-unit id="1078057494557998336" datatype="html">
         <source>Failed to load Podcasts.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcasts-paged/podcasts-paged.html</context>
-          <context context-type="linenumber">9,11</context>
-        </context-group>
+        <target state="translated">Podcastien lataaminen epäonnistui.</target>
       </trans-unit>
       <trans-unit id="3293160871090859129" datatype="html">
         <source>There are no Podcasts here.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/podcasts-paged/podcasts-paged.html</context>
-          <context context-type="linenumber">13,15</context>
-        </context-group>
+        <target state="translated">Täällä ei ole podcasteja.</target>
       </trans-unit>
     </body>
   </file>
