@@ -10,7 +10,7 @@
         [class.sm:py-4]="isOpen()">
         <div class="flex justify-between items-center w-full gap-4 max-sm:px-4">
             <div class="flex flex-grow items-center gap-1">
-                <button i18n-title class="icon-button" title="Change theme" (click)="toggleThemeInput()">
+                <button i18n-title type="button" class="icon-button" title="Change theme" (click)="toggleThemeInput()">
                     <fa-icon [icon]="faCircleHalfStroke" />
                 </button>
                 <div class="slider-container" [class.open]="themeInputOpen()">
@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="flex gap-2">
-                <button i18n-title class="icon-button" title="Collapse book" (click)="isOpen.set(false)">
+                <button i18n-title type="button" class="icon-button" title="Collapse book" (click)="isOpen.set(false)">
                     <fa-icon [icon]="faChevronDown" />
                 </button>
-                <button i18n-title class="icon-button" title="Remove book from view"
+                <button i18n-title type="button" class="icon-button" title="Remove book from view"
                     (click)="fileBookReaderService.destroyReader()">
                     <fa-icon [icon]="faClose" />
                 </button>
@@ -55,7 +55,7 @@
 
     <div class="toolbar-expand overflow-hidden flex justify-between items-center w-full gap-2 px-4 sm:px-8"
         [class.toolbar-expand-enter]="!isOpen()" [class.toolbar-expand-leave]="isOpen()">
-        <button class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
+        <button i18n-title type="button" title="Open book" class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
             [class.text-error]="fileBookReaderService.isError()" (click)="isOpen.set(true)">
             <div class="flex items-center gap-2">
                 <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"

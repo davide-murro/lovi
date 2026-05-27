@@ -17,6 +17,12 @@ export class AudioPlayer {
   audioPlayerService = inject(AudioPlayerService);
   toasterService = inject(ToasterService);
 
+  playPauseTitle = computed(() =>
+    this.audioPlayerService.isPlaying()
+      ? $localize`Pause`
+      : $localize`Play`
+  );
+
   faPlay = faPlay;
   faPause = faPause;
   faBackward = faBackward;

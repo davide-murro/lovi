@@ -2,6 +2,209 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="7029112137368589864" datatype="html">
+        <source>LOVI - Home Page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4736391636773037252" datatype="html">
+        <source>LOVI - Log In</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2365499832044067149" datatype="html">
+        <source>LOVI - Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6263445891724602521" datatype="html">
+        <source>LOVI - Confirm Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="642556939940483667" datatype="html">
+        <source>LOVI - Forgot Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="303133737209619060" datatype="html">
+        <source>LOVI - Confirm Change Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="681131099294405893" datatype="html">
+        <source>LOVI - User Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3460295334451200097" datatype="html">
+        <source>LOVI - Books</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2291130530339881770" datatype="html">
+        <source>LOVI - Book Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7677362561017412004" datatype="html">
+        <source>LOVI - Podcasts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1973429448793981429" datatype="html">
+        <source>LOVI - Podcast Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3065709909510170840" datatype="html">
+        <source>LOVI - Podcast Episode Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4302153786351316067" datatype="html">
+        <source>LOVI - My Library</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8688732477546781200" datatype="html">
+        <source>LOVI - My Offline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6711050935402648633" datatype="html">
+        <source>LOVI - Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2339523302730872050" datatype="html">
+        <source>LOVI - Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3538469491854695183" datatype="html">
+        <source>LOVI - Create Book</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5348152534172993813" datatype="html">
+        <source>LOVI - Edit Book</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1155510569269671046" datatype="html">
+        <source>LOVI - Create Podcast</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7608358822679287826" datatype="html">
+        <source>LOVI - Edit Podcast</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">183</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3344250448878683567" datatype="html">
+        <source>LOVI - Create Podcast Episode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7861175469300529292" datatype="html">
+        <source>LOVI - Edit Podcast Episode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">205</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2375426648217633736" datatype="html">
+        <source>LOVI - Create Creator</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">216</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5295489912123221290" datatype="html">
+        <source>LOVI - Edit Creator</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">223</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4401170756319463202" datatype="html">
+        <source>LOVI - Create User</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">233</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5288205505031358868" datatype="html">
+        <source>LOVI - Edit User</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">240</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5416006971659220203" datatype="html">
+        <source>LOVI - Create Role</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">250</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4342453526296597327" datatype="html">
+        <source>LOVI - Edit Role</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">257</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="539423531134515766" datatype="html">
+        <source>LOVI - Not Found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">268</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
         <context-group purpose="location">
@@ -874,57 +1077,6 @@
           <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="187187500641108332" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ isInMyLibrary() ? &apos;Remove from My Library&apos; : &apos;Add to My Library&apos; }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
-          <context context-type="linenumber">32,33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">112</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/auth/password-input/password-input.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3894950702316166331" datatype="html">
         <source>Loading...</source>
         <context-group purpose="location">
@@ -990,12 +1142,24 @@
           <context context-type="linenumber">29,30</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
           <context context-type="linenumber">27,28</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
           <context context-type="linenumber">54,55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5775367540823387927" datatype="html">
@@ -1020,12 +1184,20 @@
           <context context-type="linenumber">44,45</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.html</context>
           <context context-type="linenumber">42,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.html</context>
           <context context-type="linenumber">69,70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8735002280298695855" datatype="html">
@@ -1074,52 +1246,93 @@
           <context context-type="linenumber">85,86</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7649914623897629491" datatype="html">
+        <source>Remove from My Library</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="604078894783867661" datatype="html">
+        <source>Remove from Offline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9042260521669277115" datatype="html">
+        <source>Pause</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8564202903947049539" datatype="html">
+        <source>Play</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1819234562086037358" datatype="html">
         <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; added to queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1231146175672033150" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">116</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
           <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1231146175672033150" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to My Library</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8899308234896079004" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to My Library failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">120</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">88</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">127</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="685162272484789324" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from My Library</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
@@ -1127,133 +1340,148 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="685162272484789324" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from My Library</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5916720668975049399" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removing from My Library failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">152</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">104</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5899015855537302262" datatype="html">
-        <source>Download Book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">149</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2306373362517662855" datatype="html">
-        <source>Are you sure you want to download &quot;<x id="PH" equiv-text="book.name"/>&quot;? It will take some time depending on your internet connection.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">150</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">158</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6721414725131339985" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; downloading...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">153</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
           <context context-type="linenumber">161</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="748814568807539723" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to Offline</source>
+      <trans-unit id="5899015855537302262" datatype="html">
+        <source>Download Book</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">166</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="2306373362517662855" datatype="html">
+        <source>Are you sure you want to download &quot;<x id="PH" equiv-text="book.name"/>&quot;? It will take some time depending on your internet connection.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4120689825129770649" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to Offline failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">129</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">168</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8963173117497328406" datatype="html">
-        <source>Remove Book</source>
+      <trans-unit id="6721414725131339985" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; downloading...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
           <context context-type="linenumber">170</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="7480048592142868941" datatype="html">
-        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="book.name"/>&quot; from Offline?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
           <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="748814568807539723" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to Offline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">173</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4120689825129770649" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to Offline failed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">177</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">186</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8963173117497328406" datatype="html">
+        <source>Remove Book</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7480048592142868941" datatype="html">
+        <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="book.name"/>&quot; from Offline?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
+          <context context-type="linenumber">188</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
+          <context context-type="linenumber">197</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7048451914816791904" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from Offline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">193</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2500703953933430930" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removing from Offline failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/books/book-details/book-details.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">197</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">161</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2821179408673282599" datatype="html">
@@ -1437,23 +1665,37 @@
           <context context-type="linenumber">19,20</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8843894152555664249" datatype="html">
+        <source>Remove all Episodes from Offline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8119973018100427245" datatype="html">
+        <source>Download all Episodes for Offline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4599451746885063295" datatype="html">
         <source>Ep. <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.ts</context>
@@ -1464,11 +1706,11 @@
         <source>&quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; episodes added to queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/podcast-details-item/podcast-details-item.ts</context>
@@ -1479,28 +1721,28 @@
         <source>Download Podcast</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4376605035914527228" datatype="html">
         <source>Are you sure you want to download &quot;<x id="PH" equiv-text="podcast.name"/>&quot;? It will take a lot of space and time depending on your internet connection.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1666916685991188522" datatype="html">
         <source>Remove Podcast</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3938410096344984343" datatype="html">
         <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="podcast.name"/>&quot; from Offline? All the episodes will be removed.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-details.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6147484957227591088" datatype="html">
@@ -1567,14 +1809,14 @@
         <source>Download Podcast Episode</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4292453927845120930" datatype="html">
         <source>Remove Podcast Episode</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details.ts</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8433689360468945357" datatype="html">
@@ -1783,6 +2025,13 @@
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2111616642612603820" datatype="html">
+        <source>Play track</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5920423366277975759" datatype="html">
         <source>Move in queue</source>
         <context-group purpose="location">
@@ -1802,6 +2051,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
           <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7485182386135797326" datatype="html">
+        <source>Open queue</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1083264326477451541" datatype="html">
@@ -2037,6 +2293,20 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/email-already-taken-dialog/email-already-taken-dialog.html</context>
           <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1446670643492611810" datatype="html">
+        <source>Hide password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/password-input/password-input.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5554528553553249088" datatype="html">
+        <source>Show password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/auth/password-input/password-input.ts</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1463716403066266718" datatype="html">
@@ -2394,6 +2664,13 @@
           <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2722159711136769635" datatype="html">
+        <source>Open book</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
         <context-group purpose="location">
@@ -2452,6 +2729,20 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
           <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1556270137829928334" datatype="html">
+        <source>Close menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2005818722469409502" datatype="html">
+        <source>Open menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.ts</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
@@ -2533,6 +2824,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
           <context context-type="linenumber">42,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4501475847356105242" datatype="html">
+        <source>Page <x id="PH" equiv-text="p"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/pagination/pagination.ts</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4648768103414783027" datatype="html">

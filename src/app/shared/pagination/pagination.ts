@@ -18,6 +18,8 @@ export class Pagination {
   // reactive output
   pageChange = output<number>();
 
+  pageTitle = (p: number) => $localize`Page ${p}`;
+
   faAngleRight = faAngleRight;
   faAnglesRight = faAnglesRight;
   faAngleLeft = faAngleLeft;

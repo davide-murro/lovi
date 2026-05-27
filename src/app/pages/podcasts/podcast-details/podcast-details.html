@@ -13,8 +13,8 @@
 <div class="title flex justify-between items-start gap-2">
   <h1 class="flex-1">{{ podcast().name }}</h1>
 
-  <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-    [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'" [disabled]="isMyLibraryLoading()"
+  <button *appAuth type="button" class="button button-accent shrink-0 gap-2"
+    [title]="myLibraryTitle()" [disabled]="isMyLibraryLoading()"
     (click)="toggleMyLibrary()">
     @if(isMyLibraryLoading()) {
     <fa-icon [icon]="faCircleNotch" class="animate-spin" />
@@ -28,8 +28,8 @@
     }
   </button>
 
-  <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-    [title]="isOffline() ? 'Remove all Episodes from Offline' : 'Download all Episodes for Offline'"
+  <button *appAuth type="button" class="button button-accent shrink-0 gap-2"
+    [title]="offlineTitle()"
     [disabled]="isOfflineLoading()" (click)="toggleOffline()">
     @if(isOfflineLoading()) {
     <fa-icon [icon]="faCircleNotch" animation="spin" />

@@ -17,8 +17,8 @@
             <fa-icon [icon]="faUser" />
         </a>
 
-        <button i18n-title type="button" class="icon-button sm:!hidden"
-            [title]="menuMobileOpen() ? 'Close menu' : 'Open menu'" (click)="menuMobileOpen.set(!menuMobileOpen())">
+        <button type="button" class="icon-button sm:!hidden"
+            [title]="menuMobileTitle()" (click)="menuMobileOpen.set(!menuMobileOpen())">
             @if (menuMobileOpen()) {
             <fa-icon [icon]="faClose" />
             } @else {
@@ -52,7 +52,7 @@
             <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="flex items-center relative max-w-full">
                 <input i18n-placeholder type="search" formControlName="search" id="search" class="input !pr-15"
                     placeholder="Search" autocomplete="on" />
-                <button i18n-title type="submit" title="Search for Audio Books or Podcasts"
+                <button i18n-title type="submit" title="Search for Books or Podcasts"
                     class="input-button absolute right-0" [disabled]="!searchForm.valid">
                     <fa-icon [icon]="faMagnifyingGlass" />
                 </button>

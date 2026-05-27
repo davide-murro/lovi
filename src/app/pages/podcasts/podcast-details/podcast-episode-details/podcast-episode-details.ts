@@ -28,6 +28,24 @@ export class PodcastEpisodeDetails {
   private librariesService = inject(LibrariesService);
   private offlineService = inject(OfflineService);
 
+  myLibraryTitle = computed(() =>
+    this.isInMyLibrary()
+      ? $localize`Remove from My Library`
+      : $localize`Add to My Library`
+  );
+
+  offlineTitle = computed(() =>
+    this.isOffline()
+      ? $localize`Remove from Offline`
+      : $localize`Download Offline`
+  );
+
+  playPauseTitle = computed(() =>
+    this.isCurrentTrackPlaying()
+      ? $localize`Pause`
+      : $localize`Play`
+  );
+
   faPlay = faPlay;
   faPause = faPause;
   faList = faList;

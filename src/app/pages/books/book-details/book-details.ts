@@ -30,6 +30,23 @@ export class BookDetails {
   private offlineService = inject(OfflineService);
   private fileBookReaderService = inject(FileBookReaderService);
 
+  // i18n title properties for template
+  myLibraryTitle = computed(() =>
+    this.isInMyLibrary()
+      ? $localize`Remove from My Library`
+      : $localize`Add to My Library`
+  );
+  offlineTitle = computed(() =>
+    this.isOffline()
+      ? $localize`Remove from Offline`
+      : $localize`Download Offline`
+  );
+  currentTrackTitle = computed(() =>
+    this.isCurrentTrackPlaying()
+      ? $localize`Pause`
+      : $localize`Play`
+  );
+
   faPlay = faPlay;
   faPause = faPause;
   faList = faList;

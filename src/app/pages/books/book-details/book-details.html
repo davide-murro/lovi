@@ -15,8 +15,8 @@
     <div class="title flex justify-between items-start gap-2">
       <h1 class="flex-1">{{ book().name }}</h1>
 
-      <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-        [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'" [disabled]="isMyLibraryLoading()"
+      <button *appAuth type="button" class="button button-accent shrink-0 gap-2"
+        [title]="myLibraryTitle()" [disabled]="isMyLibraryLoading()"
         (click)="toggleMyLibrary()">
         @if(isMyLibraryLoading()) {
         <fa-icon [icon]="faCircleNotch" class="animate-spin" />
@@ -30,8 +30,8 @@
         }
       </button>
 
-      <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-        [title]="isOffline() ? 'Remove from Offline' : 'Download Offline'" [disabled]="isOfflineLoading()"
+      <button *appAuth type="button" class="button button-accent shrink-0 gap-2"
+        [title]="offlineTitle()" [disabled]="isOfflineLoading()"
         (click)="toggleOffline()">
         @if(isOfflineLoading()) {
         <fa-icon [icon]="faCircleNotch" animation="spin" />
@@ -55,8 +55,8 @@
     </p>
 
     <div class="section flex flex-1 gap-4 flex-wrap items-center justify-start">
-      <button i18n-title type="button" class="icon-button button-primary button-xl"
-        [title]="isCurrentTrackPlaying() ? 'Pause' : 'Play'" [disabled]="isCurrentTrackLoading()"
+      <button type="button" class="icon-button button-primary button-xl"
+        [title]="currentTrackTitle()" [disabled]="isCurrentTrackLoading()"
         (click)="togglePlay()">
         @if(isCurrentTrackLoading()) { <fa-icon [icon]="faCircleNotch" animation="spin" />
         } @else if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />

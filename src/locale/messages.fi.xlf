@@ -2,6 +2,122 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="7029112137368589864" datatype="html">
+        <source>LOVI - Home Page</source>
+        <target>LOVI - Kotisivu</target>
+      </trans-unit>
+      <trans-unit id="4736391636773037252" datatype="html">
+        <source>LOVI - Log In</source>
+        <target>LOVI - Kirjaudu sisään</target>
+      </trans-unit>
+      <trans-unit id="2365499832044067149" datatype="html">
+        <source>LOVI - Register</source>
+        <target>LOVI - Rekisteröidy</target>
+      </trans-unit>
+      <trans-unit id="6263445891724602521" datatype="html">
+        <source>LOVI - Confirm Email</source>
+        <target>LOVI - Vahvista sähköpostiosoite</target>
+      </trans-unit>
+      <trans-unit id="642556939940483667" datatype="html">
+        <source>LOVI - Forgot Password</source>
+        <target>LOVI - Unohditko salasanan</target>
+      </trans-unit>
+      <trans-unit id="303133737209619060" datatype="html">
+        <source>LOVI - Confirm Change Email</source>
+        <target>LOVI - Vahvista sähköpostiosoitteen muutos</target>
+      </trans-unit>
+      <trans-unit id="681131099294405893" datatype="html">
+        <source>LOVI - User Profile</source>
+        <target>LOVI - Käyttäjäprofiili</target>
+      </trans-unit>
+      <trans-unit id="3460295334451200097" datatype="html">
+        <source>LOVI - Books</source>
+        <target>LOVI - Kirjat</target>
+      </trans-unit>
+      <trans-unit id="2291130530339881770" datatype="html">
+        <source>LOVI - Book Details</source>
+        <target>LOVI - Kirjan tiedot</target>
+      </trans-unit>
+      <trans-unit id="7677362561017412004" datatype="html">
+        <source>LOVI - Podcasts</source>
+        <target>LOVI - Podcast</target>
+      </trans-unit>
+      <trans-unit id="1973429448793981429" datatype="html">
+        <source>LOVI - Podcast Details</source>
+        <target>LOVI - Podcastin tiedot</target>
+      </trans-unit>
+      <trans-unit id="3065709909510170840" datatype="html">
+        <source>LOVI - Podcast Episode Details</source>
+        <target>LOVI - Podcastin jaksotiedot</target>
+      </trans-unit>
+      <trans-unit id="4302153786351316067" datatype="html">
+        <source>LOVI - My Library</source>
+        <target>LOVI - Oma kirjasto</target>
+      </trans-unit>
+      <trans-unit id="8688732477546781200" datatype="html">
+        <source>LOVI - My Offline</source>
+        <target>LOVI - Oma offline</target>
+      </trans-unit>
+      <trans-unit id="6711050935402648633" datatype="html">
+        <source>LOVI - Search</source>
+        <target>LOVI - Haku</target>
+      </trans-unit>
+      <trans-unit id="2339523302730872050" datatype="html">
+        <source>LOVI - Edit</source>
+        <target>LOVI - Muokkaa</target>
+      </trans-unit>
+      <trans-unit id="3538469491854695183" datatype="html">
+        <source>LOVI - Create Book</source>
+        <target>LOVI - Luo kirja</target>
+      </trans-unit>
+      <trans-unit id="5348152534172993813" datatype="html">
+        <source>LOVI - Edit Book</source>
+        <target>LOVI - Muokkaa kirjaa</target>
+      </trans-unit>
+      <trans-unit id="1155510569269671046" datatype="html">
+        <source>LOVI - Create Podcast</source>
+        <target>LOVI - Luo podcast</target>
+      </trans-unit>
+      <trans-unit id="7608358822679287826" datatype="html">
+        <source>LOVI - Edit Podcast</source>
+        <target>LOVI - Muokkaa podcastia</target>
+      </trans-unit>
+      <trans-unit id="3344250448878683567" datatype="html">
+        <source>LOVI - Create Podcast Episode</source>
+        <target>LOVI - Luo podcastin jakso</target>
+      </trans-unit>
+      <trans-unit id="7861175469300529292" datatype="html">
+        <source>LOVI - Edit Podcast Episode</source>
+        <target>LOVI - Muokkaa podcastin jaksoa</target>
+      </trans-unit>
+      <trans-unit id="2375426648217633736" datatype="html">
+        <source>LOVI - Create Creator</source>
+        <target>LOVI - Luo luojan</target>
+      </trans-unit>
+      <trans-unit id="5295489912123221290" datatype="html">
+        <source>LOVI - Edit Creator</source>
+        <target>LOVI - Muokkaa luojan</target>
+      </trans-unit>
+      <trans-unit id="4401170756319463202" datatype="html">
+        <source>LOVI - Create User</source>
+        <target>LOVI - Luo käyttäjä</target>
+      </trans-unit>
+      <trans-unit id="5288205505031358868" datatype="html">
+        <source>LOVI - Edit User</source>
+        <target>LOVI - Muokkaa käyttäjää</target>
+      </trans-unit>
+      <trans-unit id="5416006971659220203" datatype="html">
+        <source>LOVI - Create Role</source>
+        <target>LOVI - Luo rooli</target>
+      </trans-unit>
+      <trans-unit id="4342453526296597327" datatype="html">
+        <source>LOVI - Edit Role</source>
+        <target>LOVI - Muokkaa roolia</target>
+      </trans-unit>
+      <trans-unit id="539423531134515766" datatype="html">
+        <source>LOVI - Not Found</source>
+        <target>LOVI - Ei löydy</target>
+      </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
         <target>Vahvista sähköpostiosoitteen muutos</target>
@@ -366,10 +482,6 @@
         <source>Books</source>
         <target state="translated">Kirjat</target>
       </trans-unit>
-      <trans-unit id="187187500641108332" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ isInMyLibrary() ? &apos;Remove from My Library&apos; : &apos;Add to My Library&apos; }}"/></source>
-        <target state="translated"><x id="INTERPOLATION" equiv-text="{{ isInMyLibrary() ? &apos;Remove from My Library&apos; : &apos;Add to My Library&apos; }}"/></target>
-      </trans-unit>
       <trans-unit id="3894950702316166331" datatype="html">
         <source>Loading...</source>
         <target state="translated">Ladataan...</target>
@@ -413,6 +525,22 @@
       <trans-unit id="2327592562693301723" datatype="html">
         <source>Read</source>
         <target state="translated">Lue</target>
+      </trans-unit>
+      <trans-unit id="7649914623897629491" datatype="html">
+        <source>Remove from My Library</source>
+        <target state="translated">Poista omasta kirjastosta</target>
+      </trans-unit>
+      <trans-unit id="604078894783867661" datatype="html">
+        <source>Remove from Offline</source>
+        <target state="translated">Poista offline-tilasta</target>
+      </trans-unit>
+      <trans-unit id="9042260521669277115" datatype="html">
+        <source>Pause</source>
+        <target state="translated">Tauko</target>
+      </trans-unit>
+      <trans-unit id="8564202903947049539" datatype="html">
+        <source>Play</source>
+        <target state="translated">Toista</target>
       </trans-unit>
       <trans-unit id="1819234562086037358" datatype="html">
         <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; added to queue</source>
@@ -551,6 +679,14 @@
       <trans-unit id="8426557733791187636" datatype="html">
         <source>Play all</source>
         <target state="translated">Toista kaikki</target>
+      </trans-unit>
+      <trans-unit id="8843894152555664249" datatype="html">
+        <source>Remove all Episodes from Offline</source>
+        <target state="translated">Poista kaikki jaksot offline-tilasta</target>
+      </trans-unit>
+      <trans-unit id="8119973018100427245" datatype="html">
+        <source>Download all Episodes for Offline</source>
+        <target state="translated">Lataa kaikki jaksot offline-tilaan</target>
       </trans-unit>
       <trans-unit id="4599451746885063295" datatype="html">
         <source>Ep. <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></source>
@@ -720,6 +856,10 @@
         <source>Close queue</source>
         <target state="translated">Sulje jono</target>
       </trans-unit>
+      <trans-unit id="2111616642612603820" datatype="html">
+        <source>Play track</source>
+        <target state="translated">Toista kappale</target>
+      </trans-unit>
       <trans-unit id="5920423366277975759" datatype="html">
         <source>Move in queue</source>
         <target state="translated">Siirrä jonossa</target>
@@ -731,6 +871,10 @@
       <trans-unit id="8497528947328199741" datatype="html">
         <source>Time</source>
         <target state="translated">Aika</target>
+      </trans-unit>
+      <trans-unit id="7485182386135797326" datatype="html">
+        <source>Open queue</source>
+        <target state="translated">Avaa jono</target>
       </trans-unit>
       <trans-unit id="1083264326477451541" datatype="html">
         <source>Toggle speed</source>
@@ -853,6 +997,14 @@
       <trans-unit id="1112525418959962254" datatype="html">
         <source>Cancel registration</source>
         <target state="translated">Peruuta rekisteröityminen</target>
+      </trans-unit>
+      <trans-unit id="1446670643492611810" datatype="html">
+        <source>Hide password</source>
+        <target state="translated">Piilota salasana</target>
+      </trans-unit>
+      <trans-unit id="5554528553553249088" datatype="html">
+        <source>Show password</source>
+        <target state="translated">Näytä salasana</target>
       </trans-unit>
       <trans-unit id="1463716403066266718" datatype="html">
         <source>Email not confirmed</source>
@@ -1034,6 +1186,10 @@
         <source>Progress</source>
         <target state="translated">Edistyminen</target>
       </trans-unit>
+      <trans-unit id="2722159711136769635" datatype="html">
+        <source>Open book</source>
+        <target state="translated">Avaa kirja</target>
+      </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
         <target state="translated">Kirjaudu sisään</target>
@@ -1065,6 +1221,14 @@
       <trans-unit id="5456802056126251420" datatype="html">
         <source>Search for Books or Podcasts</source>
         <target state="translated">Hae kirjoja tai podcasteja</target>
+      </trans-unit>
+      <trans-unit id="1556270137829928334" datatype="html">
+        <source>Close menu</source>
+        <target state="translated">Sulje valikko</target>
+      </trans-unit>
+      <trans-unit id="2005818722469409502" datatype="html">
+        <source>Open menu</source>
+        <target state="translated">Avaa valikko</target>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
         <source>Previous slide</source>
@@ -1109,6 +1273,10 @@
       <trans-unit id="6784758141439994527" datatype="html">
         <source>Last page</source>
         <target state="translated">Viimeinen sivu</target>
+      </trans-unit>
+      <trans-unit id="4501475847356105242" datatype="html">
+        <source>Page <x id="PH" equiv-text="p"/></source>
+        <target>Sivu <x id="PH" equiv-text="p"/></target>
       </trans-unit>
       <trans-unit id="4648768103414783027" datatype="html">
         <source>Go to Podcast</source>

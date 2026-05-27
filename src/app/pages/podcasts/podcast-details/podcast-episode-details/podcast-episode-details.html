@@ -19,8 +19,8 @@
 
       @if(podcastEpisode().audioUrl) {
       <div class="flex flex-row flex-wrap justify-center items-center gap-4">
-        <button i18n-title type="button" class="icon-button button-primary button-xl"
-          [title]="isCurrentTrackPlaying() ? 'Pause' : 'Play'" [disabled]="isCurrentTrackLoading()"
+        <button type="button" class="icon-button button-primary button-xl"
+          [title]="playPauseTitle()" [disabled]="isCurrentTrackLoading()"
           (click)="togglePlay()">
           @if(isCurrentTrackLoading()) { <fa-icon [icon]="faCircleNotch" animation="spin" />
           } @else if(isCurrentTrackPlaying()) {<fa-icon [icon]="faPause" />
@@ -40,8 +40,8 @@
       <div class="title flex justify-between items-start gap-2">
         <h1 class="flex-1">{{ podcastEpisode().name }}</h1>
 
-        <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-          [title]="isInMyLibrary() ? 'Remove from My Library' : 'Add to My Library'" [disabled]="isMyLibraryLoading()"
+        <button *appAuth type="button" class="button button-accent shrink-0 gap-2"
+          [title]="myLibraryTitle()" [disabled]="isMyLibraryLoading()"
           (click)="toggleMyLibrary()">
           @if(isMyLibraryLoading()) {
           <fa-icon [icon]="faCircleNotch" class="animate-spin" />
@@ -55,8 +55,8 @@
           }
         </button>
 
-        <button i18n-title *appAuth type="button" class="button button-accent shrink-0 gap-2"
-          [title]="isOffline() ? 'Remove from Offline' : 'Download Offline'" [disabled]="isOfflineLoading()"
+        <button *appAuth type="button" class="button button-accent shrink-0 gap-2"
+          [title]="offlineTitle()" [disabled]="isOfflineLoading()"
           (click)="toggleOffline()">
           @if(isOfflineLoading()) {
           <fa-icon [icon]="faCircleNotch" animation="spin" />

@@ -28,6 +28,18 @@ export class PodcastDetails {
   private librariesService = inject(LibrariesService);
   private offlineService = inject(OfflineService);
 
+  myLibraryTitle = computed(() =>
+    this.isInMyLibrary()
+      ? $localize`Remove from My Library`
+      : $localize`Add to My Library`
+  );
+
+  offlineTitle = computed(() =>
+    this.isOffline()
+      ? $localize`Remove all Episodes from Offline`
+      : $localize`Download all Episodes for Offline`
+  );
+
   faPlay = faPlay;
   faPause = faPause;
   faBookOpen = faBookOpen;

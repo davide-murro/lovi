@@ -21,7 +21,7 @@
 
     <!-- Page buttons -->
     @for (p of visiblePages(); track $index) {
-    <button i18n-title type="button" class="icon-button font-bold" [title]="'Page ' + p"
+    <button type="button" class="icon-button font-bold" [title]="pageTitle(p)"
         [class.button-primary]="p === pageNumber()" (click)="goTo(p)">
         {{ p }}
     </button>

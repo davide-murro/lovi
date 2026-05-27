@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faClose, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -29,6 +29,12 @@ import { map } from 'rxjs';
 export class Header {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+
+  menuMobileTitle = computed(() =>
+    this.menuMobileOpen()
+      ? $localize`Close menu`
+      : $localize`Open menu`
+  );
 
   faBars = faBars;
   faUser = faUser;

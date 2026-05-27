@@ -39,37 +39,37 @@ export const routes: Routes = [
     {
         path: '',
         component: Home,
-        title: 'LOVI - Home Page'
+        title: $localize`LOVI - Home Page`
     },
     {
         path: 'auth/login',
         component: Login,
-        title: 'LOVI - Log In'
+        title: $localize`LOVI - Log In`
     },
     {
         path: 'auth/register',
         component: Register,
-        title: 'LOVI - Register'
+        title: $localize`LOVI - Register`
     },
     {
         path: 'auth/confirm-email',
         component: ConfirmEmail,
-        title: 'LOVI - Confirm Email'
+        title: $localize`LOVI - Confirm Email`
     },
     {
         path: 'auth/forgot-password',
         component: ForgotPassword,
-        title: 'LOVI - Forgot Password'
+        title: $localize`LOVI - Forgot Password`
     },
     {
         path: 'auth/confirm-change-email',
         component: ConfirmChangeEmail,
-        title: 'LOVI - Confirm Change Email'
+        title: $localize`LOVI - Confirm Change Email`
     },
     {
         path: 'user-profile',
         component: UserProfile,
-        title: 'LOVI - User Profile',
+        title: $localize`LOVI - User Profile`,
         canActivate: [authGuard],
         resolve: {
             userProfile: userProfileResolver
@@ -78,12 +78,12 @@ export const routes: Routes = [
     {
         path: 'books',
         component: Books,
-        title: 'LOVI - Books'
+        title: $localize`LOVI - Books`
     },
     {
         path: 'books/:id',
         component: BookDetails,
-        title: 'LOVI - Book Details',
+        title: $localize`LOVI - Book Details`,
         resolve: {
             book: bookResolver
         },
@@ -91,11 +91,11 @@ export const routes: Routes = [
     {
         path: 'podcasts',
         component: Podcasts,
-        title: 'LOVI - Podcasts'
+        title: $localize`LOVI - Podcasts`
     },
     {
         path: 'podcasts/:id',
-        title: 'LOVI - Podcast Details',
+        title: $localize`LOVI - Podcast Details`,
         resolve: {
             podcast: podcastResolver // Resolver runs before 'podcasts/:id' component loads
         },
@@ -107,7 +107,7 @@ export const routes: Routes = [
             {
                 path: 'episodes/:episodeId',
                 component: PodcastEpisodeDetails,
-                title: 'LOVI - Podcast Episode Details',
+                title: $localize`LOVI - Podcast Episode Details`,
                 resolve: {
                     podcastEpisode: podcastEpisodeResolver
                 },
@@ -127,44 +127,44 @@ export const routes: Routes = [
             {
                 path: 'library',
                 component: MyLibrary,
-                title: 'LOVI - My Library'
+                title: $localize`LOVI - My Library`
             },
             {
                 path: 'offline',
                 component: MyOffline,
-                title: 'LOVI - My Offline'
+                title: $localize`LOVI - My Offline`
             }/*,
             {
                 path: 'local',
                 component: MyFiles,
-                title: 'LOVI - My Files'
+                title: $localize`LOVI - My Files`
             }*/
         ]
     },
     {
         path: 'search',
         component: Search,
-        title: 'LOVI - Search',
+        title: $localize`LOVI - Search`,
     },
 
     {
         path: 'edit',
         component: Edit,
-        title: 'LOVI - Edit',
+        title: $localize`LOVI - Edit`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/books/create',
         component: EditBook,
-        title: 'LOVI - Create Book',
+        title: $localize`LOVI - Create Book`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/books/:id',
         component: EditBook,
-        title: 'LOVI - Edit Book',
+        title: $localize`LOVI - Edit Book`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
         resolve: {
@@ -174,13 +174,13 @@ export const routes: Routes = [
     {
         path: 'edit/podcasts/create',
         component: EditPodcast,
-        title: 'LOVI - Create Podcast',
+        title: $localize`LOVI - Create Podcast`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/podcasts/:id',
-        title: 'LOVI - Edit Podcast',
+        title: $localize`LOVI - Edit Podcast`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
         children: [
@@ -194,7 +194,7 @@ export const routes: Routes = [
             {
                 path: 'episodes/create',
                 component: EditPodcastEpisode,
-                title: 'LOVI - Create Podcast Episode',
+                title: $localize`LOVI - Create Podcast Episode`,
                 resolve: {
                     podcast: podcastResolver
                 }
@@ -202,7 +202,7 @@ export const routes: Routes = [
             {
                 path: 'episodes/:episodeId',
                 component: EditPodcastEpisode,
-                title: 'LOVI - Edit Podcast Episode',
+                title: $localize`LOVI - Edit Podcast Episode`,
                 resolve: {
                     podcast: podcastResolver,
                     podcastEpisode: podcastEpisodeResolver
@@ -213,14 +213,14 @@ export const routes: Routes = [
     {
         path: 'edit/creators/create',
         component: EditCreator,
-        title: 'LOVI - Create Creator',
+        title: $localize`LOVI - Create Creator`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/creators/:id',
         component: EditCreator,
-        title: 'LOVI - Edit Creator',
+        title: $localize`LOVI - Edit Creator`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
         resolve: {
@@ -230,14 +230,14 @@ export const routes: Routes = [
     {
         path: 'edit/users/create',
         component: EditUser,
-        title: 'LOVI - Create User',
+        title: $localize`LOVI - Create User`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
     },
     {
         path: 'edit/users/:id',
         component: EditUser,
-        title: 'LOVI - Edit User',
+        title: $localize`LOVI - Edit User`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
         resolve: {
@@ -247,14 +247,14 @@ export const routes: Routes = [
     {
         path: 'edit/roles/create',
         component: EditRole,
-        title: 'LOVI - Create Role',
+        title: $localize`LOVI - Create Role`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
     },
     {
         path: 'edit/roles/:id',
         component: EditRole,
-        title: 'LOVI - Edit Role',
+        title: $localize`LOVI - Edit Role`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
         resolve: {
@@ -265,7 +265,7 @@ export const routes: Routes = [
     {
         path: 'not-found',
         component: NotFound,
-        title: 'LOVI - Not Found',
+        title: $localize`LOVI - Not Found`,
     },
     {
         path: '**',

@@ -7,7 +7,7 @@
   <div
     class="queue-expand overflow-hidden flex flex-col items-center w-full h-full gap-2 py-2 -my-2 sm:py-4 sm:-my-4 sm:gap-4 sm:px-8"
     [class.queue-expand-enter]="queueOpen()" [class.queue-expand-leave]="!queueOpen()">
-    <button i18n-title class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
+    <button i18n-title type="button" class="icon-button" title="Close queue" (click)="queueOpen.set(false)">
       <fa-icon [icon]="faChevronDown" />
     </button>
 
@@ -21,7 +21,7 @@
         [class.bg-opacity]="audioPlayerService.currentTrack()?.id == track.id"
         [class.text-error]="audioPlayerService.currentTrack()?.id == track.id && audioPlayerService.isError()">
         <div *cdkDragPlaceholder></div>
-        <button
+        <button i18n-title type="button" title="Play track"
           class="text-left flex flex-grow items-center gap-2 cursor-pointer overflow-hidden track-list-item-button"
           (click)="audioPlayerService.playId(track.id!)">
           <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
@@ -77,7 +77,7 @@
   </span>
 
   <div class="flex justify-between items-center w-full gap-2 px-4 sm:px-8">
-    <button class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
+    <button i18n-title type="button" title="Open queue" class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
       [class]="queueOpen() ? '!hidden' : ''" [class.text-error]="audioPlayerService.isError()"
       (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">
@@ -108,8 +108,8 @@
         @if (audioPlayerService.currentIndex()! === 0){ <fa-icon [icon]="faBackwardStep" />}
         @else if (audioPlayerService.currentIndex()! > 0){ <fa-icon [icon]="faBackward" />}
       </button>
-      <button i18n-title type="button" class="icon-button button-lg"
-        [title]="audioPlayerService.isPlaying() ? 'Pause' : 'Play'" [disabled]="audioPlayerService.isLoading()"
+      <button type="button" class="icon-button button-lg"
+        [title]="playPauseTitle()" [disabled]="audioPlayerService.isLoading()"
         (click)="audioPlayerService.togglePlay()">
         @if(audioPlayerService.isLoading()) {<fa-icon [icon]="faCircleNotch" animation="spin" />} @else if
         (audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon [icon]="faPlay" />}
