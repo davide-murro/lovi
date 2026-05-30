@@ -13,19 +13,19 @@ export class Home {
   imageSliderItems: Signal<ImageSliderItem[]> = signal([
     {
       image: 'home-image-slider/slider1.png',
-      title: 'Ancient Wisdom Rediscovered',
+      title: $localize`Ancient Wisdom Rediscovered`,
       subtitle:
-        'Stream esoteric Audio Books that explore lost civilizations, forgotten philosophies and hidden histories.',
+        $localize`Stream esoteric Audio Books that explore lost civilizations, forgotten philosophies and hidden histories.`,
     },
     {
       image: 'home-image-slider/slider2.png',
-      title: 'Sacred Sounds, Deepened Connection',
-      subtitle: 'Discover Podcasts on meditation, chakra healing and ceremonial magic.',
+      title: $localize`Sacred Sounds, Deepened Connection`,
+      subtitle: $localize`Discover Podcasts on meditation, chakra healing and ceremonial magic.`,
     },
     {
       image: 'home-image-slider/slider3.png',
-      title: 'Unveil The Mysteries',
-      subtitle: 'Delve into alchemy, tarot and astrology with curated eBooks.',
+      title: $localize`Unveil The Mysteries`,
+      subtitle: $localize`Delve into alchemy, tarot and astrology with curated eBooks.`,
     },
   ]);
 

@@ -602,6 +602,30 @@
         <source>Home</source>
         <target state="translated">Home</target>
       </trans-unit>
+      <trans-unit id="262580232318536015" datatype="html">
+        <source>Ancient Wisdom Rediscovered</source>
+        <target state="translated">Saggezza antica riscoperta</target>
+      </trans-unit>
+      <trans-unit id="1577871663191694792" datatype="html">
+        <source>Stream esoteric Audio Books that explore lost civilizations, forgotten philosophies and hidden histories.</source>
+        <target state="translated">Trasmetti libri audio esoterici che esplorano civiltà perdute, filosofie dimenticate e storie nascoste.</target>
+      </trans-unit>
+      <trans-unit id="8083327477956658132" datatype="html">
+        <source>Sacred Sounds, Deepened Connection</source>
+        <target state="translated">Suoni sacri, connessione approfondita</target>
+      </trans-unit>
+      <trans-unit id="7896744099167724093" datatype="html">
+        <source>Discover Podcasts on meditation, chakra healing and ceremonial magic.</source>
+        <target state="translated">Scopri podcast su meditazione, guarigione dei chakra e magia cerimoniale.</target>
+      </trans-unit>
+      <trans-unit id="1491765848053511235" datatype="html">
+        <source>Unveil The Mysteries</source>
+        <target state="translated">Svela i Misteri</target>
+      </trans-unit>
+      <trans-unit id="3089095224274802426" datatype="html">
+        <source>Delve into alchemy, tarot and astrology with curated eBooks.</source>
+        <target state="translated">Immergiti nell'alchimia, nei tarocchi e nell'astrologia con eBook curati.</target>
+      </trans-unit>
       <trans-unit id="4930940035022738997" datatype="html">
         <source>New Podcasts</source>
         <target state="translated">Nuovi podcast</target>
@@ -790,7 +814,7 @@
       </trans-unit>
       <trans-unit id="7507948636555938109" datatype="html">
         <source>Log out</source>
-        <target state="translated">Esci</target>
+        <target state="translated">Disconnettiti</target>
       </trans-unit>
       <trans-unit id="2152112222474686263" datatype="html">
         <source>Log out from all devices</source>

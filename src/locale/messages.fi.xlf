@@ -602,6 +602,30 @@
         <source>Home</source>
         <target state="translated">Koti</target>
       </trans-unit>
+      <trans-unit id="262580232318536015" datatype="html">
+        <source>Ancient Wisdom Rediscovered</source>
+        <target state="translated">Muinais-tieto uudelleen löydetty</target>
+      </trans-unit>
+      <trans-unit id="1577871663191694792" datatype="html">
+        <source>Stream esoteric Audio Books that explore lost civilizations, forgotten philosophies and hidden histories.</source>
+        <target state="translated">Katsele esoterisiä äänikirjoja, jotka tutkivat kadonnutta sivilisaatiota, unohdettua filosofiaa ja piilotettua historiaa.</target>
+      </trans-unit>
+      <trans-unit id="8083327477956658132" datatype="html">
+        <source>Sacred Sounds, Deepened Connection</source>
+        <target state="translated">Pyhät äänet, syvempää yhteyttä</target>
+      </trans-unit>
+      <trans-unit id="7896744099167724093" datatype="html">
+        <source>Discover Podcasts on meditation, chakra healing and ceremonial magic.</source>
+        <target state="translated">Löydä podcastit meditaatiosta, chakran parantamisesta ja seremoniallisesta maagista.</target>
+      </trans-unit>
+      <trans-unit id="1491765848053511235" datatype="html">
+        <source>Unveil The Mysteries</source>
+        <target state="translated">Paljastaa salat</target>
+      </trans-unit>
+      <trans-unit id="3089095224274802426" datatype="html">
+        <source>Delve into alchemy, tarot and astrology with curated eBooks.</source>
+        <target state="translated">Merennä alkuimia, tarotia ja astrologiaa kurioiduilla e-kirjoilla.</target>
+      </trans-unit>
       <trans-unit id="4930940035022738997" datatype="html">
         <source>New Podcasts</source>
         <target state="translated">Uudet podcastit</target>
