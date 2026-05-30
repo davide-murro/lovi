@@ -118,6 +118,18 @@
         <source>LOVI - Not Found</source>
         <target>LOVI - Non Trovato</target>
       </trans-unit>
+      <trans-unit id="3445977544660974911" datatype="html">
+        <source>Please enable cookies to use all features of this application.</source>
+        <target>Abilita i cookie per utilizzare tutte le funzionalità di questa applicazione.</target>
+      </trans-unit>
+      <trans-unit id="4383329965977857324" datatype="html">
+        <source>You are back online.</source>
+        <target>Sei di nuovo online.</target>
+      </trans-unit>
+      <trans-unit id="3600577606064542883" datatype="html">
+        <source>You are Offline. You will be able to see only Offline content.</source>
+        <target>Sei offline. Potrai vedere solo il contenuto disponibile offline.</target>
+      </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
         <target>Conferma modifica email</target>

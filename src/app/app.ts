@@ -74,12 +74,12 @@ export class App {
 
     // check cookie enabled
     if (!this.checkCookie()) {
-      this.toasterService.show('Please enable cookies to use all features of this application.', { type: 'warning', duration: 5000 });
+      this.toasterService.show($localize`Please enable cookies to use all features of this application.`, { type: 'warning', duration: 5000 });
     }
 
     // check offline
-    window.addEventListener('online', () => this.toasterService.show('You are back online.', { type: 'success', duration: 5000 }));
-    window.addEventListener('offline', () => this.toasterService.show('You are Offline. You will be able to see only Offline content.', { type: 'warning', duration: 5000 }));
+    window.addEventListener('online', () => this.toasterService.show($localize`You are back online.`, { type: 'success', duration: 5000 }));
+    window.addEventListener('offline', () => this.toasterService.show($localize`You are Offline. You will be able to see only Offline content.`, { type: 'warning', duration: 5000 }));
   }
 
   private checkCookie() {

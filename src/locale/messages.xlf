@@ -205,6 +205,27 @@
           <context context-type="linenumber">268</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3445977544660974911" datatype="html">
+        <source>Please enable cookies to use all features of this application.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4383329965977857324" datatype="html">
+        <source>You are back online.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3600577606064542883" datatype="html">
+        <source>You are Offline. You will be able to see only Offline content.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
         <context-group purpose="location">

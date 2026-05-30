@@ -118,6 +118,18 @@
         <source>LOVI - Not Found</source>
         <target>LOVI - Ei löydy</target>
       </trans-unit>
+      <trans-unit id="3445977544660974911" datatype="html">
+        <source>Please enable cookies to use all features of this application.</source>
+        <target>Ole hyvä ja ota käyttöön evästeet käyttääksesi kaikkia sovelluksen toimintoja.</target>
+      </trans-unit>
+      <trans-unit id="4383329965977857324" datatype="html">
+        <source>You are back online.</source>
+        <target>Olet takaisin verkossa.</target>
+      </trans-unit>
+      <trans-unit id="3600577606064542883" datatype="html">
+        <source>You are Offline. You will be able to see only Offline content.</source>
+        <target>Olet offline-tilassa. Näet vain offline-sisältöä.</target>
+      </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
         <target>Vahvista sähköpostiosoitteen muutos</target>
