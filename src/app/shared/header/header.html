@@ -8,17 +8,10 @@
 
         <div class="flex-1"></div>
 
-        <ng-template #signIn>
-            <a i18n i18n-title class="button button-accent shrink-0" title="Sign in" [routerLink]="['/auth', 'login']"
-                [routerLinkActive]="'button-primary'">Sign in</a>
-        </ng-template>
-        <a i18n-title *appAuth="null; else signIn" class="icon-button" title="Go to User Profile"
-            [routerLink]="['/user-profile']" [routerLinkActive]="'text-primary'">
-            <fa-icon [icon]="faUser" />
-        </a>
-
-        <button type="button" class="icon-button sm:!hidden"
-            [title]="menuMobileTitle()" (click)="menuMobileOpen.set(!menuMobileOpen())">
+        <div class="max-sm:!hidden"><ng-template [ngTemplateOutlet]="actions"></ng-template></div>
+        
+        <button type="button" class="icon-button sm:!hidden" [title]="menuMobileTitle()"
+            (click)="menuMobileOpen.set(!menuMobileOpen())">
             @if (menuMobileOpen()) {
             <fa-icon [icon]="faClose" />
             } @else {
@@ -34,6 +27,7 @@
         [class.max-sm:invisible]="!menuMobileOpen()" [class.max-sm:visible]="menuMobileOpen()">
         <div
             class="flex items-center justify-start whitespace-nowrap flex-col gap-4 overflow-hidden -m-4 p-4 sm:-mx-8 sm:px-8 sm:overflow-auto sm:flex-row sm:gap-8">
+            
             <a i18n i18n-title class="menu-link" title="Go to Books" [routerLink]="['/books']"
                 [routerLinkActive]="'active'">Books</a>
             <a i18n i18n-title class="menu-link" title="Go to Podcasts" [routerLink]="['/podcasts']"
@@ -57,6 +51,26 @@
                     <fa-icon [icon]="faMagnifyingGlass" />
                 </button>
             </form>
+
+            <div class="sm:!hidden"><ng-template [ngTemplateOutlet]="actions"></ng-template></div>
         </div>
     </div>
 </header>
+
+<ng-template #actions>
+    <div class="flex justify-center gap-2 sm:gap-4">
+        <!-- Language Selector -->
+        <button i18n-title type="button" class="icon-button" title="Change language" (click)="selectLanguage()">
+            <fa-icon [icon]="faGlobe" />
+        </button>
+
+        <ng-template #signIn>
+            <a i18n i18n-title class="button button-accent shrink-0" title="Sign in" [routerLink]="['/auth', 'login']"
+                [routerLinkActive]="'button-primary'">Sign in</a>
+        </ng-template>
+        <a i18n-title *appAuth="null; else signIn" class="icon-button" title="Go to User Profile"
+            [routerLink]="['/user-profile']" [routerLinkActive]="'text-primary'">
+            <fa-icon [icon]="faUser" />
+        </a>
+    </div>
+</ng-template>

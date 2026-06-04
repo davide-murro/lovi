@@ -612,7 +612,7 @@
       </trans-unit>
       <trans-unit id="2821179408673282599" datatype="html">
         <source>Home</source>
-        <target state="translated">Home</target>
+        <target state="translated">Pagina iniziale</target>
       </trans-unit>
       <trans-unit id="262580232318536015" datatype="html">
         <source>Ancient Wisdom Rediscovered</source>
@@ -1226,14 +1226,6 @@
         <source>Open book</source>
         <target state="translated">Apri libro</target>
       </trans-unit>
-      <trans-unit id="5207635742003539443" datatype="html">
-        <source>Sign in</source>
-        <target state="translated">Accedi</target>
-      </trans-unit>
-      <trans-unit id="8983306299153846900" datatype="html">
-        <source>Go to User Profile</source>
-        <target state="translated">Vai al profilo utente</target>
-      </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>
         <target state="translated">Vai ai libri</target>
@@ -1258,6 +1250,18 @@
         <source>Search for Books or Podcasts</source>
         <target state="translated">Cerca libri o podcast</target>
       </trans-unit>
+      <trans-unit id="1210069423269934042" datatype="html">
+        <source>Change language</source>
+        <target state="translated">Cambia lingua</target>
+      </trans-unit>
+      <trans-unit id="5207635742003539443" datatype="html">
+        <source>Sign in</source>
+        <target state="translated">Accedi</target>
+      </trans-unit>
+      <trans-unit id="8983306299153846900" datatype="html">
+        <source>Go to User Profile</source>
+        <target state="translated">Vai al profilo utente</target>
+      </trans-unit>
       <trans-unit id="1556270137829928334" datatype="html">
         <source>Close menu</source>
         <target state="translated">Chiudi menu</target>
@@ -1273,6 +1277,10 @@
       <trans-unit id="6930162363603699164" datatype="html">
         <source>Next slide</source>
         <target state="translated">Slide successivo</target>
+      </trans-unit>
+      <trans-unit id="8197760814140039374" datatype="html">
+        <source>Select language</source>
+        <target state="translated">Seleziona lingua</target>
       </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>

@@ -1095,7 +1095,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">38,39</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3894950702316166331" datatype="html">
@@ -1584,7 +1584,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">43,44</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7385160636957089888" datatype="html">
@@ -1638,7 +1638,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">40,41</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/podcasts-paged/podcasts-paged.ts</context>
@@ -1926,7 +1926,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">43,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6309828574111583895" datatype="html">
@@ -2734,78 +2734,85 @@
           <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5207635742003539443" datatype="html">
-        <source>Sign in</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">13,14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8983306299153846900" datatype="html">
-        <source>Go to User Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5928143073449378176" datatype="html">
         <source>Go to Podcasts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1134471344072681599" datatype="html">
         <source>Go to My Library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1766402655822050116" datatype="html">
         <source>Go to Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">47,48</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
         <source>Search</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5456802056126251420" datatype="html">
         <source>Search for Books or Podcasts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.html</context>
-          <context context-type="linenumber">55,56</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1210069423269934042" datatype="html">
+        <source>Change language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5207635742003539443" datatype="html">
+        <source>Sign in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8983306299153846900" datatype="html">
+        <source>Go to User Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/header/header.html</context>
+          <context context-type="linenumber">71,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1556270137829928334" datatype="html">
         <source>Close menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2005818722469409502" datatype="html">
         <source>Open menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/header/header.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
@@ -2820,6 +2827,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/image-slider/image-slider.html</context>
           <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8197760814140039374" datatype="html">
+        <source>Select language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/locale-selector-dialog/locale-selector-dialog.html</context>
+          <context context-type="linenumber">1,3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">

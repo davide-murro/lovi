@@ -44,7 +44,7 @@ export class App {
         this.audioPlayerService.stop();
       }
     });
-    // body overflow hidden when i open file reader, dialogs and selectors
+    // body overflow hidden when open file reader or dialogs
     effect(() => {
       if (this.fileBookReader?.isOpen() || this.dialogService?.dialog().visible) {
         document.body.style.overflow = 'hidden';
