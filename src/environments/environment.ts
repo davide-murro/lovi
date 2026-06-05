@@ -7,8 +7,8 @@ export const environment = {
   //facebookAppId: 'YOUR_FACEBOOK_APP_ID',
   //instagramClientId: 'YOUR_INSTAGRAM_CLIENT_ID',
   locales: [
-    { code: 'en-US', label: 'English' },
-    { code: 'it-IT', label: 'Italiano' },
-    { code: 'fi-FI', label: 'Suomi' },
-  ]
+    { code: 'en-US', label: 'English', iconPath: 'locale-icons/gb.svg' },
+    { code: 'it-IT', label: 'Italiano', iconPath: 'locale-icons/it.svg' },
+    { code: 'fi-FI', label: 'Suomi', iconPath: 'locale-icons/fi.svg' },
+  ],
 };
