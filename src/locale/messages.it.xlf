@@ -240,1083 +240,1083 @@
       </trans-unit>
       <trans-unit id="4046834611160246107" datatype="html">
         <source> New password must have:</source>
-        <target state="translated">La nuova password deve contenere:</target>
+        <target>La nuova password deve contenere:</target>
       </trans-unit>
       <trans-unit id="6431756795596367554" datatype="html">
         <source>Minimum 6 characters</source>
-        <target state="translated">Minimo 6 caratteri</target>
+        <target>Minimo 6 caratteri</target>
       </trans-unit>
       <trans-unit id="4827360877273979412" datatype="html">
         <source>At least one uppercase letter</source>
-        <target state="translated">Almeno una lettera maiuscola</target>
+        <target>Almeno una lettera maiuscola</target>
       </trans-unit>
       <trans-unit id="6521929470217720615" datatype="html">
         <source>At least one lowercase letter</source>
-        <target state="translated">Almeno una lettera minuscola</target>
+        <target>Almeno una lettera minuscola</target>
       </trans-unit>
       <trans-unit id="6367235986358966953" datatype="html">
         <source>At least one number</source>
-        <target state="translated">Almeno un numero</target>
+        <target>Almeno un numero</target>
       </trans-unit>
       <trans-unit id="3199473827307746827" datatype="html">
         <source>At least one special character</source>
-        <target state="translated">Almeno un carattere speciale</target>
+        <target>Almeno un carattere speciale</target>
       </trans-unit>
       <trans-unit id="6642051250090897630" datatype="html">
         <source> Now repeat the new password... </source>
-        <target state="translated">Ora ripeti la nuova password...</target>
+        <target>Ora ripeti la nuova password...</target>
       </trans-unit>
       <trans-unit id="8791984776889884648" datatype="html">
         <source> New password OK </source>
-        <target state="translated">Nuova password OK</target>
+        <target>Nuova password OK</target>
       </trans-unit>
       <trans-unit id="8174919026012824751" datatype="html">
         <source>Repeat new password</source>
-        <target state="translated">Ripeti la nuova password</target>
+        <target>Ripeti la nuova password</target>
       </trans-unit>
       <trans-unit id="8005278991865508477" datatype="html">
         <source> New password is required </source>
-        <target state="translated">La nuova password è obbligatoria</target>
+        <target>La nuova password è obbligatoria</target>
       </trans-unit>
       <trans-unit id="2118833403160143050" datatype="html">
         <source> Repeat new password is required </source>
-        <target state="translated">È richiesta la ripetizione della nuova password</target>
+        <target>È richiesta la ripetizione della nuova password</target>
       </trans-unit>
       <trans-unit id="1595487958604868985" datatype="html">
         <source> New passwords do not match </source>
-        <target state="translated">Le nuove password non corrispondono</target>
+        <target>Le nuove password non corrispondono</target>
       </trans-unit>
       <trans-unit id="3302445754123212607" datatype="html">
         <source> New password repeat OK </source>
-        <target state="translated">Ripetizione nuova password OK</target>
+        <target>Ripetizione nuova password OK</target>
       </trans-unit>
       <trans-unit id="4591169383100169155" datatype="html">
         <source>Save new password</source>
-        <target state="translated">Salva nuova password</target>
+        <target>Salva nuova password</target>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
-        <target state="translated">Salva</target>
+        <target>Salva</target>
       </trans-unit>
       <trans-unit id="3795588477873226308" datatype="html">
         <source>Password Reset Link Sent</source>
-        <target state="translated">Link per reimpostare la password inviato</target>
+        <target>Link per reimpostare la password inviato</target>
       </trans-unit>
       <trans-unit id="8768742428169238539" datatype="html">
         <source>If an account exists for this email, a password reset link has been sent to your inbox. In case, check your spam folder.</source>
-        <target state="translated">Se esiste un account associato a questa email, un link per reimpostare la password è stato inviato alla tua casella di posta. Controlla la cartella spam se necessario.</target>
+        <target>Se esiste un account associato a questa email, un link per reimpostare la password è stato inviato alla tua casella di posta. Controlla la cartella spam se necessario.</target>
       </trans-unit>
       <trans-unit id="7458742036174008482" datatype="html">
         <source>Forgot password process error</source>
-        <target state="translated">Errore nel processo di recupero password</target>
+        <target>Errore nel processo di recupero password</target>
       </trans-unit>
       <trans-unit id="9169981640738462056" datatype="html">
         <source>Unable to reset password. The email could not be processed.</source>
-        <target state="translated">Impossibile reimpostare la password. L'email non è stata elaborata.</target>
+        <target>Impossibile reimpostare la password. L'email non è stata elaborata.</target>
       </trans-unit>
       <trans-unit id="2558540539387408088" datatype="html">
         <source>Password Reset Success</source>
-        <target state="translated">Reimpostazione password riuscita</target>
+        <target>Reimpostazione password riuscita</target>
       </trans-unit>
       <trans-unit id="5165266329525582847" datatype="html">
         <source>Your password has been successfully reset. You can now log in with your new password.</source>
-        <target state="translated">La tua password è stata reimpostata correttamente. Ora puoi accedere con la nuova password.</target>
+        <target>La tua password è stata reimpostata correttamente. Ora puoi accedere con la nuova password.</target>
       </trans-unit>
       <trans-unit id="7741659019891448275" datatype="html">
         <source>Password Reset error</source>
-        <target state="translated">Errore nella reimpostazione della password</target>
+        <target>Errore nella reimpostazione della password</target>
       </trans-unit>
       <trans-unit id="810587747709078554" datatype="html">
         <source>Unable to reset password. The link may have expired or the token is invalid.</source>
-        <target state="translated">Impossibile reimpostare la password. Il link potrebbe essere scaduto o il token non è valido.</target>
+        <target>Impossibile reimpostare la password. Il link potrebbe essere scaduto o il token non è valido.</target>
       </trans-unit>
       <trans-unit id="8492560015765107335" datatype="html">
         <source>Sign in or create an account</source>
-        <target state="translated">Accedi o crea un account</target>
+        <target>Accedi o crea un account</target>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
-        <target state="translated">Password</target>
+        <target>Password</target>
       </trans-unit>
       <trans-unit id="5817778849206069572" datatype="html">
         <source> Password is required. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot;
                     [routerLink]=&quot;[&apos;/auth&apos;, &apos;forgot-password&apos;]&quot;
                     [queryParams]=&quot;{ email: form.value.userName || null }&quot;&gt;"/>Forgot password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
-        <target state="translated">Password obbligatoria. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot;
+        <target>Password obbligatoria. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a i18n-title title=&quot;Reset password&quot; class=&quot;link&quot;
                     [routerLink]=&quot;[&apos;/auth&apos;, &apos;forgot-password&apos;]&quot;
                     [queryParams]=&quot;{ email: form.value.userName || null }&quot;&gt;"/>Password dimenticata?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
       <trans-unit id="1636934520301910285" datatype="html">
         <source>Reset password</source>
-        <target state="translated">Reimposta password</target>
+        <target>Reimposta password</target>
       </trans-unit>
       <trans-unit id="3035570095838445091" datatype="html">
         <source> Forgot password? </source>
-        <target state="translated">Password dimenticata?</target>
+        <target>Password dimenticata?</target>
       </trans-unit>
       <trans-unit id="1750137775875093438" datatype="html">
         <source>Login to LOVI</source>
-        <target state="translated">Accedi a LOVI</target>
+        <target>Accedi a LOVI</target>
       </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
         <source>Login</source>
-        <target state="translated">Accedi</target>
+        <target>Accedi</target>
       </trans-unit>
       <trans-unit id="8604326584168843059" datatype="html">
         <source>Sign in another way</source>
-        <target state="translated">Accedi in un altro modo</target>
+        <target>Accedi in un altro modo</target>
       </trans-unit>
       <trans-unit id="8999284073934392732" datatype="html">
         <source>Login with Google</source>
-        <target state="translated">Accedi con Google</target>
+        <target>Accedi con Google</target>
       </trans-unit>
       <trans-unit id="5091971017771608684" datatype="html">
         <source>Login with Spotify</source>
-        <target state="translated">Accedi con Spotify</target>
+        <target>Accedi con Spotify</target>
       </trans-unit>
       <trans-unit id="3165739939364195862" datatype="html">
         <source>Register to LOVI</source>
-        <target state="translated">Registrati a LOVI</target>
+        <target>Registrati a LOVI</target>
       </trans-unit>
       <trans-unit id="2031388745284087363" datatype="html">
         <source> Create your LOVI account </source>
-        <target state="translated">Crea il tuo account LOVI</target>
+        <target>Crea il tuo account LOVI</target>
       </trans-unit>
       <trans-unit id="8830532201705056775" datatype="html">
         <source>Login successful</source>
-        <target state="translated">Accesso riuscito</target>
+        <target>Accesso riuscito</target>
       </trans-unit>
       <trans-unit id="8053477814844632887" datatype="html">
         <source>Login failed</source>
-        <target state="translated">Accesso fallito</target>
+        <target>Accesso fallito</target>
       </trans-unit>
       <trans-unit id="6900151687232699831" datatype="html">
         <source>Google login failed</source>
-        <target state="translated">Accesso con Google fallito</target>
+        <target>Accesso con Google fallito</target>
       </trans-unit>
       <trans-unit id="3343972888654450674" datatype="html">
         <source>Spotify login failed</source>
-        <target state="translated">Accesso con Spotify fallito</target>
+        <target>Accesso con Spotify fallito</target>
       </trans-unit>
       <trans-unit id="892209634997650887" datatype="html">
         <source><x id="PH" equiv-text="provider"/> login successful</source>
-        <target state="translated"><x id="PH" equiv-text="provider"/> accesso riuscito</target>
+        <target><x id="PH" equiv-text="provider"/> accesso riuscito</target>
       </trans-unit>
       <trans-unit id="6226662772203076879" datatype="html">
         <source><x id="PH" equiv-text="provider"/> login failed</source>
-        <target state="translated"><x id="PH" equiv-text="provider"/> accesso fallito</target>
+        <target><x id="PH" equiv-text="provider"/> accesso fallito</target>
       </trans-unit>
       <trans-unit id="2308975396733519902" datatype="html">
         <source>Create an account</source>
-        <target state="translated">Crea un account</target>
+        <target>Crea un account</target>
       </trans-unit>
       <trans-unit id="6023281321347518314" datatype="html">
         <source> Start listening now! Get your LOVI account in seconds. Get the access to unique, hard-to-find audiobooks and specialized podcasts! Build your perfect personal library today. </source>
-        <target state="translated">Inizia ad ascoltare ora! Crea il tuo account LOVI in pochi secondi. Accedi ad audiolibri unici e difficili da trovare e a podcast specializzati! Costruisci oggi la tua libreria personale perfetta.</target>
+        <target>Inizia ad ascoltare ora! Crea il tuo account LOVI in pochi secondi. Accedi ad audiolibri unici e difficili da trovare e a podcast specializzati! Costruisci oggi la tua libreria personale perfetta.</target>
       </trans-unit>
       <trans-unit id="205044832662301680" datatype="html">
         <source>Password is required</source>
-        <target state="translated">Password obbligatoria</target>
+        <target>Password obbligatoria</target>
       </trans-unit>
       <trans-unit id="7610778695094770779" datatype="html">
         <source>Password must have:</source>
-        <target state="translated">La password deve contenere:</target>
+        <target>La password deve contenere:</target>
       </trans-unit>
       <trans-unit id="33741734521740596" datatype="html">
         <source> Now repeat the password... </source>
-        <target state="translated">Ora ripeti la password...</target>
+        <target>Ora ripeti la password...</target>
       </trans-unit>
       <trans-unit id="4658299044875469665" datatype="html">
         <source> Password OK </source>
-        <target state="translated">Password OK</target>
+        <target>Password OK</target>
       </trans-unit>
       <trans-unit id="5373727393387841282" datatype="html">
         <source>Repeat password</source>
-        <target state="translated">Ripeti la password</target>
+        <target>Ripeti la password</target>
       </trans-unit>
       <trans-unit id="9132547751630599796" datatype="html">
         <source> Password is required </source>
-        <target state="translated">Password obbligatoria</target>
+        <target>Password obbligatoria</target>
       </trans-unit>
       <trans-unit id="3959229813559644868" datatype="html">
         <source> Repeat password is required </source>
-        <target state="translated">Ripeti la password obbligatoria</target>
+        <target>Ripeti la password obbligatoria</target>
       </trans-unit>
       <trans-unit id="4314910104023472121" datatype="html">
         <source> Passwords do not match </source>
-        <target state="translated">Le password non corrispondono</target>
+        <target>Le password non corrispondono</target>
       </trans-unit>
       <trans-unit id="4403348783252756585" datatype="html">
         <source> Password repeat OK </source>
-        <target state="translated">Ripetizione password OK</target>
+        <target>Ripetizione password OK</target>
       </trans-unit>
       <trans-unit id="8953033926734869941" datatype="html">
         <source>Name</source>
-        <target state="translated">Nome</target>
+        <target>Nome</target>
       </trans-unit>
       <trans-unit id="4042902315677630519" datatype="html">
         <source> Name is required </source>
-        <target state="translated">Nome obbligatorio</target>
+        <target>Nome obbligatorio</target>
       </trans-unit>
       <trans-unit id="8586580949980916008" datatype="html">
         <source> Name OK </source>
-        <target state="translated">Nome OK</target>
+        <target>Nome OK</target>
       </trans-unit>
       <trans-unit id="1639220106336890373" datatype="html">
         <source>Register a new LOVI account</source>
-        <target state="translated">Registra un nuovo account LOVI</target>
+        <target>Registra un nuovo account LOVI</target>
       </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
         <source>Register</source>
-        <target state="translated">Registrati</target>
+        <target>Registrati</target>
       </trans-unit>
       <trans-unit id="3713449669435436942" datatype="html">
         <source>Registration successful</source>
-        <target state="translated">Registrazione riuscita</target>
+        <target>Registrazione riuscita</target>
       </trans-unit>
       <trans-unit id="941700628329568981" datatype="html">
         <source>Please check your email inbox to verify your account, then sign in to LOVI</source>
-        <target state="translated">Controlla la tua casella email per verificare il tuo account, quindi accedi a LOVI</target>
+        <target>Controlla la tua casella email per verificare il tuo account, quindi accedi a LOVI</target>
       </trans-unit>
       <trans-unit id="1190716408793054975" datatype="html">
         <source>Registration failed</source>
-        <target state="translated">Registrazione fallita</target>
+        <target>Registrazione fallita</target>
       </trans-unit>
       <trans-unit id="2055188616012606724" datatype="html">
         <source>Registration failed, unexpected error.</source>
-        <target state="translated">Registrazione fallita, errore imprevisto.</target>
+        <target>Registrazione fallita, errore imprevisto.</target>
       </trans-unit>
       <trans-unit id="3345639992642077161" datatype="html">
         <source>Back to Books</source>
-        <target state="translated">Torna ai Libri</target>
+        <target>Torna ai Libri</target>
       </trans-unit>
       <trans-unit id="5224604665222373201" datatype="html">
         <source>Books</source>
-        <target state="translated">Libri</target>
+        <target>Libri</target>
       </trans-unit>
       <trans-unit id="3894950702316166331" datatype="html">
         <source>Loading...</source>
-        <target state="translated">Caricamento...</target>
+        <target>Caricamento...</target>
       </trans-unit>
       <trans-unit id="5952529966790613214" datatype="html">
         <source>In My Library</source>
-        <target state="translated">Nella mia libreria</target>
+        <target>Nella mia libreria</target>
       </trans-unit>
       <trans-unit id="1895431379485086633" datatype="html">
         <source>Add to My Library</source>
-        <target state="translated">Aggiungi alla mia libreria</target>
+        <target>Aggiungi alla mia libreria</target>
       </trans-unit>
       <trans-unit id="5775367540823387927" datatype="html">
         <source>Is Offline</source>
-        <target state="translated">Disponibile offline</target>
+        <target>Disponibile offline</target>
       </trans-unit>
       <trans-unit id="6786796833042543849" datatype="html">
         <source>Download Offline</source>
-        <target state="translated">Scarica per uso offline</target>
+        <target>Scarica per uso offline</target>
       </trans-unit>
       <trans-unit id="8735002280298695855" datatype="html">
         <source>Audio Book</source>
-        <target state="translated">Audiolibro</target>
+        <target>Audiolibro</target>
       </trans-unit>
       <trans-unit id="7413763716892937168" datatype="html">
         <source>Add Book to queue</source>
-        <target state="translated">Aggiungi il libro alla coda</target>
+        <target>Aggiungi il libro alla coda</target>
       </trans-unit>
       <trans-unit id="4284688382567695437" datatype="html">
         <source>Add to queue</source>
-        <target state="translated">Aggiungi alla coda</target>
+        <target>Aggiungi alla coda</target>
       </trans-unit>
       <trans-unit id="6316232772296091948" datatype="html">
         <source>eBook</source>
-        <target state="translated">eBook</target>
+        <target>eBook</target>
       </trans-unit>
       <trans-unit id="2556230960538313378" datatype="html">
         <source>Read Book</source>
-        <target state="translated">Leggi il libro</target>
+        <target>Leggi il libro</target>
       </trans-unit>
       <trans-unit id="2327592562693301723" datatype="html">
         <source>Read</source>
-        <target state="translated">Leggi</target>
+        <target>Leggi</target>
       </trans-unit>
       <trans-unit id="7649914623897629491" datatype="html">
         <source>Remove from My Library</source>
-        <target state="translated">Rimuovi dalla mia libreria</target>
+        <target>Rimuovi dalla mia libreria</target>
       </trans-unit>
       <trans-unit id="604078894783867661" datatype="html">
         <source>Remove from Offline</source>
-        <target state="translated">Rimuovi dagli elementi offline</target>
+        <target>Rimuovi dagli elementi offline</target>
       </trans-unit>
       <trans-unit id="9042260521669277115" datatype="html">
         <source>Pause</source>
-        <target state="translated">Pausa</target>
+        <target>Pausa</target>
       </trans-unit>
       <trans-unit id="8564202903947049539" datatype="html">
         <source>Play</source>
-        <target state="translated">Riproduci</target>
+        <target>Riproduci</target>
       </trans-unit>
       <trans-unit id="1819234562086037358" datatype="html">
         <source>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; added to queue</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="this.book().name"/>&quot; aggiunto alla coda</target>
+        <target>&quot;<x id="PH" equiv-text="this.book().name"/>&quot; aggiunto alla coda</target>
       </trans-unit>
       <trans-unit id="1231146175672033150" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to My Library</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunto alla mia libreria</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunto alla mia libreria</target>
       </trans-unit>
       <trans-unit id="8899308234896079004" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to My Library failed</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunta alla mia libreria non riuscita</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunta alla mia libreria non riuscita</target>
       </trans-unit>
       <trans-unit id="685162272484789324" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from My Library</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; rimosso dalla mia libreria</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; rimosso dalla mia libreria</target>
       </trans-unit>
       <trans-unit id="5916720668975049399" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removing from My Library failed</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; rimozione dalla mia libreria non riuscita</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; rimozione dalla mia libreria non riuscita</target>
       </trans-unit>
       <trans-unit id="5899015855537302262" datatype="html">
         <source>Download Book</source>
-        <target state="translated">Scarica il libro</target>
+        <target>Scarica il libro</target>
       </trans-unit>
       <trans-unit id="2306373362517662855" datatype="html">
         <source>Are you sure you want to download &quot;<x id="PH" equiv-text="book.name"/>&quot;? It will take some time depending on your internet connection.</source>
-        <target state="translated">Sei sicuro di voler scaricare &quot;<x id="PH" equiv-text="book.name"/>&quot;? Potrebbe richiedere del tempo a seconda della tua connessione internet.</target>
+        <target>Sei sicuro di voler scaricare &quot;<x id="PH" equiv-text="book.name"/>&quot;? Potrebbe richiedere del tempo a seconda della tua connessione internet.</target>
       </trans-unit>
       <trans-unit id="6721414725131339985" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; downloading...</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; scaricamento in corso...</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; scaricamento in corso...</target>
       </trans-unit>
       <trans-unit id="748814568807539723" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; added to Offline</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunto alla modalità offline</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunto alla modalità offline</target>
       </trans-unit>
       <trans-unit id="4120689825129770649" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; adding to Offline failed</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunta alla modalità offline non riuscita</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; aggiunta alla modalità offline non riuscita</target>
       </trans-unit>
       <trans-unit id="8963173117497328406" datatype="html">
         <source>Remove Book</source>
-        <target state="translated">Rimuovi il libro</target>
+        <target>Rimuovi il libro</target>
       </trans-unit>
       <trans-unit id="7480048592142868941" datatype="html">
         <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="book.name"/>&quot; from Offline?</source>
-        <target state="translated">Sei sicuro di voler rimuovere &quot;<x id="PH" equiv-text="book.name"/>&quot; dalla modalità offline?</target>
+        <target>Sei sicuro di voler rimuovere &quot;<x id="PH" equiv-text="book.name"/>&quot; dalla modalità offline?</target>
       </trans-unit>
       <trans-unit id="7048451914816791904" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removed from Offline</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; rimosso dalla modalità offline</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; rimosso dalla modalità offline</target>
       </trans-unit>
       <trans-unit id="2500703953933430930" datatype="html">
         <source>&quot;<x id="PH" equiv-text="book.name"/>&quot; removing from Offline failed</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="book.name"/>&quot; rimozione dalla modalità offline non riuscita</target>
+        <target>&quot;<x id="PH" equiv-text="book.name"/>&quot; rimozione dalla modalità offline non riuscita</target>
       </trans-unit>
       <trans-unit id="2821179408673282599" datatype="html">
         <source>Home</source>
-        <target state="translated">Pagina iniziale</target>
+        <target>Pagina iniziale</target>
       </trans-unit>
       <trans-unit id="262580232318536015" datatype="html">
         <source>Ancient Wisdom Rediscovered</source>
-        <target state="translated">Saggezza antica riscoperta</target>
+        <target>Saggezza antica riscoperta</target>
       </trans-unit>
       <trans-unit id="1577871663191694792" datatype="html">
         <source>Stream esoteric Audio Books that explore lost civilizations, forgotten philosophies and hidden histories.</source>
-        <target state="translated">Trasmetti libri audio esoterici che esplorano civiltà perdute, filosofie dimenticate e storie nascoste.</target>
+        <target>Trasmetti libri audio esoterici che esplorano civiltà perdute, filosofie dimenticate e storie nascoste.</target>
       </trans-unit>
       <trans-unit id="8083327477956658132" datatype="html">
         <source>Sacred Sounds, Deepened Connection</source>
-        <target state="translated">Suoni sacri, connessione approfondita</target>
+        <target>Suoni sacri, connessione approfondita</target>
       </trans-unit>
       <trans-unit id="7896744099167724093" datatype="html">
         <source>Discover Podcasts on meditation, chakra healing and ceremonial magic.</source>
-        <target state="translated">Scopri podcast su meditazione, guarigione dei chakra e magia cerimoniale.</target>
+        <target>Scopri podcast su meditazione, guarigione dei chakra e magia cerimoniale.</target>
       </trans-unit>
       <trans-unit id="1491765848053511235" datatype="html">
         <source>Unveil The Mysteries</source>
-        <target state="translated">Svela i Misteri</target>
+        <target>Svela i Misteri</target>
       </trans-unit>
       <trans-unit id="3089095224274802426" datatype="html">
         <source>Delve into alchemy, tarot and astrology with curated eBooks.</source>
-        <target state="translated">Immergiti nell'alchimia, nei tarocchi e nell'astrologia con eBook curati.</target>
+        <target>Immergiti nell'alchimia, nei tarocchi e nell'astrologia con eBook curati.</target>
       </trans-unit>
       <trans-unit id="4930940035022738997" datatype="html">
         <source>New Podcasts</source>
-        <target state="translated">Nuovi podcast</target>
+        <target>Nuovi podcast</target>
       </trans-unit>
       <trans-unit id="83367217345461685" datatype="html">
         <source>New Books</source>
-        <target state="translated">Nuovi libri</target>
+        <target>Nuovi libri</target>
       </trans-unit>
       <trans-unit id="3072935047674817211" datatype="html">
         <source>My Library</source>
-        <target state="translated">La mia libreria</target>
+        <target>La mia libreria</target>
       </trans-unit>
       <trans-unit id="7385160636957089888" datatype="html">
         <source>Library</source>
-        <target state="translated">Libreria</target>
+        <target>Libreria</target>
       </trans-unit>
       <trans-unit id="5940599242581287022" datatype="html">
         <source>My Offline Library</source>
-        <target state="translated">La mia libreria offline</target>
+        <target>La mia libreria offline</target>
       </trans-unit>
       <trans-unit id="313850810538580916" datatype="html">
         <source>Offline</source>
-        <target state="translated">Offline</target>
+        <target>Offline</target>
       </trans-unit>
       <trans-unit id="5586970926335087233" datatype="html">
         <source>Failed to load My Library.</source>
-        <target state="translated">Impossibile caricare la mia libreria.</target>
+        <target>Impossibile caricare la mia libreria.</target>
       </trans-unit>
       <trans-unit id="4047733304822929662" datatype="html">
         <source>There are no Books here</source>
-        <target state="translated">Non ci sono libri qui</target>
+        <target>Non ci sono libri qui</target>
       </trans-unit>
       <trans-unit id="1984987229407697795" datatype="html">
         <source>Podcasts</source>
-        <target state="translated">Podcast</target>
+        <target>Podcast</target>
       </trans-unit>
       <trans-unit id="8016565132227902578" datatype="html">
         <source>There are no Podcasts here</source>
-        <target state="translated">Non ci sono podcast qui</target>
+        <target>Non ci sono podcast qui</target>
       </trans-unit>
       <trans-unit id="9002747291871623570" datatype="html">
         <source> Offline content allows the application to always display downloaded data, even with an internet connection. The content is stored in a persistent cache, but the device can automatically clear this cache if necessary.
 </source>
-        <target state="translated"> Il contenuto offline consente all'applicazione di visualizzare sempre i dati scaricati, anche in assenza di connessione Internet. Il contenuto viene memorizzato in una cache persistente, ma il dispositivo può cancellare automaticamente questa cache se necessario.
+        <target> Il contenuto offline consente all'applicazione di visualizzare sempre i dati scaricati, anche in assenza di connessione Internet. Il contenuto viene memorizzato in una cache persistente, ma il dispositivo può cancellare automaticamente questa cache se necessario.
 </target>
       </trans-unit>
       <trans-unit id="7208011052874784102" datatype="html">
         <source>Offline Books</source>
-        <target state="translated">Libri offline</target>
+        <target>Libri offline</target>
       </trans-unit>
       <trans-unit id="8033259093836806265" datatype="html">
         <source>No Books are available Offline</source>
-        <target state="translated">Nessun libro disponibile offline</target>
+        <target>Nessun libro disponibile offline</target>
       </trans-unit>
       <trans-unit id="7639941731528817906" datatype="html">
         <source>Offline Podcasts</source>
-        <target state="translated">Podcast offline</target>
+        <target>Podcast offline</target>
       </trans-unit>
       <trans-unit id="4442843856048503252" datatype="html">
         <source>No Podcasts are available Offline</source>
-        <target state="translated">Nessun podcast disponibile offline</target>
+        <target>Nessun podcast disponibile offline</target>
       </trans-unit>
       <trans-unit id="4940309136341647297" datatype="html">
         <source>Back to podcasts</source>
-        <target state="translated">Torna ai podcast</target>
+        <target>Torna ai podcast</target>
       </trans-unit>
       <trans-unit id="9024833043122917992" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ podcast().episodes!.length }}"/> Episodes</source>
-        <target state="translated"><x id="INTERPOLATION" equiv-text="{{ podcast().episodes!.length }}"/> Episodi</target>
+        <target><x id="INTERPOLATION" equiv-text="{{ podcast().episodes!.length }}"/> Episodi</target>
       </trans-unit>
       <trans-unit id="2358200177925832078" datatype="html">
         <source>Play all Episodes</source>
-        <target state="translated">Riproduci tutti gli episodi</target>
+        <target>Riproduci tutti gli episodi</target>
       </trans-unit>
       <trans-unit id="8426557733791187636" datatype="html">
         <source>Play all</source>
-        <target state="translated">Riproduci tutto</target>
+        <target>Riproduci tutto</target>
       </trans-unit>
       <trans-unit id="8843894152555664249" datatype="html">
         <source>Remove all Episodes from Offline</source>
-        <target state="translated">Rimuovi tutti gli episodi dalla modalità offline</target>
+        <target>Rimuovi tutti gli episodi dalla modalità offline</target>
       </trans-unit>
       <trans-unit id="8119973018100427245" datatype="html">
         <source>Download all Episodes for Offline</source>
-        <target state="translated">Scarica tutti gli episodi per la modalità offline</target>
+        <target>Scarica tutti gli episodi per la modalità offline</target>
       </trans-unit>
       <trans-unit id="4599451746885063295" datatype="html">
         <source>Ep. <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></source>
-        <target state="translated">Ep. <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></target>
+        <target>Ep. <x id="PH" equiv-text="pe.number"/> - <x id="PH_1" equiv-text="this.podcast().name"/></target>
       </trans-unit>
       <trans-unit id="4557571074866615408" datatype="html">
         <source>&quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; episodes added to queue</source>
-        <target state="translated">&quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; episodi aggiunti alla coda</target>
+        <target>&quot;<x id="PH" equiv-text="this.podcast().name"/>&quot; episodi aggiunti alla coda</target>
       </trans-unit>
       <trans-unit id="1419156377848079268" datatype="html">
         <source>Download Podcast</source>
-        <target state="translated">Scarica podcast</target>
+        <target>Scarica podcast</target>
       </trans-unit>
       <trans-unit id="4376605035914527228" datatype="html">
         <source>Are you sure you want to download &quot;<x id="PH" equiv-text="podcast.name"/>&quot;? It will take a lot of space and time depending on your internet connection.</source>
-        <target state="translated">Sei sicuro di voler scaricare &quot;<x id="PH" equiv-text="podcast.name"/>&quot;? Occuperà molto spazio e richiederà tempo in base alla tua connessione Internet.</target>
+        <target>Sei sicuro di voler scaricare &quot;<x id="PH" equiv-text="podcast.name"/>&quot;? Occuperà molto spazio e richiederà tempo in base alla tua connessione Internet.</target>
       </trans-unit>
       <trans-unit id="1666916685991188522" datatype="html">
         <source>Remove Podcast</source>
-        <target state="translated">Rimuovi podcast</target>
+        <target>Rimuovi podcast</target>
       </trans-unit>
       <trans-unit id="3938410096344984343" datatype="html">
         <source>Are you sure you want to remove &quot;<x id="PH" equiv-text="podcast.name"/>&quot; from Offline? All the episodes will be removed.</source>
-        <target state="translated">Sei sicuro di voler rimuovere &quot;<x id="PH" equiv-text="podcast.name"/>&quot; dall'archivio offline? Tutti gli episodi verranno rimossi.</target>
+        <target>Sei sicuro di voler rimuovere &quot;<x id="PH" equiv-text="podcast.name"/>&quot; dall'archivio offline? Tutti gli episodi verranno rimossi.</target>
       </trans-unit>
       <trans-unit id="6147484957227591088" datatype="html">
         <source>Back to Podcasts</source>
-        <target state="translated">Torna ai podcast</target>
+        <target>Torna ai podcast</target>
       </trans-unit>
       <trans-unit id="470668609529713261" datatype="html">
         <source>Back to Podcast</source>
-        <target state="translated">Torna al podcast</target>
+        <target>Torna al podcast</target>
       </trans-unit>
       <trans-unit id="8185123176328552421" datatype="html">
         <source>Add Episode to queue</source>
-        <target state="translated">Aggiungi episodio alla coda</target>
+        <target>Aggiungi episodio alla coda</target>
       </trans-unit>
       <trans-unit id="7508463586135382783" datatype="html">
         <source>Episode <x id="INTERPOLATION" equiv-text="{{ podcastEpisode().number }}"/></source>
-        <target state="translated">Episodio <x id="INTERPOLATION" equiv-text="{{ podcastEpisode().number }}"/></target>
+        <target>Episodio <x id="INTERPOLATION" equiv-text="{{ podcastEpisode().number }}"/></target>
       </trans-unit>
       <trans-unit id="4505476411298564973" datatype="html">
         <source>Go to Previous Episode</source>
-        <target state="translated">Vai all'episodio precedente</target>
+        <target>Vai all'episodio precedente</target>
       </trans-unit>
       <trans-unit id="1129369554676565358" datatype="html">
         <source>Previous Episode</source>
-        <target state="translated">Episodio precedente</target>
+        <target>Episodio precedente</target>
       </trans-unit>
       <trans-unit id="6952071647606127974" datatype="html">
         <source>Go to Next Episode</source>
-        <target state="translated">Vai all'episodio successivo</target>
+        <target>Vai all'episodio successivo</target>
       </trans-unit>
       <trans-unit id="3413391363176583901" datatype="html">
         <source>Next Episode</source>
-        <target state="translated">Episodio successivo</target>
+        <target>Episodio successivo</target>
       </trans-unit>
       <trans-unit id="8175797525972180712" datatype="html">
         <source>Download Podcast Episode</source>
-        <target state="translated">Scarica episodio del podcast</target>
+        <target>Scarica episodio del podcast</target>
       </trans-unit>
       <trans-unit id="4292453927845120930" datatype="html">
         <source>Remove Podcast Episode</source>
-        <target state="translated">Rimuovi episodio del podcast</target>
+        <target>Rimuovi episodio del podcast</target>
       </trans-unit>
       <trans-unit id="8433689360468945357" datatype="html">
         <source>Search &quot;<x id="INTERPOLATION" equiv-text="{{search()}}"/>&quot;</source>
-        <target state="translated">Cerca &quot;<x id="INTERPOLATION" equiv-text="{{search()}}"/>&quot;</target>
+        <target>Cerca &quot;<x id="INTERPOLATION" equiv-text="{{search()}}"/>&quot;</target>
       </trans-unit>
       <trans-unit id="7744292213705278878" datatype="html">
         <source>User Profile</source>
-        <target state="translated">Profilo utente</target>
+        <target>Profilo utente</target>
       </trans-unit>
       <trans-unit id="5037437391296624618" datatype="html">
         <source>Information</source>
-        <target state="translated">Informazioni</target>
+        <target>Informazioni</target>
       </trans-unit>
       <trans-unit id="3000005804987112527" datatype="html">
         <source>Change email</source>
-        <target state="translated">Cambia email</target>
+        <target>Cambia email</target>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
         <source>Edit</source>
-        <target state="translated">Modifica</target>
+        <target>Modifica</target>
       </trans-unit>
       <trans-unit id="6309828574111583895" datatype="html">
         <source>Change password</source>
-        <target state="translated">Cambia password</target>
+        <target>Cambia password</target>
       </trans-unit>
       <trans-unit id="7000649363168371045" datatype="html">
         <source>Save changes</source>
-        <target state="translated">Salva modifiche</target>
+        <target>Salva modifiche</target>
       </trans-unit>
       <trans-unit id="4086606389696938932" datatype="html">
         <source>Account</source>
-        <target state="translated">Account</target>
+        <target>Account</target>
       </trans-unit>
       <trans-unit id="7569261855983898211" datatype="html">
         <source>Log out from this device</source>
-        <target state="translated">Disconnettiti da questo dispositivo</target>
+        <target>Disconnettiti da questo dispositivo</target>
       </trans-unit>
       <trans-unit id="7507948636555938109" datatype="html">
         <source>Log out</source>
-        <target state="translated">Disconnettiti</target>
+        <target>Disconnettiti</target>
       </trans-unit>
       <trans-unit id="2152112222474686263" datatype="html">
         <source>Log out from all devices</source>
-        <target state="translated">Disconnettiti da tutti i dispositivi</target>
+        <target>Disconnettiti da tutti i dispositivi</target>
       </trans-unit>
       <trans-unit id="5166399147795117304" datatype="html">
         <source>Delete account permanently</source>
-        <target state="translated">Elimina l'account definitivamente</target>
+        <target>Elimina l'account definitivamente</target>
       </trans-unit>
       <trans-unit id="7662015208795302518" datatype="html">
         <source>Delete account</source>
-        <target state="translated">Elimina account</target>
+        <target>Elimina account</target>
       </trans-unit>
       <trans-unit id="459222468206981218" datatype="html">
         <source>Email change confirmation sent</source>
-        <target state="translated">Conferma di cambio email inviata</target>
+        <target>Conferma di cambio email inviata</target>
       </trans-unit>
       <trans-unit id="2100550186085655617" datatype="html">
         <source>Confirmation notices have been sent to both your old and new email addresses. Please confirm the new email to be able to log in.</source>
-        <target state="translated">Le email di conferma sono state inviate sia al tuo vecchio che al tuo nuovo indirizzo. Conferma il nuovo indirizzo per poter effettuare il login.</target>
+        <target>Le email di conferma sono state inviate sia al tuo vecchio che al tuo nuovo indirizzo. Conferma il nuovo indirizzo per poter effettuare il login.</target>
       </trans-unit>
       <trans-unit id="5108418000757845610" datatype="html">
         <source>Password changed</source>
-        <target state="translated">Password modificata</target>
+        <target>Password modificata</target>
       </trans-unit>
       <trans-unit id="5337524527180744591" datatype="html">
         <source>Confirmation notices have been sent to your email addresses.</source>
-        <target state="translated">Le email di conferma sono state inviate ai tuoi indirizzi email.</target>
+        <target>Le email di conferma sono state inviate ai tuoi indirizzi email.</target>
       </trans-unit>
       <trans-unit id="1829779471067775299" datatype="html">
         <source>Profile updated</source>
-        <target state="translated">Profilo aggiornato</target>
+        <target>Profilo aggiornato</target>
       </trans-unit>
       <trans-unit id="7269968983793840379" datatype="html">
         <source>Profile update error</source>
-        <target state="translated">Errore nell'aggiornamento del profilo</target>
+        <target>Errore nell'aggiornamento del profilo</target>
       </trans-unit>
       <trans-unit id="2349974320554762715" datatype="html">
         <source>You will be logged out of this browser session only. All other active sessions will remain logged in.</source>
-        <target state="translated">Verrai disconnesso solo da questa sessione del browser. Tutte le altre sessioni rimarranno connesse.</target>
+        <target>Verrai disconnesso solo da questa sessione del browser. Tutte le altre sessioni rimarranno connesse.</target>
       </trans-unit>
       <trans-unit id="107300568423181994" datatype="html">
         <source>Log out all devices</source>
-        <target state="translated">Disconnetti tutti i dispositivi</target>
+        <target>Disconnetti tutti i dispositivi</target>
       </trans-unit>
       <trans-unit id="8045830701612161216" datatype="html">
         <source>You will be logged out of all browser sessions you have opened. Are you sure?</source>
-        <target state="translated">Verrai disconnesso da tutte le sessioni del browser che hai aperto. Sei sicuro?</target>
+        <target>Verrai disconnesso da tutte le sessioni del browser che hai aperto. Sei sicuro?</target>
       </trans-unit>
       <trans-unit id="7350705061372220825" datatype="html">
         <source>Log out from all devices error</source>
-        <target state="translated">Errore nella disconnessione da tutti i dispositivi</target>
+        <target>Errore nella disconnessione da tutti i dispositivi</target>
       </trans-unit>
       <trans-unit id="8507166195543036644" datatype="html">
         <source>Account deleted</source>
-        <target state="translated">Account eliminato</target>
+        <target>Account eliminato</target>
       </trans-unit>
       <trans-unit id="3480873535425883333" datatype="html">
         <source>You will be redirected to the home page.</source>
-        <target state="translated">Verrai reindirizzato alla pagina principale.</target>
+        <target>Verrai reindirizzato alla pagina principale.</target>
       </trans-unit>
       <trans-unit id="5238821077162432641" datatype="html">
         <source>Close queue</source>
-        <target state="translated">Chiudi coda</target>
+        <target>Chiudi coda</target>
       </trans-unit>
       <trans-unit id="2111616642612603820" datatype="html">
         <source>Play track</source>
-        <target state="translated">Riproduci traccia</target>
+        <target>Riproduci traccia</target>
       </trans-unit>
       <trans-unit id="5920423366277975759" datatype="html">
         <source>Move in queue</source>
-        <target state="translated">Sposta nella coda</target>
+        <target>Sposta nella coda</target>
       </trans-unit>
       <trans-unit id="6820635381009519748" datatype="html">
         <source>Remove from queue</source>
-        <target state="translated">Rimuovi dalla coda</target>
+        <target>Rimuovi dalla coda</target>
       </trans-unit>
       <trans-unit id="8497528947328199741" datatype="html">
         <source>Time</source>
-        <target state="translated">Tempo</target>
+        <target>Tempo</target>
       </trans-unit>
       <trans-unit id="7485182386135797326" datatype="html">
         <source>Open queue</source>
-        <target state="translated">Apri coda</target>
+        <target>Apri coda</target>
       </trans-unit>
       <trans-unit id="1083264326477451541" datatype="html">
         <source>Toggle speed</source>
-        <target state="translated">Cambia velocità</target>
+        <target>Cambia velocità</target>
       </trans-unit>
       <trans-unit id="8890553633144307762" datatype="html">
         <source>Back</source>
-        <target state="translated">Indietro</target>
+        <target>Indietro</target>
       </trans-unit>
       <trans-unit id="8604695045343743097" datatype="html">
         <source>Forward</source>
-        <target state="translated">Avanti</target>
+        <target>Avanti</target>
       </trans-unit>
       <trans-unit id="7877250793311378611" datatype="html">
         <source>Restart queue</source>
-        <target state="translated">Riavvia coda</target>
+        <target>Riavvia coda</target>
       </trans-unit>
       <trans-unit id="1994426929514890878" datatype="html">
         <source>Clear queue</source>
-        <target state="translated">Svuota coda</target>
+        <target>Svuota coda</target>
       </trans-unit>
       <trans-unit id="8395429101406970401" datatype="html">
         <source> Password ready </source>
-        <target state="translated"> Password pronta </target>
+        <target> Password pronta </target>
       </trans-unit>
       <trans-unit id="264068562357780835" datatype="html">
         <source>New email</source>
-        <target state="translated">Nuova email</target>
+        <target>Nuova email</target>
       </trans-unit>
       <trans-unit id="666361990119890138" datatype="html">
         <source> New email is required </source>
-        <target state="translated"> La nuova email è obbligatoria </target>
+        <target> La nuova email è obbligatoria </target>
       </trans-unit>
       <trans-unit id="7821811663801547376" datatype="html">
         <source> Invalid new email </source>
-        <target state="translated"> Nuova email non valida </target>
+        <target> Nuova email non valida </target>
       </trans-unit>
       <trans-unit id="202750919751535079" datatype="html">
         <source> New email OK </source>
-        <target state="translated"> Nuova email OK </target>
+        <target> Nuova email OK </target>
       </trans-unit>
       <trans-unit id="5973258709136150113" datatype="html">
         <source>Request email change</source>
-        <target state="translated">Richiedi cambio email</target>
+        <target>Richiedi cambio email</target>
       </trans-unit>
       <trans-unit id="574622451354762468" datatype="html">
         <source>Cancel email change</source>
-        <target state="translated">Annulla cambio email</target>
+        <target>Annulla cambio email</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
-        <target state="translated">Annulla</target>
+        <target>Annulla</target>
       </trans-unit>
       <trans-unit id="3398522351675884140" datatype="html">
         <source>The new email is the same as the current one.</source>
-        <target state="translated">La nuova email è uguale a quella attuale.</target>
+        <target>La nuova email è uguale a quella attuale.</target>
       </trans-unit>
       <trans-unit id="1016381241990187139" datatype="html">
         <source>Email is already taken.</source>
-        <target state="translated">L'email è già in uso.</target>
+        <target>L'email è già in uso.</target>
       </trans-unit>
       <trans-unit id="8812975878675449820" datatype="html">
         <source>Email change failed</source>
-        <target state="translated">Cambio email non riuscito</target>
+        <target>Cambio email non riuscito</target>
       </trans-unit>
       <trans-unit id="5340498030552368470" datatype="html">
         <source>Current password</source>
-        <target state="translated">Password corrente</target>
+        <target>Password corrente</target>
       </trans-unit>
       <trans-unit id="143678524631328953" datatype="html">
         <source>Current password is required</source>
-        <target state="translated">La password corrente è obbligatoria</target>
+        <target>La password corrente è obbligatoria</target>
       </trans-unit>
       <trans-unit id="4908140598909771718" datatype="html">
         <source> Current password ready </source>
-        <target state="translated"> Password corrente pronta </target>
+        <target> Password corrente pronta </target>
       </trans-unit>
       <trans-unit id="4696103774472791174" datatype="html">
         <source>Confirm password change</source>
-        <target state="translated">Conferma modifica password</target>
+        <target>Conferma modifica password</target>
       </trans-unit>
       <trans-unit id="5594617722028616526" datatype="html">
         <source>Cancel password change</source>
-        <target state="translated">Annulla modifica password</target>
+        <target>Annulla modifica password</target>
       </trans-unit>
       <trans-unit id="6505667961091725510" datatype="html">
         <source>Password change failed</source>
-        <target state="translated">Modifica password non riuscita</target>
+        <target>Modifica password non riuscita</target>
       </trans-unit>
       <trans-unit id="345359488993880932" datatype="html">
         <source>Delete account?</source>
-        <target state="translated">Eliminare l'account?</target>
+        <target>Eliminare l'account?</target>
       </trans-unit>
       <trans-unit id="805226041001218767" datatype="html">
         <source> Are you sure you want to permanently delete your account? All your data and information will be lost forever and cannot be recovered.
 </source>
-        <target state="translated"> Sei sicuro di voler eliminare definitivamente il tuo account? Tutti i tuoi dati e le tue informazioni andranno persi per sempre e non potranno essere recuperati.
+        <target> Sei sicuro di voler eliminare definitivamente il tuo account? Tutti i tuoi dati e le tue informazioni andranno persi per sempre e non potranno essere recuperati.
 </target>
       </trans-unit>
       <trans-unit id="8576027502857970325" datatype="html">
         <source>Confirm account deletion</source>
-        <target state="translated">Conferma eliminazione account</target>
+        <target>Conferma eliminazione account</target>
       </trans-unit>
       <trans-unit id="5633178688280942024" datatype="html">
         <source>Cancel account deletion</source>
-        <target state="translated">Annulla eliminazione account</target>
+        <target>Annulla eliminazione account</target>
       </trans-unit>
       <trans-unit id="340721362726841609" datatype="html">
         <source>Deleting account failed</source>
-        <target state="translated">Eliminazione account non riuscita</target>
+        <target>Eliminazione account non riuscita</target>
       </trans-unit>
       <trans-unit id="6993106617070148867" datatype="html">
         <source>Email already taken</source>
-        <target state="translated">Email già in uso</target>
+        <target>Email già in uso</target>
       </trans-unit>
       <trans-unit id="6954020330003586198" datatype="html">
         <source>The email you are trying to register with is already taken. If you have lost access to your account, please use the forgot password functionality.</source>
-        <target state="translated">L'email con cui stai cercando di registrarti è già in uso. Se hai perso l'accesso al tuo account, usa la funzionalità "password dimenticata".</target>
+        <target>L'email con cui stai cercando di registrarti è già in uso. Se hai perso l'accesso al tuo account, usa la funzionalità "password dimenticata".</target>
       </trans-unit>
       <trans-unit id="1112525418959962254" datatype="html">
         <source>Cancel registration</source>
-        <target state="translated">Annulla registrazione</target>
+        <target>Annulla registrazione</target>
       </trans-unit>
       <trans-unit id="1446670643492611810" datatype="html">
         <source>Hide password</source>
-        <target state="translated">Nascondi password</target>
+        <target>Nascondi password</target>
       </trans-unit>
       <trans-unit id="5554528553553249088" datatype="html">
         <source>Show password</source>
-        <target state="translated">Mostra password</target>
+        <target>Mostra password</target>
       </trans-unit>
       <trans-unit id="1463716403066266718" datatype="html">
         <source>Email not confirmed</source>
-        <target state="translated">Email non confermata</target>
+        <target>Email non confermata</target>
       </trans-unit>
       <trans-unit id="3873810076897380668" datatype="html">
         <source>Please confirm your email address by clicking the link in the email we&apos;ve sent you. If you haven&apos;t received the confirmation email, check your spam folder or request a new one.</source>
-        <target state="translated">Conferma il tuo indirizzo email cliccando il link che ti abbiamo inviato. Se non hai ricevuto l'email di conferma, controlla la cartella spam o richiedine una nuova.</target>
+        <target>Conferma il tuo indirizzo email cliccando il link che ti abbiamo inviato. Se non hai ricevuto l'email di conferma, controlla la cartella spam o richiedine una nuova.</target>
       </trans-unit>
       <trans-unit id="377175857060238077" datatype="html">
         <source>Resend confirmation link</source>
-        <target state="translated">Reinvia link di conferma</target>
+        <target>Reinvia link di conferma</target>
       </trans-unit>
       <trans-unit id="15358667606271745" datatype="html">
         <source>Resend link</source>
-        <target state="translated">Reinvia link</target>
+        <target>Reinvia link</target>
       </trans-unit>
       <trans-unit id="4206213852795546087" datatype="html">
         <source>Close without resending</source>
-        <target state="translated">Chiudi senza reinviare</target>
+        <target>Chiudi senza reinviare</target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
-        <target state="translated">Chiudi</target>
+        <target>Chiudi</target>
       </trans-unit>
       <trans-unit id="88688153290257784" datatype="html">
         <source>Confirmation email resent!</source>
-        <target state="translated">Email di conferma reinviata!</target>
+        <target>Email di conferma reinviata!</target>
       </trans-unit>
       <trans-unit id="4801097390610329915" datatype="html">
         <source>Confirmation email resending failed</source>
-        <target state="translated">Reinvio email di conferma non riuscito</target>
+        <target>Reinvio email di conferma non riuscito</target>
       </trans-unit>
       <trans-unit id="5901078222799889987" datatype="html">
         <source>Select Role</source>
-        <target state="translated">Seleziona ruolo</target>
+        <target>Seleziona ruolo</target>
       </trans-unit>
       <trans-unit id="1417773337941503568" datatype="html">
         <source>Failed to load roles</source>
-        <target state="translated">Impossibile caricare i ruoli</target>
+        <target>Impossibile caricare i ruoli</target>
       </trans-unit>
       <trans-unit id="1013644080577479556" datatype="html">
         <source>Roles (<x id="INTERPOLATION" equiv-text="{{rolePagedResult()?.totalCount}}"/>)</source>
-        <target state="translated">Ruoli (<x id="INTERPOLATION" equiv-text="{{rolePagedResult()?.totalCount}}"/>)</target>
+        <target>Ruoli (<x id="INTERPOLATION" equiv-text="{{rolePagedResult()?.totalCount}}"/>)</target>
       </trans-unit>
       <trans-unit id="3625859417927520024" datatype="html">
         <source>id</source>
-        <target state="translated">id</target>
+        <target>id</target>
       </trans-unit>
       <trans-unit id="3325180562659478330" datatype="html">
         <source>name</source>
-        <target state="translated">nome</target>
+        <target>nome</target>
       </trans-unit>
       <trans-unit id="4573672792356781465" datatype="html">
         <source>Update Role</source>
-        <target state="translated">Aggiorna ruolo</target>
+        <target>Aggiorna ruolo</target>
       </trans-unit>
       <trans-unit id="2021937620675173723" datatype="html">
         <source>Delete Role</source>
-        <target state="translated">Elimina ruolo</target>
+        <target>Elimina ruolo</target>
       </trans-unit>
       <trans-unit id="7931300809730964362" datatype="html">
         <source>Create Role</source>
-        <target state="translated">Crea ruolo</target>
+        <target>Crea ruolo</target>
       </trans-unit>
       <trans-unit id="4108203751127770450" datatype="html">
         <source>Role deleted</source>
-        <target state="translated">Ruolo eliminato</target>
+        <target>Ruolo eliminato</target>
       </trans-unit>
       <trans-unit id="2552246191591264197" datatype="html">
         <source>Role deleting failed</source>
-        <target state="translated">Eliminazione ruolo non riuscita</target>
+        <target>Eliminazione ruolo non riuscita</target>
       </trans-unit>
       <trans-unit id="7315714079098881460" datatype="html">
         <source>email</source>
-        <target state="translated">email</target>
+        <target>email</target>
       </trans-unit>
       <trans-unit id="366439089818916916" datatype="html">
         <source>email confirmed</source>
-        <target state="translated">email confermata</target>
+        <target>email confermata</target>
       </trans-unit>
       <trans-unit id="6020357970867883938" datatype="html">
         <source>Update User</source>
-        <target state="translated">Aggiorna utente</target>
+        <target>Aggiorna utente</target>
       </trans-unit>
       <trans-unit id="4839682406703705780" datatype="html">
         <source>Delete User</source>
-        <target state="translated">Elimina utente</target>
+        <target>Elimina utente</target>
       </trans-unit>
       <trans-unit id="5891941941917080206" datatype="html">
         <source>Create User</source>
-        <target state="translated">Crea utente</target>
+        <target>Crea utente</target>
       </trans-unit>
       <trans-unit id="7515883357904500238" datatype="html">
         <source>Are you sure?</source>
-        <target state="translated">Sei sicuro?</target>
+        <target>Sei sicuro?</target>
       </trans-unit>
       <trans-unit id="4430279976796477709" datatype="html">
         <source>User deleted</source>
-        <target state="translated">Utente eliminato</target>
+        <target>Utente eliminato</target>
       </trans-unit>
       <trans-unit id="5791808460861105079" datatype="html">
         <source>User deleting failed</source>
-        <target state="translated">Eliminazione utente non riuscita</target>
+        <target>Eliminazione utente non riuscita</target>
       </trans-unit>
       <trans-unit id="1775708421448026277" datatype="html">
         <source>Start forgot password process?</source>
-        <target state="translated">Avviare il processo di recupero password?</target>
+        <target>Avviare il processo di recupero password?</target>
       </trans-unit>
       <trans-unit id="5053460342620435085" datatype="html">
         <source>User forgot password started</source>
-        <target state="translated">Recupero password utente avviato</target>
+        <target>Recupero password utente avviato</target>
       </trans-unit>
       <trans-unit id="7711917666704434769" datatype="html">
         <source>User forgot password failed</source>
-        <target state="translated">Recupero password utente non riuscito</target>
+        <target>Recupero password utente non riuscito</target>
       </trans-unit>
       <trans-unit id="5515912742104872108" datatype="html">
         <source>Go to Book</source>
-        <target state="translated">Vai al libro</target>
+        <target>Vai al libro</target>
       </trans-unit>
       <trans-unit id="3052062240425252864" datatype="html">
         <source>Failed to load Books.</source>
-        <target state="translated">Caricamento libri non riuscito.</target>
+        <target>Caricamento libri non riuscito.</target>
       </trans-unit>
       <trans-unit id="143922378743673809" datatype="html">
         <source>There are no Books here.</source>
-        <target state="translated">Non ci sono libri qui.</target>
+        <target>Non ci sono libri qui.</target>
       </trans-unit>
       <trans-unit id="2056252214059701212" datatype="html">
         <source>Select Creator</source>
-        <target state="translated">Seleziona creatore</target>
+        <target>Seleziona creatore</target>
       </trans-unit>
       <trans-unit id="5584894144965270876" datatype="html">
         <source>Failed to load creators</source>
-        <target state="translated">Caricamento creatori non riuscito</target>
+        <target>Caricamento creatori non riuscito</target>
       </trans-unit>
       <trans-unit id="3525650019123992199" datatype="html">
         <source>Error loading file</source>
-        <target state="translated">Errore nel caricamento del file</target>
+        <target>Errore nel caricamento del file</target>
       </trans-unit>
       <trans-unit id="5141025750782803271" datatype="html">
         <source>Current chapter</source>
-        <target state="translated">Capitolo corrente</target>
+        <target>Capitolo corrente</target>
       </trans-unit>
       <trans-unit id="6221215027161505376" datatype="html">
         <source>Go to previous page</source>
-        <target state="translated">Vai alla pagina precedente</target>
+        <target>Vai alla pagina precedente</target>
       </trans-unit>
       <trans-unit id="3629960544875360046" datatype="html">
         <source>Previous page</source>
-        <target state="translated">Pagina precedente</target>
+        <target>Pagina precedente</target>
       </trans-unit>
       <trans-unit id="5430045444410376992" datatype="html">
         <source>Go to next page</source>
-        <target state="translated">Vai alla pagina successiva</target>
+        <target>Vai alla pagina successiva</target>
       </trans-unit>
       <trans-unit id="3337301694210287595" datatype="html">
         <source>Next page</source>
-        <target state="translated">Pagina successiva</target>
+        <target>Pagina successiva</target>
       </trans-unit>
       <trans-unit id="6851459189738911638" datatype="html">
         <source>Change theme</source>
-        <target state="translated">Cambia tema</target>
+        <target>Cambia tema</target>
       </trans-unit>
       <trans-unit id="6214609638529256016" datatype="html">
         <source>Change font size</source>
-        <target state="translated">Cambia dimensione del carattere</target>
+        <target>Cambia dimensione del carattere</target>
       </trans-unit>
       <trans-unit id="4142068363096454927" datatype="html">
         <source>Collapse book</source>
-        <target state="translated">Comprimi libro</target>
+        <target>Comprimi libro</target>
       </trans-unit>
       <trans-unit id="9114998857615529624" datatype="html">
         <source>Remove book from view</source>
-        <target state="translated">Rimuovi libro dalla vista</target>
+        <target>Rimuovi libro dalla vista</target>
       </trans-unit>
       <trans-unit id="3419681791450150574" datatype="html">
         <source>Progress</source>
-        <target state="translated">Progresso</target>
+        <target>Progresso</target>
       </trans-unit>
       <trans-unit id="2722159711136769635" datatype="html">
         <source>Open book</source>
-        <target state="translated">Apri libro</target>
+        <target>Apri libro</target>
       </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>
-        <target state="translated">Vai ai libri</target>
+        <target>Vai ai libri</target>
       </trans-unit>
       <trans-unit id="5928143073449378176" datatype="html">
         <source>Go to Podcasts</source>
-        <target state="translated">Vai ai podcast</target>
+        <target>Vai ai podcast</target>
       </trans-unit>
       <trans-unit id="1134471344072681599" datatype="html">
         <source>Go to My Library</source>
-        <target state="translated">Vai alla mia libreria</target>
+        <target>Vai alla mia libreria</target>
       </trans-unit>
       <trans-unit id="1766402655822050116" datatype="html">
         <source>Go to Edit</source>
-        <target state="translated">Vai a Modifica</target>
+        <target>Vai a Modifica</target>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
         <source>Search</source>
-        <target state="translated">Cerca</target>
+        <target>Cerca</target>
       </trans-unit>
       <trans-unit id="5456802056126251420" datatype="html">
         <source>Search for Books or Podcasts</source>
-        <target state="translated">Cerca libri o podcast</target>
+        <target>Cerca libri o podcast</target>
       </trans-unit>
       <trans-unit id="1210069423269934042" datatype="html">
         <source>Change language</source>
-        <target state="translated">Cambia lingua</target>
+        <target>Cambia lingua</target>
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
-        <target state="translated">Accedi</target>
+        <target>Accedi</target>
       </trans-unit>
       <trans-unit id="8983306299153846900" datatype="html">
         <source>Go to User Profile</source>
-        <target state="translated">Vai al profilo utente</target>
+        <target>Vai al profilo utente</target>
       </trans-unit>
       <trans-unit id="1556270137829928334" datatype="html">
         <source>Close menu</source>
-        <target state="translated">Chiudi menu</target>
+        <target>Chiudi menu</target>
       </trans-unit>
       <trans-unit id="2005818722469409502" datatype="html">
         <source>Open menu</source>
-        <target state="translated">Apri menu</target>
+        <target>Apri menu</target>
       </trans-unit>
       <trans-unit id="900279721865661457" datatype="html">
         <source>Previous slide</source>
-        <target state="translated">Slide precedente</target>
+        <target>Slide precedente</target>
       </trans-unit>
       <trans-unit id="6930162363603699164" datatype="html">
         <source>Next slide</source>
-        <target state="translated">Slide successivo</target>
+        <target>Slide successivo</target>
       </trans-unit>
       <trans-unit id="8197760814140039374" datatype="html">
         <source>Select language</source>
-        <target state="translated">Seleziona lingua</target>
+        <target>Seleziona lingua</target>
       </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>
-        <target state="translated">Ok</target>
+        <target>Ok</target>
       </trans-unit>
       <trans-unit id="6595008830732269870" datatype="html">
         <source>Not found</source>
-        <target state="translated">Non trovato</target>
+        <target>Non trovato</target>
       </trans-unit>
       <trans-unit id="7580974179112857817" datatype="html">
         <source>Element not found or not available Offline. Please try reloading the page or go back.</source>
-        <target state="translated">Elemento non trovato o non disponibile offline. Riprovare ricaricando la pagina o tornando indietro.</target>
+        <target>Elemento non trovato o non disponibile offline. Riprovare ricaricando la pagina o tornando indietro.</target>
       </trans-unit>
       <trans-unit id="6638867697461834046" datatype="html">
         <source>Reload current page</source>
-        <target state="translated">Ricarica la pagina corrente</target>
+        <target>Ricarica la pagina corrente</target>
       </trans-unit>
       <trans-unit id="7967484035994732534" datatype="html">
         <source>Reload</source>
-        <target state="translated">Ricarica</target>
+        <target>Ricarica</target>
       </trans-unit>
       <trans-unit id="5952616973440161474" datatype="html">
         <source>Go back to previous page</source>
-        <target state="translated">Torna alla pagina precedente</target>
+        <target>Torna alla pagina precedente</target>
       </trans-unit>
       <trans-unit id="734934965373819800" datatype="html">
         <source>Go back</source>
-        <target state="translated">Torna indietro</target>
+        <target>Torna indietro</target>
       </trans-unit>
       <trans-unit id="8642445555713453888" datatype="html">
         <source>First page</source>
-        <target state="translated">Prima pagina</target>
+        <target>Prima pagina</target>
       </trans-unit>
       <trans-unit id="6784758141439994527" datatype="html">
         <source>Last page</source>
-        <target state="translated">Ultima pagina</target>
+        <target>Ultima pagina</target>
       </trans-unit>
       <trans-unit id="4501475847356105242" datatype="html">
         <source>Page <x id="PH" equiv-text="p"/></source>
@@ -1324,19 +1324,19 @@
       </trans-unit>
       <trans-unit id="4648768103414783027" datatype="html">
         <source>Go to Podcast</source>
-        <target state="translated">Vai al podcast</target>
+        <target>Vai al podcast</target>
       </trans-unit>
       <trans-unit id="5662402565851233667" datatype="html">
         <source>Go to Podcast Episode</source>
-        <target state="translated">Vai all'episodio del podcast</target>
+        <target>Vai all'episodio del podcast</target>
       </trans-unit>
       <trans-unit id="1078057494557998336" datatype="html">
         <source>Failed to load Podcasts.</source>
-        <target state="translated">Impossibile caricare i podcast.</target>
+        <target>Impossibile caricare i podcast.</target>
       </trans-unit>
       <trans-unit id="3293160871090859129" datatype="html">
         <source>There are no Podcasts here.</source>
-        <target state="translated">Non ci sono podcast qui.</target>
+        <target>Non ci sono podcast qui.</target>
       </trans-unit>
     </body>
   </file>
