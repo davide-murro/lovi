@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, LOCALE_ID, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBars, faClose, faMagnifyingGlass, faUser, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faClose, faMagnifyingGlass, faUser, faGlobe, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthDirective } from '../../core/directives/auth.directive';
 import {
@@ -49,6 +49,7 @@ export class Header {
   faClose = faClose;
   faMagnifyingGlass = faMagnifyingGlass;
   faGlobe = faGlobe;
+  faInfo = faInfo;
 
   private _search = toSignal(this.route.queryParams.pipe(map((data) => data['search'])));
 

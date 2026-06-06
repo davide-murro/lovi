@@ -33,6 +33,7 @@ import { Podcasts } from "./pages/podcasts/podcasts";
 import { Search } from "./pages/search/search";
 import { UserProfile } from "./pages/user-profile/user-profile";
 import { NotFound } from "./shared/not-found/not-found";
+import { AboutUs } from "./pages/about-us/about-us";
 
 
 export const routes: Routes = [
@@ -260,6 +261,12 @@ export const routes: Routes = [
         resolve: {
             role: roleResolver
         }
+    },
+
+    {
+        path: 'about-us',
+        component: AboutUs,
+        title: $localize`LOVI - About Us`,
     },
 
     {

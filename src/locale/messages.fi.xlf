@@ -114,6 +114,10 @@
         <source>LOVI - Edit Role</source>
         <target>LOVI - Muokkaa roolia</target>
       </trans-unit>
+      <trans-unit id="5891092709006200156" datatype="html">
+        <source>LOVI - About Us</source>
+        <target>LOVI - Meistä</target>
+      </trans-unit>
       <trans-unit id="539423531134515766" datatype="html">
         <source>LOVI - Not Found</source>
         <target>LOVI - Ei löydy</target>
@@ -129,6 +133,55 @@
       <trans-unit id="3600577606064542883" datatype="html">
         <source>You are Offline. You will be able to see only Offline content.</source>
         <target>Olet offline-tilassa. Näet vain offline-sisältöä.</target>
+      </trans-unit>
+      <trans-unit id="2501489806101473286" datatype="html">
+        <source>About us</source>
+        <target>Meistä</target>
+      </trans-unit>
+      <trans-unit id="7325785141830483470" datatype="html">
+        <source> LOVI is an audiobook and audio content service specializing in spiritual culture, wisdom traditions, and esoteric knowledge. Its curated catalog includes nonfiction and fiction, classics of the world&apos;s wisdom traditions, works by contemporary authors, podcasts, lectures, audio dramas, and other in-depth audio content.
+</source>
+        <target>LOVI on henkiseen kulttuuriin, viisausperinteisiin ja esoteeriseen tietoon erikoistunut äänikirja- ja audiopalvelu. Sen kuratoituun sisältöön kuuluu tieto- ja kaunokirjallisuutta, maailman viisausperinteiden klassikoita, nykykirjailijoiden teoksia, podcasteja, luentoja, kuunnelmia sekä muuta syvällistä äänisisältöä.</target>
+      </trans-unit>
+      <trans-unit id="2281553974235772306" datatype="html">
+        <source> Oral tradition has played a central role throughout human history. People have gathered around fires to listen to stories, myths, and teachings that helped them understand the world and their place within it. Although our environment has changed, the need for meaningful narratives has not disappeared.
+</source>
+        <target>Suullisella perinteellä on ollut keskeinen merkitys ihmiskunnan historiassa. Ihmiset ovat kokoontuneet tulien äärelle kuulemaan tarinoita, myyttejä ja opetuksia, jotka ovat auttaneet heitä ymmärtämään maailmaa ja omaa paikkaansa siinä. Vaikka ympäristömme on muuttunut, tarve merkityksellisille kertomuksille ei ole kadonnut.</target>
+      </trans-unit>
+      <trans-unit id="4054700592979360815" datatype="html">
+        <source> LOVI is a modern home for this ancient tradition. We do not aim to compete with large mainstream audiobook services; instead, we focus on subjects that are often overlooked by them: philosophy, history, mythology, spiritual traditions, folklore, art, and culture.
+</source>
+        <target>LOVI on nykyaikainen koti tälle ikiaikaiselle perinteelle. Emme pyri kilpailemaan suurten massamarkkinoiden äänikirjapalveluiden kanssa, vaan keskitymme aiheisiin, jotka jäävät usein niiden ulkopuolelle: filosofiaan, historiaan, mytologiaan, henkisiin perinteisiin, kansanperinteeseen, taiteeseen ja kulttuuriin.</target>
+      </trans-unit>
+      <trans-unit id="701922128802484287" datatype="html">
+        <source> The service is intended for anyone who wishes to explore the world, culture, and themselves on a deeper level. LOVI seeks to build bridges between ideologies, religions, and worldviews while highlighting traditions and perspectives that unite humanity.
+</source>
+        <target>Palvelu on tarkoitettu kaikille, jotka haluavat tutkia maailmaa, kulttuuria ja itseään pintaa syvemmältä. LOVI pyrkii rakentamaan siltoja ideologioiden, uskontojen ja maailmankatsomusten välille sekä tuomaan esiin perinteitä ja näkökulmia, jotka yhdistävät ihmisiä.</target>
+      </trans-unit>
+      <trans-unit id="5283601700765326976" datatype="html">
+        <source> Our first published content includes literature, lecture series, podcasts, interviews, articles, poetry, and other original productions.
+</source>
+        <target>Ensimmäisiin julkaisuihimme kuuluu kirjallisuutta, luentosarjoja, podcasteja, haastatteluja, artikkeleita, runoutta ja muuta alkuperäissisältöä.</target>
+      </trans-unit>
+      <trans-unit id="2504810295254780015" datatype="html">
+        <source> LOVI&apos;s content is produced professionally in collaboration with authors, researchers, teachers, and other cultural creators. Our goal is to build a high-quality audio library that preserves, renews, and transmits spiritual and cultural heritage to future generations.
+</source>
+        <target>LOVIn sisältö tuotetaan ammattimaisesti yhteistyössä kirjailijoiden, tutkijoiden, opettajien ja muiden kulttuurin tekijöiden kanssa. Tavoitteemme on rakentaa korkeatasoinen audiokirjasto, joka säilyttää, uudistaa ja välittää henkistä ja kulttuurista perintöä tuleville sukupolville.</target>
+      </trans-unit>
+      <trans-unit id="6048623285932493500" datatype="html">
+        <source> We also believe in a fairer creative economy. That is why LOVI pays its creators competitive compensation and is developing a model in which content creators can also participate in the long-term development of the service.
+</source>
+        <target>Uskomme myös oikeudenmukaisempaan luovaan talouteen. Siksi LOVI maksaa tekijöilleen kilpailukykyisiä korvauksia ja kehittää toimintamallia, jossa sisällöntuottajat voivat osallistua myös palvelun pitkäjänteiseen kehittämiseen.</target>
+      </trans-unit>
+      <trans-unit id="5536218259123549957" datatype="html">
+        <source> Thank you for joining us on this journey.
+</source>
+        <target>Kiitos, että olet mukana matkallamme.</target>
+      </trans-unit>
+      <trans-unit id="7409105236470277702" datatype="html">
+        <source> For questions, feedback, or collaboration proposals, please contact us at: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;link&quot; href=&quot;mailto:info@lovi.media&quot;&gt;"/>info@lovi.media<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.
+</source>
+        <target>Kysymyksissä, palautteessa tai yhteistyöehdotuksissa voit ottaa yhteyttä osoitteeseen: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;link&quot; href=&quot;mailto:info@lovi.media&quot;&gt;"/>info@lovi.media<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
@@ -1253,6 +1306,10 @@
       <trans-unit id="1210069423269934042" datatype="html">
         <source>Change language</source>
         <target>Vaihda kieli</target>
+      </trans-unit>
+      <trans-unit id="7996802568896739728" datatype="html">
+        <source>Go to About us</source>
+        <target>Siirry tietoa meistä -sivulle</target>
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>

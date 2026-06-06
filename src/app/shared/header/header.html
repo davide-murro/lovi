@@ -32,12 +32,16 @@
                 [routerLinkActive]="'active'">Books</a>
             <a i18n i18n-title class="menu-link" title="Go to Podcasts" [routerLink]="['/podcasts']"
                 [routerLinkActive]="'active'">Podcasts</a>
+
             <span *appAuth class="border-accent max-sm:border-b-2 max-sm:w-8 sm:border-r-2 sm:h-8"></span>
+
             <a i18n i18n-title *appAuth class="menu-link" title="Go to My Library" [routerLink]="['/my-library']"
                 [routerLinkActive]="'active'">My Library</a>
+
             <span *appAuth="['Admin', 'Editor']"
                 class="border-accent max-sm:border-b-2 max-sm:w-8 sm:border-r-2 sm:h-8">
             </span>
+
             <a i18n i18n-title *appAuth="['Admin', 'Editor']" class="menu-link" title="Go to Edit"
                 [routerLink]="['/edit']" [routerLinkActive]="'active'">Edit</a>
 
@@ -59,10 +63,15 @@
 
 <ng-template #actions>
     <div class="flex justify-center gap-2 sm:gap-4">
+
         <!-- Language Selector -->
         <button i18n-title type="button" class="icon-button" title="Change language" (click)="selectLanguage()">
             <fa-icon [icon]="faGlobe" />
         </button>
+        
+        <a i18n-title class="icon-button" title="Go to About us" [routerLink]="['/about-us']" [routerLinkActive]="'text-primary'">
+            <fa-icon [icon]="faInfo" />
+        </a>
 
         <ng-template #signIn>
             <a i18n i18n-title class="button button-accent shrink-0" title="Sign in" [routerLink]="['/auth', 'login']"

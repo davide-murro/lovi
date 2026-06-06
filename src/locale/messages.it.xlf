@@ -114,6 +114,10 @@
         <source>LOVI - Edit Role</source>
         <target>LOVI - Modifica Ruolo</target>
       </trans-unit>
+      <trans-unit id="5891092709006200156" datatype="html">
+        <source>LOVI - About Us</source>
+        <target>LOVI - Chi Siamo</target>
+      </trans-unit>
       <trans-unit id="539423531134515766" datatype="html">
         <source>LOVI - Not Found</source>
         <target>LOVI - Non Trovato</target>
@@ -129,6 +133,55 @@
       <trans-unit id="3600577606064542883" datatype="html">
         <source>You are Offline. You will be able to see only Offline content.</source>
         <target>Sei offline. Potrai vedere solo il contenuto disponibile offline.</target>
+      </trans-unit>
+      <trans-unit id="2501489806101473286" datatype="html">
+        <source>About us</source>
+        <target>Chi siamo</target>
+      </trans-unit>
+      <trans-unit id="7325785141830483470" datatype="html">
+        <source> LOVI is an audiobook and audio content service specializing in spiritual culture, wisdom traditions, and esoteric knowledge. Its curated catalog includes nonfiction and fiction, classics of the world&apos;s wisdom traditions, works by contemporary authors, podcasts, lectures, audio dramas, and other in-depth audio content.
+</source>
+        <target>LOVI è un servizio di audiolibri e contenuti audio specializzato in cultura spirituale, tradizioni di saggezza e conoscenza esoterica. Il suo catalogo curato include saggistica e narrativa, classici delle tradizioni di saggezza del mondo, opere di autori contemporanei, podcast, conferenze, drammi audio e altri contenuti audio approfonditi.</target>
+      </trans-unit>
+      <trans-unit id="2281553974235772306" datatype="html">
+        <source> Oral tradition has played a central role throughout human history. People have gathered around fires to listen to stories, myths, and teachings that helped them understand the world and their place within it. Although our environment has changed, the need for meaningful narratives has not disappeared.
+</source>
+        <target>La tradizione orale ha svolto un ruolo centrale nella storia umana. Le persone si sono riunite intorno a fuochi per ascoltare storie, miti e insegnamenti che li aiutavano a comprendere il mondo e il loro posto al suo interno. Sebbene il nostro ambiente sia cambiato, la necessità di narrazioni significative non è scomparsa.</target>
+      </trans-unit>
+      <trans-unit id="4054700592979360815" datatype="html">
+        <source> LOVI is a modern home for this ancient tradition. We do not aim to compete with large mainstream audiobook services; instead, we focus on subjects that are often overlooked by them: philosophy, history, mythology, spiritual traditions, folklore, art, and culture.
+</source>
+        <target>LOVI è una casa moderna per questa antica tradizione. Non miriamo a competere con i grandi servizi di audiolibri mainstream; invece, ci concentriamo su argomenti che spesso vengono trascurati da loro: filosofia, storia, mitologia, tradizioni spirituali, folklore, arte e cultura.</target>
+      </trans-unit>
+      <trans-unit id="701922128802484287" datatype="html">
+        <source> The service is intended for anyone who wishes to explore the world, culture, and themselves on a deeper level. LOVI seeks to build bridges between ideologies, religions, and worldviews while highlighting traditions and perspectives that unite humanity.
+</source>
+        <target>Il servizio è destinato a chiunque desideri esplorare il mondo, la cultura e se stessi a un livello più profondo. LOVI cerca di costruire ponti tra ideologie, religioni e visioni del mondo evidenziando tradizioni e prospettive che uniscono l'umanità.</target>
+      </trans-unit>
+      <trans-unit id="5283601700765326976" datatype="html">
+        <source> Our first published content includes literature, lecture series, podcasts, interviews, articles, poetry, and other original productions.
+</source>
+        <target>Il nostro primo contenuto pubblicato include letteratura, serie di conferenze, podcast, interviste, articoli, poesia e altre produzioni originali.</target>
+      </trans-unit>
+      <trans-unit id="2504810295254780015" datatype="html">
+        <source> LOVI&apos;s content is produced professionally in collaboration with authors, researchers, teachers, and other cultural creators. Our goal is to build a high-quality audio library that preserves, renews, and transmits spiritual and cultural heritage to future generations.
+</source>
+        <target>Il contenuto di LOVI è prodotto professionalmente in collaborazione con autori, ricercatori, insegnanti e altri creatori culturali. Il nostro obiettivo è costruire una biblioteca audio di alta qualità che preservi, rinnovi e trasmetta il patrimonio spirituale e culturale alle future generazioni.</target>
+      </trans-unit>
+      <trans-unit id="6048623285932493500" datatype="html">
+        <source> We also believe in a fairer creative economy. That is why LOVI pays its creators competitive compensation and is developing a model in which content creators can also participate in the long-term development of the service.
+</source>
+        <target>Crediamo anche in un'economia creativa più equa. Ecco perché LOVI paga ai suoi creatori una compensazione competitiva e sta sviluppando un modello in cui i creatori di contenuti possono anche partecipare allo sviluppo a lungo termine del servizio.</target>
+      </trans-unit>
+      <trans-unit id="5536218259123549957" datatype="html">
+        <source> Thank you for joining us on this journey.
+</source>
+        <target>Grazie per esserti unito a noi in questo viaggio.</target>
+      </trans-unit>
+      <trans-unit id="7409105236470277702" datatype="html">
+        <source> For questions, feedback, or collaboration proposals, please contact us at: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;link&quot; href=&quot;mailto:info@lovi.media&quot;&gt;"/>info@lovi.media<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.
+</source>
+        <target>Per domande, feedback o proposte di collaborazione, contattaci all'indirizzo: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;link&quot; href=&quot;mailto:info@lovi.media&quot;&gt;"/>info@lovi.media<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="6568241849286471287" datatype="html">
         <source>Confirm email change</source>
@@ -1253,6 +1306,10 @@
       <trans-unit id="1210069423269934042" datatype="html">
         <source>Change language</source>
         <target>Cambia lingua</target>
+      </trans-unit>
+      <trans-unit id="7996802568896739728" datatype="html">
+        <source>Go to About us</source>
+        <target>Vai a Chi siamo</target>
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
