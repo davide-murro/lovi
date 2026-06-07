@@ -83,7 +83,6 @@ export class AudioPlayer {
     this.isSeeking.set(true);
     this.seekingTime.set(this.audioPlayerService.currentTime());
   }
-
   // Called on input.
   onSeeking(value: number) {
     this.seekingTime.set(value);
@@ -91,7 +90,6 @@ export class AudioPlayer {
       this.audioPlayerService.seek(value);
     }
   }
-
   // Called on mouseup (desktop) or touchend (mobile).
   onSeekingEnd() {
     this.audioPlayerService.seek(this.seekingTime());
@@ -99,18 +97,19 @@ export class AudioPlayer {
     this.seekingTime.set(0);
   }
 
-  onTrackDrop(event: CdkDragDrop<any[]>) {
-    this.audioPlayerService.reorderQueue(event.previousIndex, event.currentIndex);
-  }
-
+  // on drag start
   onTrackDragStart() {
     this.isReordering.set(true);
   }
-
+  // on drag end
   onTrackDragEnd() {
     requestAnimationFrame(() => {
       this.isReordering.set(false);
     });
+  }
+  // on drop
+  onTrackDrop(event: CdkDragDrop<any[]>) {
+    this.audioPlayerService.reorderQueue(event.previousIndex, event.currentIndex);
   }
 
   // Utility function to format seconds into int value

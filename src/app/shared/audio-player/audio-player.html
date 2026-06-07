@@ -11,8 +11,8 @@
       <fa-icon [icon]="faChevronDown" />
     </button>
 
-    <ul role="list" class="flex flex-col flex-grow w-full overflow-auto overscroll-none" #cdkBoundary cdkDropList
-      [class.is-reordering]="isReordering()" [cdkDropListAutoScrollStep]="3" (cdkDropListDropped)="onTrackDrop($event)">
+    <ul role="list" id="track-container" class="flex flex-col flex-grow w-full overflow-auto overscroll-none" #cdkBoundary cdkDropList
+      [cdkDropListAutoScrollStep]="3" (cdkDropListDropped)="onTrackDrop($event)">
       @for (track of audioPlayerService.queue(); track track.id) {
       <li class="flex items-center px-4 py-2 gap-2 track-list-item"
         [animate.enter]="!isReordering() ? 'track-enter-animation' : null"

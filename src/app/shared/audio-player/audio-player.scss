@@ -130,7 +130,7 @@
 }
 
 
-.track-enter-animation {
+#track-container .track-enter-animation {
    animation: track-enter-animation 300ms;
 }
 
@@ -149,7 +149,7 @@
 }
 
 
-.track-leave-animation {
+#track-container .track-leave-animation {
    animation: track-leave-animation 300ms;
 }
 
