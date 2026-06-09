@@ -905,9 +905,9 @@
         <source>Password changed</source>
         <target>Salasana vaihdettu</target>
       </trans-unit>
-      <trans-unit id="5337524527180744591" datatype="html">
-        <source>Confirmation notices have been sent to your email addresses.</source>
-        <target>Vahvistusilmoitukset on lähetetty sähköpostiosoitteisiisi.</target>
+      <trans-unit id="3423170370880675999" datatype="html">
+        <source>Confirmation notice have been sent to your email address.</source>
+        <target>Vahvistusilmoitus on lähetetty sähköpostiosoitteeseesi.</target>
       </trans-unit>
       <trans-unit id="1829779471067775299" datatype="html">
         <source>Profile updated</source>

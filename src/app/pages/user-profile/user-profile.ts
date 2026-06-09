@@ -66,7 +66,7 @@ export class UserProfile {
         if (result) {
           this.dialogService.log(
             $localize`Password changed`,
-            $localize`Confirmation notices have been sent to your email addresses.`
+            $localize`Confirmation notice have been sent to your email address.`
           ).subscribe();
         }
       });
