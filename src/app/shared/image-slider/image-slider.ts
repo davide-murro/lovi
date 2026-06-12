@@ -4,6 +4,7 @@ import {
   input,
   OnDestroy,
   signal,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +21,7 @@ export interface ImageSliderItem {
   selector: 'app-image-slider',
   imports: [FontAwesomeModule],
   templateUrl: './image-slider.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './image-slider.scss',
 })
 export class ImageSlider implements OnDestroy {

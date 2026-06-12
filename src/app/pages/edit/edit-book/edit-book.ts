@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,6 +16,7 @@ import { EpubReaderComponent } from '../../../shared/epub-reader/epub-reader.com
   selector: 'app-edit-book',
   imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, SecureMediaDirective, EpubReaderComponent],
   templateUrl: './edit-book.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-book.scss'
 })
 export class EditBook {

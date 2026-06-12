@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { from } from 'rxjs';
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
 import { AudioTrack } from '../../../../core/models/audio-track.model';
@@ -19,6 +19,7 @@ import { DialogService } from '../../../../core/services/dialog.service';
   selector: 'app-podcast-episode-details',
   imports: [FontAwesomeModule, RouterLink, AuthDirective, SecureMediaDirective],
   templateUrl: './podcast-episode-details.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './podcast-episode-details.scss'
 })
 export class PodcastEpisodeDetails {

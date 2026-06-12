@@ -1,4 +1,4 @@
-import { Component, effect, inject, NgZone, ViewChild } from '@angular/core';
+import { Component, effect, inject, NgZone, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Header } from './shared/header/header';
 import { Body } from './shared/body/body';
 import { AudioPlayer } from './shared/audio-player/audio-player';
@@ -17,6 +17,7 @@ import { FileBookReaderService } from './core/services/file-book-reader.service'
   selector: 'app-root',
   imports: [Header, Body, AudioPlayer, FileBookReader, Toaster, Dialog],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss',
 })
 export class App {

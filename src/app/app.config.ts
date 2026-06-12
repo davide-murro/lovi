@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, provideAppInitializer, inject } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withRouterConfig, withViewTransitions } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       }),
     ),
-    provideHttpClient(withInterceptors([authInterceptor, offlineInterceptor])),
+    provideHttpClient(withXhr(), withInterceptors([authInterceptor, offlineInterceptor])),
     provideServiceWorker('ngsw-worker.js', {
       enabled: environment.enableServiceWorker,
       registrationStrategy: 'registerWhenStable:30000'

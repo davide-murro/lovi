@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, input, OnDestroy, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, OnDestroy, signal, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight, faCircleNotch, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ import { EpubReaderStyle } from './epub-reader-style.model';
   selector: 'app-epub-reader',
   imports: [CommonModule, FontAwesomeModule],
   templateUrl: './epub-reader.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './epub-reader.component.scss'
 })
 export class EpubReaderComponent implements OnDestroy {

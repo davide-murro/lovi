@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
@@ -15,6 +15,7 @@ import { PasswordInput } from '../../../shared/auth/password-input/password-inpu
   imports: [ReactiveFormsModule, PasswordInput],
 
   templateUrl: './forgot-password.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './forgot-password.scss'
 })
 export class ForgotPassword {

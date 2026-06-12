@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { RoleDto } from '../../../core/models/dtos/auth/role-dto.model';
   selector: 'app-edit-role',
   imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
   templateUrl: './edit-role.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-role.scss'
 })
 export class EditRole {

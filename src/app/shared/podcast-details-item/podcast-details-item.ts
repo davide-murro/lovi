@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { PodcastDto } from '../../core/models/dtos/podcast-dto.model';
 import { RouterLink } from '@angular/router';
 import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
@@ -13,6 +13,7 @@ import { ToasterService } from '../../core/services/toaster.service';
   selector: 'app-podcast-details-item',
   imports: [FontAwesomeModule, RouterLink, PodcastEpisodeItem, SecureMediaDirective],
   templateUrl: './podcast-details-item.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './podcast-details-item.scss'
 })
 export class PodcastDetailsItem {

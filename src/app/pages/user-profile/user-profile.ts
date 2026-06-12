@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ import { DeleteAccountDialog } from '../../shared/auth/delete-account-dialog/del
   selector: 'app-user-profile',
   imports: [ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './user-profile.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-profile.scss'
 })
 export class UserProfile {

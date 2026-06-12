@@ -1,11 +1,12 @@
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BooksPaged } from "../../shared/books-paged/books-paged";
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-books',
   imports: [FontAwesomeModule, BooksPaged],
   templateUrl: './books.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './books.scss'
 })
 export class Books {

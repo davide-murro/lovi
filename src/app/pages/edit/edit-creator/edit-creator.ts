@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   selector: 'app-edit-creator',
   imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
   templateUrl: './edit-creator.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-creator.scss'
 })
 export class EditCreator {

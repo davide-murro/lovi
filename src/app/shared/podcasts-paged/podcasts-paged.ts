@@ -1,4 +1,4 @@
-import { Component, inject, input, linkedSignal, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { PodcastsService } from '../../core/services/podcasts.service';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -11,6 +11,7 @@ import { PodcastItem } from "../podcast-item/podcast-item";
   selector: 'app-podcasts-paged',
   imports: [Pagination, PodcastItem],
   templateUrl: './podcasts-paged.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './podcasts-paged.scss'
 })
 export class PodcastsPaged {

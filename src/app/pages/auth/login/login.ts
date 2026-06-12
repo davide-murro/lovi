@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginDto } from '../../../core/models/dtos/auth/login-dto.model';
@@ -18,6 +18,7 @@ import { PasswordInput } from '../../../shared/auth/password-input/password-inpu
   imports: [ReactiveFormsModule, RouterLink, FontAwesomeModule, PasswordInput],
 
   templateUrl: './login.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.scss'
 })
 export class Login {

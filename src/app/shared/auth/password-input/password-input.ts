@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, ElementRef, forwardRef, input, signal, viewChild } from '@angular/core';
+import { booleanAttribute, Component, computed, ElementRef, forwardRef, input, signal, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +17,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
     '[attr.placeholder]': 'null',
   },
 
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
 
     {

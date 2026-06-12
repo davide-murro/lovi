@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ToasterService } from '../../core/services/toaster.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
   selector: 'app-toaster',
   imports: [FontAwesomeModule],
   templateUrl: './toaster.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './toaster.scss'
 })
 export class Toaster {

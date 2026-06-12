@@ -1,4 +1,4 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,6 +6,7 @@ import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight } from '@fortawe
   selector: 'app-pagination',
   imports: [FontAwesomeModule],
   templateUrl: './pagination.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './pagination.scss'
 })
 export class Pagination {

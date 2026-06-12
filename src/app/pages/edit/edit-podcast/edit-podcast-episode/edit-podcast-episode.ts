@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PodcastEpisodeDto } from '../../../../core/models/dtos/podcast-episode-dto.model';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { SecureMediaDirective } from '../../../../core/directives/secure-media.d
   selector: 'app-edit-podcast-episode',
   imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, SecureMediaDirective],
   templateUrl: './edit-podcast-episode.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-podcast-episode.scss'
 })
 export class EditPodcastEpisode {

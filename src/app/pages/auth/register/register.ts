@@ -1,4 +1,4 @@
-import { Component, inject, signal, Signal } from '@angular/core';
+import { Component, inject, signal, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterDto } from '../../../core/models/dtos/auth/register-dto.model';
@@ -16,6 +16,7 @@ import { PasswordInput } from '../../../shared/auth/password-input/password-inpu
   imports: [ReactiveFormsModule, PasswordInput],
 
   templateUrl: './register.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './register.scss'
 })
 export class Register {

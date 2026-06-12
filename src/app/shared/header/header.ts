@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, LOCALE_ID, signal } from '@angular/core';
+import { Component, computed, effect, inject, LOCALE_ID, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faClose, faMagnifyingGlass, faUser, faGlobe, faInfo } from '@fortawesome/free-solid-svg-icons';
@@ -29,6 +29,7 @@ import { LocaleSelectorDialog } from '../locale-selector-dialog/locale-selector-
     FormsModule,
   ],
   templateUrl: './header.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './header.scss',
 })
 export class Header {

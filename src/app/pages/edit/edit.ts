@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthDirective } from "../../core/directives/auth.directive";
 import { RolesTablePaged } from '../../shared/auth/roles-table-paged/roles-table-paged';
@@ -11,6 +11,7 @@ import { CreatorsTablePaged } from "../../shared/creators-table-paged/creators-t
   selector: 'app-edit',
   imports: [FontAwesomeModule, AuthDirective, UsersTablePaged, RolesTablePaged, BooksTablePaged, PodcastsTablePaged, CreatorsTablePaged],
   templateUrl: './edit.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit.scss'
 })
 export class Edit {

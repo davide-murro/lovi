@@ -1,4 +1,4 @@
-import { Component, inject, computed } from "@angular/core";
+import { Component, inject, computed, ChangeDetectionStrategy } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { OfflineService } from "../../../core/services/offline.service";
 import { BookItem } from "../../../shared/book-item/book-item";
@@ -8,6 +8,7 @@ import { PodcastDetailsItem } from "../../../shared/podcast-details-item/podcast
   selector: 'app-my-offline',
   imports: [FontAwesomeModule, BookItem, PodcastDetailsItem],
   templateUrl: './my-offline.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './my-offline.scss'
 })
 export class MyOffline {

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangePasswordDto } from '../../../core/models/dtos/auth/change-password-dto.model';
 import { AuthService } from '../../../core/services/auth.service';
@@ -12,6 +12,7 @@ import { PasswordInput } from '../password-input/password-input';
   selector: 'app-change-password-dialog',
   imports: [ReactiveFormsModule, PasswordInput],
   templateUrl: './change-password-dialog.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './change-password-dialog.scss'
 })
 export class ChangePasswordDialog {

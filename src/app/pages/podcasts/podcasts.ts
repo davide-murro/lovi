@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
 
@@ -6,6 +6,7 @@ import { PodcastsPaged } from "../../shared/podcasts-paged/podcasts-paged";
   selector: 'app-podcasts',
   imports: [FontAwesomeModule, PodcastsPaged],
   templateUrl: './podcasts.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './podcasts.scss'
 })
 export class Podcasts {

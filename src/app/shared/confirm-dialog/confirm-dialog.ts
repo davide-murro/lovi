@@ -1,10 +1,11 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
   selector: 'app-confirm-dialog',
   imports: [],
   templateUrl: './confirm-dialog.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './confirm-dialog.scss'
 })
 export class ConfirmDialog {

@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { DialogService } from '../../../core/services/dialog.service';
 import { RouterLink } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-email-already-taken-dialog',
   imports: [RouterLink],
   templateUrl: './email-already-taken-dialog.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './email-already-taken-dialog.scss'
 })
 export class EmailAlreadyTakenDialog {

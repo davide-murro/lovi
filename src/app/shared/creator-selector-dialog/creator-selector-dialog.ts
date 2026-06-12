@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, of } from 'rxjs';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
@@ -12,6 +12,7 @@ import { Pagination } from "../pagination/pagination";
   selector: 'app-creator-selector-dialog',
   imports: [Pagination],
   templateUrl: './creator-selector-dialog.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './creator-selector-dialog.scss'
 })
 export class CreatorSelectorDialog {

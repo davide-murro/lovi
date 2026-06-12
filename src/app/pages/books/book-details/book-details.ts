@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { AudioPlayerService } from '../../../core/services/audio-player.service';
@@ -20,6 +20,7 @@ import { FileBook } from '../../../core/models/file-book.model';
   selector: 'app-book-details',
   imports: [FontAwesomeModule, RouterLink, AuthDirective, SecureMediaDirective],
   templateUrl: './book-details.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './book-details.scss'
 })
 export class BookDetails {
