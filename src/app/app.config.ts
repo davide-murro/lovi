@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, provideAppInitializer, inject } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideAppInitializer, inject, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withRouterConfig, withViewTransitions } from '@angular/router';
 import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideAppInitializer(() => {
       const authService = inject(AuthService);
       // Try to restore session on page load if we have a session hint
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       }),
     ),
-    provideHttpClient(withXhr(), withInterceptors([authInterceptor, offlineInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, offlineInterceptor])),
     provideServiceWorker('ngsw-worker.js', {
       enabled: environment.enableServiceWorker,
       registrationStrategy: 'registerWhenStable:30000'

@@ -31,7 +31,6 @@
             ],
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js",
               "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
@@ -89,8 +88,6 @@
                 "src/styles.scss"
               ],
               "polyfills": [
-                "zone.js",
-                "zone.js/testing",
                 "@angular/localize/init"
               ]
             }
