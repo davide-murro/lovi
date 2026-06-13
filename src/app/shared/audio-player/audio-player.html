@@ -82,16 +82,16 @@
       (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">
         <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-          loading="lazy" decoding="async" [secureSrc]="audioPlayerService.currentTrack()?.coverImageSrc"
-          [secureOffline]="true" [alt]="audioPlayerService.currentTrack()?.title" />
+          loading="lazy" decoding="async" [secureSrc]="audioPlayerService.currentTrack()!.coverImageSrc"
+          [secureOffline]="true" [alt]="audioPlayerService.currentTrack()!.title" />
         <div class="flex flex-col truncate">
-          <span class="truncate">{{ audioPlayerService.currentTrack()?.title }}</span>
+          <span class="truncate">{{ audioPlayerService.currentTrack()!.title }}</span>
           <span class="text-accent text-sm truncate">
-            @if (audioPlayerService.currentTrack()?.subtitle) {
-            {{ audioPlayerService.currentTrack()?.subtitle }}
+            @if (audioPlayerService.currentTrack()!.subtitle) {
+            {{ audioPlayerService.currentTrack()!.subtitle }}
             }
             @else {
-            {{ audioPlayerService.currentTrack()?.artists?.join(", ") }}
+            {{ audioPlayerService.currentTrack()!.artists?.join(", ") }}
             }
           </span>
         </div>

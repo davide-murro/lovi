@@ -59,16 +59,16 @@
             [class.text-error]="fileBookReaderService.isError()" (click)="isOpen.set(true)">
             <div class="flex items-center gap-2">
                 <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-                    loading="lazy" decoding="async" [secureSrc]="fileBookReaderService.currentFileBook()?.coverImageSrc"
-                    [secureOffline]="true" [alt]="fileBookReaderService.currentFileBook()?.title" />
+                    loading="lazy" decoding="async" [secureSrc]="fileBookReaderService.currentFileBook()!.coverImageSrc"
+                    [secureOffline]="true" [alt]="fileBookReaderService.currentFileBook()!.title" />
                 <div class="flex flex-col truncate">
-                    <span class="truncate">{{ fileBookReaderService.currentFileBook()?.title }}</span>
+                    <span class="truncate">{{ fileBookReaderService.currentFileBook()!.title }}</span>
                     <span class="text-accent text-sm truncate">
-                        @if (fileBookReaderService.currentFileBook()?.subtitle) {
-                        {{ fileBookReaderService.currentFileBook()?.subtitle }}
+                        @if (fileBookReaderService.currentFileBook()!.subtitle) {
+                        {{ fileBookReaderService.currentFileBook()!.subtitle }}
                         }
                         @else {
-                        {{ fileBookReaderService.currentFileBook()?.authors?.join(", ") }}
+                        {{ fileBookReaderService.currentFileBook()!.authors?.join(", ") }}
                         }
                     </span>
                 </div>
