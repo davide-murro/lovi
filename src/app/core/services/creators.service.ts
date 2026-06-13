@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -6,9 +6,7 @@ import { CreatorDto } from '../models/dtos/creator-dto.model';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class CreatorsService {
   private apiUrl = environment.apiUrl + '/creators'; // adjust port to your API
   private http = inject(HttpClient);

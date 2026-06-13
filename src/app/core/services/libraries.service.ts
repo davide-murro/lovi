@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { effect, inject, Service, Signal, signal, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { finalize, map, Observable, shareReplay, switchMap, tap } from 'rxjs';
@@ -6,9 +6,7 @@ import { LibraryDto } from '../models/dtos/library-dto.model';
 import { ManageLibraryDto } from '../models/dtos/manage-library-dto.model';
 import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class LibrariesService {
   private apiUrl = environment.apiUrl + '/libraries';
   private http = inject(HttpClient);

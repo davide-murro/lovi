@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,9 +7,7 @@ import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { UserProfileDto } from '../models/dtos/user-profile-dto.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class UsersService {
   private apiUrl = environment.apiUrl + '/users';
   private http = inject(HttpClient);

@@ -1,4 +1,4 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { AudioTrack } from '../models/audio-track.model';
 import { AuthService } from './auth.service';
 import { firstValueFrom, Subject } from 'rxjs';
@@ -8,9 +8,7 @@ import { OfflineUrlPipe } from '../pipes/offline-url.pipe';
 const REFRESH_TOKEN_EVERY_MILLISECONDS = 60000;  // 1 minute
 const COOKIE_MAX_AGE_SECONDS = 1800;             // 30 minutes
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class AudioPlayerService {
   private authService = inject(AuthService);
   private offlineUrlPipe = inject(OfflineUrlPipe);

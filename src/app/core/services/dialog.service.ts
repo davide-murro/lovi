@@ -1,13 +1,11 @@
-import { Injectable, signal, Type } from '@angular/core';
+import { Service, signal, Type } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 import { DialogState } from '../models/dialog-state.model';
 import { DialogConfig } from '../models/dialog-config.model';
 import { LogDialog } from '../../shared/log-dialog/log-dialog';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class DialogService {
   private _dialog = signal<DialogState>({
     component: null,

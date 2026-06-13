@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, signal, computed } from '@angular/core';
+import { effect, inject, signal, computed, Service } from '@angular/core';
 import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { BookDto } from '../models/dtos/book-dto.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
@@ -8,9 +8,7 @@ import { AuthService } from './auth.service';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
 import { CreatorDto } from '../models/dtos/creator-dto.model';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Service()
 export class OfflineService {
     private authService = inject(AuthService);
     private booksService = inject(BooksService);

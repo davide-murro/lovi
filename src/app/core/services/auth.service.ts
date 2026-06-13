@@ -1,8 +1,8 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { RegisterDto } from '../models/dtos/auth/register-dto.model';
-import { finalize, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { finalize, Observable, shareReplay, tap } from 'rxjs';
 import { LoginDto } from '../models/dtos/auth/login-dto.model';
 import { TokenDto } from '../models/dtos/auth/token-dto.model';
 import { ChangePasswordDto } from '../models/dtos/auth/change-password-dto.model';
@@ -16,9 +16,7 @@ import { ResendConfirmEmailDto } from '../models/dtos/auth/resend-confirm-email-
 import { ExternalLoginDto } from '../models/dtos/auth/external-login-dto.model';
 import { jwtDecode } from 'jwt-decode';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class AuthService {
   private apiUrl = environment.apiUrl + '/auth';
   private http = inject(HttpClient);

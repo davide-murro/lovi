@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,9 +6,7 @@ import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { RoleDto } from '../models/dtos/auth/role-dto.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class RolesService {
   private apiUrl = environment.apiUrl + '/roles'; // adjust port to your API
   private http = inject(HttpClient);

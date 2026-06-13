@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BookDto } from '../models/dtos/book-dto.model';
@@ -6,9 +6,7 @@ import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { Observable } from 'rxjs';
 import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class BooksService {
   private apiUrl = environment.apiUrl + '/books';
   private http = inject(HttpClient);

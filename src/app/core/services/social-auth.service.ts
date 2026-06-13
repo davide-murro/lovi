@@ -1,12 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Service, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 declare const google: any;
 //declare const FB: any;
 
-@Injectable({
-    providedIn: 'root'
-})
+@Service()
 export class SocialAuthService {
     // IDs are managed in src/environments/environment.ts
     private readonly GOOGLE_CLIENT_ID = environment.googleClientId;

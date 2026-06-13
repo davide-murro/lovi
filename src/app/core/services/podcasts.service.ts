@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PodcastDto } from '../models/dtos/podcast-dto.model';
@@ -7,9 +7,7 @@ import { PagedQuery } from '../models/dtos/pagination/paged-query.model';
 import { PagedResult } from '../models/dtos/pagination/paged-result.model';
 import { PodcastEpisodeDto } from '../models/dtos/podcast-episode-dto.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class PodcastsService {
   private apiUrl = environment.apiUrl + '/podcasts'; // adjust port to your API
   private http = inject(HttpClient);

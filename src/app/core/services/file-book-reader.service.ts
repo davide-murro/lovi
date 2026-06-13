@@ -1,12 +1,10 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { FileBook } from '../models/file-book.model';
 import { EpubReader } from '../../shared/epub-reader/epub-reader';
 import { AuthService } from './auth.service';
 import { EpubReaderStyle } from '../../shared/epub-reader/epub-reader-style.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class FileBookReaderService {
   private authService = inject(AuthService);
 
