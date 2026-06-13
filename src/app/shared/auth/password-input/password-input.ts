@@ -46,8 +46,8 @@ export class PasswordInput implements ControlValueAccessor {
   faEyeSlash = faEyeSlash;
 
   showPassword = signal(false);
-  value = '';
-  disabled = false;
+  value = signal('');
+  disabled = signal(false);
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -58,12 +58,12 @@ export class PasswordInput implements ControlValueAccessor {
 
   onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.value = target.value;
-    this.onChange(this.value);
+    this.value.set(target.value);
+    this.onChange(this.value());
   }
 
   writeValue(value: any): void {
-    this.value = value || '';
+    this.value.set(value || '');
   }
 
   registerOnChange(fn: any): void {
@@ -75,7 +75,7 @@ export class PasswordInput implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
     if (isDisabled) this.showPassword.set(false);
   }
 }
