@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../core/services/audio-player.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBackward, faBackwardStep, faChevronDown, faCircleNotch, faForward, faGripLines, faPause, faPlay, faRotateLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,6 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
   selector: 'app-audio-player',
   imports: [FontAwesomeModule, SecureMediaDirective, DragDropModule],
   templateUrl: './audio-player.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './audio-player.scss'
 })
 export class AudioPlayer {

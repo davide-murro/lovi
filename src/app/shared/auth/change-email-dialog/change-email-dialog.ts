@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChangeEmailDto } from '../../../core/models/dtos/auth/change-email-dto.model';
 import { AuthService } from '../../../core/services/auth.service';
@@ -10,7 +10,6 @@ import { PasswordInput } from '../password-input/password-input';
   selector: 'app-change-email-dialog',
   imports: [ReactiveFormsModule, PasswordInput],
   templateUrl: './change-email-dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './change-email-dialog.scss'
 })
 export class ChangeEmailDialog {

@@ -1,4 +1,4 @@
-import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 import { environment } from '../../../environments/environment';
 
@@ -6,7 +6,6 @@ import { environment } from '../../../environments/environment';
   selector: 'app-locale-selector-dialog',
   imports: [],
   templateUrl: './locale-selector-dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './locale-selector-dialog.scss'
 })
 export class LocaleSelectorDialog {

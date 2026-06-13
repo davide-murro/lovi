@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faCircleHalfStroke, faClose, faTextHeight, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,6 @@ import { EpubReaderComponent } from '../epub-reader/epub-reader.component';
   selector: 'app-file-book-reader',
   imports: [CommonModule, FontAwesomeModule, SecureMediaDirective, EpubReaderComponent],
   templateUrl: './file-book-reader.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './file-book-reader.scss'
 })
 export class FileBookReader {

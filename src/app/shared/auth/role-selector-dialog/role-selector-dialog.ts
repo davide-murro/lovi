@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, of } from 'rxjs';
 import { RoleDto } from '../../../core/models/dtos/auth/role-dto.model';
@@ -12,7 +12,6 @@ import { Pagination } from '../../pagination/pagination';
   selector: 'app-role-selector-dialog',
   imports: [Pagination],
   templateUrl: './role-selector-dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './role-selector-dialog.scss'
 })
 export class RoleSelectorDialog {

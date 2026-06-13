@@ -1,4 +1,4 @@
-import { Component, inject, input, linkedSignal, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -14,7 +14,6 @@ import { Pagination } from "../../pagination/pagination";
   selector: 'app-roles-table-paged',
   imports: [RouterLink, FontAwesomeModule, Pagination],
   templateUrl: './roles-table-paged.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './roles-table-paged.scss'
 })
 export class RolesTablePaged {

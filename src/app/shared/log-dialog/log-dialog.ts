@@ -1,11 +1,10 @@
-import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
   selector: 'app-log-dialog',
   imports: [],
   templateUrl: './log-dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './log-dialog.scss'
 })
 export class LogDialog {

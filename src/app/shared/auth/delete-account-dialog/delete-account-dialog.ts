@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DeleteAccountDto } from '../../../core/models/dtos/auth/delete-account-dto.model';
 import { AuthService } from '../../../core/services/auth.service';
@@ -10,7 +10,6 @@ import { PasswordInput } from '../password-input/password-input';
   selector: 'app-delete-account-dialog',
   imports: [ReactiveFormsModule, PasswordInput],
   templateUrl: './delete-account-dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './delete-account-dialog.scss'
 })
 export class DeleteAccountDialog {

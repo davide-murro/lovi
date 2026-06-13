@@ -1,4 +1,4 @@
-import { Component, inject, input, linkedSignal, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, of, finalize } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,7 +16,6 @@ import { Pagination } from "../../pagination/pagination";
   selector: 'app-users-table-paged',
   imports: [RouterLink, FontAwesomeModule, Pagination],
   templateUrl: './users-table-paged.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './users-table-paged.scss'
 })
 export class UsersTablePaged {

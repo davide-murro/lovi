@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { faAdd, faPen, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +18,6 @@ import { DatePipe } from '@angular/common';
   selector: 'app-edit-user',
   imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink, DatePipe],
   templateUrl: './edit-user.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-user.scss'
 })
 export class EditUser {

@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PodcastEpisodeDto } from '../../core/models/dtos/podcast-episode-dto.model';
 import { PodcastDto } from '../../core/models/dtos/podcast-dto.model';
@@ -8,7 +8,6 @@ import { SecureMediaDirective } from '../../core/directives/secure-media.directi
   selector: 'app-podcast-episode-item',
   imports: [RouterLink, SecureMediaDirective],
   templateUrl: './podcast-episode-item.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './podcast-episode-item.scss'
 })
 export class PodcastEpisodeItem {

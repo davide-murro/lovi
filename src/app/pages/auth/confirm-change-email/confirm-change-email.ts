@@ -1,4 +1,4 @@
-import { Component, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
@@ -9,7 +9,6 @@ import { ConfirmChangeEmailDto } from '../../../core/models/dtos/auth/confirm-ch
   selector: 'app-confirm-change-email',
   imports: [ReactiveFormsModule],
   templateUrl: './confirm-change-email.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './confirm-change-email.scss'
 })
 export class ConfirmChangeEmail {

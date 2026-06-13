@@ -1,11 +1,10 @@
-import { Component, effect, ElementRef, inject, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, ElementRef, inject, ViewChild, ViewContainerRef, signal } from '@angular/core';
 import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
   selector: 'app-dialog',
   imports: [],
   templateUrl: './dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dialog.scss'
 })
 export class Dialog {

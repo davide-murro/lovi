@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { PodcastDto } from '../../../core/models/dtos/podcast-dto.model';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,7 +14,6 @@ import { CreatorSelectorDialog } from '../../../shared/creator-selector-dialog/c
   selector: 'app-edit-podcast',
   imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
   templateUrl: './edit-podcast.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-podcast.scss'
 })
 export class EditPodcast {

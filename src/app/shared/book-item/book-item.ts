@@ -1,4 +1,4 @@
-import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BookDto } from '../../core/models/dtos/book-dto.model';
 import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
@@ -7,7 +7,6 @@ import { SecureMediaDirective } from '../../core/directives/secure-media.directi
   selector: 'app-book-item',
   imports: [RouterLink, SecureMediaDirective],
   templateUrl: './book-item.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './book-item.scss'
 })
 export class BookItem {

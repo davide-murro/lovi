@@ -1,4 +1,4 @@
-import { Component, inject, signal, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, input } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { ToasterService } from '../../../core/services/toaster.service';
@@ -8,7 +8,6 @@ import { ResendConfirmEmailDto } from '../../../core/models/dtos/auth/resend-con
   selector: 'app-resend-change-email-dialog',
   imports: [],
   templateUrl: './resend-change-email-dialog.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './resend-change-email-dialog.scss'
 })
 export class ResendChangeEmailDialog {

@@ -1,4 +1,4 @@
-import { Component, inject, input, linkedSignal, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, of, finalize } from 'rxjs';
 import { PagedQuery } from '../../core/models/dtos/pagination/paged-query.model';
@@ -11,7 +11,6 @@ import { BookItem } from "../book-item/book-item";
   selector: 'app-books-paged',
   imports: [Pagination, BookItem],
   templateUrl: './books-paged.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './books-paged.scss'
 })
 export class BooksPaged {

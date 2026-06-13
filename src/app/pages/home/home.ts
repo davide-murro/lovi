@@ -1,4 +1,4 @@
-import { Component, signal, Signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import { BooksPaged } from '../../shared/books-paged/books-paged';
 import { PodcastsPaged } from '../../shared/podcasts-paged/podcasts-paged';
 import { ImageSlider, ImageSliderItem } from '../../shared/image-slider/image-slider';
@@ -7,7 +7,6 @@ import { ImageSlider, ImageSliderItem } from '../../shared/image-slider/image-sl
   selector: 'app-home',
   imports: [BooksPaged, PodcastsPaged, ImageSlider],
   templateUrl: './home.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.scss',
 })
 export class Home {

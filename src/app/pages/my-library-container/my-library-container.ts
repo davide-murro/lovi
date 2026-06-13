@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { Component } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faBookBookmark, faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,6 @@ import { faBookBookmark, faFileArrowDown } from "@fortawesome/free-solid-svg-ico
   selector: 'app-my-library-container',
   imports: [FontAwesomeModule, RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './my-library-container.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './my-library-container.scss'
 })
 export class MyLibraryContainer {

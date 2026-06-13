@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { faBookBookmark, faBookOpen, faCircleNotch, faDownload, faFileArrowDown, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,7 +19,6 @@ import { from } from 'rxjs';
   selector: 'app-podcast-detail',
   imports: [FontAwesomeModule, RouterLink, AuthDirective, PodcastEpisodeItem, SecureMediaDirective],
   templateUrl: './podcast-details.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './podcast-details.scss'
 })
 export class PodcastDetails {

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, ChangeDetectionStrategy } from "@angular/core";
+import { Component, inject, signal, computed } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { of, catchError, finalize, defer } from "rxjs";
@@ -12,7 +12,6 @@ import { PodcastDetailsItem } from "../../../shared/podcast-details-item/podcast
   selector: 'app-my-library',
   imports: [FontAwesomeModule, BookItem, PodcastDetailsItem],
   templateUrl: './my-library.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './my-library.scss'
 })
 export class MyLibrary {
