@@ -11,13 +11,14 @@
       <fa-icon [icon]="faChevronDown" />
     </button>
 
-    <ul role="list" id="track-container" class="flex flex-col flex-grow w-full overflow-auto overscroll-none" #cdkBoundary cdkDropList
-      [cdkDropListAutoScrollStep]="3" (cdkDropListDropped)="onTrackDrop($event)">
+    <ul role="list" id="track-container" class="flex flex-col flex-grow w-full overflow-auto overscroll-none"
+      #cdkBoundary cdkDropList [cdkDropListAutoScrollDisabled]="true" (cdkDropListDropped)="onTrackDrop($event)">
       @for (track of audioPlayerService.queue(); track track.id) {
       <li class="flex items-center px-4 py-2 gap-2 track-list-item"
         [animate.enter]="!isReordering() ? 'track-enter-animation' : null"
         [animate.leave]="!isReordering() ? 'track-leave-animation' : null" (cdkDragStarted)="onTrackDragStart()"
-        (cdkDragEnded)="onTrackDragEnd()" [cdkDragBoundary]="cdkBoundary" cdkDrag cdkDragLockAxis="y"
+        (cdkDragEnded)="onTrackDragEnd()" (cdkDragMoved)="onTrackDragMoved($event)"
+        (cdkDragReleased)="onTrackDragReleased()" [cdkDragBoundary]="cdkBoundary" cdkDrag cdkDragLockAxis="y"
         [class.bg-opacity]="audioPlayerService.currentTrack()?.id == track.id"
         [class.text-error]="audioPlayerService.currentTrack()?.id == track.id && audioPlayerService.isError()">
         <div *cdkDragPlaceholder></div>
@@ -77,7 +78,8 @@
   </span>
 
   <div class="flex justify-between items-center w-full gap-2 px-4 sm:px-8">
-    <button i18n-title type="button" title="Open queue" class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
+    <button i18n-title type="button" title="Open queue"
+      class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
       [class]="queueOpen() ? '!hidden' : ''" [class.text-error]="audioPlayerService.isError()"
       (click)="queueOpen.set(true)">
       <div class="flex items-center gap-2">
@@ -108,9 +110,8 @@
         @if (audioPlayerService.currentIndex()! === 0){ <fa-icon [icon]="faBackwardStep" />}
         @else if (audioPlayerService.currentIndex()! > 0){ <fa-icon [icon]="faBackward" />}
       </button>
-      <button type="button" class="icon-button button-lg"
-        [title]="playPauseTitle()" [disabled]="audioPlayerService.isLoading()"
-        (click)="audioPlayerService.togglePlay()">
+      <button type="button" class="icon-button button-lg" [title]="playPauseTitle()"
+        [disabled]="audioPlayerService.isLoading()" (click)="audioPlayerService.togglePlay()">
         @if(audioPlayerService.isLoading()) {<fa-icon [icon]="faCircleNotch" animation="spin" />} @else if
         (audioPlayerService.isPlaying()) {<fa-icon [icon]="faPause" />} @else {<fa-icon [icon]="faPlay" />}
       </button>
