@@ -40,10 +40,10 @@ export class AudioPlayer {
 
   private dragScrollRaf?: number;
   private dragScrollDir = 0; // -1 up, 1 down, 0 stop
-  private dragScrollThreshold = 50; // px from edge to start scrolling
+  private dragScrollThreshold = 65; // px from edge to start scrolling
   // smooth speed parameters (px per frame)
   private dragScrollMinSpeed = 1;
-  private dragScrollMaxSpeed = 14;
+  private dragScrollMaxSpeed = 10;
   private dragPointerY?: number;
 
   playerVisible = signal(false);
