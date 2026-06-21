@@ -1,4 +1,4 @@
-export interface FileBook {
+export interface EBook {
   id?: number;
   title: string;
   subtitle?: string;

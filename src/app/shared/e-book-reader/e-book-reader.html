@@ -31,13 +31,13 @@
                     <fa-icon [icon]="faChevronDown" />
                 </button>
                 <button i18n-title type="button" class="icon-button" title="Remove book from view"
-                    (click)="fileBookReaderService.destroyReader()">
+                    (click)="eBookReaderService.destroyReader()">
                     <fa-icon [icon]="faClose" />
                 </button>
             </div>
         </div>
 
-        <app-epub-reader [epubReader]="fileBookReaderService.epubReader()" [styles]="fileBookReaderService.epubStyles()"
+        <app-epub-reader [epubReader]="eBookReaderService.epubReader()" [styles]="eBookReaderService.epubStyles()"
             class="overflow-hidden
             w-[calc(100dvw)] sm:w-[calc(100dvw-4rem)] 
             min-w-[calc(100dvw)] sm:min-w-[calc(100dvw-4rem)] 
@@ -50,33 +50,33 @@
 
     <input i18n-title disabled type="range" title="Progress" class="progress-slider w-full absolute top-0 left-0 -mt-1"
         [class.!hidden]="isOpen()" [min]="0" [max]="100"
-        [value]="(fileBookReaderService.completionPercentage() * 100).toFixed(0)"
-        [style.--value]="fileBookReaderService.completionPercentage()" />
+        [value]="(eBookReaderService.completionPercentage() * 100).toFixed(0)"
+        [style.--value]="eBookReaderService.completionPercentage()" />
 
     <div class="toolbar-expand overflow-hidden flex justify-between items-center w-full gap-2 px-4 sm:px-8"
         [class.toolbar-expand-enter]="!isOpen()" [class.toolbar-expand-leave]="isOpen()">
         <button i18n-title type="button" title="Open book" class="text-left flex flex-col flex-grow cursor-pointer overflow-hidden list-button"
-            [class.text-error]="fileBookReaderService.isError()" (click)="isOpen.set(true)">
+            [class.text-error]="eBookReaderService.isError()" (click)="isOpen.set(true)">
             <div class="flex items-center gap-2">
                 <img class="flex items-center justify-center size-12 aspect-square object-cover bg-accent-light rounded-xl"
-                    loading="lazy" decoding="async" [secureSrc]="fileBookReaderService.currentFileBook()!.coverImageSrc"
-                    [secureOffline]="true" [alt]="fileBookReaderService.currentFileBook()!.title" />
+                    loading="lazy" decoding="async" [secureSrc]="eBookReaderService.currentEBook()!.coverImageSrc"
+                    [secureOffline]="true" [alt]="eBookReaderService.currentEBook()!.title" />
                 <div class="flex flex-col truncate">
-                    <span class="truncate">{{ fileBookReaderService.currentFileBook()!.title }}</span>
+                    <span class="truncate">{{ eBookReaderService.currentEBook()!.title }}</span>
                     <span class="text-accent text-sm truncate">
-                        @if (fileBookReaderService.currentFileBook()!.subtitle) {
-                        {{ fileBookReaderService.currentFileBook()!.subtitle }}
+                        @if (eBookReaderService.currentEBook()!.subtitle) {
+                        {{ eBookReaderService.currentEBook()!.subtitle }}
                         }
                         @else {
-                        {{ fileBookReaderService.currentFileBook()!.authors?.join(", ") }}
+                        {{ eBookReaderService.currentEBook()!.authors?.join(", ") }}
                         }
                     </span>
                 </div>
             </div>
         </button>
 
-        <span class="chapter-info" [class.text-error]="fileBookReaderService.isError()">
-            {{ (fileBookReaderService.completionPercentage() * 100).toFixed(0) }} %
+        <span class="chapter-info" [class.text-error]="eBookReaderService.isError()">
+            {{ (eBookReaderService.completionPercentage() * 100).toFixed(0) }} %
         </span>
     </div>
 

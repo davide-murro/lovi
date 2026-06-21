@@ -9,13 +9,13 @@ import { Dialog } from './shared/dialog/dialog';
 import { DialogService } from './core/services/dialog.service';
 import { ViewportScroller } from '@angular/common';
 import { ToasterService } from './core/services/toaster.service';
-import { FileBookReader } from './shared/file-book-reader/file-book-reader';
+import { EBookReader } from './shared/e-book-reader/e-book-reader';
 import { AudioPlayerService } from './core/services/audio-player.service';
-import { FileBookReaderService } from './core/services/file-book-reader.service';
+import { EBookReaderService } from './core/services/e-book-reader.service';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Body, AudioPlayer, FileBookReader, Toaster, Dialog],
+  imports: [Header, Body, AudioPlayer, EBookReader, Toaster, Dialog],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -26,27 +26,27 @@ export class App {
   private dialogService = inject(DialogService);
   private toasterService = inject(ToasterService);
   private audioPlayerService = inject(AudioPlayerService);
-  private fileBookReaderService = inject(FileBookReaderService);
+  private rBookReaderService = inject(EBookReaderService);
 
   @ViewChild(Header) header!: Header;
   @ViewChild(AudioPlayer) audioPlayer!: AudioPlayer;
-  @ViewChild(FileBookReader) fileBookReader!: FileBookReader;
+  @ViewChild(EBookReader) eBookReader!: EBookReader;
 
   constructor() {
-    // manage audio player and file book reader visualization
+    // manage audio player and e book reader visualization
     effect(() => {
       if (this.audioPlayerService.currentTrack()) {
-        this.fileBookReaderService.destroyReader();
+        this.rBookReaderService.destroyReader();
       }
     });
     effect(() => {
-      if (this.fileBookReaderService.currentFileBook()) {
+      if (this.rBookReaderService.currentEBook()) {
         this.audioPlayerService.stop();
       }
     });
     // body overflow hidden when open file reader or dialogs
     effect(() => {
-      if (this.fileBookReader?.isOpen() || this.dialogService?.dialog().visible) {
+      if (this.eBookReader?.isOpen() || this.dialogService?.dialog().visible) {
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = 'auto';
@@ -57,7 +57,7 @@ export class App {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
       this.header.menuMobileOpen.set(false);
       this.audioPlayer.queueOpen.set(false);
-      this.fileBookReader.isOpen.set(false);
+      this.eBookReader.isOpen.set(false);
       this.dialogService.close(null);
     });
 

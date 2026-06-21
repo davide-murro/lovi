@@ -1,14 +1,14 @@
 import { computed, effect, inject, Service, signal } from '@angular/core';
-import { FileBook } from '../models/file-book.model';
+import { EBook } from '../models/e-book.model';
 import { EpubReader } from '../../shared/epub-reader/epub-reader';
 import { AuthService } from './auth.service';
 import { EpubReaderStyle } from '../../shared/epub-reader/epub-reader-style.model';
 
 @Service()
-export class FileBookReaderService {
+export class EBookReaderService {
   private authService = inject(AuthService);
 
-  currentFileBook = signal<FileBook | null>(null);
+  currentEBook = signal<EBook | null>(null);
 
   // EpubJS Book instance
   epubReader = signal<EpubReader>(new EpubReader());
@@ -56,15 +56,15 @@ export class FileBookReaderService {
   }
 
 
-  loadReader(fileBook: FileBook) {
-    if (!fileBook) return;
+  loadReader(eBook: EBook) {
+    if (!eBook) return;
 
-    this.currentFileBook.set(fileBook);
-    this.epubReader().src.set(this.currentFileBook()!.fileSrc);
+    this.currentEBook.set(eBook);
+    this.epubReader().src.set(this.currentEBook()!.fileSrc);
   }
 
   destroyReader() {
-    this.currentFileBook.set(null);
+    this.currentEBook.set(null);
     this.epubReader().src.set(null);
   }
 

@@ -13,8 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthDirective } from '../../../core/directives/auth.directive';
 import { SecureMediaDirective } from '../../../core/directives/secure-media.directive';
 import { DialogService } from '../../../core/services/dialog.service';
-import { FileBookReaderService } from '../../../core/services/file-book-reader.service';
-import { FileBook } from '../../../core/models/file-book.model';
+import { EBookReaderService } from '../../../core/services/e-book-reader.service';
+import { EBook } from '../../../core/models/e-book.model';
 
 @Component({
   selector: 'app-book-details',
@@ -28,7 +28,7 @@ export class BookDetails {
   private audioPlayerService = inject(AudioPlayerService);
   private librariesService = inject(LibrariesService);
   private offlineService = inject(OfflineService);
-  private fileBookReaderService = inject(FileBookReaderService);
+  private eBookReaderService = inject(EBookReaderService);
 
   // i18n title properties for template
   myLibraryTitle = computed(() =>
@@ -106,7 +106,7 @@ export class BookDetails {
   // reader
   read() {
     const book = this.book();
-    const fileBook: FileBook = {
+    const eBook: EBook = {
       id: book.id,
       title: book.name,
       authors: book.writers?.map(r => r.nickname),
@@ -114,7 +114,7 @@ export class BookDetails {
       coverImageSrc: book.coverImagePreviewUrl,
       referenceLink: `/books/${book.id}`
     };
-    this.fileBookReaderService.loadReader(fileBook);
+    this.eBookReaderService.loadReader(eBook);
   }
 
   // libraries

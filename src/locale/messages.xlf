@@ -2178,70 +2178,70 @@
         <source>Play track</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5920423366277975759" datatype="html">
         <source>Move in queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6820635381009519748" datatype="html">
         <source>Remove from queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">47,48</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8497528947328199741" datatype="html">
         <source>Time</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7485182386135797326" datatype="html">
         <source>Open queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">81,82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1083264326477451541" datatype="html">
         <source>Toggle speed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8890553633144307762" datatype="html">
         <source>Back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8604695045343743097" datatype="html">
         <source>Forward</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7877250793311378611" datatype="html">
         <source>Restart queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">123,124</context>
+          <context context-type="linenumber">124,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1994426929514890878" datatype="html">
         <source>Clear queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/audio-player/audio-player.html</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8395429101406970401" datatype="html">
@@ -2448,14 +2448,14 @@
         <source>Hide password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/password-input/password-input.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5554528553553249088" datatype="html">
         <source>Show password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/auth/password-input/password-input.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1463716403066266718" datatype="html">
@@ -2720,6 +2720,56 @@
           <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6851459189738911638" datatype="html">
+        <source>Change theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6214609638529256016" datatype="html">
+        <source>Change font size</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4142068363096454927" datatype="html">
+        <source>Collapse book</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9114998857615529624" datatype="html">
+        <source>Remove book from view</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3419681791450150574" datatype="html">
+        <source>Progress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2722159711136769635" datatype="html">
+        <source>Open book</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/e-book-reader/e-book-reader.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3525650019123992199" datatype="html">
         <source>Error loading file</source>
         <context-group purpose="location">
@@ -2768,56 +2818,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/pagination/pagination.html</context>
           <context context-type="linenumber">36,37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6851459189738911638" datatype="html">
-        <source>Change theme</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">18,19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6214609638529256016" datatype="html">
-        <source>Change font size</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">26,27</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4142068363096454927" datatype="html">
-        <source>Collapse book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9114998857615529624" datatype="html">
-        <source>Remove book from view</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">33,34</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3419681791450150574" datatype="html">
-        <source>Progress</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2722159711136769635" datatype="html">
-        <source>Open book</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/file-book-reader/file-book-reader.html</context>
-          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileBookReader } from './file-book-reader';
+import { EBookReader } from './e-book-reader';
 
-describe('FileBookReader', () => {
-  let component: FileBookReader;
-  let fixture: ComponentFixture<FileBookReader>;
+describe('EBookReader', () => {
+  let component: EBookReader;
+  let fixture: ComponentFixture<EBookReader>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FileBookReader]
+      imports: [EBookReader]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(FileBookReader);
+    fixture = TestBed.createComponent(EBookReader);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

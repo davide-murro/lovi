@@ -1231,30 +1231,6 @@
         <source>Failed to load creators</source>
         <target>Caricamento creatori non riuscito</target>
       </trans-unit>
-      <trans-unit id="3525650019123992199" datatype="html">
-        <source>Error loading file</source>
-        <target>Errore nel caricamento del file</target>
-      </trans-unit>
-      <trans-unit id="5141025750782803271" datatype="html">
-        <source>Current chapter</source>
-        <target>Capitolo corrente</target>
-      </trans-unit>
-      <trans-unit id="6221215027161505376" datatype="html">
-        <source>Go to previous page</source>
-        <target>Vai alla pagina precedente</target>
-      </trans-unit>
-      <trans-unit id="3629960544875360046" datatype="html">
-        <source>Previous page</source>
-        <target>Pagina precedente</target>
-      </trans-unit>
-      <trans-unit id="5430045444410376992" datatype="html">
-        <source>Go to next page</source>
-        <target>Vai alla pagina successiva</target>
-      </trans-unit>
-      <trans-unit id="3337301694210287595" datatype="html">
-        <source>Next page</source>
-        <target>Pagina successiva</target>
-      </trans-unit>
       <trans-unit id="6851459189738911638" datatype="html">
         <source>Change theme</source>
         <target>Cambia tema</target>
@@ -1278,6 +1254,30 @@
       <trans-unit id="2722159711136769635" datatype="html">
         <source>Open book</source>
         <target>Apri libro</target>
+      </trans-unit>
+      <trans-unit id="3525650019123992199" datatype="html">
+        <source>Error loading file</source>
+        <target>Errore nel caricamento del file</target>
+      </trans-unit>
+      <trans-unit id="5141025750782803271" datatype="html">
+        <source>Current chapter</source>
+        <target>Capitolo corrente</target>
+      </trans-unit>
+      <trans-unit id="6221215027161505376" datatype="html">
+        <source>Go to previous page</source>
+        <target>Vai alla pagina precedente</target>
+      </trans-unit>
+      <trans-unit id="3629960544875360046" datatype="html">
+        <source>Previous page</source>
+        <target>Pagina precedente</target>
+      </trans-unit>
+      <trans-unit id="5430045444410376992" datatype="html">
+        <source>Go to next page</source>
+        <target>Vai alla pagina successiva</target>
+      </trans-unit>
+      <trans-unit id="3337301694210287595" datatype="html">
+        <source>Next page</source>
+        <target>Pagina successiva</target>
       </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>

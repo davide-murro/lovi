@@ -2,18 +2,18 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faCircleHalfStroke, faClose, faTextHeight, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FileBookReaderService } from '../../core/services/file-book-reader.service';
+import { EBookReaderService } from '../../core/services/e-book-reader.service';
 import { SecureMediaDirective } from '../../core/directives/secure-media.directive';
 import { EpubReaderComponent } from '../epub-reader/epub-reader.component';
 
 @Component({
-  selector: 'app-file-book-reader',
+  selector: 'app-e-book-reader',
   imports: [CommonModule, FontAwesomeModule, SecureMediaDirective, EpubReaderComponent],
-  templateUrl: './file-book-reader.html',
-  styleUrl: './file-book-reader.scss'
+  templateUrl: './e-book-reader.html',
+  styleUrl: './e-book-reader.scss'
 })
-export class FileBookReader {
-  fileBookReaderService = inject(FileBookReaderService);
+export class EBookReader {
+  eBookReaderService = inject(EBookReaderService);
 
   faChevronDown = faChevronDown;
   faClose = faClose;
@@ -29,7 +29,7 @@ export class FileBookReader {
 
   constructor() {
     effect(() => {
-      if (this.fileBookReaderService.currentFileBook() != null) {
+      if (this.eBookReaderService.currentEBook() != null) {
         this.readerVisible.set(true);
         this.isOpen.set(true);
       } else {
@@ -37,7 +37,7 @@ export class FileBookReader {
         this.isOpen.set(false);
       }
     });
-    // set styles in fileBookReaderService
+    // set styles in eBookReaderService
     effect(() => {
       const val = this.themeValue();
       const fontSize = this.fontSizeValue();
@@ -52,7 +52,7 @@ export class FileBookReader {
 
       const color = this.getReadableTextColor(bg);
 
-      this.fileBookReaderService.epubStyles.set({
+      this.eBookReaderService.epubStyles.set({
         background: bg,
         color: color,
         'font-size': fontSize + 'px'
