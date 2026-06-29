@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-production": "ng build --configuration=production --base-href /browser/",
-    "extract-i18n": "ng extract-i18n --output-path src/locale"
+    "extract-i18n": "ng extract-i18n --output-path src/locale",
+    "update-angular": "ng update @angular/core @angular/cli @angular/cdk @angular/localize",
+    "update-tailwind": "npx tailwindcss",
+    "update-fontawesome": "npm update @fortawesome/angular-fontawesome @fortawesome/free-brands-svg-icons @fortawesome/free-solid-svg-icons"
   },
   "prettier": {
     "printWidth": 100,
@@ -34,8 +37,9 @@
     "@angular/service-worker": "^22.0.2",
     "@asteasolutions/epub-reader": "^1.0.4",
     "@fortawesome/angular-fontawesome": "^5.0.0",
-    "@fortawesome/free-brands-svg-icons": "^7.2.0",
-    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@fortawesome/fontawesome-free": "^7.3.0",
+    "@fortawesome/free-brands-svg-icons": "^7.3.0",
+    "@fortawesome/free-solid-svg-icons": "^7.3.0",
     "@tailwindcss/postcss": "^4.3.1",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.18.1",
