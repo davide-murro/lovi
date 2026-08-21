@@ -97,26 +97,26 @@ export class EditUser {
       this.usersService.update(this.userEdit()!.id!, u).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.toasterService.show('User updated');
+          this.dialogService.log('User updated', 'User updated successfully');
           this.load();
         },
         error: (err) => {
           console.error('usersService.update', this.userEdit()!.id!, u, err);
           this.isLoading.set(false);
-          this.toasterService.show('User update failed', { type: 'error' });
+          this.dialogService.log('User update failed', 'Failed to update user', { type: 'error' });
         }
       });
     } else {
       this.usersService.create(u).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.toasterService.show('User created');
+          this.dialogService.log('User created', 'User created successfully');
           this.router.navigate(['/edit', 'users', res.id])
         },
         error: (err) => {
           console.error('usersService.update', u, err);
           this.isLoading.set(false);
-          this.toasterService.show('User create failed', { type: 'error' });
+          this.dialogService.log('User create failed', 'Failed to create user', { type: 'error' });
         }
       });
 
@@ -130,12 +130,12 @@ export class EditUser {
           const id = this.userEdit()!.id;
           this.usersService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('User deleted');
+              this.dialogService.log('User deleted', 'User deleted successfully');
               this.router.navigate(['/edit']);
             },
             error: (err) => {
               console.error('usersService.delete', id, err);
-              this.toasterService.show('User delete failed', { type: 'error' });
+              this.dialogService.log('User delete failed', 'Failed to delete user', { type: 'error' });
             }
           });
         }
@@ -150,11 +150,11 @@ export class EditUser {
           }
           this.authService.forgotPassword(forgotPassword).subscribe({
             next: () => {
-              this.toasterService.show('User forgot password started');
+              this.dialogService.log('User forgot password started', 'Forgot password process started');
             },
             error: (err) => {
               console.error('authService.forgotPassword', forgotPassword, err);
-              this.toasterService.show('User forgot password failed', { type: 'error' });
+              this.dialogService.log('User forgot password failed', 'Failed to start forgot password process', { type: 'error' });
             }
           });
         }
@@ -167,11 +167,12 @@ export class EditUser {
         if (role) {
           this.usersService.addRole(this.userEdit()!.id!, role.id).subscribe({
             next: () => {
+              this.dialogService.log('User Role added', 'User Role added successfully');
               this.load();
             },
             error: (err) => {
               console.error('usersService.addRole', this.userEdit()!.id!, role.id, err);
-              this.toasterService.show('Add Role failed', { type: 'error' });
+              this.dialogService.log('Add Role failed', 'Failed to add role', { type: 'error' });
             }
           });
         }
@@ -183,11 +184,12 @@ export class EditUser {
         if (confirmed) {
           this.usersService.removeRole(this.userEdit()!.id!, roleId).subscribe({
             next: () => {
+              this.dialogService.log('User Role removed', 'User Role removed successfully');
               this.load();
             },
             error: (err) => {
               console.error('usersService.removeRole', this.userEdit()!.id!, roleId, err);
-              this.toasterService.show('Remove Role failed', { type: 'error' });
+              this.dialogService.log('Remove Role failed', 'Failed to remove role', { type: 'error' });
             }
           });
         }

@@ -73,26 +73,26 @@ export class EditRole {
       this.rolesService.update(this.roleEdit()!.id!, p).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.toasterService.show('Role updated');
+          this.dialogService.log('Role updated', 'Role updated successfully');
           this.load();
         },
         error: (err) => {
           console.error('rolesService.update', this.roleEdit()!.id!, p, err);
           this.isLoading.set(false);
-          this.toasterService.show('Role update failed', { type: 'error' });
+          this.dialogService.log('Role update failed', 'Failed to update role', { type: 'error' });
         }
       });
     } else {
       this.rolesService.create(p).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.toasterService.show('Role created');
+          this.dialogService.log('Role created', 'Role created successfully');
           this.router.navigate(['/edit', 'roles', res.id])
         },
         error: (err) => {
           console.error('rolesService.update', p, err);
           this.isLoading.set(false);
-          this.toasterService.show('Role create failed', { type: 'error' });
+          this.dialogService.log('Role create failed', 'Failed to create role', { type: 'error' });
         }
       });
 
@@ -106,12 +106,12 @@ export class EditRole {
           const id = this.roleEdit()!.id!;
           this.rolesService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('Role deleted');
+              this.dialogService.log('Role deleted', 'Role deleted successfully');
               this.router.navigate(['/edit']);
             },
             error: (err) => {
               console.error('rolesService.delete', id, err);
-              this.toasterService.show('Role delete failed', { type: 'error' });
+              this.dialogService.log('Role delete failed', 'Failed to delete role', { type: 'error' });
             }
           });
         }

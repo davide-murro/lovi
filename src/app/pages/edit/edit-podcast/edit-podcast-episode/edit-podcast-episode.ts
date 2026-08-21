@@ -164,13 +164,13 @@ export class EditPodcastEpisode {
       this.podcastsService.updateEpisode(this.podcast()!.id!, this.podcastEpisodeEdit()!.id!, pe).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.toasterService.show('Podcast Episode updated');
+          this.dialogService.log('Podcast Episode updated', 'Podcast Episode updated successfully');
           this.load();
         },
         error: (err) => {
           console.error('podcastsService.updateEpisode', this.podcast()!.id!, this.podcastEpisodeEdit()!.id!, pe, err);
           this.isLoading.set(false);
-          this.toasterService.show('Podcast Episode update failed', { type: 'error' });
+          this.dialogService.log('Podcast Episode update failed', 'Failed to update podcast episode', { type: 'error' });
         }
       });
     } else {
@@ -178,13 +178,13 @@ export class EditPodcastEpisode {
       this.podcastsService.createEpisode(pe.podcastId, pe).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.toasterService.show('Podcast Episode created');
+          this.dialogService.log('Podcast Episode created', 'Podcast Episode created successfully');
           this.router.navigate(['/edit', 'podcasts', res.podcastId, 'episodes', res.id])
         },
         error: (err) => {
           console.error('podcastsService.createEpisode', pe.podcastId, pe, err);
           this.isLoading.set(false);
-          this.toasterService.show('Podcast Episode create failed', { type: 'error' });
+          this.dialogService.log('Podcast Episode create failed', 'Failed to create podcast episode', { type: 'error' });
         }
       });
 
@@ -199,12 +199,12 @@ export class EditPodcastEpisode {
           const id = this.podcastEpisodeEdit()!.id!;
           this.podcastsService.deleteEpisode(podcastId, id).subscribe({
             next: () => {
-              this.toasterService.show('Podcast Episode deleted');
+              this.dialogService.log('Podcast Episode deleted', 'Podcast Episode deleted successfully');
               this.router.navigate(['/edit', 'podcasts', podcastId]);
             },
             error: (err) => {
               console.error('podcastsService.deleteEpisode', podcastId, id, err);
-              this.toasterService.show('Podcast Episode delete failed', { type: 'error' });
+              this.dialogService.log('Podcast Episode delete failed', 'Failed to delete podcast episode', { type: 'error' });
             }
           });
         }
@@ -218,11 +218,12 @@ export class EditPodcastEpisode {
         if (creator) {
           this.podcastsService.addEpisodeVoicer(this.podcast()!.id!, this.podcastEpisodeEdit()!.id!, creator.id!).subscribe({
             next: () => {
+              this.dialogService.log('Episode Voicer added', 'Episode Voicer added successfully');
               this.load();
             },
             error: (err) => {
               console.error('podcastsService.addEpisodeVoicer', this.podcast()!.id!, this.podcastEpisodeEdit()!.id!, creator.id, err);
-              this.toasterService.show('Add Episode Voicer failed', { type: 'error' });
+              this.dialogService.log('Add Episode Voicer failed', 'Failed to add episode voicer', { type: 'error' });
             }
           });
         }
@@ -234,11 +235,12 @@ export class EditPodcastEpisode {
         if (confirmed) {
           this.podcastsService.removeEpisodeVoicer(this.podcast()!.id!, this.podcastEpisodeEdit()!.id!, voicerId).subscribe({
             next: () => {
+              this.dialogService.log('Episode Voicer removed', 'Episode Voicer removed successfully');
               this.load();
             },
             error: (err) => {
               console.error('podcastsService.removeEpisodeVoicer', this.podcast()!.id!, this.podcastEpisodeEdit()!.id!, voicerId, err);
-              this.toasterService.show('Remove Episode Voicer failed', { type: 'error' });
+              this.dialogService.log('Remove Episode Voicer failed', 'Failed to remove episode voicer', { type: 'error' });
             }
           });
         }

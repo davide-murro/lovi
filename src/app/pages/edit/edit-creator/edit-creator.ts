@@ -100,26 +100,26 @@ export class EditCreator {
       this.creatorsService.update(this.creatorEdit()!.id!, p).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.toasterService.show('Creator updated');
+          this.dialogService.log('Creator updated', 'Creator updated successfully');
           this.load();
         },
         error: (err) => {
           console.error('creatorsService.update', this.creatorEdit()!.id!, p, err);
           this.isLoading.set(false);
-          this.toasterService.show('Creator update failed', { type: 'error' });
+          this.dialogService.log('Creator update failed', 'Failed to update creator', { type: 'error' });
         }
       });
     } else {
       this.creatorsService.create(p).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.toasterService.show('Creator created');
+          this.dialogService.log('Creator created', 'Creator created successfully');
           this.router.navigate(['/edit', 'creators', res.id])
         },
         error: (err) => {
           console.error('creatorsService.update', p, err);
           this.isLoading.set(false);
-          this.toasterService.show('Creator create failed', { type: 'error' });
+          this.dialogService.log('Creator create failed', 'Failed to create creator', { type: 'error' });
         }
       });
 
@@ -133,12 +133,12 @@ export class EditCreator {
           const id = this.creatorEdit()!.id!;
           this.creatorsService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('Creator deleted');
+              this.dialogService.log('Creator deleted', 'Creator deleted successfully');
               this.router.navigate(['/edit']);
             },
             error: (err) => {
               console.error('creatorsService.delete', id, err);
-              this.toasterService.show('Creator delete failed', { type: 'error' });
+              this.dialogService.log('Creator delete failed', 'Failed to delete creator', { type: 'error' });
             }
           });
         }

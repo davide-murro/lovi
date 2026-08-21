@@ -170,26 +170,26 @@ export class EditBook {
       this.booksService.update(this.bookEdit()!.id!, b).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.toasterService.show('Book updated');
+          this.dialogService.log('Book updated', 'Book updated successfully');
           this.load();
         },
         error: (err) => {
           console.error('booksService.update', this.bookEdit()!.id!, b, err);
           this.isLoading.set(false);
-          this.toasterService.show('Book update failed', { type: 'error' });
+          this.dialogService.log('Book update failed', 'Failed to update book', { type: 'error' });
         }
       });
     } else {
       this.booksService.create(b).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.toasterService.show('Book created');
+          this.dialogService.log('Book created', 'Book created successfully');
           this.router.navigate(['/edit', 'books', res.id])
         },
         error: (err) => {
           console.error('booksService.create', b, err);
           this.isLoading.set(false);
-          this.toasterService.show('Book create failed', { type: 'error' });
+          this.dialogService.log('Book create failed', 'Failed to create book', { type: 'error' });
         }
       });
     }
@@ -202,12 +202,12 @@ export class EditBook {
           const id = this.bookEdit()!.id!;
           this.booksService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('Book deleted');
+              this.dialogService.log('Book deleted', 'Book deleted successfully');
               this.router.navigate(['/edit']);
             },
             error: (err) => {
               console.error('booksService.delete', id, err);
-              this.toasterService.show('Book delete failed', { type: 'error' });
+              this.dialogService.log('Book delete failed', 'Failed to delete book', { type: 'error' });
             }
           });
         }
@@ -221,11 +221,12 @@ export class EditBook {
         if (creator) {
           this.booksService.addReader(this.bookEdit()!.id!, creator.id!).subscribe({
             next: () => {
+              this.dialogService.log('Reader added', 'Reader added successfully');
               this.load();
             },
             error: (err) => {
               console.error('booksService.addReader', this.bookEdit()!.id!, creator.id, err);
-              this.toasterService.show('Add Reader failed', { type: 'error' });
+              this.dialogService.log('Add Reader failed', 'Failed to add reader', { type: 'error' });
             }
           });
         }
@@ -237,11 +238,12 @@ export class EditBook {
         if (confirmed) {
           this.booksService.removeReader(this.bookEdit()!.id!, readerId).subscribe({
             next: () => {
+              this.dialogService.log('Reader removed', 'Reader removed successfully');
               this.load();
             },
             error: (err) => {
               console.error('booksService.removeReader', this.bookEdit()!.id!, readerId, err);
-              this.toasterService.show('Remove Reader failed', { type: 'error' });
+              this.dialogService.log('Remove Reader failed', 'Failed to remove reader', { type: 'error' });
             }
           });
         }
@@ -253,11 +255,12 @@ export class EditBook {
         if (creator) {
           this.booksService.addWriter(this.bookEdit()!.id!, creator.id!).subscribe({
             next: () => {
+              this.dialogService.log('Writer added', 'Writer added successfully');
               this.load();
             },
             error: (err) => {
               console.error('booksService.addWriter', this.bookEdit()!.id!, creator.id, err);
-              this.toasterService.show('Add Writer failed', { type: 'error' });
+              this.dialogService.log('Add Writer failed', 'Failed to add writer', { type: 'error' });
             }
           });
         }
@@ -269,11 +272,12 @@ export class EditBook {
         if (confirmed) {
           this.booksService.removeWriter(this.bookEdit()!.id!, writerId).subscribe({
             next: () => {
+              this.dialogService.log('Writer removed', 'Writer removed successfully');
               this.load();
             },
             error: (err) => {
               console.error('booksService.removeWriter', this.bookEdit()!.id!, writerId, err);
-              this.toasterService.show('Remove Writer failed', { type: 'error' });
+              this.dialogService.log('Remove Writer failed', 'Failed to remove writer', { type: 'error' });
             }
           });
         }

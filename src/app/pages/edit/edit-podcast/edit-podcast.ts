@@ -124,26 +124,26 @@ export class EditPodcast {
       this.podcastsService.update(this.podcastEdit()!.id!, p).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.toasterService.show('Podcast updated');
+          this.dialogService.log('Podcast updated', 'Podcast updated successfully');
           this.load();
         },
         error: (err) => {
           console.error('podcastsService.update', this.podcastEdit()!.id!, p, err);
           this.isLoading.set(false);
-          this.toasterService.show('Podcast update failed', { type: 'error' });
+          this.dialogService.log('Podcast update failed', 'Failed to update podcast', { type: 'error' });
         }
       });
     } else {
       this.podcastsService.create(p).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.toasterService.show('Podcast created');
+          this.dialogService.log('Podcast created', 'Podcast created successfully');
           this.router.navigate(['/edit', 'podcasts', res.id])
         },
         error: (err) => {
           console.error('podcastsService.update', p, err);
           this.isLoading.set(false);
-          this.toasterService.show('Podcast create failed', { type: 'error' });
+          this.dialogService.log('Podcast create failed', 'Failed to create podcast', { type: 'error' });
         }
       });
 
@@ -157,12 +157,12 @@ export class EditPodcast {
           const id = this.podcastEdit()!.id!;
           this.podcastsService.delete(id).subscribe({
             next: () => {
-              this.toasterService.show('Podcast deleted');
+              this.dialogService.log('Podcast deleted', 'Podcast deleted successfully');
               this.router.navigate(['/edit']);
             },
             error: (err) => {
               console.error('podcastsService.delete', id, err);
-              this.toasterService.show('Podcast delete failed', { type: 'error' });
+              this.dialogService.log('Podcast delete failed', 'Failed to delete podcast', { type: 'error' });
             }
           });
         }
@@ -176,11 +176,12 @@ export class EditPodcast {
         if (confirmed) {
           this.podcastsService.deleteEpisode(this.podcastEdit()!.id!, episodeId).subscribe({
             next: (res) => {
+              this.dialogService.log('Episode deleted', 'Episode deleted successfully');
               this.load();
             },
             error: (err) => {
               console.error('podcastsService.deleteEpisode', this.podcastEdit()!.id!, episodeId, err);
-              this.toasterService.show('Delete Episode failed', { type: 'error' });
+              this.dialogService.log('Episode delete failed', 'Failed to delete episode', { type: 'error' });
             }
           });
         }
@@ -194,11 +195,12 @@ export class EditPodcast {
         if (creator) {
           this.podcastsService.addVoicer(this.podcastEdit()!.id!, creator.id!).subscribe({
             next: () => {
+              this.dialogService.log('Voicer added', 'Voicer added successfully');
               this.load();
             },
             error: (err) => {
               console.error('podcastsService.addVoicer', this.podcastEdit()!.id!, creator.id, err);
-              this.toasterService.show('Add Voicer failed', { type: 'error' });
+              this.dialogService.log('Add Voicer failed', 'Failed to add voicer', { type: 'error' });
             }
           });
         }
@@ -210,11 +212,12 @@ export class EditPodcast {
         if (confirmed) {
           this.podcastsService.removeVoicer(this.podcastEdit()!.id!, voicerId).subscribe({
             next: () => {
+              this.dialogService.log('Voicer removed', 'Voicer removed successfully');
               this.load();
             },
             error: (err) => {
               console.error('podcastsService.removeVoicer', this.podcastEdit()!.id!, voicerId, err);
-              this.toasterService.show('Remove Voicer failed', { type: 'error' });
+              this.dialogService.log('Remove Voicer failed', 'Failed to remove voicer', { type: 'error' });
             }
           });
         }
