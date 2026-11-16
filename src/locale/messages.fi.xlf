@@ -122,6 +122,10 @@
         <source>LOVI - Not Found</source>
         <target>LOVI - Ei löydy</target>
       </trans-unit>
+      <trans-unit id="1667002020780381369" datatype="html">
+        <source>LOVI - Access Denied</source>
+        <target>LOVI - Pääsy estetty</target>
+      </trans-unit>
       <trans-unit id="3445977544660974911" datatype="html">
         <source>Please enable cookies to use all features of this application.</source>
         <target>Ole hyvä ja ota käyttöön evästeet käyttääksesi kaikkia sovelluksen toimintoja.</target>
@@ -985,6 +989,10 @@
         <source>Clear queue</source>
         <target>Tyhjennä jono</target>
       </trans-unit>
+      <trans-unit id="2539874054507290788" datatype="html">
+        <source>Unable to play this audio. Try again.</source>
+        <target>Äänen toisto ei onnistu. Yritä uudelleen.</target>
+      </trans-unit>
       <trans-unit id="8395429101406970401" datatype="html">
         <source> Password ready </source>
         <target> Salasana valmis </target>
@@ -1278,6 +1286,18 @@
       <trans-unit id="3337301694210287595" datatype="html">
         <source>Next page</source>
         <target>Seuraava sivu</target>
+      </trans-unit>
+      <trans-unit id="1211573871136189242" datatype="html">
+        <source>Access denied</source>
+        <target>Pääsy estetty</target>
+      </trans-unit>
+      <trans-unit id="8108032945706896800" datatype="html">
+        <source>You do not have permission to view this page.</source>
+        <target>Sinulla ei ole oikeutta nähdä tätä sivua.</target>
+      </trans-unit>
+      <trans-unit id="1151877965385925478" datatype="html">
+        <source>Return to home</source>
+        <target>Palaa etusivulle</target>
       </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>

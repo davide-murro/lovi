@@ -81,7 +81,7 @@ export class AudioPlayer {
     // error handling
     this.audioPlayerErrorSubscription = this.audioPlayerService.errorEvent$.subscribe((event) => {
       console.error('audioPlayerService.errorEvent', event);
-      this.toasterService.show('Error playing audio', { type: 'error', duration: 5000 });
+      this.toasterService.show($localize`Unable to play this audio. Try again.`, { type: 'error', duration: 5000 });
     });
   }
 

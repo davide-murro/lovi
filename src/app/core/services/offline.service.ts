@@ -67,11 +67,15 @@ export class OfflineService {
     }
 
     private async requestPersistentStorage() {
-        if (navigator.storage && navigator.storage.persist) {
-            const isPersisted = await navigator.storage.persisted();
-            if (!isPersisted) {
-                await navigator.storage.persist();
+        try {
+            if (navigator.storage && navigator.storage.persist) {
+                const isPersisted = await navigator.storage.persisted();
+                if (!isPersisted) {
+                    await navigator.storage.persist();
+                }
             }
+        } catch (error) {
+            console.warn('Unable to request persistent offline storage', error);
         }
     }
 
@@ -104,10 +108,13 @@ export class OfflineService {
         }
     }
 
-    private saveToStorage(key: string, data: any[]) {
+    private saveToStorage(key: string, data: any[]): boolean {
         try {
             localStorage.setItem(key, JSON.stringify(data));
-        } catch { }
+            return true;
+        } catch {
+            return false;
+        }
     }
 
     private addOfflineToUrl(url: string) {
@@ -333,12 +340,14 @@ export class OfflineService {
             this.downloadingBooks.update(set => set.filter(b => b.id !== book.id));
             this.offlineBooks.update(list => {
                 const newList = [...list, offlineBook];
-                this.saveToStorage('offlineBooks', newList);
+                if (!this.saveToStorage('offlineBooks', newList)) {
+                    throw new Error('Error saving book to storage.');
+                }
                 return newList;
             });
         } catch (error: any) {
             this.downloadingBooks.update(set => set.filter(b => b.id !== book.id));
-            throw new Error(error);
+            throw error;
         }
     }
 
@@ -409,19 +418,23 @@ export class OfflineService {
             this.downloadingEpisodes.update(set => set.filter(e => e.id !== episode.id));
             this.offlineEpisodes.update(list => {
                 const newList = [...list, offlineEpisode];
-                this.saveToStorage('offlinePodcastEpisodes', newList);
+                if (!this.saveToStorage('offlinePodcastEpisodes', newList)) {
+                    throw new Error('Error saving episode to storage.');
+                }
                 return newList;
             });
             if (podcastToDownload) {
                 this.offlinePodcasts.update(list => {
                     const newList = [...list, podcastToDownload];
-                    this.saveToStorage('offlinePodcasts', newList);
+                    if (!this.saveToStorage('offlinePodcasts', newList)) {
+                        throw new Error('Error saving podcast to storage.');
+                    }
                     return newList;
                 });
             }
         } catch (error: any) {
             this.downloadingEpisodes.update(set => set.filter(e => e.id !== episode.id));
-            throw new Error(error);
+            throw error;
         }
     }
 

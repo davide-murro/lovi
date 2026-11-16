@@ -122,6 +122,10 @@
         <source>LOVI - Not Found</source>
         <target>LOVI - Non Trovato</target>
       </trans-unit>
+      <trans-unit id="1667002020780381369" datatype="html">
+        <source>LOVI - Access Denied</source>
+        <target>LOVI - Accesso negato</target>
+      </trans-unit>
       <trans-unit id="3445977544660974911" datatype="html">
         <source>Please enable cookies to use all features of this application.</source>
         <target>Abilita i cookie per utilizzare tutte le funzionalità di questa applicazione.</target>
@@ -985,6 +989,10 @@
         <source>Clear queue</source>
         <target>Svuota coda</target>
       </trans-unit>
+      <trans-unit id="2539874054507290788" datatype="html">
+        <source>Unable to play this audio. Try again.</source>
+        <target>Impossibile riprodurre questo audio. Riprova.</target>
+      </trans-unit>
       <trans-unit id="8395429101406970401" datatype="html">
         <source> Password ready </source>
         <target> Password pronta </target>
@@ -1278,6 +1286,18 @@
       <trans-unit id="3337301694210287595" datatype="html">
         <source>Next page</source>
         <target>Pagina successiva</target>
+      </trans-unit>
+      <trans-unit id="1211573871136189242" datatype="html">
+        <source>Access denied</source>
+        <target>Accesso negato</target>
+      </trans-unit>
+      <trans-unit id="8108032945706896800" datatype="html">
+        <source>You do not have permission to view this page.</source>
+        <target>Non hai l'autorizzazione per visualizzare questa pagina.</target>
+      </trans-unit>
+      <trans-unit id="1151877965385925478" datatype="html">
+        <source>Return to home</source>
+        <target>Torna alla home</target>
       </trans-unit>
       <trans-unit id="4073986538643542710" datatype="html">
         <source>Go to Books</source>
