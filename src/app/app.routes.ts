@@ -34,6 +34,7 @@ import { Search } from "./pages/search/search";
 import { UserProfile } from "./pages/user-profile/user-profile";
 import { NotFound } from "./shared/not-found/not-found";
 import { AboutUs } from "./pages/about-us/about-us";
+import { Forbidden } from "./shared/forbidden/forbidden";
 
 
 export const routes: Routes = [
@@ -275,8 +276,14 @@ export const routes: Routes = [
         title: $localize`LOVI - Not Found`,
     },
     {
+        path: 'forbidden',
+        component: Forbidden,
+        title: $localize`LOVI - Access Denied`,
+    },
+    {
         path: '**',
-        redirectTo: ''
+        component: NotFound,
+        title: $localize`LOVI - Not Found`,
     }
 
 ];

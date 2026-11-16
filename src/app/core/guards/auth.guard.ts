@@ -5,7 +5,6 @@ import { inject } from '@angular/core';
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  const currentUrl = router.currentNavigation()?.extractedUrl.toString() ?? router.url;
 
   // Get user info
   const isLoggedIn = authService.isLoggedIn();
@@ -16,14 +15,13 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // If not logged in -> redirect to login
   if (!isLoggedIn) {
-    return router.navigate(['/auth', 'login'], { queryParams: { redirect: currentUrl } });
+    return router.createUrlTree(['/auth', 'login'], { queryParams: { redirect: state.url } });
   }
 
   // If route requires a specific role
   if (requiredRoles && requiredRoles.length > 0) {
     if (!userRole || !requiredRoles.includes(userRole)) {
-      // Optionally redirect to "forbidden" page
-      return router.navigate(['/forbidden']);
+      return router.createUrlTree(['/forbidden']);
     }
   }
 
