@@ -14,7 +14,7 @@ LOVI is an Angular application. Bootstrap is in `src/main.ts`; routing and provi
 
 ## Localization
 
-Use Angular i18n (`$localize` in TypeScript, `i18n` in templates) for user-facing text. Source XLIFF is `src/locale/messages.xlf`; Italian and Finnish catalogs are `messages.it.xlf` and `messages.fi.xlf`. After changing marked text, run `npm run extract-i18n` and update translated entries. Locale builds are configured in `angular.json`.
+Use Angular i18n (`$localize` in TypeScript, `i18n` in templates) for user-facing text. Source XLIFF is `src/locale/messages.xlf`; Italian and Finnish catalogs are `messages.it.xlf` and `messages.fi.xlf`. After changing marked text, run `npm run extract-i18n` and update translated entries. Keep translation units in the same order and indentation in every locale XLIFF file, matching the source catalog. Locale builds are configured in `angular.json`.
 
 ## Offline Support and PWA
 
