@@ -7,35 +7,22 @@ import { podcastResolver } from "./core/resolvers/podcast.resolver";
 import { roleResolver } from "./core/resolvers/role.resolver";
 import { userProfileResolver } from "./core/resolvers/user-profile.resolver";
 import { userResolver } from "./core/resolvers/user.resolver";
-import { BookDetails } from "./pages/books/book-details/book-details";
-import { Books } from "./pages/books/books";
-import { EditBook } from "./pages/edit/edit-book/edit-book";
-
-import { ConfirmChangeEmail } from "./pages/auth/confirm-change-email/confirm-change-email";
-import { ConfirmEmail } from "./pages/auth/confirm-email/confirm-email";
-import { ForgotPassword } from "./pages/auth/forgot-password/forgot-password";
-import { Login } from "./pages/auth/login/login";
-import { Register } from "./pages/auth/register/register";
-import { Edit } from "./pages/edit/edit";
-
-import { EditCreator } from "./pages/edit/edit-creator/edit-creator";
-import { EditPodcast } from "./pages/edit/edit-podcast/edit-podcast";
-import { EditPodcastEpisode } from "./pages/edit/edit-podcast/edit-podcast-episode/edit-podcast-episode";
-import { EditRole } from "./pages/edit/edit-role/edit-role";
-import { EditUser } from "./pages/edit/edit-user/edit-user";
 import { Home } from "./pages/home/home";
-import { MyLibraryContainer } from "./pages/my-library-container/my-library-container";
-import { MyLibrary } from "./pages/my-library-container/my-library/my-library";
-import { MyOffline } from "./pages/my-library-container/my-offline/my-offline";
-import { PodcastDetails } from "./pages/podcasts/podcast-details/podcast-details";
-import { PodcastEpisodeDetails } from "./pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details";
-import { Podcasts } from "./pages/podcasts/podcasts";
-import { Search } from "./pages/search/search";
-import { UserProfile } from "./pages/user-profile/user-profile";
-import { NotFound } from "./shared/not-found/not-found";
-import { AboutUs } from "./pages/about-us/about-us";
-import { Forbidden } from "./shared/forbidden/forbidden";
 
+
+import { UserProfile } from './pages/user-profile/user-profile';
+import { Books } from './pages/books/books';
+import { BookDetails } from './pages/books/book-details/book-details';
+import { Podcasts } from './pages/podcasts/podcasts';
+import { PodcastDetails } from './pages/podcasts/podcast-details/podcast-details';
+import { PodcastEpisodeDetails } from './pages/podcasts/podcast-details/podcast-episode-details/podcast-episode-details';
+import { MyLibraryContainer } from './pages/my-library-container/my-library-container';
+import { MyLibrary } from './pages/my-library-container/my-library/my-library';
+import { MyOffline } from './pages/my-library-container/my-offline/my-offline';
+import { Search } from './pages/search/search';
+import { AboutUs } from './pages/about-us/about-us';
+import { NotFound } from './shared/not-found/not-found';
+import { Forbidden } from './shared/forbidden/forbidden';
 
 export const routes: Routes = [
     {
@@ -45,27 +32,27 @@ export const routes: Routes = [
     },
     {
         path: 'auth/login',
-        component: Login,
+        loadComponent: () => import('./pages/auth/login/login').then(m => m.Login),
         title: $localize`LOVI - Log In`
     },
     {
         path: 'auth/register',
-        component: Register,
+        loadComponent: () => import('./pages/auth/register/register').then(m => m.Register),
         title: $localize`LOVI - Register`
     },
     {
         path: 'auth/confirm-email',
-        component: ConfirmEmail,
+        loadComponent: () => import('./pages/auth/confirm-email/confirm-email').then(m => m.ConfirmEmail),
         title: $localize`LOVI - Confirm Email`
     },
     {
         path: 'auth/forgot-password',
-        component: ForgotPassword,
+        loadComponent: () => import('./pages/auth/forgot-password/forgot-password').then(m => m.ForgotPassword),
         title: $localize`LOVI - Forgot Password`
     },
     {
         path: 'auth/confirm-change-email',
-        component: ConfirmChangeEmail,
+        loadComponent: () => import('./pages/auth/confirm-change-email/confirm-change-email').then(m => m.ConfirmChangeEmail),
         title: $localize`LOVI - Confirm Change Email`
     },
     {
@@ -151,21 +138,21 @@ export const routes: Routes = [
 
     {
         path: 'edit',
-        component: Edit,
+        loadComponent: () => import('./pages/edit/edit').then(m => m.Edit),
         title: $localize`LOVI - Edit`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/books/create',
-        component: EditBook,
+        loadComponent: () => import('./pages/edit/edit-book/edit-book').then(m => m.EditBook),
         title: $localize`LOVI - Create Book`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/books/:id',
-        component: EditBook,
+        loadComponent: () => import('./pages/edit/edit-book/edit-book').then(m => m.EditBook),
         title: $localize`LOVI - Edit Book`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
@@ -175,7 +162,7 @@ export const routes: Routes = [
     },
     {
         path: 'edit/podcasts/create',
-        component: EditPodcast,
+        loadComponent: () => import('./pages/edit/edit-podcast/edit-podcast').then(m => m.EditPodcast),
         title: $localize`LOVI - Create Podcast`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
@@ -188,14 +175,14 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: EditPodcast,
+                loadComponent: () => import('./pages/edit/edit-podcast/edit-podcast').then(m => m.EditPodcast),
                 resolve: {
                     podcast: podcastResolver
                 },
             },
             {
                 path: 'episodes/create',
-                component: EditPodcastEpisode,
+                loadComponent: () => import('./pages/edit/edit-podcast/edit-podcast-episode/edit-podcast-episode').then(m => m.EditPodcastEpisode),
                 title: $localize`LOVI - Create Podcast Episode`,
                 resolve: {
                     podcast: podcastResolver
@@ -203,7 +190,7 @@ export const routes: Routes = [
             },
             {
                 path: 'episodes/:episodeId',
-                component: EditPodcastEpisode,
+                loadComponent: () => import('./pages/edit/edit-podcast/edit-podcast-episode/edit-podcast-episode').then(m => m.EditPodcastEpisode),
                 title: $localize`LOVI - Edit Podcast Episode`,
                 resolve: {
                     podcast: podcastResolver,
@@ -214,14 +201,14 @@ export const routes: Routes = [
     },
     {
         path: 'edit/creators/create',
-        component: EditCreator,
+        loadComponent: () => import('./pages/edit/edit-creator/edit-creator').then(m => m.EditCreator),
         title: $localize`LOVI - Create Creator`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
     },
     {
         path: 'edit/creators/:id',
-        component: EditCreator,
+        loadComponent: () => import('./pages/edit/edit-creator/edit-creator').then(m => m.EditCreator),
         title: $localize`LOVI - Edit Creator`,
         canActivate: [authGuard],
         data: { roles: ['Admin', 'Editor'] },
@@ -231,14 +218,14 @@ export const routes: Routes = [
     },
     {
         path: 'edit/users/create',
-        component: EditUser,
+        loadComponent: () => import('./pages/edit/edit-user/edit-user').then(m => m.EditUser),
         title: $localize`LOVI - Create User`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
     },
     {
         path: 'edit/users/:id',
-        component: EditUser,
+        loadComponent: () => import('./pages/edit/edit-user/edit-user').then(m => m.EditUser),
         title: $localize`LOVI - Edit User`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
@@ -248,14 +235,14 @@ export const routes: Routes = [
     },
     {
         path: 'edit/roles/create',
-        component: EditRole,
+        loadComponent: () => import('./pages/edit/edit-role/edit-role').then(m => m.EditRole),
         title: $localize`LOVI - Create Role`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
     },
     {
         path: 'edit/roles/:id',
-        component: EditRole,
+        loadComponent: () => import('./pages/edit/edit-role/edit-role').then(m => m.EditRole),
         title: $localize`LOVI - Edit Role`,
         canActivate: [authGuard],
         data: { roles: ['Admin'] },
