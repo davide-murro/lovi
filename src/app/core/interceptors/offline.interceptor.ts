@@ -46,9 +46,8 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
                 if (!reqUrl.match(/\/paged/)) throw err;
                 if (req.params.get('pageNumber') !== '1') throw err;
 
-                const query: PagedQuery = {
+                const query: Omit<PagedQuery, 'pageSize'> = {
                     pageNumber: 1,
-                    pageSize: 1000,
                     search: req.params.get('search')!,
                     sortBy: req.params.get('sortBy')!,
                     sortOrder: req.params.get('sortOrder')! as 'asc' | 'desc'
@@ -99,7 +98,8 @@ export const offlineInterceptor: HttpInterceptorFn = (req, next) => {
                             totalCount: offlineItems.length,
                             pageNumber: 1,
                             totalPages: 1,
-                            pagedQuery: query
+                            // Offline catalogs are returned in one page, with no fixed item limit.
+                            pagedQuery: { ...query, pageSize: offlineItems.length } satisfies PagedQuery
                         }
                     }));
                 }
