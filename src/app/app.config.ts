@@ -12,7 +12,6 @@ import { environment } from '../environments/environment';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
     provideAppInitializer(() => {
       const authService = inject(AuthService);
       // Try to restore session on page load if we have a session hint

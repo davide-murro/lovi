@@ -1,10 +1,11 @@
-import { Component, effect, inject, NgZone, ViewChild } from '@angular/core';
+import { afterNextRender, Component, effect, inject, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Header } from './shared/header/header';
 import { Body } from './shared/body/body';
 import { AudioPlayer } from './shared/audio-player/audio-player';
 import { Toaster } from './shared/toaster/toaster';
 import { NavigationEnd, Router, Scroll } from '@angular/router';
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
 import { Dialog } from './shared/dialog/dialog';
 import { DialogService } from './core/services/dialog.service';
 import { ViewportScroller } from '@angular/common';
@@ -20,7 +21,6 @@ import { EBookReaderService } from './core/services/e-book-reader.service';
   styleUrl: './app.scss',
 })
 export class App {
-  private zone = inject(NgZone);
   private router = inject(Router);
   private viewportScroller = inject(ViewportScroller);
   private dialogService = inject(DialogService);
@@ -54,16 +54,22 @@ export class App {
     });
 
     // close all opened ui on navigation
-    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
+    this.router.events.pipe(
+      filter((e) => e instanceof NavigationEnd),
+      takeUntilDestroyed()
+    ).subscribe(() => {
       this.header.menuMobileOpen.set(false);
       this.audioPlayer.queueOpen.set(false);
       this.eBookReader.isOpen.set(false);
       this.dialogService.close(null);
     });
 
-    // handle navigation scroll
-    this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e) => {
-      this.zone.onStable.pipe(take(1)).subscribe(() => {
+    // Restore scroll after rendering.
+    this.router.events.pipe(
+      filter((e) => e instanceof Scroll),
+      takeUntilDestroyed()
+    ).subscribe((e) => {
+      afterNextRender(() => {
         if (e.position && (e.position[0] > 0 || e.position[1] > 0)) {
           this.viewportScroller.scrollToPosition(e.position);
         } else if (e.anchor) {
