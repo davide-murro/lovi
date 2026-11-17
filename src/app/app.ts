@@ -1,4 +1,4 @@
-import { afterNextRender, Component, effect, inject, ViewChild } from '@angular/core';
+import { afterNextRender, Component, effect, inject, Injector, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Header } from './shared/header/header';
 import { Body } from './shared/body/body';
@@ -21,6 +21,7 @@ import { EBookReaderService } from './core/services/e-book-reader.service';
   styleUrl: './app.scss',
 })
 export class App {
+  private injector = inject(Injector);
   private router = inject(Router);
   private viewportScroller = inject(ViewportScroller);
   private dialogService = inject(DialogService);
@@ -75,7 +76,7 @@ export class App {
         } else if (e.anchor) {
           this.viewportScroller.scrollToAnchor(e.anchor);
         }
-      });
+      }, { injector: this.injector });
     });
 
     // check cookie enabled
