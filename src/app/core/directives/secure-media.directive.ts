@@ -33,6 +33,7 @@ export class SecureMediaDirective implements OnChanges {
   }
 
   private loadMedia() {
+    // If no src, clear the media and return
     if (!this.secureSrc()) {
       this.clearMedia();
       return;
@@ -46,6 +47,7 @@ export class SecureMediaDirective implements OnChanges {
       return;
     }
 
+    // set the src attribute based on the secureOffline and secureAuth flags
     if (this.secureOffline()) {
       const offlineUrl = this.offlineUrlPipe.transform(url);
       if (offlineUrl && offlineUrl !== url) {
@@ -57,7 +59,6 @@ export class SecureMediaDirective implements OnChanges {
         url = authUrl;
       }
     }
-
     this.renderer.setAttribute(this.el.nativeElement, 'src', url);
   }
 
@@ -90,6 +91,7 @@ export class SecureMediaDirective implements OnChanges {
     if (!this.hasRetried() && this.secureAuth() && this.authService.isLoggedIn()) {
       this.hasRetried.set(true);
       const currentTime = this.tagName() === 'audio' ? this.el.nativeElement.currentTime : 0;
+      const currentPaused = this.tagName() === 'audio' ? this.el.nativeElement.paused : false;
 
       try {
         await firstValueFrom(this.authService.refreshTokens());
@@ -98,6 +100,8 @@ export class SecureMediaDirective implements OnChanges {
 
         if (this.tagName() === 'audio') {
           this.el.nativeElement.currentTime = currentTime;
+          if (currentPaused) this.el.nativeElement.pause();
+          else this.el.nativeElement.play();
         }
         return;
       } catch (e) { }
