@@ -24,11 +24,11 @@
                 <!--<td><img class="h-12 min-w-32 object-contain" [src]="creator.coverImagePreviewUrl"></td>-->
 
                 <td>
-                    <a class="icon-button" title="Update Creator"
+                    <a class="icon-button button-accent" title="Update Creator"
                         [routerLink]="['/edit', 'creators', creator.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" title="Delete Creator"
+                    <button type="button" class="icon-button button-error" title="Delete Creator"
                         (click)="deleteCreator(creator.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>

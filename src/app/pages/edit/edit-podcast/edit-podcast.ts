@@ -137,8 +137,9 @@ export class EditPodcast {
       this.podcastsService.create(p).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.dialogService.log('Podcast created', 'Podcast created successfully');
-          this.router.navigate(['/edit', 'podcasts', res.id])
+          this.dialogService.log('Podcast created', 'Podcast created successfully').subscribe(() => {
+            this.router.navigate(['/edit', 'podcasts', res.id]);
+          });
         },
         error: (err) => {
           console.error('podcastsService.update', p, err);
@@ -154,14 +155,19 @@ export class EditPodcast {
     this.dialogService.confirm('Delete Podcast', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
+          this.isLoading.set(true);
+          
           const id = this.podcastEdit()!.id!;
           this.podcastsService.delete(id).subscribe({
             next: () => {
-              this.dialogService.log('Podcast deleted', 'Podcast deleted successfully');
-              this.router.navigate(['/edit']);
+              this.isLoading.set(false);
+              this.dialogService.log('Podcast deleted', 'Podcast deleted successfully').subscribe(() => {
+                this.router.navigate(['/edit']);
+              });
             },
             error: (err) => {
               console.error('podcastsService.delete', id, err);
+              this.isLoading.set(false);
               this.dialogService.log('Podcast delete failed', 'Failed to delete podcast', { type: 'error' });
             }
           });

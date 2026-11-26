@@ -183,8 +183,9 @@ export class EditBook {
       this.booksService.create(b).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.dialogService.log('Book created', 'Book created successfully');
-          this.router.navigate(['/edit', 'books', res.id])
+          this.dialogService.log('Book created', 'Book created successfully').subscribe(() => {
+            this.router.navigate(['/edit', 'books', res.id]);
+          });
         },
         error: (err) => {
           console.error('booksService.create', b, err);
@@ -199,14 +200,19 @@ export class EditBook {
     this.dialogService.confirm('Delete Book', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
+          this.isLoading.set(true);
+
           const id = this.bookEdit()!.id!;
           this.booksService.delete(id).subscribe({
             next: () => {
-              this.dialogService.log('Book deleted', 'Book deleted successfully');
-              this.router.navigate(['/edit']);
+              this.isLoading.set(false);
+              this.dialogService.log('Book deleted', 'Book deleted successfully').subscribe(() => {
+                this.router.navigate(['/edit']);
+              });
             },
             error: (err) => {
               console.error('booksService.delete', id, err);
+              this.isLoading.set(false);
               this.dialogService.log('Book delete failed', 'Failed to delete book', { type: 'error' });
             }
           });

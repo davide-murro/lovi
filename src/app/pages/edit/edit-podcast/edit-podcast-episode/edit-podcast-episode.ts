@@ -178,8 +178,9 @@ export class EditPodcastEpisode {
       this.podcastsService.createEpisode(pe.podcastId, pe).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.dialogService.log('Podcast Episode created', 'Podcast Episode created successfully');
-          this.router.navigate(['/edit', 'podcasts', res.podcastId, 'episodes', res.id])
+          this.dialogService.log('Podcast Episode created', 'Podcast Episode created successfully').subscribe(() => {
+            this.router.navigate(['/edit', 'podcasts', res.podcastId, 'episodes', res.id]);
+          });
         },
         error: (err) => {
           console.error('podcastsService.createEpisode', pe.podcastId, pe, err);
@@ -195,15 +196,20 @@ export class EditPodcastEpisode {
     this.dialogService.confirm('Delete Podcast Episode', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
+          this.isLoading.set(true);
+          
           const podcastId = this.podcast()!.id!;
           const id = this.podcastEpisodeEdit()!.id!;
           this.podcastsService.deleteEpisode(podcastId, id).subscribe({
             next: () => {
-              this.dialogService.log('Podcast Episode deleted', 'Podcast Episode deleted successfully');
-              this.router.navigate(['/edit', 'podcasts', podcastId]);
+              this.isLoading.set(false);
+              this.dialogService.log('Podcast Episode deleted', 'Podcast Episode deleted successfully').subscribe(() => {
+                this.router.navigate(['/edit', 'podcasts', podcastId]);
+              });
             },
             error: (err) => {
               console.error('podcastsService.deleteEpisode', podcastId, id, err);
+              this.isLoading.set(false);
               this.dialogService.log('Podcast Episode delete failed', 'Failed to delete podcast episode', { type: 'error' });
             }
           });

@@ -110,8 +110,9 @@ export class EditUser {
       this.usersService.create(u).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.dialogService.log('User created', 'User created successfully');
-          this.router.navigate(['/edit', 'users', res.id])
+          this.dialogService.log('User created', 'User created successfully').subscribe(() => {
+            this.router.navigate(['/edit', 'users', res.id]);
+          });
         },
         error: (err) => {
           console.error('usersService.update', u, err);
@@ -127,14 +128,19 @@ export class EditUser {
     this.dialogService.confirm('Delete User', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
+          this.isLoading.set(true);
+
           const id = this.userEdit()!.id;
           this.usersService.delete(id).subscribe({
             next: () => {
-              this.dialogService.log('User deleted', 'User deleted successfully');
-              this.router.navigate(['/edit']);
+              this.isLoading.set(false);
+              this.dialogService.log('User deleted', 'User deleted successfully').subscribe(() => {
+                this.router.navigate(['/edit']);
+              });
             },
             error: (err) => {
               console.error('usersService.delete', id, err);
+              this.isLoading.set(false);
               this.dialogService.log('User delete failed', 'Failed to delete user', { type: 'error' });
             }
           });

@@ -113,8 +113,9 @@ export class EditCreator {
       this.creatorsService.create(p).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.dialogService.log('Creator created', 'Creator created successfully');
-          this.router.navigate(['/edit', 'creators', res.id])
+          this.dialogService.log('Creator created', 'Creator created successfully').subscribe(() => {
+            this.router.navigate(['/edit', 'creators', res.id]);
+          });
         },
         error: (err) => {
           console.error('creatorsService.update', p, err);
@@ -130,14 +131,19 @@ export class EditCreator {
     this.dialogService.confirm('Delete Creator', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
+          this.isLoading.set(true);
+          
           const id = this.creatorEdit()!.id!;
           this.creatorsService.delete(id).subscribe({
             next: () => {
-              this.dialogService.log('Creator deleted', 'Creator deleted successfully');
-              this.router.navigate(['/edit']);
+              this.isLoading.set(false);
+              this.dialogService.log('Creator deleted', 'Creator deleted successfully').subscribe(() => {
+                this.router.navigate(['/edit']);
+              });
             },
             error: (err) => {
               console.error('creatorsService.delete', id, err);
+              this.isLoading.set(false);
               this.dialogService.log('Creator delete failed', 'Failed to delete creator', { type: 'error' });
             }
           });

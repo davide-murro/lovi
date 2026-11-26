@@ -9,7 +9,8 @@
 
     <div class="flex gap-2">
         @if(bookEdit() != null) {
-        <button type="button" class="button button-accent shrink-0 gap-2" title="Delete" (click)="delete()">
+        <button type="button" class="button button-error shrink-0 gap-2" title="Delete" [disabled]="isLoading()"
+            (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
         </button>
@@ -108,7 +109,7 @@
                         <td>{{reader.surname}}</td>
 
                         <td>
-                            <button type="button" class="icon-button" title="Remove Reader"
+                            <button type="button" class="icon-button button-error" title="Remove Reader"
                                 (click)="removeReader(reader.id!)"><fa-icon [icon]="faTrash" /></button>
                         </td>
                     </tr>
@@ -149,7 +150,7 @@
                         <td>{{writer.surname}}</td>
 
                         <td>
-                            <button type="button" class="icon-button" title="Remove Writer"
+                            <button type="button" class="icon-button button-error" title="Remove Writer"
                                 (click)="removeWriter(writer.id!)"><fa-icon [icon]="faTrash" /></button>
                         </td>
                     </tr>

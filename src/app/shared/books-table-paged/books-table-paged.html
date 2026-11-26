@@ -32,11 +32,11 @@
                 <td>{{book.writers?.length}}</td>
 
                 <td>
-                    <a class="icon-button" title="Update Book" [routerLink]="['/edit', 'books', book.id]"><fa-icon
+                    <a class="icon-button button-accent" title="Update Book" [routerLink]="['/edit', 'books', book.id]"><fa-icon
                             [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" title="Delete Book"
+                    <button type="button" class="icon-button button-error" title="Delete Book"
                         (click)="deleteBook(book.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>

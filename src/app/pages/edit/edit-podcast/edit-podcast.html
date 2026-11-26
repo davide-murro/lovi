@@ -9,7 +9,8 @@
 
     <div class="flex gap-2">
         @if(podcastEdit() != null) {
-        <button type="button" class="button button-accent shrink-0 gap-2" title="Delete" (click)="delete()">
+        <button type="button" class="button button-error shrink-0 gap-2" title="Delete" [disabled]="isLoading()"
+            (click)="delete()">
             <fa-icon [icon]="faTrash" />
             <span class="hidden lg:inline">Delete</span>
         </button>
@@ -85,7 +86,7 @@
                     <td>{{voicer.surname}}</td>
 
                     <td>
-                        <button type="button" class="icon-button" title="Remove Voicer"
+                        <button type="button" class="icon-button button-error" title="Remove Voicer"
                             (click)="removeVoicer(voicer.id!)"><fa-icon [icon]="faTrash" /></button>
                     </td>
                 </tr>
@@ -135,12 +136,12 @@
                     <td>{{episode.voicers?.length}}</td>
 
                     <td>
-                        <a class="icon-button" title="Update Episode"
+                        <a class="icon-button button-accent" title="Update Episode"
                             [routerLink]="['/edit', 'podcasts', podcastEdit()!.id, 'episodes', episode.id]"><fa-icon
                                 [icon]="faPen" /></a>
                     </td>
                     <td>
-                        <button type="button" class="icon-button" title="Delete Episode"
+                        <button type="button" class="icon-button button-error" title="Delete Episode"
                             (click)="deleteEpisode(episode.id!)"><fa-icon [icon]="faTrash" /></button>
                     </td>
                 </tr>

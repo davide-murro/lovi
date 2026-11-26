@@ -28,11 +28,11 @@
                 <td>{{podcast.voicers?.length}}</td>
 
                 <td>
-                    <a class="icon-button" title="Update Podcast"
+                    <a class="icon-button button-accent" title="Update Podcast"
                         [routerLink]="['/edit', 'podcasts', podcast.id]"><fa-icon [icon]="faPen" /></a>
                 </td>
                 <td>
-                    <button type="button" class="icon-button" title="Delete Podcast"
+                    <button type="button" class="icon-button button-error" title="Delete Podcast"
                         (click)="deletePodcast(podcast.id!)"><fa-icon [icon]="faTrash" /></button>
                 </td>
             </tr>

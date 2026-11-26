@@ -86,8 +86,9 @@ export class EditRole {
       this.rolesService.create(p).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          this.dialogService.log('Role created', 'Role created successfully');
-          this.router.navigate(['/edit', 'roles', res.id])
+          this.dialogService.log('Role created', 'Role created successfully').subscribe(() => {
+            this.router.navigate(['/edit', 'roles', res.id]);
+          });
         },
         error: (err) => {
           console.error('rolesService.update', p, err);
@@ -103,14 +104,19 @@ export class EditRole {
     this.dialogService.confirm('Delete Role', 'Are you sure?')
       .subscribe(confirmed => {
         if (confirmed) {
+          this.isLoading.set(true);
+
           const id = this.roleEdit()!.id!;
           this.rolesService.delete(id).subscribe({
             next: () => {
-              this.dialogService.log('Role deleted', 'Role deleted successfully');
-              this.router.navigate(['/edit']);
+              this.isLoading.set(false);
+              this.dialogService.log('Role deleted', 'Role deleted successfully').subscribe(() => {
+                this.router.navigate(['/edit']);
+              });
             },
             error: (err) => {
               console.error('rolesService.delete', id, err);
+              this.isLoading.set(false);
               this.dialogService.log('Role delete failed', 'Failed to delete role', { type: 'error' });
             }
           });
