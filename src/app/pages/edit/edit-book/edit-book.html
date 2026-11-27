@@ -31,7 +31,7 @@
     </div>
 
     <div>
-        <label class="label" for="cover-image">Cover image (.jpg, .jpeg, .png)</label>
+        <label class="label" for="cover-image">Cover image (ratio: 2:3) (format: .jpg, .jpeg, .png)</label>
         <input type="file" accept="image/*" id="cover-image" class="input w-full" placeholder="cover-image.png"
             formControlName="coverImageValue" (change)="onCoverImageSelected($event)" />
         @if(coverPreview()) {
@@ -40,7 +40,7 @@
     </div>
 
     <div>
-        <label class="label" for="cover-image-preview">Cover image preview (.jpg, .jpeg, .png)</label>
+        <label class="label" for="cover-image-preview">Cover image preview (ratio: 2:3) (format: .jpg, .jpeg, .png)</label>
         <input type="file" accept="image/*" id="cover-image-preview" class="input w-full"
             placeholder="cover-image-preview.png" formControlName="coverImagePreviewValue"
             (change)="onCoverImagePreviewSelected($event)" />
@@ -50,7 +50,7 @@
     </div>
 
     <div>
-        <label class="label" for="audio">Audio (.mp3, .wav, .aac)</label>
+        <label class="label" for="audio">Audio (format: .mp3, .wav, .aac)</label>
         <input type="file" accept="audio/*" id="audio" class="input w-full" placeholder="audio.mp3"
             formControlName="audioValue" (change)="onAudioSelected($event)" />
         @if(audioPreview()) {
@@ -61,7 +61,7 @@
     </div>
 
     <div>
-        <label class="label" for="file">File (.epub)</label>
+        <label class="label" for="file">File (format: .epub)</label>
         <input type="file" accept=".epub" id="file" class="input w-full" placeholder="book.epub"
             formControlName="fileValue" (change)="onFileSelected($event)" />
         @if(filePreview()) {
